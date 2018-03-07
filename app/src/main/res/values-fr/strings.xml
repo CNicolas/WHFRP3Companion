@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="navigation_drawer_close">Fermer le panneau de navigation</string>
+    <string name="navigation_drawer_open">Ouvrir le panneau de navigation</string>
+    <string name="action_settings">Options</string>
+    <string name="action_home">Accueil</string>
+    <string name="page_careers">Carrières</string>
+    <string name="page_home">Accueil</string>
+    <string name="page_players">Personnages</string>
+    <string name="page_skills">Compétences</string>
+    <string name="page_specializations">Spécialisations</string>
+    <string name="page_talents">Talents</string>
+    <string name="page_items">Objets</string>
+</resources>
