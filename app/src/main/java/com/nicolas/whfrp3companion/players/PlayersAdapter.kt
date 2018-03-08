@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.TextView
+import butterknife.BindView
+import butterknife.ButterKnife
 import warhammer.database.entities.player.Player
 
 
@@ -30,18 +32,17 @@ class PlayersAdapter(context: Context, private val players: List<Player>) : Base
 
         val player = getItem(position)
 
-        // Note: don't actually do string concatenation like this in an adapter's getView.
         holder.name.text = player.name
 
         return view
     }
 
     internal class ViewHolder(view: View) {
-        // @BindView(android.R.id.text1)
-        val name: TextView = view.findViewById(android.R.id.text1) as TextView
+        @BindView(android.R.id.text1)
+        lateinit var name: TextView
 
         init {
-            // ButterKnife.bind(this, view)
+            ButterKnife.bind(this, view)
         }
     }
 }
