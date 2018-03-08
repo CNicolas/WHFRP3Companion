@@ -12,7 +12,7 @@ import android.view.MenuItem
 import com.nicolas.whfrp3companion.players.PlayersFragment
 
 
-class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+class MainActivity : AppCompatActivity() {
 
     private lateinit var drawer: DrawerLayout
     private lateinit var toggle: ActionBarDrawerToggle
@@ -27,10 +27,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         drawer = findViewById(R.id.drawer_layout)
         toggle = ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
         drawer.addDrawerListener(toggle)
-//        toggle.syncState()
 
         val navigationView = findViewById<NavigationView>(R.id.nav_view)
         setupDrawerContent(navigationView)
+
+        displaySelectedFragment(R.id.nav_home)
     }
 
     override fun onPostCreate(savedInstanceState: Bundle?) {
@@ -45,55 +46,37 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         toggle.onConfigurationChanged(newConfig)
     }
 
-//    override fun onBackPressed() {
-//        val drawer = findViewById(R.id.drawer_layout) as DrawerLayout
-//        if (drawer.isDrawerOpen(GravityCompat.START)) {
-//            drawer.closeDrawer(GravityCompat.START)
-//        } else {
-//            super.onBackPressed()
-//        }
-//    }
-
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         // The action bar home/up action should open or close the drawer.
         if (toggle.onOptionsItemSelected(item)) {
             return true
         }
-        when (item.itemId) {
-            android.R.id.home -> {
-                drawer.openDrawer(GravityCompat.START)
-                return true
-            }
-        }
 
         return super.onOptionsItemSelected(item)
     }
 
-    override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        // Handle navigation view item clicks here.
-        displaySelectedFragment(item)
-        return true
-    }
-
-    private fun displaySelectedFragment(menuItem: MenuItem) {
-        val fragment = when (menuItem.itemId) {
+    private fun displaySelectedFragment(menuItemId: Int) {
+        val fragment = when (menuItemId) {
             R.id.nav_careers -> CareersFragment()
-            else -> PlayersFragment.newInstance()
-        }
-
         //  R.id.nav_talents -> TalentTypesFragment()
         //  R.id.nav_items -> ItemsFragment()
         //  R.id.nav_skills -> SkillsFragment()
         //  R.id.nav_specializations -> SpecializationsFragment()
+            else -> PlayersFragment.newInstance()
+        }
 
         supportFragmentManager.beginTransaction()
                 .replace(R.id.content_frame, fragment)
                 .commit()
 
+        drawer.closeDrawer(GravityCompat.START)
+    }
+
+    private fun displaySelectedFragment(menuItem: MenuItem) {
+        displaySelectedFragment(menuItem.itemId)
+
         menuItem.isChecked = true
         title = menuItem.title
-
-        drawer.closeDrawer(GravityCompat.START)
     }
 
     private fun setupDrawerContent(navigationView: NavigationView) {
