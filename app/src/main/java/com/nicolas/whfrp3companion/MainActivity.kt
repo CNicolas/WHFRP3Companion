@@ -9,22 +9,26 @@ import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.view.MenuItem
+import butterknife.BindView
+import butterknife.ButterKnife
 import com.nicolas.whfrp3companion.players.PlayersFragment
 
 
 class MainActivity : AppCompatActivity() {
+    @BindView(R.id.drawer_layout)
+    lateinit var drawer: DrawerLayout
 
-    private lateinit var drawer: DrawerLayout
     private lateinit var toggle: ActionBarDrawerToggle
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        ButterKnife.bind(this)
+
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
 
-        drawer = findViewById(R.id.drawer_layout)
         toggle = ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
         drawer.addDrawerListener(toggle)
 

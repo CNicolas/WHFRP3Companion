@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion 27
@@ -43,6 +44,10 @@ dependencies {
     compile "org.jetbrains.exposed:exposed:0.9.1"
     compile "org.xerial:sqlite-jdbc:3.21.0"
     compile "com.beust:klaxon:2.1.9"
+
+    // Libraries
+    compile "com.jakewharton:butterknife:$butterknife_version"
+    kapt "com.jakewharton:butterknife-compiler:$butterknife_version"
 }
 repositories {
     mavenCentral()
