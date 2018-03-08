@@ -1,21 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/splashscreen"
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:contentDescription="@string/app_name"
-        android:src="@drawable/warhammer_v3_logo"/>
+    <ImageView android:id="@+id/splashscreen"
+               android:layout_width="match_parent"
+               android:layout_height="150dp"
+               android:contentDescription="@string/app_name"
+               android:src="@drawable/warhammer_v3_logo"/>
 
-    <ListView
-        android:id="@+id/list_players"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"/>
+    <RelativeLayout android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp">
+        <EditText android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:hint="Create a new Player"/>
+
+        <ImageButton android:id="@+id/button_new_player"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_alignParentEnd="true"
+                     android:layout_centerVertical="true"
+                     android:layout_margin="5dp"
+                     android:background="@android:color/transparent"
+                     android:contentDescription="Send"
+                     android:src="@drawable/ic_menu_send"/>
+    </RelativeLayout>
+
+    <ListView android:id="@+id/list_players"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_gravity="center"/>
 
 </LinearLayout>
