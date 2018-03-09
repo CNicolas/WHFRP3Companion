@@ -36,9 +36,15 @@ class PlayersFragment : Fragment() {
 
         players = listOf()
 //        updatePlayers()
+//        playersListView.adapter = PlayersAdapter(context!!, players)
 
         return resultingView
     }
+
+//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+//        super.onViewCreated(view, savedInstanceState)
+//        updatePlayers()
+//    }
 
     override fun onDestroyView() {
         super.onDestroyView()
@@ -57,8 +63,8 @@ class PlayersFragment : Fragment() {
 
     @OnClick(R.id.new_player_button)
     fun createNewPlayer() {
-//        WarHammerContext.playerFacade.add(Player(newPlayerEditText.text.toString()))
         if (!newPlayerEditText.text.isNullOrBlank()) {
+//            WarHammerContext.playerFacade.add(Player(newPlayerEditText.text.toString()))
             updatePlayers()
         }
     }
@@ -68,6 +74,7 @@ class PlayersFragment : Fragment() {
         val newList = players.toMutableList()
         newList.add(Player(newPlayerEditText.text.toString()))
         players = newList
+
         playersListView.adapter = PlayersAdapter(context!!, players)
 
         newPlayerEditText.text.clear()
