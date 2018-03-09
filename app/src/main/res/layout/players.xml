@@ -8,7 +8,7 @@
                android:layout_width="match_parent"
                android:layout_height="150dp"
                android:contentDescription="@string/app_name"
-               android:src="@drawable/warhammer_v3_logo"/>
+               android:src="@drawable/warhammer_v3_logo" />
 
     <RelativeLayout android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -16,23 +16,24 @@
         <EditText android:id="@+id/new_player_edit_text"
                   android:layout_width="match_parent"
                   android:layout_height="wrap_content"
-                  android:hint="Create a new Player"/>
+                  android:hint="Create a new Player" />
 
-        <ImageButton android:id="@+id/button_new_player"
-                     android:layout_width="wrap_content"
-                     android:layout_height="wrap_content"
+        <ImageButton android:id="@+id/new_player_button"
+                     android:layout_width="30dp"
+                     android:layout_height="30dp"
                      android:layout_alignParentEnd="true"
                      android:layout_centerVertical="true"
                      android:layout_margin="5dp"
                      android:clickable="true"
-                     android:background="@drawable/transparent_button"
+                     android:background="?attr/selectableItemBackground"
                      android:contentDescription="Send"
-                     android:src="@drawable/ic_menu_send"/>
+                     android:src="@drawable/ic_menu_send" />
     </RelativeLayout>
 
     <ListView android:id="@+id/list_players"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
-              android:layout_gravity="center"/>
+              android:layout_gravity="center"
+              android:foregroundGravity="center" />
 
 </LinearLayout>
