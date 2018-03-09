@@ -13,7 +13,8 @@
     <RelativeLayout android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp">
-        <EditText android:layout_width="match_parent"
+        <EditText android:id="@+id/new_player_edit_text"
+                  android:layout_width="match_parent"
                   android:layout_height="wrap_content"
                   android:hint="Create a new Player"/>
 
@@ -23,7 +24,8 @@
                      android:layout_alignParentEnd="true"
                      android:layout_centerVertical="true"
                      android:layout_margin="5dp"
-                     android:background="@android:color/transparent"
+                     android:clickable="true"
+                     android:background="@drawable/transparent_button"
                      android:contentDescription="Send"
                      android:src="@drawable/ic_menu_send"/>
     </RelativeLayout>

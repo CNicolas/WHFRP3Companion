@@ -6,19 +6,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.EditText
 import android.widget.ListView
 import android.widget.Toast
-import butterknife.BindView
-import butterknife.ButterKnife
-import butterknife.OnItemClick
-import butterknife.Unbinder
+import butterknife.*
 import com.nicolas.whfrp3companion.R
 
 class PlayersFragment : Fragment() {
     @BindView(R.id.list_players)
     lateinit var playersListView: ListView
+    @BindView(R.id.new_player_edit_text)
+    lateinit var newPlayerEditText: EditText
 
-    private var players: List<String> = listOf("Player1", "Player2")
+    //    private lateinit var players: List<Player>
+    private lateinit var players: List<String>
 
     private lateinit var unbinder: Unbinder
 
@@ -30,10 +31,7 @@ class PlayersFragment : Fragment() {
 
         unbinder = ButterKnife.bind(this, resultingView)
 
-//        players = WarHammerContext.playerFacade.findAll()
-//        val playersAdapter = PlayersAdapter(context, players)
-//        playersListView.adapter = playersAdapter
-        playersListView.adapter = ArrayAdapter<String>(context, android.R.layout.simple_list_item_1, players)
+        updatePlayers()
 
         return resultingView
     }
@@ -46,6 +44,24 @@ class PlayersFragment : Fragment() {
     @OnItemClick(R.id.list_players)
     fun onItemSelected(position: Int) {
         Toast.makeText(context, "CLICKED : " + players[position], Toast.LENGTH_SHORT).show()
+    }
+
+    @OnClick(R.id.button_new_player)
+    fun createNewPlayer() {
+//        WarHammerContext.playerFacade.add(Player(newPlayerEditText.text.toString()))
+        updatePlayers()
+    }
+
+    private fun updatePlayers() {
+//        players = WarHammerContext.playerFacade.findAll()
+//        val playersAdapter = PlayersAdapter(context!!, players)
+//        playersListView.adapter = playersAdapter
+        val newList = players.toMutableList()
+        newList.add(newPlayerEditText.text.toString())
+        players = newList
+        playersListView.adapter = ArrayAdapter<String>(context, android.R.layout.simple_list_item_1, players)
+
+        newPlayerEditText.text.clear()
     }
 
     companion object {
