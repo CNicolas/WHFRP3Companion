@@ -6,9 +6,13 @@ import android.text.Editable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
+import android.widget.EditText
+import android.widget.ImageButton
+import android.widget.ListView
+import android.widget.Toast
 import butterknife.*
 import com.nicolas.whfrp3companion.R
+import warhammer.database.entities.player.Player
 
 class PlayersFragment : Fragment() {
     @BindView(R.id.list_players)
@@ -18,8 +22,7 @@ class PlayersFragment : Fragment() {
     @BindView(R.id.new_player_button)
     lateinit var newPlayerButton: ImageButton
 
-    //    private lateinit var players: List<Player>
-    private lateinit var players: List<String>
+    private lateinit var players: List<Player>
 
     private lateinit var unbinder: Unbinder
 
@@ -62,12 +65,10 @@ class PlayersFragment : Fragment() {
 
     private fun updatePlayers() {
 //        players = WarHammerContext.playerFacade.findAll()
-//        val playersAdapter = PlayersAdapter(context!!, players)
-//        playersListView.adapter = playersAdapter
         val newList = players.toMutableList()
-        newList.add(newPlayerEditText.text.toString())
+        newList.add(Player(newPlayerEditText.text.toString()))
         players = newList
-        playersListView.adapter = ArrayAdapter<String>(context, android.R.layout.simple_list_item_1, players)
+        playersListView.adapter = PlayersAdapter(context!!, players)
 
         newPlayerEditText.text.clear()
     }
