@@ -2,13 +2,11 @@ package com.nicolas.whfrp3companion.players
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.text.Editable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.EditText
-import android.widget.ListView
-import android.widget.Toast
+import android.widget.*
 import butterknife.*
 import com.nicolas.whfrp3companion.R
 
@@ -17,6 +15,8 @@ class PlayersFragment : Fragment() {
     lateinit var playersListView: ListView
     @BindView(R.id.new_player_edit_text)
     lateinit var newPlayerEditText: EditText
+    @BindView(R.id.new_player_button)
+    lateinit var newPlayerButton: ImageButton
 
     //    private lateinit var players: List<Player>
     private lateinit var players: List<String>
@@ -31,7 +31,8 @@ class PlayersFragment : Fragment() {
 
         unbinder = ButterKnife.bind(this, resultingView)
 
-        updatePlayers()
+        players = listOf()
+//        updatePlayers()
 
         return resultingView
     }
@@ -42,14 +43,21 @@ class PlayersFragment : Fragment() {
     }
 
     @OnItemClick(R.id.list_players)
-    fun onItemSelected(position: Int) {
+    fun onPlayerClick(position: Int) {
         Toast.makeText(context, "CLICKED : " + players[position], Toast.LENGTH_SHORT).show()
     }
 
-    @OnClick(R.id.button_new_player)
+    @OnTextChanged(R.id.new_player_edit_text, callback = OnTextChanged.Callback.AFTER_TEXT_CHANGED)
+    fun playerNameChange(editable: Editable) {
+        newPlayerButton.visibility = if (!editable.isBlank()) View.VISIBLE else View.GONE
+    }
+
+    @OnClick(R.id.new_player_button)
     fun createNewPlayer() {
 //        WarHammerContext.playerFacade.add(Player(newPlayerEditText.text.toString()))
-        updatePlayers()
+        if (!newPlayerEditText.text.isNullOrBlank()) {
+            updatePlayers()
+        }
     }
 
     private fun updatePlayers() {
