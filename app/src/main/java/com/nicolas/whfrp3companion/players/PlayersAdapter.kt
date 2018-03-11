@@ -8,7 +8,7 @@ import android.widget.BaseAdapter
 import android.widget.TextView
 import butterknife.BindView
 import butterknife.ButterKnife
-import warhammer.database.entities.player.Player
+import com.nicolas.whfrp3database.entities.player.Player
 
 class PlayersAdapter(context: Context, private val players: List<Player>) : BaseAdapter() {
     private val inflater = LayoutInflater.from(context)
