@@ -2,12 +2,15 @@ package com.nicolas.whfrp3database
 
 import android.database.sqlite.SQLiteDatabase
 import com.nicolas.whfrp3database.entities.player.Player
-import com.nicolas.whfrp3database.entities.player.PlayerParser
-import com.nicolas.whfrp3database.entities.player.toColumns
+import com.nicolas.whfrp3database.entities.player.enums.Race.DWARF
+import com.nicolas.whfrp3database.entities.player.enums.Race.HUMAN
 import com.nicolas.whfrp3database.tables.PLAYER_TABLE_NAME
+import com.nicolas.whfrp3database.tables.parsers.PlayerParser
+import com.nicolas.whfrp3database.tables.parsers.toColumns
 import org.jetbrains.anko.db.insert
 import org.jetbrains.anko.db.parseOpt
 import org.jetbrains.anko.db.select
+import org.jetbrains.anko.db.update
 import org.junit.After
 import org.junit.Assert.*
 import org.junit.Before
@@ -43,6 +46,19 @@ class PlayerTableTest {
             val foundPlayer = parseOpt(PlayerParser())
             assertNotNull(foundPlayer)
             assertEquals("John", foundPlayer!!.name)
+            assertEquals(HUMAN, foundPlayer.race)
+        }
+
+        player.race = DWARF
+        update(PLAYER_TABLE_NAME, *player.toColumns())
+                .whereArgs("id = ${player.id}")
+                .exec()
+
+        select(PLAYER_TABLE_NAME).exec {
+            val foundPlayer = parseOpt(PlayerParser())
+            assertNotNull(foundPlayer)
+            assertEquals("John", foundPlayer!!.name)
+            assertEquals(DWARF, foundPlayer.race)
         }
     }
 

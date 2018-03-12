@@ -8,14 +8,14 @@ const val ITEM_TABLE_NAME = "Hand"
 fun createItemTable(db: SQLiteDatabase) {
     db.createTable(ITEM_TABLE_NAME, true,
             "id" to INTEGER + PRIMARY_KEY + UNIQUE,
-
             "playerId" to INTEGER,
+
+            "type" to TEXT,
             "name" to TEXT,
             "description" to TEXT,
             "encumbrance" to INTEGER,
             "quantity" to INTEGER,
             "quality" to TEXT,
-            "type" to TEXT,
             "subType" to TEXT,
 
             "uses" to INTEGER,
@@ -27,5 +27,8 @@ fun createItemTable(db: SQLiteDatabase) {
 
             "damage" to INTEGER,
             "criticalLevel" to INTEGER,
-            "range" to TEXT)
+            "range" to TEXT,
+
+            FOREIGN_KEY("playerId", PLAYER_TABLE_NAME, "id")
+    )
 }
