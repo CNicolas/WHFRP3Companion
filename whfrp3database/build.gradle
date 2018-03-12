@@ -23,21 +23,19 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-
     // Tests
     testCompile 'junit:junit:4.12'
-    testCompile "org.assertj:assertj-core:3.8.0"
+    testCompile 'org.robolectric:robolectric:3.7.1'
+    testCompile 'org.assertj:assertj-core:3.8.0'
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    testCompile "org.robolectric:robolectric:3.3"
-
     // Android
     compile "com.android.support:appcompat-v7:$android_support_version"
     compile "com.android.support:support-v4:$android_support_version"
 
     compile "org.jetbrains.anko:anko-sqlite:$anko_version"
+    compile "com.beust:klaxon:2.1.9"
 }
 
 repositories {

@@ -15,34 +15,36 @@ fun createPlayerTable(db: SQLiteDatabase) {
 
             // region CHARACTERISTICS
             "strength" to INTEGER,
-            "toughness" to INTEGER,
-            "agility" to INTEGER,
-            "intelligence" to INTEGER,
-            "willpower" to INTEGER,
-            "fellowship" to INTEGER,
             "strengthFortune" to INTEGER,
+            "toughness" to INTEGER,
             "toughnessFortune" to INTEGER,
+            "agility" to INTEGER,
             "agilityFortune" to INTEGER,
+            "intelligence" to INTEGER,
             "intelligenceFortune" to INTEGER,
+            "willpower" to INTEGER,
             "willpowerFortune" to INTEGER,
+            "fellowship" to INTEGER,
             "fellowshipFortune" to INTEGER,
             // endregion
 
             // region STATE
+            "careerName" to TEXT,
+            "rank" to INTEGER,
+            "availableExperience" to INTEGER,
+            "totalExperience" to INTEGER,
+
+            "reckless" to INTEGER,
+            "maxReckless" to INTEGER,
+            "conservative" to INTEGER,
+            "maxConservative" to INTEGER,
+
             "wounds" to INTEGER,
             "maxWounds" to INTEGER,
             "corruption" to INTEGER,
             "maxCorruption" to INTEGER,
             "stress" to INTEGER,
             "exhaustion" to INTEGER,
-            "careerName" to TEXT,
-            "rank" to INTEGER,
-            "availableExperience" to INTEGER,
-            "totalExperience" to INTEGER,
-            "reckless" to INTEGER,
-            "maxReckless" to INTEGER,
-            "conservative" to INTEGER,
-            "maxConservative" to INTEGER,
             // endregion
 
             // region INVENTORY

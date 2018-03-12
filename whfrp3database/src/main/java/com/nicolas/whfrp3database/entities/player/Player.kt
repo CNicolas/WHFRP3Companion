@@ -42,6 +42,7 @@ data class Player(override var name: String,
                   var brass: Int = 0,
                   var silver: Int = 0,
                   var gold: Int = 0,
+
                   var items: List<Item> = listOf(),
                   var skills: List<Skill> = listOf(),
                   var talents: List<Talent> = listOf(),
