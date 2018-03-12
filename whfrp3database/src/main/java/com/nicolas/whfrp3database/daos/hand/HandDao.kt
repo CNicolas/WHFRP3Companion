@@ -17,5 +17,5 @@ class HandDao(databaseHelper: DatabaseOpenHelper) : AbstractNameKeyDao<Hand>(dat
 
     override fun parseAll(cursor: Cursor): List<Hand> = cursor.parseList(HandParser())
 
-    override fun getColumns(entity: Hand): Array<Pair<String, Any?>> = entity.toColumns()
+    override fun getColumns(entity: Hand): Map<String, Any?> = entity.toColumns()
 }

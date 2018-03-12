@@ -67,7 +67,7 @@ class ItemParser : RowParser<Item> {
             )
 }
 
-fun Item.toColumns(player: Player): Array<Pair<String, Any?>> = arrayOf(
+fun Item.toColumns(player: Player): Map<String, Any?> = mapOf(
         "id" to id,
         "playerId" to player.id,
 

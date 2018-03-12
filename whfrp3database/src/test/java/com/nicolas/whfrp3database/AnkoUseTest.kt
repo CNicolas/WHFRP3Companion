@@ -1,12 +1,16 @@
 package com.nicolas.whfrp3database
 
 import android.database.sqlite.SQLiteDatabase
+import com.nicolas.whfrp3database.entities.hand.Hand
 import com.nicolas.whfrp3database.entities.player.Player
 import com.nicolas.whfrp3database.entities.player.enums.Race.DWARF
 import com.nicolas.whfrp3database.entities.player.enums.Race.HUMAN
+import com.nicolas.whfrp3database.tables.HAND_TABLE_NAME
 import com.nicolas.whfrp3database.tables.PLAYER_TABLE_NAME
+import com.nicolas.whfrp3database.tables.parsers.HandParser
 import com.nicolas.whfrp3database.tables.parsers.PlayerParser
 import com.nicolas.whfrp3database.tables.parsers.toColumns
+import com.nicolas.whfrp3database.tables.parsers.toPairs
 import org.jetbrains.anko.db.insert
 import org.jetbrains.anko.db.parseOpt
 import org.jetbrains.anko.db.select
@@ -22,12 +26,48 @@ import org.robolectric.annotation.Config
 
 @RunWith(RobolectricTestRunner::class)
 @Config(constants = BuildConfig::class)
-class PlayerTableTest {
+class AnkoUseTest {
     private var databaseHelper: DatabaseOpenHelper? = null
 
     @Before
     fun setUp() {
         databaseHelper = DatabaseOpenHelper(RuntimeEnvironment.application)
+    }
+
+    @Test
+    fun should_use_hand() = databaseTest {
+        select(HAND_TABLE_NAME).exec {
+            val hand = parseOpt(HandParser())
+            assertNull(hand)
+        }
+
+        val hand = Hand("HandName", challengeDicesCount = 1, id = 3)
+
+        val insertRes: Long = insert(HAND_TABLE_NAME, *hand.toColumns().toPairs())
+        assertEquals(3, insertRes)
+
+        select(HAND_TABLE_NAME).exec {
+            val foundHand = parseOpt(HandParser())
+            assertNotNull(foundHand)
+            assertEquals(3, foundHand!!.id)
+            assertEquals("HandName", foundHand.name)
+            assertEquals(1, foundHand.challengeDicesCount)
+            assertEquals(0, foundHand.characteristicDicesCount)
+        }
+
+        hand.characteristicDicesCount = 4
+        update(HAND_TABLE_NAME, *hand.toColumns().toPairs())
+                .whereArgs("id = ${hand.id}")
+                .exec()
+
+        select(HAND_TABLE_NAME).exec {
+            val foundHand = parseOpt(HandParser())
+            assertNotNull(foundHand)
+            assertEquals(3, foundHand!!.id)
+            assertEquals("HandName", foundHand.name)
+            assertEquals(1, foundHand.challengeDicesCount)
+            assertEquals(4, foundHand.characteristicDicesCount)
+        }
     }
 
     @Test
@@ -39,7 +79,7 @@ class PlayerTableTest {
 
         val player = Player("John", id = databaseHelper!!.nextAvailableId(this, PLAYER_TABLE_NAME))
 
-        val insertRes: Long = insert(PLAYER_TABLE_NAME, *player.toColumns())
+        val insertRes: Long = insert(PLAYER_TABLE_NAME, *player.toColumns().toPairs())
         assertEquals(1, insertRes)
 
         select(PLAYER_TABLE_NAME).exec {
@@ -50,7 +90,7 @@ class PlayerTableTest {
         }
 
         player.race = DWARF
-        update(PLAYER_TABLE_NAME, *player.toColumns())
+        update(PLAYER_TABLE_NAME, *player.toColumns().toPairs())
                 .whereArgs("id = ${player.id}")
                 .exec()
 

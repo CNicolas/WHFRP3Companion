@@ -4,6 +4,7 @@ import com.nicolas.whfrp3database.DatabaseOpenHelper
 import com.nicolas.whfrp3database.daos.AbstractDao
 import com.nicolas.whfrp3database.entities.player.Player
 import com.nicolas.whfrp3database.entities.player.playerLinked.PlayerLinkedEntity
+import com.nicolas.whfrp3database.tables.parsers.toPairs
 import org.jetbrains.anko.db.delete
 import org.jetbrains.anko.db.insert
 import org.jetbrains.anko.db.select
@@ -13,7 +14,12 @@ abstract class AbstractPlayerLinkedDao<E : PlayerLinkedEntity>(databaseHelper: D
     : AbstractDao<E>(databaseHelper), PlayerLinkedDao<E> {
 
     override fun add(entity: E, player: Player): E? = databaseHelper.writableDatabase.let {
-        it.insert(tableName, *getColumns(entity, player))
+        val columns = getColumns(entity, player).toMutableMap()
+        if (entity.id == -1) {
+            columns["id"] = databaseHelper.nextAvailableId(it, tableName)
+        }
+
+        it.insert(tableName, *getColumns(entity, player).toPairs())
 
         return findByNameAndPlayer(entity.name, player)
     }
@@ -25,7 +31,7 @@ abstract class AbstractPlayerLinkedDao<E : PlayerLinkedEntity>(databaseHelper: D
     override fun findAllByPlayer(player: Player): List<E> {
         return databaseHelper.writableDatabase.let {
             it.select(tableName)
-                    .whereArgs("playerId = ${player.id}")
+                    .whereArgs("playerId = '${player.id}'")
                     .exec {
                         return@exec parseAll(this)
                     }
@@ -34,7 +40,7 @@ abstract class AbstractPlayerLinkedDao<E : PlayerLinkedEntity>(databaseHelper: D
 
     override fun updateByPlayer(entity: E, player: Player): E? {
         val id = databaseHelper.writableDatabase
-                .update(tableName, *getColumns(entity, player))
+                .update(tableName, *getColumns(entity, player).toPairs())
                 .whereArgs("id = ${entity.id}")
                 .exec()
 
@@ -48,5 +54,5 @@ abstract class AbstractPlayerLinkedDao<E : PlayerLinkedEntity>(databaseHelper: D
             .delete(tableName, "id = ${entity.id}")
 
 
-    abstract fun getColumns(entity: E, player: Player): Array<Pair<String, Any?>>
+    abstract fun getColumns(entity: E, player: Player): Map<String, Any?>
 }

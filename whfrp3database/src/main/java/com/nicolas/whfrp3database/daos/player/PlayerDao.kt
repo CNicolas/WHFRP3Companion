@@ -17,5 +17,5 @@ class PlayerDao(databaseHelper: DatabaseOpenHelper) : AbstractNameKeyDao<Player>
 
     override fun parseAll(cursor: Cursor): List<Player> = cursor.parseList(PlayerParser())
 
-    override fun getColumns(entity: Player): Array<Pair<String, Any?>> = entity.toColumns()
+    override fun getColumns(entity: Player): Map<String, Any?> = entity.toColumns()
 }

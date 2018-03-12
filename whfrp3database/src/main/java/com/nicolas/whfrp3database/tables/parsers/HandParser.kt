@@ -17,7 +17,7 @@ class HandParser : RowParser<Hand> {
             )
 }
 
-fun Hand.toColumns(): Array<Pair<String, Any?>> = arrayOf(
+fun Hand.toColumns(): Map<String, Any?> = mapOf(
         "id" to id,
         "name" to name,
         "characteristicDicesCount" to characteristicDicesCount,

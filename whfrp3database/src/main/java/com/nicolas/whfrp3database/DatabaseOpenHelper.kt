@@ -23,16 +23,16 @@ class DatabaseOpenHelper(private val context: Context) : ManagedSQLiteOpenHelper
 
     override fun onCreate(db: SQLiteDatabase) {
         // Here you create tables
+        createHandTable(db)
         createPlayerTable(db)
         createItemTable(db)
-        createHandTable(db)
     }
 
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
         // Here you can upgrade tables, as usual
+        db.dropTable(HAND_TABLE_NAME, true)
         db.dropTable(PLAYER_TABLE_NAME, true)
         db.dropTable(ITEM_TABLE_NAME, true)
-        db.dropTable(HAND_TABLE_NAME, true)
     }
 
     fun deleteDatabase() {

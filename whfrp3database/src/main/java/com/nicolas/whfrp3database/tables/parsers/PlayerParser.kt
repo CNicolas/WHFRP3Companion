@@ -43,7 +43,7 @@ class PlayerParser : RowParser<Player> {
             )
 }
 
-fun Player.toColumns(): Array<Pair<String, Any?>> = arrayOf(
+fun Player.toColumns(): Map<String, Any?> = mapOf(
         "id" to id,
         "name" to name,
         "race" to race.toString(),

@@ -18,5 +18,5 @@ class ItemDao(databaseHelper: DatabaseOpenHelper) : AbstractPlayerLinkedDao<Item
 
     override fun parseAll(cursor: Cursor): List<Item> = cursor.parseList(ItemParser())
 
-    override fun getColumns(entity: Item, player: Player): Array<Pair<String, Any?>> = entity.toColumns(player)
+    override fun getColumns(entity: Item, player: Player): Map<String, Any?> = entity.toColumns(player)
 }
