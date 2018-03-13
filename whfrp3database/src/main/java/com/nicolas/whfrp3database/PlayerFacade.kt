@@ -55,7 +55,6 @@ class PlayerFacade(context: Context) {
     fun deletePlayer(name: String) {
         val player = playerDao.findByName(name)
         if (player != null) {
-//            itemDao.deleteAllByPlayer(player)
             playerDao.deleteByName(name)
         }
     }
@@ -63,7 +62,6 @@ class PlayerFacade(context: Context) {
     fun deletePlayer(player: Player) {
         val foundPlayer = playerDao.findById(player.id)
         if (foundPlayer != null) {
-//            itemDao.deleteAllByPlayer(foundPlayer)
             playerDao.delete(foundPlayer)
         } else {
             deletePlayer(player.name)
@@ -72,7 +70,6 @@ class PlayerFacade(context: Context) {
 
     fun deleteAll() {
         playerDao.deleteAll()
-//        itemDao.deleteAll()
     }
 
     private fun Player?.fillItems(): Player? {

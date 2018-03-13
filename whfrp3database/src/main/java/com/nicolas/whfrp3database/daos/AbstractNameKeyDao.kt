@@ -39,14 +39,14 @@ internal abstract class AbstractNameKeyDao<E : NamedEntity>(databaseHelper: Data
     override fun update(entity: E): E? {
         val id = databaseHelper.writableDatabase
                 .update(tableName, *getColumns(entity).toPairs())
-                .whereArgs("id = '${entity.id}'")
+                .whereArgs("id = ${entity.id}")
                 .exec()
 
         return findById(id)
     }
 
     override fun delete(entity: E): Int = databaseHelper.writableDatabase
-            .delete(tableName, "id = '${entity.id}'")
+            .delete(tableName, "id = ${entity.id} or name = '${entity.name}'")
 
     override fun deleteByName(name: String): Int = databaseHelper.writableDatabase
             .delete(tableName, "name = '$name'")

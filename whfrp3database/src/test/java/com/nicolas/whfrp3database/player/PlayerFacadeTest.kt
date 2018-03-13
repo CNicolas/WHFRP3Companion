@@ -1,4 +1,4 @@
-package com.nicolas.whfrp3database.facade
+package com.nicolas.whfrp3database.player
 
 import com.nicolas.whfrp3database.BuildConfig
 import com.nicolas.whfrp3database.entities.player.CharacteristicValue
