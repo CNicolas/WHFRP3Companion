@@ -1,4 +1,4 @@
-package warhammer.dicelauncher.dices.impl.bad
+package com.nicolas.dicelauncher.dices.impl.bad
 
 import com.nicolas.dicelauncher.dices.AbstractDice
 import com.nicolas.dicelauncher.dices.Face

@@ -4,10 +4,10 @@ import com.nicolas.dicelauncher.dices.Dice
 import com.nicolas.dicelauncher.dices.Face
 import com.nicolas.dicelauncher.dices.Face.*
 import com.nicolas.dicelauncher.dices.impl.bad.ChallengeDice
+import com.nicolas.dicelauncher.dices.impl.bad.MisfortuneDice
 import com.nicolas.dicelauncher.dices.impl.good.*
-import com.nicolas.whfrp3database.entities.hand.Hand
-import warhammer.dicelauncher.dices.impl.bad.MisfortuneDice
 import com.nicolas.dicelauncher.statistics.LaunchStatistics
+import com.nicolas.whfrp3database.entities.hand.Hand
 
 fun Hand.launch(): LaunchResult = launchHand(this)
 fun Hand.launchForStatistics(count: Int): LaunchStatistics = launchHandForStatistics(this, count)

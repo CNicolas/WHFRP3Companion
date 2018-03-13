@@ -23,6 +23,9 @@ android {
 }
 
 dependencies {
+    // Kotlin
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
     compile project(':whfrp3database')
 
     // Tests
