@@ -45,7 +45,7 @@ class ItemParser : RowParser<Item> {
             GenericItem(
                     id = columns[0].toInt(),
                     name = columns[3] as String,
-                    description = columns[4] as String,
+                    description = columns[4] as String?,
                     encumbrance = columns[5].toInt(),
                     quantity = columns[6].toInt(),
                     quality = Quality.valueOf(columns[7] as String)
@@ -71,22 +71,22 @@ fun Item.toColumns(player: Player): Map<String, Any?> = mapOf(
         "id" to id,
         "playerId" to player.id,
 
-        "type" to type,
+        "type" to type.toString(),
         "name" to name,
         "description" to description,
         "encumbrance" to encumbrance,
         "quantity" to quantity,
-        "quality" to quality,
+        "quality" to quality.toString(),
 
         "uses" to uses,
 
         "isEquipped" to isEquipped,
-        "subType" to subType,
+        "subType" to subType.toString(),
 
         "soak" to soak,
         "defense" to defense,
 
         "damage" to damage,
         "criticalLevel" to criticalLevel,
-        "range" to range
+        "range" to range.toString()
 )

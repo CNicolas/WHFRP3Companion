@@ -3,7 +3,7 @@ package com.nicolas.whfrp3database.tables
 import android.database.sqlite.SQLiteDatabase
 import org.jetbrains.anko.db.*
 
-const val ITEM_TABLE_NAME = "Hand"
+const val ITEM_TABLE_NAME = "Item"
 
 fun createItemTable(db: SQLiteDatabase) {
     db.createTable(ITEM_TABLE_NAME, true,

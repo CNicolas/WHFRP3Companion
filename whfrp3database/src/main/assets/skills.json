@@ -1,0 +1,324 @@
+[
+  {
+    "name": "Athlétisme",
+    "characteristic": "STRENGTH",
+    "type": "BASIC",
+    "specializations": [
+      { "name": "Escalade" },
+      { "name": "Natation" },
+      { "name": "Saut" },
+      { "name": "Ramer" },
+      { "name": "Course" },
+      { "name": "Levage" }
+    ]
+  },
+  {
+    "characteristic": "AGILITY",
+    "type": "BASIC",
+    "name": "Capacité de Tir",
+    "specializations": [
+      { "name": "Arcs" },
+      { "name": "Arbalètes" },
+      { "name": "Armes de Jet" },
+      { "name": "Armes à Poudre" }
+    ]
+  },
+  {
+    "characteristic": "AGILITY",
+    "type": "BASIC",
+    "name": "Coordination",
+    "specializations": [
+      { "name": "Esquive" },
+      { "name": "Équilibre" },
+      { "name": "Acrobaties" },
+      { "name": "Jonglage" },
+      { "name": "Danse" },
+      { "name": "Cordes et Nœuds" }
+    ]
+  },
+  {
+    "characteristic": "STRENGTH",
+    "type": "BASIC",
+    "name": "Intimidation",
+    "specializations": [
+      { "name": "Violence" },
+      { "name": "Interrogation" },
+      { "name": "Politique" }
+    ]
+  },
+  {
+    "characteristic": "TOUGHNESS",
+    "type": "BASIC",
+    "name": "Résistance",
+    "specializations": [
+      { "name": "Blocage au Bouclier" },
+      { "name": "Récupération Après l'Effort" },
+      { "name": "Résistance aux Maladies" },
+      { "name": "Résistance au Poison" },
+      { "name": "Résistance à la Faim" }
+    ]
+  },
+  {
+    "characteristic": "AGILITY",
+    "type": "BASIC",
+    "name": "Équitation",
+    "specializations": [
+      { "name": "Chevaux" },
+      { "name": "Saut Équestre" },
+      { "name": "Coches" },
+      { "name": "Combat Monté" },
+      { "name": "Longs Voyages" }
+    ]
+  },
+  {
+    "characteristic": "AGILITY",
+    "type": "BASIC",
+    "name": "Forfait",
+    "specializations": [
+      { "name": "Pickpocket" },
+      { "name": "Serrures" },
+      { "name": "Fabrication de Pièges" },
+      { "name": "Déjouter les Pièges" },
+      { "name": "Escamotage" }
+    ]
+  },
+  {
+    "characteristic": "AGILITY",
+    "type": "BASIC",
+    "name": "Furtivité",
+    "specializations": [
+      { "name": "Mouvement Silencieux (Rural)" },
+      { "name": "Mouvement Silencieux (Urbain)" },
+      { "name": "Dissimulation" },
+      { "name": "Embuscade" },
+      { "name": "Se Fondre dans la Foule" }
+    ]
+  },
+  {
+    "characteristic": "STRENGTH",
+    "type": "BASIC",
+    "name": "Capacité de Combat",
+    "specializations": [
+      { "name": "Armes à Une Main" },
+      { "name": "Armes à Deux Mains" },
+      { "name": "Armes d’Hast" },
+      { "name": "Parade (Armes à Une Main)" },
+      { "name": "Parade (Armes à Deux Mains)" }
+    ]
+  },
+  {
+    "characteristic": "FELLOWSHIP",
+    "type": "BASIC",
+    "name": "Charisme",
+    "specializations": [
+      { "name": "Étiquette" },
+      { "name": "Commérage" },
+      { "name": "Diplomatie" },
+      { "name": "Marchandage" },
+      { "name": "Séduction" }
+    ]
+  },
+  {
+    "characteristic": "WILLPOWER",
+    "type": "BASIC",
+    "name": "Discipline",
+    "specializations": [
+      { "name": "Résistance au Charisme" },
+      { "name": "Résistance à la Ruse" },
+      { "name": "Résistance à l'Intimidation" },
+      { "name": "Résistance à la Peur" },
+      { "name": "Résistance à la Terreur" },
+      { "name": "Résistance à la Torture" }
+    ]
+  },
+  {
+    "characteristic": "INTELLIGENCE",
+    "type": "BASIC",
+    "name": "Premiers Soins",
+    "specializations": [
+      { "name": "Chirurgie de Terrain" },
+      { "name": "Soins à Long Terme" },
+      { "name": "Soins des Blessures Critiques" },
+      { "name": "Soins des Blessures Ordinaires" }
+    ]
+  },
+  {
+    "characteristic": "INTELLIGENCE",
+    "type": "BASIC",
+    "name": "Folklore",
+    "specializations": [
+      { "name": "Connaissance des Créatures" },
+      { "name": "Connaissance du Reikland" },
+      { "name": "Géographie" },
+      { "name": "Superstitions" },
+      { "name": "Coutumes Locales" }
+    ]
+  },
+  {
+    "characteristic": "FELLOWSHIP",
+    "type": "BASIC",
+    "name": "Ruse",
+    "specializations": [
+      { "name": "Subterfuge" },
+      { "name": "Baratin" },
+      { "name": "Escroquerie" },
+      { "name": "Sous-Entendus" },
+      { "name": "Feindre l'Innocence" }
+    ]
+  },
+  {
+    "characteristic": "FELLOWSHIP",
+    "type": "BASIC",
+    "name": "Intuition",
+    "specializations": [
+      { "name": "Discerner les Mensonges" },
+      { "name": "Compter la Monnaie" },
+      { "name": "Évaluation" },
+      { "name": "Appréciation des Adversaires" }
+    ]
+  },
+  {
+    "characteristic": "FELLOWSHIP",
+    "type": "BASIC",
+    "name": "Commandement",
+    "specializations": [
+      { "name": "Commandement Militaire" },
+      { "name": "Commandement Politique" },
+      { "name": "Logistique" },
+      { "name": "Chef Spirituel" }
+    ]
+  },
+  {
+    "characteristic": "INTELLIGENCE",
+    "type": "BASIC",
+    "name": "Connaissance de la Nature",
+    "specializations": [
+      { "name": "Trouver Un Abri" },
+      { "name": "Trouver à Manger" },
+      { "name": "Trouver à Boire" },
+      { "name": "Identification des Animaux" },
+      { "name": "Identification des Plantes" }
+    ]
+  },
+  {
+    "characteristic": "INTELLIGENCE",
+    "type": "BASIC",
+    "name": "Observation",
+    "specializations": [
+      { "name": "Acuité Auditive" },
+      { "name": "Acuité Visuelle" },
+      { "name": "Pistage" },
+      { "name": "Sens du Détail" }
+    ]
+  },
+  {
+    "characteristic": "INTELLIGENCE",
+    "type": "ADVANCED",
+    "name": "Art de la magie",
+    "specializations": [
+      { "name": "Histoire de la Magie" },
+      { "name": "Collèges de Magie" },
+      { "name": "Sorts de Rang 1" },
+      { "name": "Sorts de Rang 2" },
+      { "name": "Sorts de Rang 3" },
+      { "name": "Sorts de Rang 4" },
+      { "name": "Sorts de Rang 5" }
+    ]
+  },
+  {
+    "characteristic": "FELLOWSHIP",
+    "type": "ADVANCED",
+    "name": "Dressage des animaux",
+    "specializations": [
+      { "name": "Commandement" },
+      { "name": "Entraînement" },
+      { "name": "Empathie" },
+      { "name": "Apaisement" },
+      { "name": "Retour d'Obéissance" }
+    ]
+  },
+  {
+    "characteristic": "INTELLIGENCE",
+    "type": "ADVANCED",
+    "name": "Education",
+    "specializations": [
+      { "name": "Histoire" },
+      { "name": "Géographie" },
+      { "name": "Raisonnement" },
+      { "name": "Linguistique" },
+      { "name": "Philosophie" }
+    ]
+  },
+  {
+    "characteristic": "INTELLIGENCE",
+    "type": "ADVANCED",
+    "name": "Focalisation",
+    "specializations": [
+      { "name": "Demi-Régime" },
+      { "name": "Surfocalisation" },
+      { "name": "Prudence" },
+      { "name": "Témérité" },
+      { "name": "Collège de Magie Spécifique" }
+    ]
+  },
+  {
+    "characteristic": "INTELLIGENCE",
+    "type": "ADVANCED",
+    "name": "Invocation",
+    "specializations": [
+      { "name": "Divinité Spécifique" },
+      { "name": "Invocation Rituelle" },
+      { "name": "Invocation de Groupe" }
+    ]
+  },
+  {
+    "characteristic": "INTELLIGENCE",
+    "type": "ADVANCED",
+    "name": "Médecine",
+    "specializations": [
+      { "name": "Blessures Critiques" },
+      { "name": "Poisons" },
+      { "name": "Maladies" },
+      { "name": "Soins à Long Terme" },
+      { "name": "Chirurgie" }
+    ]
+  },
+  {
+    "characteristic": "INTELLIGENCE",
+    "type": "ADVANCED",
+    "name": "Métier",
+    "specializations": [
+      { "name": "Forgeron" },
+      { "name": "Charpentier" },
+      { "name": "Joailler" },
+      { "name": "Brasser" },
+      { "name": "Ingénieur" },
+      { "name": "Spectacle" }
+    ]
+  },
+  {
+    "characteristic": "INTELLIGENCE",
+    "type": "ADVANCED",
+    "name": "Perception de la magie",
+    "specializations": [
+      { "name": "Observer un Vent Spécifique" },
+      { "name": "Identification des Sorts" },
+      { "name": "Discerner les Auras" },
+      { "name": "Magie Noire" },
+      { "name": "Estimation de l'Énergie" }
+    ]
+  },
+  {
+    "characteristic": "INTELLIGENCE",
+    "type": "ADVANCED",
+    "name": "Piété",
+    "specializations": [
+      { "name": "Demi-Régime" },
+      { "name": "Prudence" },
+      { "name": "Témérité" },
+      { "name": "En Grand Besoin" },
+      { "name": "Traditions" },
+      { "name": "Dogme" }
+    ]
+  }
+]

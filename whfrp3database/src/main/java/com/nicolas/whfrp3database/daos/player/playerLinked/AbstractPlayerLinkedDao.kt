@@ -31,7 +31,7 @@ abstract class AbstractPlayerLinkedDao<E : PlayerLinkedEntity>(databaseHelper: D
     override fun findAllByPlayer(player: Player): List<E> {
         return databaseHelper.writableDatabase.let {
             it.select(tableName)
-                    .whereArgs("playerId = '${player.id}'")
+                    .whereArgs("playerId = ${player.id}")
                     .exec {
                         return@exec parseAll(this)
                     }

@@ -88,6 +88,6 @@ fun Player.toColumns(): Map<String, Any?> = mapOf(
         "gold" to gold,
         // endregion
 
-        "skills" to skills.toString(),
-        "talents" to talents.toString()
+        "skills" to Klaxon().toJsonString(skills),
+        "talents" to Klaxon().toJsonString(talents)
 )
