@@ -1,1 +1,1 @@
-include ':app', ':whfrp3database'
+include ':app', ':whfrp3database', ':dicelauncher'
