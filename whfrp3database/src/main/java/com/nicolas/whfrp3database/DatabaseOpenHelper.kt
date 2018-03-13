@@ -38,17 +38,6 @@ class DatabaseOpenHelper(private val context: Context) : ManagedSQLiteOpenHelper
     fun deleteDatabase() {
         context.deleteDatabase(databaseName)
     }
-
-    fun nextAvailableId(db: SQLiteDatabase, tableName: String): Int {
-        return db.select(tableName)
-                .orderBy("id", SqlOrderDirection.DESC)
-                .exec {
-                    if (this.count == 0) {
-                        return@exec 1
-                    }
-                    return@exec getInt(0) + 1
-                }
-    }
 }
 
 // Access property for Context

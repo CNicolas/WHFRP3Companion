@@ -11,15 +11,19 @@ import org.jetbrains.anko.db.update
 internal abstract class AbstractNameKeyDao<E : NamedEntity>(databaseHelper: DatabaseOpenHelper)
     : AbstractDao<E>(databaseHelper), NameKeyDao<E> {
 
-    override fun add(entity: E): E? = databaseHelper.writableDatabase.let {
-        val columns = getColumns(entity).toMutableMap()
-        if (entity.id == -1) {
-            columns["id"] = databaseHelper.nextAvailableId(it, tableName)
+    override fun add(entity: E): E? {
+        val nextId: Int = (findAll().map { it.id }.max() ?: 0) + 1
+
+        databaseHelper.writableDatabase.let {
+            val columns = getColumns(entity).toMutableMap()
+            if (entity.id == -1) {
+                columns["id"] = nextId
+            }
+
+            it.insert(tableName, *columns.toPairs())
+
+            return findByName(entity.name)
         }
-
-        it.insert(tableName, *columns.toPairs())
-
-        return findByName(entity.name)
     }
 
     override fun findByName(name: String): E? = databaseHelper.writableDatabase.let {
