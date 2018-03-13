@@ -39,7 +39,7 @@ dependencies {
     compile "com.android.support:support-v4:$android_support_version"
 
     compile "org.jetbrains.anko:anko-sqlite:$anko_version"
-    compile "com.beust:klaxon:2.1.9"
+    compile "com.google.code.gson:gson:2.8.2"
 }
 
 repositories {
