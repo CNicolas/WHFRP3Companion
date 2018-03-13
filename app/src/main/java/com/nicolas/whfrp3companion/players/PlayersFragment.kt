@@ -14,6 +14,8 @@ import butterknife.*
 import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3database.PlayerFacade
 import com.nicolas.whfrp3database.entities.player.Player
+import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.uiThread
 
 class PlayersFragment : Fragment() {
     @BindView(R.id.list_players)
@@ -34,7 +36,7 @@ class PlayersFragment : Fragment() {
         val resultingView: View = inflater.inflate(R.layout.players, container, false)
 
         unbinder = ButterKnife.bind(this, resultingView)
-        playerFacade=PlayerFacade(context!!)
+        playerFacade = PlayerFacade(context!!)
 
         updatePlayers()
 
@@ -59,17 +61,21 @@ class PlayersFragment : Fragment() {
     @OnClick(R.id.new_player_button)
     fun createNewPlayer() {
         if (!newPlayerEditText.text.isNullOrBlank()) {
-            playerFacade.add(Player(newPlayerEditText.text.toString()))
-            updatePlayers()
+            doAsync {
+                playerFacade.add(Player(newPlayerEditText.text.toString()))
+                updatePlayers()
+            }
         }
     }
 
     private fun updatePlayers() {
-        players = playerFacade.findAll()
-
-        playersListView.adapter = PlayersAdapter(context!!, players)
-
-        newPlayerEditText.text.clear()
+        doAsync {
+            players = playerFacade.findAll()
+            uiThread {
+                playersListView.adapter = PlayersAdapter(context!!, players)
+                newPlayerEditText.text.clear()
+            }
+        }
     }
 
     companion object {
