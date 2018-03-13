@@ -12,11 +12,8 @@ import android.widget.ListView
 import android.widget.Toast
 import butterknife.*
 import com.nicolas.whfrp3companion.R
-import com.nicolas.whfrp3database.database
+import com.nicolas.whfrp3database.PlayerFacade
 import com.nicolas.whfrp3database.entities.player.Player
-import com.nicolas.whfrp3database.tables.PLAYER_TABLE_NAME
-import org.jetbrains.anko.db.insert
-import org.jetbrains.anko.db.select
 
 class PlayersFragment : Fragment() {
     @BindView(R.id.list_players)
@@ -26,8 +23,8 @@ class PlayersFragment : Fragment() {
     @BindView(R.id.new_player_button)
     lateinit var newPlayerButton: ImageButton
 
+    private lateinit var playerFacade: PlayerFacade
     private lateinit var players: List<Player>
-
     private lateinit var unbinder: Unbinder
 
     override fun onCreateView(inflater: LayoutInflater,
@@ -37,18 +34,12 @@ class PlayersFragment : Fragment() {
         val resultingView: View = inflater.inflate(R.layout.players, container, false)
 
         unbinder = ButterKnife.bind(this, resultingView)
+        playerFacade=PlayerFacade(context!!)
 
-        players = listOf()
-//        updatePlayers()
-//        playersListView.adapter = PlayersAdapter(context!!, players)
+        updatePlayers()
 
         return resultingView
     }
-
-//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-//        super.onViewCreated(view, savedInstanceState)
-//        updatePlayers()
-//    }
 
     override fun onDestroyView() {
         super.onDestroyView()
@@ -68,23 +59,13 @@ class PlayersFragment : Fragment() {
     @OnClick(R.id.new_player_button)
     fun createNewPlayer() {
         if (!newPlayerEditText.text.isNullOrBlank()) {
-            context!!.database.use {
-                insert(PLAYER_TABLE_NAME,
-                        "name" to newPlayerEditText.text.toString())
-            }
-//            WarHammerContext.playerFacade.add(Player(newPlayerEditText.text.toString()))
+            playerFacade.add(Player(newPlayerEditText.text.toString()))
             updatePlayers()
         }
     }
 
     private fun updatePlayers() {
-//        players = WarHammerContext.playerFacade.findAll()
-        context!!.database.use {
-            select(PLAYER_TABLE_NAME)
-        }
-//        val newList = players.toMutableList()
-//        newList.add(Player(newPlayerEditText.text.toString()))
-//        players = newList
+        players = playerFacade.findAll()
 
         playersListView.adapter = PlayersAdapter(context!!, players)
 
