@@ -20,12 +20,12 @@ class ItemParser : RowParser<Item> {
             Armor(
                     id = columns[0].toInt(),
                     name = columns[3] as String,
-                    description = columns[4] as String,
+                    description = columns[4] as String?,
                     encumbrance = columns[5].toInt(),
                     quantity = columns[6].toInt(),
                     quality = Quality.valueOf(columns[7] as String),
                     subType = ArmorType.valueOf(columns[8] as String),
-                    isEquipped = columns[10] as Boolean,
+                    isEquipped = columns[10].toBoolean(),
                     soak = columns[11].toInt(),
                     defense = columns[12].toInt()
             )
@@ -34,7 +34,7 @@ class ItemParser : RowParser<Item> {
             Expandable(
                     id = columns[0].toInt(),
                     name = columns[3] as String,
-                    description = columns[4] as String,
+                    description = columns[4] as String?,
                     encumbrance = columns[5].toInt(),
                     quantity = columns[6].toInt(),
                     quality = Quality.valueOf(columns[7] as String),
@@ -55,12 +55,12 @@ class ItemParser : RowParser<Item> {
             Weapon(
                     id = columns[0].toInt(),
                     name = columns[3] as String,
-                    description = columns[4] as String,
+                    description = columns[4] as String?,
                     encumbrance = columns[5].toInt(),
                     quantity = columns[6].toInt(),
                     quality = Quality.valueOf(columns[7] as String),
                     subType = WeaponType.valueOf(columns[8] as String),
-                    isEquipped = columns[10] as Boolean,
+                    isEquipped = columns[10].toBoolean(),
                     damage = columns[13].toInt(),
                     criticalLevel = columns[14].toInt(),
                     range = Range.valueOf(columns[15] as String)
