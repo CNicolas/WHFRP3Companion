@@ -18,6 +18,6 @@ abstract class AbstractDao<E>(protected val databaseHelper: DatabaseOpenHelper) 
     override fun deleteAll(): Int = databaseHelper.writableDatabase
             .delete(tableName)
 
-    abstract fun parse(cursor: Cursor): E?
-    abstract fun parseAll(cursor: Cursor): List<E>
+    protected abstract fun parse(cursor: Cursor): E?
+    protected abstract fun parseAll(cursor: Cursor): List<E>
 }

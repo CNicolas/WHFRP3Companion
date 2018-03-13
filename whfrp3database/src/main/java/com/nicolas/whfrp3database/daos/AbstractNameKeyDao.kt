@@ -51,5 +51,5 @@ abstract class AbstractNameKeyDao<E : NamedEntity>(databaseHelper: DatabaseOpenH
     override fun deleteByName(name: String): Int = databaseHelper.writableDatabase
             .delete(tableName, "name = '$name'")
 
-    abstract fun getColumns(entity: E): Map<String, Any?>
+    protected abstract fun getColumns(entity: E): Map<String, Any?>
 }

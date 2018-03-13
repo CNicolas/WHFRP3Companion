@@ -28,12 +28,15 @@ class HandDaoTest {
 
         assertEquals(0, handDao.findAll().size)
 
-        handDao.add(Hand("HandName", fortuneDicesCount = 2, id = 3))
+        val insertedHand = handDao.add(Hand("HandName", fortuneDicesCount = 2, id = 3))
         assertEquals(1, handDao.findAll().size)
+        assertNotNull(insertedHand)
 
         val foundHand = handDao.findById(3)
         assertNotNull(foundHand)
         assertEquals(2, foundHand!!.fortuneDicesCount)
+
+        assertEquals(insertedHand!!, foundHand)
     }
 
     @After
