@@ -1,27 +1,18 @@
-package com.nicolas.whfrp3database
+package com.nicolas.whfrp3database.facade
 
+import com.nicolas.whfrp3database.BuildConfig
 import com.nicolas.whfrp3database.entities.player.CharacteristicValue
 import com.nicolas.whfrp3database.entities.player.Player
 import com.nicolas.whfrp3database.entities.player.playerLinked.item.GenericItem
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.After
-import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
-import org.robolectric.RuntimeEnvironment
 import org.robolectric.annotation.Config
 
 @RunWith(RobolectricTestRunner::class)
 @Config(constants = BuildConfig::class)
-class PlayerFacadeTest {
-    private lateinit var playerFacade: PlayerFacade
-
-    @Before
-    fun setUp() {
-        playerFacade = PlayerFacade(RuntimeEnvironment.application)
-    }
-
+class PlayerFacadeTest : AbstractPlayerFacadeTest() {
     @Test
     fun should_add_a_simple_player() {
         val playerName = "PlayerName"
@@ -80,11 +71,5 @@ class PlayerFacadeTest {
 
         val allPlayers = playerFacade.findAll()
         assertThat(allPlayers.size).isEqualTo(1)
-    }
-
-    @After
-    fun tearDown() {
-        RuntimeEnvironment.application.database.close()
-        RuntimeEnvironment.application.database.deleteDatabase()
     }
 }

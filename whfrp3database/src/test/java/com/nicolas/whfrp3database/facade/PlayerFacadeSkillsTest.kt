@@ -1,27 +1,19 @@
-package com.nicolas.whfrp3database
+package com.nicolas.whfrp3database.facade
 
+import com.nicolas.whfrp3database.BuildConfig
 import com.nicolas.whfrp3database.entities.player.Player
 import com.nicolas.whfrp3database.entities.player.enums.Characteristic.*
 import com.nicolas.whfrp3database.entities.player.playerLinked.skill.SkillType
 import com.nicolas.whfrp3database.extensions.*
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.After
-import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
-import org.robolectric.RuntimeEnvironment
 import org.robolectric.annotation.Config
 
 @RunWith(RobolectricTestRunner::class)
 @Config(constants = BuildConfig::class)
-class PlayerFacadeSkillsTest {
-    private lateinit var playerFacade: PlayerFacade
-
-    @Before
-    fun setUp() {
-        playerFacade = PlayerFacade(RuntimeEnvironment.application)
-    }
+class PlayerFacadeSkillsTest : AbstractPlayerFacadeTest() {
 
     @Test
     fun should_add_advanced_skill_to_player() {
@@ -103,11 +95,5 @@ class PlayerFacadeSkillsTest {
 
         assertThat(specializations.size).isEqualTo(4)
         assertThat(specializations.map { it.name }).containsExactly("Arcs", "Arbalètes", "Armes de Jet", "Armes à Poudre")
-    }
-
-    @After
-    fun tearDown() {
-        RuntimeEnvironment.application.database.close()
-        RuntimeEnvironment.application.database.deleteDatabase()
     }
 }

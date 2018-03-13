@@ -1,29 +1,20 @@
-package com.nicolas.whfrp3database
+package com.nicolas.whfrp3database.facade
 
+import com.nicolas.whfrp3database.BuildConfig
 import com.nicolas.whfrp3database.entities.player.Player
 import com.nicolas.whfrp3database.entities.player.playerLinked.talent.TalentCooldown
 import com.nicolas.whfrp3database.entities.player.playerLinked.talent.TalentCooldown.PASSIVE
 import com.nicolas.whfrp3database.entities.player.playerLinked.talent.TalentType.FAITH
 import com.nicolas.whfrp3database.extensions.*
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.After
-import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
-import org.robolectric.RuntimeEnvironment
 import org.robolectric.annotation.Config
 
 @RunWith(RobolectricTestRunner::class)
 @Config(constants = BuildConfig::class)
-class PlayerFacadeTalentsTest {
-    private lateinit var playerFacade: PlayerFacade
-
-    @Before
-    fun setUp() {
-        playerFacade = PlayerFacade(RuntimeEnvironment.application)
-    }
-
+class PlayerFacadeTalentsTest : AbstractPlayerFacadeTest() {
     @Test
     fun should_add_passive_faith_talent() {
         val player = playerFacade.add(Player("John"))
@@ -81,11 +72,5 @@ class PlayerFacadeTalentsTest {
         val faithPassiveTalent = playerFacade.talents.filter { it.type == FAITH }.first { it.cooldown == PASSIVE }
 
         assertThat(passiveFaithTalent).isEqualToComparingFieldByField(faithPassiveTalent)
-    }
-
-    @After
-    fun tearDown() {
-        RuntimeEnvironment.application.database.close()
-        RuntimeEnvironment.application.database.deleteDatabase()
     }
 }

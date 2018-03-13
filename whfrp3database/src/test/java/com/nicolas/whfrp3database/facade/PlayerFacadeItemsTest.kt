@@ -1,5 +1,6 @@
-package com.nicolas.whfrp3database
+package com.nicolas.whfrp3database.facade
 
+import com.nicolas.whfrp3database.BuildConfig
 import com.nicolas.whfrp3database.entities.player.Player
 import com.nicolas.whfrp3database.entities.player.playerLinked.item.Armor
 import com.nicolas.whfrp3database.entities.player.playerLinked.item.Expandable
@@ -10,24 +11,14 @@ import com.nicolas.whfrp3database.entities.player.playerLinked.item.enums.Qualit
 import com.nicolas.whfrp3database.entities.player.playerLinked.item.enums.Quality.NORMAL
 import com.nicolas.whfrp3database.extensions.*
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.After
-import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
-import org.robolectric.RuntimeEnvironment
 import org.robolectric.annotation.Config
 
 @RunWith(RobolectricTestRunner::class)
 @Config(constants = BuildConfig::class)
-class PlayerFacadeItemsTest {
-    private lateinit var playerFacade: PlayerFacade
-
-    @Before
-    fun setUp() {
-        playerFacade = PlayerFacade(RuntimeEnvironment.application)
-    }
-
+class PlayerFacadeItemsTest : AbstractPlayerFacadeTest() {
     @Test
     fun should_update_items_of_a_player() {
         val playerName = "PlayerName"
@@ -134,11 +125,5 @@ class PlayerFacadeItemsTest {
         playerFacade.update(player)
 
         assertThat(player.items.size).isEqualTo(0)
-    }
-
-    @After
-    fun tearDown() {
-        RuntimeEnvironment.application.database.close()
-        RuntimeEnvironment.application.database.deleteDatabase()
     }
 }
