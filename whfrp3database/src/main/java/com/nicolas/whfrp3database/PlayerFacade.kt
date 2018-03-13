@@ -5,12 +5,22 @@ import com.nicolas.whfrp3database.daos.player.PlayerDao
 import com.nicolas.whfrp3database.daos.player.playerLinked.item.ItemDao
 import com.nicolas.whfrp3database.entities.player.Player
 import com.nicolas.whfrp3database.entities.player.playerLinked.skill.SkillType
-import com.nicolas.whfrp3database.staticData.SkillsLoader
+import com.nicolas.whfrp3database.entities.player.playerLinked.talent.TalentCooldown
+import com.nicolas.whfrp3database.staticData.loadSkills
+import com.nicolas.whfrp3database.staticData.loadTalents
 
 class PlayerFacade(context: Context) {
     private val playerDao = PlayerDao(context.database)
     private val itemDao = ItemDao(context.database)
-    private val skillsLoader = SkillsLoader(context)
+
+    val skills = loadSkills(context) ?: listOf()
+    val basicSkills = skills.filter { it.type == SkillType.BASIC }
+    val advancedSkills = skills.filter { it.type == SkillType.ADVANCED }
+    val allSpecializations = skills.map { it to it.specializations }.toMap()
+
+    val talents = loadTalents(context) ?: listOf()
+    val passiveTalents = talents.filter { it.cooldown == TalentCooldown.PASSIVE }
+    val exhaustibleTalents = talents.filter { it.cooldown == TalentCooldown.TALENT }
 
     fun add(player: Player): Player {
         createSkillsForPlayer(player)
@@ -96,12 +106,10 @@ class PlayerFacade(context: Context) {
     private fun findAllItemsByPlayer(player: Player) = itemDao.findAllByPlayer(player)
 
     private fun createSkillsForPlayer(player: Player) {
-        skillsLoader.skills
-                .filter { it.type == SkillType.BASIC }
-                .forEach {
-                    val mutableSkills = player.skills.toMutableList()
-                    mutableSkills.add(it)
-                    player.skills = mutableSkills
-                }
+        basicSkills.forEach {
+            val mutableSkills = player.skills.toMutableList()
+            mutableSkills.add(it)
+            player.skills = mutableSkills
+        }
     }
 }
