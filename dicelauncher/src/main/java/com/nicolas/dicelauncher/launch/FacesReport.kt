@@ -23,12 +23,12 @@ fun mergeReports(reports: List<FacesReport>): FacesReport =
         reports.reduce { finalReport, launchResultReport -> mergeTwoReports(finalReport, launchResultReport) }
 
 private fun mergeTwoReports(report1: FacesReport, report2: FacesReport): FacesReport =
-        report1.mergeReduce2(report2) { a, b -> a + b }
+        report1.mergeReduce(report2) { a, b -> a + b }
 
-private fun <K, V> Map<K, V>.mergeReduce2(other: Map<K, V>, reduce: (V, V) -> V = { a, b -> b }): Map<K, V> {
+private fun <K, V> Map<K, V>.mergeReduce(other: Map<K, V>, reduce: (V, V) -> V = { _, b -> b }): Map<K, V> {
     val result = LinkedHashMap<K, V>(this.size + other.size)
     result.putAll(this)
-    for ((key, value) in other) {
+    other.forEach { (key, value) ->
         result[key] = result[key]?.let { reduce(value, it) } ?: value
     }
     return result
