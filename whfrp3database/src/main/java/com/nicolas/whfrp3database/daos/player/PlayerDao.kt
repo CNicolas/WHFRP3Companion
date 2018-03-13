@@ -10,7 +10,7 @@ import com.nicolas.whfrp3database.tables.parsers.toColumns
 import org.jetbrains.anko.db.parseList
 import org.jetbrains.anko.db.parseOpt
 
-class PlayerDao(databaseHelper: DatabaseOpenHelper) : AbstractNameKeyDao<Player>(databaseHelper) {
+internal class PlayerDao(databaseHelper: DatabaseOpenHelper) : AbstractNameKeyDao<Player>(databaseHelper) {
     override val tableName = PLAYER_TABLE_NAME
 
     override fun parse(cursor: Cursor): Player? = cursor.parseOpt(PlayerParser())

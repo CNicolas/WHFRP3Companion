@@ -10,7 +10,7 @@ import com.nicolas.whfrp3database.tables.parsers.toColumns
 import org.jetbrains.anko.db.parseList
 import org.jetbrains.anko.db.parseOpt
 
-class HandDao(databaseHelper: DatabaseOpenHelper) : AbstractNameKeyDao<Hand>(databaseHelper) {
+internal class HandDao(databaseHelper: DatabaseOpenHelper) : AbstractNameKeyDao<Hand>(databaseHelper) {
     override val tableName = HAND_TABLE_NAME
 
     override fun parse(cursor: Cursor): Hand? = cursor.parseOpt(HandParser())

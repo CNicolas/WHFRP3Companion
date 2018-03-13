@@ -3,7 +3,7 @@ package com.nicolas.whfrp3database.tables.parsers
 import com.nicolas.whfrp3database.entities.hand.Hand
 import org.jetbrains.anko.db.RowParser
 
-class HandParser : RowParser<Hand> {
+internal class HandParser : RowParser<Hand> {
     override fun parseRow(columns: Array<Any?>): Hand =
             Hand(id = columns[0].toInt(),
                     name = columns[1] as String,
@@ -17,7 +17,7 @@ class HandParser : RowParser<Hand> {
             )
 }
 
-fun Hand.toColumns(): Map<String, Any?> = mapOf(
+internal fun Hand.toColumns(): Map<String, Any?> = mapOf(
         "id" to id,
         "name" to name,
         "characteristicDicesCount" to characteristicDicesCount,

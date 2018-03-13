@@ -4,7 +4,7 @@ import com.nicolas.whfrp3database.daos.Dao
 import com.nicolas.whfrp3database.entities.player.Player
 import com.nicolas.whfrp3database.entities.player.playerLinked.PlayerLinkedEntity
 
-interface PlayerLinkedDao<E : PlayerLinkedEntity> : Dao<E> {
+internal interface PlayerLinkedDao<E : PlayerLinkedEntity> : Dao<E> {
     fun add(entity: E, player: Player): E?
 
     fun findByNameAndPlayer(name: String, player: Player): E?

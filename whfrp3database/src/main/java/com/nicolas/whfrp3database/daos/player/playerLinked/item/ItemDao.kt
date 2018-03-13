@@ -11,7 +11,7 @@ import com.nicolas.whfrp3database.tables.parsers.toColumns
 import org.jetbrains.anko.db.parseList
 import org.jetbrains.anko.db.parseOpt
 
-class ItemDao(databaseHelper: DatabaseOpenHelper) : AbstractPlayerLinkedDao<Item>(databaseHelper) {
+internal class ItemDao(databaseHelper: DatabaseOpenHelper) : AbstractPlayerLinkedDao<Item>(databaseHelper) {
     override val tableName = ITEM_TABLE_NAME
 
     override fun parse(cursor: Cursor): Item? = cursor.parseOpt(ItemParser())

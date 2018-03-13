@@ -6,7 +6,7 @@ import com.nicolas.whfrp3database.entities.player.Player
 import com.nicolas.whfrp3database.entities.player.enums.Race
 import org.jetbrains.anko.db.RowParser
 
-class PlayerParser : RowParser<Player> {
+internal class PlayerParser : RowParser<Player> {
     override fun parseRow(columns: Array<Any?>): Player =
             Player(id = columns[0].toInt(),
                     name = columns[1] as String,

@@ -8,7 +8,7 @@ import org.jetbrains.anko.db.insert
 import org.jetbrains.anko.db.select
 import org.jetbrains.anko.db.update
 
-abstract class AbstractNameKeyDao<E : NamedEntity>(databaseHelper: DatabaseOpenHelper)
+internal abstract class AbstractNameKeyDao<E : NamedEntity>(databaseHelper: DatabaseOpenHelper)
     : AbstractDao<E>(databaseHelper), NameKeyDao<E> {
 
     override fun add(entity: E): E? = databaseHelper.writableDatabase.let {
@@ -17,7 +17,7 @@ abstract class AbstractNameKeyDao<E : NamedEntity>(databaseHelper: DatabaseOpenH
             columns["id"] = databaseHelper.nextAvailableId(it, tableName)
         }
 
-        val id = it.insert(tableName, *columns.toPairs())
+        it.insert(tableName, *columns.toPairs())
 
         return findByName(entity.name)
     }

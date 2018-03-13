@@ -2,7 +2,7 @@ package com.nicolas.whfrp3database.daos
 
 import com.nicolas.whfrp3database.entities.NamedEntity
 
-interface NameKeyDao<E : NamedEntity> : Dao<E> {
+internal interface NameKeyDao<E : NamedEntity> : Dao<E> {
     fun add(entity: E): E?
 
     fun findByName(name: String): E?

@@ -3,9 +3,9 @@ package com.nicolas.whfrp3database.tables
 import android.database.sqlite.SQLiteDatabase
 import org.jetbrains.anko.db.*
 
-const val PLAYER_TABLE_NAME = "Player"
+internal const val PLAYER_TABLE_NAME = "Player"
 
-fun createPlayerTable(db: SQLiteDatabase) {
+internal fun createPlayerTable(db: SQLiteDatabase) {
     db.createTable(PLAYER_TABLE_NAME, true,
             "id" to INTEGER + PRIMARY_KEY + UNIQUE,
             "name" to TEXT + UNIQUE,

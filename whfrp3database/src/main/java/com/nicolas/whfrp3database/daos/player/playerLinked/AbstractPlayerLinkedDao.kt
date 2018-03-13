@@ -10,7 +10,7 @@ import org.jetbrains.anko.db.insert
 import org.jetbrains.anko.db.select
 import org.jetbrains.anko.db.update
 
-abstract class AbstractPlayerLinkedDao<E : PlayerLinkedEntity>(databaseHelper: DatabaseOpenHelper)
+internal abstract class AbstractPlayerLinkedDao<E : PlayerLinkedEntity>(databaseHelper: DatabaseOpenHelper)
     : AbstractDao<E>(databaseHelper), PlayerLinkedDao<E> {
 
     override fun add(entity: E, player: Player): E? = databaseHelper.writableDatabase.let {

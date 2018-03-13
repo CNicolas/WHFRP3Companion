@@ -6,7 +6,7 @@ import com.nicolas.whfrp3database.entities.player.playerLinked.item.enums.*
 import org.jetbrains.anko.db.RowParser
 
 
-class ItemParser : RowParser<Item> {
+internal class ItemParser : RowParser<Item> {
     override fun parseRow(columns: Array<Any?>): Item {
         return when (ItemType.valueOf(columns[2] as String)) {
             ItemType.ARMOR -> parseArmor(columns)
@@ -67,7 +67,7 @@ class ItemParser : RowParser<Item> {
             )
 }
 
-fun Item.toColumns(player: Player): Map<String, Any?> = mapOf(
+internal fun Item.toColumns(player: Player): Map<String, Any?> = mapOf(
         "id" to id,
         "playerId" to player.id,
 
