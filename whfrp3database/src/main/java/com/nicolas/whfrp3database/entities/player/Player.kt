@@ -7,7 +7,7 @@ import com.nicolas.whfrp3database.entities.player.enums.Race
 import com.nicolas.whfrp3database.entities.player.playerLinked.item.Item
 import com.nicolas.whfrp3database.entities.player.playerLinked.skill.Skill
 import com.nicolas.whfrp3database.entities.player.playerLinked.talent.Talent
-import com.nicolas.whfrp3database.extensions.items.getArmors
+import com.nicolas.whfrp3database.extensions.getArmors
 
 data class Player(override var name: String,
 

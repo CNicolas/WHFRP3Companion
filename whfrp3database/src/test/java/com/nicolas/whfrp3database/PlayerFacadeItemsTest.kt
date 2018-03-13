@@ -8,7 +8,7 @@ import com.nicolas.whfrp3database.entities.player.playerLinked.item.Weapon
 import com.nicolas.whfrp3database.entities.player.playerLinked.item.enums.ArmorType.HELMET
 import com.nicolas.whfrp3database.entities.player.playerLinked.item.enums.Quality.LOW
 import com.nicolas.whfrp3database.entities.player.playerLinked.item.enums.Quality.NORMAL
-import com.nicolas.whfrp3database.extensions.items.*
+import com.nicolas.whfrp3database.extensions.*
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.After
 import org.junit.Before

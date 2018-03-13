@@ -3,7 +3,7 @@ package com.nicolas.whfrp3database
 import com.nicolas.whfrp3database.entities.player.Player
 import com.nicolas.whfrp3database.entities.player.enums.Characteristic.*
 import com.nicolas.whfrp3database.entities.player.playerLinked.skill.SkillType
-import com.nicolas.whfrp3database.extensions.skills.*
+import com.nicolas.whfrp3database.extensions.*
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.After
 import org.junit.Before

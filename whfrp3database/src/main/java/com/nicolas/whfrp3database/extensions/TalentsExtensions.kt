@@ -1,4 +1,4 @@
-package com.nicolas.whfrp3database.extensions.talents
+package com.nicolas.whfrp3database.extensions
 
 import com.nicolas.whfrp3database.entities.player.Player
 import com.nicolas.whfrp3database.entities.player.playerLinked.talent.Talent
