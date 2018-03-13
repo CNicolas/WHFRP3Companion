@@ -22,40 +22,35 @@ android {
 }
 
 dependencies {
-//    compile fileTree(dir: 'libs', include: ['*.jar'])
     compile project(':whfrp3database')
-
-    // Tests
-    testCompile 'junit:junit:4.12'
-    testCompile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    testCompile "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
-    testCompile "org.robolectric:robolectric:3.3"
-    testCompile "org.assertj:assertj-core:3.8.0"
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
+    compile project(':dicelauncher')
 
     // Android
     compile "com.android.support:appcompat-v7:$android_support_version"
     compile "com.android.support:support-v4:$android_support_version"
     compile "com.android.support:design:$android_support_version"
-    compile "com.android.support.constraint:constraint-layout:1.0.2"
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
 
     // Kotlin
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
     // Database
-    compile "org.jetbrains.exposed:exposed:0.9.1"
-    compile "org.xerial:sqlite-jdbc:3.21.0"
-    compile "com.beust:klaxon:2.1.9"
+    compile 'com.beust:klaxon:2.1.9'
 
     // Libraries
     compile "com.jakewharton:butterknife:$butterknife_version"
     kapt "com.jakewharton:butterknife-compiler:$butterknife_version"
+
+    // Tests
+    testCompile "org.robolectric:robolectric:$robolectric_version"
+    testCompile "org.assertj:assertj-core:$assertj_version"
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    testCompile 'junit:junit:4.12'
 }
 repositories {
     mavenCentral()
-
-    maven { url "https://dl.bintray.com/kotlin/exposed" }
+    jcenter()
     maven { url "https://maven.google.com" }
 }
