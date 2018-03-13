@@ -5,6 +5,8 @@ buildscript {
     ext.android_support_version = '27.1.0'
     ext.butterknife_version = '8.8.1'
     ext.anko_version = '0.10.4'
+    ext.robolectric_version = '3.7.1'
+    ext.assertj_version = '3.9.0'
 
     repositories {
         jcenter()
