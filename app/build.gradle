@@ -34,9 +34,6 @@ dependencies {
     // Kotlin
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
-    // Database
-    compile 'com.beust:klaxon:2.1.9'
-
     // Libraries
     compile "com.jakewharton:butterknife:$butterknife_version"
     kapt "com.jakewharton:butterknife-compiler:$butterknife_version"

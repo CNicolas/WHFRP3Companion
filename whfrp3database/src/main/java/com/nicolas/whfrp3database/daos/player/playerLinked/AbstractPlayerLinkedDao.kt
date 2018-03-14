@@ -13,29 +13,38 @@ import org.jetbrains.anko.db.update
 internal abstract class AbstractPlayerLinkedDao<E : PlayerLinkedEntity>(databaseHelper: DatabaseOpenHelper)
     : AbstractDao<E>(databaseHelper), PlayerLinkedDao<E> {
 
-    override fun add(entity: E, player: Player): E? = databaseHelper.writableDatabase.let {
-        val columns = getColumns(entity, player).toMutableMap()
-        if (entity.id == -1) {
-            columns["id"] = databaseHelper.nextAvailableId(it, tableName)
+    override fun add(entity: E, player: Player): E? {
+        val nextId: Int = (findAll().map { it.id }.max() ?: 0) + 1
+
+        databaseHelper.writableDatabase.let {
+            val columns = getColumns(entity, player).toMutableMap()
+            if (entity.id == -1) {
+                columns["id"] = nextId
+            }
+
+            it.insert(tableName, *getColumns(entity, player).toPairs())
+
+            return findByNameAndPlayer(entity.name, player)
         }
-
-        it.insert(tableName, *getColumns(entity, player).toPairs())
-
-        return findByNameAndPlayer(entity.name, player)
     }
 
     override fun findByNameAndPlayer(name: String, player: Player): E? {
         return findAllByPlayer(player).firstOrNull { it.name == name }
     }
 
-    override fun findAllByPlayer(player: Player): List<E> {
-        return databaseHelper.writableDatabase.let {
-            it.select(tableName)
-                    .whereArgs("playerId = ${player.id}")
-                    .exec {
-                        return@exec parseAll(this)
-                    }
-        }
+    override fun findAllByPlayer(player: Player): List<E> = databaseHelper.writableDatabase.let {
+        it.select(tableName)
+                .whereArgs("playerId = ${player.id}")
+                .exec {
+                    return@exec parseAll(this)
+                }
+    }
+
+    private fun findAll(): List<E> = databaseHelper.writableDatabase.let {
+        it.select(tableName)
+                .exec {
+                    return@exec parseAll(this)
+                }
     }
 
     override fun updateByPlayer(entity: E, player: Player): E? {
