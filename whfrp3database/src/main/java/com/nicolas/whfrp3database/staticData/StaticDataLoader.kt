@@ -15,5 +15,5 @@ internal fun loadSkills(context: Context): List<Skill>? {
 internal fun loadTalents(context: Context): List<Talent>? {
     val talentsReader = context.assets.open("talents.json").reader()
 
-    return Gson().fromJson(talentsReader, genericType<List<Skill>>())
+    return Gson().fromJson(talentsReader, genericType<List<Talent>>())
 }

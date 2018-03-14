@@ -77,10 +77,10 @@ class AnkoUseTest {
             assertNull(player)
         }
 
-        val player = Player("John", id = databaseHelper!!.nextAvailableId(this, PLAYER_TABLE_NAME))
+        val player = Player("John", id = 44)
 
         val insertRes: Long = insert(PLAYER_TABLE_NAME, *player.toColumns().toPairs())
-        assertEquals(1, insertRes)
+        assertEquals(44, insertRes)
 
         select(PLAYER_TABLE_NAME).exec {
             val foundPlayer = parseOpt(PlayerParser())
