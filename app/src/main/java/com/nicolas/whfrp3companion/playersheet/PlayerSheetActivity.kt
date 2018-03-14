@@ -15,7 +15,6 @@ import com.nicolas.whfrp3companion.CareersFragment
 import com.nicolas.whfrp3companion.R
 import org.jetbrains.anko.longToast
 
-
 class PlayerSheetActivity : AppCompatActivity() {
     @BindView(R.id.drawer_layout)
     lateinit var drawer: DrawerLayout
