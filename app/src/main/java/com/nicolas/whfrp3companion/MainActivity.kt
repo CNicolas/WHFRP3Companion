@@ -15,7 +15,7 @@ import com.nicolas.whfrp3companion.players.PlayersFragment
 
 
 class MainActivity : AppCompatActivity() {
-    @BindView(R.id.drawer_layout)
+    @BindView(R.id.main_drawer_layout)
     lateinit var drawer: DrawerLayout
 
     private lateinit var toggle: ActionBarDrawerToggle
@@ -61,7 +61,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun displaySelectedFragment(menuItemId: Int) {
         val fragment = when (menuItemId) {
-            R.id.nav_careers -> CareersFragment()
+            R.id.nav_careers -> EmptyFragment.newInstance()
         //  R.id.nav_talents -> TalentTypesFragment()
         //  R.id.nav_items -> ItemsFragment()
         //  R.id.nav_skills -> SkillsFragment()
