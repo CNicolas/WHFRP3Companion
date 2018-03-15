@@ -22,7 +22,7 @@ class OpenPlayerSheetActivityTest {
     @Throws
     fun setUp() {
         val intent = Intent(ShadowApplication.getInstance().applicationContext, PlayerSheetActivity::class.java)
-        intent.putExtra(PLAYER_INTENT_ARGUMENT, Player("Jack"))
+        intent.putExtra(PLAYER_NAME_INTENT_ARGUMENT, Player("Jack"))
 
         playerSheetActivity = Robolectric
                 .buildActivity(PlayerSheetActivity::class.java, intent)
