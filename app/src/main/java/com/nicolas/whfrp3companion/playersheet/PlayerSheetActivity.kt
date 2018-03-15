@@ -29,6 +29,10 @@ class PlayerSheetActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_playersheet)
 
+        if (intent.extras != null) {
+            player = intent.extras.getSerializable(PLAYER_INTENT_ARGUMENT) as Player
+        }
+
         ButterKnife.bind(this)
 
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
@@ -39,8 +43,6 @@ class PlayerSheetActivity : AppCompatActivity() {
 
         val navigationView = findViewById<NavigationView>(R.id.nav_view)
         setupDrawerContent(navigationView)
-
-        player = intent.extras.getSerializable(PLAYER_INTENT_ARGUMENT) as Player
 
         displaySelectedFragment(R.id.nav_player_characteristics)
     }
@@ -78,7 +80,7 @@ class PlayerSheetActivity : AppCompatActivity() {
         }
 
         supportFragmentManager.beginTransaction()
-                .replace(R.id.content_frame, fragment)
+                .replace(R.id.playersheet_content_frame, fragment)
                 .commit()
 
         drawer.closeDrawer(GravityCompat.START)
