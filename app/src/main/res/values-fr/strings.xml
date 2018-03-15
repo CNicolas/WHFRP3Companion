@@ -11,4 +11,8 @@
     <string name="page_specializations">Spécialisations</string>
     <string name="page_talents">Talents</string>
     <string name="page_items">Objets</string>
+    <string name="page_characteristics">Caractéristiques</string>
+    <string name="page_actions">Actions</string>
+    <string name="page_inventory">Inventaire</string>
+    <string name="page_state">Etat</string>
 </resources>

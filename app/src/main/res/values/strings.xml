@@ -14,4 +14,8 @@
     <string name="page_players">Players</string>
     <string name="page_items">Items</string>
     <string name="page_specializations">Specializations</string>
+    <string name="page_characteristics">Characteristics</string>
+    <string name="page_state">State</string>
+    <string name="page_inventory">Inventory</string>
+    <string name="page_actions">Actions</string>
 </resources>

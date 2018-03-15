@@ -1,4 +1,4 @@
-package com.nicolas.whfrp3companion
+package com.nicolas.whfrp3companion.playersheet
 
 import android.content.res.Configuration
 import android.os.Bundle
@@ -11,18 +11,19 @@ import android.support.v7.widget.Toolbar
 import android.view.MenuItem
 import butterknife.BindView
 import butterknife.ButterKnife
-import com.nicolas.whfrp3companion.players.PlayersFragment
+import com.nicolas.whfrp3companion.EmptyFragment
+import com.nicolas.whfrp3companion.R
+import org.jetbrains.anko.longToast
 
-
-class MainActivity : AppCompatActivity() {
-    @BindView(R.id.main_drawer_layout)
+class PlayerSheetActivity : AppCompatActivity() {
+    @BindView(R.id.playersheet_drawer_layout)
     lateinit var drawer: DrawerLayout
 
     private lateinit var toggle: ActionBarDrawerToggle
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_playersheet)
 
         ButterKnife.bind(this)
 
@@ -35,7 +36,7 @@ class MainActivity : AppCompatActivity() {
         val navigationView = findViewById<NavigationView>(R.id.nav_view)
         setupDrawerContent(navigationView)
 
-        displaySelectedFragment(R.id.nav_home)
+        displaySelectedFragment(R.id.nav_player_characteristics)
     }
 
     override fun onPostCreate(savedInstanceState: Bundle?) {
@@ -61,12 +62,13 @@ class MainActivity : AppCompatActivity() {
 
     private fun displaySelectedFragment(menuItemId: Int) {
         val fragment = when (menuItemId) {
-            R.id.nav_careers -> EmptyFragment.newInstance()
-        //  R.id.nav_talents -> TalentTypesFragment()
-        //  R.id.nav_items -> ItemsFragment()
-        //  R.id.nav_skills -> SkillsFragment()
-        //  R.id.nav_specializations -> SpecializationsFragment()
-            else -> PlayersFragment.newInstance()
+            R.id.nav_player_characteristics -> EmptyFragment.newInstance()
+//          R.id.nav_player_state -> TalentTypesFragment()
+//          R.id.nav_player_skills -> ItemsFragment()
+//          R.id.nav_player_inventory -> SkillsFragment()
+//          R.id.nav_player_actions -> SpecializationsFragment()
+//            R.id.nav_player_talents -> PlayerTalentsFragment()
+            else -> EmptyFragment.newInstance()
         }
 
         supportFragmentManager.beginTransaction()
@@ -81,6 +83,7 @@ class MainActivity : AppCompatActivity() {
 
         menuItem.isChecked = true
         title = menuItem.title
+        longToast("Hey : $title")
     }
 
     private fun setupDrawerContent(navigationView: NavigationView) {
