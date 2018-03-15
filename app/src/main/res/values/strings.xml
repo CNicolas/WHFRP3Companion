@@ -18,4 +18,6 @@
     <string name="page_state">State</string>
     <string name="page_inventory">Inventory</string>
     <string name="page_actions">Actions</string>
+
+    <string name="new_player">Create a player</string>
 </resources>

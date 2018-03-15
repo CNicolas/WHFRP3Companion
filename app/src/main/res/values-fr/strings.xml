@@ -15,4 +15,5 @@
     <string name="page_actions">Actions</string>
     <string name="page_inventory">Inventaire</string>
     <string name="page_state">Etat</string>
+    <string name="new_player">Créez un joueur</string>
 </resources>

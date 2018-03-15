@@ -2,12 +2,9 @@ package com.nicolas.whfrp3companion.players
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.text.Editable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
-import android.widget.ImageButton
 import android.widget.ListView
 import butterknife.*
 import com.nicolas.whfrp3companion.PLAYER_INTENT_ARGUMENT
@@ -15,17 +12,12 @@ import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.playersheet.PlayerSheetActivity
 import com.nicolas.whfrp3database.PlayerFacade
 import com.nicolas.whfrp3database.entities.player.Player
-import org.jetbrains.anko.doAsync
-import org.jetbrains.anko.intentFor
-import org.jetbrains.anko.uiThread
+import org.jetbrains.anko.*
+import org.jetbrains.anko.design.textInputEditText
 
 class PlayersFragment : Fragment() {
     @BindView(R.id.list_players)
     lateinit var playersListView: ListView
-    @BindView(R.id.new_player_edit_text)
-    lateinit var newPlayerEditText: EditText
-    @BindView(R.id.new_player_button)
-    lateinit var newPlayerButton: ImageButton
 
     private lateinit var playerFacade: PlayerFacade
     private lateinit var players: List<Player>
@@ -35,7 +27,7 @@ class PlayersFragment : Fragment() {
                               container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
-        val resultingView: View = inflater.inflate(R.layout.players, container, false)
+        val resultingView: View = inflater.inflate(R.layout.fragment_players, container, false)
 
         unbinder = ButterKnife.bind(this, resultingView)
         playerFacade = PlayerFacade(context!!)
@@ -52,24 +44,31 @@ class PlayersFragment : Fragment() {
 
     @OnItemClick(R.id.list_players)
     fun onPlayerClick(position: Int) {
-        startActivity(activity?.intentFor<PlayerSheetActivity>(
-                PLAYER_INTENT_ARGUMENT to players[position]
-        ))
-    }
-
-    @OnTextChanged(R.id.new_player_edit_text, callback = OnTextChanged.Callback.AFTER_TEXT_CHANGED)
-    fun playerNameChange(editable: Editable) {
-        newPlayerButton.visibility = if (!editable.isBlank()) View.VISIBLE else View.GONE
-    }
-
-    @OnClick(R.id.new_player_button)
-    fun createNewPlayer() {
-        if (!newPlayerEditText.text.isNullOrBlank()) {
-            doAsync {
-                playerFacade.add(Player(newPlayerEditText.text.toString()))
-                updatePlayers()
-            }
+        if (activity != null) {
+            startActivity(activity!!.intentFor<PlayerSheetActivity>(
+                    PLAYER_INTENT_ARGUMENT to players[position]
+            ))
         }
+    }
+
+    @OnClick(R.id.fab_new_player)
+    fun createNewPlayer() {
+        activity?.alert {
+            title = getString(R.string.new_player)
+            customView {
+                val name = textInputEditText()
+
+                yesButton {
+                    if (!name.text.isNullOrBlank()) {
+                        doAsync {
+                            playerFacade.add(Player(name.text.toString()))
+                            updatePlayers()
+                        }
+                    }
+                }
+                noButton {}
+            }
+        }?.show()
     }
 
     private fun updatePlayers() {
@@ -77,7 +76,6 @@ class PlayersFragment : Fragment() {
             players = playerFacade.findAll()
             uiThread {
                 playersListView.adapter = PlayersAdapter(context!!, players)
-                newPlayerEditText.text.clear()
             }
         }
     }
