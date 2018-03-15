@@ -10,13 +10,13 @@ import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.ListView
 import butterknife.*
+import com.nicolas.whfrp3companion.PLAYER_INTENT_ARGUMENT
 import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.playersheet.PlayerSheetActivity
 import com.nicolas.whfrp3database.PlayerFacade
 import com.nicolas.whfrp3database.entities.player.Player
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.intentFor
-import org.jetbrains.anko.toast
 import org.jetbrains.anko.uiThread
 
 class PlayersFragment : Fragment() {
@@ -52,9 +52,9 @@ class PlayersFragment : Fragment() {
 
     @OnItemClick(R.id.list_players)
     fun onPlayerClick(position: Int) {
-        activity?.toast("CLICKED : ${players[position]}")
-
-        startActivity(activity?.intentFor<PlayerSheetActivity>())
+        startActivity(activity?.intentFor<PlayerSheetActivity>(
+                PLAYER_INTENT_ARGUMENT to players[position]
+        ))
     }
 
     @OnTextChanged(R.id.new_player_edit_text, callback = OnTextChanged.Callback.AFTER_TEXT_CHANGED)
