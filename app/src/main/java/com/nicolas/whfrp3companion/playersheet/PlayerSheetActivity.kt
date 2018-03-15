@@ -11,19 +11,19 @@ import android.support.v7.widget.Toolbar
 import android.view.MenuItem
 import butterknife.BindView
 import butterknife.ButterKnife
-import com.nicolas.whfrp3companion.CareersFragment
+import com.nicolas.whfrp3companion.EmptyFragment
 import com.nicolas.whfrp3companion.R
 import org.jetbrains.anko.longToast
 
 class PlayerSheetActivity : AppCompatActivity() {
-    @BindView(R.id.drawer_layout)
+    @BindView(R.id.playersheet_drawer_layout)
     lateinit var drawer: DrawerLayout
 
     private lateinit var toggle: ActionBarDrawerToggle
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_playersheet)
 
         ButterKnife.bind(this)
 
@@ -36,7 +36,7 @@ class PlayerSheetActivity : AppCompatActivity() {
         val navigationView = findViewById<NavigationView>(R.id.nav_view)
         setupDrawerContent(navigationView)
 
-        displaySelectedFragment(R.id.nav_home)
+        displaySelectedFragment(R.id.nav_player_characteristics)
     }
 
     override fun onPostCreate(savedInstanceState: Bundle?) {
@@ -61,13 +61,20 @@ class PlayerSheetActivity : AppCompatActivity() {
     }
 
     private fun displaySelectedFragment(menuItemId: Int) {
-        val fragment = CareersFragment()
+        val fragment = when (menuItemId) {
+            R.id.nav_player_characteristics -> EmptyFragment.newInstance()
+//          R.id.nav_player_state -> TalentTypesFragment()
+//          R.id.nav_player_skills -> ItemsFragment()
+//          R.id.nav_player_inventory -> SkillsFragment()
+//          R.id.nav_player_actions -> SpecializationsFragment()
+//            R.id.nav_player_talents -> PlayerTalentsFragment()
+            else -> EmptyFragment.newInstance()
+        }
 
         supportFragmentManager.beginTransaction()
                 .replace(R.id.content_frame, fragment)
                 .commit()
 
-        longToast("Hey : $menuItemId")
         drawer.closeDrawer(GravityCompat.START)
     }
 
@@ -76,6 +83,7 @@ class PlayerSheetActivity : AppCompatActivity() {
 
         menuItem.isChecked = true
         title = menuItem.title
+        longToast("Hey : $title")
     }
 
     private fun setupDrawerContent(navigationView: NavigationView) {
