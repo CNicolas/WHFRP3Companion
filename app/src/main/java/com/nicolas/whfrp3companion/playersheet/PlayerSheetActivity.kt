@@ -72,16 +72,15 @@ class PlayerSheetActivity : AppCompatActivity() {
     }
 
     private fun displaySelectedFragment(menuItemId: Int) {
-//        val fragment = when (menuItemId) {
-//            R.id.nav_player_characteristics -> PlayerCharacteristicsFragment.newInstance(player)
-////          R.id.nav_player_state -> TalentTypesFragment()
-////          R.id.nav_player_skills -> ItemsFragment()
-////          R.id.nav_player_inventory -> SkillsFragment()
-////          R.id.nav_player_actions -> SpecializationsFragment()
-////            R.id.nav_player_talents -> PlayerTalentsFragment()
-//            else -> EmptyFragment.newInstance()
-//        }
-        val fragment = EmptyFragment.newInstance()
+        val fragment = when (menuItemId) {
+            R.id.nav_player_characteristics -> PlayerCharacteristicsFragment.newInstance(player)
+//          R.id.nav_player_state -> TalentTypesFragment()
+//          R.id.nav_player_skills -> ItemsFragment()
+//          R.id.nav_player_inventory -> SkillsFragment()
+//          R.id.nav_player_actions -> SpecializationsFragment()
+//            R.id.nav_player_talents -> PlayerTalentsFragment()
+            else -> EmptyFragment.newInstance()
+        }
 
         supportFragmentManager.beginTransaction()
                 .replace(R.id.playersheet_content_frame, fragment)
