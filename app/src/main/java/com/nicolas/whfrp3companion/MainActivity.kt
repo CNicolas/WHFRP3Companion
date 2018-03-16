@@ -70,31 +70,31 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun displaySelectedFragment(menuItemId: Int) {
-        if (menuItemId == R.id.nav_dice_launcher) {
-            startActivity(this.intentFor<DiceLauncherActivity>())
-        } else {
-            val fragment = when (menuItemId) {
-                R.id.nav_home -> PlayersFragment.newInstance()
+        val fragment = when (menuItemId) {
+            R.id.nav_home -> PlayersFragment.newInstance()
 //            R.id.nav_talents -> TalentTypesFragment()
 //            R.id.nav_items -> ItemsFragment()
 //            R.id.nav_skills -> SkillsFragment.newInstance()
 //            R.id.nav_specializations -> SpecializationsFragment()
-                else -> EmptyFragment.newInstance()
-            }
-
-            supportFragmentManager.beginTransaction()
-                    .replace(R.id.main_content_frame, fragment)
-                    .commit()
+            else -> EmptyFragment.newInstance()
         }
+
+        supportFragmentManager.beginTransaction()
+                .replace(R.id.main_content_frame, fragment)
+                .commit()
 
         drawer.closeDrawer(GravityCompat.START)
     }
 
     private fun displaySelectedFragment(menuItem: MenuItem) {
-        displaySelectedFragment(menuItem.itemId)
+        if (menuItem.itemId == R.id.nav_dice_launcher) {
+            startActivity(this.intentFor<DiceLauncherActivity>())
+        } else {
+            displaySelectedFragment(menuItem.itemId)
 
-        menuItem.isChecked = true
-        title = menuItem.title
+            menuItem.isChecked = true
+            title = menuItem.title
+        }
     }
 
     private fun setupDrawerContent(navigationView: NavigationView) {
