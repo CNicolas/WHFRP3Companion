@@ -1,4 +1,4 @@
-package com.nicolas.whfrp3companion.players
+package com.nicolas.whfrp3companion.fragments.players
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -19,9 +19,10 @@ class PlayersFragment : Fragment() {
     @BindView(R.id.list_players)
     lateinit var playersListView: ListView
 
+    private lateinit var unbinder: Unbinder
+
     private lateinit var playerFacade: PlayerFacade
     private lateinit var players: List<Player>
-    private lateinit var unbinder: Unbinder
 
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,

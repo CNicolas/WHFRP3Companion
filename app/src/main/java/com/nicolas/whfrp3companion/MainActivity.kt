@@ -11,7 +11,7 @@ import android.support.v7.widget.Toolbar
 import android.view.MenuItem
 import butterknife.BindView
 import butterknife.ButterKnife
-import com.nicolas.whfrp3companion.players.PlayersFragment
+import com.nicolas.whfrp3companion.fragments.players.PlayersFragment
 
 
 class MainActivity : AppCompatActivity() {
@@ -61,12 +61,12 @@ class MainActivity : AppCompatActivity() {
 
     private fun displaySelectedFragment(menuItemId: Int) {
         val fragment = when (menuItemId) {
-            R.id.nav_careers -> EmptyFragment.newInstance()
-        //  R.id.nav_talents -> TalentTypesFragment()
-        //  R.id.nav_items -> ItemsFragment()
-        //  R.id.nav_skills -> SkillsFragment()
-        //  R.id.nav_specializations -> SpecializationsFragment()
-            else -> PlayersFragment.newInstance()
+            R.id.nav_home -> PlayersFragment.newInstance()
+//            R.id.nav_talents -> TalentTypesFragment()
+//            R.id.nav_items -> ItemsFragment()
+//            R.id.nav_skills -> SkillsFragment.newInstance()
+//            R.id.nav_specializations -> SpecializationsFragment()
+            else -> EmptyFragment.newInstance()
         }
 
         supportFragmentManager.beginTransaction()
