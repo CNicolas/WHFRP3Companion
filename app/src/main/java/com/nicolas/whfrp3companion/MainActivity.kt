@@ -11,6 +11,7 @@ import android.support.v7.widget.Toolbar
 import android.view.MenuItem
 import butterknife.BindView
 import butterknife.ButterKnife
+import com.nicolas.whfrp3companion.fragments.EmptyFragment
 import com.nicolas.whfrp3companion.fragments.players.PlayersFragment
 
 

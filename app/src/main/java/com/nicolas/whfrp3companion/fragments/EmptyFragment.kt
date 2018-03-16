@@ -1,10 +1,11 @@
-package com.nicolas.whfrp3companion
+package com.nicolas.whfrp3companion.fragments
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.nicolas.whfrp3companion.R
 
 class EmptyFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater,
