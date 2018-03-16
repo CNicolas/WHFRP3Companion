@@ -8,6 +8,7 @@ import com.nicolas.whfrp3database.entities.player.playerLinked.item.Item
 import com.nicolas.whfrp3database.entities.player.playerLinked.skill.Skill
 import com.nicolas.whfrp3database.entities.player.playerLinked.talent.Talent
 import com.nicolas.whfrp3database.extensions.getArmors
+import java.io.Serializable
 
 data class Player(override var name: String,
 
@@ -47,7 +48,7 @@ data class Player(override var name: String,
                   var skills: List<Skill> = listOf(),
                   var talents: List<Talent> = listOf(),
 
-                  override val id: Int = -1) : NamedEntity {
+                  override val id: Int = -1) : NamedEntity, Serializable {
     val maxStress: Int
         get() = willpower.value * 2
 

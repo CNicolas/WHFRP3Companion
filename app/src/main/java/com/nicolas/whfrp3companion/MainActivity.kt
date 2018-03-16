@@ -70,7 +70,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         supportFragmentManager.beginTransaction()
-                .replace(R.id.content_frame, fragment)
+                .replace(R.id.main_content_frame, fragment)
                 .commit()
 
         drawer.closeDrawer(GravityCompat.START)

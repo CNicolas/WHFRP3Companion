@@ -11,7 +11,7 @@ class EmptyFragment : Fragment() {
                               container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
-        return inflater.inflate(R.layout.empty_fragment, container, false)
+        return inflater.inflate(R.layout.fragment_empty, container, false)
     }
 
     companion object {

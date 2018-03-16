@@ -12,10 +12,14 @@ import android.view.MenuItem
 import butterknife.BindView
 import butterknife.ButterKnife
 import com.nicolas.whfrp3companion.EmptyFragment
+import com.nicolas.whfrp3companion.PLAYER_INTENT_ARGUMENT
 import com.nicolas.whfrp3companion.R
+import com.nicolas.whfrp3database.entities.player.Player
 import org.jetbrains.anko.longToast
 
 class PlayerSheetActivity : AppCompatActivity() {
+    private lateinit var player: Player
+
     @BindView(R.id.playersheet_drawer_layout)
     lateinit var drawer: DrawerLayout
 
@@ -24,6 +28,8 @@ class PlayerSheetActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_playersheet)
+
+        player = intent.extras.getSerializable(PLAYER_INTENT_ARGUMENT) as Player
 
         ButterKnife.bind(this)
 
@@ -62,7 +68,7 @@ class PlayerSheetActivity : AppCompatActivity() {
 
     private fun displaySelectedFragment(menuItemId: Int) {
         val fragment = when (menuItemId) {
-            R.id.nav_player_characteristics -> EmptyFragment.newInstance()
+            R.id.nav_player_characteristics -> PlayerCharacteristicsFragment.newInstance(player)
 //          R.id.nav_player_state -> TalentTypesFragment()
 //          R.id.nav_player_skills -> ItemsFragment()
 //          R.id.nav_player_inventory -> SkillsFragment()
@@ -72,7 +78,7 @@ class PlayerSheetActivity : AppCompatActivity() {
         }
 
         supportFragmentManager.beginTransaction()
-                .replace(R.id.content_frame, fragment)
+                .replace(R.id.playersheet_content_frame, fragment)
                 .commit()
 
         drawer.closeDrawer(GravityCompat.START)
