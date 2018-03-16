@@ -9,7 +9,7 @@ import android.widget.TextView
 import butterknife.BindView
 import butterknife.ButterKnife
 import butterknife.Unbinder
-import com.nicolas.whfrp3companion.PLAYER_NAME_INTENT_ARGUMENT
+import com.nicolas.whfrp3companion.PLAYER_INTENT_ARGUMENT
 import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3database.entities.player.Player
 import org.jetbrains.anko.toast
@@ -30,11 +30,9 @@ class PlayerCharacteristicsFragment : Fragment() {
 
         unbinder = ButterKnife.bind(this, resultingView)
 
-        playerNameTextView.text = "No player ?"
-
         if (arguments != null) {
-            if (arguments!!.getSerializable(PLAYER_NAME_INTENT_ARGUMENT) is Player) {
-                player = arguments!!.getSerializable(PLAYER_NAME_INTENT_ARGUMENT) as Player
+            if (arguments!!.getSerializable(PLAYER_INTENT_ARGUMENT) is Player) {
+                player = arguments!!.getSerializable(PLAYER_INTENT_ARGUMENT) as Player
                 playerNameTextView.text = player.name
             }
         }
@@ -50,7 +48,7 @@ class PlayerCharacteristicsFragment : Fragment() {
     companion object {
         fun newInstance(player: Player): PlayerCharacteristicsFragment {
             val args = Bundle()
-            args.putSerializable(PLAYER_NAME_INTENT_ARGUMENT, player)
+            args.putSerializable(PLAYER_INTENT_ARGUMENT, player)
 
             val fragment = PlayerCharacteristicsFragment()
             fragment.arguments = args

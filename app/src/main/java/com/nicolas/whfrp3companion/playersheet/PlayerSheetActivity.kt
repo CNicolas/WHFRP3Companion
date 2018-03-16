@@ -12,9 +12,8 @@ import android.view.MenuItem
 import butterknife.BindView
 import butterknife.ButterKnife
 import com.nicolas.whfrp3companion.EmptyFragment
-import com.nicolas.whfrp3companion.PLAYER_NAME_INTENT_ARGUMENT
+import com.nicolas.whfrp3companion.PLAYER_INTENT_ARGUMENT
 import com.nicolas.whfrp3companion.R
-import com.nicolas.whfrp3database.PlayerFacade
 import com.nicolas.whfrp3database.entities.player.Player
 import org.jetbrains.anko.longToast
 
@@ -26,15 +25,11 @@ class PlayerSheetActivity : AppCompatActivity() {
 
     private lateinit var toggle: ActionBarDrawerToggle
 
-    private lateinit var playerFacade: PlayerFacade
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_playersheet)
 
-        playerFacade = PlayerFacade(this)
-        val playerName = intent.extras.getSerializable(PLAYER_NAME_INTENT_ARGUMENT) as String
-        player = playerFacade.find(playerName) ?: Player("TOUT EST RATE !!!!!")
+        player = intent.extras.getSerializable(PLAYER_INTENT_ARGUMENT) as Player
 
         ButterKnife.bind(this)
 
