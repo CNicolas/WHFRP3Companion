@@ -11,13 +11,17 @@ import android.support.v7.widget.Toolbar
 import android.view.MenuItem
 import butterknife.BindView
 import butterknife.ButterKnife
+import butterknife.Unbinder
 import com.nicolas.whfrp3companion.fragments.EmptyFragment
 import com.nicolas.whfrp3companion.fragments.players.PlayersFragment
+import org.jetbrains.anko.intentFor
 
 
 class MainActivity : AppCompatActivity() {
     @BindView(R.id.main_drawer_layout)
     lateinit var drawer: DrawerLayout
+
+    private lateinit var unbinder: Unbinder
 
     private lateinit var toggle: ActionBarDrawerToggle
 
@@ -25,7 +29,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        ButterKnife.bind(this)
+        unbinder = ButterKnife.bind(this)
 
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
@@ -45,6 +49,11 @@ class MainActivity : AppCompatActivity() {
         toggle.syncState()
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        unbinder.unbind()
+    }
+
     override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)
         // Pass any configuration change to the drawer toggles
@@ -61,18 +70,22 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun displaySelectedFragment(menuItemId: Int) {
-        val fragment = when (menuItemId) {
-            R.id.nav_home -> PlayersFragment.newInstance()
+        if (menuItemId == R.id.nav_dice_launcher) {
+            startActivity(this.intentFor<DiceLauncherActivity>())
+        } else {
+            val fragment = when (menuItemId) {
+                R.id.nav_home -> PlayersFragment.newInstance()
 //            R.id.nav_talents -> TalentTypesFragment()
 //            R.id.nav_items -> ItemsFragment()
 //            R.id.nav_skills -> SkillsFragment.newInstance()
 //            R.id.nav_specializations -> SpecializationsFragment()
-            else -> EmptyFragment.newInstance()
-        }
+                else -> EmptyFragment.newInstance()
+            }
 
-        supportFragmentManager.beginTransaction()
-                .replace(R.id.main_content_frame, fragment)
-                .commit()
+            supportFragmentManager.beginTransaction()
+                    .replace(R.id.main_content_frame, fragment)
+                    .commit()
+        }
 
         drawer.closeDrawer(GravityCompat.START)
     }

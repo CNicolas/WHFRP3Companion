@@ -16,4 +16,5 @@
     <string name="page_inventory">Inventaire</string>
     <string name="page_state">Etat</string>
     <string name="new_player">Créez un joueur</string>
+    <string name="page_dice_launcher">Lanceur de dés</string>
 </resources>
