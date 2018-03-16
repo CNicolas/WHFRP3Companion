@@ -35,13 +35,13 @@ class DiceLauncherActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dice_launcher)
 
+        unbinder = ButterKnife.bind(this)
+
         hand = if (intent?.extras !== null) {
             intent.extras.getSerializable(HAND_INTENT_ARGUMENT) as Hand
         } else {
             Hand("")
         }
-
-        unbinder = ButterKnife.bind(this)
 
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
