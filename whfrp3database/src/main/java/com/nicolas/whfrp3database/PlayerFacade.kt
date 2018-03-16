@@ -13,12 +13,12 @@ class PlayerFacade(context: Context) {
     private val playerDao = PlayerDao(context.database)
     private val itemDao = ItemDao(context.database)
 
-    val skills = loadSkills(context) ?: listOf()
+    val skills = loadSkills(context)
     val basicSkills = skills.filter { it.type == SkillType.BASIC }
     val advancedSkills = skills.filter { it.type == SkillType.ADVANCED }
     val allSpecializations = skills.map { it to it.specializations }.toMap()
 
-    val talents = loadTalents(context) ?: listOf()
+    val talents = loadTalents(context)
     val passiveTalents = talents.filter { it.cooldown == TalentCooldown.PASSIVE }
     val exhaustibleTalents = talents.filter { it.cooldown == TalentCooldown.TALENT }
 
