@@ -21,4 +21,12 @@
     <string name="page_actions">Actions</string>
 
     <string name="new_player">Create a player</string>
+
+    <string name="characteristic">Characteristic</string>
+    <string name="conservative">Conservative</string>
+    <string name="reckless">Reckless</string>
+    <string name="expertise">Expertise</string>
+    <string name="fortune">Fortune</string>
+    <string name="challenge">Challenge</string>
+    <string name="misfortune">Misfortune</string>
 </resources>

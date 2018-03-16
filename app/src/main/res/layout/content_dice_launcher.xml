@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              app:layout_behavior="@string/appbar_scrolling_view_behavior"
+              tools:showIn="@layout/activity_dice_launcher"
+              tools:context="com.nicolas.whfrp3companion.DiceLauncherActivity">
+
+    <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:fitsSystemWindows="true"-->
+        <!--android:orientation="horizontal">-->
+
+        <!--<LinearLayout android:layout_width="wrap_content"-->
+                      <!--android:layout_height="match_parent"-->
+        <!--android:layout_weight="1"-->
+        <!--android:orientation="vertical"></LinearLayout>-->
+
+    <!--</LinearLayout>-->
+
+    <!--<android.support.constraint.ConstraintLayout android:layout_width="match_parent"
+                                                 android:layout_height="match_parent"
+                                                 android:id="@+id/dice_launcher_layout"
+                                                 android:fitsSystemWindows="true">
+
+        <ImageView android:id="@+id/characteristic_dice"
+                   android:layout_width="wrap_content"
+                   android:layout_height="55dp"
+                   android:src="@drawable/dice_characteristic"
+                   android:contentDescription="@string/characteristic"
+                   android:paddingStart="10dp"
+                   android:paddingEnd="10dp"
+                   app:layout_constraintRight_toLeftOf="@+id/conservative_dice_picker" />
+
+        <NumberPicker android:id="@+id/characteristic_dice_picker"
+                      android:layout_width="55dp"
+                      android:layout_height="120dp"
+                      app:layout_constraintTop_toBottomOf="@+id/characteristic_dice"
+                      app:layout_constraintRight_toLeftOf="@+id/conservative_dice_picker" />
+
+        <ImageView android:id="@+id/conservative_dice"
+                   android:layout_width="wrap_content"
+                   android:layout_height="55dp"
+                   android:src="@drawable/dice_conservative"
+                   android:contentDescription="@string/conservative"
+                   android:paddingStart="10dp"
+                   android:paddingEnd="10dp"
+                   app:layout_constraintLeft_toRightOf="@+id/characteristic_dice_picker"
+                   app:layout_constraintRight_toLeftOf="@+id/reckless_dice_picker" />
+
+        <NumberPicker android:id="@+id/conservative_dice_picker"
+                      android:layout_width="55dp"
+                      android:layout_height="120dp"
+                      app:layout_constraintLeft_toRightOf="@+id/characteristic_dice_picker"
+                      app:layout_constraintTop_toBottomOf="@+id/conservative_dice"
+                      app:layout_constraintRight_toLeftOf="@+id/reckless_dice_picker" />
+
+        <ImageView android:id="@+id/reckless_dice"
+                   android:layout_width="wrap_content"
+                   android:layout_height="55dp"
+                   android:src="@drawable/dice_reckless"
+                   android:contentDescription="@string/reckless"
+                   android:paddingStart="10dp"
+                   android:paddingEnd="10dp"
+                   app:layout_constraintLeft_toRightOf="@+id/conservative_dice_picker"
+                   app:layout_constraintRight_toLeftOf="@+id/expertise_dice_picker" />
+
+        <NumberPicker android:id="@+id/reckless_dice_picker"
+                      android:layout_width="55dp"
+                      android:layout_height="120dp"
+                      app:layout_constraintLeft_toRightOf="@+id/conservative_dice_picker"
+                      app:layout_constraintTop_toBottomOf="@+id/reckless_dice"
+                      app:layout_constraintRight_toLeftOf="@+id/expertise_dice_picker" />
+
+        <ImageView android:id="@+id/expertise_dice"
+                   android:layout_width="wrap_content"
+                   android:layout_height="55dp"
+                   android:src="@drawable/dice_expertise"
+                   android:contentDescription="@string/expertise"
+                   android:paddingStart="10dp"
+                   android:paddingEnd="10dp"
+                   app:layout_constraintLeft_toRightOf="@+id/reckless_dice_picker"
+                   app:layout_constraintRight_toLeftOf="@+id/fortune_dice_picker" />
+
+        <NumberPicker android:id="@+id/expertise_dice_picker"
+                      android:layout_width="55dp"
+                      android:layout_height="120dp"
+                      app:layout_constraintLeft_toRightOf="@+id/reckless_dice_picker"
+                      app:layout_constraintTop_toBottomOf="@+id/expertise_dice"
+                      app:layout_constraintRight_toLeftOf="@+id/fortune_dice_picker" />
+
+        <ImageView android:id="@+id/fortune_dice"
+                   android:layout_width="wrap_content"
+                   android:layout_height="55dp"
+                   android:src="@drawable/dice_fortune"
+                   android:contentDescription="@string/fortune"
+                   android:paddingStart="10dp"
+                   android:paddingEnd="10dp"
+                   app:layout_constraintLeft_toRightOf="@+id/expertise_dice_picker"
+                   app:layout_constraintRight_toLeftOf="@+id/challenge_dice_picker" />
+
+        <NumberPicker android:id="@+id/fortune_dice_picker"
+                      android:layout_width="55dp"
+                      android:layout_height="120dp"
+                      app:layout_constraintLeft_toRightOf="@+id/expertise_dice_picker"
+                      app:layout_constraintTop_toBottomOf="@+id/fortune_dice"
+                      app:layout_constraintRight_toLeftOf="@+id/challenge_dice_picker" />
+
+        <ImageView android:id="@+id/challenge_dice"
+                   android:layout_width="wrap_content"
+                   android:layout_height="55dp"
+                   android:src="@drawable/dice_challenge"
+                   android:contentDescription="@string/challenge"
+                   android:paddingStart="10dp"
+                   android:paddingEnd="10dp"
+                   app:layout_constraintLeft_toRightOf="@+id/fortune_dice_picker"
+                   app:layout_constraintRight_toLeftOf="@+id/misfortune_dice_picker" />
+
+        <NumberPicker android:id="@+id/challenge_dice_picker"
+                      android:layout_width="55dp"
+                      android:layout_height="120dp"
+                      app:layout_constraintLeft_toRightOf="@+id/fortune_dice_picker"
+                      app:layout_constraintTop_toBottomOf="@+id/challenge_dice"
+                      app:layout_constraintRight_toLeftOf="@+id/misfortune_dice_picker" />
+
+        <ImageView android:id="@+id/misfortune_dice"
+                   android:layout_width="wrap_content"
+                   android:layout_height="55dp"
+                   android:src="@drawable/dice_misfortune"
+                   android:contentDescription="@string/misfortune"
+                   android:paddingStart="10dp"
+                   android:paddingEnd="10dp"
+                   app:layout_constraintLeft_toRightOf="@+id/challenge_dice_picker"
+                   app:layout_constraintRight_toRightOf="@+id/dice_launcher_layout" />
+
+        <NumberPicker android:id="@+id/misfortune_dice_picker"
+                      android:layout_width="55dp"
+                      android:layout_height="120dp"
+                      app:layout_constraintLeft_toRightOf="@+id/challenge_dice_picker"
+                      app:layout_constraintTop_toBottomOf="@+id/misfortune_dice"
+                      app:layout_constraintRight_toRightOf="@+id/dice_launcher_layout" />
+
+    </android.support.constraint.ConstraintLayout>-->
+</LinearLayout>

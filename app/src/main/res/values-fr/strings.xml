@@ -14,7 +14,14 @@
     <string name="page_characteristics">Caractéristiques</string>
     <string name="page_actions">Actions</string>
     <string name="page_inventory">Inventaire</string>
-    <string name="page_state">Etat</string>
+    <string name="page_state">État</string>
     <string name="new_player">Créez un joueur</string>
     <string name="page_dice_launcher">Lanceur de dés</string>
+    <string name="challenge">Défi</string>
+    <string name="characteristic">Caractéristique</string>
+    <string name="conservative">Prudence</string>
+    <string name="expertise">Expertise</string>
+    <string name="fortune">Fortune</string>
+    <string name="misfortune">Infortune</string>
+    <string name="reckless">Témrité</string>
 </resources>

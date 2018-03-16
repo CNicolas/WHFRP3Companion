@@ -9,16 +9,9 @@
 
     <include layout="@layout/toolbar"
              android:layout_width="match_parent"
-             android:layout_height="wrap_content"/>
+             android:layout_height="wrap_content" />
 
-    <android.support.constraint.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        tools:showIn="@layout/activity_dice_launcher"
-        tools:context="com.nicolas.whfrp3companion.DiceLauncherActivity">
-
-    </android.support.constraint.ConstraintLayout>
+    <include layout="@layout/content_dice_launcher" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab_launch_hand"
