@@ -1,5 +1,7 @@
 package com.nicolas.whfrp3database.entities
 
-interface WarHammerEntity {
+import java.io.Serializable
+
+interface WarHammerEntity : Serializable {
     val id: Int
 }
