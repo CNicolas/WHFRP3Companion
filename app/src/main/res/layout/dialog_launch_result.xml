@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="horizontal">
+
+    <TextView android:id="@+id/success_result"
+              style="@style/ResultDialogImagedTextView"
+              android:drawableTop="@drawable/ic_success_black_36" />
+
+    <TextView android:id="@+id/boon_result"
+              style="@style/ResultDialogImagedTextView"
+              android:drawableTop="@drawable/ic_boon_black_36" />
+
+    <TextView android:id="@+id/sigmar_result"
+              style="@style/ResultDialogImagedTextView"
+              android:drawableTop="@drawable/ic_sigmar_black_36" />
+
+    <TextView android:id="@+id/failure_result"
+              style="@style/ResultDialogImagedTextView"
+              android:drawableTop="@drawable/ic_failure_black_36" />
+
+    <TextView android:id="@+id/bane_result"
+              style="@style/ResultDialogImagedTextView"
+              android:drawableTop="@drawable/ic_bane_black_36" />
+
+    <TextView android:id="@+id/delay_result"
+              style="@style/ResultDialogImagedTextView"
+              android:drawableTop="@drawable/ic_delay_black_36" />
+
+    <TextView android:id="@+id/exhaustion_result"
+              style="@style/ResultDialogImagedTextView"
+              android:drawableTop="@drawable/ic_exhaustion_black_36" />
+
+    <TextView
+            style="@style/ResultDialogImagedTextView"
+            android:drawableTop="@drawable/ic_chaos_black_36" />
+</LinearLayout>

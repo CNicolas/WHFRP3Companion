@@ -8,6 +8,8 @@ import butterknife.BindView
 import butterknife.ButterKnife
 import butterknife.OnClick
 import butterknife.Unbinder
+import com.nicolas.dicelauncher.launch.launch
+import com.nicolas.whfrp3companion.dialogs.LaunchResultDialog
 import com.nicolas.whfrp3database.entities.hand.Hand
 import org.jetbrains.anko.longToast
 
@@ -63,6 +65,13 @@ class DiceLauncherActivity : AppCompatActivity() {
                 challengeDicesCount = challengeDicePicker.value,
                 misfortuneDicesCount = misfortuneDicePicker.value)
         longToast(hand.toString())
+
+        val launchResultsDialog = LaunchResultDialog(hand.launch())
+        launchResultsDialog.show(supportFragmentManager, DIALOG_LAUNCH_RESULT_TAG)
     }
 
+    @OnClick(R.id.fab_launch_hand_statistics)
+    fun launchHandStatistics() {
+        longToast("How many times ?")
+    }
 }
