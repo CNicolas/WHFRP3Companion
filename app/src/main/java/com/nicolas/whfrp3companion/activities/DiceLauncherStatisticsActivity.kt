@@ -15,7 +15,7 @@ class DiceLauncherStatisticsActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_dice_launcher)
+        setContentView(R.layout.activity_dice_launcher_statistics)
 
         unbinder = ButterKnife.bind(this)
 
@@ -27,8 +27,6 @@ class DiceLauncherStatisticsActivity : AppCompatActivity() {
 
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
-        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        supportActionBar!!.setHomeButtonEnabled(true)
     }
 
     override fun onDestroy() {

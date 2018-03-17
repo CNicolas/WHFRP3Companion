@@ -9,6 +9,7 @@
 
     <string name="page_home">Home</string>
     <string name="page_dice_launcher">Dices launcher</string>
+    <string name="page_dice_launcher_statistics">Statistics</string>
     <string name="page_skills">Skills</string>
     <string name="page_talents">Talents</string>
     <string name="page_careers">Careers</string>
@@ -30,4 +31,6 @@
     <string name="fortune">Fortune</string>
     <string name="challenge">Challenge</string>
     <string name="misfortune">Misfortune</string>
+
+    <string name="statistics_average_result_hint">0 / Launch</string>
 </resources>

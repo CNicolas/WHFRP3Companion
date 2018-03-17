@@ -13,4 +13,6 @@
 
     <dimen name="very_small_padding">2dp</dimen>
     <dimen name="medium_padding">10dp</dimen>
+    <dimen name="big_padding">20dp</dimen>
+    <dimen name="giant_padding">32dp</dimen>
 </resources>

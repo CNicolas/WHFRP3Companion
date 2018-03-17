@@ -25,4 +25,6 @@
     <string name="misfortune">Infortune</string>
     <string name="reckless">Témrité</string>
     <string name="results">Résultats</string>
+    <string name="page_dice_launcher_statistics">Statistiques</string>
+    <string name="statistics_average_result_hint">0 / lancé</string>
 </resources>
