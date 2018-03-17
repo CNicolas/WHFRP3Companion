@@ -90,6 +90,8 @@ class MainActivity : AppCompatActivity() {
     private fun displaySelectedFragment(menuItem: MenuItem) {
         if (menuItem.itemId == R.id.nav_dice_launcher) {
             startActivity(this.intentFor<DiceLauncherActivity>())
+
+            drawer.closeDrawer(GravityCompat.START)
         } else {
             displaySelectedFragment(menuItem.itemId)
 
