@@ -24,7 +24,7 @@
                 android:value=".MainActivity" />
         </activity>
         <activity
-            android:name=".DiceLauncherActivity"
+            android:name=".activities.DiceLauncherActivity"
             android:label="@string/page_dice_launcher"
             android:theme="@style/AppTheme">
         </activity>

@@ -1,4 +1,4 @@
-package com.nicolas.whfrp3companion
+package com.nicolas.whfrp3companion.activities
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
@@ -9,6 +9,9 @@ import butterknife.ButterKnife
 import butterknife.OnClick
 import butterknife.Unbinder
 import com.nicolas.dicelauncher.launch.launch
+import com.nicolas.whfrp3companion.DIALOG_LAUNCH_RESULT_TAG
+import com.nicolas.whfrp3companion.HAND_INTENT_ARGUMENT
+import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.dialogs.LaunchResultDialog
 import com.nicolas.whfrp3database.entities.hand.Hand
 import org.jetbrains.anko.longToast
