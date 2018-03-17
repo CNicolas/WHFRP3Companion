@@ -28,7 +28,7 @@
                        android:layout_gravity="center" />
             <com.nicolas.whfrp3companion.components.NumberPickerMinMax android:id="@+id/characteristic_dice_picker"
                                                                        android:layout_width="wrap_content"
-                                                                       android:layout_height="120dp" />
+                                                                       android:layout_height="wrap_content" />
         </LinearLayout>
 
         <LinearLayout android:id="@+id/conservative_dice_picker_layout"
@@ -47,7 +47,7 @@
 
             <com.nicolas.whfrp3companion.components.NumberPickerMinMax android:id="@+id/conservative_dice_picker"
                                                                        android:layout_width="wrap_content"
-                                                                       android:layout_height="120dp" />
+                                                                       android:layout_height="wrap_content" />
         </LinearLayout>
 
         <LinearLayout android:id="@+id/reckless_dice_picker_layout"
@@ -66,7 +66,7 @@
 
             <com.nicolas.whfrp3companion.components.NumberPickerMinMax android:id="@+id/reckless_dice_picker"
                                                                        android:layout_width="wrap_content"
-                                                                       android:layout_height="120dp" />
+                                                                       android:layout_height="wrap_content" />
         </LinearLayout>
 
         <LinearLayout android:id="@+id/expertise_dice_picker_layout"
@@ -85,7 +85,7 @@
 
             <com.nicolas.whfrp3companion.components.NumberPickerMinMax android:id="@+id/expertise_dice_picker"
                                                                        android:layout_width="wrap_content"
-                                                                       android:layout_height="120dp" />
+                                                                       android:layout_height="wrap_content" />
         </LinearLayout>
 
         <LinearLayout android:id="@+id/fortune_dice_picker_layout"
@@ -104,7 +104,7 @@
 
             <com.nicolas.whfrp3companion.components.NumberPickerMinMax android:id="@+id/fortune_dice_picker"
                                                                        android:layout_width="wrap_content"
-                                                                       android:layout_height="120dp" />
+                                                                       android:layout_height="wrap_content" />
         </LinearLayout>
 
         <LinearLayout android:id="@+id/challenge_dice_picker_layout"
@@ -123,7 +123,7 @@
 
             <com.nicolas.whfrp3companion.components.NumberPickerMinMax android:id="@+id/challenge_dice_picker"
                                                                        android:layout_width="wrap_content"
-                                                                       android:layout_height="120dp" />
+                                                                       android:layout_height="wrap_content" />
         </LinearLayout>
 
         <LinearLayout android:id="@+id/misfortune_dice_picker_layout"
@@ -142,7 +142,7 @@
 
             <com.nicolas.whfrp3companion.components.NumberPickerMinMax android:id="@+id/misfortune_dice_picker"
                                                                        android:layout_width="wrap_content"
-                                                                       android:layout_height="120dp" />
+                                                                       android:layout_height="wrap_content" />
         </LinearLayout>
 
     </android.support.constraint.ConstraintLayout>
