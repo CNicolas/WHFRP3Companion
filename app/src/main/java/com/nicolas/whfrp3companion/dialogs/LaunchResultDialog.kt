@@ -1,10 +1,10 @@
 package com.nicolas.whfrp3companion.dialogs
 
+import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.app.Dialog
 import android.os.Bundle
 import android.support.v4.app.DialogFragment
-import android.view.View
 import android.view.View.GONE
 import android.widget.TextView
 import butterknife.BindView
@@ -30,6 +30,8 @@ class LaunchResultDialog() : DialogFragment() {
     lateinit var delayResult: TextView
     @BindView(R.id.exhaustion_result)
     lateinit var exhaustionResult: TextView
+    @BindView(R.id.chaos_result)
+    lateinit var chaosResult: TextView
 
     private lateinit var unbinder: Unbinder
 
@@ -39,23 +41,22 @@ class LaunchResultDialog() : DialogFragment() {
         this.launchResult = launchResult
     }
 
+    @SuppressLint("InflateParams")
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val builder = AlertDialog.Builder(activity)
         val inflater = activity!!.layoutInflater
-        val view = inflater.inflate(R.layout.dialog_launch_result, null)
-
-        unbinder = ButterKnife.bind(view)
+        val view = inflater.inflate(R.layout.dialog_launch_result, null, false)
 
         builder.setView(view)
         builder.setTitle(R.string.results)
         builder.setPositiveButton(android.R.string.ok, { _, _ -> dismiss() })
 
-        return builder.create()
-    }
+        val dialog = builder.create()
+        unbinder = ButterKnife.bind(this, view)
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        setResultsContent(launchResult)
+        setResultsContent()
+
+        return dialog
     }
 
     override fun onDestroy() {
@@ -63,7 +64,7 @@ class LaunchResultDialog() : DialogFragment() {
         unbinder.unbind()
     }
 
-    private fun setResultsContent(launchResult: LaunchResult) {
+    private fun setResultsContent() {
         when (launchResult.report[Face.SUCCESS]) {
             null -> successResult.visibility = GONE
             else -> successResult.text = launchResult.report[Face.SUCCESS].toString()
@@ -97,6 +98,11 @@ class LaunchResultDialog() : DialogFragment() {
         when (launchResult.report[Face.EXHAUSTION]) {
             null -> exhaustionResult.visibility = GONE
             else -> exhaustionResult.text = launchResult.report[Face.EXHAUSTION].toString()
+        }
+
+        when (launchResult.report[Face.CHAOS]) {
+            null -> chaosResult.visibility = GONE
+            else -> chaosResult.text = launchResult.report[Face.CHAOS].toString()
         }
     }
 }

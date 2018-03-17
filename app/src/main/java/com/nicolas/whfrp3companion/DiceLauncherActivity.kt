@@ -64,7 +64,6 @@ class DiceLauncherActivity : AppCompatActivity() {
                 recklessDicesCount = recklessDicePicker.value,
                 challengeDicesCount = challengeDicePicker.value,
                 misfortuneDicesCount = misfortuneDicePicker.value)
-        longToast(hand.toString())
 
         val launchResultsDialog = LaunchResultDialog(hand.launch())
         launchResultsDialog.show(supportFragmentManager, DIALOG_LAUNCH_RESULT_TAG)
