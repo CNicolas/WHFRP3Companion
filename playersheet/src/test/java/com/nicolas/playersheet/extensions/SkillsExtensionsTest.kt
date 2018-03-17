@@ -20,7 +20,7 @@ class SkillsExtensionsTest {
 
     @Before
     fun setUp() {
-        allSkills = loadSkills(RuntimeEnvironment.application)!!
+        allSkills = loadSkills(RuntimeEnvironment.application)
     }
 
     @Test
