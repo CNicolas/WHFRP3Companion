@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                             xmlns:app="http://schemas.android.com/apk/res-auto"
+                                             xmlns:tools="http://schemas.android.com/tools"
+                                             android:layout_width="match_parent"
+                                             android:layout_height="match_parent"
+                                             android:orientation="vertical"
+                                             android:layout_marginTop="?attr/actionBarSize"
+                                             tools:showIn="@layout/activity_dice_launcher_statistics"
+                                             tools:context=".activities.DiceLauncherStatisticsActivity">
+    <TextView android:id="@+id/launch_total_count"
+              android:layout_width="368dp"
+              android:layout_height="wrap_content"
+              android:gravity="center"
+              android:hint="Launch total count"
+              android:textSize="30sp"
+              app:layout_constraintTop_toTopOf="parent"
+              app:layout_constraintLeft_toRightOf="parent" />
+
+    <TextView android:id="@+id/successful_launches"
+              android:layout_width="368dp"
+              android:layout_height="wrap_content"
+              android:layout_margin="@dimen/medium_padding"
+              android:hint="Successful launches"
+              android:textSize="@dimen/medium_text_size"
+              android:gravity="center"
+              app:layout_constraintTop_toBottomOf="@+id/launch_total_count"
+              app:layout_constraintLeft_toRightOf="parent" />
+</android.support.constraint.ConstraintLayout>
