@@ -13,11 +13,20 @@
                                                  android:layout_height="match_parent"
                                                  android:fitsSystemWindows="true">
 
+        <EditText android:id="@+id/hand_name"
+                  android:layout_width="0dp"
+                  android:layout_height="wrap_content"
+                  android:hint="Hand name"
+                  android:gravity="center"
+                  app:layout_constraintTop_toTopOf="parent"
+                  app:layout_constraintLeft_toLeftOf="parent"
+                  app:layout_constraintRight_toRightOf="parent" />
+
         <LinearLayout android:id="@+id/characteristic_dice_picker_layout"
                       android:layout_width="wrap_content"
                       android:layout_height="0dp"
                       android:orientation="vertical"
-                      app:layout_constraintTop_toTopOf="parent"
+                      app:layout_constraintTop_toBottomOf="@+id/hand_name"
                       app:layout_constraintLeft_toLeftOf="parent"
                       app:layout_constraintRight_toLeftOf="@+id/conservative_dice_picker_layout">
             <ImageView android:id="@+id/characteristic_dice"
@@ -35,7 +44,7 @@
                       android:layout_width="wrap_content"
                       android:layout_height="0dp"
                       android:orientation="vertical"
-                      app:layout_constraintTop_toTopOf="parent"
+                      app:layout_constraintTop_toBottomOf="@+id/hand_name"
                       app:layout_constraintLeft_toRightOf="@+id/characteristic_dice_picker_layout"
                       app:layout_constraintRight_toLeftOf="@+id/reckless_dice_picker_layout">
             <ImageView android:id="@+id/conservative_dice"
@@ -54,7 +63,7 @@
                       android:layout_width="wrap_content"
                       android:layout_height="0dp"
                       android:orientation="vertical"
-                      app:layout_constraintTop_toTopOf="parent"
+                      app:layout_constraintTop_toBottomOf="@+id/hand_name"
                       app:layout_constraintLeft_toRightOf="@+id/conservative_dice_picker_layout"
                       app:layout_constraintRight_toLeftOf="@+id/expertise_dice_picker_layout">
             <ImageView android:id="@+id/reckless_dice"
@@ -73,7 +82,7 @@
                       android:layout_width="wrap_content"
                       android:layout_height="0dp"
                       android:orientation="vertical"
-                      app:layout_constraintTop_toTopOf="parent"
+                      app:layout_constraintTop_toBottomOf="@+id/hand_name"
                       app:layout_constraintLeft_toRightOf="@+id/reckless_dice_picker_layout"
                       app:layout_constraintRight_toLeftOf="@+id/fortune_dice_picker_layout">
             <ImageView android:id="@+id/expertise_dice"
@@ -92,7 +101,7 @@
                       android:layout_width="wrap_content"
                       android:layout_height="0dp"
                       android:orientation="vertical"
-                      app:layout_constraintTop_toTopOf="parent"
+                      app:layout_constraintTop_toBottomOf="@+id/hand_name"
                       app:layout_constraintLeft_toRightOf="@+id/expertise_dice_picker_layout"
                       app:layout_constraintRight_toRightOf="parent">
             <ImageView android:id="@+id/fortune_dice"

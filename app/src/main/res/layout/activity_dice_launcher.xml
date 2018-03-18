@@ -12,7 +12,8 @@
              android:layout_width="match_parent"
              android:layout_height="wrap_content" />
 
-    <include layout="@layout/content_dice_launcher" android:id="@+id/include" />
+    <include  android:id="@+id/include"
+            layout="@layout/content_dice_launcher" />
 
     <android.support.constraint.ConstraintLayout android:layout_width="wrap_content"
                                                  android:layout_height="wrap_content"
