@@ -1,11 +1,15 @@
 package com.nicolas.whfrp3companion.activities
 
+import android.opengl.Visibility
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
+import android.view.View
+import android.widget.ProgressBar
 import android.widget.TextView
 import butterknife.BindView
 import butterknife.ButterKnife
+import butterknife.OnClick
 import butterknife.Unbinder
 import com.nicolas.dicelauncher.launch.launchForStatistics
 import com.nicolas.whfrp3companion.HAND_INTENT_ARGUMENT
@@ -37,6 +41,9 @@ class DiceLauncherStatisticsActivity : AppCompatActivity() {
     @BindView(R.id.average_chaos)
     lateinit var averageChaos: TextView
 
+    @BindView(R.id.progress)
+    lateinit var progressBar: ProgressBar
+
     private lateinit var unbinder: Unbinder
     private lateinit var hand: Hand
     private var launchCount = 100
@@ -64,7 +71,14 @@ class DiceLauncherStatisticsActivity : AppCompatActivity() {
         unbinder.unbind()
     }
 
+    @OnClick(R.id.fab_relaunch_hand)
+    fun relaunch() {
+        calculateStatistics()
+    }
+
     private fun calculateStatistics() {
+        progressBar.visibility = View.VISIBLE
+
         doAsync {
             val statistics = hand.launchForStatistics(launchCount)
             uiThread {
@@ -79,6 +93,8 @@ class DiceLauncherStatisticsActivity : AppCompatActivity() {
                 averageDelay.text = "${statistics.averageDelay} per launch"
                 averageExhaustion.text = "${statistics.averageExhaustion} per launch"
                 averageChaos.text = "${statistics.averageChaos} per launch"
+
+                progressBar.visibility = View.GONE
             }
         }
     }
