@@ -11,6 +11,7 @@ import butterknife.Unbinder
 import com.nicolas.dicelauncher.launch.launch
 import com.nicolas.whfrp3companion.DIALOG_LAUNCH_RESULT_TAG
 import com.nicolas.whfrp3companion.HAND_INTENT_ARGUMENT
+import com.nicolas.whfrp3companion.HAND_LAUNCH_COUNT_INTENT_ARGUMENT
 import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.dialogs.LaunchResultDialog
 import com.nicolas.whfrp3database.entities.hand.Hand
@@ -65,7 +66,11 @@ class DiceLauncherActivity : AppCompatActivity() {
 
     @OnClick(R.id.fab_launch_hand_statistics)
     fun launchHandStatistics() {
-        startActivity(intentFor<DiceLauncherStatisticsActivity>(HAND_INTENT_ARGUMENT to getHandFromPickers()))
+        val launchCount = 2000
+        startActivity(intentFor<DiceLauncherStatisticsActivity>(
+                HAND_INTENT_ARGUMENT to getHandFromPickers(),
+                HAND_LAUNCH_COUNT_INTENT_ARGUMENT to launchCount
+        ))
     }
 
     private fun getHandFromPickers(): Hand =

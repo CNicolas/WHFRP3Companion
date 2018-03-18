@@ -1,6 +1,5 @@
 package com.nicolas.whfrp3companion.activities
 
-import android.opengl.Visibility
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
@@ -13,6 +12,7 @@ import butterknife.OnClick
 import butterknife.Unbinder
 import com.nicolas.dicelauncher.launch.launchForStatistics
 import com.nicolas.whfrp3companion.HAND_INTENT_ARGUMENT
+import com.nicolas.whfrp3companion.HAND_LAUNCH_COUNT_INTENT_ARGUMENT
 import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3database.entities.hand.Hand
 import org.jetbrains.anko.doAsync
@@ -46,7 +46,7 @@ class DiceLauncherStatisticsActivity : AppCompatActivity() {
 
     private lateinit var unbinder: Unbinder
     private lateinit var hand: Hand
-    private var launchCount = 100
+    private var launchCount: Int = 100
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,10 +54,11 @@ class DiceLauncherStatisticsActivity : AppCompatActivity() {
 
         unbinder = ButterKnife.bind(this)
 
-        hand = if (intent?.extras !== null) {
-            intent.extras.getSerializable(HAND_INTENT_ARGUMENT) as Hand
+        if (intent?.extras !== null) {
+            hand = intent.extras.getSerializable(HAND_INTENT_ARGUMENT) as Hand
+            launchCount = intent.extras.getInt(HAND_LAUNCH_COUNT_INTENT_ARGUMENT)
         } else {
-            Hand("")
+            hand = Hand("")
         }
 
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
