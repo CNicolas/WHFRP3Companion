@@ -19,8 +19,8 @@ import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.dialogs.LaunchResultDialog
 import com.nicolas.whfrp3database.HandFacade
 import com.nicolas.whfrp3database.entities.hand.Hand
+import org.jetbrains.anko.alert
 import org.jetbrains.anko.intentFor
-import org.jetbrains.anko.toast
 
 class DiceLauncherActivity : AppCompatActivity() {
     @BindView(R.id.hand_name)
@@ -43,6 +43,7 @@ class DiceLauncherActivity : AppCompatActivity() {
 
     private lateinit var unbinder: Unbinder
 
+    private lateinit var handFacade: HandFacade
     private lateinit var hand: Hand
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -59,6 +60,9 @@ class DiceLauncherActivity : AppCompatActivity() {
 
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
+
+        handFacade = HandFacade(this)
+        setViewValues(hand)
     }
 
     override fun onDestroy() {
@@ -74,13 +78,24 @@ class DiceLauncherActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
             R.id.reset_hand -> reset()
-            R.id.save_hand -> toast("Save !!")
-            R.id.delete_hand -> toast("Delete !!")
+            R.id.save_hand -> saveHand()
+            R.id.delete_hand -> deleteHand()
             R.id.launch_statistics_100 -> launchHandStatistics(100)
             R.id.launch_statistics_1000 -> launchHandStatistics(1000)
             R.id.launch_statistics_5000 -> launchHandStatistics(5000)
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    @OnClick(R.id.fab_list_hands)
+    fun listHands() {
+        alert {
+            title = "Select a hand"
+            items(handFacade.findAll()
+                    .map { it.name }) { _, item, _ ->
+                setViewValues(handFacade.find(item)!!)
+            }
+        }.show()
     }
 
     @OnClick(R.id.launch_button)
@@ -101,10 +116,11 @@ class DiceLauncherActivity : AppCompatActivity() {
     }
 
     private fun saveHand() {
-        val hand = getHandFromPickers()
-        val handFacade = HandFacade(this)
+        handFacade.save(getHandFromPickers())
+    }
 
-        handFacade.save(hand)
+    private fun deleteHand() {
+        handFacade.delete(handNameView.text.toString())
     }
 
     private fun getHandFromPickers(): Hand =
