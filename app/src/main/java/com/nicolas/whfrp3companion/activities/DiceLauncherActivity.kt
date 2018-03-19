@@ -3,6 +3,7 @@ package com.nicolas.whfrp3companion.activities
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
+import android.widget.EditText
 import android.widget.NumberPicker
 import butterknife.BindView
 import butterknife.ButterKnife
@@ -18,6 +19,9 @@ import com.nicolas.whfrp3database.entities.hand.Hand
 import org.jetbrains.anko.intentFor
 
 class DiceLauncherActivity : AppCompatActivity() {
+    @BindView(R.id.hand_name)
+    lateinit var handNameView: EditText
+
     @BindView(R.id.characteristic_dice_picker)
     lateinit var characteristicDicePicker: NumberPicker
     @BindView(R.id.conservative_dice_picker)
@@ -74,7 +78,7 @@ class DiceLauncherActivity : AppCompatActivity() {
     }
 
     private fun getHandFromPickers(): Hand =
-            Hand("No name",
+            Hand(handNameView.text.toString(),
                     characteristicDicesCount = characteristicDicePicker.value,
                     expertiseDicesCount = expertiseDicePicker.value,
                     fortuneDicesCount = fortuneDicePicker.value,
