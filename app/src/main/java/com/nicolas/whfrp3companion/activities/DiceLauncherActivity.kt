@@ -17,8 +17,10 @@ import com.nicolas.whfrp3companion.HAND_INTENT_ARGUMENT
 import com.nicolas.whfrp3companion.HAND_LAUNCH_COUNT_INTENT_ARGUMENT
 import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.dialogs.LaunchResultDialog
+import com.nicolas.whfrp3database.HandFacade
 import com.nicolas.whfrp3database.entities.hand.Hand
 import org.jetbrains.anko.intentFor
+import org.jetbrains.anko.toast
 
 class DiceLauncherActivity : AppCompatActivity() {
     @BindView(R.id.hand_name)
@@ -71,6 +73,9 @@ class DiceLauncherActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
+            R.id.reset_hand -> reset()
+            R.id.save_hand -> toast("Save !!")
+            R.id.delete_hand -> toast("Delete !!")
             R.id.launch_statistics_100 -> launchHandStatistics(100)
             R.id.launch_statistics_1000 -> launchHandStatistics(1000)
             R.id.launch_statistics_5000 -> launchHandStatistics(5000)
@@ -91,6 +96,17 @@ class DiceLauncherActivity : AppCompatActivity() {
         ))
     }
 
+    private fun reset() {
+        setViewValues(Hand(""))
+    }
+
+    private fun saveHand() {
+        val hand = getHandFromPickers()
+        val handFacade = HandFacade(this)
+
+        handFacade.save(hand)
+    }
+
     private fun getHandFromPickers(): Hand =
             Hand(handNameView.text.toString(),
                     characteristicDicesCount = characteristicDicePicker.value,
@@ -100,4 +116,15 @@ class DiceLauncherActivity : AppCompatActivity() {
                     recklessDicesCount = recklessDicePicker.value,
                     challengeDicesCount = challengeDicePicker.value,
                     misfortuneDicesCount = misfortuneDicePicker.value)
+
+    private fun setViewValues(hand: Hand) {
+        handNameView.setText(hand.name)
+        characteristicDicePicker.value = hand.characteristicDicesCount
+        expertiseDicePicker.value = hand.expertiseDicesCount
+        fortuneDicePicker.value = hand.fortuneDicesCount
+        conservativeDicePicker.value = hand.conservativeDicesCount
+        recklessDicePicker.value = hand.recklessDicesCount
+        challengeDicePicker.value = hand.challengeDicesCount
+        misfortuneDicePicker.value = hand.misfortuneDicesCount
+    }
 }
