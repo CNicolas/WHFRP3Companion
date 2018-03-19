@@ -33,4 +33,5 @@
     <string name="misfortune">Misfortune</string>
 
     <string name="statistics_average_result_hint">0 / Launch</string>
+    <string name="launch">Launch</string>
 </resources>

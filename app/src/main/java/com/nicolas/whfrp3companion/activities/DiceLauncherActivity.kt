@@ -62,7 +62,7 @@ class DiceLauncherActivity : AppCompatActivity() {
         unbinder.unbind()
     }
 
-    @OnClick(R.id.fab_launch_hand)
+    @OnClick(R.id.fab_launch_hand, R.id.launch_button)
     fun launchHand() {
         val launchResultsDialog = LaunchResultDialog(getHandFromPickers().launch())
         launchResultsDialog.show(supportFragmentManager, DIALOG_LAUNCH_RESULT_TAG)
