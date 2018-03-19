@@ -1,14 +1,12 @@
 package com.nicolas.whfrp3companion.activities
 
 import android.os.Bundle
+import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
-import android.view.View
-import android.widget.ProgressBar
 import android.widget.TextView
 import butterknife.BindView
 import butterknife.ButterKnife
-import butterknife.OnClick
 import butterknife.Unbinder
 import com.nicolas.dicelauncher.launch.launchForStatistics
 import com.nicolas.whfrp3companion.HAND_INTENT_ARGUMENT
@@ -41,8 +39,8 @@ class DiceLauncherStatisticsActivity : AppCompatActivity() {
     @BindView(R.id.average_chaos)
     lateinit var averageChaos: TextView
 
-    @BindView(R.id.progress)
-    lateinit var progressBar: ProgressBar
+    @BindView(R.id.swipe_refresh_layout)
+    lateinit var refreshLayout: SwipeRefreshLayout
 
     private lateinit var unbinder: Unbinder
     private lateinit var hand: Hand
@@ -53,6 +51,7 @@ class DiceLauncherStatisticsActivity : AppCompatActivity() {
         setContentView(R.layout.activity_dice_launcher_statistics)
 
         unbinder = ButterKnife.bind(this)
+        refreshLayout.setOnRefreshListener { calculateStatistics() }
 
         if (intent?.extras !== null) {
             hand = intent.extras.getSerializable(HAND_INTENT_ARGUMENT) as Hand
@@ -72,13 +71,8 @@ class DiceLauncherStatisticsActivity : AppCompatActivity() {
         unbinder.unbind()
     }
 
-    @OnClick(R.id.fab_relaunch_hand)
-    fun relaunch() {
-        calculateStatistics()
-    }
-
     private fun calculateStatistics() {
-        progressBar.visibility = View.VISIBLE
+        refreshLayout.isRefreshing = true
 
         doAsync {
             val statistics = hand.launchForStatistics(launchCount)
@@ -95,7 +89,7 @@ class DiceLauncherStatisticsActivity : AppCompatActivity() {
                 averageExhaustion.text = "${statistics.averageExhaustion} per launch"
                 averageChaos.text = "${statistics.averageChaos} per launch"
 
-                progressBar.visibility = View.GONE
+                refreshLayout.isRefreshing = false
             }
         }
     }
