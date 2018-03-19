@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single"
+           android:icon="@drawable/ic_insert_chart_white_24dp">
+        <item android:id="@+id/launch_statistics_100"
+              android:title="@string/launch_100_times" />
+        <item android:id="@+id/launch_statistics_1000"
+              android:title="@string/launch_1000_times" />
+        <item android:id="@+id/launch_statistics_5000"
+              android:title="@string/launch_5000_times" />
+    </group>
+</menu>

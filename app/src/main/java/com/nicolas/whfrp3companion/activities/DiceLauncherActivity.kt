@@ -3,6 +3,8 @@ package com.nicolas.whfrp3companion.activities
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.EditText
 import android.widget.NumberPicker
 import butterknife.BindView
@@ -62,15 +64,27 @@ class DiceLauncherActivity : AppCompatActivity() {
         unbinder.unbind()
     }
 
-    @OnClick(R.id.fab_launch_hand, R.id.launch_button)
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.activity_dice_launcher, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when (item?.itemId) {
+            R.id.launch_statistics_100 -> launchHandStatistics(100)
+            R.id.launch_statistics_1000 -> launchHandStatistics(1000)
+            R.id.launch_statistics_5000 -> launchHandStatistics(5000)
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    @OnClick(R.id.launch_button)
     fun launchHand() {
         val launchResultsDialog = LaunchResultDialog(getHandFromPickers().launch())
         launchResultsDialog.show(supportFragmentManager, DIALOG_LAUNCH_RESULT_TAG)
     }
 
-    @OnClick(R.id.fab_launch_hand_statistics)
-    fun launchHandStatistics() {
-        val launchCount = 2000
+    private fun launchHandStatistics(launchCount: Int) {
         startActivity(intentFor<DiceLauncherStatisticsActivity>(
                 HAND_INTENT_ARGUMENT to getHandFromPickers(),
                 HAND_LAUNCH_COUNT_INTENT_ARGUMENT to launchCount
