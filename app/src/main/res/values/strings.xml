@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name" translatable="false">WHFRP3Companion</string>
+    <string name="zero" translatable="false">0</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -33,6 +34,13 @@
     <string name="challenge">Challenge</string>
     <string name="misfortune">Misfortune</string>
 
+    <string name="strength">Strength</string>
+    <string name="toughness">Toughness</string>
+    <string name="agility">Agility</string>
+    <string name="intelligence">Intelligence</string>
+    <string name="willpower">Willpower</string>
+    <string name="fellowship">Fellowship</string>
+
     <string name="new_player">Create a player</string>
     <string name="results">Results</string>
     <string name="select_hand">Select a hand</string>
@@ -46,4 +54,10 @@
     <string name="successful_rolls_hint">Successful rolls</string>
     <string name="statistics_average_result_hint">0 / roll</string>
     <string name="hand_name_hint">Hand name</string>
+
+    <string name="player_name">Player name</string>
+    <string name="career">Career</string>
+    <string name="rank">Rank</string>
+
+    <string name="lorem">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor...</string>
 </resources>
