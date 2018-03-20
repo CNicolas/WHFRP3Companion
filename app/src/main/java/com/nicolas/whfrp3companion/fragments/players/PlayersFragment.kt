@@ -2,6 +2,7 @@ package com.nicolas.whfrp3companion.fragments.players
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.text.InputType
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -58,6 +59,8 @@ class PlayersFragment : Fragment() {
             title = getString(R.string.new_player)
             customView {
                 val name = textInputEditText()
+                name.inputType = InputType.TYPE_TEXT_FLAG_CAP_SENTENCES
+                name.maxLines = 1
 
                 yesButton {
                     if (!name.text.isNullOrBlank()) {
