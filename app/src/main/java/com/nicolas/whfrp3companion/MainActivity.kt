@@ -12,7 +12,7 @@ import android.view.MenuItem
 import butterknife.BindView
 import butterknife.ButterKnife
 import butterknife.Unbinder
-import com.nicolas.whfrp3companion.activities.DiceLauncherActivity
+import com.nicolas.whfrp3companion.activities.DiceRollerActivity
 import com.nicolas.whfrp3companion.fragments.EmptyFragment
 import com.nicolas.whfrp3companion.fragments.players.PlayersFragment
 import org.jetbrains.anko.intentFor
@@ -88,8 +88,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun displaySelectedFragment(menuItem: MenuItem) {
-        if (menuItem.itemId == R.id.nav_dice_launcher) {
-            startActivity(this.intentFor<DiceLauncherActivity>())
+        if (menuItem.itemId == R.id.nav_dice_roller) {
+            startActivity(this.intentFor<DiceRollerActivity>())
 
             drawer.closeDrawer(GravityCompat.START)
         } else {

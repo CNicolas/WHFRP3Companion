@@ -5,9 +5,9 @@
               android:icon="@drawable/ic_home_black"
               android:title="@string/page_home" />
 
-        <item android:id="@+id/nav_dice_launcher"
+        <item android:id="@+id/nav_dice_roller"
               android:icon="@drawable/ic_dice_white"
-              android:title="@string/page_dice_launcher" />
+              android:title="@string/page_dice_roller" />
 
         <item android:id="@+id/nav_talents"
               android:icon="@drawable/ic_talents_black"

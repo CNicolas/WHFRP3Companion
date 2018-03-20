@@ -4,9 +4,7 @@ import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import com.nicolas.whfrp3database.tables.*
 import org.jetbrains.anko.db.ManagedSQLiteOpenHelper
-import org.jetbrains.anko.db.SqlOrderDirection
 import org.jetbrains.anko.db.dropTable
-import org.jetbrains.anko.db.select
 
 class DatabaseOpenHelper(private val context: Context) : ManagedSQLiteOpenHelper(context, "whfrp3.db", null, 1) {
     companion object {

@@ -28,14 +28,14 @@
                     android:value=".MainActivity" />
         </activity>
 
-        <activity android:name=".activities.DiceLauncherActivity"
-                android:label="@string/page_dice_launcher"
+        <activity android:name=".activities.DiceRollerActivity"
+                android:label="@string/page_dice_roller"
                 android:screenOrientation="portrait"
                 android:theme="@style/AppTheme">
         </activity>
-        <activity android:name=".activities.DiceLauncherStatisticsActivity"
-                  android:parentActivityName=".activities.DiceLauncherActivity"
-                  android:label="@string/page_dice_launcher_statistics"
+        <activity android:name=".activities.DiceRollerStatisticsActivity"
+                  android:parentActivityName=".activities.DiceRollerActivity"
+                  android:label="@string/page_dice_roller_statistics"
                   android:screenOrientation="portrait"
                   android:theme="@style/AppTheme" />
     </application>

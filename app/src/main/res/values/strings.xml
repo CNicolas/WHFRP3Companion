@@ -4,12 +4,16 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
-    <string name="action_settings">Settings</string>
-    <string name="action_home">Home</string>
+    <string name="reset_hand">Reset hand</string>
+    <string name="save_hand">Save hand</string>
+    <string name="delete_hand">Delete hand</string>
+    <string name="roll_100_times">Roll 100 times</string>
+    <string name="roll_1000_times">Roll 1000 times</string>
+    <string name="roll_5000_times">Roll 5000 times</string>
 
     <string name="page_home">Home</string>
-    <string name="page_dice_launcher">Dices launcher</string>
-    <string name="page_dice_launcher_statistics">Statistics</string>
+    <string name="page_dice_roller">Dices roller</string>
+    <string name="page_dice_roller_statistics">Statistics</string>
     <string name="page_skills">Skills</string>
     <string name="page_talents">Talents</string>
     <string name="page_careers">Careers</string>
@@ -21,9 +25,6 @@
     <string name="page_inventory">Inventory</string>
     <string name="page_actions">Actions</string>
 
-    <string name="new_player">Create a player</string>
-    <string name="results">Results</string>
-
     <string name="characteristic">Characteristic</string>
     <string name="conservative">Conservative</string>
     <string name="reckless">Reckless</string>
@@ -32,9 +33,17 @@
     <string name="challenge">Challenge</string>
     <string name="misfortune">Misfortune</string>
 
-    <string name="statistics_average_result_hint">0 / Launch</string>
-    <string name="launch">Launch</string>
-    <string name="launch_100_times">Launch 100 times</string>
-    <string name="launch_1000_times">Launch 1000 times</string>
-    <string name="launch_5000_times">Launch 5000 times</string>
+    <string name="new_player">Create a player</string>
+    <string name="results">Results</string>
+    <string name="select_hand">Select a hand</string>
+    <string name="roll">Roll</string>
+
+    <string name="rolls_count_format">%d rolls</string>
+    <string name="successful_rolls_with_percentage_format">%1$d successful rolls (%2$s%%)</string>
+    <string name="average_face_count_per_roll">%s per rolls</string>
+
+    <string name="total_rolls_count_hint">Total roll count</string>
+    <string name="successful_rolls_hint">Successful rolls</string>
+    <string name="statistics_average_result_hint">0 / roll</string>
+    <string name="hand_name_hint">Hand name</string>
 </resources>
