@@ -38,5 +38,5 @@
     <string name="reset_hand">Vider la main</string>
     <string name="hand_name_hint">Nom de la main</string>
     <string name="delete_hand">Supprimer la main</string>
-    <string name="average_face_count_per_roll">%1$f par lancé</string>
+    <string name="average_face_count_per_roll">%s par lancé</string>
 </resources>
