@@ -1,7 +1,7 @@
 package com.nicolas.playersheet.player
 
-import com.nicolas.dicelauncher.launch.launch
-import com.nicolas.dicelauncher.launch.launchForStatistics
+import com.nicolas.diceroller.roll.roll
+import com.nicolas.diceroller.roll.rollForStatistics
 import com.nicolas.playersheet.extensions.createHand
 import com.nicolas.whfrp3database.BuildConfig
 import com.nicolas.whfrp3database.HandFacade
@@ -48,7 +48,7 @@ class ScenarioTest {
     }
 
     @Test
-    fun should_modify_a_player_and_launch_a_hand() {
+    fun should_modify_a_player_and_roll_a_hand() {
         val player = playerFacade.add(Player(name = "John"))
         assertThat(player).isNotNull()
 
@@ -113,10 +113,10 @@ class ScenarioTest {
         assertThat(updatedPlayer3.maxStress).isEqualTo(8)
         assertThat(updatedPlayer3.encumbrance).isEqualTo(5)
 
-        val initiative = player.createHand(AGILITY, "Initiative").launch()
+        val initiative = player.createHand(AGILITY, "Initiative").roll()
         assertThat(initiative.isSuccessful).isTrue()
         val impossible = player.createHand(FELLOWSHIP, "Impossible", DifficultyLevel.GODLIKE)
-                .launchForStatistics(50)
+                .rollForStatistics(50)
         assertThat(impossible.successfulPercentage).isLessThan(70.0)
 
         val talent = allTalents.first { it.name == "Ascétisme" }
@@ -128,15 +128,15 @@ class ScenarioTest {
     }
 
     @Test
-    fun should_use_dice_launcher_alone() {
+    fun should_use_dice_roller_alone() {
         val hand = Hand("default", 4, 1, 1, challengeDicesCount = 1)
-        assertThat(hand.launchForStatistics(100).successfulPercentage).isGreaterThanOrEqualTo(50.0)
+        assertThat(hand.rollForStatistics(100).successfulPercentage).isGreaterThanOrEqualTo(50.0)
 
         hand.name = "Good charac"
         handFacade.add(hand)
 
         hand.misfortuneDicesCount = 2
-        assertThat(hand.launchForStatistics(100).successfulPercentage).isGreaterThanOrEqualTo(20.0)
+        assertThat(hand.rollForStatistics(100).successfulPercentage).isGreaterThanOrEqualTo(20.0)
         hand.name = "Harder"
         handFacade.add(hand)
 

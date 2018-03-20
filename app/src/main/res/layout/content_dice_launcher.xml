@@ -7,7 +7,7 @@
               android:layout_marginTop="?attr/actionBarSize"
               android:orientation="vertical"
               tools:showIn="@layout/activity_dice_launcher"
-              tools:context=".activities.DiceLauncherActivity">
+              tools:context=".activities.DiceRollerActivity">
 
     <android.support.constraint.ConstraintLayout android:layout_width="match_parent"
                                                  android:layout_height="match_parent"
