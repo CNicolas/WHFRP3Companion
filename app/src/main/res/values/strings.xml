@@ -41,6 +41,11 @@
     <string name="willpower">Willpower</string>
     <string name="fellowship">Fellowship</string>
 
+    <string name="human">Human</string>
+    <string name="dwarf">Dwarf</string>
+    <string name="high_elf">High Elf</string>
+    <string name="wood_elf">Wood Elf</string>
+
     <string name="new_player">Create a player</string>
     <string name="results">Results</string>
     <string name="select_hand">Select a hand</string>
@@ -59,5 +64,5 @@
     <string name="career">Career</string>
     <string name="rank">Rank</string>
 
-    <string name="lorem">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor...</string>
+    <string name="lorem">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor…</string>
 </resources>
