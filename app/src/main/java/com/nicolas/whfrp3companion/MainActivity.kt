@@ -88,7 +88,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun displaySelectedFragment(menuItem: MenuItem) {
-        if (menuItem.itemId == R.id.nav_dice_launcher) {
+        if (menuItem.itemId == R.id.nav_dice_roller) {
             startActivity(this.intentFor<DiceRollerActivity>())
 
             drawer.closeDrawer(GravityCompat.START)

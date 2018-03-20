@@ -48,7 +48,7 @@ class DiceRollerActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_dice_launcher)
+        setContentView(R.layout.activity_dice_roller)
 
         unbinder = ButterKnife.bind(this)
 
@@ -71,7 +71,7 @@ class DiceRollerActivity : AppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.activity_dice_launcher, menu)
+        menuInflater.inflate(R.menu.activity_dice_roller, menu)
         return super.onCreateOptionsMenu(menu)
     }
 
@@ -80,9 +80,9 @@ class DiceRollerActivity : AppCompatActivity() {
             R.id.reset_hand -> reset()
             R.id.save_hand -> saveHand()
             R.id.delete_hand -> deleteHand()
-            R.id.launch_statistics_100 -> rollHandStatistics(100)
-            R.id.launch_statistics_1000 -> rollHandStatistics(1000)
-            R.id.launch_statistics_5000 -> rollHandStatistics(5000)
+            R.id.roll_statistics_100 -> rollHandStatistics(100)
+            R.id.roll_statistics_1000 -> rollHandStatistics(1000)
+            R.id.roll_statistics_5000 -> rollHandStatistics(5000)
         }
         return super.onOptionsItemSelected(item)
     }
@@ -98,7 +98,7 @@ class DiceRollerActivity : AppCompatActivity() {
         }.show()
     }
 
-    @OnClick(R.id.launch_button)
+    @OnClick(R.id.roll_button)
     fun rollHand() {
         val rollResultsDialog = RollResultDialog(getHandFromPickers().roll())
         rollResultsDialog.show(supportFragmentManager, DIALOG_ROLL_RESULT_TAG)

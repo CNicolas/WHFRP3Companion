@@ -17,9 +17,9 @@ import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 
 class DiceRollerStatisticsActivity : AppCompatActivity() {
-    @BindView(R.id.total_launch_count)
+    @BindView(R.id.total_roll_count)
     lateinit var totalRollCount: TextView
-    @BindView(R.id.successful_launches)
+    @BindView(R.id.successful_rolls)
     lateinit var successfulRolls: TextView
 
     @BindView(R.id.average_success)
@@ -48,7 +48,7 @@ class DiceRollerStatisticsActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_dice_launcher_statistics)
+        setContentView(R.layout.activity_dice_roller_statistics)
 
         unbinder = ButterKnife.bind(this)
         refreshLayout.setOnRefreshListener { calculateStatistics() }

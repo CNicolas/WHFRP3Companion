@@ -45,7 +45,7 @@ class RollResultDialog() : DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val builder = AlertDialog.Builder(activity)
         val inflater = activity!!.layoutInflater
-        val view = inflater.inflate(R.layout.dialog_launch_result, null, false)
+        val view = inflater.inflate(R.layout.dialog_roll_result, null, false)
 
         builder.setView(view)
         builder.setTitle(R.string.results)

@@ -14,13 +14,13 @@
           android:title="@string/delete_hand"
           android:icon="@drawable/ic_delete_white_24dp" />
 
-    <item android:id="@+id/launch_statistics_100"
+    <item android:id="@+id/roll_statistics_100"
           android:title="@string/roll_100_times"
           app:showAsAction="never" />
-    <item android:id="@+id/launch_statistics_1000"
+    <item android:id="@+id/roll_statistics_1000"
           android:title="@string/roll_1000_times"
           app:showAsAction="never" />
-    <item android:id="@+id/launch_statistics_5000"
+    <item android:id="@+id/roll_statistics_5000"
           android:title="@string/roll_5000_times"
           app:showAsAction="never" />
 </menu>
