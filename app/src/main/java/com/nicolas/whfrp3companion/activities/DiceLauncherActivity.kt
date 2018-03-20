@@ -90,7 +90,7 @@ class DiceLauncherActivity : AppCompatActivity() {
     @OnClick(R.id.fab_list_hands)
     fun listHands() {
         alert {
-            title = "Select a hand"
+            title = getString(R.string.select_hand)
             items(handFacade.findAll()
                     .map { it.name }) { _, item, _ ->
                 setViewValues(handFacade.find(item)!!)

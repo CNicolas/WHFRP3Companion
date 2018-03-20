@@ -77,20 +77,24 @@ class DiceLauncherStatisticsActivity : AppCompatActivity() {
         doAsync {
             val statistics = hand.launchForStatistics(launchCount)
             uiThread {
-                totalLaunchCount.text = "${statistics.launchCount} launches"
-                successfulLaunches.text = "${statistics.successfulLaunchCount} successful launches (${statistics.successfulPercentage}%)"
+                totalLaunchCount.text = getString(R.string.rolls_count_format).format(statistics.launchCount)
+                successfulLaunches.text = getString(R.string.successful_rolls_with_percentage_format)
+                        .format(statistics.successfulLaunchCount, statistics.successfulPercentage)
 
-                averageSuccess.text = "${statistics.averageSuccess} per launch"
-                averageBoon.text = "${statistics.averageBoon} per launch"
-                averageSigmar.text = "${statistics.averageBoon} per launch"
-                averageFailure.text = "${statistics.averageFailure} per launch"
-                averageBane.text = "${statistics.averageBane} per launch"
-                averageDelay.text = "${statistics.averageDelay} per launch"
-                averageExhaustion.text = "${statistics.averageExhaustion} per launch"
-                averageChaos.text = "${statistics.averageChaos} per launch"
+                averageSuccess.text = formatAverageFacePerLaunch(statistics.averageSuccess)
+                averageBoon.text = formatAverageFacePerLaunch(statistics.averageBoon)
+                averageSigmar.text = formatAverageFacePerLaunch(statistics.averageBoon)
+                averageFailure.text = formatAverageFacePerLaunch(statistics.averageFailure)
+                averageBane.text = formatAverageFacePerLaunch(statistics.averageBane)
+                averageDelay.text = formatAverageFacePerLaunch(statistics.averageDelay)
+                averageExhaustion.text = formatAverageFacePerLaunch(statistics.averageExhaustion)
+                averageChaos.text = formatAverageFacePerLaunch(statistics.averageChaos)
 
                 refreshLayout.isRefreshing = false
             }
         }
     }
+
+    private fun formatAverageFacePerLaunch(value: Double) =
+            getString(R.string.average_face_count_per_roll).format(value)
 }
