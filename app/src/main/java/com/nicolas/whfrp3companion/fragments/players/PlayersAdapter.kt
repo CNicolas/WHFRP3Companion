@@ -1,8 +1,10 @@
 package com.nicolas.whfrp3companion.fragments.players
 
 import android.content.Context
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.TEXT_ALIGNMENT_CENTER
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.TextView
@@ -42,6 +44,8 @@ class PlayersAdapter(context: Context, private val players: List<Player>) : Base
 
         init {
             ButterKnife.bind(this, view)
+            name.gravity = Gravity.CENTER
+            name.textAlignment = TEXT_ALIGNMENT_CENTER
         }
     }
 }
