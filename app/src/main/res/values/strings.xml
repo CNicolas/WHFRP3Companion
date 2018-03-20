@@ -40,7 +40,7 @@
 
     <string name="rolls_count_format">%d rolls</string>
     <string name="successful_rolls_with_percentage_format">%1$d successful rolls (%2$s%%)</string>
-    <string name="average_face_count_per_roll">%1$f per rolls</string>
+    <string name="average_face_count_per_roll">%s per rolls</string>
 
     <string name="total_rolls_count_hint">Total roll count</string>
     <string name="successful_rolls_hint">Successful rolls</string>

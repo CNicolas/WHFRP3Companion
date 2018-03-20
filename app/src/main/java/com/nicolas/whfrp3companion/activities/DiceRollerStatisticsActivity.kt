@@ -79,7 +79,7 @@ class DiceRollerStatisticsActivity : AppCompatActivity() {
             uiThread {
                 totalRollCount.text = getString(R.string.rolls_count_format).format(statistics.rollCount)
                 successfulRolls.text = getString(R.string.successful_rolls_with_percentage_format)
-                        .format(statistics.successfulRollCount, statistics.successfulPercentage)
+                        .format(statistics.successfulRollCount, statistics.successfulPercentage.formatWithDigits(2))
 
                 averageSuccess.text = formatAverageFacePerRoll(statistics.averageSuccess)
                 averageBoon.text = formatAverageFacePerRoll(statistics.averageBoon)
@@ -96,5 +96,7 @@ class DiceRollerStatisticsActivity : AppCompatActivity() {
     }
 
     private fun formatAverageFacePerRoll(value: Double) =
-            getString(R.string.average_face_count_per_roll).format(value)
+            getString(R.string.average_face_count_per_roll).format(value.formatWithDigits(1))
+
+    private fun Double.formatWithDigits(digits: Int = 2) = String.format("%.${digits}f", this)
 }
