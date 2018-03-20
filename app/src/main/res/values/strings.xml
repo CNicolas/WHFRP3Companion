@@ -8,10 +8,33 @@
     <string name="action_home">Home</string>
 
     <string name="page_home">Home</string>
+    <string name="page_dice_launcher">Dices launcher</string>
+    <string name="page_dice_launcher_statistics">Statistics</string>
     <string name="page_skills">Skills</string>
     <string name="page_talents">Talents</string>
     <string name="page_careers">Careers</string>
     <string name="page_players">Players</string>
     <string name="page_items">Items</string>
     <string name="page_specializations">Specializations</string>
+    <string name="page_characteristics">Characteristics</string>
+    <string name="page_state">State</string>
+    <string name="page_inventory">Inventory</string>
+    <string name="page_actions">Actions</string>
+
+    <string name="new_player">Create a player</string>
+    <string name="results">Results</string>
+
+    <string name="characteristic">Characteristic</string>
+    <string name="conservative">Conservative</string>
+    <string name="reckless">Reckless</string>
+    <string name="expertise">Expertise</string>
+    <string name="fortune">Fortune</string>
+    <string name="challenge">Challenge</string>
+    <string name="misfortune">Misfortune</string>
+
+    <string name="statistics_average_result_hint">0 / Launch</string>
+    <string name="launch">Launch</string>
+    <string name="launch_100_times">Launch 100 times</string>
+    <string name="launch_1000_times">Launch 1000 times</string>
+    <string name="launch_5000_times">Launch 5000 times</string>
 </resources>

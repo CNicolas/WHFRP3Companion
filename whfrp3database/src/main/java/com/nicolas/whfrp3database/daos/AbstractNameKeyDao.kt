@@ -14,39 +14,36 @@ internal abstract class AbstractNameKeyDao<E : NamedEntity>(databaseHelper: Data
     override fun add(entity: E): E? {
         val nextId: Int = (findAll().map { it.id }.max() ?: 0) + 1
 
-        databaseHelper.writableDatabase.let {
-            val columns = getColumns(entity).toMutableMap()
-            if (entity.id == -1) {
-                columns["id"] = nextId
+        val columns = getColumns(entity).toMutableMap()
+        if (entity.id == -1) {
+            columns["id"] = nextId
+        }
+
+        databaseHelper.writableDatabase.insert(tableName, *columns.toPairs())
+
+        return findByName(entity.name)
+    }
+
+    override fun findByName(name: String): E? = databaseHelper.writableDatabase
+            .select(tableName)
+            .whereArgs("name = '$name'")
+            .exec {
+                return@exec parse(this)
             }
 
-            it.insert(tableName, *columns.toPairs())
-
-            return findByName(entity.name)
-        }
-    }
-
-    override fun findByName(name: String): E? = databaseHelper.writableDatabase.let {
-        it.select(tableName)
-                .whereArgs("name = '$name'")
-                .exec {
-                    return@exec parse(this)
-                }
-    }
-
-    override fun findAll(): List<E> = databaseHelper.writableDatabase.let {
-        it.select(tableName).exec {
-            return@exec parseAll(this)
-        }
-    }
+    override fun findAll(): List<E> = databaseHelper.writableDatabase
+            .select(tableName)
+            .exec {
+                return@exec parseAll(this)
+            }
 
     override fun update(entity: E): E? {
-        val id = databaseHelper.writableDatabase
+        databaseHelper.writableDatabase
                 .update(tableName, *getColumns(entity).toPairs())
-                .whereArgs("id = ${entity.id}")
+                .whereArgs("id = ${entity.id} or name = '${entity.name}'")
                 .exec()
 
-        return findById(id)
+        return findByName(entity.name)
     }
 
     override fun delete(entity: E): Int = databaseHelper.writableDatabase

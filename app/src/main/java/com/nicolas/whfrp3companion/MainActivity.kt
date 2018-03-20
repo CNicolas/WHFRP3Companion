@@ -11,12 +11,18 @@ import android.support.v7.widget.Toolbar
 import android.view.MenuItem
 import butterknife.BindView
 import butterknife.ButterKnife
-import com.nicolas.whfrp3companion.players.PlayersFragment
+import butterknife.Unbinder
+import com.nicolas.whfrp3companion.activities.DiceLauncherActivity
+import com.nicolas.whfrp3companion.fragments.EmptyFragment
+import com.nicolas.whfrp3companion.fragments.players.PlayersFragment
+import org.jetbrains.anko.intentFor
 
 
 class MainActivity : AppCompatActivity() {
-    @BindView(R.id.drawer_layout)
+    @BindView(R.id.main_drawer_layout)
     lateinit var drawer: DrawerLayout
+
+    private lateinit var unbinder: Unbinder
 
     private lateinit var toggle: ActionBarDrawerToggle
 
@@ -24,7 +30,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        ButterKnife.bind(this)
+        unbinder = ButterKnife.bind(this)
 
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
@@ -44,6 +50,11 @@ class MainActivity : AppCompatActivity() {
         toggle.syncState()
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        unbinder.unbind()
+    }
+
     override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)
         // Pass any configuration change to the drawer toggles
@@ -61,26 +72,32 @@ class MainActivity : AppCompatActivity() {
 
     private fun displaySelectedFragment(menuItemId: Int) {
         val fragment = when (menuItemId) {
-            R.id.nav_careers -> CareersFragment()
-        //  R.id.nav_talents -> TalentTypesFragment()
-        //  R.id.nav_items -> ItemsFragment()
-        //  R.id.nav_skills -> SkillsFragment()
-        //  R.id.nav_specializations -> SpecializationsFragment()
-            else -> PlayersFragment.newInstance()
+            R.id.nav_home -> PlayersFragment.newInstance()
+//            R.id.nav_talents -> TalentTypesFragment()
+//            R.id.nav_items -> ItemsFragment()
+//            R.id.nav_skills -> SkillsFragment.newInstance()
+//            R.id.nav_specializations -> SpecializationsFragment()
+            else -> EmptyFragment.newInstance()
         }
 
         supportFragmentManager.beginTransaction()
-                .replace(R.id.content_frame, fragment)
+                .replace(R.id.main_content_frame, fragment)
                 .commit()
 
         drawer.closeDrawer(GravityCompat.START)
     }
 
     private fun displaySelectedFragment(menuItem: MenuItem) {
-        displaySelectedFragment(menuItem.itemId)
+        if (menuItem.itemId == R.id.nav_dice_launcher) {
+            startActivity(this.intentFor<DiceLauncherActivity>())
 
-        menuItem.isChecked = true
-        title = menuItem.title
+            drawer.closeDrawer(GravityCompat.START)
+        } else {
+            displaySelectedFragment(menuItem.itemId)
+
+            menuItem.isChecked = true
+            title = menuItem.title
+        }
     }
 
     private fun setupDrawerContent(navigationView: NavigationView) {

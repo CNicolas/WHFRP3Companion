@@ -6,5 +6,11 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:popupMenuStyle">@style/AppTheme.PopupMenu</item>
+    </style>
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <style name="AppTheme.PopupMenu" parent="android:Widget.Holo.Light.ListPopupWindow">
+        <item name="android:popupBackground">@drawable/options_menu_background</item>
     </style>
 </resources>

@@ -1,4 +1,4 @@
-package com.nicolas.whfrp3companion.players
+package com.nicolas.whfrp3companion.fragments.players
 
 import android.content.Context
 import android.view.LayoutInflater

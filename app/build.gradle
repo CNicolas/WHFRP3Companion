@@ -24,20 +24,19 @@ android {
 dependencies {
     compile project(':whfrp3database')
     compile project(':dicelauncher')
+    compile project(':playersheet')
 
     // Android
     compile "com.android.support:appcompat-v7:$android_support_version"
     compile "com.android.support:support-v4:$android_support_version"
     compile "com.android.support:design:$android_support_version"
-    compile 'com.android.support.constraint:constraint-layout:1.0.2'
 
     // Kotlin
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
-    // Database
-    compile "com.google.code.gson:gson:2.8.2"
-
     // Libraries
+    compile "org.jetbrains.anko:anko-commons:$anko_version"
+    compile "org.jetbrains.anko:anko-design:$anko_version"
     compile "com.jakewharton:butterknife:$butterknife_version"
     kapt "com.jakewharton:butterknife-compiler:$butterknife_version"
 
@@ -47,6 +46,8 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    testCompile 'org.robolectric:shadows-support-v4:3.3.2'
     testCompile 'junit:junit:4.12'
 }
 repositories {

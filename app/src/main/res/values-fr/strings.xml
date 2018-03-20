@@ -11,4 +11,24 @@
     <string name="page_specializations">Spécialisations</string>
     <string name="page_talents">Talents</string>
     <string name="page_items">Objets</string>
+    <string name="page_characteristics">Caractéristiques</string>
+    <string name="page_actions">Actions</string>
+    <string name="page_inventory">Inventaire</string>
+    <string name="page_state">État</string>
+    <string name="new_player">Créez un joueur</string>
+    <string name="page_dice_launcher">Lanceur de dés</string>
+    <string name="challenge">Défi</string>
+    <string name="characteristic">Caractéristique</string>
+    <string name="conservative">Prudence</string>
+    <string name="expertise">Expertise</string>
+    <string name="fortune">Fortune</string>
+    <string name="misfortune">Infortune</string>
+    <string name="reckless">Témrité</string>
+    <string name="results">Résultats</string>
+    <string name="page_dice_launcher_statistics">Statistiques</string>
+    <string name="statistics_average_result_hint">0 / lancé</string>
+    <string name="launch">Lancer</string>
+    <string name="launch_100_times">Lancer 100 fois</string>
+    <string name="launch_5000_times">Lancer 5000 fois</string>
+    <string name="launch_1000_times">Lancer 1000 fois</string>
 </resources>

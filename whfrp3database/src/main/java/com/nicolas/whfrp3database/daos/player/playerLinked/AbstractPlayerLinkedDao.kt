@@ -16,16 +16,14 @@ internal abstract class AbstractPlayerLinkedDao<E : PlayerLinkedEntity>(database
     override fun add(entity: E, player: Player): E? {
         val nextId: Int = (findAll().map { it.id }.max() ?: 0) + 1
 
-        databaseHelper.writableDatabase.let {
-            val columns = getColumns(entity, player).toMutableMap()
-            if (entity.id == -1) {
-                columns["id"] = nextId
-            }
-
-            it.insert(tableName, *getColumns(entity, player).toPairs())
-
-            return findByNameAndPlayer(entity.name, player)
+        val columns = getColumns(entity, player).toMutableMap()
+        if (entity.id == -1) {
+            columns["id"] = nextId
         }
+
+        databaseHelper.writableDatabase.insert(tableName, *getColumns(entity, player).toPairs())
+
+        return findByNameAndPlayer(entity.name, player)
     }
 
     override fun findByNameAndPlayer(name: String, player: Player): E? {
@@ -48,12 +46,12 @@ internal abstract class AbstractPlayerLinkedDao<E : PlayerLinkedEntity>(database
     }
 
     override fun updateByPlayer(entity: E, player: Player): E? {
-        val id = databaseHelper.writableDatabase
+        databaseHelper.writableDatabase
                 .update(tableName, *getColumns(entity, player).toPairs())
-                .whereArgs("id = ${entity.id}")
+                .whereArgs("playerId = ${player.id} and (id = ${entity.id} or name = '${entity.name}')")
                 .exec()
 
-        return findById(id)
+        return findByNameAndPlayer(entity.name, player)
     }
 
     override fun deleteAllByPlayer(player: Player): Int = databaseHelper.writableDatabase

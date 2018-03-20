@@ -8,11 +8,11 @@ import org.jetbrains.anko.db.select
 internal abstract class AbstractDao<E>(protected val databaseHelper: DatabaseOpenHelper) : Dao<E> {
     abstract val tableName: String
 
-    override fun findById(id: Int): E? =
-            databaseHelper.writableDatabase.let {
-                it.select(tableName).exec {
-                    return@exec parse(this)
-                }
+    override fun findById(id: Int): E? = databaseHelper.writableDatabase
+            .select(tableName)
+            .whereArgs("id = $id")
+            .exec {
+                return@exec parse(this)
             }
 
     override fun deleteAll(): Int = databaseHelper.writableDatabase
