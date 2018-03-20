@@ -43,7 +43,7 @@ class OpenPlayerSheetActivityTest {
 
         val playerCharacteristicsFragment = fragment as PlayerCharacteristicsFragment
 
-        assertThat(playerCharacteristicsFragment.playerNameTextView).isNotNull()
-        assertThat(playerCharacteristicsFragment.playerNameTextView.text).isEqualTo("Jack")
+        assertThat(playerCharacteristicsFragment.playerName).isNotNull()
+        assertThat(playerCharacteristicsFragment.playerName.text).isEqualTo("Jack")
     }
 }

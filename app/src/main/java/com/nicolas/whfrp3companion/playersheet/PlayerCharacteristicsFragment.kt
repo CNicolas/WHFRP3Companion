@@ -17,7 +17,7 @@ class PlayerCharacteristicsFragment : Fragment() {
     private lateinit var player: Player
 
     @BindView(R.id.player_name)
-    lateinit var playerNameTextView: EditText
+    lateinit var playerName: EditText
 
     private lateinit var unbinder: Unbinder
 
@@ -32,7 +32,7 @@ class PlayerCharacteristicsFragment : Fragment() {
         if (arguments != null) {
             if (arguments!!.getSerializable(PLAYER_INTENT_ARGUMENT) is Player) {
                 player = arguments!!.getSerializable(PLAYER_INTENT_ARGUMENT) as Player
-                playerNameTextView.setText(player.name)
+                playerName.setText(player.name)
             }
         }
 
