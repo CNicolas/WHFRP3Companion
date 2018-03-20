@@ -32,7 +32,7 @@ class PlayerFacadeItemsTest : AbstractPlayerFacadeTest() {
 
         val updatedPlayer = playerFacade.update(player)
         assertThat(updatedPlayer.name).isEqualTo(playerName)
-        assertThat(updatedPlayer.items).isNotEmpty()
+        assertThat(updatedPlayer.items).isNotEmpty
         assertThat(updatedPlayer.items).isEqualTo(player.items)
         assertThat(updatedPlayer.items[0] is Weapon).isTrue()
         val weapon = updatedPlayer.getWeapons()[0]
