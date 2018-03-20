@@ -44,7 +44,7 @@ class ScenarioTest {
         handFacade = HandFacade(RuntimeEnvironment.application)
         playerFacade = PlayerFacade(RuntimeEnvironment.application)
 
-        allTalents = loadTalents(RuntimeEnvironment.application)!!
+        allTalents = loadTalents(RuntimeEnvironment.application)
     }
 
     @Test

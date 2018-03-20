@@ -7,6 +7,12 @@ import com.nicolas.whfrp3database.entities.hand.Hand
 class HandFacade(context: Context) {
     private val handDao = HandDao(context.database)
 
+    fun save(hand: Hand): Hand = if (find(hand.name) == null) {
+        add(hand)
+    } else {
+        update(hand)
+    }
+
     fun add(hand: Hand) = handDao.add(hand)!!
 
     fun find(name: String): Hand? = handDao.findByName(name)

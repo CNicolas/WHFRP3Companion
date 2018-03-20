@@ -22,7 +22,7 @@ class TalentsExtensionsTest {
 
     @Before
     fun setUp() {
-        allTalents = loadTalents(RuntimeEnvironment.application)!!
+        allTalents = loadTalents(RuntimeEnvironment.application)
     }
 
     @Test
