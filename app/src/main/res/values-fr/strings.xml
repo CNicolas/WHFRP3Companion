@@ -4,7 +4,7 @@
     <string name="navigation_drawer_open">Ouvrir le panneau de navigation</string>
     <string name="page_careers">Carrières</string>
     <string name="page_home">Accueil</string>
-    <string name="page_players">Personnages</string>
+    <string name="page_players">Joueurs</string>
     <string name="page_skills">Compétences</string>
     <string name="page_specializations">Spécialisations</string>
     <string name="page_talents">Talents</string>
@@ -39,4 +39,13 @@
     <string name="hand_name_hint">Nom de la main</string>
     <string name="delete_hand">Supprimer la main</string>
     <string name="average_face_count_per_roll">%s par lancé</string>
+    <string name="player_name">Nom du joueur</string>
+    <string name="career">Carrière</string>
+    <string name="fellowship">Sociabilité</string>
+    <string name="intelligence">Intelligence</string>
+    <string name="agility">Agilité</string>
+    <string name="rank">Rang</string>
+    <string name="strength">Force</string>
+    <string name="toughness">Endurance</string>
+    <string name="willpower">Volonté</string>
 </resources>

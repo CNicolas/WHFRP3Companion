@@ -5,20 +5,19 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import android.widget.EditText
 import butterknife.BindView
 import butterknife.ButterKnife
 import butterknife.Unbinder
 import com.nicolas.whfrp3companion.PLAYER_INTENT_ARGUMENT
 import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3database.entities.player.Player
-import org.jetbrains.anko.toast
 
 class PlayerCharacteristicsFragment : Fragment() {
     private lateinit var player: Player
 
     @BindView(R.id.player_name)
-    lateinit var playerNameTextView: TextView
+    lateinit var playerNameTextView: EditText
 
     private lateinit var unbinder: Unbinder
 
@@ -33,7 +32,7 @@ class PlayerCharacteristicsFragment : Fragment() {
         if (arguments != null) {
             if (arguments!!.getSerializable(PLAYER_INTENT_ARGUMENT) is Player) {
                 player = arguments!!.getSerializable(PLAYER_INTENT_ARGUMENT) as Player
-                playerNameTextView.text = player.name
+                playerNameTextView.setText(player.name)
             }
         }
 
@@ -52,8 +51,6 @@ class PlayerCharacteristicsFragment : Fragment() {
 
             val fragment = PlayerCharacteristicsFragment()
             fragment.arguments = args
-
-            fragment.activity?.toast("I got this : ${player.name}")
 
             return fragment
         }
