@@ -13,4 +13,12 @@
         <item name="android:padding">@dimen/very_small_padding</item>
         <item name="android:textSize">35sp</item>
     </style>
+
+    <style name="StatisticsAverageFaceTextView">
+        <item name="android:layout_marginEnd">@dimen/giant_padding</item>
+        <item name="android:drawablePadding">@dimen/big_padding</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:hint">@string/statistics_average_result_hint</item>
+        <item name="android:textSize">@dimen/medium_text_size</item>
+    </style>
 </resources>
