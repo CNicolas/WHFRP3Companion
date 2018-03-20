@@ -29,13 +29,13 @@
         </activity>
 
         <activity android:name=".activities.DiceLauncherActivity"
-                android:label="@string/page_dice_launcher"
+                android:label="@string/page_dice_roller"
                 android:screenOrientation="portrait"
                 android:theme="@style/AppTheme">
         </activity>
         <activity android:name=".activities.DiceLauncherStatisticsActivity"
                   android:parentActivityName=".activities.DiceLauncherActivity"
-                  android:label="@string/page_dice_launcher_statistics"
+                  android:label="@string/page_dice_roller_statistics"
                   android:screenOrientation="portrait"
                   android:theme="@style/AppTheme" />
     </application>

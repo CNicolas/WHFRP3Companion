@@ -18,7 +18,7 @@
                   android:layout_height="wrap_content"
                   android:gravity="center"
                   android:layout_margin="@dimen/medium_padding"
-                  android:hint="Hand name"
+                  android:hint="@string/hand_name_hint"
                   app:layout_constraintTop_toTopOf="parent"
                   app:layout_constraintLeft_toLeftOf="parent"
                   app:layout_constraintRight_toRightOf="parent" />
@@ -159,7 +159,7 @@
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/medium_padding"
-                android:text="@string/launch"
+                android:text="@string/roll"
                 app:layout_constraintTop_toBottomOf="@id/challenge_dice_picker_layout"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent" />
