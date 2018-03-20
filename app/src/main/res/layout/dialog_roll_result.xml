@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:orientation="horizontal">
+              android:orientation="horizontal"
+              android:paddingTop="@dimen/medium_padding">
 
     <TextView android:id="@+id/success_result"
               style="@style/ResultDialogImagedTextView"
