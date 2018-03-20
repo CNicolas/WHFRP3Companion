@@ -6,7 +6,7 @@
               android:layout_height="match_parent"
               android:layout_marginTop="?attr/actionBarSize"
               android:orientation="vertical"
-              tools:showIn="@layout/activity_dice_launcher"
+              tools:showIn="@layout/activity_dice_roller"
               tools:context=".activities.DiceRollerActivity">
 
     <android.support.constraint.ConstraintLayout android:layout_width="match_parent"
@@ -155,7 +155,7 @@
                                                                        android:layout_height="150dp" />
         </LinearLayout>
 
-        <Button android:id="@+id/launch_button"
+        <Button android:id="@+id/roll_button"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/medium_padding"

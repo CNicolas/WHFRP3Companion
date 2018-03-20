@@ -6,13 +6,13 @@
                                               android:layout_width="match_parent"
                                               android:layout_height="match_parent"
                                               android:layout_marginTop="?attr/actionBarSize"
-                                              tools:showIn="@layout/activity_dice_launcher_statistics"
+                                              tools:showIn="@layout/activity_dice_roller_statistics"
                                               tools:context=".activities.DiceRollerStatisticsActivity">
     <android.support.constraint.ConstraintLayout android:layout_width="match_parent"
                                                  android:layout_height="match_parent"
                                                  android:orientation="vertical">
 
-        <TextView android:id="@+id/total_launch_count"
+        <TextView android:id="@+id/total_roll_count"
                   android:layout_width="0dp"
                   android:layout_height="wrap_content"
                   android:gravity="center"
@@ -21,16 +21,16 @@
                   app:layout_constraintTop_toTopOf="parent"
                   app:layout_constraintLeft_toLeftOf="parent"
                   app:layout_constraintRight_toRightOf="parent"
-                  app:layout_constraintBottom_toTopOf="@+id/successful_launches" />
+                  app:layout_constraintBottom_toTopOf="@+id/successful_rolls" />
 
-        <TextView android:id="@+id/successful_launches"
+        <TextView android:id="@+id/successful_rolls"
                   android:layout_width="0dp"
                   android:layout_height="wrap_content"
                   android:layout_marginTop="@dimen/medium_padding"
                   android:gravity="center"
                   android:hint="@string/successful_rolls_hint"
                   android:textSize="@dimen/big_text_size"
-                  app:layout_constraintTop_toBottomOf="@+id/total_launch_count"
+                  app:layout_constraintTop_toBottomOf="@+id/total_roll_count"
                   app:layout_constraintLeft_toLeftOf="parent"
                   app:layout_constraintRight_toRightOf="parent"
                   app:layout_constraintBottom_toTopOf="@+id/average_success" />
@@ -45,7 +45,7 @@
                   android:gravity="center_vertical"
                   android:hint="@string/statistics_average_result_hint"
                   android:textSize="@dimen/medium_text_size"
-                  app:layout_constraintTop_toBottomOf="@+id/successful_launches"
+                  app:layout_constraintTop_toBottomOf="@+id/successful_rolls"
                   app:layout_constraintLeft_toLeftOf="parent"
                   app:layout_constraintRight_toRightOf="parent"
                   app:layout_constraintBottom_toTopOf="@+id/average_boon" />
