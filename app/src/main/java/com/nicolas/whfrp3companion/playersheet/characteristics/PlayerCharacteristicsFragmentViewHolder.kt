@@ -96,6 +96,7 @@ internal class PlayerCharacteristicsFragmentViewHolder(view: View) {
 
         age.setText(player.age?.toString())
         size.setText(player.size?.toString())
+        description.setText(player.description)
     }
 
     fun getPlayer(): Player = Player(
@@ -103,6 +104,7 @@ internal class PlayerCharacteristicsFragmentViewHolder(view: View) {
             race = Race.values()[race.selectedItemPosition],
             age = age.intValue,
             size = size.intValue,
+            description = description.text.toString(),
             strength = CharacteristicValue(strength.intValue, strengthFortune.intValue),
             toughness = CharacteristicValue(toughness.intValue, toughnessFortune.intValue),
             agility = CharacteristicValue(agility.intValue, agilityFortune.intValue),
