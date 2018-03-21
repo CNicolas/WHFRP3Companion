@@ -251,6 +251,17 @@
              app:layout_constraintRight_toRightOf="parent"
              app:layout_constraintBottom_toTopOf="@+id/age" />
 
+    <!--region Age and size-->
+    <TextView android:id="@+id/age_label"
+              android:layout_width="0dp"
+              android:layout_height="0dp"
+              android:gravity="center|end"
+              android:labelFor="@+id/age"
+              android:hint="@string/age"
+              app:layout_constraintTop_toBottomOf="@id/race"
+              app:layout_constraintLeft_toLeftOf="parent"
+              app:layout_constraintRight_toLeftOf="@+id/age"
+              app:layout_constraintBottom_toTopOf="@+id/description" />
     <EditText android:id="@+id/age"
               android:layout_width="0dp"
               android:layout_height="wrap_content"
@@ -258,11 +269,20 @@
               android:inputType="numberSigned"
               android:hint="@string/zero"
               app:layout_constraintTop_toBottomOf="@id/race"
-              app:layout_constraintLeft_toLeftOf="parent"
-              app:layout_constraintRight_toLeftOf="@+id/size"
-              app:layout_constraintBottom_toTopOf="@+id/description"
-              app:layout_constraintHorizontal_weight="1" />
+              app:layout_constraintLeft_toRightOf="@id/age_label"
+              app:layout_constraintRight_toLeftOf="@+id/size_label"
+              app:layout_constraintBottom_toTopOf="@+id/description" />
 
+    <TextView android:id="@+id/size_label"
+              android:layout_width="0dp"
+              android:layout_height="0dp"
+              android:gravity="center|end"
+              android:labelFor="@+id/size"
+              android:hint="@string/size"
+              app:layout_constraintTop_toBottomOf="@id/race"
+              app:layout_constraintLeft_toRightOf="@id/age"
+              app:layout_constraintRight_toLeftOf="@+id/size"
+              app:layout_constraintBottom_toTopOf="@+id/description" />
     <EditText android:id="@+id/size"
               android:layout_width="0dp"
               android:layout_height="wrap_content"
@@ -270,10 +290,10 @@
               android:inputType="numberSigned"
               android:hint="@string/zero"
               app:layout_constraintTop_toBottomOf="@id/race"
-              app:layout_constraintLeft_toRightOf="@id/age"
+              app:layout_constraintLeft_toRightOf="@id/size_label"
               app:layout_constraintRight_toRightOf="parent"
-              app:layout_constraintBottom_toTopOf="@+id/description"
-              app:layout_constraintHorizontal_weight="1" />
+              app:layout_constraintBottom_toTopOf="@+id/description" />
+    <!--endregion-->
 
     <EditText android:id="@+id/description"
               android:layout_width="0dp"
@@ -282,7 +302,7 @@
               android:scrollbars="vertical"
               android:inputType="textMultiLine"
               android:maxLines="30"
-              android:hint="@string/lorem"
+              android:hint="@string/description"
               app:layout_constraintTop_toBottomOf="@id/age"
               app:layout_constraintLeft_toLeftOf="parent"
               app:layout_constraintRight_toRightOf="parent"
