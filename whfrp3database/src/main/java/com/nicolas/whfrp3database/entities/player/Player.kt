@@ -15,6 +15,7 @@ data class Player(override var name: String,
                   var race: Race = Race.HUMAN,
                   var age: Int? = null,
                   var size: Int? = null,
+                  var description: String? = null,
 
                   var strength: CharacteristicValue = CharacteristicValue(0),
                   var toughness: CharacteristicValue = CharacteristicValue(0),

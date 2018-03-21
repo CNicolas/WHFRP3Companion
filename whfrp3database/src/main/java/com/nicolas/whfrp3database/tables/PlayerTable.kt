@@ -12,6 +12,7 @@ internal fun createPlayerTable(db: SQLiteDatabase) {
             "race" to TEXT,
             "age" to INTEGER,
             "size" to INTEGER,
+            "description" to TEXT,
 
             // region CHARACTERISTICS
             "strength" to INTEGER,
