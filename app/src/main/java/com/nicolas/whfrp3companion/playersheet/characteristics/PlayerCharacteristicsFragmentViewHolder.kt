@@ -63,12 +63,10 @@ internal class PlayerCharacteristicsFragmentViewHolder(view: View) {
     @BindView(R.id.description)
     lateinit var description: EditText
 
-    private lateinit var unbinder: Unbinder
+    private var unbinder: Unbinder = ButterKnife.bind(this, view)
 
     init {
-        ButterKnife.bind(this, view)
         race.adapter = ArrayAdapter(view.context!!, R.layout.element_enum_spinner, Race.values().map { view.context.getString(it.labelId) })
-        race.setSelection(0)
     }
 
     fun fillViews(player: Player) {
@@ -94,6 +92,7 @@ internal class PlayerCharacteristicsFragmentViewHolder(view: View) {
         maxConservative.setText(player.maxConservative.toString())
         maxReckless.setText(player.maxReckless.toString())
 
+        race.setSelection(player.race.ordinal)
         age.setText(player.age?.toString())
         size.setText(player.size?.toString())
         description.setText(player.description)
