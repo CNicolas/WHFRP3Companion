@@ -6,9 +6,7 @@
           android:minHeight="?android:attr/listPreferredItemHeightSmall"
           android:padding="@dimen/small_padding"
           android:gravity="center"
-          android:textSize="@dimen/medium_text_size"
-          android:hint="@string/human"
           android:background="?android:attr/activatedBackgroundIndicator"
-          android:textAppearance="?android:attr/textAppearanceListItemSmall">
-
-</TextView>
+          android:textAppearance="?android:attr/textAppearanceListItemSmall"
+          android:textSize="@dimen/medium_text_size"
+          android:hint="@string/human" />
