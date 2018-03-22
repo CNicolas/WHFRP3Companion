@@ -32,8 +32,8 @@ internal fun createPlayerTable(db: SQLiteDatabase) {
             // region STATE
             "careerName" to TEXT,
             "rank" to INTEGER,
-            "availableExperience" to INTEGER,
-            "totalExperience" to INTEGER,
+            "experience" to INTEGER,
+            "maxExperience" to INTEGER,
 
             "reckless" to INTEGER,
             "maxReckless" to INTEGER,

@@ -12,13 +12,13 @@ class PlayerExtensionsTest {
     fun should_earn_an_experience_point() {
         val player = Player(name = "PlayerName")
 
-        assertThat(player.totalExperience).isEqualTo(0)
-        assertThat(player.availableExperience).isEqualTo(0)
+        assertThat(player.maxExperience).isEqualTo(0)
+        assertThat(player.experience).isEqualTo(0)
 
         player.earnExperiencePoints(1)
 
-        assertThat(player.totalExperience).isEqualTo(1)
-        assertThat(player.availableExperience).isEqualTo(1)
+        assertThat(player.maxExperience).isEqualTo(1)
+        assertThat(player.experience).isEqualTo(1)
     }
 
     @Test
