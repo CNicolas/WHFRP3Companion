@@ -5,7 +5,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            tools:context=".playersheet.PlayerSheetActivity">
+            tools:context=".playersheet.PlayerSheetActivity"
+            tools:ignore="LabelFor">
     <android.support.constraint.ConstraintLayout android:layout_width="match_parent"
                                                  android:layout_height="wrap_content"
                                                  android:orientation="vertical">
@@ -38,7 +39,7 @@
         <EditText android:id="@+id/rank"
                   android:layout_width="0dp"
                   android:layout_height="wrap_content"
-                  android:layout_marginEnd="@dimen/giant_padding_2"
+                  android:layout_marginEnd="@dimen/giant_padding"
                   android:gravity="center"
                   android:inputType="numberSigned"
                   android:selectAllOnFocus="true"
@@ -55,7 +56,7 @@
                    android:layout_height="wrap_content"
                    android:labelFor="@+id/max_wounds"
                    android:src="@drawable/ic_bandages_black"
-                   android:contentDescription="Wounds"
+                   android:contentDescription="@string/max_wounds"
                    app:layout_constraintTop_toBottomOf="@id/career"
                    app:layout_constraintLeft_toLeftOf="parent"
                    app:layout_constraintRight_toLeftOf="@+id/max_wounds"
@@ -77,7 +78,7 @@
                    android:layout_height="wrap_content"
                    android:labelFor="@+id/max_corruption"
                    android:src="@drawable/ic_chaos_black_36"
-                   android:contentDescription="Chaos"
+                   android:contentDescription="@string/max_corruption"
                    app:layout_constraintTop_toBottomOf="@+id/career"
                    app:layout_constraintLeft_toRightOf="@id/max_wounds"
                    app:layout_constraintRight_toLeftOf="@+id/max_corruption"
