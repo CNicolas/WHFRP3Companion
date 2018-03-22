@@ -16,6 +16,7 @@
                   android:layout_height="wrap_content"
                   android:gravity="center"
                   android:selectAllOnFocus="true"
+                  android:textSize="@dimen/big_text_size"
                   android:hint="@string/player_name"
                   app:layout_constraintTop_toTopOf="parent"
                   app:layout_constraintLeft_toLeftOf="parent"
@@ -105,21 +106,21 @@
                   app:layout_constraintLeft_toLeftOf="parent"
                   app:layout_constraintRight_toLeftOf="@+id/strength"
                   app:layout_constraintBottom_toTopOf="@+id/toughness"
-                  app:layout_constraintHorizontal_weight="3" />
+                  app:layout_constraintHorizontal_weight="4" />
         <EditText android:id="@+id/strength"
                   style="@style/CharacteristicEditText"
                   app:layout_constraintTop_toBottomOf="@id/max_wounds"
                   app:layout_constraintLeft_toRightOf="@id/strength_label"
                   app:layout_constraintRight_toLeftOf="@+id/strength_fortune"
                   app:layout_constraintBottom_toTopOf="@+id/toughness"
-                  app:layout_constraintHorizontal_weight="1" />
+                  app:layout_constraintHorizontal_weight="2" />
         <EditText android:id="@+id/strength_fortune"
                   style="@style/CharacteristicFortuneEditText"
                   app:layout_constraintTop_toBottomOf="@id/max_wounds"
                   app:layout_constraintLeft_toRightOf="@id/strength"
                   app:layout_constraintRight_toRightOf="parent"
                   app:layout_constraintBottom_toTopOf="@+id/toughness"
-                  app:layout_constraintHorizontal_weight="2" />
+                  app:layout_constraintHorizontal_weight="3" />
         <!--endregion-->
 
         <!--region TOUGHNESS-->
@@ -131,21 +132,21 @@
                   app:layout_constraintLeft_toLeftOf="parent"
                   app:layout_constraintRight_toLeftOf="@+id/toughness"
                   app:layout_constraintBottom_toTopOf="@+id/agility"
-                  app:layout_constraintHorizontal_weight="3" />
+                  app:layout_constraintHorizontal_weight="4" />
         <EditText android:id="@+id/toughness"
                   style="@style/CharacteristicEditText"
                   app:layout_constraintLeft_toRightOf="@id/toughness_label"
                   app:layout_constraintTop_toBottomOf="@id/strength"
                   app:layout_constraintRight_toLeftOf="@+id/toughness_fortune"
                   app:layout_constraintBottom_toTopOf="@+id/agility"
-                  app:layout_constraintHorizontal_weight="1" />
+                  app:layout_constraintHorizontal_weight="2" />
         <EditText android:id="@+id/toughness_fortune"
                   style="@style/CharacteristicFortuneEditText"
                   app:layout_constraintLeft_toRightOf="@id/toughness"
                   app:layout_constraintTop_toBottomOf="@id/strength"
                   app:layout_constraintRight_toRightOf="parent"
                   app:layout_constraintBottom_toTopOf="@+id/agility"
-                  app:layout_constraintHorizontal_weight="2" />
+                  app:layout_constraintHorizontal_weight="3" />
         <!--endregion-->
 
         <!--region AGILITY-->
@@ -157,21 +158,21 @@
                   app:layout_constraintLeft_toLeftOf="parent"
                   app:layout_constraintRight_toLeftOf="@+id/agility"
                   app:layout_constraintBottom_toTopOf="@+id/intelligence"
-                  app:layout_constraintHorizontal_weight="3" />
+                  app:layout_constraintHorizontal_weight="4" />
         <EditText android:id="@+id/agility"
                   style="@style/CharacteristicEditText"
                   app:layout_constraintLeft_toRightOf="@id/agility_label"
                   app:layout_constraintTop_toBottomOf="@id/toughness"
                   app:layout_constraintRight_toLeftOf="@+id/agility_fortune"
                   app:layout_constraintBottom_toTopOf="@+id/intelligence"
-                  app:layout_constraintHorizontal_weight="1" />
+                  app:layout_constraintHorizontal_weight="2" />
         <EditText android:id="@+id/agility_fortune"
                   style="@style/CharacteristicFortuneEditText"
                   app:layout_constraintLeft_toRightOf="@id/agility"
                   app:layout_constraintTop_toBottomOf="@id/toughness"
                   app:layout_constraintRight_toRightOf="parent"
                   app:layout_constraintBottom_toTopOf="@+id/intelligence"
-                  app:layout_constraintHorizontal_weight="2" />
+                  app:layout_constraintHorizontal_weight="3" />
         <!--endregion-->
 
         <!--region INTELLIGENCE-->
@@ -183,21 +184,21 @@
                   app:layout_constraintLeft_toLeftOf="parent"
                   app:layout_constraintRight_toLeftOf="@+id/intelligence"
                   app:layout_constraintBottom_toTopOf="@+id/willpower"
-                  app:layout_constraintHorizontal_weight="3" />
+                  app:layout_constraintHorizontal_weight="4" />
         <EditText android:id="@+id/intelligence"
                   style="@style/CharacteristicEditText"
                   app:layout_constraintLeft_toRightOf="@id/intelligence_label"
                   app:layout_constraintTop_toBottomOf="@id/agility"
                   app:layout_constraintRight_toLeftOf="@+id/intelligence_fortune"
                   app:layout_constraintBottom_toTopOf="@+id/willpower"
-                  app:layout_constraintHorizontal_weight="1" />
+                  app:layout_constraintHorizontal_weight="2" />
         <EditText android:id="@+id/intelligence_fortune"
                   style="@style/CharacteristicFortuneEditText"
                   app:layout_constraintLeft_toRightOf="@id/intelligence"
                   app:layout_constraintTop_toBottomOf="@id/agility"
                   app:layout_constraintRight_toRightOf="parent"
                   app:layout_constraintBottom_toTopOf="@+id/willpower"
-                  app:layout_constraintHorizontal_weight="2" />
+                  app:layout_constraintHorizontal_weight="3" />
         <!--endregion-->
 
         <!--region WILLPOWER-->
@@ -209,21 +210,21 @@
                   app:layout_constraintLeft_toLeftOf="parent"
                   app:layout_constraintRight_toLeftOf="@+id/willpower"
                   app:layout_constraintBottom_toTopOf="@+id/fellowship"
-                  app:layout_constraintHorizontal_weight="3" />
+                  app:layout_constraintHorizontal_weight="4" />
         <EditText android:id="@+id/willpower"
                   style="@style/CharacteristicEditText"
                   app:layout_constraintLeft_toRightOf="@id/willpower_label"
                   app:layout_constraintTop_toBottomOf="@id/intelligence"
                   app:layout_constraintRight_toLeftOf="@+id/willpower_fortune"
                   app:layout_constraintBottom_toTopOf="@+id/fellowship"
-                  app:layout_constraintHorizontal_weight="1" />
+                  app:layout_constraintHorizontal_weight="2" />
         <EditText android:id="@+id/willpower_fortune"
                   style="@style/CharacteristicFortuneEditText"
                   app:layout_constraintLeft_toRightOf="@id/willpower"
                   app:layout_constraintTop_toBottomOf="@id/intelligence"
                   app:layout_constraintRight_toRightOf="parent"
                   app:layout_constraintBottom_toTopOf="@+id/fellowship"
-                  app:layout_constraintHorizontal_weight="2" />
+                  app:layout_constraintHorizontal_weight="3" />
         <!--endregion-->
 
         <!--region FELLOWSHIP-->
@@ -235,26 +236,26 @@
                   app:layout_constraintLeft_toLeftOf="parent"
                   app:layout_constraintRight_toLeftOf="@+id/fellowship"
                   app:layout_constraintBottom_toTopOf="@+id/max_conservative"
-                  app:layout_constraintHorizontal_weight="3" />
+                  app:layout_constraintHorizontal_weight="4" />
         <EditText android:id="@+id/fellowship"
                   style="@style/CharacteristicEditText"
                   app:layout_constraintLeft_toRightOf="@id/fellowship_label"
                   app:layout_constraintTop_toBottomOf="@id/willpower"
                   app:layout_constraintRight_toLeftOf="@+id/fellowship_fortune"
                   app:layout_constraintBottom_toTopOf="@+id/max_conservative"
-                  app:layout_constraintHorizontal_weight="1" />
+                  app:layout_constraintHorizontal_weight="2" />
         <EditText android:id="@+id/fellowship_fortune"
                   style="@style/CharacteristicFortuneEditText"
                   app:layout_constraintLeft_toRightOf="@id/fellowship"
                   app:layout_constraintTop_toBottomOf="@id/willpower"
                   app:layout_constraintRight_toRightOf="parent"
                   app:layout_constraintBottom_toTopOf="@+id/max_conservative"
-                  app:layout_constraintHorizontal_weight="2" />
+                  app:layout_constraintHorizontal_weight="3" />
         <!--endregion-->
 
         <!--region Stance-->
         <EditText android:id="@+id/max_conservative"
-                  android:layout_width="50dp"
+                  android:layout_width="75dp"
                   android:layout_height="45dp"
                   android:gravity="center"
                   android:background="@color/conservative"
@@ -267,7 +268,7 @@
                   app:layout_constraintBottom_toTopOf="@+id/race" />
 
         <EditText android:id="@+id/max_reckless"
-                  android:layout_width="50dp"
+                  android:layout_width="75dp"
                   android:layout_height="45dp"
                   android:background="@color/reckless"
                   android:gravity="center"
@@ -277,7 +278,7 @@
                   app:layout_constraintTop_toBottomOf="@id/fellowship"
                   app:layout_constraintLeft_toRightOf="@id/max_conservative"
                   app:layout_constraintRight_toRightOf="parent"
-                  app:layout_constraintBottom_toTopOf="@+id/race" />
+                  app:layout_constraintBottom_toTopOf="@+id/race" app:layout_constraintVertical_bias="0.0" />
         <!--endregion-->
 
         <Spinner android:id="@+id/race"
