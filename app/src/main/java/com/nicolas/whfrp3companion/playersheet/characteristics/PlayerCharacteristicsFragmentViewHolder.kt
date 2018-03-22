@@ -98,9 +98,9 @@ internal class PlayerCharacteristicsFragmentViewHolder(view: View) {
         description.setText(player.description)
     }
 
-    fun getPlayer(): Player = Player(
+    fun extractPlayerFromViews(): Player = Player(
             name = name.text.toString(),
-            race = Race.values()[race.selectedItemPosition],
+            race = Race[race.selectedItemPosition],
             age = age.intValue,
             size = size.intValue,
             description = description.text.toString(),
