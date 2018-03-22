@@ -48,4 +48,13 @@
     <string name="strength">Force</string>
     <string name="toughness">Endurance</string>
     <string name="willpower">Volonté</string>
+    <string name="age">Age</string>
+    <string name="description">Description</string>
+    <string name="dwarf">Nain</string>
+    <string name="high_elf">Haut Elfe</string>
+    <string name="human">Humain</string>
+    <string name="lorem">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor…</string>
+    <string name="saved">Enregistré</string>
+    <string name="size">Taille</string>
+    <string name="wood_elf">Elfe Sylvain</string>
 </resources>

@@ -67,5 +67,7 @@
     <string name="size">Size</string>
     <string name="description">Description</string>
 
+    <string name="saved">Saved</string>
+
     <string name="lorem">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor…</string>
 </resources>
