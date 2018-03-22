@@ -63,9 +63,12 @@ class PlayerCharacteristicsFragment : Fragment() {
         views.destroy()
     }
 
+    @Suppress("UNUSED_PARAMETER")
     @OnTextChanged(R.id.player_name,
             R.id.career,
             R.id.rank,
+            R.id.experience,
+            R.id.max_experience,
             R.id.max_wounds,
             R.id.max_corruption,
             R.id.strength,

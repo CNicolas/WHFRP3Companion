@@ -20,6 +20,10 @@ internal class PlayerCharacteristicsFragmentViewHolder(view: View) {
     lateinit var career: EditText
     @BindView(R.id.rank)
     lateinit var rank: EditText
+    @BindView(R.id.experience)
+    lateinit var experience: EditText
+    @BindView(R.id.max_experience)
+    lateinit var maxExperience: EditText
     @BindView(R.id.max_wounds)
     lateinit var maxWounds: EditText
     @BindView(R.id.max_corruption)
@@ -73,6 +77,8 @@ internal class PlayerCharacteristicsFragmentViewHolder(view: View) {
         name.setText(player.name)
         career.setText(player.careerName)
         rank.setText(player.rank.toString())
+        experience.setText(player.availableExperience.toString())
+        maxExperience.setText(player.totalExperience.toString())
         maxWounds.setText(player.maxWounds.toString())
         maxCorruption.setText(player.maxCorruption.toString())
 
@@ -112,6 +118,8 @@ internal class PlayerCharacteristicsFragmentViewHolder(view: View) {
             fellowship = CharacteristicValue(fellowship.intValue, fellowshipFortune.intValue),
             careerName = career.text.toString(),
             rank = rank.intValue,
+            availableExperience = experience.intValue,
+            totalExperience = maxExperience.intValue,
             maxConservative = maxConservative.intValue,
             maxReckless = maxReckless.intValue,
             maxWounds = maxWounds.intValue,
