@@ -61,7 +61,8 @@
                    app:layout_constraintTop_toBottomOf="@id/career"
                    app:layout_constraintLeft_toLeftOf="parent"
                    app:layout_constraintRight_toLeftOf="@+id/max_wounds"
-                   app:layout_constraintBottom_toTopOf="@+id/strength" />
+                   app:layout_constraintBottom_toTopOf="@+id/strength"
+                   app:layout_constraintHorizontal_weight="2" />
         <EditText android:id="@+id/max_wounds"
                   android:layout_width="0dp"
                   android:layout_height="wrap_content"
@@ -71,8 +72,52 @@
                   android:hint="@string/zero"
                   app:layout_constraintTop_toBottomOf="@id/career"
                   app:layout_constraintLeft_toRightOf="@id/bandage_image"
+                  app:layout_constraintRight_toLeftOf="@+id/experience_label"
+                  app:layout_constraintBottom_toTopOf="@+id/strength"
+                  app:layout_constraintHorizontal_weight="3" />
+
+        <TextView android:id="@+id/experience_label"
+                  android:layout_width="0dp"
+                  android:layout_height="wrap_content"
+                  android:gravity="center"
+                  android:textSize="@dimen/giant_text_size"
+                  android:textStyle="bold|italic"
+                  android:textColor="@android:color/black"
+                  android:labelFor="@+id/experience"
+                  android:text="@string/xp"
+                  app:layout_constraintTop_toBottomOf="@id/career"
+                  app:layout_constraintLeft_toRightOf="@id/max_wounds"
+                  app:layout_constraintRight_toLeftOf="@+id/experience"
+                  app:layout_constraintBottom_toTopOf="@+id/strength"
+                  app:layout_constraintHorizontal_weight="3" />
+        <EditText android:id="@+id/experience"
+                  android:layout_width="0dp"
+                  android:layout_height="wrap_content"
+                  android:gravity="center"
+                  android:hint="@string/zero"
+                  app:layout_constraintTop_toBottomOf="@id/career"
+                  app:layout_constraintLeft_toRightOf="@id/experience_label"
+                  app:layout_constraintRight_toLeftOf="@+id/experience_separator"
+                  app:layout_constraintBottom_toTopOf="@+id/strength"
+                  app:layout_constraintHorizontal_weight="2" />
+        <TextView android:id="@+id/experience_separator"
+                  android:layout_width="0dp"
+                  android:layout_height="wrap_content"
+                  android:text="@string/slash"
+                  app:layout_constraintTop_toBottomOf="@id/career"
+                  app:layout_constraintLeft_toRightOf="@id/experience"
+                  app:layout_constraintRight_toLeftOf="@+id/max_experience"
+                  app:layout_constraintBottom_toTopOf="@+id/strength"
+                  app:layout_constraintHorizontal_weight="1" />
+        <EditText android:id="@+id/max_experience"
+                  android:layout_width="0dp"
+                  android:layout_height="wrap_content"
+                  android:hint="@string/zero"
+                  app:layout_constraintTop_toBottomOf="@id/career"
+                  app:layout_constraintLeft_toRightOf="@id/experience_separator"
                   app:layout_constraintRight_toLeftOf="@+id/corruption_image"
-                  app:layout_constraintBottom_toTopOf="@+id/strength" />
+                  app:layout_constraintBottom_toTopOf="@+id/strength"
+                  app:layout_constraintHorizontal_weight="2" />
 
         <ImageView android:id="@+id/corruption_image"
                    android:layout_width="0dp"
@@ -81,9 +126,10 @@
                    android:src="@drawable/ic_chaos_black_36"
                    android:contentDescription="@string/max_corruption"
                    app:layout_constraintTop_toBottomOf="@+id/career"
-                   app:layout_constraintLeft_toRightOf="@id/max_wounds"
+                   app:layout_constraintLeft_toRightOf="@id/max_experience"
                    app:layout_constraintRight_toLeftOf="@+id/max_corruption"
-                   app:layout_constraintBottom_toTopOf="@+id/strength" />
+                   app:layout_constraintBottom_toTopOf="@+id/strength"
+                   app:layout_constraintHorizontal_weight="2" />
         <EditText android:id="@+id/max_corruption"
                   android:layout_width="0dp"
                   android:layout_height="wrap_content"
@@ -94,7 +140,8 @@
                   app:layout_constraintTop_toBottomOf="@+id/career"
                   app:layout_constraintLeft_toRightOf="@id/corruption_image"
                   app:layout_constraintRight_toRightOf="parent"
-                  app:layout_constraintBottom_toTopOf="@+id/strength" />
+                  app:layout_constraintBottom_toTopOf="@+id/strength"
+                  app:layout_constraintHorizontal_weight="2" />
         <!--endregion-->
 
         <!--region STRENGTH-->
