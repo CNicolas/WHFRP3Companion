@@ -26,8 +26,8 @@ data class Player(override var name: String,
 
                   var careerName: String? = null,
                   var rank: Int = 0,
-                  var availableExperience: Int = 0,
-                  var totalExperience: Int = 0,
+                  var experience: Int = 0,
+                  var maxExperience: Int = 0,
 
                   var reckless: Int = 0,
                   var maxReckless: Int = 0,

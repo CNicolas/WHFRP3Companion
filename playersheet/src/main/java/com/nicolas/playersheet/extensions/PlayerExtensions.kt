@@ -38,8 +38,8 @@ fun Player.createHand(skill: Skill,
 }
 
 fun Player.earnExperiencePoints(experiencePoints: Int): Player {
-    availableExperience += experiencePoints
-    totalExperience += experiencePoints
+    experience += experiencePoints
+    maxExperience += experiencePoints
 
     return this
 }
