@@ -11,14 +11,14 @@ import android.support.v7.widget.Toolbar
 import android.view.MenuItem
 import butterknife.BindView
 import butterknife.ButterKnife
-import com.nicolas.whfrp3companion.fragments.EmptyFragment
-import com.nicolas.whfrp3companion.PLAYER_INTENT_ARGUMENT
+import com.nicolas.whfrp3companion.PLAYER_NAME_INTENT_ARGUMENT
 import com.nicolas.whfrp3companion.R
-import com.nicolas.whfrp3database.entities.player.Player
+import com.nicolas.whfrp3companion.fragments.EmptyFragment
+import com.nicolas.whfrp3companion.playersheet.characteristics.PlayerCharacteristicsFragment
 import org.jetbrains.anko.longToast
 
 class PlayerSheetActivity : AppCompatActivity() {
-    private lateinit var player: Player
+    private lateinit var playerName: String
 
     @BindView(R.id.playersheet_drawer_layout)
     lateinit var drawer: DrawerLayout
@@ -29,7 +29,7 @@ class PlayerSheetActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_playersheet)
 
-        player = intent.extras.getSerializable(PLAYER_INTENT_ARGUMENT) as Player
+        playerName = intent.extras.getString(PLAYER_NAME_INTENT_ARGUMENT)
 
         ButterKnife.bind(this)
 
@@ -68,7 +68,7 @@ class PlayerSheetActivity : AppCompatActivity() {
 
     private fun displaySelectedFragment(menuItemId: Int) {
         val fragment = when (menuItemId) {
-            R.id.nav_player_characteristics -> PlayerCharacteristicsFragment.newInstance(player)
+            R.id.nav_player_characteristics -> PlayerCharacteristicsFragment.newInstance(playerName)
 //          R.id.nav_player_state -> TalentTypesFragment()
 //          R.id.nav_player_skills -> ItemsFragment()
 //          R.id.nav_player_inventory -> SkillsFragment()

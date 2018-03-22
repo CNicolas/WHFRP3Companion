@@ -1,7 +1,7 @@
 package com.nicolas.whfrp3companion
 
 import android.content.Intent
-import com.nicolas.whfrp3companion.playersheet.PlayerCharacteristicsFragment
+import com.nicolas.whfrp3companion.playersheet.characteristics.PlayerCharacteristicsFragment
 import com.nicolas.whfrp3companion.playersheet.PlayerSheetActivity
 import com.nicolas.whfrp3database.entities.player.Player
 import org.assertj.core.api.Assertions.assertThat
@@ -22,7 +22,7 @@ class OpenPlayerSheetActivityTest {
     @Throws
     fun setUp() {
         val intent = Intent(ShadowApplication.getInstance().applicationContext, PlayerSheetActivity::class.java)
-        intent.putExtra(PLAYER_INTENT_ARGUMENT, Player("Jack"))
+        intent.putExtra(PLAYER_NAME_INTENT_ARGUMENT, Player("Jack"))
 
         playerSheetActivity = Robolectric
                 .buildActivity(PlayerSheetActivity::class.java, intent)

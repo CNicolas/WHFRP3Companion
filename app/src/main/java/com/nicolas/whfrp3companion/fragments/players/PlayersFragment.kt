@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ListView
 import butterknife.*
-import com.nicolas.whfrp3companion.PLAYER_INTENT_ARGUMENT
+import com.nicolas.whfrp3companion.PLAYER_NAME_INTENT_ARGUMENT
 import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.playersheet.PlayerSheetActivity
 import com.nicolas.whfrp3database.PlayerFacade
@@ -48,7 +48,7 @@ class PlayersFragment : Fragment() {
     fun onPlayerClick(position: Int) {
         if (activity != null) {
             startActivity(activity!!.intentFor<PlayerSheetActivity>(
-                    PLAYER_INTENT_ARGUMENT to players[position]
+                    PLAYER_NAME_INTENT_ARGUMENT to players[position].name
             ))
         }
     }
