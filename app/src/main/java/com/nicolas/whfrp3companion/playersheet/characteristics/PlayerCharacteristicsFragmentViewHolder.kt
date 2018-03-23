@@ -4,7 +4,6 @@ import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.EditText
 import android.widget.Spinner
-import android.widget.TextView
 import butterknife.BindView
 import butterknife.ButterKnife
 import butterknife.Unbinder
@@ -15,8 +14,6 @@ import com.nicolas.whfrp3database.entities.player.Player
 import com.nicolas.whfrp3database.entities.player.enums.Race
 
 internal class PlayerCharacteristicsFragmentViewHolder(view: View) {
-    @BindView(R.id.player_name)
-    lateinit var name: TextView
     @BindView(R.id.career)
     lateinit var career: EditText
     @BindView(R.id.rank)
@@ -66,12 +63,15 @@ internal class PlayerCharacteristicsFragmentViewHolder(view: View) {
 
     private var unbinder: Unbinder = ButterKnife.bind(this, view)
 
+    private var playerName: String = ""
+
     init {
         race.adapter = ArrayAdapter(view.context!!, R.layout.element_enum_spinner, Race.values().map { view.context.getString(it.labelId) })
     }
 
     fun fillViews(player: Player) {
-        name.text = player.name
+        playerName = player.name
+
         career.setText(player.careerName)
         rank.setText(player.rank.toString())
         experience.setText(player.experience.toString())
@@ -100,7 +100,7 @@ internal class PlayerCharacteristicsFragmentViewHolder(view: View) {
     }
 
     fun extractPlayerFromViews(): Player = Player(
-            name = name.text.toString(),
+            name = playerName,
             race = Race[race.selectedItemPosition],
             description = description.text.toString(),
             strength = CharacteristicValue(strength.intValue, strengthFortune.intValue),
