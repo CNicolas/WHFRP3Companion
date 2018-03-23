@@ -1,17 +1,13 @@
 package com.nicolas.whfrp3companion.playersheet.characteristics
 
 import android.view.View
-import android.widget.ArrayAdapter
 import android.widget.EditText
-import android.widget.Spinner
 import butterknife.BindView
 import butterknife.ButterKnife
 import butterknife.Unbinder
 import com.nicolas.whfrp3companion.R
-import com.nicolas.whfrp3companion.components.labelId
 import com.nicolas.whfrp3database.entities.player.CharacteristicValue
 import com.nicolas.whfrp3database.entities.player.Player
-import com.nicolas.whfrp3database.entities.player.enums.Race
 
 internal class PlayerCharacteristicsFragmentViewHolder(view: View) {
     @BindView(R.id.career)
@@ -56,18 +52,12 @@ internal class PlayerCharacteristicsFragmentViewHolder(view: View) {
     lateinit var maxConservative: EditText
     @BindView(R.id.max_reckless)
     lateinit var maxReckless: EditText
-    @BindView(R.id.race)
-    lateinit var race: Spinner
     @BindView(R.id.description)
     lateinit var description: EditText
 
     private var unbinder: Unbinder = ButterKnife.bind(this, view)
 
     private var playerName: String = ""
-
-    init {
-        race.adapter = ArrayAdapter(view.context!!, R.layout.element_enum_spinner, Race.values().map { view.context.getString(it.labelId) })
-    }
 
     fun fillViews(player: Player) {
         playerName = player.name
@@ -95,13 +85,11 @@ internal class PlayerCharacteristicsFragmentViewHolder(view: View) {
         maxConservative.setText(player.maxConservative.toString())
         maxReckless.setText(player.maxReckless.toString())
 
-        race.setSelection(player.race.ordinal)
         description.setText(player.description)
     }
 
     fun extractPlayerFromViews(): Player = Player(
             name = playerName,
-            race = Race[race.selectedItemPosition],
             description = description.text.toString(),
             strength = CharacteristicValue(strength.intValue, strengthFortune.intValue),
             toughness = CharacteristicValue(toughness.intValue, toughnessFortune.intValue),

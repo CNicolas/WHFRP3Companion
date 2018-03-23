@@ -6,7 +6,6 @@ import android.text.Editable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
 import butterknife.ButterKnife
 import butterknife.OnTextChanged
 import butterknife.Unbinder
@@ -14,7 +13,6 @@ import com.nicolas.whfrp3companion.PLAYER_NAME_INTENT_ARGUMENT
 import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3database.PlayerFacade
 import com.nicolas.whfrp3database.entities.player.Player
-import com.nicolas.whfrp3database.entities.player.enums.Race
 import org.jetbrains.anko.doAsync
 
 class PlayerCharacteristicsFragment : Fragment() {
@@ -31,28 +29,15 @@ class PlayerCharacteristicsFragment : Fragment() {
         super.onCreateView(inflater, container, savedInstanceState)
         val resultingView: View = inflater.inflate(R.layout.fragment_player_characteristics, container, false)
 
+        val playerName = arguments!!.getString(PLAYER_NAME_INTENT_ARGUMENT)
+
         playerFacade = PlayerFacade(context!!)
+        player = playerFacade.find(playerName)!!
 
         views = PlayerCharacteristicsFragmentViewHolder(resultingView)
+        views.fillViews(player)
+
         unbinder = ButterKnife.bind(this, resultingView)
-
-        if (arguments != null) {
-            val playerName = arguments!!.getString(PLAYER_NAME_INTENT_ARGUMENT)
-            player = playerFacade.find(playerName)!!
-
-            views.fillViews(player)
-            views.race.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-                override fun onNothingSelected(parent: AdapterView<*>?) {}
-
-                override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                    doAsync {
-                        if (player.race != Race[position]) {
-                            player = playerFacade.update(views.extractPlayerFromViews())
-                        }
-                    }
-                }
-            }
-        }
 
         return resultingView
     }
