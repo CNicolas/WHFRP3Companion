@@ -3,13 +3,11 @@ package com.nicolas.whfrp3companion.fragments.players
 import android.app.AlertDialog
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.EditText
-import android.widget.ListView
-import android.widget.Spinner
+import android.widget.*
 import butterknife.*
 import com.nicolas.whfrp3companion.PLAYER_NAME_INTENT_ARGUMENT
 import com.nicolas.whfrp3companion.R
@@ -57,6 +55,25 @@ class PlayersFragment : Fragment() {
                     PLAYER_NAME_INTENT_ARGUMENT to players[position].name
             ))
         }
+    }
+
+    @OnItemLongClick(R.id.list_players)
+    fun onPlayerLongClick(view: View, position: Int): Boolean {
+        val player = players[position]
+        val playerPopupMenu = PopupMenu(activity!!, view, Gravity.END)
+        playerPopupMenu.menuInflater.inflate(R.menu.list_players, playerPopupMenu.menu)
+        playerPopupMenu.setOnMenuItemClickListener {
+            when (it.itemId) {
+                R.id.delete_player -> {
+                    playerFacade.deletePlayer(player)
+                    updatePlayers()
+                }
+            }
+            true
+        }
+        playerPopupMenu.show()
+
+        return true
     }
 
     @OnClick(R.id.fab_new_player)
