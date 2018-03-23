@@ -1,20 +1,26 @@
 package com.nicolas.whfrp3companion.fragments.players
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.text.InputType
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
+import android.widget.EditText
 import android.widget.ListView
+import android.widget.Spinner
 import butterknife.*
 import com.nicolas.whfrp3companion.PLAYER_NAME_INTENT_ARGUMENT
 import com.nicolas.whfrp3companion.R
+import com.nicolas.whfrp3companion.components.labelId
 import com.nicolas.whfrp3companion.playersheet.PlayerSheetActivity
 import com.nicolas.whfrp3database.PlayerFacade
 import com.nicolas.whfrp3database.entities.player.Player
-import org.jetbrains.anko.*
-import org.jetbrains.anko.design.textInputEditText
+import com.nicolas.whfrp3database.entities.player.enums.Race
+import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.intentFor
+import org.jetbrains.anko.uiThread
 
 class PlayersFragment : Fragment() {
     @BindView(R.id.list_players)
@@ -55,24 +61,24 @@ class PlayersFragment : Fragment() {
 
     @OnClick(R.id.fab_new_player)
     fun createNewPlayer() {
-        activity?.alert {
-            title = getString(R.string.new_player)
-            customView {
-                val name = textInputEditText()
-                name.inputType = InputType.TYPE_TEXT_FLAG_CAP_SENTENCES
-                name.maxLines = 1
+        val builder = AlertDialog.Builder(activity)
+        val inflater = activity!!.layoutInflater
+        val view = inflater.inflate(R.layout.dialog_create_player, null, false)
 
-                yesButton {
-                    if (!name.text.isNullOrBlank()) {
-                        doAsync {
-                            playerFacade.add(Player(name.text.toString()))
-                            updatePlayers()
-                        }
-                    }
-                }
-                noButton {}
-            }
-        }?.show()
+        val playerName: EditText = view.findViewById(R.id.player_name) as EditText
+        val raceSpinner: Spinner = view.findViewById(R.id.race) as Spinner
+        raceSpinner.adapter = ArrayAdapter(view.context!!, R.layout.element_enum_spinner, Race.values().map { view.context.getString(it.labelId) })
+
+        builder.setView(view)
+        builder.setTitle(R.string.create_player)
+        builder.setNegativeButton(android.R.string.cancel, { dialog, _ -> dialog.dismiss() })
+        builder.setPositiveButton(android.R.string.ok, { dialog, _ ->
+            playerFacade.add(Player(name = playerName.text.toString(), race = Race[raceSpinner.selectedItemPosition]))
+            updatePlayers()
+            dialog.dismiss()
+        })
+
+        builder.create().show()
     }
 
     private fun updatePlayers() {

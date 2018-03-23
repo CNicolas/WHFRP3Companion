@@ -46,7 +46,7 @@
     <string name="high_elf">High Elf</string>
     <string name="wood_elf">Wood Elf</string>
 
-    <string name="new_player">Create a player</string>
+    <string name="create_player">Create a player</string>
     <string name="results">Results</string>
     <string name="select_hand">Select a hand</string>
     <string name="roll">Roll</string>
