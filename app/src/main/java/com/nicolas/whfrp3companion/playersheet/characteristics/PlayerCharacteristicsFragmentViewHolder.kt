@@ -4,6 +4,7 @@ import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.EditText
 import android.widget.Spinner
+import android.widget.TextView
 import butterknife.BindView
 import butterknife.ButterKnife
 import butterknife.Unbinder
@@ -15,7 +16,7 @@ import com.nicolas.whfrp3database.entities.player.enums.Race
 
 internal class PlayerCharacteristicsFragmentViewHolder(view: View) {
     @BindView(R.id.player_name)
-    lateinit var name: EditText
+    lateinit var name: TextView
     @BindView(R.id.career)
     lateinit var career: EditText
     @BindView(R.id.rank)
@@ -60,10 +61,6 @@ internal class PlayerCharacteristicsFragmentViewHolder(view: View) {
     lateinit var maxReckless: EditText
     @BindView(R.id.race)
     lateinit var race: Spinner
-    @BindView(R.id.age)
-    lateinit var age: EditText
-    @BindView(R.id.size)
-    lateinit var size: EditText
     @BindView(R.id.description)
     lateinit var description: EditText
 
@@ -74,7 +71,7 @@ internal class PlayerCharacteristicsFragmentViewHolder(view: View) {
     }
 
     fun fillViews(player: Player) {
-        name.setText(player.name)
+        name.text = player.name
         career.setText(player.careerName)
         rank.setText(player.rank.toString())
         experience.setText(player.experience.toString())
@@ -99,16 +96,12 @@ internal class PlayerCharacteristicsFragmentViewHolder(view: View) {
         maxReckless.setText(player.maxReckless.toString())
 
         race.setSelection(player.race.ordinal)
-        age.setText(player.age?.toString())
-        size.setText(player.size?.toString())
         description.setText(player.description)
     }
 
     fun extractPlayerFromViews(): Player = Player(
             name = name.text.toString(),
             race = Race[race.selectedItemPosition],
-            age = age.intValue,
-            size = size.intValue,
             description = description.text.toString(),
             strength = CharacteristicValue(strength.intValue, strengthFortune.intValue),
             toughness = CharacteristicValue(toughness.intValue, toughnessFortune.intValue),

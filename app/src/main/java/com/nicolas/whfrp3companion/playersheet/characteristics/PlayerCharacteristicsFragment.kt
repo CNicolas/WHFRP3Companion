@@ -64,8 +64,7 @@ class PlayerCharacteristicsFragment : Fragment() {
     }
 
     @Suppress("UNUSED_PARAMETER")
-    @OnTextChanged(R.id.player_name,
-            R.id.career,
+    @OnTextChanged(R.id.career,
             R.id.rank,
             R.id.experience,
             R.id.max_experience,
@@ -85,8 +84,6 @@ class PlayerCharacteristicsFragment : Fragment() {
             R.id.fellowship_fortune,
             R.id.max_conservative,
             R.id.max_reckless,
-            R.id.age,
-            R.id.size,
             R.id.description,
             callback = OnTextChanged.Callback.AFTER_TEXT_CHANGED)
     fun save(editable: Editable) {
