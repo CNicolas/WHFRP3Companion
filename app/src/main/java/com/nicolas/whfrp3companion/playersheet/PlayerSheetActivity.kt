@@ -30,6 +30,7 @@ class PlayerSheetActivity : AppCompatActivity() {
         setContentView(R.layout.activity_playersheet)
 
         playerName = intent.extras.getString(PLAYER_NAME_INTENT_ARGUMENT)
+        title = playerName
 
         ButterKnife.bind(this)
 
@@ -88,7 +89,7 @@ class PlayerSheetActivity : AppCompatActivity() {
         displaySelectedFragment(menuItem.itemId)
 
         menuItem.isChecked = true
-        title = menuItem.title
+        title = playerName
         longToast("Hey : $title")
     }
 
