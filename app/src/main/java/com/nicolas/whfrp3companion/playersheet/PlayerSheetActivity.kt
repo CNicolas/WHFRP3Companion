@@ -13,12 +13,14 @@ import butterknife.BindView
 import butterknife.ButterKnife
 import com.nicolas.whfrp3companion.PLAYER_NAME_INTENT_ARGUMENT
 import com.nicolas.whfrp3companion.R
+import com.nicolas.whfrp3companion.components.labelId
 import com.nicolas.whfrp3companion.fragments.EmptyFragment
 import com.nicolas.whfrp3companion.playersheet.characteristics.PlayerCharacteristicsFragment
-import org.jetbrains.anko.longToast
+import com.nicolas.whfrp3database.PlayerFacade
+import com.nicolas.whfrp3database.entities.player.Player
 
 class PlayerSheetActivity : AppCompatActivity() {
-    private lateinit var playerName: String
+    private lateinit var player: Player
 
     @BindView(R.id.playersheet_drawer_layout)
     lateinit var drawer: DrawerLayout
@@ -29,8 +31,8 @@ class PlayerSheetActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_playersheet)
 
-        playerName = intent.extras.getString(PLAYER_NAME_INTENT_ARGUMENT)
-        title = playerName
+        player = PlayerFacade(this).find(intent.extras.getString(PLAYER_NAME_INTENT_ARGUMENT))!!
+        title = "${player.name} - ${getString(player.race.labelId)}"
 
         ButterKnife.bind(this)
 
@@ -69,7 +71,7 @@ class PlayerSheetActivity : AppCompatActivity() {
 
     private fun displaySelectedFragment(menuItemId: Int) {
         val fragment = when (menuItemId) {
-            R.id.nav_player_characteristics -> PlayerCharacteristicsFragment.newInstance(playerName)
+            R.id.nav_player_characteristics -> PlayerCharacteristicsFragment.newInstance(player.name)
 //          R.id.nav_player_state -> TalentTypesFragment()
 //          R.id.nav_player_skills -> ItemsFragment()
 //          R.id.nav_player_inventory -> SkillsFragment()
@@ -89,8 +91,6 @@ class PlayerSheetActivity : AppCompatActivity() {
         displaySelectedFragment(menuItem.itemId)
 
         menuItem.isChecked = true
-        title = playerName
-        longToast("Hey : $title")
     }
 
     private fun setupDrawerContent(navigationView: NavigationView) {
