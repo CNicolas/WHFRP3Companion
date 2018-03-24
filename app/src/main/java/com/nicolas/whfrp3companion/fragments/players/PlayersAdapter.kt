@@ -10,6 +10,7 @@ import android.widget.BaseAdapter
 import android.widget.TextView
 import butterknife.BindView
 import butterknife.ButterKnife
+import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.components.labelId
 import com.nicolas.whfrp3database.entities.player.Player
 
@@ -27,26 +28,27 @@ class PlayersAdapter(context: Context, private val players: List<Player>) : Base
         if (view != null) {
             holder = view.tag as ViewHolder
         } else {
-            view = inflater.inflate(android.R.layout.simple_list_item_1, parent, false)
+            view = inflater.inflate(R.layout.list_element_player, parent, false)
             holder = ViewHolder(view)
             view!!.tag = holder
         }
 
         val player = getItem(position)
 
-        holder.playerText.text = "${player.name} - ${view.context.getString(player.race.labelId)}"
+        holder.name.text = player.name
+        holder.race.text = view.context.getString(player.race.labelId)
 
         return view
     }
 
     internal class ViewHolder(view: View) {
-        @BindView(android.R.id.text1)
-        lateinit var playerText: TextView
+        @BindView(R.id.player_name)
+        lateinit var name: TextView
+        @BindView(R.id.race)
+        lateinit var race: TextView
 
         init {
             ButterKnife.bind(this, view)
-            playerText.gravity = Gravity.CENTER
-            playerText.textAlignment = TEXT_ALIGNMENT_CENTER
         }
     }
 }

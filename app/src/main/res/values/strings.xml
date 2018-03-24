@@ -62,6 +62,7 @@
     <string name="hand_name_hint">Hand name</string>
 
     <string name="player_name">Player name</string>
+    <string name="race">Race</string>
     <string name="career">Career</string>
     <string name="rank">Rank</string>
     <string name="age">Age</string>
@@ -73,5 +74,6 @@
     <string name="xp">XP</string>
 
     <string name="slash" translatable="false">/</string>
+    <string name="hyphen" translatable="false">-</string>
     <string name="lorem">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor…</string>
 </resources>
