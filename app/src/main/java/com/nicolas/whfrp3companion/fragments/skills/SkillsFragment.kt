@@ -29,7 +29,7 @@ class SkillsFragment : Fragment() {
         unbinder = ButterKnife.bind(this, resultingView)
 
         val skills = loadSkills(context!!)
-        val skillsAdapter = SkillsAdapter(context!!, Characteristic.values().map { getString(it.labelId) }, characteristicToSkills(skills))
+        val skillsAdapter = SkillsAdapter(context!!, skills, skills.map { it to it.specializations }.toMap())
         skillsList.setAdapter(skillsAdapter)
 
         return resultingView
@@ -39,11 +39,6 @@ class SkillsFragment : Fragment() {
         super.onDestroyView()
         unbinder.unbind()
     }
-
-    private fun characteristicToSkills(skills: List<Skill>): Map<String, List<Skill>> =
-            Characteristic.values().map { characteristic ->
-                getString(characteristic.labelId) to skills.filter { it.characteristic == characteristic }
-            }.toMap()
 
     companion object {
         fun newInstance(): SkillsFragment {
