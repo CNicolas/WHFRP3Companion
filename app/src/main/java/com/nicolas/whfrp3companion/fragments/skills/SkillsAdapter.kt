@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseExpandableListAdapter
+import android.widget.ImageView
 import android.widget.TextView
 import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.components.labelId
@@ -59,6 +60,13 @@ class SkillsAdapter(private val context: Context,
 
         val characteristicView = resultingView.findViewById<TextView>(R.id.characteristic)
         characteristicView.text = context.getString(skill.characteristic.labelId)
+
+        val indicator = resultingView.findViewById<ImageView>(R.id.indicator)
+        if (isExpanded) {
+            indicator.setImageResource(R.drawable.ic_expand_less_black_24dp)
+        } else {
+            indicator.setImageResource(R.drawable.ic_expand_more_black_24dp)
+        }
 
         return resultingView
     }
