@@ -10,13 +10,14 @@ import android.widget.BaseExpandableListAdapter
 import android.widget.ImageView
 import android.widget.TextView
 import com.nicolas.whfrp3companion.R
-import com.nicolas.whfrp3companion.components.labelId
+import com.nicolas.whfrp3companion.shared.enums.labelId
 import com.nicolas.whfrp3database.entities.player.playerLinked.skill.Skill
 import com.nicolas.whfrp3database.entities.player.playerLinked.skill.Specialization
 
 class SkillsAdapter(private val context: Context,
                     private val headers: List<Skill>,
                     private val children: Map<Skill, List<Specialization>>) : BaseExpandableListAdapter() {
+
     override fun getChild(groupPosition: Int, childPosition: Int): Specialization =
             children[headers[groupPosition]]!![childPosition]
 
@@ -34,7 +35,11 @@ class SkillsAdapter(private val context: Context,
             convertView
         }
 
-        resultingView.findViewById<TextView>(R.id.child).text = specialization.name
+        val specializationNameView = resultingView.findViewById(R.id.specialization_name) as TextView
+        specializationNameView.text = specialization.name
+
+        val specializedView = resultingView.findViewById(R.id.specialized) as ImageView
+        specializedView.visibility = if (specialization.isSpecialized) View.VISIBLE else View.INVISIBLE
 
         return resultingView
     }
@@ -54,14 +59,14 @@ class SkillsAdapter(private val context: Context,
             convertView
         }
 
-        val headerView = resultingView.findViewById<TextView>(R.id.header)
+        val headerView = resultingView.findViewById(R.id.header) as TextView
         headerView.text = skill.name
-        headerView.setTypeface(null, Typeface.BOLD)
+        headerView.setTypeface(headerView.typeface, Typeface.BOLD)
 
-        val characteristicView = resultingView.findViewById<TextView>(R.id.characteristic)
-        characteristicView.text = context.getString(skill.characteristic.labelId)
+        val characteristicView = resultingView.findViewById(R.id.characteristic) as TextView
+        characteristicView.text = context.getString(skill.characteristic.labelId).substring(0..2)
 
-        val indicator = resultingView.findViewById<ImageView>(R.id.indicator)
+        val indicator = resultingView.findViewById(R.id.indicator) as ImageView
         if (isExpanded) {
             indicator.setImageResource(R.drawable.ic_expand_less_black_24dp)
         } else {
