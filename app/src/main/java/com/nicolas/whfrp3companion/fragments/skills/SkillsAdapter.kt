@@ -40,6 +40,11 @@ class SkillsAdapter(private val context: Context,
         val specializedView = resultingView.findViewById(R.id.specialized) as ImageView
         specializedView.visibility = if (specialization.isSpecialized) View.VISIBLE else View.INVISIBLE
 
+        resultingView.setOnClickListener {
+            specialization.isSpecialized = !specialization.isSpecialized
+            specializedView.visibility = if (specialization.isSpecialized) View.VISIBLE else View.INVISIBLE
+        }
+
         return resultingView
     }
 

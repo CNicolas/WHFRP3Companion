@@ -9,17 +9,17 @@
 
     <ImageView android:id="@+id/specialized"
                android:layout_width="wrap_content"
-               android:layout_height="match_parent"
+               android:layout_height="wrap_content"
                android:layout_gravity="center_vertical"
                android:src="@drawable/ic_check_black"
                android:contentDescription="@string/page_specializations" />
 
     <TextView android:id="@+id/specialization_name"
               android:layout_width="match_parent"
-              android:layout_height="60dp"
+              android:layout_height="45dp"
               android:layout_gravity="center_vertical"
               android:gravity="center_vertical"
-              android:padding="@dimen/big_padding"
+              android:paddingStart="@dimen/big_padding"
               android:textSize="@dimen/medium_text_size"
               android:hint="@string/page_specializations" />
 </LinearLayout>

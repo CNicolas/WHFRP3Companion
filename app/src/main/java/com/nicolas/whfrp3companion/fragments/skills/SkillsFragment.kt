@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ExpandableListView
-import android.widget.ImageView
 import butterknife.BindView
 import butterknife.ButterKnife
 import butterknife.Unbinder
@@ -29,16 +28,6 @@ class SkillsFragment : Fragment() {
         val skills = loadSkills(context!!)
         val skillsAdapter = SkillsAdapter(context!!, skills, skills.map { it to it.specializations }.toMap())
         skillsList.setAdapter(skillsAdapter)
-
-        skillsList.setOnChildClickListener({ _, v, groupPosition, childPosition, _ ->
-            val specialization = skillsAdapter.getChild(groupPosition, childPosition)
-            specialization.isSpecialized = !specialization.isSpecialized
-
-            val specializedView = v.findViewById(R.id.specialized) as ImageView
-            specializedView.visibility = if (specialization.isSpecialized) View.VISIBLE else View.INVISIBLE
-
-            true
-        })
 
         return resultingView
     }
