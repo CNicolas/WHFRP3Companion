@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:orientation="horizontal"
-              android:paddingStart="?android:attr/expandableListPreferredChildPaddingLeft">
+              android:paddingStart="?android:attr/expandableListPreferredChildPaddingLeft"
+              tools:ignore="UseCompoundDrawables">
 
     <ImageView android:id="@+id/specialized"
                android:layout_width="wrap_content"
@@ -13,8 +15,8 @@
                android:contentDescription="@string/page_specializations" />
 
     <TextView android:id="@+id/specialization_name"
-              android:layout_width="fill_parent"
-              android:layout_height="100dp"
+              android:layout_width="match_parent"
+              android:layout_height="60dp"
               android:layout_gravity="center_vertical"
               android:gravity="center_vertical"
               android:padding="@dimen/big_padding"

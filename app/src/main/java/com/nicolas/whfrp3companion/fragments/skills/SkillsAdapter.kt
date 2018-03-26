@@ -2,7 +2,6 @@ package com.nicolas.whfrp3companion.fragments.skills
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.graphics.Typeface
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -59,23 +58,57 @@ class SkillsAdapter(private val context: Context,
             convertView
         }
 
-        val headerView = resultingView.findViewById(R.id.header) as TextView
-        headerView.text = skill.name
-        headerView.setTypeface(headerView.typeface, Typeface.BOLD)
+        val skillNameView = resultingView.findViewById(R.id.skill_name) as TextView
+        skillNameView.text = skill.name
 
         val characteristicView = resultingView.findViewById(R.id.characteristic) as TextView
         characteristicView.text = context.getString(skill.characteristic.labelId).substring(0..2)
 
-        val indicator = resultingView.findViewById(R.id.indicator) as ImageView
-        if (isExpanded) {
-            indicator.setImageResource(R.drawable.ic_expand_less_black_24dp)
-        } else {
-            indicator.setImageResource(R.drawable.ic_expand_more_black_24dp)
-        }
+//        val level1 = resultingView.findViewById(R.id.level_1) as RadioButton
+//        val level2 = resultingView.findViewById(R.id.level_2) as RadioButton
+//        val level3 = resultingView.findViewById(R.id.level_3) as RadioButton
+//
+//        when (skill.level) {
+//            1 -> {
+//                level1.isChecked = true
+//                level2.isChecked = false
+//                level3.isChecked = false
+//            }
+//            2 -> {
+//                level1.isChecked = false
+//                level2.isChecked = true
+//                level3.isChecked = false
+//            }
+//            3 -> {
+//                level1.isChecked = false
+//                level2.isChecked = false
+//                level3.isChecked = true
+//            }
+//            else -> {
+//                level1.isChecked = false
+//                level2.isChecked = false
+//                level3.isChecked = false
+//            }
+//        }
+//
+//        level1.onFormationLevelChecked(1, skill)
+//        level2.onFormationLevelChecked(2, skill)
+//        level3.onFormationLevelChecked(3, skill)
 
         return resultingView
     }
 
     override fun hasStableIds(): Boolean = false
     override fun isChildSelectable(groupPosition: Int, childPosition: Int): Boolean = true
+
+//    private fun RadioButton.onFormationLevelChecked(level: Int, skill: Skill) {
+//        setOnClickListener { v ->
+//            when {
+//                skill.level == level -> skill.level = 0
+//                isChecked -> skill.level = level
+//                else -> skill.level = 0
+//            }
+//            context.toast("${skill.name} - ${skill.level} ($level)")
+//        }
+//    }
 }
