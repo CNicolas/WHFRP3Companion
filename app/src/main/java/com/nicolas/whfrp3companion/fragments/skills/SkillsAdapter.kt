@@ -5,13 +5,12 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.BaseExpandableListAdapter
-import android.widget.ImageView
-import android.widget.TextView
+import android.widget.*
 import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.shared.enums.labelId
 import com.nicolas.whfrp3database.entities.player.playerLinked.skill.Skill
 import com.nicolas.whfrp3database.entities.player.playerLinked.skill.Specialization
+import org.jetbrains.anko.toast
 
 class SkillsAdapter(private val context: Context,
                     private val headers: List<Skill>,
@@ -69,36 +68,34 @@ class SkillsAdapter(private val context: Context,
         val characteristicView = resultingView.findViewById(R.id.characteristic) as TextView
         characteristicView.text = context.getString(skill.characteristic.labelId).substring(0..2)
 
-//        val level1 = resultingView.findViewById(R.id.level_1) as RadioButton
-//        val level2 = resultingView.findViewById(R.id.level_2) as RadioButton
-//        val level3 = resultingView.findViewById(R.id.level_3) as RadioButton
-//
-//        when (skill.level) {
-//            1 -> {
-//                level1.isChecked = true
-//                level2.isChecked = false
-//                level3.isChecked = false
-//            }
-//            2 -> {
-//                level1.isChecked = false
-//                level2.isChecked = true
-//                level3.isChecked = false
-//            }
-//            3 -> {
-//                level1.isChecked = false
-//                level2.isChecked = false
-//                level3.isChecked = true
-//            }
-//            else -> {
-//                level1.isChecked = false
-//                level2.isChecked = false
-//                level3.isChecked = false
-//            }
-//        }
-//
-//        level1.onFormationLevelChecked(1, skill)
-//        level2.onFormationLevelChecked(2, skill)
-//        level3.onFormationLevelChecked(3, skill)
+        val formationLevels = resultingView.findViewById(R.id.formation_levels) as RadioGroup
+        val level1 = resultingView.findViewById(R.id.level_1) as RadioButton
+        val level2 = resultingView.findViewById(R.id.level_2) as RadioButton
+        val level3 = resultingView.findViewById(R.id.level_3) as RadioButton
+
+        when (skill.level) {
+            1 -> {
+                level1.isChecked = true
+            }
+            2 -> {
+                level2.isChecked = true
+            }
+            3 -> {
+                level3.isChecked = true
+            }
+            else -> {
+                formationLevels.clearCheck()
+            }
+        }
+
+        level1.onFormationLevelClicked(1, skill)
+        level2.onFormationLevelClicked(2, skill)
+        level3.onFormationLevelClicked(3, skill)
+
+        formationLevels.isFocusable = false
+        level1.isFocusable = false
+        level2.isFocusable = false
+        level3.isFocusable = false
 
         return resultingView
     }
@@ -106,14 +103,13 @@ class SkillsAdapter(private val context: Context,
     override fun hasStableIds(): Boolean = false
     override fun isChildSelectable(groupPosition: Int, childPosition: Int): Boolean = true
 
-//    private fun RadioButton.onFormationLevelChecked(level: Int, skill: Skill) {
-//        setOnClickListener { v ->
-//            when {
-//                skill.level == level -> skill.level = 0
-//                isChecked -> skill.level = level
-//                else -> skill.level = 0
-//            }
-//            context.toast("${skill.name} - ${skill.level} ($level)")
-//        }
-//    }
+    private fun RadioButton.onFormationLevelClicked(level: Int, skill: Skill) {
+        setOnClickListener { _ ->
+            when (level) {
+                skill.level -> skill.level = 0
+                else -> skill.level = level
+            }
+            context.toast("${skill.name} - ${skill.level} ($level)")
+        }
+    }
 }
