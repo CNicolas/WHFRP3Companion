@@ -15,7 +15,7 @@
               app:layout_constraintLeft_toLeftOf="parent"
               app:layout_constraintRight_toLeftOf="@+id/characteristic"
               app:layout_constraintBottom_toBottomOf="parent"
-              app:layout_constraintHorizontal_weight="5" />
+              app:layout_constraintHorizontal_weight="6" />
 
     <TextView android:id="@+id/characteristic"
               android:layout_width="0dp"
