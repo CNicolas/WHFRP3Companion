@@ -1,4 +1,4 @@
-package com.nicolas.whfrp3companion.components
+package com.nicolas.whfrp3companion.shared.enums
 
 import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3database.entities.player.enums.Race

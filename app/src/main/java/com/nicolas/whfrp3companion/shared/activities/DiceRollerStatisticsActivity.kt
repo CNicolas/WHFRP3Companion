@@ -1,4 +1,4 @@
-package com.nicolas.whfrp3companion.activities
+package com.nicolas.whfrp3companion.shared.activities
 
 import android.os.Bundle
 import android.support.v4.widget.SwipeRefreshLayout
@@ -9,9 +9,9 @@ import butterknife.BindView
 import butterknife.ButterKnife
 import butterknife.Unbinder
 import com.nicolas.diceroller.roll.rollForStatistics
-import com.nicolas.whfrp3companion.HAND_INTENT_ARGUMENT
-import com.nicolas.whfrp3companion.HAND_ROLL_COUNT_INTENT_ARGUMENT
 import com.nicolas.whfrp3companion.R
+import com.nicolas.whfrp3companion.shared.HAND_INTENT_ARGUMENT
+import com.nicolas.whfrp3companion.shared.HAND_ROLL_COUNT_INTENT_ARGUMENT
 import com.nicolas.whfrp3database.entities.hand.Hand
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread

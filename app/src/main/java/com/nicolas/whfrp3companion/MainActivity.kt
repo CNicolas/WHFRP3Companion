@@ -12,9 +12,9 @@ import android.view.MenuItem
 import butterknife.BindView
 import butterknife.ButterKnife
 import butterknife.Unbinder
-import com.nicolas.whfrp3companion.activities.DiceRollerActivity
 import com.nicolas.whfrp3companion.fragments.EmptyFragment
 import com.nicolas.whfrp3companion.fragments.players.PlayersFragment
+import com.nicolas.whfrp3companion.shared.activities.DiceRollerActivity
 import org.jetbrains.anko.intentFor
 
 

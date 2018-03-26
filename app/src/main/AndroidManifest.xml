@@ -29,13 +29,13 @@
                     android:value=".MainActivity" />
         </activity>
 
-        <activity android:name=".activities.DiceRollerActivity"
+        <activity android:name=".shared.activities.DiceRollerActivity"
                   android:label="@string/page_dice_roller"
                   android:screenOrientation="portrait"
                   android:theme="@style/AppTheme">
         </activity>
-        <activity android:name=".activities.DiceRollerStatisticsActivity"
-                  android:parentActivityName=".activities.DiceRollerActivity"
+        <activity android:name=".shared.activities.DiceRollerStatisticsActivity"
+                  android:parentActivityName=".shared.activities.DiceRollerActivity"
                   android:label="@string/page_dice_roller_statistics"
                   android:screenOrientation="portrait"
                   android:theme="@style/AppTheme" />

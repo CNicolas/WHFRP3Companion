@@ -1,17 +1,15 @@
 package com.nicolas.whfrp3companion.fragments.players
 
 import android.content.Context
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.TEXT_ALIGNMENT_CENTER
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.TextView
 import butterknife.BindView
 import butterknife.ButterKnife
 import com.nicolas.whfrp3companion.R
-import com.nicolas.whfrp3companion.components.labelId
+import com.nicolas.whfrp3companion.shared.enums.labelId
 import com.nicolas.whfrp3database.entities.player.Player
 
 class PlayersAdapter(context: Context, private val players: List<Player>) : BaseAdapter() {

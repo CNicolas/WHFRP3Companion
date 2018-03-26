@@ -1,4 +1,4 @@
-package com.nicolas.whfrp3companion
+package com.nicolas.whfrp3companion.shared
 
 const val PLAYER_NAME_INTENT_ARGUMENT = "playerName"
 

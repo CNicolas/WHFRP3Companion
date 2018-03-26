@@ -1,4 +1,4 @@
-package com.nicolas.whfrp3companion.components
+package com.nicolas.whfrp3companion.shared.components
 
 import android.content.Context
 import android.util.AttributeSet
