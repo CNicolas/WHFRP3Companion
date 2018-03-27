@@ -12,9 +12,9 @@ import com.nicolas.whfrp3database.entities.player.playerLinked.skill.Skill
 import com.nicolas.whfrp3database.entities.player.playerLinked.skill.Specialization
 import org.jetbrains.anko.toast
 
-class SkillsAdapter(private val context: Context,
-                    private val headers: List<Skill>,
-                    private val children: Map<Skill, List<Specialization>>) : BaseExpandableListAdapter() {
+class SkillsExpandableAdapter(private val context: Context,
+                              private val headers: List<Skill>,
+                              private val children: Map<Skill, List<Specialization>>) : BaseExpandableListAdapter() {
 
     override fun getChild(groupPosition: Int, childPosition: Int): Specialization =
             children[headers[groupPosition]]!![childPosition]
