@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.*
 import butterknife.BindView
 import butterknife.ButterKnife
+import butterknife.OnClick
 import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.shared.enums.labelId
 import com.nicolas.whfrp3database.entities.player.playerLinked.skill.Skill
@@ -48,20 +49,15 @@ class SkillsExpandableAdapter(private val context: Context,
 
         holder.specialization = specialization
         holder.specializationNameView.text = specialization.name
-        holder.specializedView.visibility = if (specialization.isSpecialized) View.VISIBLE else View.INVISIBLE
-
-        resultingView.setOnClickListener {
-            specialization.isSpecialized = !specialization.isSpecialized
-            holder.specializedView.visibility = if (specialization.isSpecialized) View.VISIBLE else View.INVISIBLE
-        }
-
+        holder.specializationNameView.isChecked = specialization.isSpecialized
         holder.specializationNameView.isFocusable = false
-        holder.specializedView.isFocusable = false
 
         return resultingView
     }
 
+    //region Group
     override fun getGroup(groupPosition: Int): Skill = headers[groupPosition]
+
     override fun getGroupCount(): Int = headers.size
     override fun getGroupId(groupPosition: Int): Long = groupPosition.toLong()
 
@@ -110,6 +106,8 @@ class SkillsExpandableAdapter(private val context: Context,
         return resultingView
     }
 
+    // endregion
+
     override fun hasStableIds(): Boolean = false
     override fun isChildSelectable(groupPosition: Int, childPosition: Int): Boolean = true
 
@@ -148,14 +146,18 @@ class SkillsExpandableAdapter(private val context: Context,
 
     internal class ChildViewHolder(private val view: View) {
         @BindView(R.id.specialization_name)
-        lateinit var specializationNameView: TextView
-        @BindView(R.id.specialized)
-        lateinit var specializedView: ImageView
+        lateinit var specializationNameView: CheckBox
 
         lateinit var specialization: Specialization
 
         init {
             ButterKnife.bind(this, view)
+        }
+
+        @OnClick(R.id.specialization_name)
+        fun toggleSpecialization(view: View) {
+            specialization.isSpecialized = !specialization.isSpecialized
+            (view as CheckBox).isChecked = specialization.isSpecialized
         }
     }
 }
