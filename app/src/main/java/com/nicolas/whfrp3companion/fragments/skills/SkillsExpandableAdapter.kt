@@ -2,10 +2,13 @@ package com.nicolas.whfrp3companion.fragments.skills
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import butterknife.BindView
+import butterknife.ButterKnife
 import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.shared.enums.labelId
 import com.nicolas.whfrp3database.entities.player.playerLinked.skill.Skill
@@ -15,9 +18,16 @@ import org.jetbrains.anko.toast
 class SkillsExpandableAdapter(private val context: Context,
                               private val headers: List<Skill>,
                               private val children: Map<Skill, List<Specialization>>) : BaseExpandableListAdapter() {
+    private val inflater = LayoutInflater.from(context)
 
-    override fun getChild(groupPosition: Int, childPosition: Int): Specialization =
-            children[headers[groupPosition]]!![childPosition]
+    override fun getChild(groupPosition: Int, childPosition: Int): Specialization {
+        val skill = getGroup(groupPosition)
+        val specialization = skill.specializations[childPosition]
+
+        Log.i("SKILL", "skill : ${skill.name}, specialization : $specialization")
+
+        return specialization
+    }
 
     override fun getChildId(groupPosition: Int, childPosition: Int): Long = childPosition.toLong()
     override fun getChildrenCount(groupPosition: Int): Int = children[headers[groupPosition]]?.size ?: 0
@@ -26,23 +36,27 @@ class SkillsExpandableAdapter(private val context: Context,
     override fun getChildView(groupPosition: Int, childPosition: Int, isLastChild: Boolean, convertView: View?, parent: ViewGroup?): View {
         val specialization = getChild(groupPosition, childPosition)
 
-        val resultingView = if (convertView == null) {
-            val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-            inflater.inflate(R.layout.list_skills_child, null)
+        var resultingView = convertView
+        val holder: ChildViewHolder
+        if (resultingView != null) {
+            holder = resultingView.tag as ChildViewHolder
         } else {
-            convertView
+            resultingView = inflater.inflate(R.layout.list_skills_child, parent, false)
+            holder = ChildViewHolder(resultingView)
+            resultingView!!.tag = holder
         }
 
-        val specializationNameView = resultingView.findViewById(R.id.specialization_name) as TextView
-        specializationNameView.text = specialization.name
-
-        val specializedView = resultingView.findViewById(R.id.specialized) as ImageView
-        specializedView.visibility = if (specialization.isSpecialized) View.VISIBLE else View.INVISIBLE
+        holder.specialization = specialization
+        holder.specializationNameView.text = specialization.name
+        holder.specializedView.visibility = if (specialization.isSpecialized) View.VISIBLE else View.INVISIBLE
 
         resultingView.setOnClickListener {
             specialization.isSpecialized = !specialization.isSpecialized
-            specializedView.visibility = if (specialization.isSpecialized) View.VISIBLE else View.INVISIBLE
+            holder.specializedView.visibility = if (specialization.isSpecialized) View.VISIBLE else View.INVISIBLE
         }
+
+        holder.specializationNameView.isFocusable = false
+        holder.specializedView.isFocusable = false
 
         return resultingView
     }
@@ -55,47 +69,43 @@ class SkillsExpandableAdapter(private val context: Context,
     override fun getGroupView(groupPosition: Int, isExpanded: Boolean, convertView: View?, parent: ViewGroup?): View {
         val skill = getGroup(groupPosition)
 
-        val resultingView = if (convertView == null) {
-            val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-            inflater.inflate(R.layout.list_skills_header, null)
+        var resultingView = convertView
+        val holder: GroupViewHolder
+        if (resultingView != null) {
+            holder = resultingView.tag as GroupViewHolder
         } else {
-            convertView
+            resultingView = inflater.inflate(R.layout.list_skills_header, parent, false)
+            holder = GroupViewHolder(resultingView)
+            resultingView!!.tag = holder
         }
 
-        val skillNameView = resultingView.findViewById(R.id.skill_name) as TextView
-        skillNameView.text = skill.name
-
-        val characteristicView = resultingView.findViewById(R.id.characteristic) as TextView
-        characteristicView.text = context.getString(skill.characteristic.labelId).substring(0..2)
-
-        val formationLevels = resultingView.findViewById(R.id.formation_levels) as RadioGroup
-        val level1 = resultingView.findViewById(R.id.level_1) as RadioButton
-        val level2 = resultingView.findViewById(R.id.level_2) as RadioButton
-        val level3 = resultingView.findViewById(R.id.level_3) as RadioButton
+        holder.skill = skill
+        holder.skillNameView.text = skill.name
+        holder.characteristicView.text = context.getString(skill.characteristic.labelId).substring(0..2)
 
         when (skill.level) {
             1 -> {
-                level1.isChecked = true
+                holder.formationLevelsView.check(holder.level1View.id)
             }
             2 -> {
-                level2.isChecked = true
+                holder.formationLevelsView.check(holder.level2View.id)
             }
             3 -> {
-                level3.isChecked = true
+                holder.formationLevelsView.check(holder.level3View.id)
             }
             else -> {
-                formationLevels.clearCheck()
+                holder.formationLevelsView.clearCheck()
             }
         }
 
-        level1.onFormationLevelClicked(1, skill)
-        level2.onFormationLevelClicked(2, skill)
-        level3.onFormationLevelClicked(3, skill)
+        holder.level1View.onFormationLevelClicked(1, skill)
+        holder.level2View.onFormationLevelClicked(2, skill)
+        holder.level3View.onFormationLevelClicked(3, skill)
 
-        formationLevels.isFocusable = false
-        level1.isFocusable = false
-        level2.isFocusable = false
-        level3.isFocusable = false
+        holder.formationLevelsView.isFocusable = false
+        holder.level1View.isFocusable = false
+        holder.level2View.isFocusable = false
+        holder.level3View.isFocusable = false
 
         return resultingView
     }
@@ -110,6 +120,42 @@ class SkillsExpandableAdapter(private val context: Context,
                 else -> skill.level = level
             }
             context.toast("${skill.name} - ${skill.level} ($level)")
+            isFocusable = false
+        }
+    }
+
+    internal class GroupViewHolder(private val view: View) {
+        @BindView(R.id.skill_name)
+        lateinit var skillNameView: TextView
+        @BindView(R.id.characteristic)
+        lateinit var characteristicView: TextView
+
+        @BindView(R.id.formation_levels)
+        lateinit var formationLevelsView: RadioGroup
+        @BindView(R.id.level_1)
+        lateinit var level1View: RadioButton
+        @BindView(R.id.level_2)
+        lateinit var level2View: RadioButton
+        @BindView(R.id.level_3)
+        lateinit var level3View: RadioButton
+
+        lateinit var skill: Skill
+
+        init {
+            ButterKnife.bind(this, view)
+        }
+    }
+
+    internal class ChildViewHolder(private val view: View) {
+        @BindView(R.id.specialization_name)
+        lateinit var specializationNameView: TextView
+        @BindView(R.id.specialized)
+        lateinit var specializedView: ImageView
+
+        lateinit var specialization: Specialization
+
+        init {
+            ButterKnife.bind(this, view)
         }
     }
 }
