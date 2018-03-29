@@ -9,14 +9,14 @@ import android.view.ViewGroup
 import butterknife.ButterKnife
 import butterknife.OnTextChanged
 import butterknife.Unbinder
-import com.nicolas.whfrp3companion.shared.PLAYER_NAME_INTENT_ARGUMENT
 import com.nicolas.whfrp3companion.R
+import com.nicolas.whfrp3companion.shared.PLAYER_NAME_INTENT_ARGUMENT
 import com.nicolas.whfrp3database.PlayerFacade
 import com.nicolas.whfrp3database.entities.player.Player
 import org.jetbrains.anko.doAsync
 
 class PlayerCharacteristicsFragment : Fragment() {
-    internal lateinit var views: PlayerCharacteristicsFragmentViewHolder
+    private lateinit var views: PlayerCharacteristicsFragmentViewHolder
     private lateinit var unbinder: Unbinder
 
     private lateinit var playerFacade: PlayerFacade
@@ -73,7 +73,28 @@ class PlayerCharacteristicsFragment : Fragment() {
             callback = OnTextChanged.Callback.AFTER_TEXT_CHANGED)
     fun save(editable: Editable) {
         doAsync {
-            player = playerFacade.update(views.extractPlayerFromViews())
+            val partialPlayer = views.extractPlayerFromViews()
+
+            player = playerFacade.update(
+                    player.copy(
+                            name = partialPlayer.name,
+                            description = partialPlayer.description,
+                            strength = partialPlayer.strength,
+                            toughness = partialPlayer.toughness,
+                            agility = partialPlayer.agility,
+                            intelligence = partialPlayer.intelligence,
+                            willpower = partialPlayer.willpower,
+                            fellowship = partialPlayer.fellowship,
+                            careerName = partialPlayer.careerName,
+                            rank = partialPlayer.rank,
+                            experience = partialPlayer.experience,
+                            maxExperience = partialPlayer.maxExperience,
+                            maxConservative = partialPlayer.maxConservative,
+                            maxReckless = partialPlayer.maxReckless,
+                            maxWounds = partialPlayer.maxWounds,
+                            maxCorruption = partialPlayer.maxCorruption
+                    )
+            )
         }
     }
 
