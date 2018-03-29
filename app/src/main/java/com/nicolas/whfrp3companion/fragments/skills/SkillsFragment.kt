@@ -13,7 +13,6 @@ import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.shared.adapters.SkillsExpandableAdapter
 import com.nicolas.whfrp3database.staticData.loadSkills
 
-
 class SkillsFragment : Fragment() {
     @BindView(R.id.skills_list)
     lateinit var skillsList: ExpandableListView
