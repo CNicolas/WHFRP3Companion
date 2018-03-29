@@ -11,10 +11,11 @@ import android.support.v7.widget.Toolbar
 import android.view.MenuItem
 import butterknife.BindView
 import butterknife.ButterKnife
-import com.nicolas.whfrp3companion.shared.PLAYER_NAME_INTENT_ARGUMENT
 import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.fragments.EmptyFragment
 import com.nicolas.whfrp3companion.playersheet.characteristics.PlayerCharacteristicsFragment
+import com.nicolas.whfrp3companion.playersheet.skills.PlayerSkillsFragment
+import com.nicolas.whfrp3companion.shared.PLAYER_NAME_INTENT_ARGUMENT
 import com.nicolas.whfrp3companion.shared.enums.labelId
 import com.nicolas.whfrp3database.PlayerFacade
 import com.nicolas.whfrp3database.entities.player.Player
@@ -73,7 +74,7 @@ class PlayerSheetActivity : AppCompatActivity() {
         val fragment = when (menuItemId) {
             R.id.nav_player_characteristics -> PlayerCharacteristicsFragment.newInstance(player.name)
 //          R.id.nav_player_state -> TalentTypesFragment()
-//          R.id.nav_player_skills -> ItemsFragment()
+            R.id.nav_player_skills -> PlayerSkillsFragment.newInstance(player.name)
 //          R.id.nav_player_inventory -> SkillsFragment()
 //          R.id.nav_player_actions -> SpecializationsFragment()
 //            R.id.nav_player_talents -> PlayerTalentsFragment()

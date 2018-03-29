@@ -20,8 +20,6 @@ import com.nicolas.whfrp3database.entities.player.playerLinked.skill.Skill
 import com.nicolas.whfrp3database.entities.player.playerLinked.skill.Specialization
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.intentFor
-import org.jetbrains.anko.toast
-import org.jetbrains.anko.uiThread
 
 class SkillsExpandableAdapter(private val context: Context,
                               private val skills: List<Skill>) : BaseExpandableListAdapter() {
@@ -165,16 +163,13 @@ class SkillsExpandableAdapter(private val context: Context,
             ButterKnife.bind(this, view)
         }
 
-        @OnClick(R.id.specialization_name)
+        @OnClick(R.id.specialization_name_checkable)
         fun toggleSpecialization(view: View) {
             specialization.isSpecialized = !specialization.isSpecialized
             (view as CheckBox).isChecked = specialization.isSpecialized
 
             doAsync {
                 updatePlayer(player, playerFacade)
-                uiThread {
-                    view.context.toast(player?.skills.toString())
-                }
             }
         }
 
@@ -192,7 +187,7 @@ class SkillsExpandableAdapter(private val context: Context,
         }
     }
 
-    internal class GroupViewHolder(private val view: View) {
+    internal class GroupViewHolder(view: View) {
         @BindView(R.id.skill_name)
         lateinit var skillNameView: TextView
         @BindView(R.id.characteristic)
@@ -247,9 +242,6 @@ class SkillsExpandableAdapter(private val context: Context,
 
             doAsync {
                 updatePlayer(player, playerFacade)
-                uiThread {
-                    view.context.toast(player?.skills.toString())
-                }
             }
         }
     }
