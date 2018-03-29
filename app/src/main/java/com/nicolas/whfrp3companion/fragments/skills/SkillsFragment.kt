@@ -26,7 +26,7 @@ class SkillsFragment : Fragment() {
         unbinder = ButterKnife.bind(this, resultingView)
 
         val skills = loadSkills(context!!)
-        val skillsAdapter = SkillsExpandableAdapter(context!!, skills, skills.map { it to it.specializations }.toMap())
+        val skillsAdapter = SkillsExpandableAdapter(context!!, skills)
         skillsList.setAdapter(skillsAdapter)
 
         return resultingView

@@ -2,7 +2,6 @@ package com.nicolas.whfrp3companion.fragments.skills
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,26 +16,17 @@ import com.nicolas.whfrp3database.entities.player.playerLinked.skill.Specializat
 import org.jetbrains.anko.toast
 
 class SkillsExpandableAdapter(private val context: Context,
-                              private val headers: List<Skill>,
-                              private val children: Map<Skill, List<Specialization>>) : BaseExpandableListAdapter() {
+                              private val skills: List<Skill>) : BaseExpandableListAdapter() {
     private val inflater = LayoutInflater.from(context)
 
-    override fun getChild(groupPosition: Int, childPosition: Int): Specialization {
-        val skill = getGroup(groupPosition)
-        val specialization = skill.specializations[childPosition]
-
-        Log.i("SKILL", "skill : ${skill.name}, specialization : $specialization")
-
-        return specialization
-    }
+    override fun getChild(groupPosition: Int, childPosition: Int): Specialization =
+            getGroup(groupPosition).specializations[childPosition]
 
     override fun getChildId(groupPosition: Int, childPosition: Int): Long = childPosition.toLong()
-    override fun getChildrenCount(groupPosition: Int): Int = children[headers[groupPosition]]?.size ?: 0
+    override fun getChildrenCount(groupPosition: Int): Int = getGroup(groupPosition).specializations.size
 
     @SuppressLint("InflateParams")
     override fun getChildView(groupPosition: Int, childPosition: Int, isLastChild: Boolean, convertView: View?, parent: ViewGroup?): View {
-        val specialization = getChild(groupPosition, childPosition)
-
         var resultingView = convertView
         val holder: ChildViewHolder
         if (resultingView != null) {
@@ -47,6 +37,8 @@ class SkillsExpandableAdapter(private val context: Context,
             resultingView!!.tag = holder
         }
 
+        val specialization = getChild(groupPosition, childPosition)
+
         holder.specialization = specialization
         holder.specializationNameView.text = specialization.name
         holder.specializationNameView.isChecked = specialization.isSpecialized
@@ -56,15 +48,13 @@ class SkillsExpandableAdapter(private val context: Context,
     }
 
     //region Group
-    override fun getGroup(groupPosition: Int): Skill = headers[groupPosition]
+    override fun getGroup(groupPosition: Int): Skill = skills[groupPosition]
 
-    override fun getGroupCount(): Int = headers.size
+    override fun getGroupCount(): Int = skills.size
     override fun getGroupId(groupPosition: Int): Long = groupPosition.toLong()
 
     @SuppressLint("InflateParams")
     override fun getGroupView(groupPosition: Int, isExpanded: Boolean, convertView: View?, parent: ViewGroup?): View {
-        val skill = getGroup(groupPosition)
-
         var resultingView = convertView
         val holder: GroupViewHolder
         if (resultingView != null) {
@@ -74,6 +64,8 @@ class SkillsExpandableAdapter(private val context: Context,
             holder = GroupViewHolder(resultingView)
             resultingView!!.tag = holder
         }
+
+        val skill = getGroup(groupPosition)
 
         holder.skill = skill
         holder.skillNameView.text = skill.name
@@ -122,7 +114,7 @@ class SkillsExpandableAdapter(private val context: Context,
         }
     }
 
-    internal class GroupViewHolder(private val view: View) {
+    internal class GroupViewHolder(view: View) {
         @BindView(R.id.skill_name)
         lateinit var skillNameView: TextView
         @BindView(R.id.characteristic)
@@ -144,7 +136,7 @@ class SkillsExpandableAdapter(private val context: Context,
         }
     }
 
-    internal class ChildViewHolder(private val view: View) {
+    internal class ChildViewHolder(view: View) {
         @BindView(R.id.specialization_name)
         lateinit var specializationNameView: CheckBox
 
