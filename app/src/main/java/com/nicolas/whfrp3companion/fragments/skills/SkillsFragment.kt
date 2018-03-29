@@ -18,6 +18,7 @@ class SkillsFragment : Fragment() {
     lateinit var skillsList: ExpandableListView
 
     private lateinit var unbinder: Unbinder
+
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
