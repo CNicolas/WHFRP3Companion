@@ -8,6 +8,7 @@
     <ExpandableListView android:id="@+id/skills_list"
                         android:layout_height="match_parent"
                         android:layout_width="match_parent"
+                        android:groupIndicator="@null"
                         tools:listheader="@layout/list_skills_header"
                         tools:listitem="@layout/list_skills_child" />
 </LinearLayout>
