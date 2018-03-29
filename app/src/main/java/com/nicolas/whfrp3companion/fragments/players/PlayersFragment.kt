@@ -82,15 +82,15 @@ class PlayersFragment : Fragment() {
         val inflater = activity!!.layoutInflater
         val view = inflater.inflate(R.layout.dialog_create_player, null, false)
 
-        val playerName: EditText = view.findViewById(R.id.player_name) as EditText
-        val raceSpinner: Spinner = view.findViewById(R.id.race) as Spinner
-        raceSpinner.adapter = ArrayAdapter(view.context!!, R.layout.element_enum_spinner, Race.values().map { view.context.getString(it.labelId) })
+        val playerNameView: EditText = view.findViewById(R.id.player_name) as EditText
+        val raceView: Spinner = view.findViewById(R.id.race) as Spinner
+        raceView.adapter = ArrayAdapter(view.context!!, R.layout.element_enum_spinner, Race.values().map { view.context.getString(it.labelId) })
 
         builder.setView(view)
         builder.setTitle(R.string.create_player)
         builder.setNegativeButton(android.R.string.cancel, { dialog, _ -> dialog.dismiss() })
         builder.setPositiveButton(android.R.string.ok, { dialog, _ ->
-            playerFacade.add(Player(name = playerName.text.toString(), race = Race[raceSpinner.selectedItemPosition]))
+            playerFacade.add(Player(name = playerNameView.text.toString(), race = Race[raceView.selectedItemPosition]))
             updatePlayers()
             dialog.dismiss()
         })
