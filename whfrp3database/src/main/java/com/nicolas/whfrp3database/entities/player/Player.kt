@@ -46,12 +46,10 @@ data class Player(override var name: String,
                   var gold: Int = 0,
 
                   var items: List<Item> = listOf(),
+                  var skills: List<Skill> = listOf(),
                   var talents: List<Talent> = listOf(),
 
                   override val id: Int = -1) : NamedEntity, Serializable {
-
-    var skills: List<Skill> = listOf()
-        internal set
 
     val maxStress: Int
         get() = willpower.value * 2
