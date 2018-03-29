@@ -23,7 +23,7 @@ class PlayerFacade(context: Context) {
     val exhaustibleTalents = talents.filter { it.cooldown == TalentCooldown.TALENT }
 
     fun add(player: Player): Player {
-        createSkillsForPlayer(player)
+        player.createSkills()
         val savedPlayer = playerDao.add(player)
 
         savedPlayer!!.items = player.items
@@ -102,11 +102,7 @@ class PlayerFacade(context: Context) {
 
     private fun findAllItemsByPlayer(player: Player) = itemDao.findAllByPlayer(player)
 
-    private fun createSkillsForPlayer(player: Player) {
-        basicSkills.forEach {
-            val mutableSkills = player.skills.toMutableList()
-            mutableSkills.add(it)
-            player.skills = mutableSkills
-        }
+    private fun Player.createSkills() {
+        skills = basicSkills.toList()
     }
 }
