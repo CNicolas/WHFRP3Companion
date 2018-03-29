@@ -2,6 +2,7 @@ package com.nicolas.whfrp3companion.shared.adapters
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.graphics.Typeface
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,7 +18,11 @@ import com.nicolas.whfrp3companion.shared.enums.labelId
 import com.nicolas.whfrp3database.PlayerFacade
 import com.nicolas.whfrp3database.entities.player.Player
 import com.nicolas.whfrp3database.entities.player.playerLinked.skill.Skill
+import com.nicolas.whfrp3database.entities.player.playerLinked.skill.SkillType.ADVANCED
+import com.nicolas.whfrp3database.entities.player.playerLinked.skill.SkillType.BASIC
 import com.nicolas.whfrp3database.entities.player.playerLinked.skill.Specialization
+import com.nicolas.whfrp3database.extensions.getSkillByName
+import com.nicolas.whfrp3database.extensions.getSpecializationByName
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.intentFor
 
@@ -28,7 +33,7 @@ class SkillsExpandableAdapter(private val context: Context,
     private var playerFacade: PlayerFacade? = null
     private var player: Player? = null
 
-    constructor(context: Context, player: Player) : this(context, player.skills) {
+    constructor(context: Context, player: Player) : this(context, player.skills.toList()) {
         this.player = player
         playerFacade = PlayerFacade(context)
     }
@@ -80,10 +85,16 @@ class SkillsExpandableAdapter(private val context: Context,
         holder.player = player
         holder.playerFacade = playerFacade
         holder.skill = skill
+
         holder.skillNameView.text = skill.name
+        when (skill.type) {
+            BASIC -> holder.skillNameView.setTypeface(null, Typeface.BOLD)
+            ADVANCED -> holder.skillNameView.setTypeface(null, Typeface.BOLD_ITALIC)
+        }
         holder.characteristicView.text = context.getString(skill.characteristic.labelId).substring(0..2)
 
         if (player != null) {
+            holder.launchSkillView.visibility = View.VISIBLE
             holder.formationLevelsView.visibility = View.VISIBLE
 
             when (skill.level) {
@@ -93,6 +104,7 @@ class SkillsExpandableAdapter(private val context: Context,
                 else -> holder.formationLevelsView.clearCheck()
             }
         } else {
+            holder.launchSkillView.visibility = View.GONE
             holder.formationLevelsView.visibility = View.GONE
         }
 
@@ -156,6 +168,7 @@ class SkillsExpandableAdapter(private val context: Context,
 
         internal var player: Player? = null
         internal var playerFacade: PlayerFacade? = null
+
         lateinit var skill: Skill
         lateinit var specialization: Specialization
 
@@ -169,7 +182,12 @@ class SkillsExpandableAdapter(private val context: Context,
             (view as CheckBox).isChecked = specialization.isSpecialized
 
             doAsync {
-                updatePlayer(player, playerFacade)
+                if (player != null) {
+                    player?.getSkillByName(skill.name)
+                            ?.getSpecializationByName(specialization.name)
+                            ?.isSpecialized = specialization.isSpecialized
+                    playerFacade?.update(player!!)
+                }
             }
         }
 
@@ -187,12 +205,7 @@ class SkillsExpandableAdapter(private val context: Context,
         }
     }
 
-    internal class GroupViewHolder(view: View) {
-        @BindView(R.id.skill_name)
-        lateinit var skillNameView: TextView
-        @BindView(R.id.characteristic)
-        lateinit var characteristicView: TextView
-
+    internal class GroupViewHolder(private val view: View) {
         @BindView(R.id.formation_levels)
         lateinit var formationLevelsView: RadioGroup
         @BindView(R.id.level_1)
@@ -202,8 +215,17 @@ class SkillsExpandableAdapter(private val context: Context,
         @BindView(R.id.level_3)
         lateinit var level3View: RadioButton
 
+        @BindView(R.id.skill_name)
+        lateinit var skillNameView: TextView
+        @BindView(R.id.characteristic)
+        lateinit var characteristicView: TextView
+
+        @BindView(R.id.launch_skill)
+        lateinit var launchSkillView: ImageButton
+
         internal var player: Player? = null
         internal var playerFacade: PlayerFacade? = null
+
         lateinit var skill: Skill
 
         init {
@@ -219,7 +241,16 @@ class SkillsExpandableAdapter(private val context: Context,
         @OnClick(R.id.level_3)
         fun checkFormationLevel3() = setFormationLevel(3)
 
+        @OnClick(R.id.launch_skill)
+        fun launchSkill() {
+            val context = view.context
+            context.startActivity(context.intentFor<DiceRollerActivity>(
+                    HAND_INTENT_ARGUMENT to player?.createHand(skill, skill.name)
+            ))
+        }
+
         fun loseFocus() {
+            launchSkillView.isFocusable = false
             formationLevelsView.isFocusable = false
             level1View.isFocusable = false
             level2View.isFocusable = false
@@ -235,20 +266,14 @@ class SkillsExpandableAdapter(private val context: Context,
                 else -> skill.level = level
             }
 
-            formationLevelsView.isFocusable = false
-            level1View.isFocusable = false
-            level2View.isFocusable = false
-            level3View.isFocusable = false
+            loseFocus()
 
             doAsync {
-                updatePlayer(player, playerFacade)
+                if (player != null) {
+                    player?.getSkillByName(skill.name)?.level = level
+                    playerFacade?.update(player!!)
+                }
             }
         }
-    }
-}
-
-private fun updatePlayer(player: Player?, playerFacade: PlayerFacade?) {
-    if (player != null) {
-        playerFacade?.update(player)
     }
 }
