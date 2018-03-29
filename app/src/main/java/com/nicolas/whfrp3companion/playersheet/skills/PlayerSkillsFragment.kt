@@ -10,8 +10,8 @@ import butterknife.BindView
 import butterknife.ButterKnife
 import butterknife.Unbinder
 import com.nicolas.whfrp3companion.R
-import com.nicolas.whfrp3companion.fragments.skills.SkillsExpandableAdapter
 import com.nicolas.whfrp3companion.shared.PLAYER_NAME_INTENT_ARGUMENT
+import com.nicolas.whfrp3companion.shared.adapters.SkillsExpandableAdapter
 import com.nicolas.whfrp3database.PlayerFacade
 import com.nicolas.whfrp3database.entities.player.Player
 

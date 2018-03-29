@@ -1,4 +1,4 @@
-package com.nicolas.whfrp3companion.fragments.skills
+package com.nicolas.whfrp3companion.shared.adapters
 
 import android.annotation.SuppressLint
 import android.content.Context
