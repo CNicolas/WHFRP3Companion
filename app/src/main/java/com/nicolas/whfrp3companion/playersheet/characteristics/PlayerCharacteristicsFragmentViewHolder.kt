@@ -4,12 +4,15 @@ import android.view.View
 import android.widget.EditText
 import butterknife.BindView
 import butterknife.ButterKnife
+import butterknife.OnClick
 import butterknife.Unbinder
 import com.nicolas.whfrp3companion.R
+import com.nicolas.whfrp3database.entities.hand.Hand
 import com.nicolas.whfrp3database.entities.player.CharacteristicValue
 import com.nicolas.whfrp3database.entities.player.Player
+import org.jetbrains.anko.longToast
 
-internal class PlayerCharacteristicsFragmentViewHolder(view: View) {
+internal class PlayerCharacteristicsFragmentViewHolder(private val view: View) {
     @BindView(R.id.career)
     lateinit var career: EditText
     @BindView(R.id.rank)
@@ -58,6 +61,36 @@ internal class PlayerCharacteristicsFragmentViewHolder(view: View) {
     private var unbinder: Unbinder = ButterKnife.bind(this, view)
 
     private var playerName: String = ""
+
+    @OnClick(R.id.launch_strength)
+    fun launchStrength() {
+        launchDiceRollerActivity(CharacteristicValue(strength.intValue, strengthFortune.intValue).getHand("Strength"))
+    }
+
+    @OnClick(R.id.launch_toughness)
+    fun launchToughness() {
+        launchDiceRollerActivity(CharacteristicValue(toughness.intValue, toughnessFortune.intValue).getHand("Toughness"))
+    }
+
+    @OnClick(R.id.launch_agility)
+    fun launchAgility() {
+        launchDiceRollerActivity(CharacteristicValue(agility.intValue, agilityFortune.intValue).getHand("Agility"))
+    }
+
+    @OnClick(R.id.launch_intelligence)
+    fun launchIntelligence() {
+        launchDiceRollerActivity(CharacteristicValue(intelligence.intValue, intelligenceFortune.intValue).getHand("Intelligence"))
+    }
+
+    @OnClick(R.id.launch_willpower)
+    fun launchWillpower() {
+        launchDiceRollerActivity(CharacteristicValue(willpower.intValue, willpowerFortune.intValue).getHand("Willpower"))
+    }
+
+    @OnClick(R.id.launch_fellowship)
+    fun launchFellowship() {
+        launchDiceRollerActivity(CharacteristicValue(fellowship.intValue, fellowshipFortune.intValue).getHand("Fellowship"))
+    }
 
     fun fillViews(player: Player) {
         playerName = player.name
@@ -109,6 +142,13 @@ internal class PlayerCharacteristicsFragmentViewHolder(view: View) {
 
     fun destroy() {
         unbinder.unbind()
+    }
+
+    private fun launchDiceRollerActivity(hand: Hand) {
+//        view.context.startActivity(view.context.intentFor<DiceRollerActivity>(
+//                HAND_INTENT_ARGUMENT to hand
+//        ))
+        view.context.longToast("$hand")
     }
 
     private val EditText.intValue: Int
