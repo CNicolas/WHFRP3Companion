@@ -7,10 +7,12 @@ import butterknife.ButterKnife
 import butterknife.OnClick
 import butterknife.Unbinder
 import com.nicolas.whfrp3companion.R
+import com.nicolas.whfrp3companion.shared.HAND_INTENT_ARGUMENT
+import com.nicolas.whfrp3companion.shared.activities.DiceRollerActivity
 import com.nicolas.whfrp3database.entities.hand.Hand
 import com.nicolas.whfrp3database.entities.player.CharacteristicValue
 import com.nicolas.whfrp3database.entities.player.Player
-import org.jetbrains.anko.longToast
+import org.jetbrains.anko.intentFor
 
 internal class PlayerCharacteristicsFragmentViewHolder(private val view: View) {
     @BindView(R.id.career)
@@ -145,10 +147,9 @@ internal class PlayerCharacteristicsFragmentViewHolder(private val view: View) {
     }
 
     private fun launchDiceRollerActivity(hand: Hand) {
-//        view.context.startActivity(view.context.intentFor<DiceRollerActivity>(
-//                HAND_INTENT_ARGUMENT to hand
-//        ))
-        view.context.longToast("$hand")
+        view.context.startActivity(view.context.intentFor<DiceRollerActivity>(
+                HAND_INTENT_ARGUMENT to hand
+        ))
     }
 
     private val EditText.intValue: Int
