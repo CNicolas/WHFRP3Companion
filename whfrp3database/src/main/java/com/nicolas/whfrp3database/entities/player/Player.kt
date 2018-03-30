@@ -29,10 +29,9 @@ data class Player(override var name: String,
                   var experience: Int = 0,
                   var maxExperience: Int = 0,
 
-                  var reckless: Int = 0,
-                  var maxReckless: Int = 0,
-                  var conservative: Int = 0,
                   var maxConservative: Int = 0,
+                  var maxReckless: Int = 0,
+                  var stance: Int = 0,
 
                   var wounds: Int = 0,
                   var maxWounds: Int = 0,

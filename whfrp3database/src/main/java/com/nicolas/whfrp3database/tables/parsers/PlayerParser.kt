@@ -28,21 +28,20 @@ internal class PlayerParser : RowParser<Player> {
                     rank = columns[19].toInt(),
                     experience = columns[20].toInt(),
                     maxExperience = columns[21].toInt(),
-                    reckless = columns[22].toInt(),
+                    maxConservative = columns[22].toInt(),
                     maxReckless = columns[23].toInt(),
-                    conservative = columns[24].toInt(),
-                    maxConservative = columns[25].toInt(),
-                    wounds = columns[26].toInt(),
-                    maxWounds = columns[27].toInt(),
-                    corruption = columns[28].toInt(),
-                    maxCorruption = columns[29].toInt(),
-                    stress = columns[30].toInt(),
-                    exhaustion = columns[31].toInt(),
-                    brass = columns[32].toInt(),
-                    silver = columns[33].toInt(),
-                    gold = columns[34].toInt(),
-                    skills = Gson().fromJson(columns[35] as String, genericType<List<Skill>>()),
-                    talents = Gson().fromJson(columns[36] as String, genericType<List<Talent>>())
+                    stance = columns[24].toInt(),
+                    wounds = columns[25].toInt(),
+                    maxWounds = columns[26].toInt(),
+                    corruption = columns[27].toInt(),
+                    maxCorruption = columns[28].toInt(),
+                    stress = columns[29].toInt(),
+                    exhaustion = columns[30].toInt(),
+                    brass = columns[31].toInt(),
+                    silver = columns[32].toInt(),
+                    gold = columns[33].toInt(),
+                    skills = Gson().fromJson(columns[34] as String, genericType<List<Skill>>()),
+                    talents = Gson().fromJson(columns[35] as String, genericType<List<Talent>>())
             )
 }
 
@@ -80,10 +79,9 @@ fun Player.toColumns(): Map<String, Any?> = mapOf(
         "rank" to rank,
         "experience" to experience,
         "maxExperience" to maxExperience,
-        "reckless" to reckless,
-        "maxReckless" to maxReckless,
-        "conservative" to conservative,
         "maxConservative" to maxConservative,
+        "maxReckless" to maxReckless,
+        "stance" to stance,
         // endregion
 
         // region INVENTORY
