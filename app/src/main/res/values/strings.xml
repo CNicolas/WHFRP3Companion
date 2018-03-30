@@ -71,7 +71,7 @@
     <string name="max_wounds">Max wounds</string>
     <string name="max_corruption">Max corruption</string>
     <string name="saved">Saved</string>
-    <string name="xp">XP</string>
+    <string name="xp" translatable="false">XP</string>
 
     <string name="slash" translatable="false">/</string>
     <string name="hyphen" translatable="false">-</string>
