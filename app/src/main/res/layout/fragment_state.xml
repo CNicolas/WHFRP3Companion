@@ -194,7 +194,7 @@
               android:hint="@string/zero"
               app:layout_constraintTop_toBottomOf="@id/stance"
               app:layout_constraintRight_toLeftOf="@+id/soak"
-              app:layout_constraintBottom_toBottomOf="parent"
+              app:layout_constraintBottom_toTopOf="@+id/encumbrance_bar"
               app:layout_constraintLeft_toLeftOf="parent" />
     <TextView android:id="@+id/soak"
               android:layout_width="0dp"
@@ -207,7 +207,41 @@
               android:hint="@string/zero"
               app:layout_constraintTop_toBottomOf="@id/stance"
               app:layout_constraintRight_toRightOf="parent"
-              app:layout_constraintBottom_toBottomOf="parent"
+              app:layout_constraintBottom_toTopOf="@+id/encumbrance_bar"
               app:layout_constraintLeft_toRightOf="@id/defense" />
+    <!--endregion-->
+
+    <!--region Encumbrance-->
+    <ImageView android:id="@+id/encumbrance_icon"
+               android:layout_width="0dp"
+               android:layout_height="wrap_content"
+               android:src="@drawable/ic_weight_black_36"
+               android:contentDescription="@string/encumbrance"
+               app:layout_constraintTop_toBottomOf="@id/defense"
+               app:layout_constraintRight_toLeftOf="@+id/encumbrance_bar"
+               app:layout_constraintBottom_toBottomOf="parent"
+               app:layout_constraintLeft_toLeftOf="parent"
+               app:layout_constraintHorizontal_weight="1" />
+    <SeekBar android:id="@+id/encumbrance_bar"
+             android:layout_width="0dp"
+             android:layout_height="40dp"
+             android:thumb="@null"
+             android:focusable="false"
+             app:layout_constraintTop_toBottomOf="@id/defense"
+             app:layout_constraintRight_toLeftOf="@+id/encumbrance_label"
+             app:layout_constraintBottom_toBottomOf="parent"
+             app:layout_constraintLeft_toRightOf="@id/encumbrance_icon"
+             app:layout_constraintHorizontal_weight="4" />
+    <TextView android:id="@+id/encumbrance_label"
+              android:layout_width="0dp"
+              android:layout_height="40dp"
+              android:gravity="center"
+              android:textSize="@dimen/medium_text_size"
+              android:hint="@string/zero"
+              app:layout_constraintTop_toBottomOf="@id/soak"
+              app:layout_constraintRight_toRightOf="parent"
+              app:layout_constraintBottom_toBottomOf="parent"
+              app:layout_constraintLeft_toRightOf="@id/encumbrance_bar"
+              app:layout_constraintHorizontal_weight="3" />
     <!--endregion-->
 </android.support.constraint.ConstraintLayout>

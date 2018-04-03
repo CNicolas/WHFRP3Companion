@@ -64,4 +64,5 @@
     <string name="stress">Stress</string>
     <string name="exhaustion">Fatigue</string>
     <string name="wounds">Blessures</string>
+    <string name="encumbrance">Encombrement</string>
 </resources>

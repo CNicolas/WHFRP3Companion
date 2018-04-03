@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.SeekBar
 import android.widget.TextView
 import butterknife.BindView
 import butterknife.ButterKnife
@@ -46,6 +47,11 @@ class PlayerStateFragment : Fragment() {
     @BindView(R.id.soak)
     lateinit var soakView: TextView
 
+    @BindView(R.id.encumbrance_bar)
+    lateinit var encumbranceBarView: SeekBar
+    @BindView(R.id.encumbrance_label)
+    lateinit var encumbranceLabel: TextView
+
     private lateinit var unbinder: Unbinder
 
     private lateinit var playerFacade: PlayerFacade
@@ -76,6 +82,11 @@ class PlayerStateFragment : Fragment() {
 
         defenseView.text = "${player.defense}"
         soakView.text = "${player.soak}"
+
+        encumbranceBarView.max = player.maxEncumbrance
+        encumbranceBarView.progress = player.encumbrance
+        encumbranceBarView.isEnabled = false
+        encumbranceLabel.text = "${player.encumbrance} / ${player.maxEncumbrance}"
 
         return resultingView
     }
