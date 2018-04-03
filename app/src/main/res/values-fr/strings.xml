@@ -61,4 +61,6 @@
     <string name="max_corruption">Max corruption</string>
     <string name="max_wounds">Points de blessure</string>
     <string name="race">Race</string>
+    <string name="stress">Stress</string>
+    <string name="exhaustion">Fatigue</string>
 </resources>

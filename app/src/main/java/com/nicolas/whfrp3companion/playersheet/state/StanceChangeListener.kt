@@ -3,13 +3,16 @@ package com.nicolas.whfrp3companion.playersheet.state
 import android.content.Context
 import android.content.res.ColorStateList
 import android.support.v4.content.ContextCompat
+import android.widget.TextView
 import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3database.PlayerFacade
 import com.nicolas.whfrp3database.entities.player.Player
 import org.adw.library.widgets.discreteseekbar.DiscreteSeekBar
 import org.jetbrains.anko.doAsync
 
-class StanceChangeListener(context: Context, private val player: Player) : DiscreteSeekBar.OnProgressChangeListener {
+class StanceChangeListener(context: Context,
+                           private val player: Player,
+                           private val currentStanceView: TextView) : DiscreteSeekBar.OnProgressChangeListener {
     private val playerFacade = PlayerFacade(context)
 
     private val conservativeColor = ContextCompat.getColor(context, R.color.conservative)
@@ -19,36 +22,33 @@ class StanceChangeListener(context: Context, private val player: Player) : Discr
     override fun onProgressChanged(seekBar: DiscreteSeekBar, value: Int, fromUser: Boolean) {
         seekBar.changeColorForStance(value)
         player.stance = value
+        currentStanceView.text = "$value"
 
         doAsync {
             playerFacade.update(player)
         }
     }
 
-    override fun onStartTrackingTouch(seekBar: DiscreteSeekBar?) {}
+    override fun onStartTrackingTouch(seekBar: DiscreteSeekBar) {
+        seekBar.changeColorForStance(seekBar.progress)
+    }
 
-    override fun onStopTrackingTouch(seekBar: DiscreteSeekBar?) {}
+    override fun onStopTrackingTouch(seekBar: DiscreteSeekBar) {
+        seekBar.changeColorForStance(seekBar.progress)
+    }
 
     private fun DiscreteSeekBar.changeColorForStance(value: Int) {
-        when {
-            value < 0 -> {
-                setRippleColor(ColorStateList.valueOf(conservativeColor))
-                setScrubberColor(conservativeColor)
-                setThumbColor(ColorStateList.valueOf(conservativeColor), conservativeColor)
-                setTrackColor(conservativeColor)
-            }
-            value > 0 -> {
-                setRippleColor(ColorStateList.valueOf(recklessColor))
-                setScrubberColor(recklessColor)
-                setThumbColor(ColorStateList.valueOf(recklessColor), recklessColor)
-                setTrackColor(recklessColor)
-            }
-            else -> {
-                setRippleColor(ColorStateList.valueOf(neutralColor))
-                setScrubberColor(neutralColor)
-                setThumbColor(ColorStateList.valueOf(neutralColor), neutralColor)
-                setTrackColor(neutralColor)
-            }
+        val (colorStateList, color) = when {
+            value < 0 -> ColorStateList.valueOf(conservativeColor) to conservativeColor
+            value > 0 -> ColorStateList.valueOf(recklessColor) to recklessColor
+            else -> ColorStateList.valueOf(neutralColor) to neutralColor
         }
+
+        setRippleColor(colorStateList)
+        setScrubberColor(colorStateList)
+        setThumbColor(colorStateList, color)
+        setTrackColor(colorStateList)
+
+        currentStanceView.setTextColor(colorStateList)
     }
 }

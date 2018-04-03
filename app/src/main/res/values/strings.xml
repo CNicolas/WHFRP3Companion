@@ -72,8 +72,11 @@
     <string name="max_corruption">Max corruption</string>
     <string name="saved">Saved</string>
     <string name="xp" translatable="false">XP</string>
+    <string name="stress">Stress</string>
+    <string name="exhaustion">Exhaustion</string>
 
     <string name="slash" translatable="false">/</string>
     <string name="hyphen" translatable="false">-</string>
+    <string name="plus" translatable="false">+</string>
     <string name="lorem">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor…</string>
 </resources>

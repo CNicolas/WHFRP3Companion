@@ -24,6 +24,19 @@ class PlayerStateFragment : Fragment() {
     lateinit var removeWoundView: Button
     @BindView(R.id.wounds)
     lateinit var woundsView: TextView
+
+    @BindView(R.id.remove_stress)
+    lateinit var removeStressView: Button
+    @BindView(R.id.stress)
+    lateinit var stressView: TextView
+
+    @BindView(R.id.remove_exhaustion)
+    lateinit var removeExhaustionView: Button
+    @BindView(R.id.exhaustion)
+    lateinit var exhaustionView: TextView
+
+    @BindView(R.id.current_stance)
+    lateinit var currentStanceView: TextView
     @BindView(R.id.stance)
     lateinit var stanceView: DiscreteSeekBar
 
@@ -47,14 +60,13 @@ class PlayerStateFragment : Fragment() {
         removeWoundView.isEnabled = player.wounds > 0
         updateWoundsText()
 
-        stanceView.min = -player.maxConservative
-        stanceView.max = player.maxReckless
-        stanceView.setOnProgressChangeListener(StanceChangeListener(context!!, player))
-        stanceView.progress = player.stance
-        stanceView.numericTransformer = object : DiscreteSeekBar.NumericTransformer() {
-            override fun transform(value: Int): Int = abs(value)
+        removeStressView.isEnabled = player.stress > 0
+        updateStressText()
 
-        }
+        removeExhaustionView.isEnabled = player.exhaustion > 0
+        updateExhaustionText()
+
+        setupStance()
 
         return resultingView
     }
@@ -91,8 +103,80 @@ class PlayerStateFragment : Fragment() {
         }
     }
 
+    @OnClick(R.id.remove_stress)
+    fun removeStress() {
+        if (player.stress > 0) {
+            removeStressView.isEnabled = true
+            player.stress -= 1
+        } else {
+            removeStressView.isEnabled = false
+        }
+
+        updateStressText()
+
+        doAsync {
+            playerFacade.update(player)
+        }
+    }
+
+    @OnClick(R.id.add_stress)
+    fun addStress() {
+        player.stress += 1
+
+        updateStressText()
+
+        doAsync {
+            playerFacade.update(player)
+        }
+    }
+
+    @OnClick(R.id.remove_exhaustion)
+    fun removeExhaustion() {
+        if (player.exhaustion > 0) {
+            removeExhaustionView.isEnabled = true
+            player.exhaustion -= 1
+        } else {
+            removeExhaustionView.isEnabled = false
+        }
+
+        updateExhaustionText()
+
+        doAsync {
+            playerFacade.update(player)
+        }
+    }
+
+    @OnClick(R.id.add_exhaustion)
+    fun addExhaustion() {
+        player.exhaustion += 1
+
+        updateExhaustionText()
+
+        doAsync {
+            playerFacade.update(player)
+        }
+    }
+
     private fun updateWoundsText() {
         woundsView.text = "${player.wounds} / ${player.maxWounds}"
+    }
+
+    private fun updateStressText() {
+        stressView.text = "${player.stress}"
+    }
+
+    private fun updateExhaustionText() {
+        exhaustionView.text = "${player.exhaustion}"
+    }
+
+    private fun setupStance() {
+        stanceView.min = -player.maxConservative
+        stanceView.max = player.maxReckless
+        stanceView.setOnProgressChangeListener(StanceChangeListener(context!!, player, currentStanceView))
+        stanceView.progress = player.stance
+        stanceView.numericTransformer = object : DiscreteSeekBar.NumericTransformer() {
+            override fun transform(value: Int): Int = abs(value)
+        }
     }
 
     companion object {
