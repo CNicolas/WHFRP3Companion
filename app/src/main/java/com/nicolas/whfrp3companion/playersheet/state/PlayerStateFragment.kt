@@ -41,6 +41,11 @@ class PlayerStateFragment : Fragment() {
     @BindView(R.id.stance)
     lateinit var stanceView: DiscreteSeekBar
 
+    @BindView(R.id.defense)
+    lateinit var defenseView: TextView
+    @BindView(R.id.soak)
+    lateinit var soakView: TextView
+
     private lateinit var unbinder: Unbinder
 
     private lateinit var playerFacade: PlayerFacade
@@ -68,6 +73,9 @@ class PlayerStateFragment : Fragment() {
         updateExhaustionText()
 
         setupStance()
+
+        defenseView.text = "${player.defense}"
+        soakView.text = "${player.soak}"
 
         return resultingView
     }
