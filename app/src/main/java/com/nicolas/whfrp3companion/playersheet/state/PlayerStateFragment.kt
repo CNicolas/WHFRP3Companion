@@ -11,6 +11,7 @@ import butterknife.BindView
 import butterknife.ButterKnife
 import butterknife.OnClick
 import butterknife.Unbinder
+import com.nicolas.playersheet.extensions.*
 import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.shared.PLAYER_NAME_INTENT_ARGUMENT
 import com.nicolas.whfrp3database.PlayerFacade
@@ -78,12 +79,8 @@ class PlayerStateFragment : Fragment() {
 
     @OnClick(R.id.remove_wound)
     fun removeWound() {
-        if (player.wounds > 0) {
-            removeWoundView.isEnabled = true
-            player.wounds -= 1
-        } else {
-            removeWoundView.isEnabled = false
-        }
+        player.heal(1)
+        removeWoundView.isEnabled = player.wounds > 0
 
         updateWoundsText()
 
@@ -94,7 +91,8 @@ class PlayerStateFragment : Fragment() {
 
     @OnClick(R.id.add_wound)
     fun addWound() {
-        player.wounds += 1
+        player.loseHealth(1)
+        removeWoundView.isEnabled = true
 
         updateWoundsText()
 
@@ -105,12 +103,8 @@ class PlayerStateFragment : Fragment() {
 
     @OnClick(R.id.remove_stress)
     fun removeStress() {
-        if (player.stress > 0) {
-            removeStressView.isEnabled = true
-            player.stress -= 1
-        } else {
-            removeStressView.isEnabled = false
-        }
+        player.removeStress(1)
+        removeStressView.isEnabled = player.stress > 0
 
         updateStressText()
 
@@ -121,7 +115,8 @@ class PlayerStateFragment : Fragment() {
 
     @OnClick(R.id.add_stress)
     fun addStress() {
-        player.stress += 1
+        player.addStress(1)
+        removeStressView.isEnabled = true
 
         updateStressText()
 
@@ -132,12 +127,8 @@ class PlayerStateFragment : Fragment() {
 
     @OnClick(R.id.remove_exhaustion)
     fun removeExhaustion() {
-        if (player.exhaustion > 0) {
-            removeExhaustionView.isEnabled = true
-            player.exhaustion -= 1
-        } else {
-            removeExhaustionView.isEnabled = false
-        }
+        player.removeExhaustion(1)
+        removeExhaustionView.isEnabled = player.exhaustion > 0
 
         updateExhaustionText()
 
@@ -148,7 +139,8 @@ class PlayerStateFragment : Fragment() {
 
     @OnClick(R.id.add_exhaustion)
     fun addExhaustion() {
-        player.exhaustion += 1
+        player.addExhaustion(1)
+        removeExhaustionView.isEnabled = true
 
         updateExhaustionText()
 

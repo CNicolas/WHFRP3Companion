@@ -63,4 +63,5 @@
     <string name="race">Race</string>
     <string name="stress">Stress</string>
     <string name="exhaustion">Fatigue</string>
+    <string name="wounds">Blessures</string>
 </resources>

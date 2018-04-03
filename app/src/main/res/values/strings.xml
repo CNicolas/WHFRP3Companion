@@ -69,6 +69,7 @@
     <string name="size">Size</string>
     <string name="description">Description</string>
     <string name="max_wounds">Max wounds</string>
+    <string name="wounds">Wounds</string>
     <string name="max_corruption">Max corruption</string>
     <string name="saved">Saved</string>
     <string name="xp" translatable="false">XP</string>

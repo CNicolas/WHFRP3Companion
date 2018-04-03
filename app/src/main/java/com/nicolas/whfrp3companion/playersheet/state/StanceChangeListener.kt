@@ -9,6 +9,7 @@ import com.nicolas.whfrp3database.PlayerFacade
 import com.nicolas.whfrp3database.entities.player.Player
 import org.adw.library.widgets.discreteseekbar.DiscreteSeekBar
 import org.jetbrains.anko.doAsync
+import java.lang.Math.abs
 
 class StanceChangeListener(context: Context,
                            private val player: Player,
@@ -22,7 +23,7 @@ class StanceChangeListener(context: Context,
     override fun onProgressChanged(seekBar: DiscreteSeekBar, value: Int, fromUser: Boolean) {
         seekBar.changeColorForStance(value)
         player.stance = value
-        currentStanceView.text = "$value"
+        currentStanceView.text = abs(value).toString()
 
         doAsync {
             playerFacade.update(player)
