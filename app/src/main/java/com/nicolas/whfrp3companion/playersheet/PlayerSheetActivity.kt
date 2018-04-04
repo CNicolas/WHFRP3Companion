@@ -1,5 +1,6 @@
 package com.nicolas.whfrp3companion.playersheet
 
+import android.content.Context
 import android.content.res.Configuration
 import android.os.Bundle
 import android.support.design.widget.NavigationView
@@ -9,6 +10,7 @@ import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.view.MenuItem
+import android.view.inputmethod.InputMethodManager
 import butterknife.BindView
 import butterknife.ButterKnife
 import com.nicolas.whfrp3companion.R
@@ -86,6 +88,7 @@ class PlayerSheetActivity : AppCompatActivity() {
                 .commit()
 
         drawer.closeDrawer(GravityCompat.START)
+        closeKeyboard()
     }
 
     private fun displaySelectedFragment(menuItem: MenuItem) {
@@ -99,5 +102,10 @@ class PlayerSheetActivity : AppCompatActivity() {
             displaySelectedFragment(it)
             true
         }
+    }
+
+    private fun closeKeyboard() {
+        val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(drawer.windowToken, 0)
     }
 }
