@@ -219,7 +219,7 @@
                android:contentDescription="@string/encumbrance"
                app:layout_constraintTop_toBottomOf="@id/defense"
                app:layout_constraintRight_toLeftOf="@+id/encumbrance_bar"
-               app:layout_constraintBottom_toBottomOf="parent"
+               app:layout_constraintBottom_toTopOf="@+id/gold"
                app:layout_constraintLeft_toLeftOf="parent"
                app:layout_constraintHorizontal_weight="1" />
     <SeekBar android:id="@+id/encumbrance_bar"
@@ -229,7 +229,7 @@
              android:focusable="false"
              app:layout_constraintTop_toBottomOf="@id/defense"
              app:layout_constraintRight_toLeftOf="@+id/encumbrance_label"
-             app:layout_constraintBottom_toBottomOf="parent"
+             app:layout_constraintBottom_toTopOf="@+id/gold"
              app:layout_constraintLeft_toRightOf="@id/encumbrance_icon"
              app:layout_constraintHorizontal_weight="4" />
     <TextView android:id="@+id/encumbrance_label"
@@ -240,8 +240,56 @@
               android:hint="@string/zero"
               app:layout_constraintTop_toBottomOf="@id/soak"
               app:layout_constraintRight_toRightOf="parent"
-              app:layout_constraintBottom_toBottomOf="parent"
+              app:layout_constraintBottom_toTopOf="@+id/gold"
               app:layout_constraintLeft_toRightOf="@id/encumbrance_bar"
               app:layout_constraintHorizontal_weight="3" />
+    <!--endregion-->
+
+    <!--region Money-->
+    <TextView android:id="@+id/gold"
+              android:layout_width="0dp"
+              android:layout_height="40dp"
+              android:gravity="center"
+              android:paddingStart="@dimen/medium_padding"
+              android:drawableStart="@drawable/coins_gold"
+              android:textSize="@dimen/medium_text_size"
+              android:hint="@string/zero"
+              app:layout_constraintTop_toBottomOf="@id/encumbrance_bar"
+              app:layout_constraintRight_toLeftOf="@+id/silver"
+              app:layout_constraintBottom_toBottomOf="parent"
+              app:layout_constraintLeft_toLeftOf="parent" />
+    <TextView android:id="@+id/silver"
+              android:layout_width="0dp"
+              android:layout_height="40dp"
+              android:gravity="center"
+              android:paddingStart="@dimen/medium_padding"
+              android:drawableStart="@drawable/coins_silver"
+              android:textSize="@dimen/medium_text_size"
+              android:hint="@string/zero"
+              app:layout_constraintTop_toBottomOf="@id/encumbrance_bar"
+              app:layout_constraintRight_toLeftOf="@+id/brass"
+              app:layout_constraintBottom_toBottomOf="parent"
+              app:layout_constraintLeft_toRightOf="@id/gold" />
+    <TextView android:id="@+id/brass"
+              android:layout_width="0dp"
+              android:layout_height="40dp"
+              android:gravity="center"
+              android:paddingStart="@dimen/medium_padding"
+              android:drawableStart="@drawable/coins_brass"
+              android:textSize="@dimen/medium_text_size"
+              android:hint="@string/zero"
+              app:layout_constraintTop_toBottomOf="@id/encumbrance_bar"
+              app:layout_constraintRight_toLeftOf="@+id/change_money"
+              app:layout_constraintBottom_toBottomOf="parent"
+              app:layout_constraintLeft_toRightOf="@id/silver" />
+    <Button android:id="@+id/change_money"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="@dimen/medium_padding"
+            android:text="@string/more_less"
+            app:layout_constraintTop_toBottomOf="@id/encumbrance_label"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/brass" />
     <!--endregion-->
 </android.support.constraint.ConstraintLayout>

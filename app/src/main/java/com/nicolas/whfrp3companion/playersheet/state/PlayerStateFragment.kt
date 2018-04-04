@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.NumberPicker
 import android.widget.SeekBar
 import android.widget.TextView
 import butterknife.BindView
@@ -18,7 +19,9 @@ import com.nicolas.whfrp3companion.shared.PLAYER_NAME_INTENT_ARGUMENT
 import com.nicolas.whfrp3database.PlayerFacade
 import com.nicolas.whfrp3database.entities.player.Player
 import org.adw.library.widgets.discreteseekbar.DiscreteSeekBar
+import org.jetbrains.anko.alert
 import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.toast
 import kotlin.math.abs
 
 class PlayerStateFragment : Fragment() {
@@ -51,6 +54,13 @@ class PlayerStateFragment : Fragment() {
     lateinit var encumbranceBarView: SeekBar
     @BindView(R.id.encumbrance_label)
     lateinit var encumbranceLabel: TextView
+
+    @BindView(R.id.gold)
+    lateinit var goldView: TextView
+    @BindView(R.id.silver)
+    lateinit var silverView: TextView
+    @BindView(R.id.brass)
+    lateinit var brassView: TextView
 
     private lateinit var unbinder: Unbinder
 
@@ -87,6 +97,10 @@ class PlayerStateFragment : Fragment() {
         encumbranceBarView.progress = player.encumbrance
         encumbranceBarView.isEnabled = false
         encumbranceLabel.text = "${player.encumbrance} / ${player.maxEncumbrance}"
+
+        goldView.text = "${player.gold}"
+        silverView.text = "${player.silver}"
+        brassView.text = "${player.brass}"
 
         return resultingView
     }
@@ -165,6 +179,28 @@ class PlayerStateFragment : Fragment() {
 
         doAsync {
             playerFacade.update(player)
+        }
+    }
+
+    @OnClick(R.id.change_money)
+    fun changeMoney() {
+        context?.alert {
+            titleResource = R.string.change_money
+            val dialogView = layoutInflater.inflate(R.layout.dialog_money, null)
+            positiveButton("Add") {
+                val goldAmount = (dialogView.findViewById(R.id.gold) as NumberPicker).value
+                val silverAmount = (dialogView.findViewById(R.id.silver) as NumberPicker).value
+                val brassAmount = (dialogView.findViewById(R.id.brass) as NumberPicker).value
+                dialogView.context.toast("Add : $goldAmount, $silverAmount, $brassAmount")
+                it.dismiss()
+            }
+            negativeButton("Remove") {
+                val goldAmount = (dialogView.findViewById(R.id.gold) as NumberPicker).value
+                val silverAmount = (dialogView.findViewById(R.id.silver) as NumberPicker).value
+                val brassAmount = (dialogView.findViewById(R.id.brass) as NumberPicker).value
+                dialogView.context.toast("Remove : $goldAmount, $silverAmount, $brassAmount")
+                it.dismiss()
+            }
         }
     }
 
