@@ -16,13 +16,14 @@
                app:layout_constraintRight_toLeftOf="@+id/silver_label"
                app:layout_constraintBottom_toTopOf="@+id/gold"
                app:layout_constraintLeft_toLeftOf="parent" />
-    <NumberPicker android:id="@+id/gold"
-                  android:layout_width="0dp"
-                  android:layout_height="wrap_content"
-                  app:layout_constraintTop_toBottomOf="@id/gold_label"
-                  app:layout_constraintRight_toLeftOf="@+id/silver"
-                  app:layout_constraintBottom_toBottomOf="parent"
-                  app:layout_constraintLeft_toLeftOf="parent" />
+    <com.nicolas.whfrp3companion.shared.components.NumberPickerMinMax android:id="@+id/gold"
+                                                                      android:layout_width="0dp"
+                                                                      android:layout_height="wrap_content"
+                                                                      app:maxValue="100"
+                                                                      app:layout_constraintTop_toBottomOf="@id/gold_label"
+                                                                      app:layout_constraintRight_toLeftOf="@+id/silver"
+                                                                      app:layout_constraintBottom_toBottomOf="parent"
+                                                                      app:layout_constraintLeft_toLeftOf="parent" />
 
     <ImageView android:id="@+id/silver_label"
                android:layout_width="0dp"
@@ -33,13 +34,14 @@
                app:layout_constraintRight_toLeftOf="@+id/brass_label"
                app:layout_constraintBottom_toTopOf="@+id/silver"
                app:layout_constraintLeft_toRightOf="@id/gold_label" />
-    <NumberPicker android:id="@+id/silver"
-                  android:layout_width="0dp"
-                  android:layout_height="wrap_content"
-                  app:layout_constraintTop_toBottomOf="@id/silver_label"
-                  app:layout_constraintRight_toLeftOf="@+id/brass"
-                  app:layout_constraintBottom_toBottomOf="parent"
-                  app:layout_constraintLeft_toRightOf="@id/gold" />
+    <com.nicolas.whfrp3companion.shared.components.NumberPickerMinMax android:id="@+id/silver"
+                                                                      android:layout_width="0dp"
+                                                                      android:layout_height="wrap_content"
+                                                                      app:maxValue="100"
+                                                                      app:layout_constraintTop_toBottomOf="@id/silver_label"
+                                                                      app:layout_constraintRight_toLeftOf="@+id/brass"
+                                                                      app:layout_constraintBottom_toBottomOf="parent"
+                                                                      app:layout_constraintLeft_toRightOf="@id/gold" />
 
     <ImageView android:id="@+id/brass_label"
                android:layout_width="0dp"
@@ -50,11 +52,12 @@
                app:layout_constraintRight_toRightOf="parent"
                app:layout_constraintBottom_toTopOf="@+id/brass"
                app:layout_constraintLeft_toRightOf="@id/silver_label" />
-    <NumberPicker android:id="@+id/brass"
-                  android:layout_width="0dp"
-                  android:layout_height="wrap_content"
-                  app:layout_constraintTop_toBottomOf="@id/brass_label"
-                  app:layout_constraintRight_toRightOf="parent"
-                  app:layout_constraintBottom_toBottomOf="parent"
-                  app:layout_constraintLeft_toRightOf="@id/silver" />
+    <com.nicolas.whfrp3companion.shared.components.NumberPickerMinMax android:id="@+id/brass"
+                                                                      android:layout_width="0dp"
+                                                                      android:layout_height="wrap_content"
+                                                                      app:maxValue="100"
+                                                                      app:layout_constraintTop_toBottomOf="@id/brass_label"
+                                                                      app:layout_constraintRight_toRightOf="parent"
+                                                                      app:layout_constraintBottom_toBottomOf="parent"
+                                                                      app:layout_constraintLeft_toRightOf="@id/silver" />
 </android.support.constraint.ConstraintLayout>

@@ -191,12 +191,6 @@ class PlayerStateFragment : Fragment() {
         val goldPicker = view.findViewById(R.id.gold) as NumberPicker
         val silverPicker = view.findViewById(R.id.silver) as NumberPicker
         val brassPicker = view.findViewById(R.id.brass) as NumberPicker
-        goldPicker.minValue = 0
-        goldPicker.maxValue = 100
-        silverPicker.minValue = 0
-        silverPicker.maxValue = 100
-        brassPicker.minValue = 0
-        brassPicker.maxValue = 100
 
         builder.setView(view)
         builder.setTitle(R.string.change_money)
