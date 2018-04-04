@@ -66,4 +66,6 @@
     <string name="wounds">Blessures</string>
     <string name="encumbrance">Encombrement</string>
     <string name="change_money">Ajouter ou retirer de l\'argent</string>
+    <string name="add">Ajouter</string>
+    <string name="remove">Supprimer</string>
 </resources>

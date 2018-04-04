@@ -1,5 +1,6 @@
 package com.nicolas.whfrp3companion.playersheet.state
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
@@ -19,7 +20,6 @@ import com.nicolas.whfrp3companion.shared.PLAYER_NAME_INTENT_ARGUMENT
 import com.nicolas.whfrp3database.PlayerFacade
 import com.nicolas.whfrp3database.entities.player.Player
 import org.adw.library.widgets.discreteseekbar.DiscreteSeekBar
-import org.jetbrains.anko.alert
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.toast
 import kotlin.math.abs
@@ -184,24 +184,40 @@ class PlayerStateFragment : Fragment() {
 
     @OnClick(R.id.change_money)
     fun changeMoney() {
-        context?.alert {
-            titleResource = R.string.change_money
-            val dialogView = layoutInflater.inflate(R.layout.dialog_money, null)
-            positiveButton("Add") {
-                val goldAmount = (dialogView.findViewById(R.id.gold) as NumberPicker).value
-                val silverAmount = (dialogView.findViewById(R.id.silver) as NumberPicker).value
-                val brassAmount = (dialogView.findViewById(R.id.brass) as NumberPicker).value
-                dialogView.context.toast("Add : $goldAmount, $silverAmount, $brassAmount")
-                it.dismiss()
-            }
-            negativeButton("Remove") {
-                val goldAmount = (dialogView.findViewById(R.id.gold) as NumberPicker).value
-                val silverAmount = (dialogView.findViewById(R.id.silver) as NumberPicker).value
-                val brassAmount = (dialogView.findViewById(R.id.brass) as NumberPicker).value
-                dialogView.context.toast("Remove : $goldAmount, $silverAmount, $brassAmount")
-                it.dismiss()
-            }
-        }
+        val builder = AlertDialog.Builder(activity)
+        val inflater = activity!!.layoutInflater
+        val view = inflater.inflate(R.layout.dialog_money, null, false)
+
+        val goldPicker = view.findViewById(R.id.gold) as NumberPicker
+        val silverPicker = view.findViewById(R.id.silver) as NumberPicker
+        val brassPicker = view.findViewById(R.id.brass) as NumberPicker
+        goldPicker.minValue = 0
+        goldPicker.maxValue = 100
+        silverPicker.minValue = 0
+        silverPicker.maxValue = 100
+        brassPicker.minValue = 0
+        brassPicker.maxValue = 100
+
+        builder.setView(view)
+        builder.setTitle(R.string.change_money)
+
+        builder.setNegativeButton(R.string.remove, { dialog, _ ->
+            val goldAmount = goldPicker.value
+            val silverAmount = silverPicker.value
+            val brassAmount = brassPicker.value
+            view.context.toast("Remove : $goldAmount, $silverAmount, $brassAmount")
+            dialog.dismiss()
+        })
+
+        builder.setPositiveButton(R.string.add, { dialog, _ ->
+            val goldAmount = goldPicker.value
+            val silverAmount = silverPicker.value
+            val brassAmount = brassPicker.value
+            view.context.toast("Add : $goldAmount, $silverAmount, $brassAmount")
+            dialog.dismiss()
+        })
+
+        builder.create().show()
     }
 
     private fun updateWoundsText() {
