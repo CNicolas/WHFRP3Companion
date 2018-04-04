@@ -1,4 +1,4 @@
-package com.nicolas.whfrp3companion.shared.adapters
+package com.nicolas.whfrp3companion.playersheet.skills
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -14,6 +14,7 @@ import com.nicolas.playersheet.extensions.createHand
 import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.shared.HAND_INTENT_ARGUMENT
 import com.nicolas.whfrp3companion.shared.activities.DiceRollerActivity
+import com.nicolas.whfrp3companion.shared.adapters.AbstractSkillsExpandableAdapter
 import com.nicolas.whfrp3companion.shared.enums.labelId
 import com.nicolas.whfrp3database.PlayerFacade
 import com.nicolas.whfrp3database.entities.player.Player
@@ -26,52 +27,11 @@ import com.nicolas.whfrp3database.extensions.getSpecializationByName
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.intentFor
 
-class SkillsExpandableAdapter(private val context: Context,
-                              private val skills: List<Skill>) : BaseExpandableListAdapter() {
+class PlayerSkillsExpandableAdapter(private val context: Context,
+                                    private val player: Player) : AbstractSkillsExpandableAdapter(player.skills) {
     private val inflater = LayoutInflater.from(context)
 
-    private var playerFacade: PlayerFacade? = null
-    private var player: Player? = null
-
-    constructor(context: Context, player: Player) : this(context, player.skills.toList()) {
-        this.player = player
-        playerFacade = PlayerFacade(context)
-    }
-
-    @SuppressLint("InflateParams")
-    override fun getChildView(groupPosition: Int,
-                              childPosition: Int,
-                              isLastChild: Boolean,
-                              convertView: View?,
-                              parent: ViewGroup?): View {
-        val (resultingView, holder) = getChildViewHolderOfView(convertView, parent)
-
-        val specialization = getChild(groupPosition, childPosition)
-
-        holder.player = player
-        holder.playerFacade = playerFacade
-        holder.skill = getGroup(groupPosition)
-        holder.specialization = specialization
-
-        if (player != null) {
-            holder.specializationNameCheckableView.text = specialization.name
-            holder.specializationNameCheckableView.isChecked = specialization.isSpecialized
-
-            holder.specializationNameCheckableView.visibility = View.VISIBLE
-            holder.launchSpecializationView.visibility = View.VISIBLE
-            holder.specializationNameView.visibility = View.GONE
-        } else {
-            holder.specializationNameView.text = specialization.name
-
-            holder.specializationNameView.visibility = View.VISIBLE
-            holder.specializationNameCheckableView.visibility = View.GONE
-            holder.launchSpecializationView.visibility = View.GONE
-        }
-
-        holder.loseFocus()
-
-        return resultingView
-    }
+    private val playerFacade: PlayerFacade = PlayerFacade(context)
 
     @SuppressLint("InflateParams")
     override fun getGroupView(groupPosition: Int,
@@ -93,40 +53,41 @@ class SkillsExpandableAdapter(private val context: Context,
         }
         holder.characteristicView.text = context.getString(skill.characteristic.labelId).substring(0..2)
 
-        if (player != null) {
-            holder.launchSkillView.visibility = View.VISIBLE
-            holder.formationLevelsView.visibility = View.VISIBLE
-
-            when (skill.level) {
-                1 -> holder.formationLevelsView.check(holder.level1View.id)
-                2 -> holder.formationLevelsView.check(holder.level2View.id)
-                3 -> holder.formationLevelsView.check(holder.level3View.id)
-                else -> holder.formationLevelsView.clearCheck()
-            }
-        } else {
-            holder.launchSkillView.visibility = View.GONE
-            holder.formationLevelsView.visibility = View.GONE
+        when (skill.level) {
+            1 -> holder.formationLevelsView.check(holder.level1View.id)
+            2 -> holder.formationLevelsView.check(holder.level2View.id)
+            3 -> holder.formationLevelsView.check(holder.level3View.id)
+            else -> holder.formationLevelsView.clearCheck()
         }
+
 
         holder.loseFocus()
 
         return resultingView
     }
 
-    // region Simple overrides
+    @SuppressLint("InflateParams")
+    override fun getChildView(groupPosition: Int,
+                              childPosition: Int,
+                              isLastChild: Boolean,
+                              convertView: View?,
+                              parent: ViewGroup?): View {
+        val (resultingView, holder) = getChildViewHolderOfView(convertView, parent)
 
-    override fun getGroup(groupPosition: Int) = skills[groupPosition]
-    override fun getGroupCount() = skills.size
-    override fun getGroupId(groupPosition: Int) = groupPosition.toLong()
+        val specialization = getChild(groupPosition, childPosition)
 
-    override fun getChild(groupPosition: Int, childPosition: Int) = getGroup(groupPosition).specializations[childPosition]
-    override fun getChildId(groupPosition: Int, childPosition: Int) = childPosition.toLong()
-    override fun getChildrenCount(groupPosition: Int) = getGroup(groupPosition).specializations.size
+        holder.player = player
+        holder.playerFacade = playerFacade
+        holder.skill = getGroup(groupPosition)
+        holder.specialization = specialization
 
-    override fun hasStableIds(): Boolean = false
-    override fun isChildSelectable(groupPosition: Int, childPosition: Int): Boolean = true
+        holder.specializationNameCheckableView.text = specialization.name
+        holder.specializationNameCheckableView.isChecked = specialization.isSpecialized
 
-    // endregion
+        holder.loseFocus()
+
+        return resultingView
+    }
 
     private fun getChildViewHolderOfView(savedView: View?, parent: ViewGroup?): Pair<View, ChildViewHolder> {
         var view = savedView
@@ -135,7 +96,7 @@ class SkillsExpandableAdapter(private val context: Context,
         if (view != null) {
             holder = view.tag as ChildViewHolder
         } else {
-            view = inflater.inflate(R.layout.list_skills_child, parent, false)
+            view = inflater.inflate(R.layout.list_player_skills_child, parent, false)
             holder = ChildViewHolder(view)
             view!!.tag = holder
         }
@@ -150,7 +111,7 @@ class SkillsExpandableAdapter(private val context: Context,
         if (view != null) {
             holder = view.tag as GroupViewHolder
         } else {
-            view = inflater.inflate(R.layout.list_skills_header, parent, false)
+            view = inflater.inflate(R.layout.list_player_skills_header, parent, false)
             holder = GroupViewHolder(view)
             view!!.tag = holder
         }
@@ -161,8 +122,6 @@ class SkillsExpandableAdapter(private val context: Context,
     internal class ChildViewHolder(private val view: View) {
         @BindView(R.id.specialization_name_checkable)
         lateinit var specializationNameCheckableView: CheckBox
-        @BindView(R.id.specialization_name)
-        lateinit var specializationNameView: TextView
         @BindView(R.id.launch_specialization)
         lateinit var launchSpecializationView: ImageButton
 

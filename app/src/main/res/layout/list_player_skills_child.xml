@@ -4,7 +4,7 @@
               android:layout_height="wrap_content"
               android:paddingStart="?android:attr/expandableListPreferredChildPaddingLeft">
 
-    <TextView android:id="@+id/specialization_name"
+    <CheckBox android:id="@+id/specialization_name_checkable"
               android:layout_width="0dp"
               android:layout_height="45dp"
               android:paddingStart="@dimen/medium_padding"
@@ -14,4 +14,14 @@
               android:textColor="@color/colorSecondaryText"
               android:hint="@string/page_specializations"
               android:layout_weight="9" />
+
+    <ImageButton android:id="@+id/launch_specialization"
+                 android:layout_width="wrap_content"
+                 android:layout_height="match_parent"
+                 android:layout_gravity="center_vertical"
+                 android:background="?android:attr/selectableItemBackground"
+                 android:tint="@color/colorSecondaryText"
+                 android:src="@drawable/ic_dice_black"
+                 android:contentDescription="@string/page_dice_roller"
+                 android:layout_weight="1" />
 </LinearLayout>
