@@ -98,9 +98,7 @@ class PlayerStateFragment : Fragment() {
         encumbranceBarView.isEnabled = false
         encumbranceLabel.text = "${player.encumbrance} / ${player.maxEncumbrance}"
 
-        goldView.text = "${player.gold}"
-        silverView.text = "${player.silver}"
-        brassView.text = "${player.brass}"
+        setupMoney()
 
         return resultingView
     }
@@ -117,9 +115,7 @@ class PlayerStateFragment : Fragment() {
 
         updateWoundsText()
 
-        doAsync {
-            playerFacade.update(player)
-        }
+        updatePlayerAsync()
     }
 
     @OnClick(R.id.add_wound)
@@ -129,9 +125,7 @@ class PlayerStateFragment : Fragment() {
 
         updateWoundsText()
 
-        doAsync {
-            playerFacade.update(player)
-        }
+        updatePlayerAsync()
     }
 
     @OnClick(R.id.remove_stress)
@@ -141,9 +135,7 @@ class PlayerStateFragment : Fragment() {
 
         updateStressText()
 
-        doAsync {
-            playerFacade.update(player)
-        }
+        updatePlayerAsync()
     }
 
     @OnClick(R.id.add_stress)
@@ -153,9 +145,7 @@ class PlayerStateFragment : Fragment() {
 
         updateStressText()
 
-        doAsync {
-            playerFacade.update(player)
-        }
+        updatePlayerAsync()
     }
 
     @OnClick(R.id.remove_exhaustion)
@@ -165,9 +155,7 @@ class PlayerStateFragment : Fragment() {
 
         updateExhaustionText()
 
-        doAsync {
-            playerFacade.update(player)
-        }
+        updatePlayerAsync()
     }
 
     @OnClick(R.id.add_exhaustion)
@@ -177,9 +165,7 @@ class PlayerStateFragment : Fragment() {
 
         updateExhaustionText()
 
-        doAsync {
-            playerFacade.update(player)
-        }
+        updatePlayerAsync()
     }
 
     @OnClick(R.id.change_money)
@@ -196,20 +182,23 @@ class PlayerStateFragment : Fragment() {
         builder.setTitle(R.string.change_money)
 
         builder.setNegativeButton(R.string.remove, { dialog, _ ->
-            val goldAmount = goldPicker.value
-            val silverAmount = silverPicker.value
-            val brassAmount = brassPicker.value
-            view.context.toast("Remove : $goldAmount, $silverAmount, $brassAmount")
-            dialog.dismiss()
+            try {
+                player.removeMoney(goldPicker.value, silverPicker.value, brassPicker.value)
+                dialog.dismiss()
+            } catch (exception: IllegalArgumentException) {
+                context?.toast(R.string.not_enough_money)
+            }
         })
 
         builder.setPositiveButton(R.string.add, { dialog, _ ->
-            val goldAmount = goldPicker.value
-            val silverAmount = silverPicker.value
-            val brassAmount = brassPicker.value
-            view.context.toast("Add : $goldAmount, $silverAmount, $brassAmount")
+            player.addMoney(goldPicker.value, silverPicker.value, brassPicker.value)
             dialog.dismiss()
         })
+
+        builder.setOnDismissListener {
+            updatePlayerAsync()
+            setupMoney()
+        }
 
         builder.create().show()
     }
@@ -233,6 +222,18 @@ class PlayerStateFragment : Fragment() {
         stanceView.progress = player.stance
         stanceView.numericTransformer = object : DiscreteSeekBar.NumericTransformer() {
             override fun transform(value: Int): Int = abs(value)
+        }
+    }
+
+    private fun setupMoney() {
+        goldView.text = "${player.gold}"
+        silverView.text = "${player.silver}"
+        brassView.text = "${player.brass}"
+    }
+
+    private fun updatePlayerAsync() {
+        doAsync {
+            playerFacade.update(player)
         }
     }
 
