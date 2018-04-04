@@ -21,7 +21,7 @@
     <string name="expertise">Expertise</string>
     <string name="fortune">Fortune</string>
     <string name="misfortune">Infortune</string>
-    <string name="reckless">Témrité</string>
+    <string name="reckless">Témérité</string>
     <string name="results">Résultats</string>
     <string name="page_dice_roller_statistics">Statistiques</string>
     <string name="statistics_average_result_hint">0 / lancé</string>
@@ -61,4 +61,12 @@
     <string name="max_corruption">Max corruption</string>
     <string name="max_wounds">Points de blessure</string>
     <string name="race">Race</string>
+    <string name="stress">Stress</string>
+    <string name="exhaustion">Fatigue</string>
+    <string name="wounds">Blessures</string>
+    <string name="encumbrance">Encombrement</string>
+    <string name="change_money">Ajouter ou retirer de l\'argent</string>
+    <string name="add">Ajouter</string>
+    <string name="remove">Supprimer</string>
+    <string name="not_enough_money">Pas assez d\'argent</string>
 </resources>

@@ -35,10 +35,9 @@ internal fun createPlayerTable(db: SQLiteDatabase) {
             "experience" to INTEGER,
             "maxExperience" to INTEGER,
 
-            "reckless" to INTEGER,
-            "maxReckless" to INTEGER,
-            "conservative" to INTEGER,
             "maxConservative" to INTEGER,
+            "maxReckless" to INTEGER,
+            "stance" to INTEGER,
 
             "wounds" to INTEGER,
             "maxWounds" to INTEGER,

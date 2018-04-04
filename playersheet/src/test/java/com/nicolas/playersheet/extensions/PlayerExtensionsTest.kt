@@ -5,7 +5,7 @@ import com.nicolas.whfrp3database.entities.player.CharacteristicValue
 import com.nicolas.whfrp3database.entities.player.Player
 import com.nicolas.whfrp3database.entities.player.playerLinked.item.Armor
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.Test
+import org.testng.annotations.Test
 
 class PlayerExtensionsTest {
     @Test

@@ -24,7 +24,10 @@ class NumberPickerMinMax : NumberPicker {
     private fun processAttributeSet(context: Context, attrs: AttributeSet) {
         val a = context.theme.obtainStyledAttributes(attrs, R.styleable.NumberPickerMinMax, 0, 0)
 
-        minValue = a.getInteger(R.styleable.NumberPickerMinMax_minValue, context.resources.getInteger(R.integer.zero))
-        maxValue = a.getInteger(R.styleable.NumberPickerMinMax_maxValue, context.resources.getInteger(R.integer.max_dice_number_picker))
+        val defaultMinValue = context.resources.getInteger(R.integer.zero)
+        minValue = a.getInteger(R.styleable.NumberPickerMinMax_minValue, defaultMinValue)
+
+        val defaultMaxValue = context.resources.getInteger(R.integer.max_dice_number_picker)
+        maxValue = a.getInteger(R.styleable.NumberPickerMinMax_maxValue, defaultMaxValue)
     }
 }
