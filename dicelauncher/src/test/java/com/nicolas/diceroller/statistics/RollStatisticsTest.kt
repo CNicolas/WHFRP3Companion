@@ -4,7 +4,7 @@ import com.nicolas.diceroller.roll.rollForStatistics
 import com.nicolas.diceroller.roll.rollHandForStatistics
 import com.nicolas.whfrp3database.entities.hand.Hand
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.Test
+import org.testng.annotations.Test
 
 class RollStatisticsTest {
     @Test

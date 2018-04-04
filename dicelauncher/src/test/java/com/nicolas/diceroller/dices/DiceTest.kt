@@ -5,7 +5,7 @@ import com.nicolas.diceroller.dices.impl.good.ConservativeDice
 import com.nicolas.diceroller.dices.impl.good.ExpertiseDice
 import com.nicolas.diceroller.dices.impl.good.RecklessDice
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.Test
+import org.testng.annotations.Test
 
 class DiceTest {
     @Test

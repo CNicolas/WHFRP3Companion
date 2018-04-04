@@ -2,7 +2,7 @@ package com.nicolas.diceroller.roll
 
 import com.nicolas.diceroller.dices.Face.*
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.Test
+import org.testng.annotations.Test
 
 class FacesReportTest {
     @Test
