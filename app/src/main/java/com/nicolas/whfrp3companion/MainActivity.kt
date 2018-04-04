@@ -12,9 +12,10 @@ import android.view.MenuItem
 import butterknife.BindView
 import butterknife.ButterKnife
 import butterknife.Unbinder
-import com.nicolas.whfrp3companion.activities.DiceRollerActivity
 import com.nicolas.whfrp3companion.fragments.EmptyFragment
 import com.nicolas.whfrp3companion.fragments.players.PlayersFragment
+import com.nicolas.whfrp3companion.shared.activities.DiceRollerActivity
+import com.nicolas.whfrp3companion.fragments.skills.SkillsFragment
 import org.jetbrains.anko.intentFor
 
 
@@ -75,7 +76,7 @@ class MainActivity : AppCompatActivity() {
             R.id.nav_home -> PlayersFragment.newInstance()
 //            R.id.nav_talents -> TalentTypesFragment()
 //            R.id.nav_items -> ItemsFragment()
-//            R.id.nav_skills -> SkillsFragment.newInstance()
+            R.id.nav_skills -> SkillsFragment.newInstance()
 //            R.id.nav_specializations -> SpecializationsFragment()
             else -> EmptyFragment.newInstance()
         }

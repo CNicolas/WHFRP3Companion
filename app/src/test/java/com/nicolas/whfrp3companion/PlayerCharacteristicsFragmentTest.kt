@@ -1,8 +1,7 @@
 package com.nicolas.whfrp3companion
 
 import android.widget.TextView
-import com.nicolas.whfrp3companion.playersheet.PlayerCharacteristicsFragment
-import com.nicolas.whfrp3database.entities.player.Player
+import com.nicolas.whfrp3companion.playersheet.characteristics.PlayerCharacteristicsFragment
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -15,7 +14,7 @@ import org.robolectric.shadows.support.v4.SupportFragmentTestUtil.startFragment
 class PlayerCharacteristicsFragmentTest {
     @Test
     fun should_be_initialized() {
-        val fragment = PlayerCharacteristicsFragment.newInstance(Player("John"))
+        val fragment = PlayerCharacteristicsFragment.newInstance("John")
 
         startFragment(fragment)
         assertThat(fragment).isNotNull()

@@ -1,5 +1,6 @@
 package com.nicolas.whfrp3companion.playersheet
 
+import android.content.Context
 import android.content.res.Configuration
 import android.os.Bundle
 import android.support.design.widget.NavigationView
@@ -9,13 +10,18 @@ import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.view.MenuItem
+import android.view.inputmethod.InputMethodManager
 import butterknife.BindView
 import butterknife.ButterKnife
-import com.nicolas.whfrp3companion.fragments.EmptyFragment
-import com.nicolas.whfrp3companion.PLAYER_INTENT_ARGUMENT
 import com.nicolas.whfrp3companion.R
+import com.nicolas.whfrp3companion.fragments.EmptyFragment
+import com.nicolas.whfrp3companion.playersheet.characteristics.PlayerCharacteristicsFragment
+import com.nicolas.whfrp3companion.playersheet.skills.PlayerSkillsFragment
+import com.nicolas.whfrp3companion.playersheet.state.PlayerStateFragment
+import com.nicolas.whfrp3companion.shared.PLAYER_NAME_INTENT_ARGUMENT
+import com.nicolas.whfrp3companion.shared.enums.labelId
+import com.nicolas.whfrp3database.PlayerFacade
 import com.nicolas.whfrp3database.entities.player.Player
-import org.jetbrains.anko.longToast
 
 class PlayerSheetActivity : AppCompatActivity() {
     private lateinit var player: Player
@@ -29,7 +35,8 @@ class PlayerSheetActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_playersheet)
 
-        player = intent.extras.getSerializable(PLAYER_INTENT_ARGUMENT) as Player
+        player = PlayerFacade(this).find(intent.extras.getString(PLAYER_NAME_INTENT_ARGUMENT))!!
+        title = "${player.name} - ${getString(player.race.labelId)}"
 
         ButterKnife.bind(this)
 
@@ -68,9 +75,9 @@ class PlayerSheetActivity : AppCompatActivity() {
 
     private fun displaySelectedFragment(menuItemId: Int) {
         val fragment = when (menuItemId) {
-            R.id.nav_player_characteristics -> PlayerCharacteristicsFragment.newInstance(player)
-//          R.id.nav_player_state -> TalentTypesFragment()
-//          R.id.nav_player_skills -> ItemsFragment()
+            R.id.nav_player_characteristics -> PlayerCharacteristicsFragment.newInstance(player.name)
+            R.id.nav_player_state -> PlayerStateFragment.newInstance(player.name)
+            R.id.nav_player_skills -> PlayerSkillsFragment.newInstance(player.name)
 //          R.id.nav_player_inventory -> SkillsFragment()
 //          R.id.nav_player_actions -> SpecializationsFragment()
 //            R.id.nav_player_talents -> PlayerTalentsFragment()
@@ -82,14 +89,13 @@ class PlayerSheetActivity : AppCompatActivity() {
                 .commit()
 
         drawer.closeDrawer(GravityCompat.START)
+        closeKeyboard()
     }
 
     private fun displaySelectedFragment(menuItem: MenuItem) {
         displaySelectedFragment(menuItem.itemId)
 
         menuItem.isChecked = true
-        title = menuItem.title
-        longToast("Hey : $title")
     }
 
     private fun setupDrawerContent(navigationView: NavigationView) {
@@ -97,5 +103,10 @@ class PlayerSheetActivity : AppCompatActivity() {
             displaySelectedFragment(it)
             true
         }
+    }
+
+    private fun closeKeyboard() {
+        val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(drawer.windowToken, 0)
     }
 }

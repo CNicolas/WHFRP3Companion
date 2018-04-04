@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+          android:id="@+id/enum_value"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:minHeight="?android:attr/listPreferredItemHeightSmall"
+          android:padding="@dimen/small_padding"
+          android:gravity="center"
+          android:background="?android:attr/activatedBackgroundIndicator"
+          android:textAppearance="?android:attr/textAppearanceListItemSmall"
+          android:textSize="@dimen/medium_text_size"
+          android:hint="@string/human" />

@@ -17,4 +17,7 @@
     <dimen name="medium_padding">10dp</dimen>
     <dimen name="big_padding">20dp</dimen>
     <dimen name="giant_padding">32dp</dimen>
+    <dimen name="giant_padding_2">64dp</dimen>
+
+    <dimen name="dice_picker_height">130dp</dimen>
 </resources>

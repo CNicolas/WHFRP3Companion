@@ -8,7 +8,7 @@ import com.nicolas.whfrp3database.extensions.getExpandableByName
 import com.nicolas.whfrp3database.extensions.getWeaponByName
 import com.nicolas.whfrp3database.extensions.removeItem
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.Test
+import org.testng.annotations.Test
 
 class InventoryTest {
     @Test

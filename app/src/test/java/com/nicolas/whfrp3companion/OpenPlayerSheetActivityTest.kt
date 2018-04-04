@@ -1,9 +1,11 @@
 package com.nicolas.whfrp3companion
 
 import android.content.Intent
-import com.nicolas.whfrp3companion.playersheet.PlayerCharacteristicsFragment
 import com.nicolas.whfrp3companion.playersheet.PlayerSheetActivity
+import com.nicolas.whfrp3companion.playersheet.characteristics.PlayerCharacteristicsFragment
+import com.nicolas.whfrp3companion.shared.PLAYER_NAME_INTENT_ARGUMENT
 import com.nicolas.whfrp3database.entities.player.Player
+import com.nicolas.whfrp3database.entities.player.enums.Race
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Before
 import org.junit.Test
@@ -22,7 +24,7 @@ class OpenPlayerSheetActivityTest {
     @Throws
     fun setUp() {
         val intent = Intent(ShadowApplication.getInstance().applicationContext, PlayerSheetActivity::class.java)
-        intent.putExtra(PLAYER_INTENT_ARGUMENT, Player("Jack"))
+        intent.putExtra(PLAYER_NAME_INTENT_ARGUMENT, Player("Jack", race = Race.DWARF))
 
         playerSheetActivity = Robolectric
                 .buildActivity(PlayerSheetActivity::class.java, intent)
@@ -43,7 +45,7 @@ class OpenPlayerSheetActivityTest {
 
         val playerCharacteristicsFragment = fragment as PlayerCharacteristicsFragment
 
-        assertThat(playerCharacteristicsFragment.playerNameTextView).isNotNull()
-        assertThat(playerCharacteristicsFragment.playerNameTextView.text).isEqualTo("Jack")
+        assertThat(playerCharacteristicsFragment.activity?.title).isNotNull()
+        assertThat(playerCharacteristicsFragment.activity!!.title.toString()).isEqualTo("Jack - Dwarf")
     }
 }

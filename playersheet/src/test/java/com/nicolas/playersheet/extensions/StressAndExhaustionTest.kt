@@ -5,7 +5,7 @@ import com.nicolas.playersheet.enums.StressState.*
 import com.nicolas.whfrp3database.entities.player.CharacteristicValue
 import com.nicolas.whfrp3database.entities.player.Player
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.Test
+import org.testng.annotations.Test
 
 class StressAndExhaustionTest {
     @Test

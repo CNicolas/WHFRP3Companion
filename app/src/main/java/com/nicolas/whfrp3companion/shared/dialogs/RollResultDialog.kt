@@ -1,4 +1,4 @@
-package com.nicolas.whfrp3companion.dialogs
+package com.nicolas.whfrp3companion.shared.dialogs
 
 import android.annotation.SuppressLint
 import android.app.AlertDialog

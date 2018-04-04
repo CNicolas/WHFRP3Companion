@@ -12,6 +12,7 @@ internal fun createPlayerTable(db: SQLiteDatabase) {
             "race" to TEXT,
             "age" to INTEGER,
             "size" to INTEGER,
+            "description" to TEXT,
 
             // region CHARACTERISTICS
             "strength" to INTEGER,
@@ -31,13 +32,12 @@ internal fun createPlayerTable(db: SQLiteDatabase) {
             // region STATE
             "careerName" to TEXT,
             "rank" to INTEGER,
-            "availableExperience" to INTEGER,
-            "totalExperience" to INTEGER,
+            "experience" to INTEGER,
+            "maxExperience" to INTEGER,
 
-            "reckless" to INTEGER,
-            "maxReckless" to INTEGER,
-            "conservative" to INTEGER,
             "maxConservative" to INTEGER,
+            "maxReckless" to INTEGER,
+            "stance" to INTEGER,
 
             "wounds" to INTEGER,
             "maxWounds" to INTEGER,

@@ -3,7 +3,7 @@ package com.nicolas.diceroller.roll
 import com.nicolas.diceroller.dices.Face.*
 import com.nicolas.whfrp3database.entities.hand.Hand
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.Test
+import org.testng.annotations.Test
 
 class RollHelpersTest {
     @Test

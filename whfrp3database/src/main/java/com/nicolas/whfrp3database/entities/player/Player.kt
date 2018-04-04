@@ -15,6 +15,7 @@ data class Player(override var name: String,
                   var race: Race = Race.HUMAN,
                   var age: Int? = null,
                   var size: Int? = null,
+                  var description: String? = null,
 
                   var strength: CharacteristicValue = CharacteristicValue(0),
                   var toughness: CharacteristicValue = CharacteristicValue(0),
@@ -25,13 +26,12 @@ data class Player(override var name: String,
 
                   var careerName: String? = null,
                   var rank: Int = 0,
-                  var availableExperience: Int = 0,
-                  var totalExperience: Int = 0,
+                  var experience: Int = 0,
+                  var maxExperience: Int = 0,
 
-                  var reckless: Int = 0,
-                  var maxReckless: Int = 0,
-                  var conservative: Int = 0,
                   var maxConservative: Int = 0,
+                  var maxReckless: Int = 0,
+                  var stance: Int = 0,
 
                   var wounds: Int = 0,
                   var maxWounds: Int = 0,
@@ -49,6 +49,7 @@ data class Player(override var name: String,
                   var talents: List<Talent> = listOf(),
 
                   override val id: Int = -1) : NamedEntity, Serializable {
+
     val maxStress: Int
         get() = willpower.value * 2
 

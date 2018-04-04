@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name" translatable="false">WHFRP3Companion</string>
+    <string name="zero" translatable="false">0</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -33,10 +34,27 @@
     <string name="challenge">Challenge</string>
     <string name="misfortune">Misfortune</string>
 
-    <string name="new_player">Create a player</string>
+    <string name="strength">Strength</string>
+    <string name="toughness">Toughness</string>
+    <string name="agility">Agility</string>
+    <string name="intelligence">Intelligence</string>
+    <string name="willpower">Willpower</string>
+    <string name="fellowship">Fellowship</string>
+
+    <string name="human">Human</string>
+    <string name="dwarf">Dwarf</string>
+    <string name="high_elf">High Elf</string>
+    <string name="wood_elf">Wood Elf</string>
+
+    <string name="create_player">Create a player</string>
+    <string name="delete_player">Delete</string>
     <string name="results">Results</string>
     <string name="select_hand">Select a hand</string>
     <string name="roll">Roll</string>
+    <string name="change_money">Add or remove money</string>
+    <string name="add">Add</string>
+    <string name="remove">Remove</string>
+    <string name="not_enough_money">Not enough money</string>
 
     <string name="rolls_count_format">%d rolls</string>
     <string name="successful_rolls_with_percentage_format">%1$d successful rolls (%2$s%%)</string>
@@ -46,4 +64,26 @@
     <string name="successful_rolls_hint">Successful rolls</string>
     <string name="statistics_average_result_hint">0 / roll</string>
     <string name="hand_name_hint">Hand name</string>
+
+    <string name="player_name">Player name</string>
+    <string name="race">Race</string>
+    <string name="career">Career</string>
+    <string name="rank">Rank</string>
+    <string name="age">Age</string>
+    <string name="size">Size</string>
+    <string name="description">Description</string>
+    <string name="max_wounds">Max wounds</string>
+    <string name="wounds">Wounds</string>
+    <string name="max_corruption">Max corruption</string>
+    <string name="saved">Saved</string>
+    <string name="xp" translatable="false">XP</string>
+    <string name="stress">Stress</string>
+    <string name="exhaustion">Exhaustion</string>
+    <string name="encumbrance">Encumbrance</string>
+
+    <string name="slash" translatable="false">/</string>
+    <string name="hyphen" translatable="false">-</string>
+    <string name="plus" translatable="false">+</string>
+    <string name="more_less" translatable="false">+ / -</string>
+    <string name="lorem">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor…</string>
 </resources>
