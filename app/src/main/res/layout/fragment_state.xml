@@ -283,8 +283,8 @@
               app:layout_constraintBottom_toBottomOf="parent"
               app:layout_constraintLeft_toRightOf="@id/silver" />
     <ImageButton android:id="@+id/change_money"
-                 android:layout_width="0dp"
-                 android:layout_height="40dp"
+                 android:layout_width="60dp"
+                 android:layout_height="50dp"
                  android:layout_marginStart="@dimen/medium_padding"
                  android:gravity="center"
                  android:src="@drawable/ic_coin_black_24dp"
