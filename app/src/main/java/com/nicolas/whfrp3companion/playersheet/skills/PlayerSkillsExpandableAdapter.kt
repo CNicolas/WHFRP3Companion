@@ -6,7 +6,9 @@ import android.graphics.Typeface
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
+import android.widget.CheckBox
+import android.widget.ImageButton
+import android.widget.TextView
 import butterknife.BindView
 import butterknife.ButterKnife
 import butterknife.OnClick
@@ -53,14 +55,7 @@ class PlayerSkillsExpandableAdapter(private val context: Context,
         }
         holder.characteristicView.text = context.getString(skill.characteristic.labelId).substring(0..2)
 
-        when (skill.level) {
-            1 -> holder.formationLevelsView.check(holder.level1View.id)
-            2 -> holder.formationLevelsView.check(holder.level2View.id)
-            3 -> holder.formationLevelsView.check(holder.level3View.id)
-            else -> holder.formationLevelsView.clearCheck()
-        }
-
-
+        holder.checkLevel()
         holder.loseFocus()
 
         return resultingView
@@ -165,14 +160,12 @@ class PlayerSkillsExpandableAdapter(private val context: Context,
     }
 
     internal class GroupViewHolder(private val view: View) {
-        @BindView(R.id.formation_levels)
-        lateinit var formationLevelsView: RadioGroup
         @BindView(R.id.level_1)
-        lateinit var level1View: RadioButton
+        lateinit var level1View: CheckBox
         @BindView(R.id.level_2)
-        lateinit var level2View: RadioButton
+        lateinit var level2View: CheckBox
         @BindView(R.id.level_3)
-        lateinit var level3View: RadioButton
+        lateinit var level3View: CheckBox
 
         @BindView(R.id.skill_name)
         lateinit var skillNameView: TextView
@@ -210,7 +203,6 @@ class PlayerSkillsExpandableAdapter(private val context: Context,
 
         fun loseFocus() {
             launchSkillView.isFocusable = false
-            formationLevelsView.isFocusable = false
             level1View.isFocusable = false
             level2View.isFocusable = false
             level3View.isFocusable = false
@@ -218,19 +210,42 @@ class PlayerSkillsExpandableAdapter(private val context: Context,
 
         private fun setFormationLevel(level: Int) {
             when (level) {
-                skill.level -> {
-                    skill.level = 0
-                    formationLevelsView.clearCheck()
-                }
+                skill.level -> skill.level = 0
                 else -> skill.level = level
             }
 
+            checkLevel()
             loseFocus()
 
             doAsync {
                 if (player != null) {
-                    player?.getSkillByName(skill.name)?.level = level
+                    player?.getSkillByName(skill.name)?.level = skill.level
                     playerFacade?.update(player!!)
+                }
+            }
+        }
+
+        fun checkLevel() {
+            when (skill.level) {
+                1 -> {
+                    level1View.isChecked = true
+                    level2View.isChecked = false
+                    level3View.isChecked = false
+                }
+                2 -> {
+                    level1View.isChecked = true
+                    level2View.isChecked = true
+                    level3View.isChecked = false
+                }
+                3 -> {
+                    level1View.isChecked = true
+                    level2View.isChecked = true
+                    level3View.isChecked = true
+                }
+                else -> {
+                    level1View.isChecked = false
+                    level2View.isChecked = false
+                    level3View.isChecked = false
                 }
             }
         }
