@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:paddingStart="?android:attr/expandableListPreferredChildPaddingLeft">
+
+    <TextView android:id="@+id/item_name"
+              android:layout_width="0dp"
+              android:layout_height="45dp"
+              android:paddingStart="@dimen/medium_padding"
+              android:paddingEnd="?android:attr/expandableListPreferredChildPaddingLeft"
+              android:gravity="center_vertical"
+              android:textSize="@dimen/medium_text_size"
+              android:textColor="@color/colorSecondaryText"
+              android:hint="@string/page_items"
+              android:layout_weight="9" />
+</LinearLayout>

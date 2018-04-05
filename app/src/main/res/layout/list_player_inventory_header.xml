@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:paddingTop="@dimen/medium_padding"
+              android:paddingBottom="@dimen/medium_padding"
+              android:paddingStart="@dimen/medium_padding">
+
+    <TextView android:id="@+id/item_type"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:textSize="@dimen/medium_text_size"
+              android:textStyle="bold"
+              android:hint="@string/page_inventory" />
+</LinearLayout>
