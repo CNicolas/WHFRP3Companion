@@ -282,14 +282,16 @@
               app:layout_constraintRight_toLeftOf="@+id/change_money"
               app:layout_constraintBottom_toBottomOf="parent"
               app:layout_constraintLeft_toRightOf="@id/silver" />
-    <Button android:id="@+id/change_money"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="@dimen/medium_padding"
-            android:text="@string/more_less"
-            app:layout_constraintTop_toBottomOf="@id/encumbrance_label"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toRightOf="@id/brass" />
+    <ImageButton android:id="@+id/change_money"
+                 android:layout_width="0dp"
+                 android:layout_height="40dp"
+                 android:layout_marginStart="@dimen/medium_padding"
+                 android:gravity="center"
+                 android:src="@drawable/ic_coin_black_24dp"
+                 android:contentDescription="@string/change_money"
+                 app:layout_constraintTop_toBottomOf="@id/encumbrance_label"
+                 app:layout_constraintRight_toRightOf="parent"
+                 app:layout_constraintBottom_toBottomOf="parent"
+                 app:layout_constraintLeft_toRightOf="@id/brass" />
     <!--endregion-->
 </android.support.constraint.ConstraintLayout>
