@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import android.widget.CheckBox
 import android.widget.ImageButton
 import android.widget.TextView
-import butterknife.BindView
 import butterknife.ButterKnife
 import butterknife.OnClick
 import com.nicolas.playersheet.extensions.createHand
@@ -17,6 +16,7 @@ import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.shared.HAND_INTENT_ARGUMENT
 import com.nicolas.whfrp3companion.shared.activities.DiceRollerActivity
 import com.nicolas.whfrp3companion.shared.adapters.AbstractSkillsExpandableAdapter
+import com.nicolas.whfrp3companion.shared.bind
 import com.nicolas.whfrp3companion.shared.enums.labelId
 import com.nicolas.whfrp3database.PlayerFacade
 import com.nicolas.whfrp3database.entities.player.Player
@@ -115,10 +115,8 @@ class PlayerSkillsExpandableAdapter(private val context: Context,
     }
 
     internal class ChildViewHolder(private val view: View) {
-        @BindView(R.id.specialization_name_checkable)
-        lateinit var specializationNameCheckableView: CheckBox
-        @BindView(R.id.launch_specialization)
-        lateinit var launchSpecializationView: ImageButton
+        val specializationNameCheckableView by view.bind<CheckBox>(R.id.specialization_name_checkable)
+        private val launchSpecializationView by view.bind<ImageButton>(R.id.launch_specialization)
 
         internal var player: Player? = null
         internal var playerFacade: PlayerFacade? = null
@@ -160,20 +158,14 @@ class PlayerSkillsExpandableAdapter(private val context: Context,
     }
 
     internal class GroupViewHolder(private val view: View) {
-        @BindView(R.id.level_1)
-        lateinit var level1View: CheckBox
-        @BindView(R.id.level_2)
-        lateinit var level2View: CheckBox
-        @BindView(R.id.level_3)
-        lateinit var level3View: CheckBox
+        private val level1View by view.bind<CheckBox>(R.id.level_1)
+        private val level2View by view.bind<CheckBox>(R.id.level_2)
+        private val level3View by view.bind<CheckBox>(R.id.level_3)
 
-        @BindView(R.id.skill_name)
-        lateinit var skillNameView: TextView
-        @BindView(R.id.characteristic)
-        lateinit var characteristicView: TextView
+        val skillNameView by view.bind<TextView>(R.id.skill_name)
+        val characteristicView by view.bind<TextView>(R.id.characteristic)
 
-        @BindView(R.id.launch_skill)
-        lateinit var launchSkillView: ImageButton
+        private val launchSkillView by view.bind<ImageButton>(R.id.launch_skill)
 
         internal var player: Player? = null
         internal var playerFacade: PlayerFacade? = null

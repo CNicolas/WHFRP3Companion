@@ -11,7 +11,6 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.view.MenuItem
 import android.view.inputmethod.InputMethodManager
-import butterknife.BindView
 import butterknife.ButterKnife
 import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.fragments.EmptyFragment
@@ -19,6 +18,7 @@ import com.nicolas.whfrp3companion.playersheet.characteristics.PlayerCharacteris
 import com.nicolas.whfrp3companion.playersheet.skills.PlayerSkillsFragment
 import com.nicolas.whfrp3companion.playersheet.state.PlayerStateFragment
 import com.nicolas.whfrp3companion.shared.PLAYER_NAME_INTENT_ARGUMENT
+import com.nicolas.whfrp3companion.shared.bind
 import com.nicolas.whfrp3companion.shared.enums.labelId
 import com.nicolas.whfrp3database.PlayerFacade
 import com.nicolas.whfrp3database.entities.player.Player
@@ -26,8 +26,7 @@ import com.nicolas.whfrp3database.entities.player.Player
 class PlayerSheetActivity : AppCompatActivity() {
     private lateinit var player: Player
 
-    @BindView(R.id.playersheet_drawer_layout)
-    lateinit var drawer: DrawerLayout
+    private val drawer by bind<DrawerLayout>(R.id.playersheet_drawer_layout)
 
     private lateinit var toggle: ActionBarDrawerToggle
 

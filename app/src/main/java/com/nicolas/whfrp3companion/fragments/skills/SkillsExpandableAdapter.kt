@@ -7,10 +7,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import butterknife.BindView
 import butterknife.ButterKnife
 import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.shared.adapters.AbstractSkillsExpandableAdapter
+import com.nicolas.whfrp3companion.shared.bind
 import com.nicolas.whfrp3companion.shared.enums.labelId
 import com.nicolas.whfrp3database.entities.player.playerLinked.skill.Skill
 import com.nicolas.whfrp3database.entities.player.playerLinked.skill.SkillType.ADVANCED
@@ -91,8 +91,7 @@ class SkillsExpandableAdapter(private val context: Context,
     }
 
     internal class ChildViewHolder(view: View) {
-        @BindView(R.id.specialization_name)
-        lateinit var specializationNameView: TextView
+        val specializationNameView by view.bind<TextView>(R.id.specialization_name)
 
         lateinit var skill: Skill
         lateinit var specialization: Specialization
@@ -103,10 +102,8 @@ class SkillsExpandableAdapter(private val context: Context,
     }
 
     internal class GroupViewHolder(view: View) {
-        @BindView(R.id.skill_name)
-        lateinit var skillNameView: TextView
-        @BindView(R.id.characteristic)
-        lateinit var characteristicView: TextView
+        val skillNameView by view.bind<TextView>(R.id.skill_name)
+        val characteristicView by view.bind<TextView>(R.id.characteristic)
 
         lateinit var skill: Skill
 

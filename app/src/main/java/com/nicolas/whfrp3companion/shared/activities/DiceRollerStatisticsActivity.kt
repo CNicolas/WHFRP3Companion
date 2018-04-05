@@ -5,42 +5,31 @@ import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.widget.TextView
-import butterknife.BindView
 import butterknife.ButterKnife
 import butterknife.Unbinder
 import com.nicolas.diceroller.roll.rollForStatistics
 import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.shared.HAND_INTENT_ARGUMENT
 import com.nicolas.whfrp3companion.shared.HAND_ROLL_COUNT_INTENT_ARGUMENT
+import com.nicolas.whfrp3companion.shared.bind
 import com.nicolas.whfrp3database.entities.hand.Hand
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 
 class DiceRollerStatisticsActivity : AppCompatActivity() {
-    @BindView(R.id.total_roll_count)
-    lateinit var totalRollCount: TextView
-    @BindView(R.id.successful_rolls)
-    lateinit var successfulRolls: TextView
+    private val totalRollCount by bind<TextView>(R.id.total_roll_count)
+    private val successfulRolls by bind<TextView>(R.id.successful_rolls)
 
-    @BindView(R.id.average_success)
-    lateinit var averageSuccess: TextView
-    @BindView(R.id.average_boon)
-    lateinit var averageBoon: TextView
-    @BindView(R.id.average_sigmar)
-    lateinit var averageSigmar: TextView
-    @BindView(R.id.average_failure)
-    lateinit var averageFailure: TextView
-    @BindView(R.id.average_bane)
-    lateinit var averageBane: TextView
-    @BindView(R.id.average_delay)
-    lateinit var averageDelay: TextView
-    @BindView(R.id.average_exhaustion)
-    lateinit var averageExhaustion: TextView
-    @BindView(R.id.average_chaos)
-    lateinit var averageChaos: TextView
+    private val averageSuccess by bind<TextView>(R.id.average_success)
+    private val averageBoon by bind<TextView>(R.id.average_boon)
+    private val averageSigmar by bind<TextView>(R.id.average_sigmar)
+    private val averageFailure by bind<TextView>(R.id.average_failure)
+    private val averageBane by bind<TextView>(R.id.average_bane)
+    private val averageDelay by bind<TextView>(R.id.average_delay)
+    private val averageExhaustion by bind<TextView>(R.id.average_exhaustion)
+    private val averageChaos by bind<TextView>(R.id.average_chaos)
 
-    @BindView(R.id.swipe_refresh_layout)
-    lateinit var refreshLayout: SwipeRefreshLayout
+    private val refreshLayout by bind<SwipeRefreshLayout>(R.id.swipe_refresh_layout)
 
     private lateinit var unbinder: Unbinder
     private lateinit var hand: Hand
