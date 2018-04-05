@@ -70,7 +70,7 @@ class PlayerStateFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        val resultingView: View = inflater.inflate(R.layout.fragment_state, container, false)
+        val resultingView: View = inflater.inflate(R.layout.fragment_player_state, container, false)
 
         unbinder = ButterKnife.bind(this, resultingView)
 
