@@ -16,7 +16,7 @@ import com.nicolas.whfrp3database.entities.player.Player
 
 class PlayerSkillsFragment : Fragment() {
     @BindView(R.id.skills_list)
-    lateinit var skillsList: ExpandableListView
+    lateinit var skillsView: ExpandableListView
 
     private lateinit var unbinder: Unbinder
 
@@ -37,7 +37,8 @@ class PlayerSkillsFragment : Fragment() {
         player = playerFacade.find(playerName)!!
 
         val skillsAdapter = PlayerSkillsExpandableAdapter(context!!, player)
-        skillsList.setAdapter(skillsAdapter)
+        skillsView.setAdapter(skillsAdapter)
+        skillsView.setGroupIndicator(null)
 
         return resultingView
     }
