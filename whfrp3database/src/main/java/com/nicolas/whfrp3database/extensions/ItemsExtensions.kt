@@ -26,6 +26,7 @@ fun Player.getExpandables() = items.getExpandables()
 fun Player.getGenericItems() = items.getGenericItems()
 fun Player.getWeapons() = items.getWeapons()
 
+fun Player.getItemByName(name: String): Item? = items.firstOrNull { it.name == name }
 fun Player.getArmorByName(name: String): Armor? = getArmors().firstOrNull { it.name == name }
 fun Player.getExpandableByName(name: String): Expandable? = getExpandables().firstOrNull { it.name == name }
 fun Player.getGenericItemByName(name: String): GenericItem? = getGenericItems().firstOrNull { it.name == name }

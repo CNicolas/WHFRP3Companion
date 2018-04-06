@@ -14,8 +14,10 @@ import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.shared.PLAYER_NAME_INTENT_ARGUMENT
 import com.nicolas.whfrp3database.PlayerFacade
 import com.nicolas.whfrp3database.entities.player.Player
+import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.longToast
+import org.jetbrains.anko.uiThread
 
 class PlayerInventoryFragment : Fragment() {
     @BindView(R.id.inventory)
@@ -24,6 +26,7 @@ class PlayerInventoryFragment : Fragment() {
     private lateinit var unbinder: Unbinder
 
     private lateinit var playerFacade: PlayerFacade
+    private lateinit var playerName: String
     private lateinit var player: Player
 
     override fun onCreateView(inflater: LayoutInflater,
@@ -33,13 +36,10 @@ class PlayerInventoryFragment : Fragment() {
 
         unbinder = ButterKnife.bind(this, resultingView)
 
-        val playerName = arguments!!.getString(PLAYER_NAME_INTENT_ARGUMENT)
-
+        playerName = arguments!!.getString(PLAYER_NAME_INTENT_ARGUMENT)
         playerFacade = PlayerFacade(context!!)
-        player = playerFacade.find(playerName)!!
 
-        val inventoryAdapter = PlayerInventoryExpandableAdapter(context!!, player)
-        inventoryView.setAdapter(inventoryAdapter)
+        getPlayerItems()
 
         return resultingView
     }
@@ -49,8 +49,7 @@ class PlayerInventoryFragment : Fragment() {
 
         activity?.longToast("I came back !")
 
-        val inventoryAdapter = PlayerInventoryExpandableAdapter(context!!, player)
-        inventoryView.setAdapter(inventoryAdapter)
+        getPlayerItems()
     }
 
     override fun onDestroyView() {
@@ -64,6 +63,17 @@ class PlayerInventoryFragment : Fragment() {
             startActivity(activity!!.intentFor<AddItemActivity>(
                     PLAYER_NAME_INTENT_ARGUMENT to player.name
             ))
+        }
+    }
+
+    private fun getPlayerItems() {
+        doAsync {
+            player = playerFacade.find(playerName)!!
+            val inventoryAdapter = PlayerInventoryExpandableAdapter(context!!, player)
+
+            uiThread {
+                inventoryView.setAdapter(inventoryAdapter)
+            }
         }
     }
 

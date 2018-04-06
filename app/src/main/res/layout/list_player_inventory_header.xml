@@ -4,7 +4,7 @@
               android:layout_height="wrap_content"
               android:paddingTop="@dimen/medium_padding"
               android:paddingBottom="@dimen/medium_padding"
-              android:paddingStart="@dimen/medium_padding">
+              android:paddingStart="?android:attr/expandableListPreferredItemPaddingLeft">
 
     <TextView android:id="@+id/item_type"
               android:layout_width="match_parent"
