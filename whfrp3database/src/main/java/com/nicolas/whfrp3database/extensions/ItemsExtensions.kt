@@ -2,6 +2,7 @@ package com.nicolas.whfrp3database.extensions
 
 import com.nicolas.whfrp3database.entities.player.Player
 import com.nicolas.whfrp3database.entities.player.playerLinked.item.*
+import com.nicolas.whfrp3database.entities.player.playerLinked.item.enums.ItemType
 import com.nicolas.whfrp3database.entities.player.playerLinked.item.enums.ItemType.*
 import com.nicolas.whfrp3database.entities.player.playerLinked.item.enums.Range
 
@@ -11,6 +12,13 @@ fun Player.addItem(item: Item): List<Item> {
     items = mutableItems.toList()
 
     return items
+}
+
+fun Player.getItemsOfType(type: ItemType) = when (type) {
+    ARMOR -> getArmors()
+    EXPANDABLE -> getExpandables()
+    GENERIC_ITEM -> getGenericItems()
+    WEAPON -> getWeapons()
 }
 
 fun Player.getArmors() = items.getArmors()
