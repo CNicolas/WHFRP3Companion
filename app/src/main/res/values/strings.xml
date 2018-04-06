@@ -46,6 +46,15 @@
     <string name="high_elf">High Elf</string>
     <string name="wood_elf">Wood Elf</string>
 
+    <string name="armor">Armor</string>
+    <string name="armors">Armors</string>
+    <string name="expandable">Expandable</string>
+    <string name="expandables">Expandables</string>
+    <string name="generic_item">Generic Item</string>
+    <string name="generic_items">Generic Items</string>
+    <string name="weapon">Weapon</string>
+    <string name="weapons">Weapons</string>
+
     <string name="create_player">Create a player</string>
     <string name="delete_player">Delete</string>
     <string name="results">Results</string>

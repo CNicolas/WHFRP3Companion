@@ -5,6 +5,8 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ExpandableListView
+import butterknife.BindView
 import butterknife.ButterKnife
 import butterknife.Unbinder
 import com.nicolas.whfrp3companion.R
@@ -13,6 +15,9 @@ import com.nicolas.whfrp3database.PlayerFacade
 import com.nicolas.whfrp3database.entities.player.Player
 
 class PlayerInventoryFragment : Fragment() {
+    @BindView(R.id.inventory)
+    lateinit var inventoryView: ExpandableListView
+
     private lateinit var unbinder: Unbinder
 
     private lateinit var playerFacade: PlayerFacade
@@ -30,7 +35,22 @@ class PlayerInventoryFragment : Fragment() {
         playerFacade = PlayerFacade(context!!)
         player = playerFacade.find(playerName)!!
 
+        val inventoryAdapter = PlayerInventoryExpandableAdapter(context!!, player)
+        inventoryView.setAdapter(inventoryAdapter)
+
         return resultingView
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        val inventoryAdapter = PlayerInventoryExpandableAdapter(context!!, player)
+        inventoryView.setAdapter(inventoryAdapter)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        unbinder.unbind()
     }
 
     companion object {

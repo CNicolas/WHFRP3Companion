@@ -69,4 +69,12 @@
     <string name="add">Ajouter</string>
     <string name="remove">Supprimer</string>
     <string name="not_enough_money">Pas assez d\'argent</string>
+    <string name="armor">Armure</string>
+    <string name="armors">Armures</string>
+    <string name="expandable">Consommable</string>
+    <string name="expandables">Consommables</string>
+    <string name="generic_item">Item</string>
+    <string name="generic_items">Items</string>
+    <string name="weapon">Arme</string>
+    <string name="weapons">Armes</string>
 </resources>
