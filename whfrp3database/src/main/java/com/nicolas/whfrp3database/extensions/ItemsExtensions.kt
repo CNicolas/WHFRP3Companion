@@ -68,6 +68,7 @@ fun List<Item>.getWeapons(): List<Weapon> =
         filter { it.type == WEAPON }
                 .map { it as Weapon }
 
+//TODO refactor with several methods toArmor, toWeapon. Need to handle nullable subType/isEqu
 fun Item.moveToItemType(itemType: ItemType): Item =
         when (itemType) {
             ARMOR -> Armor(name, description, encumbrance, quantity, quality, subType, isEquipped, soak, defense, id)

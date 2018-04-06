@@ -82,7 +82,6 @@
     <string name="critical_level">Niveau critique</string>
     <string name="damage">Dégâts</string>
     <string name="defense">Défense</string>
-    <string name="plus" translatable="false"></string>
     <string name="quality">Qualité</string>
     <string name="quantity">Quantité</string>
     <string name="range">Portée</string>
