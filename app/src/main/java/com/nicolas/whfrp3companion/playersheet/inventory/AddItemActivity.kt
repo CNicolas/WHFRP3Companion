@@ -17,13 +17,16 @@ import com.nicolas.whfrp3database.entities.player.Player
 import com.nicolas.whfrp3database.entities.player.playerLinked.item.GenericItem
 import com.nicolas.whfrp3database.entities.player.playerLinked.item.Item
 import com.nicolas.whfrp3database.entities.player.playerLinked.item.enums.ItemType
+import com.nicolas.whfrp3database.entities.player.playerLinked.item.enums.Quality
 import com.nicolas.whfrp3database.extensions.addItem
 import com.nicolas.whfrp3database.extensions.moveToItemType
 import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.uiThread
 
 class AddItemActivity : AppCompatActivity() {
     private val itemNameView by bind<EditText>(R.id.item_name)
     private val itemTypeView by bind<Spinner>(R.id.item_type)
+    private val qualityView by bind<Spinner>(R.id.quality)
 
     private lateinit var unbinder: Unbinder
 
@@ -46,6 +49,9 @@ class AddItemActivity : AppCompatActivity() {
 
         itemTypeView.adapter = ArrayAdapter(this, R.layout.element_enum_spinner, ItemType.values().map { getString(it.labelId) })
         itemTypeView.setSelection(ItemType.GENERIC_ITEM.ordinal)
+
+        qualityView.adapter = ArrayAdapter(this, R.layout.element_enum_spinner, Quality.values().map { getString(it.labelId) })
+        qualityView.setSelection(ItemType.GENERIC_ITEM.ordinal)
 
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
@@ -72,6 +78,10 @@ class AddItemActivity : AppCompatActivity() {
         doAsync {
             player.addItem(item)
             player = playerFacade.update(player)
+
+            uiThread {
+                finish()
+            }
         }
     }
 }

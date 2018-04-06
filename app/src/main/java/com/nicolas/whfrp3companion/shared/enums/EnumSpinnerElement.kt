@@ -6,6 +6,8 @@ import com.nicolas.whfrp3database.entities.player.enums.Characteristic.*
 import com.nicolas.whfrp3database.entities.player.enums.Race
 import com.nicolas.whfrp3database.entities.player.enums.Race.*
 import com.nicolas.whfrp3database.entities.player.playerLinked.item.enums.ItemType
+import com.nicolas.whfrp3database.entities.player.playerLinked.item.enums.Quality
+import com.nicolas.whfrp3database.entities.player.playerLinked.item.enums.Quality.*
 
 internal val Race.labelId: Int
     get() = when (this) {
@@ -38,4 +40,12 @@ internal val ItemType.pluralLabelId: Int
         ItemType.EXPANDABLE -> R.string.expandables
         ItemType.GENERIC_ITEM -> R.string.generic_items
         ItemType.WEAPON -> R.string.weapons
+    }
+
+internal val Quality.labelId: Int
+    get() = when (this) {
+        LOW -> R.string.quality_low
+        NORMAL -> R.string.quality_normal
+        SUPERIOR -> R.string.quality_superior
+        MAGIC -> R.string.quality_magic
     }

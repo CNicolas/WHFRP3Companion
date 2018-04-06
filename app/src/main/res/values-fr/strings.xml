@@ -79,4 +79,17 @@
     <string name="weapons">Armes</string>
     <string name="item_name">Nom de l\'objet</string>
     <string name="page_add_item">Ajouter un objet</string>
+    <string name="critical_level">Niveau critique</string>
+    <string name="damage">Dégâts</string>
+    <string name="defense">Défense</string>
+    <string name="plus" translatable="false"></string>
+    <string name="quality">Qualité</string>
+    <string name="quantity">Quantité</string>
+    <string name="range">Portée</string>
+    <string name="soak">Encaissement</string>
+    <string name="uses">Utilisations</string>
+    <string name="quality_low">Faible</string>
+    <string name="quality_magic">Magique</string>
+    <string name="quality_normal">Normale</string>
+    <string name="quality_superior">Supérieure</string>
 </resources>

@@ -56,6 +56,11 @@
     <string name="weapon">Weapon</string>
     <string name="weapons">Weapons</string>
 
+    <string name="quality_low">Low</string>
+    <string name="quality_normal">Normal</string>
+    <string name="quality_superior">Superior</string>
+    <string name="quality_magic">Magic</string>
+
     <string name="create_player">Create a player</string>
     <string name="delete_player">Delete</string>
     <string name="results">Results</string>
@@ -92,6 +97,14 @@
     <string name="encumbrance">Encumbrance</string>
 
     <string name="item_name">Item name</string>
+    <string name="quantity">Quantity</string>
+    <string name="quality">Quality</string>
+    <string name="damage">Damage</string>
+    <string name="critical_level">Critical level</string>
+    <string name="range">Range</string>
+    <string name="soak">Soak</string>
+    <string name="defense">Defense</string>
+    <string name="uses">Uses</string>
 
     <string name="slash" translatable="false">/</string>
     <string name="hyphen" translatable="false">-</string>
