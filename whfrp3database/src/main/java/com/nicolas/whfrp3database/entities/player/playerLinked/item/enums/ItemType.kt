@@ -4,5 +4,9 @@ enum class ItemType {
     ARMOR,
     EXPANDABLE,
     GENERIC_ITEM,
-    WEAPON
+    WEAPON;
+
+    companion object {
+        operator fun get(ordinal: Int): ItemType = values()[ordinal]
+    }
 }

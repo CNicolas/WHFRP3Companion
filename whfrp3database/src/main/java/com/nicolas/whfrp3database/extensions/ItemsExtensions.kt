@@ -66,3 +66,19 @@ fun List<Item>.getGenericItems(): List<GenericItem> =
 fun List<Item>.getWeapons(): List<Weapon> =
         filter { it.type == WEAPON }
                 .map { it as Weapon }
+
+fun Item.moveToItemType(itemType: ItemType): Item =
+        when (itemType) {
+            ARMOR -> Armor(name, description, encumbrance, quantity, quality, subType, isEquipped, soak, defense, id)
+            EXPANDABLE -> Expandable(name, description, encumbrance, quantity, quality, uses, id)
+            GENERIC_ITEM -> GenericItem(name, description, encumbrance, quantity, quality, id)
+            WEAPON -> Weapon(name, description, encumbrance, quantity, quality, subType, isEquipped, damage, criticalLevel, range, id)
+        }
+
+fun ItemType.create(): Item =
+        when (this) {
+            ARMOR -> Armor()
+            EXPANDABLE -> Expandable()
+            GENERIC_ITEM -> GenericItem()
+            WEAPON -> Weapon()
+        }

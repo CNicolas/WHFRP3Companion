@@ -8,11 +8,14 @@ import android.view.ViewGroup
 import android.widget.ExpandableListView
 import butterknife.BindView
 import butterknife.ButterKnife
+import butterknife.OnClick
 import butterknife.Unbinder
 import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.shared.PLAYER_NAME_INTENT_ARGUMENT
 import com.nicolas.whfrp3database.PlayerFacade
 import com.nicolas.whfrp3database.entities.player.Player
+import org.jetbrains.anko.intentFor
+import org.jetbrains.anko.longToast
 
 class PlayerInventoryFragment : Fragment() {
     @BindView(R.id.inventory)
@@ -44,6 +47,8 @@ class PlayerInventoryFragment : Fragment() {
     override fun onResume() {
         super.onResume()
 
+        activity?.longToast("I came back !")
+
         val inventoryAdapter = PlayerInventoryExpandableAdapter(context!!, player)
         inventoryView.setAdapter(inventoryAdapter)
     }
@@ -51,6 +56,15 @@ class PlayerInventoryFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         unbinder.unbind()
+    }
+
+    @OnClick(R.id.add_item)
+    fun addItem() {
+        if (activity != null) {
+            startActivity(activity!!.intentFor<AddItemActivity>(
+                    PLAYER_NAME_INTENT_ARGUMENT to player.name
+            ))
+        }
     }
 
     companion object {

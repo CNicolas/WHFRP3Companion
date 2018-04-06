@@ -73,8 +73,10 @@
     <string name="armors">Armures</string>
     <string name="expandable">Consommable</string>
     <string name="expandables">Consommables</string>
-    <string name="generic_item">Item</string>
-    <string name="generic_items">Items</string>
+    <string name="generic_item">Objet</string>
+    <string name="generic_items">Objets</string>
     <string name="weapon">Arme</string>
     <string name="weapons">Armes</string>
+    <string name="item_name">Nom de l\'objet</string>
+    <string name="page_add_item">Ajouter un objet</string>
 </resources>

@@ -25,6 +25,7 @@
     <string name="page_state">State</string>
     <string name="page_inventory">Inventory</string>
     <string name="page_actions">Actions</string>
+    <string name="page_add_item">Add Item</string>
 
     <string name="characteristic">Characteristic</string>
     <string name="conservative">Conservative</string>
@@ -89,6 +90,8 @@
     <string name="stress">Stress</string>
     <string name="exhaustion">Exhaustion</string>
     <string name="encumbrance">Encumbrance</string>
+
+    <string name="item_name">Item name</string>
 
     <string name="slash" translatable="false">/</string>
     <string name="hyphen" translatable="false">-</string>
