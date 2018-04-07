@@ -68,19 +68,22 @@ fun List<Item>.getWeapons(): List<Weapon> =
         filter { it.type == WEAPON }
                 .map { it as Weapon }
 
-//TODO refactor with several methods toArmor, toWeapon. Need to handle nullable subType/isEqu
 fun Item.moveToItemType(itemType: ItemType): Item =
         when (itemType) {
-            ARMOR -> Armor(name, description, encumbrance, quantity, quality, subType, isEquipped, soak, defense, id)
-            EXPANDABLE -> Expandable(name, description, encumbrance, quantity, quality, uses, id)
-            GENERIC_ITEM -> GenericItem(name, description, encumbrance, quantity, quality, id)
-            WEAPON -> Weapon(name, description, encumbrance, quantity, quality, subType, isEquipped, damage, criticalLevel, range, id)
+            ARMOR -> toArmor()
+            EXPANDABLE -> toExpandable()
+            GENERIC_ITEM -> toGenericITem()
+            WEAPON -> toWeapon()
         }
 
-fun ItemType.create(): Item =
-        when (this) {
-            ARMOR -> Armor()
-            EXPANDABLE -> Expandable()
-            GENERIC_ITEM -> GenericItem()
-            WEAPON -> Weapon()
-        }
+fun Item.toArmor(): Armor =
+        Armor(name, description, encumbrance, quantity, quality, id = id)
+
+fun Item.toExpandable(): Expandable =
+        Expandable(name, description, encumbrance, quantity, quality, id = id)
+
+fun Item.toGenericITem(): GenericItem =
+        GenericItem(name, description, encumbrance, quantity, quality, id)
+
+fun Item.toWeapon(): Weapon =
+        Weapon(name, description, encumbrance, quantity, quality, id = id)
