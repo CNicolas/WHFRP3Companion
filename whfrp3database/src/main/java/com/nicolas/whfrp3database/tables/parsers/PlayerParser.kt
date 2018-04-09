@@ -1,6 +1,6 @@
 package com.nicolas.whfrp3database.tables.parsers
 
-import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import com.nicolas.whfrp3database.entities.player.CharacteristicValue
 import com.nicolas.whfrp3database.entities.player.Player
 import com.nicolas.whfrp3database.entities.player.enums.Race
@@ -10,6 +10,10 @@ import com.nicolas.whfrp3database.entities.player.playerLinked.talent.Talent
 import org.jetbrains.anko.db.RowParser
 
 internal class PlayerParser : RowParser<Player> {
+    private val gson = GsonBuilder()
+            .registerTypeAdapter(Item::class.java, ItemDeserializer())
+            .create()
+
     override fun parseRow(columns: Array<Any?>): Player =
             Player(id = columns[0].toInt(),
                     name = columns[1] as String,
@@ -41,58 +45,64 @@ internal class PlayerParser : RowParser<Player> {
                     brass = columns[31].toInt(),
                     silver = columns[32].toInt(),
                     gold = columns[33].toInt(),
-                    items = Gson().fromJson(columns[34] as String, genericType<List<Item>>()),
-                    skills = Gson().fromJson(columns[35] as String, genericType<List<Skill>>()),
-                    talents = Gson().fromJson(columns[36] as String, genericType<List<Talent>>())
+                    items = gson.fromJson(columns[34] as String, genericType<List<Item>>()),
+                    skills = gson.fromJson(columns[35] as String, genericType<List<Skill>>()),
+                    talents = gson.fromJson(columns[36] as String, genericType<List<Talent>>())
             )
 }
 
-fun Player.toColumns(): Map<String, Any?> = mapOf(
-        "id" to id,
-        "name" to name,
-        "race" to race.toString(),
-        "age" to age,
-        "size" to size,
-        "description" to description,
+fun Player.toColumns(): Map<String, Any?> {
+    val gson = GsonBuilder()
+            .registerTypeAdapter(Item::class.java, ItemDeserializer())
+            .create()
 
-        // region CHARACTERISTICS
-        "strength" to strength.value,
-        "strengthFortune" to strength.fortuneValue,
-        "toughness" to toughness.value,
-        "toughnessFortune" to toughness.fortuneValue,
-        "agility" to agility.value,
-        "agilityFortune" to agility.fortuneValue,
-        "intelligence" to intelligence.value,
-        "intelligenceFortune" to intelligence.fortuneValue,
-        "willpower" to willpower.value,
-        "willpowerFortune" to willpower.fortuneValue,
-        "fellowship" to fellowship.value,
-        "fellowshipFortune" to fellowship.fortuneValue,
-        // endregion
+    return mapOf(
+            "id" to id,
+            "name" to name,
+            "race" to race.toString(),
+            "age" to age,
+            "size" to size,
+            "description" to description,
 
-        // region STATE
-        "wounds" to wounds,
-        "maxWounds" to maxWounds,
-        "corruption" to corruption,
-        "maxCorruption" to maxCorruption,
-        "stress" to stress,
-        "exhaustion" to exhaustion,
-        "careerName" to careerName,
-        "rank" to rank,
-        "experience" to experience,
-        "maxExperience" to maxExperience,
-        "maxConservative" to maxConservative,
-        "maxReckless" to maxReckless,
-        "stance" to stance,
-        // endregion
+            // region CHARACTERISTICS
+            "strength" to strength.value,
+            "strengthFortune" to strength.fortuneValue,
+            "toughness" to toughness.value,
+            "toughnessFortune" to toughness.fortuneValue,
+            "agility" to agility.value,
+            "agilityFortune" to agility.fortuneValue,
+            "intelligence" to intelligence.value,
+            "intelligenceFortune" to intelligence.fortuneValue,
+            "willpower" to willpower.value,
+            "willpowerFortune" to willpower.fortuneValue,
+            "fellowship" to fellowship.value,
+            "fellowshipFortune" to fellowship.fortuneValue,
+            // endregion
 
-        // region INVENTORY
-        "brass" to brass,
-        "silver" to silver,
-        "gold" to gold,
-        // endregion
+            // region STATE
+            "wounds" to wounds,
+            "maxWounds" to maxWounds,
+            "corruption" to corruption,
+            "maxCorruption" to maxCorruption,
+            "stress" to stress,
+            "exhaustion" to exhaustion,
+            "careerName" to careerName,
+            "rank" to rank,
+            "experience" to experience,
+            "maxExperience" to maxExperience,
+            "maxConservative" to maxConservative,
+            "maxReckless" to maxReckless,
+            "stance" to stance,
+            // endregion
 
-        "items" to Gson().toJson(items),
-        "skills" to Gson().toJson(skills),
-        "talents" to Gson().toJson(talents)
-)
+            // region INVENTORY
+            "brass" to brass,
+            "silver" to silver,
+            "gold" to gold,
+            // endregion
+
+            "items" to gson.toJson(items),
+            "skills" to gson.toJson(skills),
+            "talents" to gson.toJson(talents)
+    )
+}

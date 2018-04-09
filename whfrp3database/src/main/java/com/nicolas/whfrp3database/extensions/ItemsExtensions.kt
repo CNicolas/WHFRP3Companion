@@ -2,7 +2,7 @@ package com.nicolas.whfrp3database.extensions
 
 import com.nicolas.whfrp3database.entities.player.Player
 import com.nicolas.whfrp3database.entities.player.playerLinked.item.*
-import com.nicolas.whfrp3database.entities.player.playerLinked.item.enums.ItemType
+import com.nicolas.whfrp3database.entities.player.playerLinked.item.enums.ItemType.*
 import com.nicolas.whfrp3database.entities.player.playerLinked.item.enums.Range
 
 fun Player.addItem(item: Item): List<Item> {
@@ -44,17 +44,17 @@ fun Player.getWeaponDamage(weapon: Weapon): Int {
 }
 
 fun List<Item>.getArmors(): List<Armor> =
-        filter { it.type == ItemType.ARMOR }
+        filter { it.type == ARMOR }
                 .map { it as Armor }
 
 fun List<Item>.getExpandables(): List<Expandable> =
-        filter { it.type == ItemType.EXPANDABLE }
+        filter { it.type == EXPANDABLE }
                 .map { it as Expandable }
 
 fun List<Item>.getGenericItems(): List<GenericItem> =
-        filter { it.type == ItemType.GENERIC_ITEM }
+        filter { it.type == GENERIC_ITEM }
                 .map { it as GenericItem }
 
 fun List<Item>.getWeapons(): List<Weapon> =
-        filter { it.type == ItemType.WEAPON }
+        filter { it.type == WEAPON }
                 .map { it as Weapon }
