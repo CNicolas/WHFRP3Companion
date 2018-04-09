@@ -7,6 +7,7 @@ import com.nicolas.whfrp3database.entities.player.playerLinked.item.Expandable
 import com.nicolas.whfrp3database.entities.player.playerLinked.item.GenericItem
 import com.nicolas.whfrp3database.entities.player.playerLinked.item.Weapon
 import com.nicolas.whfrp3database.entities.player.playerLinked.item.enums.ArmorType.HELMET
+import com.nicolas.whfrp3database.entities.player.playerLinked.item.enums.ArmorType.PLATE
 import com.nicolas.whfrp3database.entities.player.playerLinked.item.enums.Quality.LOW
 import com.nicolas.whfrp3database.entities.player.playerLinked.item.enums.Quality.NORMAL
 import com.nicolas.whfrp3database.extensions.*
@@ -17,7 +18,7 @@ import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 
 @RunWith(RobolectricTestRunner::class)
-@Config(constants = BuildConfig::class)
+@Config(constants = BuildConfig::class, manifest = Config.NONE, assetDir = "/src/test/assets")
 class PlayerFacadeItemsTest : AbstractPlayerFacadeTest() {
     @Test
     fun should_update_items_of_a_player() {
@@ -33,14 +34,41 @@ class PlayerFacadeItemsTest : AbstractPlayerFacadeTest() {
         val updatedPlayer = playerFacade.update(player)
         assertThat(updatedPlayer.name).isEqualTo(playerName)
         assertThat(updatedPlayer.items).isNotEmpty
+        assertThat(updatedPlayer.items.size).isEqualTo(1)
         assertThat(updatedPlayer.items).isEqualTo(player.items)
         assertThat(updatedPlayer.items[0] is Weapon).isTrue()
+        assertThat(updatedPlayer).isEqualToComparingFieldByField(player)
+        assertThat(updatedPlayer.encumbrance).isEqualTo(3)
+
         val weapon = updatedPlayer.getWeapons()[0]
         assertThat(weapon.name).isEqualTo("Sword")
         assertThat(weapon.damage).isEqualTo(4)
         assertThat(weapon.isEquipped).isTrue()
+
+        player.addItem(Armor(name = "Plates armor", subType = PLATE, isEquipped = false, encumbrance = 3, soak = 4))
+
+        val updatedPlayer2 = playerFacade.update(player)
+        assertThat(updatedPlayer.name).isEqualTo(playerName)
+        assertThat(updatedPlayer.items).isNotEmpty
+        assertThat(updatedPlayer.items.size).isEqualTo(2)
+        assertThat(updatedPlayer.items).isEqualTo(player.items)
+        assertThat(updatedPlayer.items[0] is Weapon).isTrue()
+        assertThat(updatedPlayer.items[1] is Armor).isTrue()
         assertThat(updatedPlayer).isEqualToComparingFieldByField(player)
-        assertThat(updatedPlayer.encumbrance).isEqualTo(3)
+        assertThat(updatedPlayer.encumbrance).isEqualTo(6)
+
+        val sameWeapon = updatedPlayer2.getWeaponByName("Sword")
+        assertThat(sameWeapon).isNotNull()
+        assertThat(sameWeapon!!.name).isEqualTo("Sword")
+        assertThat(sameWeapon.damage).isEqualTo(4)
+        assertThat(sameWeapon.isEquipped).isTrue()
+        val armor = updatedPlayer2.getArmors()[0]
+        assertThat(armor.name).isEqualTo("Plates armor")
+        assertThat(armor.encumbrance).isEqualTo(3)
+        assertThat(armor.subType).isEqualTo(PLATE)
+        assertThat(armor.isEquipped).isEqualTo(false)
+        assertThat(armor.soak).isEqualTo(4)
+        assertThat(armor.defense).isEqualTo(0)
     }
 
     @Test
@@ -51,7 +79,6 @@ class PlayerFacadeItemsTest : AbstractPlayerFacadeTest() {
         assertThat(player.items[0] is GenericItem).isTrue()
         val genericItem = player.getGenericItems()[0]
         assertThat(genericItem.name).isEqualTo("Rope")
-        assertThat(genericItem.isEquipped).isNull()
         assertThat(genericItem.quality).isEqualTo(NORMAL)
 
         genericItem.quality = LOW
@@ -61,7 +88,6 @@ class PlayerFacadeItemsTest : AbstractPlayerFacadeTest() {
         assertThat(updatedPlayer.items.size).isEqualTo(1)
         assertThat(updatedPlayer.items[0] is GenericItem).isTrue()
         val newItem = updatedPlayer.getGenericItems()[0]
-        assertThat(newItem.isEquipped).isNull()
         assertThat(newItem.quality).isEqualTo(LOW)
     }
 

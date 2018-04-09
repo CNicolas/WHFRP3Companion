@@ -2,7 +2,6 @@ package com.nicolas.whfrp3database
 
 import android.content.Context
 import com.nicolas.whfrp3database.daos.player.PlayerDao
-import com.nicolas.whfrp3database.daos.player.playerLinked.item.ItemDao
 import com.nicolas.whfrp3database.entities.player.Player
 import com.nicolas.whfrp3database.entities.player.playerLinked.skill.SkillType
 import com.nicolas.whfrp3database.entities.player.playerLinked.talent.TalentCooldown
@@ -11,7 +10,6 @@ import com.nicolas.whfrp3database.staticData.loadTalents
 
 class PlayerFacade(context: Context) {
     private val playerDao = PlayerDao(context.database)
-    private val itemDao = ItemDao(context.database)
 
     val skills = loadSkills(context)
     val basicSkills = skills.filter { it.type == SkillType.BASIC }
@@ -24,30 +22,17 @@ class PlayerFacade(context: Context) {
 
     fun add(player: Player): Player {
         player.createSkills()
-        val savedPlayer = playerDao.add(player)
-
-        savedPlayer!!.items = player.items
-        updateItems(savedPlayer)
+        playerDao.add(player)
 
         return find(player.name)!!
     }
 
-    fun find(name: String): Player? = playerDao.findByName(name).fillItems()
+    fun find(name: String): Player? = playerDao.findByName(name)
 
-    fun findAll(): List<Player> {
-        val players = playerDao.findAll()
-        players.forEach {
-            it.fillItems()
-        }
-
-        return players
-    }
+    fun findAll(): List<Player> = playerDao.findAll()
 
     fun update(player: Player): Player {
         playerDao.update(player)
-        updateItems(player)
-
-        setPlayersLists(player)
 
         return find(player.name)!!
     }
@@ -71,36 +56,6 @@ class PlayerFacade(context: Context) {
     fun deleteAll() {
         playerDao.deleteAll()
     }
-
-    private fun Player?.fillItems(): Player? {
-        if (this != null) {
-            this.items = itemDao.findAllByPlayer(this)
-        }
-        return this
-    }
-
-    private fun setPlayersLists(player: Player) {
-        player.items = findAllItemsByPlayer(player)
-    }
-
-    private fun updateItems(player: Player) {
-        val savedItems = findAllItemsByPlayer(player).toMutableList()
-
-        player.items.forEach { it ->
-            val item = itemDao.findById(it.id)
-            savedItems.remove(item)
-
-            if (item == null) {
-                itemDao.add(it, player)!!
-            } else {
-                itemDao.updateByPlayer(it, player)!!
-            }
-        }
-
-        savedItems.forEach { itemDao.delete(it) }
-    }
-
-    private fun findAllItemsByPlayer(player: Player) = itemDao.findAllByPlayer(player)
 
     private fun Player.createSkills() {
         skills = basicSkills.toList()

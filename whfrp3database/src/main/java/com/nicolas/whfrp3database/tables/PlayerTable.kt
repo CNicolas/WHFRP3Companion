@@ -53,6 +53,7 @@ internal fun createPlayerTable(db: SQLiteDatabase) {
             "gold" to INTEGER,
             // endregion
 
+            "items" to TEXT,
             "skills" to TEXT,
             "talents" to TEXT)
 }

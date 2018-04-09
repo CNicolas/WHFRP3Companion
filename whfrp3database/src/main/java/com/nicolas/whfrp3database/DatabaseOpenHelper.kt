@@ -2,7 +2,10 @@ package com.nicolas.whfrp3database
 
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
-import com.nicolas.whfrp3database.tables.*
+import com.nicolas.whfrp3database.tables.HAND_TABLE_NAME
+import com.nicolas.whfrp3database.tables.PLAYER_TABLE_NAME
+import com.nicolas.whfrp3database.tables.createHandTable
+import com.nicolas.whfrp3database.tables.createPlayerTable
 import org.jetbrains.anko.db.ManagedSQLiteOpenHelper
 import org.jetbrains.anko.db.dropTable
 
@@ -23,14 +26,12 @@ class DatabaseOpenHelper(private val context: Context) : ManagedSQLiteOpenHelper
         // Here you create tables
         createHandTable(db)
         createPlayerTable(db)
-        createItemTable(db)
     }
 
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
         // Here you can upgrade tables, as usual
         db.dropTable(HAND_TABLE_NAME, true)
         db.dropTable(PLAYER_TABLE_NAME, true)
-        db.dropTable(ITEM_TABLE_NAME, true)
     }
 
     fun deleteDatabase() {

@@ -11,7 +11,7 @@ import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 
 @RunWith(RobolectricTestRunner::class)
-@Config(constants = BuildConfig::class)
+@Config(constants = BuildConfig::class, manifest = Config.NONE, assetDir = "src/test/assets")
 class PlayerFacadeTest : AbstractPlayerFacadeTest() {
     @Test
     fun should_add_a_simple_player() {
