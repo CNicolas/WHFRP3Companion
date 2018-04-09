@@ -2,7 +2,14 @@ package com.nicolas.whfrp3database.entities.player.playerLinked.item.enums
 
 import com.nicolas.whfrp3database.entities.player.playerLinked.item.enums.WeaponCategory.*
 
-enum class WeaponType(override val category: WeaponCategory) : ItemSubType {
+enum class WeaponCategory {
+    MELEE,
+    RANGE,
+    FIRE_ARM,
+    REPEATING
+}
+
+enum class WeaponType(val category: WeaponCategory) {
     DAGGER(MELEE),
     FLAIL(MELEE),
     HALBERD(MELEE),

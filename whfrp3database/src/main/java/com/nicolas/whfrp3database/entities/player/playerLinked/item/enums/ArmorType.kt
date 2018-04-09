@@ -3,7 +3,13 @@ package com.nicolas.whfrp3database.entities.player.playerLinked.item.enums
 import com.nicolas.whfrp3database.entities.player.playerLinked.item.enums.ArmorCategory.BODY
 import com.nicolas.whfrp3database.entities.player.playerLinked.item.enums.ArmorCategory.HEAD
 
-enum class ArmorType(override val category: ArmorCategory):ItemSubType {
+enum class ArmorCategory {
+    HEAD,
+    BODY,
+    SHIELD
+}
+
+enum class ArmorType(val category: ArmorCategory) {
     HELMET(HEAD),
     HAT(HEAD),
 
