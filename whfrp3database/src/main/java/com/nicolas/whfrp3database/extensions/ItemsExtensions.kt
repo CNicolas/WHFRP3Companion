@@ -36,14 +36,12 @@ fun Player.removeAllItems() {
 }
 
 fun Player.getWeaponDamage(weapon: Weapon): Int {
-    val weaponDamage = weapon.damage ?: 0
+    val weaponDamage = weapon.damage
     return when (weapon.range) {
-        null -> weaponDamage
         Range.ENGAGED -> strength.value + weaponDamage
         else -> agility.value + weaponDamage
     }
 }
-
 
 fun List<Item>.getArmors(): List<Armor> =
         filter { it.type == ItemType.ARMOR }
