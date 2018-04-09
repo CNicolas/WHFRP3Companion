@@ -13,7 +13,7 @@ import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 
 @RunWith(RobolectricTestRunner::class)
-@Config(constants = BuildConfig::class)
+@Config(constants = BuildConfig::class, manifest = Config.NONE, assetDir = "src/test/assets")
 class PlayerFacadeTalentsTest : AbstractPlayerFacadeTest() {
     @Test
     fun should_add_passive_faith_talent() {

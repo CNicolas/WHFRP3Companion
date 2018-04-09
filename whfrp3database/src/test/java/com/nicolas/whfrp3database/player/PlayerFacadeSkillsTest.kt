@@ -12,7 +12,7 @@ import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 
 @RunWith(RobolectricTestRunner::class)
-@Config(constants = BuildConfig::class)
+@Config(constants = BuildConfig::class, manifest = Config.NONE, assetDir = "src/test/assets")
 class PlayerFacadeSkillsTest : AbstractPlayerFacadeTest() {
 
     @Test

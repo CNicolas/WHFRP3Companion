@@ -66,10 +66,10 @@ data class Player(override var name: String,
         }
 
     val defense: Int
-        get() = getArmors().sumBy { it.defense ?: 0 }
+        get() = getArmors().sumBy { it.defense }
 
     val soak: Int
-        get() = getArmors().sumBy { it.soak ?: 0 }
+        get() = getArmors().sumBy { it.soak }
 
     operator fun get(characteristic: Characteristic): CharacteristicValue = when (characteristic) {
         STRENGTH -> strength
