@@ -5,6 +5,17 @@ android {
     compileSdkVersion 27
     buildToolsVersion "27.0.3"
 
+    sourceSets {
+        String testDir = 'src/test/java'
+        test {
+            java.srcDirs += [testDir]
+        }
+        androidTest {
+            java.srcDirs += [testDir]
+            resources.srcDirs += ['src/test/resources']
+        }
+    }
+
     defaultConfig {
         minSdkVersion 22
         targetSdkVersion 27
@@ -12,7 +23,6 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
     }
     buildTypes {
         release {

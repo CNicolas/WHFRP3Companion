@@ -4,6 +4,7 @@ import com.google.gson.Gson
 import com.nicolas.whfrp3database.entities.player.CharacteristicValue
 import com.nicolas.whfrp3database.entities.player.Player
 import com.nicolas.whfrp3database.entities.player.enums.Race
+import com.nicolas.whfrp3database.entities.player.playerLinked.item.Item
 import com.nicolas.whfrp3database.entities.player.playerLinked.skill.Skill
 import com.nicolas.whfrp3database.entities.player.playerLinked.talent.Talent
 import org.jetbrains.anko.db.RowParser
@@ -40,8 +41,9 @@ internal class PlayerParser : RowParser<Player> {
                     brass = columns[31].toInt(),
                     silver = columns[32].toInt(),
                     gold = columns[33].toInt(),
-                    skills = Gson().fromJson(columns[34] as String, genericType<List<Skill>>()),
-                    talents = Gson().fromJson(columns[35] as String, genericType<List<Talent>>())
+                    items = Gson().fromJson(columns[34] as String, genericType<List<Item>>()),
+                    skills = Gson().fromJson(columns[35] as String, genericType<List<Skill>>()),
+                    talents = Gson().fromJson(columns[36] as String, genericType<List<Talent>>())
             )
 }
 
@@ -90,6 +92,7 @@ fun Player.toColumns(): Map<String, Any?> = mapOf(
         "gold" to gold,
         // endregion
 
+        "items" to Gson().toJson(items),
         "skills" to Gson().toJson(skills),
         "talents" to Gson().toJson(talents)
 )
