@@ -16,7 +16,6 @@ import com.nicolas.whfrp3database.PlayerFacade
 import com.nicolas.whfrp3database.entities.player.Player
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.intentFor
-import org.jetbrains.anko.longToast
 import org.jetbrains.anko.uiThread
 
 class PlayerInventoryFragment : Fragment() {
@@ -46,8 +45,6 @@ class PlayerInventoryFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-
-        activity?.longToast("I came back !")
 
         getPlayerItems()
     }

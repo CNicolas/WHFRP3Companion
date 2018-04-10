@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.BaseExpandableListAdapter
 import android.widget.TextView
 import butterknife.ButterKnife
+import butterknife.OnClick
 import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.shared.bind
 import com.nicolas.whfrp3companion.shared.enums.pluralLabelId
@@ -15,6 +16,7 @@ import com.nicolas.whfrp3database.entities.player.Player
 import com.nicolas.whfrp3database.entities.player.playerLinked.item.Item
 import com.nicolas.whfrp3database.entities.player.playerLinked.item.enums.ItemType
 import com.nicolas.whfrp3database.extensions.getItemsOfType
+import org.jetbrains.anko.longToast
 
 class PlayerInventoryExpandableAdapter(private val context: Context,
                                        private val player: Player) : BaseExpandableListAdapter() {
@@ -108,6 +110,11 @@ class PlayerInventoryExpandableAdapter(private val context: Context,
 
         init {
             ButterKnife.bind(this, view)
+        }
+
+        @OnClick(R.id.item_name)
+        fun selectItem(view: View) {
+            view.context.longToast(item.toString())
         }
     }
 }
