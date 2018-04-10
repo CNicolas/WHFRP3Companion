@@ -77,13 +77,13 @@ fun Item.moveToItemType(itemType: ItemType): Item =
         }
 
 fun Item.toArmor(): Armor =
-        Armor(name, description, encumbrance, quantity, quality, id = id)
+        Armor(name, description, encumbrance, quantity, quality)
 
 fun Item.toExpandable(): Expandable =
-        Expandable(name, description, encumbrance, quantity, quality, id = id)
+        Expandable(name, description, encumbrance, quantity, quality)
 
 fun Item.toGenericITem(): GenericItem =
-        GenericItem(name, description, encumbrance, quantity, quality, id)
+        GenericItem(name, description, encumbrance, quantity, quality)
 
 fun Item.toWeapon(): Weapon =
-        Weapon(name, description, encumbrance, quantity, quality, id = id)
+        Weapon(name, description, encumbrance, quantity, quality)
