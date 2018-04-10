@@ -2,4 +2,5 @@
 <resources>
     <integer name="zero">0</integer>
     <integer name="max_dice_number_picker">20</integer>
+    <integer name="max_uses">99</integer>
 </resources>
