@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:gravity="center">
+
+    <ImageView android:id="@+id/defense_label"
+               android:layout_width="40dp"
+               android:layout_height="40dp"
+               android:src="@drawable/ic_shield_black_36"
+               android:contentDescription="@string/defense"
+               android:layout_marginEnd="@dimen/medium_padding" />
+    <com.nicolas.whfrp3companion.shared.components.NumberPickerMinMax android:id="@+id/defense"
+                                                                      android:layout_width="wrap_content"
+                                                                      android:layout_height="wrap_content"
+                                                                      app:minValue="@integer/zero"
+                                                                      app:maxValue="@integer/max_dice_number_picker" />
+    <ImageView android:id="@+id/soak_label"
+               android:layout_width="40dp"
+               android:layout_height="40dp"
+               android:src="@drawable/ic_armor_black_36"
+               android:contentDescription="@string/soak"
+               android:layout_marginStart="@dimen/giant_padding"
+               android:layout_marginEnd="@dimen/medium_padding" />
+    <com.nicolas.whfrp3companion.shared.components.NumberPickerMinMax android:id="@+id/soak"
+                                                                      android:layout_width="wrap_content"
+                                                                      android:layout_height="wrap_content"
+                                                                      app:minValue="@integer/zero"
+                                                                      app:maxValue="@integer/max_dice_number_picker" />
+</LinearLayout>

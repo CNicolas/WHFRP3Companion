@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                             xmlns:app="http://schemas.android.com/apk/res-auto"
+                                             android:orientation="vertical"
+                                             android:layout_width="match_parent"
+                                             android:layout_height="wrap_content"
+                                             android:layout_marginStart="@dimen/giant_padding_2"
+                                             android:layout_marginEnd="@dimen/giant_padding_2">
+    <ImageView android:id="@+id/uses_label"
+               android:layout_width="wrap_content"
+               android:layout_height="50dp"
+               android:src="@drawable/ic_potion_black_24dp"
+               android:contentDescription="@string/uses"
+               app:layout_constraintTop_toTopOf="parent"
+               app:layout_constraintRight_toLeftOf="@+id/uses"
+               app:layout_constraintBottom_toBottomOf="parent"
+               app:layout_constraintLeft_toLeftOf="parent" />
+    <com.nicolas.whfrp3companion.shared.components.NumberPickerMinMax android:id="@+id/uses"
+                                                                      android:layout_width="wrap_content"
+                                                                      android:layout_height="wrap_content"
+                                                                      app:minValue="@integer/zero"
+                                                                      app:maxValue="@integer/max_uses"
+                                                                      app:layout_constraintTop_toTopOf="parent"
+                                                                      app:layout_constraintRight_toRightOf="parent"
+                                                                      app:layout_constraintBottom_toBottomOf="parent"
+                                                                      app:layout_constraintLeft_toRightOf="@id/uses_label" />
+</android.support.constraint.ConstraintLayout>
