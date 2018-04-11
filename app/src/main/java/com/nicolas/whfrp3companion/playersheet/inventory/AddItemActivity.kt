@@ -8,6 +8,7 @@ import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.widget.ArrayAdapter
+import android.widget.ImageView
 import android.widget.NumberPicker
 import android.widget.Spinner
 import butterknife.*
@@ -31,23 +32,28 @@ class AddItemActivity : AppCompatActivity() {
     private val itemTypeView by bind<Spinner>(R.id.item_type)
     private val qualityView by bind<Spinner>(R.id.quality)
 
+    private val defenseLabelView by bind<ImageView>(R.id.defense_label)
     private val defenseView by bind<NumberPicker>(R.id.defense)
+    private val soakLabelView by bind<ImageView>(R.id.soak_label)
     private val soakView by bind<NumberPicker>(R.id.soak)
 
+    private val usesLabelView by bind<ImageView>(R.id.uses_label)
     private val usesView by bind<NumberPicker>(R.id.uses)
 
     private val weaponTypeView by bind<Spinner>(R.id.weapon_type)
+    private val damageLabelView by bind<ImageView>(R.id.damage_label)
     private val damageView by bind<NumberPicker>(R.id.damage)
+    private val criticalLevelLabelView by bind<ImageView>(R.id.critical_level_label)
     private val criticalLevelView by bind<NumberPicker>(R.id.critical_level)
 
     private lateinit var unbinder: Unbinder
 
     private val armorViews
-        get () = listOf(defenseView, soakView)
+        get () = listOf(defenseLabelView, defenseView, soakLabelView, soakView)
     private val expandableViews
-        get() = listOf(usesView)
+        get() = listOf(usesLabelView, usesView)
     private val weaponViews
-        get () = listOf(weaponTypeView, damageView, criticalLevelView)
+        get () = listOf(weaponTypeView, damageLabelView, damageView, criticalLevelLabelView, criticalLevelView)
 
     private lateinit var playerFacade: PlayerFacade
 
