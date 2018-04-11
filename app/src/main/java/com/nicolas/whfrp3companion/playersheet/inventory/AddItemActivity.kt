@@ -5,8 +5,10 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.text.Editable
 import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.widget.ArrayAdapter
-import android.widget.EditText
+import android.widget.NumberPicker
 import android.widget.Spinner
 import butterknife.*
 import com.nicolas.whfrp3companion.R
@@ -26,15 +28,26 @@ import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 
 class AddItemActivity : AppCompatActivity() {
-    private val armorLayout by bind<View>(R.id.armor_layout)
-    private val expandableLayout by bind<View>(R.id.expandable_layout)
-    private val weaponLayout by bind<View>(R.id.weapon_layout)
-
-    private val itemNameView by bind<EditText>(R.id.item_name)
     private val itemTypeView by bind<Spinner>(R.id.item_type)
     private val qualityView by bind<Spinner>(R.id.quality)
 
+    private val defenseView by bind<NumberPicker>(R.id.defense)
+    private val soakView by bind<NumberPicker>(R.id.soak)
+
+    private val usesView by bind<NumberPicker>(R.id.uses)
+
+    private val weaponTypeView by bind<Spinner>(R.id.weapon_type)
+    private val damageView by bind<NumberPicker>(R.id.damage)
+    private val criticalLevelView by bind<NumberPicker>(R.id.critical_level)
+
     private lateinit var unbinder: Unbinder
+
+    private val armorViews
+        get () = listOf(defenseView, soakView)
+    private val expandableViews
+        get() = listOf(usesView)
+    private val weaponViews
+        get () = listOf(weaponTypeView, damageView, criticalLevelView)
 
     private lateinit var playerFacade: PlayerFacade
 
@@ -54,10 +67,10 @@ class AddItemActivity : AppCompatActivity() {
         }
 
         itemTypeView.adapter = ArrayAdapter(this, R.layout.element_enum_spinner, values().map { getString(it.labelId) })
-        itemTypeView.setSelection(GENERIC_ITEM.ordinal)
+        itemTypeView.setSelection(ItemType.GENERIC_ITEM.ordinal)
 
         qualityView.adapter = ArrayAdapter(this, R.layout.element_enum_spinner, Quality.values().map { getString(it.labelId) })
-        qualityView.setSelection(GENERIC_ITEM.ordinal)
+        qualityView.setSelection(Quality.NORMAL.ordinal)
 
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
@@ -79,26 +92,10 @@ class AddItemActivity : AppCompatActivity() {
         item = item.moveToItemType(ItemType[position])
 
         when (item.type) {
-            ARMOR -> {
-                armorLayout.visibility = View.VISIBLE
-                expandableLayout.visibility = View.GONE
-                weaponLayout.visibility = View.GONE
-            }
-            EXPANDABLE -> {
-                armorLayout.visibility = View.GONE
-                expandableLayout.visibility = View.VISIBLE
-                weaponLayout.visibility = View.GONE
-            }
-            GENERIC_ITEM -> {
-                armorLayout.visibility = View.GONE
-                expandableLayout.visibility = View.GONE
-                weaponLayout.visibility = View.GONE
-            }
-            WEAPON -> {
-                armorLayout.visibility = View.GONE
-                expandableLayout.visibility = View.GONE
-                weaponLayout.visibility = View.VISIBLE
-            }
+            ARMOR -> showArmorViews()
+            EXPANDABLE -> showExpandableViews()
+            GENERIC_ITEM -> showGenericItemViews()
+            WEAPON -> showWeaponViews()
         }
     }
 
@@ -113,4 +110,31 @@ class AddItemActivity : AppCompatActivity() {
             }
         }
     }
+
+    private fun showArmorViews() {
+        armorViews.show()
+        expandableViews.hide()
+        weaponViews.hide()
+    }
+
+    private fun showExpandableViews() {
+        armorViews.hide()
+        expandableViews.show()
+        weaponViews.hide()
+    }
+
+    private fun showGenericItemViews() {
+        armorViews.hide()
+        expandableViews.hide()
+        weaponViews.hide()
+    }
+
+    private fun showWeaponViews() {
+        armorViews.hide()
+        expandableViews.hide()
+        weaponViews.show()
+    }
+
+    private fun List<View>.show() = this.forEach { it.visibility = VISIBLE }
+    private fun List<View>.hide() = this.forEach { it.visibility = GONE }
 }
