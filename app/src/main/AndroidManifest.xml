@@ -32,7 +32,7 @@
                   android:label="@string/page_add_item"
                   android:screenOrientation="portrait"
                   android:theme="@style/AppTheme"
-                  android:windowSoftInputMode="stateHidden|adjustResize">
+                  android:windowSoftInputMode="stateHidden|adjustPan">
             <meta-data android:name="android.support.PARENT_ACTIVITY"
                        android:value=".playersheet.PlayerSheetActivity" />
         </activity>

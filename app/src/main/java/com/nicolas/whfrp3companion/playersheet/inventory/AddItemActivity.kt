@@ -32,14 +32,17 @@ class AddItemActivity : AppCompatActivity() {
     private val itemTypeView by bind<Spinner>(R.id.item_type)
     private val qualityView by bind<Spinner>(R.id.quality)
 
+    private val armorLayout by bind<View>(R.id.armor_layout)
     private val defenseLabelView by bind<ImageView>(R.id.defense_label)
     private val defenseView by bind<NumberPicker>(R.id.defense)
     private val soakLabelView by bind<ImageView>(R.id.soak_label)
     private val soakView by bind<NumberPicker>(R.id.soak)
 
+    private val expandableLayout by bind<View>(R.id.expandable_layout)
     private val usesLabelView by bind<ImageView>(R.id.uses_label)
     private val usesView by bind<NumberPicker>(R.id.uses)
 
+    private val weaponLayout by bind<View>(R.id.weapon_layout)
     private val weaponTypeView by bind<Spinner>(R.id.weapon_type)
     private val damageLabelView by bind<ImageView>(R.id.damage_label)
     private val damageView by bind<NumberPicker>(R.id.damage)
@@ -49,11 +52,11 @@ class AddItemActivity : AppCompatActivity() {
     private lateinit var unbinder: Unbinder
 
     private val armorViews
-        get () = listOf(defenseLabelView, defenseView, soakLabelView, soakView)
+        get () = listOf(armorLayout, defenseLabelView, defenseView, soakLabelView, soakView)
     private val expandableViews
-        get() = listOf(usesLabelView, usesView)
+        get() = listOf(expandableLayout, usesLabelView, usesView)
     private val weaponViews
-        get () = listOf(weaponTypeView, damageLabelView, damageView, criticalLevelLabelView, criticalLevelView)
+        get () = listOf(weaponLayout, weaponTypeView, damageLabelView, damageView, criticalLevelLabelView, criticalLevelView)
 
     private lateinit var playerFacade: PlayerFacade
 
