@@ -61,6 +61,41 @@
     <string name="quality_superior">Superior</string>
     <string name="quality_magic">Magic</string>
 
+    <string name="armor_helmet">Helmet</string>
+    <string name="armor_hat">Hat</string>
+    <string name="armor_plate">Plate</string>
+    <string name="armor_mail">Mail</string>
+    <string name="armor_leather">Leather</string>
+    <string name="armor_robe">Robe</string>
+    <string name="armor_shield">Shield</string>
+
+    <string name="weapon_dagger">Dagger</string>
+    <string name="weapon_flail">Flail</string>
+    <string name="weapon_halberd">Halberd</string>
+    <string name="weapon_hammer">Hammer</string>
+    <string name="weapon_two_handed_hammer">Two handed hammer</string>
+    <string name="weapon_mace">Mace</string>
+    <string name="weapon_two_handed_mace">Two handed mace</string>
+    <string name="weapon_spear">Spear</string>
+    <string name="weapon_stick">Stick</string>
+    <string name="weapon_sword">Sword</string>
+    <string name="weapon_two_handed_sword">Two handed sword</string>
+    <string name="weapon_whip">Whip</string>
+    <string name="weapon_bow">Bow</string>
+    <string name="weapon_crossbow">Crossbow</string>
+    <string name="weapon_one_handed_crossbow">One handed crossbow</string>
+    <string name="weapon_sling">Sling</string>
+    <string name="weapon_handgun">Handgun</string>
+    <string name="weapon_rifle">Rifle</string>
+    <string name="weapon_repeating_gun">Repeating gun</string>
+    <string name="weapon_repeating_crossbow">Repeating crossbow</string>
+
+    <string name="range_engaged">Engaged</string>
+    <string name="range_short">Short</string>
+    <string name="range_medium">Medium</string>
+    <string name="range_long">Long</string>
+    <string name="range_extreme">Extreme</string>
+
     <string name="create_player">Create a player</string>
     <string name="delete_player">Delete</string>
     <string name="results">Results</string>
