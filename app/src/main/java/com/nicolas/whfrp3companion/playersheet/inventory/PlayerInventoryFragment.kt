@@ -11,9 +11,12 @@ import butterknife.ButterKnife
 import butterknife.OnClick
 import butterknife.Unbinder
 import com.nicolas.whfrp3companion.R
+import com.nicolas.whfrp3companion.shared.ITEM_EDIT_INTENT_ARGUMENT
 import com.nicolas.whfrp3companion.shared.PLAYER_NAME_INTENT_ARGUMENT
 import com.nicolas.whfrp3database.PlayerFacade
 import com.nicolas.whfrp3database.entities.player.Player
+import com.nicolas.whfrp3database.entities.player.playerLinked.item.Item
+import com.nicolas.whfrp3database.extensions.removeItem
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.uiThread
@@ -55,10 +58,11 @@ class PlayerInventoryFragment : Fragment() {
     }
 
     @OnClick(R.id.add_item)
-    fun addItem() {
+    fun openItemEditionActivity(item: Item? = null) {
         if (activity != null) {
-            startActivity(activity!!.intentFor<AddItemActivity>(
-                    PLAYER_NAME_INTENT_ARGUMENT to player.name
+            startActivity(activity!!.intentFor<ItemEditionActivity>(
+                    PLAYER_NAME_INTENT_ARGUMENT to player.name,
+                    ITEM_EDIT_INTENT_ARGUMENT to item
             ))
         }
     }
@@ -66,7 +70,20 @@ class PlayerInventoryFragment : Fragment() {
     private fun getPlayerItems() {
         doAsync {
             player = playerFacade.find(playerName)!!
+
             val inventoryAdapter = PlayerInventoryExpandableAdapter(context!!, player)
+            inventoryAdapter.addItemListener(object : ItemListener {
+                override fun onItemDeleted(item: Item) {
+                    player.removeItem(item)
+                    playerFacade.update(player)
+
+                    getPlayerItems()
+                }
+
+                override fun onItemEditionDemand(item: Item) {
+                    openItemEditionActivity(item)
+                }
+            })
 
             uiThread {
                 inventoryView.setAdapter(inventoryAdapter)

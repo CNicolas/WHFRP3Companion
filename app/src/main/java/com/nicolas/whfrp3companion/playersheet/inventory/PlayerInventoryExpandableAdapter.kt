@@ -13,26 +13,20 @@ import butterknife.ButterKnife
 import butterknife.OnClick
 import butterknife.OnLongClick
 import com.nicolas.whfrp3companion.R
-import com.nicolas.whfrp3companion.shared.ITEM_EDIT_INTENT_ARGUMENT
-import com.nicolas.whfrp3companion.shared.PLAYER_NAME_INTENT_ARGUMENT
 import com.nicolas.whfrp3companion.shared.bind
 import com.nicolas.whfrp3companion.shared.enums.pluralLabelId
-import com.nicolas.whfrp3database.PlayerFacade
 import com.nicolas.whfrp3database.entities.player.Player
 import com.nicolas.whfrp3database.entities.player.playerLinked.item.Item
 import com.nicolas.whfrp3database.entities.player.playerLinked.item.enums.ItemType
 import com.nicolas.whfrp3database.extensions.getItemsOfType
-import com.nicolas.whfrp3database.extensions.removeItemByName
-import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.longToast
 
 class PlayerInventoryExpandableAdapter(private val context: Context,
                                        private val player: Player) : BaseExpandableListAdapter() {
     private val inflater = LayoutInflater.from(context)
-
     private val groupedItems = ItemType.values().map { it to player.getItemsOfType(it) }.toMap()
 
-    private val playerFacade = PlayerFacade(context)
+    private val itemListeners: MutableList<ItemListener> = mutableListOf()
 
     @SuppressLint("InflateParams")
     override fun getGroupView(groupPosition: Int,
@@ -64,7 +58,9 @@ class PlayerInventoryExpandableAdapter(private val context: Context,
         return resultingView
     }
 
+    // region One line overrides
     override fun getGroup(groupPosition: Int) = ItemType.values()[groupPosition]
+
     override fun getGroupCount() = ItemType.values().size
     override fun getGroupId(groupPosition: Int) = groupPosition.toLong()
 
@@ -74,7 +70,11 @@ class PlayerInventoryExpandableAdapter(private val context: Context,
 
     override fun hasStableIds(): Boolean = false
     override fun isChildSelectable(groupPosition: Int, childPosition: Int): Boolean = true
+    // endregion
 
+    fun addItemListener(itemListener: ItemListener) = itemListeners.add(itemListener)
+
+    // region Group and Child ViewHolders creation
     private fun getGroupViewHolderOfView(savedView: View?, parent: ViewGroup?): Pair<View, GroupViewHolder> {
         var view = savedView
 
@@ -98,12 +98,13 @@ class PlayerInventoryExpandableAdapter(private val context: Context,
             holder = view.tag as ChildViewHolder
         } else {
             view = inflater.inflate(R.layout.list_player_inventory_child, parent, false)
-            holder = ChildViewHolder(player, playerFacade, view)
+            holder = ChildViewHolder(itemListeners, view)
             view!!.tag = holder
         }
 
         return Pair(view, holder)
     }
+    // endregion
 
     private class GroupViewHolder(view: View) {
         val itemTypeView by view.bind<TextView>(R.id.item_type)
@@ -113,7 +114,7 @@ class PlayerInventoryExpandableAdapter(private val context: Context,
         }
     }
 
-    internal class ChildViewHolder(private val player: Player, private val playerFacade: PlayerFacade, view: View) {
+    internal class ChildViewHolder(private val itemListeners: List<ItemListener>, view: View) {
         val itemNameView by view.bind<TextView>(R.id.item_name)
 
         lateinit var item: Item
@@ -131,21 +132,19 @@ class PlayerInventoryExpandableAdapter(private val context: Context,
         fun openItemMenu(view: View): Boolean {
             val itemPopupMenu = PopupMenu(view.context, view, Gravity.END)
             itemPopupMenu.menuInflater.inflate(R.menu.inventory_item, itemPopupMenu.menu)
+
             itemPopupMenu.setOnMenuItemClickListener {
                 when (it.itemId) {
                     R.id.edit_item -> {
-                        view.context.startActivity(view.context.intentFor<AddItemActivity>(
-                                PLAYER_NAME_INTENT_ARGUMENT to player.name,
-                                ITEM_EDIT_INTENT_ARGUMENT to item
-                        ))
+                        itemListeners.notifyEditionDemand(item)
                     }
                     R.id.delete_item -> {
-                        player.removeItemByName(itemNameView.text.toString())
-                        playerFacade.update(player)
+                        itemListeners.notifyDeletion(item)
                     }
                 }
                 true
             }
+
             itemPopupMenu.show()
 
             return true
