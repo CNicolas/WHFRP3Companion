@@ -2,12 +2,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
-              android:minHeight="40dp"
               android:paddingStart="?android:attr/expandableListPreferredChildPaddingLeft">
 
     <CheckBox android:id="@+id/specialization_name_checkable"
               android:layout_width="0dp"
-              android:layout_height="match_parent"
+              android:layout_height="45dp"
               android:paddingStart="@dimen/medium_padding"
               android:paddingEnd="?android:attr/expandableListPreferredChildPaddingLeft"
               android:gravity="center_vertical"
