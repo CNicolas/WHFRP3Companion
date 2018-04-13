@@ -48,6 +48,7 @@
               android:layout_height="50dp"
               android:paddingEnd="@dimen/medium_padding"
               android:gravity="center"
+              android:inputType="numberSigned"
               android:hint="@string/zero"
               app:layout_constraintTop_toBottomOf="@id/item_type"
               app:layout_constraintRight_toLeftOf="@+id/encumbrance_label"
@@ -69,6 +70,7 @@
               android:layout_width="0dp"
               android:layout_height="50dp"
               android:gravity="center"
+              android:inputType="numberSigned"
               android:hint="@string/zero"
               app:layout_constraintTop_toBottomOf="@id/item_type"
               app:layout_constraintRight_toLeftOf="@+id/quality"
@@ -94,26 +96,25 @@
                   app:layout_constraintRight_toRightOf="parent"
                   app:layout_constraintBottom_toTopOf="@+id/description"
                   app:layout_constraintLeft_toLeftOf="parent">
+
+        <include android:id="@+id/weapon_layout"
+                 layout="@layout/content_add_weapon" />
+
         <include android:id="@+id/armor_layout"
                  layout="@layout/content_add_armor" />
 
         <include android:id="@+id/expandable_layout"
                  layout="@layout/content_add_expandable" />
-
-        <include android:id="@+id/weapon_layout"
-                 layout="@layout/content_add_weapon" />
     </LinearLayout>
 
     <EditText android:id="@+id/description"
               android:layout_width="0dp"
-              android:layout_height="wrap_content"
-              android:minHeight="50dp"
-              android:maxHeight="200dp"
+              android:layout_height="120dp"
               android:gravity="top"
               android:scrollbars="vertical"
-              android:inputType="textMultiLine"
+              android:inputType="textMultiLine|textCapSentences"
               android:selectAllOnFocus="true"
-              android:maxLines="10"
+              android:maxLines="5"
               android:hint="@string/description"
               app:layout_constraintTop_toBottomOf="@id/custom_item_layout"
               app:layout_constraintRight_toRightOf="parent"
