@@ -27,7 +27,7 @@ import com.nicolas.whfrp3database.extensions.removeItem
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 
-class AddItemActivity : AppCompatActivity() {
+class ItemEditionActivity : AppCompatActivity() {
     private val itemNameEditText by bind<EditText>(R.id.item_name)
     private val itemTypeView by bind<Spinner>(R.id.item_type)
     private val encumbranceEditText by bind<EditText>(R.id.encumbrance)

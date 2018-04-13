@@ -27,7 +27,7 @@
                        android:value=".MainActivity" />
         </activity>
 
-        <activity android:name=".playersheet.inventory.AddItemActivity"
+        <activity android:name=".playersheet.inventory.ItemEditionActivity"
                   android:parentActivityName=".playersheet.PlayerSheetActivity"
                   android:label="@string/page_add_item"
                   android:screenOrientation="portrait"

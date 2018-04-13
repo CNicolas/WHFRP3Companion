@@ -9,7 +9,7 @@
                                              android:paddingEnd="@dimen/medium_padding"
                                              android:orientation="vertical"
                                              android:focusableInTouchMode="true"
-                                             tools:context=".playersheet.inventory.AddItemActivity"
+                                             tools:context=".playersheet.inventory.ItemEditionActivity"
                                              tools:showIn="@layout/activity_add_item">
     <!--region GenericItem-->
     <EditText android:id="@+id/item_name"

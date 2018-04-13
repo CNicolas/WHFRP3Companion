@@ -5,7 +5,7 @@
                                                  android:layout_width="match_parent"
                                                  android:layout_height="match_parent"
                                                  android:fitsSystemWindows="true"
-                                                 tools:context=".playersheet.inventory.AddItemActivity">
+                                                 tools:context=".playersheet.inventory.ItemEditionActivity">
 
     <include layout="@layout/toolbar" />
 
