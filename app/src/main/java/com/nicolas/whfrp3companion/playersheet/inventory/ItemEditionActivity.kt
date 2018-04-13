@@ -4,19 +4,14 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.view.View
-import android.view.View.GONE
-import android.view.View.VISIBLE
 import android.widget.*
 import butterknife.ButterKnife
 import butterknife.OnClick
 import butterknife.OnItemSelected
 import butterknife.Unbinder
 import com.nicolas.whfrp3companion.R
-import com.nicolas.whfrp3companion.shared.ITEM_EDIT_INTENT_ARGUMENT
-import com.nicolas.whfrp3companion.shared.PLAYER_NAME_INTENT_ARGUMENT
-import com.nicolas.whfrp3companion.shared.bind
+import com.nicolas.whfrp3companion.shared.*
 import com.nicolas.whfrp3companion.shared.enums.labelId
-import com.nicolas.whfrp3companion.shared.intValue
 import com.nicolas.whfrp3database.PlayerFacade
 import com.nicolas.whfrp3database.entities.player.Player
 import com.nicolas.whfrp3database.entities.player.playerLinked.item.*
@@ -232,7 +227,4 @@ class ItemEditionActivity : AppCompatActivity() {
         expandableViews.hide()
         weaponViews.show()
     }
-
-    private fun List<View>.show() = this.forEach { it.visibility = VISIBLE }
-    private fun List<View>.hide() = this.forEach { it.visibility = GONE }
 }

@@ -15,8 +15,13 @@ import butterknife.OnLongClick
 import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.shared.bind
 import com.nicolas.whfrp3companion.shared.enums.pluralLabelId
+import com.nicolas.whfrp3companion.shared.hide
+import com.nicolas.whfrp3companion.shared.show
 import com.nicolas.whfrp3database.entities.player.Player
+import com.nicolas.whfrp3database.entities.player.playerLinked.item.Armor
+import com.nicolas.whfrp3database.entities.player.playerLinked.item.Expandable
 import com.nicolas.whfrp3database.entities.player.playerLinked.item.Item
+import com.nicolas.whfrp3database.entities.player.playerLinked.item.Weapon
 import com.nicolas.whfrp3database.entities.player.playerLinked.item.enums.ItemType
 import com.nicolas.whfrp3database.extensions.getItemsOfType
 import org.jetbrains.anko.longToast
@@ -51,9 +56,7 @@ class PlayerInventoryExpandableAdapter(private val context: Context,
         val (resultingView, holder) = getChildViewHolderOfView(convertView, parent)
 
         val item = getChild(groupPosition, childPosition)
-
-        holder.item = item
-        holder.itemNameView.text = item.name
+        holder.setupViews(item)
 
         return resultingView
     }
@@ -115,12 +118,43 @@ class PlayerInventoryExpandableAdapter(private val context: Context,
     }
 
     internal class ChildViewHolder(private val itemListeners: List<ItemListener>, view: View) {
-        val itemNameView by view.bind<TextView>(R.id.item_name)
+        private val itemNameView by view.bind<TextView>(R.id.item_name)
+        private val quantityTextView by view.bind<TextView>(R.id.quantity)
+
+        private val defenseTextView by view.bind<TextView>(R.id.defense)
+        private val soakTextView by view.bind<TextView>(R.id.soak)
+
+        private val usesTextView by view.bind<TextView>(R.id.uses)
+
+        private val damageTextView by view.bind<TextView>(R.id.damage)
+        private val criticalLevelTextView by view.bind<TextView>(R.id.critical_level)
+        private val rangeTextView by view.bind<TextView>(R.id.range)
 
         lateinit var item: Item
 
+        private val armorViews
+            get () = listOf(defenseTextView, soakTextView)
+        private val expandableViews
+            get() = listOf(usesTextView)
+        private val weaponViews
+            get () = listOf(damageTextView, criticalLevelTextView, rangeTextView)
+
         init {
             ButterKnife.bind(this, view)
+        }
+
+        fun setupViews(item: Item) {
+            this.item = item
+
+            itemNameView.text = item.name
+            quantityTextView.text = item.quantity.toString()
+
+            when (item.type) {
+                ItemType.ARMOR -> showArmorViews()
+                ItemType.EXPANDABLE -> showExpandableViews()
+                ItemType.WEAPON -> showWeaponViews()
+                ItemType.GENERIC_ITEM -> showGenericItemViews()
+            }
         }
 
         @OnClick(R.id.item_name)
@@ -150,5 +184,43 @@ class PlayerInventoryExpandableAdapter(private val context: Context,
             return true
         }
 
+        private fun showArmorViews() {
+            val armor = item as Armor
+
+            defenseTextView.text = armor.defense.toString()
+            soakTextView.text = armor.soak.toString()
+
+            armorViews.show()
+            expandableViews.hide()
+            weaponViews.hide()
+        }
+
+        private fun showExpandableViews() {
+            val expandable = item as Expandable
+
+            usesTextView.text = expandable.uses.toString()
+
+            armorViews.hide()
+            expandableViews.show()
+            weaponViews.hide()
+        }
+
+        private fun showGenericItemViews() {
+            armorViews.hide()
+            expandableViews.hide()
+            weaponViews.hide()
+        }
+
+        private fun showWeaponViews() {
+            val weapon = item as Weapon
+
+            damageTextView.text = weapon.damage.toString()
+            criticalLevelTextView.text = weapon.criticalLevel.toString()
+            rangeTextView.text = weapon.range.toString()
+
+            armorViews.hide()
+            expandableViews.hide()
+            weaponViews.show()
+        }
     }
 }
