@@ -2,20 +2,28 @@ package com.nicolas.whfrp3companion.playersheet.inventory
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseExpandableListAdapter
+import android.widget.PopupMenu
 import android.widget.TextView
 import butterknife.ButterKnife
 import butterknife.OnClick
+import butterknife.OnLongClick
 import com.nicolas.whfrp3companion.R
+import com.nicolas.whfrp3companion.shared.ITEM_EDIT_INTENT_ARGUMENT
+import com.nicolas.whfrp3companion.shared.PLAYER_NAME_INTENT_ARGUMENT
 import com.nicolas.whfrp3companion.shared.bind
 import com.nicolas.whfrp3companion.shared.enums.pluralLabelId
+import com.nicolas.whfrp3database.PlayerFacade
 import com.nicolas.whfrp3database.entities.player.Player
 import com.nicolas.whfrp3database.entities.player.playerLinked.item.Item
 import com.nicolas.whfrp3database.entities.player.playerLinked.item.enums.ItemType
 import com.nicolas.whfrp3database.extensions.getItemsOfType
+import com.nicolas.whfrp3database.extensions.removeItemByName
+import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.longToast
 
 class PlayerInventoryExpandableAdapter(private val context: Context,
@@ -23,6 +31,8 @@ class PlayerInventoryExpandableAdapter(private val context: Context,
     private val inflater = LayoutInflater.from(context)
 
     private val groupedItems = ItemType.values().map { it to player.getItemsOfType(it) }.toMap()
+
+    private val playerFacade = PlayerFacade(context)
 
     @SuppressLint("InflateParams")
     override fun getGroupView(groupPosition: Int,
@@ -88,7 +98,7 @@ class PlayerInventoryExpandableAdapter(private val context: Context,
             holder = view.tag as ChildViewHolder
         } else {
             view = inflater.inflate(R.layout.list_player_inventory_child, parent, false)
-            holder = ChildViewHolder(view)
+            holder = ChildViewHolder(player, playerFacade, view)
             view!!.tag = holder
         }
 
@@ -103,7 +113,7 @@ class PlayerInventoryExpandableAdapter(private val context: Context,
         }
     }
 
-    internal class ChildViewHolder(view: View) {
+    internal class ChildViewHolder(private val player: Player, private val playerFacade: PlayerFacade, view: View) {
         val itemNameView by view.bind<TextView>(R.id.item_name)
 
         lateinit var item: Item
@@ -116,5 +126,30 @@ class PlayerInventoryExpandableAdapter(private val context: Context,
         fun selectItem(view: View) {
             view.context.longToast(item.toString())
         }
+
+        @OnLongClick(R.id.item_name)
+        fun openItemMenu(view: View): Boolean {
+            val itemPopupMenu = PopupMenu(view.context, view, Gravity.END)
+            itemPopupMenu.menuInflater.inflate(R.menu.inventory_item, itemPopupMenu.menu)
+            itemPopupMenu.setOnMenuItemClickListener {
+                when (it.itemId) {
+                    R.id.edit_item -> {
+                        view.context.startActivity(view.context.intentFor<AddItemActivity>(
+                                PLAYER_NAME_INTENT_ARGUMENT to player.name,
+                                ITEM_EDIT_INTENT_ARGUMENT to item
+                        ))
+                    }
+                    R.id.delete_item -> {
+                        player.removeItemByName(itemNameView.text.toString())
+                        playerFacade.update(player)
+                    }
+                }
+                true
+            }
+            itemPopupMenu.show()
+
+            return true
+        }
+
     }
 }

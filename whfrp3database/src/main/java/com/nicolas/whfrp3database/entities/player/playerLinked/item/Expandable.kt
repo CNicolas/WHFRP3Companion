@@ -9,7 +9,7 @@ data class Expandable(override var name: String = "Expandable",
                       override var quantity: Int = 1,
                       override var quality: Quality = Quality.NORMAL,
 
-                      var uses: Int? = 0) : Item {
+                      var uses: Int = 1) : Item {
 
     override var type = ItemType.EXPANDABLE
 }

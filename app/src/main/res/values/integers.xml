@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <integer name="zero">0</integer>
+    <integer name="one">1</integer>
     <integer name="max_dice_number_picker">20</integer>
     <integer name="max_uses">99</integer>
 </resources>
