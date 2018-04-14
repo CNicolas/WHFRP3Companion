@@ -58,7 +58,11 @@ class PlayerInventoryFragment : Fragment() {
     }
 
     @OnClick(R.id.add_item)
-    fun openItemEditionActivity(item: Item? = null) {
+    fun openAddItemActivity() {
+        startItemEditionActivity()
+    }
+
+    private fun startItemEditionActivity(item: Item? = null) {
         if (activity != null) {
             startActivity(activity!!.intentFor<ItemEditionActivity>(
                     PLAYER_NAME_INTENT_ARGUMENT to player.name,
@@ -81,7 +85,7 @@ class PlayerInventoryFragment : Fragment() {
                 }
 
                 override fun onItemEditionDemand(item: Item) {
-                    openItemEditionActivity(item)
+                    startItemEditionActivity(item)
                 }
             })
 
