@@ -107,6 +107,8 @@
     <string name="not_enough_money">Not enough money</string>
     <string name="edit_item">Edit</string>
     <string name="delete_item">Delete</string>
+    <string name="equip_item">Equip</string>
+    <string name="unequip_item">Unequip</string>
 
     <string name="rolls_count_format">%d rolls</string>
     <string name="successful_rolls_with_percentage_format">%1$d successful rolls (%2$s%%)</string>

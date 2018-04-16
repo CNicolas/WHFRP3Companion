@@ -125,4 +125,6 @@
     <string name="range_short">Courte</string>
     <string name="delete_item">Supprimer</string>
     <string name="edit_item">Éditer</string>
+    <string name="equip_item">Équiper</string>
+    <string name="unequip_item">Déséquiper</string>
 </resources>
