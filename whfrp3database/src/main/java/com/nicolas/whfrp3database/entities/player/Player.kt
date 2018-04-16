@@ -59,11 +59,14 @@ data class Player(override var name: String,
     val encumbrance: Int
         get() = items.sumBy { it.encumbrance }
 
-    val maxEncumbrance: Int
-        get() = strength.value * 5 + strength.fortuneValue + 5 + when (race) {
+    val encumbranceOverload: Int
+        get() = strength.value * 5 + strength.fortuneValue + when (race) {
             Race.DWARF -> 5
             else -> 0
         }
+
+    val maxEncumbrance: Int
+        get() = encumbranceOverload + 5
 
     val defense: Int
         get() = getEquippedArmors().sumBy { it.defense }

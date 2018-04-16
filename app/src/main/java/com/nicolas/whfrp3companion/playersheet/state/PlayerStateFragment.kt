@@ -1,14 +1,15 @@
 package com.nicolas.whfrp3companion.playersheet.state
 
 import android.app.AlertDialog
+import android.content.res.ColorStateList
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v4.content.ContextCompat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.NumberPicker
-import android.widget.SeekBar
 import android.widget.TextView
 import butterknife.BindView
 import butterknife.ButterKnife
@@ -51,7 +52,7 @@ class PlayerStateFragment : Fragment() {
     lateinit var soakView: TextView
 
     @BindView(R.id.encumbrance_bar)
-    lateinit var encumbranceBarView: SeekBar
+    lateinit var encumbranceBarView: DiscreteSeekBar
     @BindView(R.id.encumbrance_label)
     lateinit var encumbranceLabel: TextView
 
@@ -93,10 +94,7 @@ class PlayerStateFragment : Fragment() {
         defenseView.text = "${player.defense}"
         soakView.text = "${player.soak}"
 
-        encumbranceBarView.max = player.maxEncumbrance
-        encumbranceBarView.progress = player.encumbrance
-        encumbranceBarView.isEnabled = false
-        encumbranceLabel.text = "${player.encumbrance} / ${player.maxEncumbrance}"
+        setupEncumbrance()
 
         setupMoney()
 
@@ -223,6 +221,25 @@ class PlayerStateFragment : Fragment() {
         stanceView.numericTransformer = object : DiscreteSeekBar.NumericTransformer() {
             override fun transform(value: Int): Int = abs(value)
         }
+    }
+
+    private fun setupEncumbrance() {
+        encumbranceBarView.min = 0
+        encumbranceBarView.max = player.maxEncumbrance
+        encumbranceBarView.progress = player.encumbrance
+        encumbranceBarView.isEnabled = false
+
+        val colorId = when {
+            player.encumbrance < player.encumbranceOverload -> R.color.conservative
+            player.encumbrance < player.maxEncumbrance -> R.color.orange
+            else -> R.color.reckless
+        }
+        val color = ContextCompat.getColor(context!!, colorId)
+        val colorStateList = ColorStateList.valueOf(color)
+        encumbranceBarView.setScrubberColor(colorStateList)
+
+        encumbranceLabel.text = "${player.encumbrance} / ${player.maxEncumbrance}"
+        encumbranceLabel.setTextColor(colorStateList)
     }
 
     private fun setupMoney() {

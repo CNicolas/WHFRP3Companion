@@ -219,16 +219,23 @@
                app:layout_constraintBottom_toTopOf="@+id/gold"
                app:layout_constraintLeft_toLeftOf="parent"
                app:layout_constraintHorizontal_weight="1" />
-    <SeekBar android:id="@+id/encumbrance_bar"
-             android:layout_width="0dp"
-             android:layout_height="40dp"
-             android:thumb="@null"
-             android:focusable="false"
-             app:layout_constraintTop_toBottomOf="@id/defense"
-             app:layout_constraintRight_toLeftOf="@+id/encumbrance_label"
-             app:layout_constraintBottom_toTopOf="@+id/gold"
-             app:layout_constraintLeft_toRightOf="@id/encumbrance_icon"
-             app:layout_constraintHorizontal_weight="4" />
+    <org.adw.library.widgets.discreteseekbar.DiscreteSeekBar android:id="@+id/encumbrance_bar"
+                                                             android:layout_width="0dp"
+                                                             android:layout_height="40dp"
+                                                             android:minHeight="10dp"
+                                                             android:background="@drawable/black_border"
+                                                             android:focusable="false"
+                                                             app:dsb_allowTrackClickToDrag="false"
+                                                             app:dsb_indicatorPopupEnabled="false"
+                                                             app:dsb_scrubberHeight="10dp"
+                                                             app:dsb_thumbSize="0dp"
+                                                             app:dsb_trackHeight="10dp"
+                                                             app:dsb_trackColor="@color/spinner_background"
+                                                             app:layout_constraintTop_toBottomOf="@id/defense"
+                                                             app:layout_constraintRight_toLeftOf="@+id/encumbrance_label"
+                                                             app:layout_constraintBottom_toTopOf="@+id/gold"
+                                                             app:layout_constraintLeft_toRightOf="@id/encumbrance_icon"
+                                                             app:layout_constraintHorizontal_weight="7" />
     <TextView android:id="@+id/encumbrance_label"
               android:layout_width="0dp"
               android:layout_height="40dp"
@@ -239,7 +246,7 @@
               app:layout_constraintRight_toRightOf="parent"
               app:layout_constraintBottom_toTopOf="@+id/gold"
               app:layout_constraintLeft_toRightOf="@id/encumbrance_bar"
-              app:layout_constraintHorizontal_weight="3" />
+              app:layout_constraintHorizontal_weight="2" />
     <!--endregion-->
 
     <!--region Money-->
