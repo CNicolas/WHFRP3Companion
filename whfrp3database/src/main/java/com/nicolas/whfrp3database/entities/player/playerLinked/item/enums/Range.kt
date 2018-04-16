@@ -5,5 +5,9 @@ enum class Range {
     SHORT,
     MEDIUM,
     LONG,
-    EXTREME
+    EXTREME;
+
+    companion object {
+        operator fun get(ordinal: Int): Range = values()[ordinal]
+    }
 }

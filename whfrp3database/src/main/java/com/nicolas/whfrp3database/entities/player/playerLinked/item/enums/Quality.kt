@@ -4,5 +4,9 @@ enum class Quality {
     LOW,
     NORMAL,
     SUPERIOR,
-    MAGIC
+    MAGIC;
+
+    companion object {
+        operator fun get(ordinal: Int): Quality = values()[ordinal]
+    }
 }

@@ -18,7 +18,9 @@ enum class ArmorType(val category: ArmorCategory) {
     LEATHER(BODY),
     ROBE(BODY),
 
-    SHIELD(ArmorCategory.SHIELD),
-    BULWARK(ArmorCategory.SHIELD)
+    SHIELD(ArmorCategory.SHIELD);
 
+    companion object {
+        operator fun get(ordinal: Int): ArmorType = values()[ordinal]
+    }
 }

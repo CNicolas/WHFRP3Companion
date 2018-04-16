@@ -8,7 +8,6 @@
               android:layout_width="0dp"
               android:layout_height="45dp"
               android:paddingStart="@dimen/medium_padding"
-              android:paddingEnd="?android:attr/expandableListPreferredChildPaddingLeft"
               android:gravity="center_vertical"
               android:textSize="@dimen/medium_text_size"
               android:textColor="@color/colorSecondaryText"

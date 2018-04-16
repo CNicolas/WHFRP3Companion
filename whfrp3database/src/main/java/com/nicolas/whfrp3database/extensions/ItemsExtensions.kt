@@ -2,6 +2,7 @@ package com.nicolas.whfrp3database.extensions
 
 import com.nicolas.whfrp3database.entities.player.Player
 import com.nicolas.whfrp3database.entities.player.playerLinked.item.*
+import com.nicolas.whfrp3database.entities.player.playerLinked.item.enums.ItemType
 import com.nicolas.whfrp3database.entities.player.playerLinked.item.enums.ItemType.*
 import com.nicolas.whfrp3database.entities.player.playerLinked.item.enums.Range
 
@@ -13,15 +14,26 @@ fun Player.addItem(item: Item): List<Item> {
     return items
 }
 
+fun Player.getItemsOfType(type: ItemType) = when (type) {
+    ARMOR -> getArmors()
+    EXPANDABLE -> getExpandables()
+    GENERIC_ITEM -> getGenericItems()
+    WEAPON -> getWeapons()
+}
+
 fun Player.getArmors() = items.getArmors()
 fun Player.getExpandables() = items.getExpandables()
 fun Player.getGenericItems() = items.getGenericItems()
 fun Player.getWeapons() = items.getWeapons()
 
+fun Player.getItemByName(name: String): Item? = items.firstOrNull { it.name == name }
+fun Player.getEquipmentByName(name: String): Equipment? = items.firstOrNull { it.name == name } as? Equipment
 fun Player.getArmorByName(name: String): Armor? = getArmors().firstOrNull { it.name == name }
 fun Player.getExpandableByName(name: String): Expandable? = getExpandables().firstOrNull { it.name == name }
 fun Player.getGenericItemByName(name: String): GenericItem? = getGenericItems().firstOrNull { it.name == name }
 fun Player.getWeaponByName(name: String): Weapon? = getWeapons().firstOrNull { it.name == name }
+
+fun Player.getEquippedArmors() = getArmors().filter { it.isEquipped }
 
 fun Player.removeItem(item: Item): List<Item> {
     val mutableItems = items.toMutableList()
@@ -29,6 +41,16 @@ fun Player.removeItem(item: Item): List<Item> {
     items = mutableItems.toList()
 
     return items
+}
+
+fun Player.removeItemByName(name: String): List<Item> {
+    val item = getItemByName(name)
+
+    return if (item != null) {
+        removeItem(item)
+    } else {
+        items
+    }
 }
 
 fun Player.removeAllItems() {
@@ -58,3 +80,4 @@ fun List<Item>.getGenericItems(): List<GenericItem> =
 fun List<Item>.getWeapons(): List<Weapon> =
         filter { it.type == WEAPON }
                 .map { it as Weapon }
+
