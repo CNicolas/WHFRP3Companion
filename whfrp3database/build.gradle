@@ -5,6 +5,17 @@ android {
     compileSdkVersion 27
     buildToolsVersion "27.0.3"
 
+    sourceSets {
+        String testDir = 'src/test/java'
+        test {
+            java.srcDirs += [testDir]
+        }
+        androidTest {
+            java.srcDirs += [testDir]
+            resources.srcDirs += ['src/test/resources']
+        }
+    }
+
     defaultConfig {
         minSdkVersion 22
         targetSdkVersion 27
@@ -12,7 +23,6 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
     }
     buildTypes {
         release {
@@ -27,9 +37,10 @@ dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
     // Tests
+    testCompile "org.testng:testng:$testng_version"
+    testCompile "org.assertj:assertj-core:$assertj_version"
     testCompile 'junit:junit:4.12'
     testCompile "org.robolectric:robolectric:$robolectric_version"
-    testCompile "org.assertj:assertj-core:$assertj_version"
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })

@@ -1,0 +1,638 @@
+[
+  {
+    "type": "AFFINITY",
+    "cooldown": "PASSIVE",
+    "name": "Accord Aéthérique",
+    "description": "Vous bénéficiez d'un {MISFORTUNE_DICE} supplémentaire à l'occasion de vos tests de Focalisation, Piété, Observation, Folklore, Éducation et Intuition si la magie y jour un rôle."
+  },
+  {
+    "type": "AFFINITY",
+    "cooldown": "TALENT",
+    "name": "Agilité Mentale",
+    "description": "Épuiser cette carte vous permet de retirer immédiatement 2 jetons de recharge qui se trouvent sur vos cartes en cours de recharge."
+  },
+  {
+    "type": "AFFINITY",
+    "cooldown": "PASSIVE",
+    "name": "Anticipation",
+    "description": "À l'occasion de vos tests d'Initiative, {BOON_FACE} Ajoutez {SUCCESS_FACE} aux résultats."
+  },
+  {
+    "type": "AFFINITY",
+    "cooldown": "PASSIVE",
+    "name": "Aura d'Autorité",
+    "description": "Vous bénéficiez d'un {FORTUNE_DICE} supplémentaire lors de vos tests d'Intimidation et pouvez substituer votre Intelligence à votre Force lorsque vous employez cette compétence."
+  },
+  {
+    "type": "AFFINITY",
+    "cooldown": "PASSIVE",
+    "name": "Blasé",
+    "description": "Ajoutez {MISFORTUNE_DICE} {MISFORTUNE_DICE} à tous les tests d'Intimidation qui vous prennent pour cible."
+  },
+  {
+    "type": "AFFINITY",
+    "cooldown": "PASSIVE",
+    "name": "Clairvoyant",
+    "description": "À l'occasion des actions exigeant un test de Force Mentale, {BOON_FACE} Éliminez 1 stress."
+  },
+  {
+    "type": "AFFINITY",
+    "cooldown": "PASSIVE",
+    "name": "Conduit Aéthérique",
+    "description": "Lorsque vous regagnez ou perdez de l'énergie au moment de la fin du tour parce que vous n'êtes pas à l'équilibre, vous gagnez ou perdez 1 énergie supplémentaire (sauf si cela entraîne la perte de votre équilibre)."
+  },
+  {
+    "type": "AFFINITY",
+    "cooldown": "TALENT",
+    "name": "Créatif",
+    "description": "Épuiser ce talent vous permet d'employer n'importe lequel de vos talents à l'emplacement qu'occupe le talent Créatif. Ce talent reste associé à cet emplacement jusqu'à ce que le talent Créatif ait fini de recharger."
+  },
+  {
+    "type": "AFFINITY",
+    "cooldown": "PASSIVE",
+    "name": "Cultivé",
+    "description": "Vous bénéficiez d'un {FORTUNE_DICE} supplémentaire à l'occasion de vos tests de Folklore et d'Éducation."
+  },
+  {
+    "type": "AFFINITY",
+    "cooldown": "PASSIVE",
+    "name": "Déterminé",
+    "description": "À l'occasion d'une action exigeant un test de Force Mentale pour laquelle vous avez dépensé des points de fortune, {BOON_FACE} {BOON_FACE} Ajoutez {SUCCESS_FACE} aux résultats."
+  },
+  {
+    "type": "AFFINITY",
+    "cooldown": "PASSIVE",
+    "name": "Déviant",
+    "description": "Lorsque vous effectuez un test de Sociabilité et que votre attitude est prudente, vous ne souffrez de délais que lorsque vous obtenez plus d'un {DELAY_FACE}."
+  },
+  {
+    "type": "AFFINITY",
+    "cooldown": "PASSIVE",
+    "name": "Esprit Déductif",
+    "description": "Un {BOON_FACE} est ajouté aux résultats de votre jet de dés lorsque vous obtenez au moins {SUCCESS_FACE} {SUCCESS_FACE} {SUCCESS_FACE} à l'occasion d'un test d'Intelligence."
+  },
+  {
+    "type": "AFFINITY",
+    "cooldown": "PASSIVE",
+    "name": "Flexible",
+    "description": "Vous ne gagnez pas de stress à l'occasion des tests d'Intelligence lorsque vous vous servez du dé de témérité, à moins d'obtenir plus d'un {EXERTION_FACE}."
+  },
+  {
+    "type": "AFFINITY",
+    "cooldown": "PASSIVE",
+    "name": "Foi Ardente",
+    "description": "Vous disposez d'un {FORTUNE_DICE} supplémentaire à l'occasion de tous vos tests de Commandement et de Piété."
+  },
+  {
+    "type": "AFFINITY",
+    "cooldown": "TALENT",
+    "name": "Il me Semble me Souvenir de …",
+    "description": "Épuiser cette carte vous permet de bénéficier de {FORTUNE_DICE} {FORTUNE_DICE} à l'occasion de n'importe quel test d'Intelligence."
+  },
+  {
+    "type": "AFFINITY",
+    "cooldown": "PASSIVE",
+    "name": "Instinctif",
+    "description": "Vous bénéficiez de {FORTUNE_DICE} {FORTUNE_DICE} supplémentaires à l'occasion de vos tests d'Intuition."
+  },
+  {
+    "type": "AFFINITY",
+    "cooldown": "PASSIVE",
+    "name": "Intègre Serviteur",
+    "description": "Lorsque vous gagnez ou perdez de la faveur au moment de la fin du tour parce que vous n'êtes pas à l'équilibre, vous gagnez ou perdez 1 faveur supplémentaire (sauf si cela entraîne la perte de votre équilibre)."
+  },
+  {
+    "type": "AFFINITY",
+    "cooldown": "PASSIVE",
+    "name": "J'ai Vu Pire…",
+    "description": "Épuiser cette carte vous permet de bénéficier de {FORTUNE_DICE} {FORTUNE_DICE} à l'occasion de n'importe quel test de Force Mentale."
+  },
+  {
+    "type": "AFFINITY",
+    "cooldown": "PASSIVE",
+    "name": "Malin",
+    "description": "À l'occasion des actions exigeant un test d'Intelligence, {BOON_FACE} {BOON_FACE} Ajoutez {SUCCESS_FACE} aux résultats."
+  },
+  {
+    "type": "AFFINITY",
+    "cooldown": "TALENT",
+    "name": "Plus Malin qu'il n'y Paraît",
+    "description": "Épuiser cette carte et gagner 1 stress vous permet de traiter votre Intelligence comme si elle était d'1 point plus élevée qu'elle ne l'est vraiment sur un test de compétence, ou lorsque devez faire un test opposé à l'aide de votre Intelligence."
+  },
+  {
+    "type": "AFFINITY",
+    "cooldown": "PASSIVE",
+    "name": "Réfléchi",
+    "description": "Si votre attitude est téméraire, vous pouvez dépenser 1 point de fortune pour convertir un dé de caractéristique en dé de prudence de plus que votre attitude ne le permet normalement."
+  },
+  {
+    "type": "AFFINITY",
+    "cooldown": "TALENT",
+    "name": "Résolu",
+    "description": "Épuiser cette carte vous permet d'éliminer 2 stress."
+  },
+  {
+    "type": "AFFINITY",
+    "cooldown": "PASSIVE",
+    "name": "Rôdeur des Ombres",
+    "description": "Vous bénéficiez d'un {FORTUNE_DICE} supplémentaire à l'occasion de tous vos tests de Furtivité."
+  },
+  {
+    "type": "AFFINITY",
+    "cooldown": "PASSIVE",
+    "name": "Sceptique",
+    "description": "Lorsque quelqu'un vous prend pour cible à l'occasion d'un test de Ruse, celui-ci doit ajouter un {MISFORTUNE_DICE} à sa réserve de dé."
+  },
+  {
+    "type": "AFFINITY",
+    "cooldown": "PASSIVE",
+    "name": "Serein",
+    "description": "Vous éliminez 1 point de stress supplémentaire chaque fois que vous réussissez un test de Force Mentale pour réduire votre stress."
+  },
+  {
+    "type": "AFFINITY",
+    "cooldown": "PASSIVE",
+    "name": "Signes",
+    "description": "Vous bénéficiez de {FORTUNE_DICE} {FORTUNE_DICE} supplémentaires à l'occasion de vos tests d'Intelligence tant que vous êtes en extérieur."
+  },
+  {
+    "type": "AFFINITY",
+    "cooldown": "PASSIVE",
+    "name": "Touche-à-tout",
+    "description": "Gagnez 1 stress pour bénéficier d'un {FORTUNE_DICE} supplémentaire à l'occasion de n'importe quel test de compétence."
+  },
+  {
+    "type": "AFFINITY",
+    "cooldown": "PASSIVE",
+    "name": "Vue Perçante",
+    "description": "Vous bénéficiez d'un {FORTUNE_DICE} supplémentaire à l'occasion des tests d'Observation basés sur la vue."
+  },
+  {
+    "type": "TOUR",
+    "cooldown": "PASSIVE",
+    "name": "Aboie !",
+    "description": "Tant que vous et vos alliés demeurez à portée moyenne ou moins de votre familier, vous bénéficiez d'un {FORTUNE_DICE} à l'occasion de vos tests d'Observation (Int) et d'Initiative."
+  },
+  {
+    "type": "TOUR",
+    "cooldown": "PASSIVE",
+    "name": "Bon Chien !",
+    "description": "À l'occasion de vos tests de Dressage des animaux (Soc), {BOON_FACE} {BOON_FACE} Votre familier gagne 1 Obéissance."
+  },
+  {
+    "type": "TOUR",
+    "cooldown": "PASSIVE",
+    "name": "Embête-les !",
+    "description": "Les ennemis engagés au combat contre votre familier subissent un {MISFORTUNE_DICE} à l'occasion de leurs actions d'Attaque de Corps à Corps, d'Attaque à Distance ou de Bénédiction."
+  },
+  {
+    "type": "TOUR",
+    "cooldown": "PASSIVE",
+    "name": "Meilleur Ami de l'Homme",
+    "description": "Tant que vous êtes engagé au combat aux côtés de votre familier, votre valeur d'encaissement augmente de 1 contre les attaques de Corps à Corps et les Attaques à Distance."
+  },
+  {
+    "type": "TOUR",
+    "cooldown": "PASSIVE",
+    "name": "Mords et Tiens Bon !",
+    "description": "Tant que votre familier est engagé au corps à corps avec un ennemi, les Attaques de Corps à Corps et les Attaques à Distance que vous et vos alliés portez bénéficient d'un {FORTUNE_DICE} supplémentaire."
+  },
+  {
+    "type": "TOUR",
+    "cooldown": "PASSIVE",
+    "name": "Mords-Lui les Chevilles !",
+    "description": "Les ennemis engagés au combat contre votre familier ne bénéficient pas de manœuvre gratuite au cours de leur tour. À l'occasion de vos tests de Dressage des animaux (Soc), {BANE_FACE} {BANE_FACE} Votre familier perd 1 Obéissance."
+  },
+  {
+    "type": "REPUTATION",
+    "cooldown": "TALENT",
+    "name": "Accointances",
+    "description": "Épuiser cette carte vous permet de bénéficier de {FORTUNE_DICE} {FORTUNE_DICE} à l'occasion d'une action sociale."
+  },
+  {
+    "type": "REPUTATION",
+    "cooldown": "PASSIVE",
+    "name": "Ambitieux",
+    "description": "Vous pouvez dépenser un point de fortune pour convertir un dé de caractéristique supplémentaire en dé d'attitude."
+  },
+  {
+    "type": "REPUTATION",
+    "cooldown": "PASSIVE",
+    "name": "Ascétisme",
+    "description": "Vous bénéficiez d'un {FORTUNE_DICE} supplémentaire à l'occasion de vos tests de Résistance et de Discipline."
+  },
+  {
+    "type": "REPUTATION",
+    "cooldown": "PASSIVE",
+    "name": "Baroudeur",
+    "description": "Vous bénéficiez d'un {FORTUNE_DICE} à l'occasion de vos tests de Charisme, d'Éducation et de Folklore lorsque ces tests concernent des lieux exotiques ou les individus qui en proviennent. Épuiser cette carte vous permet d'ignorer un malus imposé à vos actions Sociales si ce malus est dû à des différences d'ordre culturel."
+  },
+  {
+    "type": "REPUTATION",
+    "cooldown": "PASSIVE",
+    "name": "Beau Parleur",
+    "description": "Un {BOON_FACE} est ajouté aux résultats de votre jet de dés lorsque vous obtenez au moins {SUCCESS_FACE} {SUCCESS_FACE} {SUCCESS_FACE} à l'occasion d'un test de Sociabilité."
+  },
+  {
+    "type": "REPUTATION",
+    "cooldown": "PASSIVE",
+    "name": "Charismatique",
+    "description": "Lorsque vous dépensez des points de fortune à l'occasion d'un test de Sociabilité, {BOON_FACE} {BOON_FACE} Ajoutez {SUCCESS_FACE} aux résultats."
+  },
+  {
+    "type": "REPUTATION",
+    "cooldown": "TALENT",
+    "name": "Confiant",
+    "description": "Épuisez cette carte afin d'annuler {BANE_FACE} {BANE_FACE} obtenus lors d'un test d'Intelligence, de Force Mentale ou de Sociabilité."
+  },
+  {
+    "type": "REPUTATION",
+    "cooldown": "TALENT",
+    "name": "Débrouillard",
+    "description": "Épuiser cette carte vous permet de bénéficier d'un {EXPERTISE_DICE} à l'occasion d'un test d'Intelligence."
+  },
+  {
+    "type": "REPUTATION",
+    "cooldown": "PASSIVE",
+    "name": "Éducation Universitaire",
+    "description": "À l'occasion de vos tests d'Éducation et de Folklore, {BOON_FACE} {BOON_FACE} Ajoutez {SUCCESS_FACE} aux résultats."
+  },
+  {
+    "type": "REPUTATION",
+    "cooldown": "PASSIVE",
+    "name": "Empathie avec les Magiciens",
+    "description": "Vous bénéficiez d'un {FORTUNE_DICE} à l'occasion de vos tests de Sociabilité et vos actions Sociales qui visent les sorciers."
+  },
+  {
+    "type": "REPUTATION",
+    "cooldown": "TALENT",
+    "name": "Favorisé par le Destin",
+    "description": "Épuiser cette carte après avoir effectué un test d'Intelligence, de Force Mentale ou de Sociabilité vous permet de relancer tous les {FORTUNE_DICE} et {MISFORTUNE_DICE} qui se trouvaient dans la réserve de dés employée lors du test en question."
+  },
+  {
+    "type": "REPUTATION",
+    "cooldown": "PASSIVE",
+    "name": "Goujaterie",
+    "description": "À l'occasion de vos actions Sociales, {BOON_FACE} {BOON_FACE} la cible de votre action progresse d'un cran dans l'attitude téméraire."
+  },
+  {
+    "type": "REPUTATION",
+    "cooldown": "PASSIVE",
+    "name": "Grégaire",
+    "description": "Vos tests de Charisme bénéficient d'un {FORTUNE_DICE} supplémentaire."
+  },
+  {
+    "type": "REPUTATION",
+    "cooldown": "TALENT",
+    "name": "Inflexible",
+    "description": "Épuiser cette carte vous permet d'éliminer 1 stress et 1 fatigue."
+  },
+  {
+    "type": "REPUTATION",
+    "cooldown": "PASSIVE",
+    "name": "Insensible aux Éléments",
+    "description": "Lorsque vous gagnez du stress, de la fatigue ou subissez une ou plusieurs blessures à cause de mauvaises conditions météorologiques ou environnementales, ces valeurs sont réduites de 1 (jusqu'à un minimum de 1). Par ailleurs, le mauvais temps vous impose un {MISFORTUNE_DICE} de moins."
+  },
+  {
+    "type": "REPUTATION",
+    "cooldown": "TALENT",
+    "name": "Je Connais un Gars…",
+    "description": "Épuiser cette carte vous permet de bénéficier de {FORTUNE_DICE} {FORTUNE_DICE} à l'occasion d'un test de Sociabilité. Si ce test se solde par un échec, gagnez 1 stress."
+  },
+  {
+    "type": "REPUTATION",
+    "cooldown": "PASSIVE",
+    "name": "Malhonnête",
+    "description": "Vous bénéficiez d'un {FORTUNE_DICE} à l'occasion de vos tests de Forfaits."
+  },
+  {
+    "type": "REPUTATION",
+    "cooldown": "PASSIVE",
+    "name": "Mondain",
+    "description": "Éliminez 1 stress chaque fois que vous réussissez un test de Charisme ou de Ruse dont le niveau de difficulté est au moins Facile (1d)."
+  },
+  {
+    "type": "REPUTATION",
+    "cooldown": "PASSIVE",
+    "name": "Pieux",
+    "description": "Vous bénéficiez d'un {FORTUNE_DICE} à l'occasion de vos tests de Sociabilité et de vos actions Sociales qui visent les prêtres et les dévots."
+  },
+  {
+    "type": "REPUTATION",
+    "cooldown": "PASSIVE",
+    "name": "Plus Chanceux que Talentueux",
+    "description": "Lorsque vous dépensez des points de fortune pour ajouter un dé à l'occasion d'un test fait avec une compétence e base à laquelle nous n'êtes pas formé, vous bénéficiez d'un bonus de {FORTUNE_DICE} {FORTUNE_DICE} au lieu de {FORTUNE_DICE}."
+  },
+  {
+    "type": "REPUTATION",
+    "cooldown": "PASSIVE",
+    "name": "Plus d'Argent que de Jugeote",
+    "description": "À l'occasion de vos tests de Sociabilité ou des actions Sociales, faites étalage de votre richesse en dépensant une pièce d'or au moment de la résolution de votre action. Ceci vous permet de bénéficier d'un {EXPERTISE_DICE} pour ce test."
+  },
+  {
+    "type": "REPUTATION",
+    "cooldown": "TALENT",
+    "name": "Pouvoir de la Foi",
+    "description": "Épuiser cette carte vous permet de substituer votre Force Mentale à votre Intelligence à l'occasion d'un test de compétence. À l'occasion de ce test : {BANE_FACE} Ajoutez {FAILURE_FACE} aux résultats."
+  },
+  {
+    "type": "REPUTATION",
+    "cooldown": "PASSIVE",
+    "name": "Protecteur",
+    "description": "Vous bénéficiez d'un {FORTUNE_DICE} à l'occasion de vos tests si un de vos alliés à portée moyenne ou moins a subi une blessure critique."
+  },
+  {
+    "type": "REPUTATION",
+    "cooldown": "PASSIVE",
+    "name": "Regard Glacial",
+    "description": "Vos actions de Sociabilité utilisant la Ruse gagnent : {BOON_FACE} {BOON_FACE} La cible doit passer un test moyen de Discipline (2d) ou être secouée pendant 2 rounds."
+  },
+  {
+    "type": "REPUTATION",
+    "cooldown": "PASSIVE",
+    "name": "Réputé",
+    "description": "Vous bénéficiez d'un {FORTUNE_DICE} supplémentaire à l'occasion de tous vos tests de Ruse."
+  },
+  {
+    "type": "REPUTATION",
+    "cooldown": "PASSIVE",
+    "name": "Sans Peur",
+    "description": "Vous bénéficiez d'un {FORTUNE_DICE} à l'occasion de vos tests de Discipline lorsque vous tentez de résister à la Peur ou à la Terreur. Épuiser cette carte vous permet de relancer un test de Discipline lorsque vous tentez de résister à la Peur ou à la Terreur."
+  },
+  {
+    "type": "REPUTATION",
+    "cooldown": "PASSIVE",
+    "name": "Sens de l'Humour",
+    "description": "À l'occasion de vos tests de Sociabilité, {BOON_FACE} {BOON_FACE} Le niveau de tension de votre groupe baisse de 1."
+  },
+  {
+    "type": "REPUTATION",
+    "cooldown": "TALENT",
+    "name": "Sociable",
+    "description": "Épuiser cette carte vous permet de recharger une carte d'action Sociale."
+  },
+  {
+    "type": "REPUTATION",
+    "cooldown": "PASSIVE",
+    "name": "Stoïcisme",
+    "description": "Vous pouvez dépenser 1 point de fortune lorsque vous êtes affecté par une carte d'état dont la durée est limitée par un nombre de rounds pour réduire cette durée de 2 rounds."
+  },
+  {
+    "type": "REPUTATION",
+    "cooldown": "TALENT",
+    "name": "Voix de la Raison",
+    "description": "Épuiser cette carte vous permet de substituer votre Intelligence à votre Force Mentale à l'occasion d'un test de compétence. À l'occasion de ce test : {BANE_FACE} Ajoutez {FAILURE_FACE} aux résultats."
+  },
+  {
+    "type": "FAITH",
+    "cooldown": "PASSIVE",
+    "name": "Manann, Dieu des Mers",
+    "description": "Vous bénéficiez d'un {FORTUNE_DICE} à l'occasion de vos tests d'Invocation et de Piété lorsque vous vous trouvez à portée longue ou moins d'une étendue d'eau.\nJauge d'Attitude de Départ : PPNTT"
+  },
+  {
+    "type": "FAITH",
+    "cooldown": "PASSIVE",
+    "name": "Morr, Dieu des Rêves et de la Mort",
+    "description": "Une fois par tour, vous pouvez administrer l'extrême onction de Morr à une personne morte ou mourante qui se trouve à portée courte pour gagner 1 faveur. Ces rites exigent d'effectuer une manœuvre.\nJauge d'Attitude de Départ : PPNTT"
+  },
+  {
+    "type": "FAITH",
+    "cooldown": "PASSIVE",
+    "name": "Myrmidia, Déesse de la Guerre",
+    "description": "Vous gagnez 1 faveur chaque fois que vous obtenez un {SIGMAR_FACE} ou plus lorsque vous portez une Attaque de Corps à Corps.\nJauge d'Attitude de Départ : PPPNT"
+  },
+  {
+    "type": "FAITH",
+    "cooldown": "PASSIVE",
+    "name": "Ranald, Dieu de la Chance et de la Tromperie",
+    "description": "Vous commencez chaque session pourvu d'un point de fortune supplémentaire. Lorsque vous dépensez un point de fortune ou plus à l'occasion d'un test de compétence et que ce test est un succès, gagnez 1 faveur.\nJauge d'Attitude de Départ : PNTTT"
+  },
+  {
+    "type": "FAITH",
+    "cooldown": "PASSIVE",
+    "name": "Shallya, Déesse de la Guérison et de la Compassion",
+    "description": "Chaque fois qu'on de vos alliés qui se trouve à portée courte de vous subit une blessure critique, gagnez 1 faveur.\nJauge d'Attitude de Départ : PPPNT"
+  },
+  {
+    "type": "FAITH",
+    "cooldown": "PASSIVE",
+    "name": "Sigmar, Dieu de l'Empire",
+    "description": "Gagnez 1 faveur chaque fois que vous infligez 1 blessure critique ou plus.\nJauge d'Attitude de Départ : CNTTT"
+  },
+  {
+    "type": "FAITH",
+    "cooldown": "PASSIVE",
+    "name": "Taal, Dieu de la Nature et des Étendues Sauvages",
+    "description": "Vous bénéficiez d'un {FORTUNE_DICE} à l'occasion de vos tests de Piété et d'Invocation tant que vous vous trouvez en forêt ou dans la nature.\nJauge d'Attitude de Départ : PPNTT"
+  },
+  {
+    "type": "FAITH",
+    "cooldown": "PASSIVE",
+    "name": "Ulric, Dieu des Batailles, des Loups et de l'Hiver",
+    "description": "Gagnez 1 faveur chaque fois que vous subissez une blessure critique.\nJauge d'Attitude de Départ : PNTTT"
+  },
+  {
+    "type": "FAITH",
+    "cooldown": "PASSIVE",
+    "name": "Verena, Déesse du Savoir et de la Justice",
+    "description": "Vous pouvez associez un talent Affinité à votre carte de Foi comme si cette dernière était un emplacement de talent de votre fiche de carrière. Tant qu'un talent actif est associé à cet emplacement, vous bénéficiez d'un {FORTUNE_DICE} à l'occasion de vos tests d'Éducation.\nJauge d'Attitude de Départ : PPNTT"
+  },
+  {
+    "type": "ORDER",
+    "cooldown": "PASSIVE",
+    "name": "Aqshy, Domaine du Feu, Ordre Flamboyant",
+    "description": "Lorsque vous infligez des dégâts avec un Sort du Collège Flamboyant, vous pouvez augmenter ces dégâts de 1 pour chaque point d'énergie supplémentaire que vous choisissez d'investir."
+  },
+  {
+    "type": "ORDER",
+    "cooldown": "PASSIVE",
+    "name": "Azyr, Domaine des Cieux, Ordre Céleste",
+    "description": "Lorsque vous employez un Sort du Collège Céleste, vous pouvez dépenser 1 énergie supplémentaire pour bénéficier d'un {FORTUNE_DICE} supplémentaire à l'occasion de ce test.\nJauge d'Attitude de Départ : PPPNT"
+  },
+  {
+    "type": "ORDER",
+    "cooldown": "PASSIVE",
+    "name": "Chamon, Domaine du Métal, Ordre Doré",
+    "description": "Lorsque vous employez un Sort de l'Ordre Doré, vous pouvez dépenser 1 énergie pour convertir un de vos dés de caractéristiques {CHARACTERISTIC_DICE} en dé de prudence {CONSERVATIVE_DICE}, quelle que soit votre attitude actuelle.\nJaude d'Attitude de Départ : PPPNT"
+  },
+  {
+    "type": "ORDER",
+    "cooldown": "PASSIVE",
+    "name": "Ghur, Domaine des Bêtes, Ordre d'Ambre",
+    "description": "Tant que vous êtes sous Forme Animale, vous pouvez dépenser 1 énergie pour effectuer une manœuvre supplémentaire lors de votre tour. Il n'est possible de dépenser que 1 énergie de la sorte par tour.\nJauge d'Attitude de Départ : PNTTT"
+  },
+  {
+    "type": "ORDER",
+    "cooldown": "PASSIVE",
+    "name": "Ghyran, Domaine de la Vie, Ordre de Jade",
+    "description": "Vous bénéficiez d'un {FORTUNE_DICE} lorsque vous employez un Sort du Collège de Jade si la saison mentionnée par ce sort correspond à la saison actuelle. Si la saison mentionnée est l'opposé de la saison actuelle, vous devez en revanche ajouter un {MISFORTUNE_DICE} à votre réserve de dés.\nJauge d'Attitude de Départ : PPPNT"
+  },
+  {
+    "type": "ORDER",
+    "cooldown": "PASSIVE",
+    "name": "Hysh, Domaine de la Lumière, Ordre Lumineux",
+    "description": "Après avoir lancé un Sort de l'Ordre Lumineux, vous pouvez dépenser 1 énergie afin de retirer ou d'ajouter un jeton de recharge à ce sort ou à une carte d'état obtenue à l'aide de celui-ci.\nJauge d'Attitude de Départ : PPPNT"
+  },
+  {
+    "type": "ORDER",
+    "cooldown": "PASSIVE",
+    "name": "Magie Noire",
+    "description": "Vous pouvez apprendre et employer des Sorts de Magie Noire et des Sorts du Chaos. Lorsque vous focalisez l'énergie ou que vous lancez un sort, vous bénéficiez d'un {EXPERTISE_DICE} à l'occasion de votre test. Si vous générez un ou plusieurs {EXERTION_FACE} ou {DELAY_FACE} à l'occasion de ces tests, ajoutez {CHAOS_FACE} aux résultats.\nÀ l'occasion de vos tests de Focalisation et l'Art de la magie, {MISFORTUNE_DICE} {MISFORTUNE_DICE} Ajoutez {CHAOS_FACE} aux résultats."
+  },
+  {
+    "type": "ORDER",
+    "cooldown": "PASSIVE",
+    "name": "Shyish, Domaine de la Mort, Ordre d'Améthyste",
+    "description": "Si une créature vivante meurt au cours d'un tour qui suit immédiatement un tour ou vous avez employé un Sort de l'Ordre d'Améthyste, vous pouvez immédiatement dépenser 1 énergie afin d'ajouter ou de retirer 1 jeton de recharge se trouvant sur une de vos cartes d'action de Sort de l'Ordre d'Améthyste.\nJauge d'Attitude de Départ : PPNTT"
+  },
+  {
+    "type": "ORDER",
+    "cooldown": "PASSIVE",
+    "name": "Ulgu, Dmaine des Ombres, Ordre Gris",
+    "description": "Vous pouvez dépenser 1 énergie supplémentaire lorsque vous employez un Sort de l'Ordre Gris afin d'ajouter ou de retirer 1 jeton de recharge à sa carte d'action.\nJauge d'Attitude de Départ : PPNTT"
+  },
+  {
+    "type": "TACTICS",
+    "cooldown": "PASSIVE",
+    "name": "À Bras-le-Corps",
+    "description": "Si vous êtes engagé au combat avec une cible qui tente d'employer la Défense Active Esquive et que votre Attaque de Corps à Corps réussit malgré tout, rajoutez un jeton de recharge supplémentaire sur sa carte d'action Esquive."
+  },
+  {
+    "type": "TACTICS",
+    "cooldown": "TALENT",
+    "name": "Assaut sans Relâche",
+    "description": "Épuiser cette carte vous permet de relancer tous les {FORTUNE_DICE} et les {MISFORTUNE_DICE} suite à un test de Force, d'Endurance ou d'Agilité."
+  },
+  {
+    "type": "TACTICS",
+    "cooldown": "PASSIVE",
+    "name": "Cavalier Invétéré",
+    "description": "Toutes les attques que vous effectuez alors que vous êtes monté bénéficient d'un {FORTUNE_DICE} supplémentaire. Toutes les formes actives de défense dont vous vous servez alors que vous êtes à cheval imposent un {MISFORTUNE_DICE} supplémentaire aux attaques portées contre vous."
+  },
+  {
+    "type": "TACTICS",
+    "cooldown": "PASSIVE",
+    "name": "Charge",
+    "description": "Vous bénéficiez d'un {FORTUNE_DICE} à l'occasion de toutes vos Attaques de Corps à Corps au cours d'un tour où vous engagez le combat avec un ennemi."
+  },
+  {
+    "type": "TACTICS",
+    "cooldown": "TALENT",
+    "name": "Coup de Rein",
+    "description": "Épuiser cette carte vous permet de bénéficier de {FORTUNE_DICE} {FORTUNE_DICE} à l'occasion de n'importe quel test de Force. Si ce test est un échec, gagnez 1 fatigue."
+  },
+  {
+    "type": "TACTICS",
+    "cooldown": "PASSIVE",
+    "name": "Couteau dans la Plaie",
+    "description": "Vous pouvez infliger 1 fatigue à votre cible en effectuant une manœuvre supplémentaire immédiatement après l'avoir attaquée au corps à corps."
+  },
+  {
+    "type": "TACTICS",
+    "cooldown": "PASSIVE",
+    "name": "Efforts Coordonnés",
+    "description": "À l'occasion d'un test d'Agilité pour lequel vous avez dépensé des points de fortune, {BOON_FACE} {BOON_FACE} Ajoutez {SUCCESS_FACE} aux résultats."
+  },
+  {
+    "type": "TACTICS",
+    "cooldown": "TALENT",
+    "name": "Entraînement Exceptionnel",
+    "description": "Épuiser cette carte vous permet d'annulez jusqu'à {BANE_FACE} {BANE_FACE} lors de vos tests de Force, d'Agilité ou d'Endurance."
+  },
+  {
+    "type": "TACTICS",
+    "cooldown": "PASSIVE",
+    "name": "Escrimeur",
+    "description": "Votre valeur de défense augmente de 1 lorsque vous êtes armé d'une arme d'escrime ou d'une arme d'escrime et d'une dague."
+  },
+  {
+    "type": "TACTICS",
+    "cooldown": "PASSIVE",
+    "name": "Exploiter les Vulnérabilités",
+    "description": "Vous bénéficez d'un {FORTUNE_DICE} à l'occasion de vos attaques lorsque votre adversaire souffre d'une blessure critique."
+  },
+  {
+    "type": "TACTICS",
+    "cooldown": "PASSIVE",
+    "name": "Fait de Fer",
+    "description": "Si vous gagnez 2 points de fatigue ou plus d'un seul coup, ce total est réduit de 1."
+  },
+  {
+    "type": "TACTICS",
+    "cooldown": "TALENT",
+    "name": "Impavide",
+    "description": "Épuiser cette carte vous permet d'augmenter votre valeur d'encaissement de 2 contre une source de dégâts. Vous pouvez utiliser ce talent après avoir pris connaissance des dégâts."
+  },
+  {
+    "type": "TACTICS",
+    "cooldown": "PASSIVE",
+    "name": "Intouchable",
+    "description": "Vous pouvez subir 1 fatigue pour utiliser la défense active Parade contre Attaque à Distance."
+  },
+  {
+    "type": "TACTICS",
+    "cooldown": "PASSIVE",
+    "name": "La Force Justifie Tout",
+    "description": "À l'occasion d'un test de Force pour lequel vous avez dépensé des points de fortune, {BOON_FACE} {BOON_FACE} Ajoutez {SUCCESS_FACE} aux résultats."
+  },
+  {
+    "type": "TACTICS",
+    "cooldown": "PASSIVE",
+    "name": "Manœuvre sur les Flancs",
+    "description": "Tant que vous êtes engagé au combat avec au moins 1 allié, vous et vos alliés bénéficiez tous d'un {FORTUNE_DICE} supplémentaire à l'occasion de vos Attaques au Corps à Corps."
+  },
+  {
+    "type": "TACTICS",
+    "cooldown": "PASSIVE",
+    "name": "Meneur au Front",
+    "description": "Vous bénéficiez d'un {FORTUNE_DICE} à l'occasion d'un test de compétence si aucun ennemi n'a agi depuis le début du tour en cours."
+  },
+  {
+    "type": "TACTICS",
+    "cooldown": "PASSIVE",
+    "name": "Mur de Boucliers",
+    "description": "Votre valeur de défense augmente de +1 si vous vous battez aux côtés d'au moins deux alliés équipés de boucliers."
+  },
+  {
+    "type": "TACTICS",
+    "cooldown": "TALENT",
+    "name": "Pas de Repos pour les Braves",
+    "description": "Épuiser cette carte vous permet d'éliminer 2 fatigue."
+  },
+  {
+    "type": "TACTICS",
+    "cooldown": "TALENT",
+    "name": "Poursuite sans Relâche",
+    "description": "Vous jouissez d'une manœuvre gratuite dès que vous vainquez le dernier ennemi avec lequel vous étiez aux prises."
+  },
+  {
+    "type": "TACTICS",
+    "cooldown": "TALENT",
+    "name": "Réflexes Éclairs",
+    "description": "Épuiser cette carte vous permet de bénéficier de {FORTUNE_DICE} {FORTUNE_DICE} à l'occasion d'un test d'Agilité ou impose {MISFORTUNE_DICE} {MISFORTUNE_DICE} à une tentative d'Esquive. SI votre test d'Agilité est un échec, gagnez 1 fatigue."
+  },
+  {
+    "type": "TACTICS",
+    "cooldown": "PASSIVE",
+    "name": "Sens du Combat",
+    "description": "Votre valeur de défense contre les Attaques de Corps à Corps augmente de 1 lorsque aucune de vos cartes d'action Défensive n'est en recharge."
+  },
+  {
+    "type": "TACTICS",
+    "cooldown": "PASSIVE",
+    "name": "Serrer les Dents",
+    "description": "À l'occasion d'un test d'Endurance pour lequel vous avez dépensé des points de fortune, {BOON_FACE} {BOON_FACE} Ajoutez {SUCCESS_FACE} aux résultats."
+  },
+  {
+    "type": "TACTICS",
+    "cooldown": "PASSIVE",
+    "name": "Robuste",
+    "description": "Le niveau de gravité de vos blessures critiques est réduit de 1 lorsqu'elles sont traitées ou guéries, jusqu'à un minimum de 1. Les blessures critiques dont le niveau de gravité déjà égal à 0 ne sont pas affectées par ce talent."
+  },
+  {
+    "type": "TACTICS",
+    "cooldown": "TALENT",
+    "name": "Vigilance",
+    "description": "Épuiser cette carte vous confère {FORTUNE_DICE} {FORTUNE_DICE} à l'occasion d'un test d'Initiative."
+  }
+]

@@ -29,15 +29,15 @@ class PlayerCharacteristicsFragment : Fragment() {
         super.onCreateView(inflater, container, savedInstanceState)
         val resultingView: View = inflater.inflate(R.layout.fragment_player_characteristics, container, false)
 
-        val playerName = arguments!!.getString(PLAYER_NAME_INTENT_ARGUMENT)
+        unbinder = ButterKnife.bind(this, resultingView)
 
+        val playerName = arguments!!.getString(PLAYER_NAME_INTENT_ARGUMENT)
         playerFacade = PlayerFacade(context!!)
         player = playerFacade.find(playerName)!!
 
         views = PlayerCharacteristicsFragmentViewHolder(resultingView)
         views.fillViews(player)
 
-        unbinder = ButterKnife.bind(this, resultingView)
 
         return resultingView
     }

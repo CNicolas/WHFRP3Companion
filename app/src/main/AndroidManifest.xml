@@ -2,12 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="com.nicolas.whfrp3companion">
 
-    <application
-            android:allowBackup="true"
-            android:icon="@drawable/warhammer_v3_logo"
-            android:label="@string/app_name"
-            android:supportsRtl="true"
-            android:theme="@style/AppTheme">
+    <application android:allowBackup="true"
+                 android:icon="@drawable/warhammer_v3_logo"
+                 android:label="@string/app_name"
+                 android:supportsRtl="true"
+                 android:theme="@style/AppTheme">
+
         <activity android:name=".MainActivity"
                   android:screenOrientation="portrait"
                   android:theme="@style/AppTheme">
@@ -23,9 +23,18 @@
                   android:screenOrientation="portrait"
                   android:theme="@style/AppTheme"
                   android:windowSoftInputMode="stateHidden|adjustResize">
-            <meta-data
-                    android:name="android.support.PARENT_ACTIVITY"
-                    android:value=".MainActivity" />
+            <meta-data android:name="android.support.PARENT_ACTIVITY"
+                       android:value=".MainActivity" />
+        </activity>
+
+        <activity android:name=".playersheet.inventory.ItemEditionActivity"
+                  android:parentActivityName=".playersheet.PlayerSheetActivity"
+                  android:label="@string/page_add_item"
+                  android:screenOrientation="portrait"
+                  android:theme="@style/AppTheme"
+                  android:windowSoftInputMode="stateHidden|adjustPan">
+            <meta-data android:name="android.support.PARENT_ACTIVITY"
+                       android:value=".playersheet.PlayerSheetActivity" />
         </activity>
 
         <activity android:name=".shared.activities.DiceRollerActivity"
@@ -37,7 +46,10 @@
                   android:parentActivityName=".shared.activities.DiceRollerActivity"
                   android:label="@string/page_dice_roller_statistics"
                   android:screenOrientation="portrait"
-                  android:theme="@style/AppTheme" />
-    </application>
+                  android:theme="@style/AppTheme">
+            <meta-data android:name="android.support.PARENT_ACTIVITY"
+                       android:value=".shared.activities.DiceRollerActivity" />
+        </activity>
 
+    </application>
 </manifest>

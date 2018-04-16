@@ -10,12 +10,11 @@ import butterknife.BindView
 import butterknife.ButterKnife
 import butterknife.Unbinder
 import com.nicolas.whfrp3companion.R
-import com.nicolas.whfrp3companion.shared.adapters.SkillsExpandableAdapter
 import com.nicolas.whfrp3database.staticData.loadSkills
 
 class SkillsFragment : Fragment() {
     @BindView(R.id.skills_list)
-    lateinit var skillsList: ExpandableListView
+    lateinit var skillsView: ExpandableListView
 
     private lateinit var unbinder: Unbinder
 
@@ -28,7 +27,7 @@ class SkillsFragment : Fragment() {
 
         val skills = loadSkills(context!!)
         val skillsAdapter = SkillsExpandableAdapter(context!!, skills)
-        skillsList.setAdapter(skillsAdapter)
+        skillsView.setAdapter(skillsAdapter)
 
         return resultingView
     }

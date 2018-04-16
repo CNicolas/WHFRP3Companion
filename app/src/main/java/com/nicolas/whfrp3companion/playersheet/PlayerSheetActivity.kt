@@ -11,14 +11,15 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.view.MenuItem
 import android.view.inputmethod.InputMethodManager
-import butterknife.BindView
 import butterknife.ButterKnife
 import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.fragments.EmptyFragment
 import com.nicolas.whfrp3companion.playersheet.characteristics.PlayerCharacteristicsFragment
+import com.nicolas.whfrp3companion.playersheet.inventory.PlayerInventoryFragment
 import com.nicolas.whfrp3companion.playersheet.skills.PlayerSkillsFragment
 import com.nicolas.whfrp3companion.playersheet.state.PlayerStateFragment
 import com.nicolas.whfrp3companion.shared.PLAYER_NAME_INTENT_ARGUMENT
+import com.nicolas.whfrp3companion.shared.bind
 import com.nicolas.whfrp3companion.shared.enums.labelId
 import com.nicolas.whfrp3database.PlayerFacade
 import com.nicolas.whfrp3database.entities.player.Player
@@ -26,8 +27,7 @@ import com.nicolas.whfrp3database.entities.player.Player
 class PlayerSheetActivity : AppCompatActivity() {
     private lateinit var player: Player
 
-    @BindView(R.id.playersheet_drawer_layout)
-    lateinit var drawer: DrawerLayout
+    private val drawer by bind<DrawerLayout>(R.id.playersheet_drawer_layout)
 
     private lateinit var toggle: ActionBarDrawerToggle
 
@@ -78,8 +78,8 @@ class PlayerSheetActivity : AppCompatActivity() {
             R.id.nav_player_characteristics -> PlayerCharacteristicsFragment.newInstance(player.name)
             R.id.nav_player_state -> PlayerStateFragment.newInstance(player.name)
             R.id.nav_player_skills -> PlayerSkillsFragment.newInstance(player.name)
-//          R.id.nav_player_inventory -> SkillsFragment()
-//          R.id.nav_player_actions -> SpecializationsFragment()
+            R.id.nav_player_inventory -> PlayerInventoryFragment.newInstance(player.name)
+//            R.id.nav_player_actions -> PlayerActionsFragment()
 //            R.id.nav_player_talents -> PlayerTalentsFragment()
             else -> EmptyFragment.newInstance()
         }

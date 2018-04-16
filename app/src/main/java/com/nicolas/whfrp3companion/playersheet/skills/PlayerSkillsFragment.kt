@@ -11,13 +11,12 @@ import butterknife.ButterKnife
 import butterknife.Unbinder
 import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.shared.PLAYER_NAME_INTENT_ARGUMENT
-import com.nicolas.whfrp3companion.shared.adapters.SkillsExpandableAdapter
 import com.nicolas.whfrp3database.PlayerFacade
 import com.nicolas.whfrp3database.entities.player.Player
 
 class PlayerSkillsFragment : Fragment() {
     @BindView(R.id.skills_list)
-    lateinit var skillsList: ExpandableListView
+    lateinit var skillsView: ExpandableListView
 
     private lateinit var unbinder: Unbinder
 
@@ -37,8 +36,9 @@ class PlayerSkillsFragment : Fragment() {
         playerFacade = PlayerFacade(context!!)
         player = playerFacade.find(playerName)!!
 
-        val skillsAdapter = SkillsExpandableAdapter(context!!, player)
-        skillsList.setAdapter(skillsAdapter)
+        val skillsAdapter = PlayerSkillsExpandableAdapter(context!!, player)
+        skillsView.setAdapter(skillsAdapter)
+        skillsView.setGroupIndicator(null)
 
         return resultingView
     }

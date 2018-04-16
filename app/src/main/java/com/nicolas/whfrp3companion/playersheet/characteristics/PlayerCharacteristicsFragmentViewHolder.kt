@@ -2,63 +2,43 @@ package com.nicolas.whfrp3companion.playersheet.characteristics
 
 import android.view.View
 import android.widget.EditText
-import butterknife.BindView
 import butterknife.ButterKnife
 import butterknife.OnClick
 import butterknife.Unbinder
 import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.shared.HAND_INTENT_ARGUMENT
 import com.nicolas.whfrp3companion.shared.activities.DiceRollerActivity
+import com.nicolas.whfrp3companion.shared.bind
+import com.nicolas.whfrp3companion.shared.intValue
 import com.nicolas.whfrp3database.entities.hand.Hand
 import com.nicolas.whfrp3database.entities.player.CharacteristicValue
 import com.nicolas.whfrp3database.entities.player.Player
 import org.jetbrains.anko.intentFor
 
 internal class PlayerCharacteristicsFragmentViewHolder(private val view: View) {
-    @BindView(R.id.career)
-    lateinit var career: EditText
-    @BindView(R.id.rank)
-    lateinit var rank: EditText
-    @BindView(R.id.experience)
-    lateinit var experience: EditText
-    @BindView(R.id.max_experience)
-    lateinit var maxExperience: EditText
-    @BindView(R.id.max_wounds)
-    lateinit var maxWounds: EditText
-    @BindView(R.id.max_corruption)
-    lateinit var maxCorruption: EditText
+    private val career by view.bind<EditText>(R.id.career)
+    private val rank by view.bind<EditText>(R.id.rank)
+    private val experience by view.bind<EditText>(R.id.experience)
+    private val maxExperience by view.bind<EditText>(R.id.max_experience)
+    private val maxWounds by view.bind<EditText>(R.id.max_wounds)
+    private val maxCorruption by view.bind<EditText>(R.id.max_corruption)
 
-    @BindView(R.id.strength)
-    lateinit var strength: EditText
-    @BindView(R.id.strength_fortune)
-    lateinit var strengthFortune: EditText
-    @BindView(R.id.toughness)
-    lateinit var toughness: EditText
-    @BindView(R.id.toughness_fortune)
-    lateinit var toughnessFortune: EditText
-    @BindView(R.id.agility)
-    lateinit var agility: EditText
-    @BindView(R.id.agility_fortune)
-    lateinit var agilityFortune: EditText
-    @BindView(R.id.intelligence)
-    lateinit var intelligence: EditText
-    @BindView(R.id.intelligence_fortune)
-    lateinit var intelligenceFortune: EditText
-    @BindView(R.id.willpower)
-    lateinit var willpower: EditText
-    @BindView(R.id.willpower_fortune)
-    lateinit var willpowerFortune: EditText
-    @BindView(R.id.fellowship)
-    lateinit var fellowship: EditText
-    @BindView(R.id.fellowship_fortune)
-    lateinit var fellowshipFortune: EditText
+    private val strength by view.bind<EditText>(R.id.strength)
+    private val strengthFortune by view.bind<EditText>(R.id.strength_fortune)
+    private val toughness by view.bind<EditText>(R.id.toughness)
+    private val toughnessFortune by view.bind<EditText>(R.id.toughness_fortune)
+    private val agility by view.bind<EditText>(R.id.agility)
+    private val agilityFortune by view.bind<EditText>(R.id.agility_fortune)
+    private val intelligence by view.bind<EditText>(R.id.intelligence)
+    private val intelligenceFortune by view.bind<EditText>(R.id.intelligence_fortune)
+    private val willpower by view.bind<EditText>(R.id.willpower)
+    private val willpowerFortune by view.bind<EditText>(R.id.willpower_fortune)
+    private val fellowship by view.bind<EditText>(R.id.fellowship)
+    private val fellowshipFortune by view.bind<EditText>(R.id.fellowship_fortune)
 
-    @BindView(R.id.max_conservative)
-    lateinit var maxConservative: EditText
-    @BindView(R.id.max_reckless)
-    lateinit var maxReckless: EditText
-    @BindView(R.id.description)
-    lateinit var description: EditText
+    private val maxConservative by view.bind<EditText>(R.id.max_conservative)
+    private val maxReckless by view.bind<EditText>(R.id.max_reckless)
+    private val description by view.bind<EditText>(R.id.description)
 
     private var unbinder: Unbinder = ButterKnife.bind(this, view)
 
@@ -151,11 +131,4 @@ internal class PlayerCharacteristicsFragmentViewHolder(private val view: View) {
                 HAND_INTENT_ARGUMENT to hand
         ))
     }
-
-    private val EditText.intValue: Int
-        get() = if (text.isNullOrBlank()) {
-            0
-        } else {
-            text.toString().toInt()
-        }
 }
