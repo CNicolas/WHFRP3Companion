@@ -7,7 +7,7 @@ import com.nicolas.whfrp3database.entities.player.enums.Race
 import com.nicolas.whfrp3database.entities.player.playerLinked.item.Item
 import com.nicolas.whfrp3database.entities.player.playerLinked.skill.Skill
 import com.nicolas.whfrp3database.entities.player.playerLinked.talent.Talent
-import com.nicolas.whfrp3database.extensions.getArmors
+import com.nicolas.whfrp3database.extensions.getEquippedArmors
 import java.io.Serializable
 
 data class Player(override var name: String,
@@ -66,10 +66,10 @@ data class Player(override var name: String,
         }
 
     val defense: Int
-        get() = getArmors().sumBy { it.defense }
+        get() = getEquippedArmors().sumBy { it.defense }
 
     val soak: Int
-        get() = getArmors().sumBy { it.soak }
+        get() = getEquippedArmors().sumBy { it.soak }
 
     operator fun get(characteristic: Characteristic): CharacteristicValue = when (characteristic) {
         STRENGTH -> strength
