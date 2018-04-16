@@ -4,7 +4,10 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.view.View
-import android.widget.*
+import android.widget.ArrayAdapter
+import android.widget.EditText
+import android.widget.NumberPicker
+import android.widget.Spinner
 import butterknife.ButterKnife
 import butterknife.OnClick
 import butterknife.OnItemSelected
@@ -32,31 +35,19 @@ class ItemEditionActivity : AppCompatActivity() {
 
     private val armorLayout by bind<View>(R.id.armor_layout)
     private val armorTypeSpinner by bind<Spinner>(R.id.armor_type)
-    private val defenseLabelView by bind<ImageView>(R.id.defense_label)
     private val defenseNumberPicker by bind<NumberPicker>(R.id.defense)
-    private val soakLabelView by bind<ImageView>(R.id.soak_label)
     private val soakNumberPicker by bind<NumberPicker>(R.id.soak)
 
     private val expandableLayout by bind<View>(R.id.expandable_layout)
-    private val usesLabelView by bind<ImageView>(R.id.uses_label)
     private val usesNumberPicker by bind<NumberPicker>(R.id.uses)
 
     private val weaponLayout by bind<View>(R.id.weapon_layout)
     private val weaponTypeSpinner by bind<Spinner>(R.id.weapon_type)
     private val weaponRangeSpinner by bind<Spinner>(R.id.range)
-    private val damageLabelView by bind<ImageView>(R.id.damage_label)
     private val damageNumberPicker by bind<NumberPicker>(R.id.damage)
-    private val criticalLevelLabelView by bind<ImageView>(R.id.critical_level_label)
     private val criticalLevelNumberPicker by bind<NumberPicker>(R.id.critical_level)
 
     private lateinit var unbinder: Unbinder
-
-    private val armorViews
-        get () = listOf(armorLayout, armorTypeSpinner, defenseLabelView, defenseNumberPicker, soakLabelView, soakNumberPicker)
-    private val expandableViews
-        get() = listOf(expandableLayout, usesLabelView, usesNumberPicker)
-    private val weaponViews
-        get () = listOf(weaponLayout, weaponTypeSpinner, weaponRangeSpinner, damageLabelView, damageNumberPicker, criticalLevelLabelView, criticalLevelNumberPicker)
 
     private lateinit var playerFacade: PlayerFacade
 
@@ -164,67 +155,67 @@ class ItemEditionActivity : AppCompatActivity() {
     private fun createItemFromViews(): Item {
         return when (ItemType[itemTypeView.selectedItemPosition]) {
             ARMOR -> Armor(
-                    itemNameEditText.text.toString(),
-                    descriptionEditText.text.toString(),
-                    encumbranceEditText.intValue,
-                    quantityEditText.intValue,
-                    Quality[qualitySpinner.selectedItemPosition],
-                    false,
-                    ArmorType[armorTypeSpinner.selectedItemPosition],
-                    soakNumberPicker.value,
-                    defenseNumberPicker.value
+                    name = itemNameEditText.text.toString(),
+                    description = descriptionEditText.text.toString(),
+                    encumbrance = encumbranceEditText.intValue,
+                    quantity = quantityEditText.intValue,
+                    quality = Quality[qualitySpinner.selectedItemPosition],
+                    isEquipped = (item as? Equipment)?.isEquipped ?: false,
+                    subType = ArmorType[armorTypeSpinner.selectedItemPosition],
+                    soak = soakNumberPicker.value,
+                    defense = defenseNumberPicker.value
             )
             EXPANDABLE -> Expandable(
-                    itemNameEditText.text.toString(),
-                    descriptionEditText.text.toString(),
-                    encumbranceEditText.intValue,
-                    quantityEditText.intValue,
-                    Quality[qualitySpinner.selectedItemPosition],
-                    usesNumberPicker.value
+                    name = itemNameEditText.text.toString(),
+                    description = descriptionEditText.text.toString(),
+                    encumbrance = encumbranceEditText.intValue,
+                    quantity = quantityEditText.intValue,
+                    quality = Quality[qualitySpinner.selectedItemPosition],
+                    uses = usesNumberPicker.value
             )
             GENERIC_ITEM -> GenericItem(
-                    itemNameEditText.text.toString(),
-                    descriptionEditText.text.toString(),
-                    encumbranceEditText.intValue,
-                    quantityEditText.intValue,
-                    Quality[qualitySpinner.selectedItemPosition]
+                    name = itemNameEditText.text.toString(),
+                    description = descriptionEditText.text.toString(),
+                    encumbrance = encumbranceEditText.intValue,
+                    quantity = quantityEditText.intValue,
+                    quality = Quality[qualitySpinner.selectedItemPosition]
             )
             WEAPON -> Weapon(
-                    itemNameEditText.text.toString(),
-                    descriptionEditText.text.toString(),
-                    encumbranceEditText.intValue,
-                    quantityEditText.intValue,
-                    Quality[qualitySpinner.selectedItemPosition],
-                    false,
-                    WeaponType[weaponTypeSpinner.selectedItemPosition],
-                    damageNumberPicker.value,
-                    criticalLevelNumberPicker.value,
-                    Range[weaponRangeSpinner.selectedItemPosition]
+                    name = itemNameEditText.text.toString(),
+                    description = descriptionEditText.text.toString(),
+                    encumbrance = encumbranceEditText.intValue,
+                    quantity = quantityEditText.intValue,
+                    quality = Quality[qualitySpinner.selectedItemPosition],
+                    isEquipped = (item as? Equipment)?.isEquipped ?: false,
+                    subType = WeaponType[weaponTypeSpinner.selectedItemPosition],
+                    damage = damageNumberPicker.value,
+                    criticalLevel = criticalLevelNumberPicker.value,
+                    range = Range[weaponRangeSpinner.selectedItemPosition]
             )
         }
     }
 
     private fun showArmorViews() {
-        armorViews.show()
-        expandableViews.hide()
-        weaponViews.hide()
+        armorLayout.show()
+        expandableLayout.hide()
+        weaponLayout.hide()
     }
 
     private fun showExpandableViews() {
-        armorViews.hide()
-        expandableViews.show()
-        weaponViews.hide()
+        armorLayout.hide()
+        expandableLayout.show()
+        weaponLayout.hide()
     }
 
     private fun showGenericItemViews() {
-        armorViews.hide()
-        expandableViews.hide()
-        weaponViews.hide()
+        armorLayout.hide()
+        expandableLayout.hide()
+        weaponLayout.hide()
     }
 
     private fun showWeaponViews() {
-        armorViews.hide()
-        expandableViews.hide()
-        weaponViews.show()
+        armorLayout.hide()
+        expandableLayout.hide()
+        weaponLayout.show()
     }
 }

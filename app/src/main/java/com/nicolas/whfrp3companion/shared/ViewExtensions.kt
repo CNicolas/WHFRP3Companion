@@ -1,6 +1,8 @@
 package com.nicolas.whfrp3companion.shared
 
 import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.widget.EditText
 
 val EditText.intValue: Int
@@ -10,5 +12,13 @@ val EditText.intValue: Int
         text.toString().toInt()
     }
 
-internal fun List<View>.show() = this.forEach { it.visibility = View.VISIBLE }
-internal fun List<View>.hide() = this.forEach { it.visibility = View.GONE }
+internal fun View.show() {
+    visibility = VISIBLE
+}
+
+internal fun View.hide() {
+    visibility = GONE
+}
+
+internal fun List<View>.show() = forEach { it.visibility = View.VISIBLE }
+internal fun List<View>.hide() = forEach { it.visibility = View.GONE }
