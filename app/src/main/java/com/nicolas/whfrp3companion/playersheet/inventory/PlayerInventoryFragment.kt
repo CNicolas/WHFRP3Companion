@@ -15,7 +15,9 @@ import com.nicolas.whfrp3companion.shared.ITEM_EDIT_INTENT_ARGUMENT
 import com.nicolas.whfrp3companion.shared.PLAYER_NAME_INTENT_ARGUMENT
 import com.nicolas.whfrp3database.PlayerFacade
 import com.nicolas.whfrp3database.entities.player.Player
+import com.nicolas.whfrp3database.entities.player.playerLinked.item.Equipment
 import com.nicolas.whfrp3database.entities.player.playerLinked.item.Item
+import com.nicolas.whfrp3database.extensions.getEquipmentByName
 import com.nicolas.whfrp3database.extensions.removeItem
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.intentFor
@@ -77,15 +79,20 @@ class PlayerInventoryFragment : Fragment() {
 
             val inventoryAdapter = PlayerInventoryExpandableAdapter(context!!, player)
             inventoryAdapter.addItemListener(object : ItemListener {
+                override fun onEquipment(equipment: Equipment, isEquipped: Boolean) {
+                    player.getEquipmentByName(equipment.name)?.isEquipped = isEquipped
+                    playerFacade.update(player)
+                }
+
+                override fun onItemEditionDemand(item: Item) {
+                    startItemEditionActivity(item)
+                }
+
                 override fun onItemDeleted(item: Item) {
                     player.removeItem(item)
                     playerFacade.update(player)
 
                     getPlayerItems()
-                }
-
-                override fun onItemEditionDemand(item: Item) {
-                    startItemEditionActivity(item)
                 }
             })
 

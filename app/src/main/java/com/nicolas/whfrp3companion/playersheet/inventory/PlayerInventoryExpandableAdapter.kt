@@ -2,11 +2,16 @@ package com.nicolas.whfrp3companion.playersheet.inventory
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.graphics.Typeface.BOLD
+import android.support.v4.content.ContextCompat
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.INVISIBLE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.BaseExpandableListAdapter
+import android.widget.ImageView
 import android.widget.PopupMenu
 import android.widget.TextView
 import butterknife.ButterKnife
@@ -18,11 +23,10 @@ import com.nicolas.whfrp3companion.shared.enums.pluralLabelId
 import com.nicolas.whfrp3companion.shared.hide
 import com.nicolas.whfrp3companion.shared.show
 import com.nicolas.whfrp3database.entities.player.Player
-import com.nicolas.whfrp3database.entities.player.playerLinked.item.Armor
-import com.nicolas.whfrp3database.entities.player.playerLinked.item.Expandable
-import com.nicolas.whfrp3database.entities.player.playerLinked.item.Item
-import com.nicolas.whfrp3database.entities.player.playerLinked.item.Weapon
+import com.nicolas.whfrp3database.entities.player.playerLinked.item.*
 import com.nicolas.whfrp3database.entities.player.playerLinked.item.enums.ItemType
+import com.nicolas.whfrp3database.entities.player.playerLinked.item.enums.ItemType.*
+import com.nicolas.whfrp3database.entities.player.playerLinked.item.enums.Quality.*
 import com.nicolas.whfrp3database.extensions.getItemsOfType
 import org.jetbrains.anko.longToast
 
@@ -118,7 +122,8 @@ class PlayerInventoryExpandableAdapter(private val context: Context,
     }
 
     internal class ChildViewHolder(private val itemListeners: List<ItemListener>, view: View) {
-        private val itemNameView by view.bind<TextView>(R.id.item_name)
+        private val equippedImageView by view.bind<ImageView>(R.id.equipped)
+        private val itemNameTextView by view.bind<TextView>(R.id.item_name)
         private val quantityTextView by view.bind<TextView>(R.id.quantity)
 
         private val defenseTextView by view.bind<TextView>(R.id.defense)
@@ -146,14 +151,21 @@ class PlayerInventoryExpandableAdapter(private val context: Context,
         fun setupViews(item: Item) {
             this.item = item
 
-            itemNameView.text = item.name
+            itemNameTextView.text = item.name
             quantityTextView.text = item.quantity.toString()
 
+            when (item.quality) {
+                LOW -> itemNameTextView.setTextColor(ContextCompat.getColor(itemNameTextView.context, R.color.colorSecondaryText))
+                NORMAL -> itemNameTextView.setTextColor(ContextCompat.getColor(itemNameTextView.context, R.color.colorPrimaryText))
+                SUPERIOR -> itemNameTextView.setTextColor(ContextCompat.getColor(itemNameTextView.context, R.color.colorAccent))
+                MAGIC -> itemNameTextView.setTextColor(ContextCompat.getColor(itemNameTextView.context, R.color.orange))
+            }
+
             when (item.type) {
-                ItemType.ARMOR -> showArmorViews()
-                ItemType.EXPANDABLE -> showExpandableViews()
-                ItemType.WEAPON -> showWeaponViews()
-                ItemType.GENERIC_ITEM -> showGenericItemViews()
+                ARMOR -> showArmorViews()
+                EXPANDABLE -> showExpandableViews()
+                WEAPON -> showWeaponViews()
+                GENERIC_ITEM -> showGenericItemViews()
             }
         }
 
@@ -165,10 +177,26 @@ class PlayerInventoryExpandableAdapter(private val context: Context,
         @OnLongClick(R.id.item_name)
         fun openItemMenu(view: View): Boolean {
             val itemPopupMenu = PopupMenu(view.context, view, Gravity.END)
-            itemPopupMenu.menuInflater.inflate(R.menu.inventory_item, itemPopupMenu.menu)
+            if (item is Equipment) {
+                if ((item as Equipment).isEquipped) {
+                    itemPopupMenu.menuInflater.inflate(R.menu.inventory_equipment_equipped, itemPopupMenu.menu)
+                } else {
+                    itemPopupMenu.menuInflater.inflate(R.menu.inventory_equipment_unequipped, itemPopupMenu.menu)
+                }
+            } else {
+                itemPopupMenu.menuInflater.inflate(R.menu.inventory_item, itemPopupMenu.menu)
+            }
 
             itemPopupMenu.setOnMenuItemClickListener {
                 when (it.itemId) {
+                    R.id.equip_item -> {
+                        itemListeners.notifyEquipment(item as Equipment, true)
+                        showEquippedImage(true)
+                    }
+                    R.id.unequip_item -> {
+                        itemListeners.notifyEquipment(item as Equipment, false)
+                        showEquippedImage(false)
+                    }
                     R.id.edit_item -> {
                         itemListeners.notifyEditionDemand(item)
                     }
@@ -193,6 +221,8 @@ class PlayerInventoryExpandableAdapter(private val context: Context,
             armorViews.show()
             expandableViews.hide()
             weaponViews.hide()
+
+            showEquippedImage(armor.isEquipped)
         }
 
         private fun showExpandableViews() {
@@ -221,6 +251,16 @@ class PlayerInventoryExpandableAdapter(private val context: Context,
             armorViews.hide()
             expandableViews.hide()
             weaponViews.show()
+
+            showEquippedImage(weapon.isEquipped)
+        }
+
+        private fun showEquippedImage(isEquipped: Boolean) = if (isEquipped) {
+            itemNameTextView.setTypeface(null, BOLD)
+            equippedImageView.visibility = VISIBLE
+        } else {
+            itemNameTextView.typeface = null
+            equippedImageView.visibility = INVISIBLE
         }
     }
 }
