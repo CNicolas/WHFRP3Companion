@@ -38,7 +38,6 @@ class PlayerCharacteristicsFragment : Fragment() {
         views = PlayerCharacteristicsFragmentViewHolder(resultingView)
         views.fillViews(player)
 
-
         return resultingView
     }
 
