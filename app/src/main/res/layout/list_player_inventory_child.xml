@@ -3,20 +3,32 @@
                                              xmlns:app="http://schemas.android.com/apk/res-auto"
                                              android:layout_width="match_parent"
                                              android:layout_height="wrap_content"
-                                             android:paddingStart="?android:attr/expandableListPreferredChildPaddingLeft"
                                              android:paddingBottom="@dimen/small_padding">
+
+    <ImageView android:id="@+id/equipped"
+               android:layout_width="?android:attr/expandableListPreferredChildPaddingLeft"
+               android:layout_height="0dp"
+               android:paddingTop="@dimen/medium_padding"
+               android:src="@drawable/ic_equipment_black_24dp"
+               android:contentDescription="@string/equip_item"
+               app:layout_constraintTop_toTopOf="parent"
+               app:layout_constraintRight_toLeftOf="@+id/item_name"
+               app:layout_constraintBottom_toBottomOf="parent"
+               app:layout_constraintLeft_toLeftOf="parent"
+               app:layout_constraintHorizontal_weight="1" />
 
     <TextView android:id="@+id/item_name"
               android:layout_width="0dp"
               android:layout_height="40dp"
               android:gravity="center_vertical"
+              android:paddingStart="@dimen/medium_padding"
               android:textSize="@dimen/medium_text_size"
               android:textColor="@color/colorSecondaryText"
               android:hint="@string/page_items"
               app:layout_constraintTop_toTopOf="parent"
               app:layout_constraintRight_toLeftOf="@+id/quantity"
               app:layout_constraintBottom_toTopOf="@+id/custom_item_layout"
-              app:layout_constraintLeft_toLeftOf="parent"
+              app:layout_constraintLeft_toRightOf="@+id/equipped"
               app:layout_constraintHorizontal_weight="8" />
 
     <TextView android:id="@+id/quantity"
@@ -33,10 +45,11 @@
     <LinearLayout android:id="@+id/custom_item_layout"
                   android:layout_width="0dp"
                   android:layout_height="wrap_content"
+                  android:paddingStart="@dimen/medium_padding"
                   app:layout_constraintTop_toBottomOf="@+id/item_name"
                   app:layout_constraintRight_toLeftOf="@id/quantity"
                   app:layout_constraintBottom_toBottomOf="parent"
-                  app:layout_constraintLeft_toLeftOf="parent">
+                  app:layout_constraintLeft_toRightOf="@+id/equipped">
         <TextView android:id="@+id/defense"
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
