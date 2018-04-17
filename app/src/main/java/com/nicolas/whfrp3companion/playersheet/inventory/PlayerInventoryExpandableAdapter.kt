@@ -19,6 +19,7 @@ import butterknife.OnClick
 import butterknife.OnLongClick
 import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.shared.bind
+import com.nicolas.whfrp3companion.shared.enums.labelId
 import com.nicolas.whfrp3companion.shared.enums.pluralLabelId
 import com.nicolas.whfrp3companion.shared.hide
 import com.nicolas.whfrp3companion.shared.show
@@ -171,7 +172,7 @@ class PlayerInventoryExpandableAdapter(private val context: Context,
         }
 
         @OnClick(R.id.inventory_item_layout)
-        fun selectItem(view: View) {
+        fun selectItem() {
             if (item is Equipment) {
                 changeEquipmentStatus()
             }
@@ -237,7 +238,7 @@ class PlayerInventoryExpandableAdapter(private val context: Context,
 
             damageTextView.text = weapon.damage.toString()
             criticalLevelTextView.text = weapon.criticalLevel.toString()
-            rangeTextView.text = weapon.range.toString()
+            rangeTextView.setText(weapon.range.labelId)
 
             armorViews.hide()
             expandableViews.hide()
