@@ -26,7 +26,7 @@ enum class WeaponType(val category: WeaponCategory) {
     BOW(RANGE),
     CROSSBOW(RANGE),
     ONE_HANDED_CROSSBOW(RANGE),
-    SLING(RANGE),
+    SLINGSHOT(RANGE),
 
     HANDGUN(FIRE_ARM),
     RIFLE(FIRE_ARM),

@@ -80,11 +80,35 @@ internal val WeaponType.labelId: Int
         BOW -> R.string.weapon_bow
         CROSSBOW -> R.string.weapon_crossbow
         ONE_HANDED_CROSSBOW -> R.string.weapon_one_handed_crossbow
-        SLING -> R.string.weapon_sling
+        SLINGSHOT -> R.string.weapon_sling
         HANDGUN -> R.string.weapon_handgun
         RIFLE -> R.string.weapon_rifle
         REPEATING_GUN -> R.string.weapon_repeating_gun
         REPEATING_CROSSBOW -> R.string.weapon_repeating_crossbow
+    }
+internal val WeaponType.drawableId: Int?
+    get() = when (this) {
+        DAGGER -> R.drawable.ic_dagger_black
+//        FLAIL -> R.drawable.ic_sword_black
+//        HALBERD -> R.drawable.ic_sword_black
+        HAMMER -> R.drawable.ic_hammer_black
+        TWO_HANDED_HAMMER -> R.drawable.ic_hammer_black
+        MACE -> R.drawable.ic_mace_black
+        TWO_HANDED_MACE -> R.drawable.ic_mace_black
+        SPEAR -> R.drawable.ic_spear_black
+        STICK -> R.drawable.ic_stick_black
+        SWORD -> R.drawable.ic_sword_black
+        TWO_HANDED_SWORD -> R.drawable.ic_two_handed_sword_black
+        WHIP -> R.drawable.ic_whip_black
+        BOW -> R.drawable.ic_bow_black
+        CROSSBOW -> R.drawable.ic_crossbow_black
+        ONE_HANDED_CROSSBOW -> R.drawable.ic_one_handed_crossbow_black
+        SLINGSHOT -> R.drawable.ic_slingshot_black
+        HANDGUN -> R.drawable.ic_handgun_black
+        RIFLE -> R.drawable.ic_rifle_black
+        REPEATING_GUN -> R.drawable.ic_handgun_black
+        REPEATING_CROSSBOW -> R.drawable.ic_crossbow_black
+        else -> null
     }
 
 internal val Range.labelId: Int
