@@ -100,13 +100,13 @@
                   app:layout_constraintLeft_toLeftOf="parent">
 
         <include android:id="@+id/weapon_layout"
-                 layout="@layout/content_add_weapon" />
+                 layout="@layout/part_weapon_edition" />
 
         <include android:id="@+id/armor_layout"
-                 layout="@layout/content_add_armor" />
+                 layout="@layout/part_armor_edition" />
 
         <include android:id="@+id/expandable_layout"
-                 layout="@layout/content_add_expandable" />
+                 layout="@layout/part_expandable_edition" />
     </LinearLayout>
 
     <EditText android:id="@+id/description"
