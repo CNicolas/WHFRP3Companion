@@ -28,7 +28,6 @@ import com.nicolas.whfrp3database.entities.player.playerLinked.item.enums.ItemTy
 import com.nicolas.whfrp3database.entities.player.playerLinked.item.enums.ItemType.*
 import com.nicolas.whfrp3database.entities.player.playerLinked.item.enums.Quality.*
 import com.nicolas.whfrp3database.extensions.getItemsOfType
-import org.jetbrains.anko.longToast
 
 class PlayerInventoryExpandableAdapter(private val context: Context,
                                        private val player: Player) : BaseExpandableListAdapter() {
@@ -171,34 +170,20 @@ class PlayerInventoryExpandableAdapter(private val context: Context,
             }
         }
 
-        @OnClick(R.id.item_name)
+        @OnClick(R.id.inventory_item_layout)
         fun selectItem(view: View) {
-            view.context.longToast(item.toString())
+            if (item is Equipment) {
+                changeEquipmentStatus()
+            }
         }
 
-        @OnLongClick(R.id.item_name)
+        @OnLongClick(R.id.inventory_item_layout)
         fun openItemMenu(view: View): Boolean {
             val itemPopupMenu = PopupMenu(view.context, view, Gravity.END)
-            if (item is Equipment) {
-                if ((item as Equipment).isEquipped) {
-                    itemPopupMenu.menuInflater.inflate(R.menu.inventory_equipment_equipped, itemPopupMenu.menu)
-                } else {
-                    itemPopupMenu.menuInflater.inflate(R.menu.inventory_equipment_unequipped, itemPopupMenu.menu)
-                }
-            } else {
-                itemPopupMenu.menuInflater.inflate(R.menu.inventory_item, itemPopupMenu.menu)
-            }
+            itemPopupMenu.menuInflater.inflate(R.menu.inventory_item, itemPopupMenu.menu)
 
             itemPopupMenu.setOnMenuItemClickListener {
                 when (it.itemId) {
-                    R.id.equip_item -> {
-                        itemListeners.notifyEquipment(item as Equipment, true)
-                        showEquippedImage(true)
-                    }
-                    R.id.unequip_item -> {
-                        itemListeners.notifyEquipment(item as Equipment, false)
-                        showEquippedImage(false)
-                    }
                     R.id.edit_item -> {
                         itemListeners.notifyEditionDemand(item)
                     }
@@ -235,12 +220,16 @@ class PlayerInventoryExpandableAdapter(private val context: Context,
             armorViews.hide()
             expandableViews.show()
             weaponViews.hide()
+
+            showEquippedImage(false)
         }
 
         private fun showGenericItemViews() {
             armorViews.hide()
             expandableViews.hide()
             weaponViews.hide()
+
+            showEquippedImage(false)
         }
 
         private fun showWeaponViews() {
@@ -263,6 +252,14 @@ class PlayerInventoryExpandableAdapter(private val context: Context,
         } else {
             itemNameTextView.typeface = null
             equippedImageView.visibility = INVISIBLE
+        }
+
+        private fun changeEquipmentStatus(isEquipped: Boolean? = null) {
+            val equipment = item as Equipment
+            equipment.isEquipped = isEquipped ?: !equipment.isEquipped
+
+            itemListeners.notifyEquipment(equipment, equipment.isEquipped)
+            showEquippedImage(equipment.isEquipped)
         }
     }
 }
