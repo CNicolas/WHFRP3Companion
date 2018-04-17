@@ -110,6 +110,8 @@
     <string name="equip_item">Equip</string>
     <string name="unequip_item">Unequip</string>
 
+    <string name="no_saved_hand">No saved hand</string>
+
     <string name="rolls_count_format">%d rolls</string>
     <string name="successful_rolls_with_percentage_format">%1$d successful rolls (%2$s%%)</string>
     <string name="average_face_count_per_roll">%s per rolls</string>

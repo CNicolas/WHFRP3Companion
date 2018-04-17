@@ -127,4 +127,5 @@
     <string name="edit_item">Éditer</string>
     <string name="equip_item">Équiper</string>
     <string name="unequip_item">Déséquiper</string>
+    <string name="no_saved_hand">Aucune main sauvegardée</string>
 </resources>

@@ -21,6 +21,7 @@ import com.nicolas.whfrp3database.HandFacade
 import com.nicolas.whfrp3database.entities.hand.Hand
 import org.jetbrains.anko.alert
 import org.jetbrains.anko.intentFor
+import org.jetbrains.anko.toast
 
 class DiceRollerActivity : AppCompatActivity() {
     private val handNameView by bind<EditText>(R.id.hand_name)
@@ -70,7 +71,6 @@ class DiceRollerActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
             R.id.reset_hand -> reset()
-            R.id.save_hand -> saveHand()
             R.id.delete_hand -> deleteHand()
             R.id.roll_statistics_100 -> rollHandStatistics(100)
             R.id.roll_statistics_1000 -> rollHandStatistics(1000)
@@ -79,15 +79,27 @@ class DiceRollerActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-    @OnClick(R.id.fab_list_hands)
+    @OnClick(R.id.fab_save_hand)
+    fun clickSaveHand() {
+        saveHand()
+    }
+
+    @OnClick(R.id.load_hand)
     fun listHands() {
-        alert {
-            title = getString(R.string.select_hand)
-            items(handFacade.findAll()
-                    .map { it.name }) { _, item, _ ->
-                setViewValues(handFacade.find(item)!!)
-            }
-        }.show()
+        val allHands = handFacade.findAll()
+
+        if (allHands.isEmpty()) {
+            toast(R.string.no_saved_hand)
+        } else {
+            alert {
+                title = getString(R.string.select_hand)
+                items(allHands.map { it.name },
+                        { _, item, _ ->
+                            setViewValues(handFacade.find(item)!!)
+                        }
+                )
+            }.show()
+        }
     }
 
     @OnClick(R.id.roll_button)
@@ -113,6 +125,7 @@ class DiceRollerActivity : AppCompatActivity() {
 
     private fun deleteHand() {
         handFacade.delete(handNameView.text.toString())
+        reset()
     }
 
     private fun getHandFromPickers(): Hand =
