@@ -10,7 +10,7 @@
               tools:context=".shared.activities.DiceRollerActivity">
 
     <android.support.constraint.ConstraintLayout android:layout_width="match_parent"
-                                                 android:layout_height="match_parent"
+                                                 android:layout_height="wrap_content"
                                                  android:fitsSystemWindows="true">
 
         <EditText android:id="@+id/hand_name"
@@ -22,149 +22,138 @@
                   android:inputType="textCapSentences"
                   android:maxLines="1"
                   app:layout_constraintTop_toTopOf="parent"
-                  app:layout_constraintLeft_toLeftOf="parent"
-                  app:layout_constraintRight_toRightOf="parent" />
+                  app:layout_constraintRight_toRightOf="parent"
+                  app:layout_constraintBottom_toTopOf="@+id/characteristic_dice"
+                  app:layout_constraintLeft_toLeftOf="parent" />
 
-        <LinearLayout android:id="@+id/characteristic_dice_picker_layout"
-                      android:layout_width="wrap_content"
-                      android:layout_height="0dp"
-                      android:orientation="vertical"
-                      app:layout_constraintTop_toBottomOf="@+id/hand_name"
-                      app:layout_constraintLeft_toLeftOf="parent"
-                      app:layout_constraintRight_toLeftOf="@+id/conservative_dice_picker_layout">
-            <ImageView android:id="@+id/characteristic_dice"
-                       android:layout_width="wrap_content"
-                       android:layout_height="wrap_content"
-                       android:src="@drawable/dice_characteristic"
-                       android:contentDescription="@string/characteristic"
-                       android:layout_gravity="center" />
-            <com.nicolas.whfrp3companion.shared.components.NumberPickerMinMax android:id="@+id/characteristic_dice_picker"
-                                                                              android:layout_width="wrap_content"
-                                                                              android:layout_height="@dimen/dice_picker_height" />
-        </LinearLayout>
+        <ImageView android:id="@+id/characteristic_dice"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:src="@drawable/dice_characteristic"
+                   android:contentDescription="@string/characteristic"
+                   app:layout_constraintTop_toBottomOf="@id/hand_name"
+                   app:layout_constraintRight_toLeftOf="@+id/conservative_dice"
+                   app:layout_constraintBottom_toTopOf="@+id/characteristic_dice_picker"
+                   app:layout_constraintLeft_toLeftOf="parent" />
+        <com.nicolas.whfrp3companion.shared.components.NumberPickerMinMax android:id="@+id/characteristic_dice_picker"
+                                                                          android:layout_width="wrap_content"
+                                                                          android:layout_height="@dimen/dice_picker_height"
+                                                                          app:layout_constraintTop_toBottomOf="@id/characteristic_dice"
+                                                                          app:layout_constraintRight_toLeftOf="@+id/conservative_dice_picker"
+                                                                          app:layout_constraintBottom_toTopOf="@+id/challenge_dice"
+                                                                          app:layout_constraintLeft_toLeftOf="parent" />
 
-        <LinearLayout android:id="@+id/conservative_dice_picker_layout"
-                      android:layout_width="wrap_content"
-                      android:layout_height="0dp"
-                      android:orientation="vertical"
-                      app:layout_constraintTop_toBottomOf="@+id/hand_name"
-                      app:layout_constraintLeft_toRightOf="@+id/characteristic_dice_picker_layout"
-                      app:layout_constraintRight_toLeftOf="@+id/reckless_dice_picker_layout">
-            <ImageView android:id="@+id/conservative_dice"
-                       android:layout_width="wrap_content"
-                       android:layout_height="wrap_content"
-                       android:src="@drawable/dice_conservative"
-                       android:contentDescription="@string/conservative"
-                       android:layout_gravity="center" />
+        <ImageView android:id="@+id/conservative_dice"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:src="@drawable/dice_conservative"
+                   android:contentDescription="@string/conservative"
+                   app:layout_constraintTop_toBottomOf="@id/hand_name"
+                   app:layout_constraintRight_toLeftOf="@+id/reckless_dice"
+                   app:layout_constraintBottom_toTopOf="@+id/conservative_dice_picker"
+                   app:layout_constraintLeft_toRightOf="@id/characteristic_dice" />
+        <com.nicolas.whfrp3companion.shared.components.NumberPickerMinMax android:id="@+id/conservative_dice_picker"
+                                                                          android:layout_width="wrap_content"
+                                                                          android:layout_height="@dimen/dice_picker_height"
+                                                                          app:layout_constraintTop_toBottomOf="@id/conservative_dice"
+                                                                          app:layout_constraintRight_toLeftOf="@+id/reckless_dice_picker"
+                                                                          app:layout_constraintBottom_toTopOf="@+id/challenge_dice"
+                                                                          app:layout_constraintLeft_toRightOf="@id/characteristic_dice_picker" />
 
-            <com.nicolas.whfrp3companion.shared.components.NumberPickerMinMax android:id="@+id/conservative_dice_picker"
-                                                                              android:layout_width="wrap_content"
-                                                                              android:layout_height="@dimen/dice_picker_height" />
-        </LinearLayout>
+        <ImageView android:id="@+id/reckless_dice"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:src="@drawable/dice_reckless"
+                   android:contentDescription="@string/reckless"
+                   app:layout_constraintTop_toBottomOf="@id/hand_name"
+                   app:layout_constraintRight_toLeftOf="@+id/expertise_dice"
+                   app:layout_constraintBottom_toTopOf="@+id/reckless_dice_picker"
+                   app:layout_constraintLeft_toRightOf="@id/conservative_dice" />
+        <com.nicolas.whfrp3companion.shared.components.NumberPickerMinMax android:id="@+id/reckless_dice_picker"
+                                                                          android:layout_width="wrap_content"
+                                                                          android:layout_height="@dimen/dice_picker_height"
+                                                                          app:layout_constraintTop_toBottomOf="@id/reckless_dice"
+                                                                          app:layout_constraintRight_toLeftOf="@+id/expertise_dice_picker"
+                                                                          app:layout_constraintBottom_toTopOf="@+id/challenge_dice"
+                                                                          app:layout_constraintLeft_toRightOf="@id/conservative_dice_picker" />
 
-        <LinearLayout android:id="@+id/reckless_dice_picker_layout"
-                      android:layout_width="wrap_content"
-                      android:layout_height="0dp"
-                      android:orientation="vertical"
-                      app:layout_constraintTop_toBottomOf="@+id/hand_name"
-                      app:layout_constraintLeft_toRightOf="@+id/conservative_dice_picker_layout"
-                      app:layout_constraintRight_toLeftOf="@+id/expertise_dice_picker_layout">
-            <ImageView android:id="@+id/reckless_dice"
-                       android:layout_width="wrap_content"
-                       android:layout_height="wrap_content"
-                       android:src="@drawable/dice_reckless"
-                       android:contentDescription="@string/reckless"
-                       android:layout_gravity="center" />
+        <ImageView android:id="@+id/expertise_dice"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:src="@drawable/dice_expertise"
+                   android:contentDescription="@string/expertise"
+                   app:layout_constraintTop_toBottomOf="@id/hand_name"
+                   app:layout_constraintRight_toLeftOf="@+id/fortune_dice"
+                   app:layout_constraintBottom_toTopOf="@+id/expertise_dice_picker"
+                   app:layout_constraintLeft_toRightOf="@id/reckless_dice" />
+        <com.nicolas.whfrp3companion.shared.components.NumberPickerMinMax android:id="@+id/expertise_dice_picker"
+                                                                          android:layout_width="wrap_content"
+                                                                          android:layout_height="@dimen/dice_picker_height"
+                                                                          app:layout_constraintTop_toBottomOf="@id/expertise_dice"
+                                                                          app:layout_constraintRight_toLeftOf="@+id/fortune_dice_picker"
+                                                                          app:layout_constraintBottom_toTopOf="@+id/misfortune_dice"
+                                                                          app:layout_constraintLeft_toRightOf="@id/reckless_dice_picker" />
 
-            <com.nicolas.whfrp3companion.shared.components.NumberPickerMinMax android:id="@+id/reckless_dice_picker"
-                                                                              android:layout_width="wrap_content"
-                                                                              android:layout_height="@dimen/dice_picker_height" />
-        </LinearLayout>
+        <ImageView android:id="@+id/fortune_dice"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:src="@drawable/dice_fortune"
+                   android:contentDescription="@string/fortune"
+                   app:layout_constraintTop_toBottomOf="@id/hand_name"
+                   app:layout_constraintRight_toRightOf="parent"
+                   app:layout_constraintBottom_toTopOf="@+id/fortune_dice_picker"
+                   app:layout_constraintLeft_toRightOf="@id/expertise_dice" />
+        <com.nicolas.whfrp3companion.shared.components.NumberPickerMinMax android:id="@+id/fortune_dice_picker"
+                                                                          android:layout_width="wrap_content"
+                                                                          android:layout_height="@dimen/dice_picker_height"
+                                                                          app:layout_constraintTop_toBottomOf="@id/fortune_dice"
+                                                                          app:layout_constraintRight_toRightOf="parent"
+                                                                          app:layout_constraintBottom_toTopOf="@+id/misfortune_dice"
+                                                                          app:layout_constraintLeft_toRightOf="@id/expertise_dice_picker" />
 
-        <LinearLayout android:id="@+id/expertise_dice_picker_layout"
-                      android:layout_width="wrap_content"
-                      android:layout_height="0dp"
-                      android:orientation="vertical"
-                      app:layout_constraintTop_toBottomOf="@+id/hand_name"
-                      app:layout_constraintLeft_toRightOf="@+id/reckless_dice_picker_layout"
-                      app:layout_constraintRight_toLeftOf="@+id/fortune_dice_picker_layout">
-            <ImageView android:id="@+id/expertise_dice"
-                       android:layout_width="wrap_content"
-                       android:layout_height="wrap_content"
-                       android:src="@drawable/dice_expertise"
-                       android:contentDescription="@string/expertise"
-                       android:layout_gravity="center" />
+        <ImageView android:id="@+id/challenge_dice"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:src="@drawable/dice_challenge"
+                   android:contentDescription="@string/challenge"
+                   app:layout_constraintTop_toBottomOf="@id/characteristic_dice_picker"
+                   app:layout_constraintRight_toLeftOf="@+id/misfortune_dice"
+                   app:layout_constraintBottom_toTopOf="@+id/challenge_dice_picker"
+                   app:layout_constraintLeft_toLeftOf="parent" />
+        <com.nicolas.whfrp3companion.shared.components.NumberPickerMinMax android:id="@+id/challenge_dice_picker"
+                                                                          android:layout_width="wrap_content"
+                                                                          android:layout_height="@dimen/dice_picker_height"
+                                                                          app:layout_constraintTop_toBottomOf="@id/challenge_dice"
+                                                                          app:layout_constraintRight_toLeftOf="@+id/misfortune_dice_picker"
+                                                                          app:layout_constraintBottom_toTopOf="@+id/roll_button"
+                                                                          app:layout_constraintLeft_toLeftOf="parent" />
 
-            <com.nicolas.whfrp3companion.shared.components.NumberPickerMinMax android:id="@+id/expertise_dice_picker"
-                                                                              android:layout_width="wrap_content"
-                                                                              android:layout_height="@dimen/dice_picker_height" />
-        </LinearLayout>
-
-        <LinearLayout android:id="@+id/fortune_dice_picker_layout"
-                      android:layout_width="wrap_content"
-                      android:layout_height="0dp"
-                      android:orientation="vertical"
-                      app:layout_constraintTop_toBottomOf="@+id/hand_name"
-                      app:layout_constraintLeft_toRightOf="@+id/expertise_dice_picker_layout"
-                      app:layout_constraintRight_toRightOf="parent">
-            <ImageView android:id="@+id/fortune_dice"
-                       android:layout_width="wrap_content"
-                       android:layout_height="wrap_content"
-                       android:src="@drawable/dice_fortune"
-                       android:contentDescription="@string/fortune"
-                       android:layout_gravity="center" />
-
-            <com.nicolas.whfrp3companion.shared.components.NumberPickerMinMax android:id="@+id/fortune_dice_picker"
-                                                                              android:layout_width="wrap_content"
-                                                                              android:layout_height="@dimen/dice_picker_height" />
-        </LinearLayout>
-
-        <LinearLayout android:id="@+id/challenge_dice_picker_layout"
-                      android:layout_width="wrap_content"
-                      android:layout_height="0dp"
-                      android:orientation="vertical"
-                      app:layout_constraintTop_toBottomOf="@+id/reckless_dice_picker_layout"
-                      app:layout_constraintLeft_toRightOf="parent"
-                      app:layout_constraintRight_toLeftOf="@+id/misfortune_dice_picker_layout">
-            <ImageView android:id="@+id/challenge_dice"
-                       android:layout_width="wrap_content"
-                       android:layout_height="wrap_content"
-                       android:src="@drawable/dice_challenge"
-                       android:contentDescription="@string/challenge"
-                       android:layout_gravity="center" />
-
-            <com.nicolas.whfrp3companion.shared.components.NumberPickerMinMax android:id="@+id/challenge_dice_picker"
-                                                                              android:layout_width="wrap_content"
-                                                                              android:layout_height="@dimen/dice_picker_height" />
-        </LinearLayout>
-
-        <LinearLayout android:id="@+id/misfortune_dice_picker_layout"
-                      android:layout_width="wrap_content"
-                      android:layout_height="0dp"
-                      android:orientation="vertical"
-                      app:layout_constraintTop_toBottomOf="@+id/reckless_dice_picker_layout"
-                      app:layout_constraintLeft_toRightOf="@+id/challenge_dice_picker_layout"
-                      app:layout_constraintRight_toLeftOf="parent">
-            <ImageView android:id="@+id/misfortune_dice"
-                       android:layout_width="wrap_content"
-                       android:layout_height="wrap_content"
-                       android:src="@drawable/dice_misfortune"
-                       android:contentDescription="@string/misfortune"
-                       android:layout_gravity="center" />
-
-            <com.nicolas.whfrp3companion.shared.components.NumberPickerMinMax android:id="@+id/misfortune_dice_picker"
-                                                                              android:layout_width="wrap_content"
-                                                                              android:layout_height="@dimen/dice_picker_height" />
-        </LinearLayout>
+        <ImageView android:id="@+id/misfortune_dice"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:src="@drawable/dice_misfortune"
+                   android:contentDescription="@string/misfortune"
+                   app:layout_constraintTop_toBottomOf="@id/fortune_dice_picker"
+                   app:layout_constraintRight_toRightOf="parent"
+                   app:layout_constraintBottom_toTopOf="@+id/misfortune_dice_picker"
+                   app:layout_constraintLeft_toRightOf="@id/challenge_dice" />
+        <com.nicolas.whfrp3companion.shared.components.NumberPickerMinMax android:id="@+id/misfortune_dice_picker"
+                                                                          android:layout_width="wrap_content"
+                                                                          android:layout_height="@dimen/dice_picker_height"
+                                                                          app:layout_constraintTop_toBottomOf="@id/misfortune_dice"
+                                                                          app:layout_constraintRight_toRightOf="parent"
+                                                                          app:layout_constraintBottom_toTopOf="@+id/roll_button"
+                                                                          app:layout_constraintLeft_toRightOf="@id/challenge_dice_picker" />
 
         <Button android:id="@+id/roll_button"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/medium_padding"
                 android:text="@string/roll"
-                app:layout_constraintTop_toBottomOf="@id/challenge_dice_picker_layout"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent" />
+                app:layout_constraintTop_toBottomOf="@id/challenge_dice_picker"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent" />
     </android.support.constraint.ConstraintLayout>
 
 </LinearLayout>
