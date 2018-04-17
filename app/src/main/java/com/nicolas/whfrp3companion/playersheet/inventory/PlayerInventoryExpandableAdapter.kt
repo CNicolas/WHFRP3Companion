@@ -125,6 +125,7 @@ class PlayerInventoryExpandableAdapter(private val context: Context,
         private val equippedImageView by view.bind<ImageView>(R.id.equipped)
         private val itemNameTextView by view.bind<TextView>(R.id.item_name)
         private val quantityTextView by view.bind<TextView>(R.id.quantity)
+        private val encumbranceTextView by view.bind<TextView>(R.id.encumbrance)
 
         private val defenseTextView by view.bind<TextView>(R.id.defense)
         private val soakTextView by view.bind<TextView>(R.id.soak)
@@ -153,6 +154,7 @@ class PlayerInventoryExpandableAdapter(private val context: Context,
 
             itemNameTextView.text = item.name
             quantityTextView.text = item.quantity.toString()
+            encumbranceTextView.text = "${item.encumbrance}  (${item.encumbrance * item.quantity})"
 
             when (item.quality) {
                 LOW -> itemNameTextView.setTextColor(ContextCompat.getColor(itemNameTextView.context, R.color.colorSecondaryText))
