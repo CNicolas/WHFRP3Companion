@@ -205,17 +205,18 @@
               android:hint="@string/zero"
               app:layout_constraintTop_toBottomOf="@id/stance"
               app:layout_constraintRight_toRightOf="parent"
-              app:layout_constraintBottom_toTopOf="@+id/encumbrance_bar"
+              app:layout_constraintBottom_toTopOf="@+id/weapons"
               app:layout_constraintLeft_toRightOf="@id/defense" />
     <!--endregion-->
 
     <ListView android:id="@+id/weapons"
               android:layout_width="0dp"
-              android:layout_height="0dp"
+              android:layout_height="wrap_content"
               app:layout_constraintTop_toBottomOf="@id/defense"
               app:layout_constraintRight_toRightOf="parent"
               app:layout_constraintBottom_toTopOf="@+id/encumbrance_bar"
-              app:layout_constraintLeft_toLeftOf="parent" />
+              app:layout_constraintLeft_toLeftOf="parent"
+              tools:listitem="@layout/list_element_weapon" />
 
     <!--region Encumbrance-->
     <ImageView android:id="@+id/encumbrance_icon"

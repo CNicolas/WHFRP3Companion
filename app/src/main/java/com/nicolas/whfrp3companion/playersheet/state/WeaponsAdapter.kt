@@ -10,6 +10,7 @@ import android.widget.TextView
 import butterknife.ButterKnife
 import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.shared.bind
+import com.nicolas.whfrp3companion.shared.enums.drawableId
 import com.nicolas.whfrp3companion.shared.enums.labelId
 import com.nicolas.whfrp3database.entities.player.playerLinked.item.Weapon
 
@@ -46,7 +47,7 @@ class WeaponsAdapter(context: Context, private val weapons: List<Weapon>) : Base
         private val criticalLevelTextView by view.bind<TextView>(R.id.critical_level)
         private val rangeTextView by view.bind<TextView>(R.id.range)
 
-        lateinit var weapon: Weapon
+        private lateinit var weapon: Weapon
 
         init {
             ButterKnife.bind(this, view)
@@ -54,6 +55,10 @@ class WeaponsAdapter(context: Context, private val weapons: List<Weapon>) : Base
 
         fun setupViews(weapon: Weapon) {
             this.weapon = weapon
+
+            if (weapon.subType.drawableId !== null) {
+                weaponTypeImageView.setImageResource(weapon.subType.drawableId!!)
+            }
 
             weaponNameTextView.text = weapon.name
 
