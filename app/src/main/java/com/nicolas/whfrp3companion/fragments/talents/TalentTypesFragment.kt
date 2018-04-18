@@ -10,6 +10,8 @@ import butterknife.BindView
 import butterknife.ButterKnife
 import butterknife.Unbinder
 import com.nicolas.whfrp3companion.R
+import com.nicolas.whfrp3companion.shared.DIALOG_TALENT_TYPE_TAG
+import com.nicolas.whfrp3companion.shared.dialogs.TalentSearchDialog
 
 class TalentTypesFragment : Fragment() {
     @BindView(R.id.talent_types_list)
@@ -33,6 +35,11 @@ class TalentTypesFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         unbinder.unbind()
+    }
+
+    private fun openTalentSearchDialog() {
+        val talentSearchDialog = TalentSearchDialog()
+        talentSearchDialog.show(activity?.supportFragmentManager, DIALOG_TALENT_TYPE_TAG)
     }
 
     companion object {
