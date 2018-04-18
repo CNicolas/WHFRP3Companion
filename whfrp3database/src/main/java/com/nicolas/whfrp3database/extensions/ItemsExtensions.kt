@@ -34,6 +34,7 @@ fun Player.getGenericItemByName(name: String): GenericItem? = getGenericItems().
 fun Player.getWeaponByName(name: String): Weapon? = getWeapons().firstOrNull { it.name == name }
 
 fun Player.getEquippedArmors() = getArmors().filter { it.isEquipped }
+fun Player.getEquippedWeapons() = getWeapons().filter { it.isEquipped }
 
 fun Player.removeItem(item: Item): List<Item> {
     val mutableItems = items.toMutableList()

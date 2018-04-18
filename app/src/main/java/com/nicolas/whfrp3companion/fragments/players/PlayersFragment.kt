@@ -18,6 +18,7 @@ import com.nicolas.whfrp3database.entities.player.Player
 import com.nicolas.whfrp3database.entities.player.enums.Race
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.intentFor
+import org.jetbrains.anko.toast
 import org.jetbrains.anko.uiThread
 
 class PlayersFragment : Fragment() {
@@ -90,9 +91,13 @@ class PlayersFragment : Fragment() {
         builder.setTitle(R.string.create_player)
         builder.setNegativeButton(android.R.string.cancel, { dialog, _ -> dialog.dismiss() })
         builder.setPositiveButton(android.R.string.ok, { dialog, _ ->
-            playerFacade.add(Player(name = playerNameView.text.toString(), race = Race[raceView.selectedItemPosition]))
-            updatePlayers()
-            dialog.dismiss()
+            if (playerNameView.text.trim() != "") {
+                playerFacade.add(Player(name = playerNameView.text.toString(), race = Race[raceView.selectedItemPosition]))
+                updatePlayers()
+                dialog.dismiss()
+            } else {
+                context?.toast("No name entered")
+            }
         })
 
         builder.create().show()

@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ListView
 import android.widget.NumberPicker
 import android.widget.TextView
 import butterknife.BindView
@@ -20,6 +21,8 @@ import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.shared.PLAYER_NAME_INTENT_ARGUMENT
 import com.nicolas.whfrp3database.PlayerFacade
 import com.nicolas.whfrp3database.entities.player.Player
+import com.nicolas.whfrp3database.extensions.getEquippedWeapons
+import com.nicolas.whfrp3database.extensions.getWeapons
 import org.adw.library.widgets.discreteseekbar.DiscreteSeekBar
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.toast
@@ -50,6 +53,9 @@ class PlayerStateFragment : Fragment() {
     lateinit var defenseView: TextView
     @BindView(R.id.soak)
     lateinit var soakView: TextView
+
+    @BindView(R.id.weapons)
+    lateinit var weaponsListView: ListView
 
     @BindView(R.id.encumbrance_bar)
     lateinit var encumbranceBarView: DiscreteSeekBar
@@ -93,6 +99,8 @@ class PlayerStateFragment : Fragment() {
 
         defenseView.text = "${player.defense}"
         soakView.text = "${player.soak}"
+
+        weaponsListView.adapter = WeaponsAdapter(context!!, player.getEquippedWeapons())
 
         setupEncumbrance()
 
