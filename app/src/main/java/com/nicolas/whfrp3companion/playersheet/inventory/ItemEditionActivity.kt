@@ -56,7 +56,7 @@ class ItemEditionActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_add_item)
+        setContentView(R.layout.activity_item_edition)
 
         unbinder = ButterKnife.bind(this)
 
