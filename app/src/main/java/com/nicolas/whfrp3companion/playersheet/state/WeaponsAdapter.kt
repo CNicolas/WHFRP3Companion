@@ -24,12 +24,12 @@ class WeaponsAdapter(context: Context, private val weapons: List<Weapon>) : Base
     override fun getView(position: Int, savedView: View?, parent: ViewGroup?): View {
         var view = savedView
 
-        val holder: ChildViewHolder
+        val holder: ViewHolder
         if (view != null) {
-            holder = view.tag as ChildViewHolder
+            holder = view.tag as ViewHolder
         } else {
             view = inflater.inflate(R.layout.list_element_weapon, parent, false)
-            holder = ChildViewHolder(view)
+            holder = ViewHolder(view)
             view!!.tag = holder
         }
 
@@ -39,7 +39,7 @@ class WeaponsAdapter(context: Context, private val weapons: List<Weapon>) : Base
         return view
     }
 
-    internal class ChildViewHolder(view: View) {
+    internal class ViewHolder(view: View) {
         private val weaponTypeImageView by view.bind<ImageView>(R.id.weapon_type)
         private val weaponNameTextView by view.bind<TextView>(R.id.weapon_name)
 
