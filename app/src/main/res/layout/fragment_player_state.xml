@@ -212,6 +212,8 @@
     <ListView android:id="@+id/weapons"
               android:layout_width="0dp"
               android:layout_height="110dp"
+              android:layout_marginTop="@dimen/medium_padding"
+              android:layout_marginBottom="@dimen/medium_padding"
               app:layout_constraintTop_toBottomOf="@id/defense"
               app:layout_constraintRight_toRightOf="parent"
               app:layout_constraintBottom_toTopOf="@+id/encumbrance_bar"
