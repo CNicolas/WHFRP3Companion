@@ -56,9 +56,7 @@ class WeaponsAdapter(context: Context, private val weapons: List<Weapon>) : Base
         fun setupViews(weapon: Weapon) {
             this.weapon = weapon
 
-            if (weapon.subType.drawableId !== null) {
-                weaponTypeImageView.setImageResource(weapon.subType.drawableId!!)
-            }
+            weaponTypeImageView.setImageResource(weapon.subType.drawableId)
 
             weaponNameTextView.text = weapon.name
 

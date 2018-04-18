@@ -10,6 +10,8 @@ enum class WeaponCategory {
 }
 
 enum class WeaponType(val category: WeaponCategory) {
+    AXE(MELEE),
+    TWO_HANDED_AXE(MELEE),
     DAGGER(MELEE),
     FLAIL(MELEE),
     HALBERD(MELEE),

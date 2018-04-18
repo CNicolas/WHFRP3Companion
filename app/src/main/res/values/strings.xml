@@ -69,6 +69,8 @@
     <string name="armor_robe">Robe</string>
     <string name="armor_shield">Shield</string>
 
+    <string name="weapon_axe">Axe</string>
+    <string name="weapon_two_handed_axe">Two handed axe</string>
     <string name="weapon_dagger">Dagger</string>
     <string name="weapon_flail">Flail</string>
     <string name="weapon_halberd">Halberd</string>
