@@ -26,8 +26,8 @@ class TalentSearchDialog() : DialogFragment() {
         val view = inflater.inflate(R.layout.dialog_talent_search, null, false)
 
         builder.setView(view)
-        builder.setTitle(R.string.search_menu_title)
-        builder.setPositiveButton(R.string.search_menu_title, { _, _ -> dismiss() })
+        builder.setTitle(R.string.search)
+        builder.setPositiveButton(R.string.search, { _, _ -> dismiss() })
 
         val dialog = builder.create()
         unbinder = ButterKnife.bind(this, view)
