@@ -130,4 +130,10 @@
     <string name="no_saved_hand">Aucune main sauvegardée</string>
     <string name="weapon_axe">Hache</string>
     <string name="weapon_two_handed_axe">Hace à deux mains</string>
+    <string name="affinity">Affinité</string>
+    <string name="faith">Foi</string>
+    <string name="order">Ordre</string>
+    <string name="reputation">Réputation</string>
+    <string name="tactics">Tactique</string>
+    <string name="trick">Tour</string>
 </resources>

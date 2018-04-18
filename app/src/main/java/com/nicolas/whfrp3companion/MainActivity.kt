@@ -14,6 +14,7 @@ import butterknife.Unbinder
 import com.nicolas.whfrp3companion.fragments.EmptyFragment
 import com.nicolas.whfrp3companion.fragments.players.PlayersFragment
 import com.nicolas.whfrp3companion.fragments.skills.SkillsFragment
+import com.nicolas.whfrp3companion.fragments.talents.TalentTypesFragment
 import com.nicolas.whfrp3companion.shared.activities.DiceRollerActivity
 import com.nicolas.whfrp3companion.shared.bind
 import org.jetbrains.anko.intentFor
@@ -73,10 +74,8 @@ class MainActivity : AppCompatActivity() {
     private fun displaySelectedFragment(menuItemId: Int) {
         val fragment = when (menuItemId) {
             R.id.nav_home -> PlayersFragment.newInstance()
-//            R.id.nav_talents -> TalentTypesFragment()
-//            R.id.nav_items -> ItemsFragment()
             R.id.nav_skills -> SkillsFragment.newInstance()
-//            R.id.nav_specializations -> SpecializationsFragment()
+            R.id.nav_talents -> TalentTypesFragment.newInstance()
             else -> EmptyFragment.newInstance()
         }
 

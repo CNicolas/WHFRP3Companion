@@ -7,5 +7,9 @@ enum class TalentType {
     ORDER,
     REPUTATION,
     TACTICS,
-    TOUR
+    TRICK;
+
+    companion object {
+        operator fun get(ordinal: Int): TalentType = TalentType.values()[ordinal]
+    }
 }
