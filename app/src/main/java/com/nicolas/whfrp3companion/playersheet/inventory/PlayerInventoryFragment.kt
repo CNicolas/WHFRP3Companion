@@ -17,6 +17,7 @@ import com.nicolas.whfrp3database.PlayerFacade
 import com.nicolas.whfrp3database.entities.player.Player
 import com.nicolas.whfrp3database.entities.player.playerLinked.item.Equipment
 import com.nicolas.whfrp3database.entities.player.playerLinked.item.Item
+import com.nicolas.whfrp3database.entities.player.playerLinked.item.enums.ItemType
 import com.nicolas.whfrp3database.extensions.getEquipmentByName
 import com.nicolas.whfrp3database.extensions.removeItem
 import org.jetbrains.anko.doAsync
@@ -74,6 +75,12 @@ class PlayerInventoryFragment : Fragment() {
     }
 
     private fun getPlayerItems() {
+        val expandedGroups = if (inventoryView.adapter != null) {
+            ItemType.values().map { inventoryView.isGroupExpanded(it.ordinal) }
+        } else {
+            null
+        }
+
         doAsync {
             player = playerFacade.find(playerName)!!
 
@@ -98,6 +105,11 @@ class PlayerInventoryFragment : Fragment() {
 
             uiThread {
                 inventoryView.setAdapter(inventoryAdapter)
+                expandedGroups?.forEachIndexed { groupIndex, expanded ->
+                    if (expanded) {
+                        inventoryView.expandGroup(groupIndex)
+                    }
+                }
             }
         }
     }
