@@ -7,17 +7,10 @@ import android.os.Bundle
 import android.support.v4.app.DialogFragment
 import butterknife.ButterKnife
 import butterknife.Unbinder
-import com.nicolas.playersheet.dtos.TalentSearch
 import com.nicolas.whfrp3companion.R
 
-class TalentSearchDialog() : DialogFragment() {
+class TalentSearchDialog : DialogFragment() {
     private lateinit var unbinder: Unbinder
-
-    private var talentSearch: TalentSearch = TalentSearch()
-
-    constructor(talentSearch: TalentSearch) : this() {
-        this.talentSearch = talentSearch
-    }
 
     @SuppressLint("InflateParams")
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
