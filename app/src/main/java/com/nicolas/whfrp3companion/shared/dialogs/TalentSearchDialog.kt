@@ -62,12 +62,12 @@ class TalentSearchDialog : DialogFragment() {
     private fun getTalentSearchFromViews(): TalentSearch {
         val talentType = when {
             talentTypeSpinner.selectedItemPosition == 0 -> null
-            else -> TalentType[talentTypeSpinner.selectedItemPosition + 1]
+            else -> TalentType[talentTypeSpinner.selectedItemPosition - 1]
         }
 
         val talentCooldown = when {
             cooldownSpinner.selectedItemPosition == 0 -> null
-            else -> TalentCooldown[cooldownSpinner.selectedItemPosition + 1]
+            else -> TalentCooldown[cooldownSpinner.selectedItemPosition - 1]
         }
 
         return TalentSearch(
