@@ -6,13 +6,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ListView
-import butterknife.BindView
-import butterknife.ButterKnife
-import butterknife.OnClick
-import butterknife.Unbinder
+import butterknife.*
+import com.nicolas.playersheet.dtos.TalentSearch
 import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.shared.DIALOG_TALENT_TYPE_TAG
+import com.nicolas.whfrp3companion.shared.TALENTS_SEARCH_INTENT_ARGUMENT
+import com.nicolas.whfrp3companion.shared.activities.TalentsActivity
 import com.nicolas.whfrp3companion.shared.dialogs.TalentSearchDialog
+import com.nicolas.whfrp3database.entities.player.playerLinked.talent.TalentType
+import org.jetbrains.anko.intentFor
 
 class TalentTypesFragment : Fragment() {
     @BindView(R.id.talent_types_list)
@@ -36,6 +38,15 @@ class TalentTypesFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         unbinder.unbind()
+    }
+
+    @OnItemClick(R.id.talent_types_list)
+    fun onTalentTypeClick(position: Int) {
+        if (activity != null) {
+            startActivity(activity!!.intentFor<TalentsActivity>(
+                    TALENTS_SEARCH_INTENT_ARGUMENT to TalentSearch(text = "", talentType = TalentType[position], cooldown = null)
+            ))
+        }
     }
 
     @OnClick(R.id.search)
