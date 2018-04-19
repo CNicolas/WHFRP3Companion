@@ -131,6 +131,8 @@
     <string name="statistics_average_result_hint">0 / roll</string>
     <string name="hand_name_hint">Hand name</string>
 
+    <string name="talent_name">Talent name</string>
+
     <string name="player_name">Player name</string>
     <string name="race">Race</string>
     <string name="rank">Rank</string>

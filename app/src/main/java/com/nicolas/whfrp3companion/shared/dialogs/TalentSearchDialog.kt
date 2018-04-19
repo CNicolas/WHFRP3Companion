@@ -13,7 +13,7 @@ import com.nicolas.whfrp3companion.R
 class TalentSearchDialog() : DialogFragment() {
     private lateinit var unbinder: Unbinder
 
-    private lateinit var talentSearch: TalentSearch
+    private var talentSearch: TalentSearch = TalentSearch()
 
     constructor(talentSearch: TalentSearch) : this() {
         this.talentSearch = talentSearch
