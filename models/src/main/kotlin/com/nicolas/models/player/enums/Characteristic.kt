@@ -6,5 +6,9 @@ enum class Characteristic {
     AGILITY,
     INTELLIGENCE,
     WILLPOWER,
-    FELLOWSHIP
+    FELLOWSHIP;
+
+    companion object {
+        operator fun get(ordinal: Int): Characteristic = Characteristic.values()[ordinal]
+    }
 }
