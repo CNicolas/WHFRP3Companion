@@ -141,4 +141,8 @@
     <string name="cooldown">Temps de recharge</string>
     <string name="talent_type">Type de talent</string>
     <string name="skill">Compétence</string>
+    <string name="cooldown_passive">Passif</string>
+    <string name="cooldown_session">Session</string>
+    <string name="cooldown_talent">Talent</string>
+    <string name="all">Tout</string>
 </resources>

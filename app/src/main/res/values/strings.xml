@@ -105,6 +105,10 @@
     <string name="tactics">Tactics</string>
     <string name="trick">Trick</string>
 
+    <string name="cooldown_passive">Passive</string>
+    <string name="cooldown_talent">Talent</string>
+    <string name="cooldown_session">Session</string>
+
     <string name="create_player">Create a player</string>
     <string name="delete_player">Delete</string>
     <string name="results">Results</string>
@@ -160,7 +164,7 @@
     <string name="soak">Soak</string>
     <string name="defense">Defense</string>
     <string name="uses">Uses</string>
-
+    <string name="all">All</string>
     <string name="slash" translatable="false">/</string>
     <string name="hyphen" translatable="false">-</string>
     <string name="plus" translatable="false">+</string>

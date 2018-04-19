@@ -9,6 +9,8 @@ import com.nicolas.models.player.playerLinked.item.enums.ArmorType.*
 import com.nicolas.models.player.playerLinked.item.enums.Quality.*
 import com.nicolas.models.player.playerLinked.item.enums.Range.*
 import com.nicolas.models.player.playerLinked.item.enums.WeaponType.*
+import com.nicolas.models.player.playerLinked.talent.TalentCooldown
+import com.nicolas.models.player.playerLinked.talent.TalentCooldown.*
 import com.nicolas.models.player.playerLinked.talent.TalentType
 import com.nicolas.models.player.playerLinked.talent.TalentType.*
 import com.nicolas.whfrp3companion.R
@@ -144,4 +146,11 @@ internal val TalentType.colorId: Int
         REPUTATION -> R.color.orange
         TACTICS -> R.color.dark_red
         TRICK -> R.color.conservative
+    }
+
+internal val TalentCooldown.labelId: Int
+    get() = when (this) {
+        PASSIVE -> R.string.cooldown_passive
+        TALENT -> R.string.cooldown_talent
+        SESSION -> R.string.cooldown_session
     }
