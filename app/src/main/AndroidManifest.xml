@@ -60,5 +60,10 @@
                 android:value=".shared.activities.DiceRollerActivity" />
         </activity>
 
+        <activity android:name=".shared.activities.TalentsActivity"
+                  android:label="@string/page_talents"
+                  android:screenOrientation="portrait"
+                  android:theme="@style/AppTheme">
+        </activity>
     </application>
 </manifest>
