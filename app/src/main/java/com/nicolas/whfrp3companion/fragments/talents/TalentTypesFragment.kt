@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.ListView
 import butterknife.BindView
 import butterknife.ButterKnife
+import butterknife.OnClick
 import butterknife.Unbinder
 import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.shared.DIALOG_TALENT_TYPE_TAG
@@ -37,7 +38,8 @@ class TalentTypesFragment : Fragment() {
         unbinder.unbind()
     }
 
-    private fun openTalentSearchDialog() {
+    @OnClick(R.id.search)
+    fun openTalentSearchDialog() {
         val talentSearchDialog = TalentSearchDialog()
         talentSearchDialog.show(activity?.supportFragmentManager, DIALOG_TALENT_TYPE_TAG)
     }
