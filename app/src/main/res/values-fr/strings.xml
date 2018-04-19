@@ -138,4 +138,7 @@
     <string name="trick">Tour</string>
     <string name="search">Recherche</string>
     <string name="talent_name">Nom du talent</string>
+    <string name="cooldown">Temps de recharge</string>
+    <string name="talent_type">Type de talent</string>
+    <string name="skill">Compétence</string>
 </resources>
