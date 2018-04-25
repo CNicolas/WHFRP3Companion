@@ -1,6 +1,6 @@
 package com.nicolas.playersheet.extensions
 
-import com.nicolas.whfrp3database.entities.player.Player
+import com.nicolas.models.player.Player
 
 // region Add
 fun Player.addMoney(goldAmount: Int, silverAmount: Int, brassAmount: Int) {

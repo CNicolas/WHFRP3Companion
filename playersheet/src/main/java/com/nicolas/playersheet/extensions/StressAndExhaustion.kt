@@ -1,10 +1,10 @@
 package com.nicolas.playersheet.extensions
 
+import com.nicolas.models.player.Player
 import com.nicolas.playersheet.enums.ExhaustionState
 import com.nicolas.playersheet.enums.ExhaustionState.*
 import com.nicolas.playersheet.enums.StressState
 import com.nicolas.playersheet.enums.StressState.*
-import com.nicolas.whfrp3database.entities.player.Player
 
 // region STRESS
 

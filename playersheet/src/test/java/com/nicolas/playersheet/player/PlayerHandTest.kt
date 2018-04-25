@@ -1,15 +1,15 @@
 package com.nicolas.playersheet.player
 
+import com.nicolas.models.extensions.getSkillByName
+import com.nicolas.models.hand.DifficultyLevel.HARD
+import com.nicolas.models.hand.DifficultyLevel.MEDIUM
+import com.nicolas.models.player.CharacteristicValue
+import com.nicolas.models.player.Player
+import com.nicolas.models.player.enums.Characteristic
+import com.nicolas.playersheet.BuildConfig
 import com.nicolas.playersheet.extensions.createHand
-import com.nicolas.whfrp3database.BuildConfig
 import com.nicolas.whfrp3database.PlayerFacade
 import com.nicolas.whfrp3database.database
-import com.nicolas.whfrp3database.entities.hand.DifficultyLevel.HARD
-import com.nicolas.whfrp3database.entities.hand.DifficultyLevel.MEDIUM
-import com.nicolas.whfrp3database.entities.player.CharacteristicValue
-import com.nicolas.whfrp3database.entities.player.Player
-import com.nicolas.whfrp3database.entities.player.enums.Characteristic
-import com.nicolas.whfrp3database.extensions.getSkillByName
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.After
 import org.junit.Before

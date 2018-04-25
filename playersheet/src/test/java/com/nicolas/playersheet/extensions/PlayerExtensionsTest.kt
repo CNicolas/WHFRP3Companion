@@ -1,9 +1,9 @@
 package com.nicolas.playersheet.extensions
 
+import com.nicolas.models.player.CharacteristicValue
+import com.nicolas.models.player.Player
+import com.nicolas.models.player.playerLinked.item.Armor
 import com.nicolas.playersheet.enums.PlayerLivingState.*
-import com.nicolas.whfrp3database.entities.player.CharacteristicValue
-import com.nicolas.whfrp3database.entities.player.Player
-import com.nicolas.whfrp3database.entities.player.playerLinked.item.Armor
 import org.assertj.core.api.Assertions.assertThat
 import org.testng.annotations.Test
 

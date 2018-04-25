@@ -1,7 +1,7 @@
 package com.nicolas.playersheet.extensions
 
+import com.nicolas.models.player.Player
 import com.nicolas.playersheet.enums.PlayerLivingState
-import com.nicolas.whfrp3database.entities.player.Player
 
 fun Player.earnExperiencePoints(experiencePoints: Int): Player {
     experience += experiencePoints

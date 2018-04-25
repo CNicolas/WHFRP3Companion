@@ -1,12 +1,12 @@
 package com.nicolas.playersheet.extensions
 
-import com.nicolas.whfrp3database.entities.player.Player
-import com.nicolas.whfrp3database.entities.player.playerLinked.item.Expandable
-import com.nicolas.whfrp3database.entities.player.playerLinked.item.Weapon
-import com.nicolas.whfrp3database.extensions.addItem
-import com.nicolas.whfrp3database.extensions.getExpandableByName
-import com.nicolas.whfrp3database.extensions.getWeaponByName
-import com.nicolas.whfrp3database.extensions.removeItem
+import com.nicolas.models.extensions.addItem
+import com.nicolas.models.extensions.getExpandableByName
+import com.nicolas.models.extensions.getWeaponByName
+import com.nicolas.models.extensions.removeItem
+import com.nicolas.models.player.Player
+import com.nicolas.models.player.playerLinked.item.Expandable
+import com.nicolas.models.player.playerLinked.item.Weapon
 import org.assertj.core.api.Assertions.assertThat
 import org.testng.annotations.Test
 

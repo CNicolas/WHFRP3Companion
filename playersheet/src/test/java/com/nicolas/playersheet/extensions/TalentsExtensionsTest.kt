@@ -1,11 +1,11 @@
 package com.nicolas.playersheet.extensions
 
-import com.nicolas.whfrp3database.BuildConfig
-import com.nicolas.whfrp3database.entities.player.playerLinked.talent.Talent
-import com.nicolas.whfrp3database.entities.player.playerLinked.talent.TalentCooldown.PASSIVE
-import com.nicolas.whfrp3database.entities.player.playerLinked.talent.TalentCooldown.TALENT
-import com.nicolas.whfrp3database.entities.player.playerLinked.talent.TalentType.AFFINITY
-import com.nicolas.whfrp3database.extensions.findByType
+import com.nicolas.models.extensions.findByType
+import com.nicolas.models.player.playerLinked.talent.Talent
+import com.nicolas.models.player.playerLinked.talent.TalentCooldown.PASSIVE
+import com.nicolas.models.player.playerLinked.talent.TalentCooldown.TALENT
+import com.nicolas.models.player.playerLinked.talent.TalentType.AFFINITY
+import com.nicolas.playersheet.BuildConfig
 import com.nicolas.whfrp3database.staticData.loadTalents
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Before

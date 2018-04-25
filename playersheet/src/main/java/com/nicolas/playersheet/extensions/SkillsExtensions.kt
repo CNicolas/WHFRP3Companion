@@ -1,7 +1,7 @@
 package com.nicolas.playersheet.extensions
 
-import com.nicolas.whfrp3database.entities.player.enums.Characteristic
-import com.nicolas.whfrp3database.entities.player.playerLinked.skill.Skill
+import com.nicolas.models.player.enums.Characteristic
+import com.nicolas.models.player.playerLinked.skill.Skill
 
 fun List<Skill>.findSkills(text: String? = null, characteristic: Characteristic? = null): List<Skill> {
     var filteredSkills = toList()

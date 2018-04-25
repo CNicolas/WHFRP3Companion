@@ -1,6 +1,6 @@
 package com.nicolas.playersheet.extensions
 
-import com.nicolas.whfrp3database.entities.player.Player
+import com.nicolas.models.player.Player
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.catchThrowableOfType
 import org.testng.annotations.Test

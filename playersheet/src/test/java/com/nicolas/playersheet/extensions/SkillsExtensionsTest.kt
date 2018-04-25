@@ -1,9 +1,9 @@
 package com.nicolas.playersheet.extensions
 
+import com.nicolas.models.player.enums.Characteristic.AGILITY
+import com.nicolas.models.player.enums.Characteristic.STRENGTH
+import com.nicolas.models.player.playerLinked.skill.Skill
 import com.nicolas.whfrp3database.BuildConfig
-import com.nicolas.whfrp3database.entities.player.enums.Characteristic.AGILITY
-import com.nicolas.whfrp3database.entities.player.enums.Characteristic.STRENGTH
-import com.nicolas.whfrp3database.entities.player.playerLinked.skill.Skill
 import com.nicolas.whfrp3database.staticData.loadSkills
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Before
