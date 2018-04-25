@@ -12,16 +12,16 @@ import butterknife.ButterKnife
 import butterknife.OnClick
 import butterknife.OnItemSelected
 import butterknife.Unbinder
+import com.nicolas.models.extensions.addItem
+import com.nicolas.models.extensions.removeItem
+import com.nicolas.models.player.Player
+import com.nicolas.models.player.playerLinked.item.*
+import com.nicolas.models.player.playerLinked.item.enums.*
+import com.nicolas.models.player.playerLinked.item.enums.ItemType.*
 import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.shared.*
 import com.nicolas.whfrp3companion.shared.enums.labelId
 import com.nicolas.whfrp3database.PlayerFacade
-import com.nicolas.whfrp3database.entities.player.Player
-import com.nicolas.whfrp3database.entities.player.playerLinked.item.*
-import com.nicolas.whfrp3database.entities.player.playerLinked.item.enums.*
-import com.nicolas.whfrp3database.entities.player.playerLinked.item.enums.ItemType.*
-import com.nicolas.whfrp3database.extensions.addItem
-import com.nicolas.whfrp3database.extensions.removeItem
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 

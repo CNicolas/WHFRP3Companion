@@ -16,13 +16,12 @@ import butterknife.BindView
 import butterknife.ButterKnife
 import butterknife.OnClick
 import butterknife.Unbinder
+import com.nicolas.models.extensions.getEquippedWeapons
+import com.nicolas.models.player.Player
 import com.nicolas.playersheet.extensions.*
 import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.shared.PLAYER_NAME_INTENT_ARGUMENT
 import com.nicolas.whfrp3database.PlayerFacade
-import com.nicolas.whfrp3database.entities.player.Player
-import com.nicolas.whfrp3database.extensions.getEquippedWeapons
-import com.nicolas.whfrp3database.extensions.getWeapons
 import org.adw.library.widgets.discreteseekbar.DiscreteSeekBar
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.toast

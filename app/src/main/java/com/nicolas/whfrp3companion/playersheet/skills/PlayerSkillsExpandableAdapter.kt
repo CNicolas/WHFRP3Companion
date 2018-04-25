@@ -11,6 +11,13 @@ import android.widget.ImageButton
 import android.widget.TextView
 import butterknife.ButterKnife
 import butterknife.OnClick
+import com.nicolas.models.extensions.getSkillByName
+import com.nicolas.models.extensions.getSpecializationByName
+import com.nicolas.models.player.Player
+import com.nicolas.models.player.playerLinked.skill.Skill
+import com.nicolas.models.player.playerLinked.skill.SkillType.ADVANCED
+import com.nicolas.models.player.playerLinked.skill.SkillType.BASIC
+import com.nicolas.models.player.playerLinked.skill.Specialization
 import com.nicolas.playersheet.extensions.createHand
 import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.shared.HAND_INTENT_ARGUMENT
@@ -19,13 +26,6 @@ import com.nicolas.whfrp3companion.shared.adapters.AbstractSkillsExpandableAdapt
 import com.nicolas.whfrp3companion.shared.bind
 import com.nicolas.whfrp3companion.shared.enums.labelId
 import com.nicolas.whfrp3database.PlayerFacade
-import com.nicolas.whfrp3database.entities.player.Player
-import com.nicolas.whfrp3database.entities.player.playerLinked.skill.Skill
-import com.nicolas.whfrp3database.entities.player.playerLinked.skill.SkillType.ADVANCED
-import com.nicolas.whfrp3database.entities.player.playerLinked.skill.SkillType.BASIC
-import com.nicolas.whfrp3database.entities.player.playerLinked.skill.Specialization
-import com.nicolas.whfrp3database.extensions.getSkillByName
-import com.nicolas.whfrp3database.extensions.getSpecializationByName
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.intentFor
 

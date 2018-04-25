@@ -1,15 +1,15 @@
 package com.nicolas.whfrp3companion.shared.enums
 
+import com.nicolas.models.player.enums.Characteristic
+import com.nicolas.models.player.enums.Characteristic.*
+import com.nicolas.models.player.enums.Race
+import com.nicolas.models.player.enums.Race.*
+import com.nicolas.models.player.playerLinked.item.enums.*
+import com.nicolas.models.player.playerLinked.item.enums.ArmorType.*
+import com.nicolas.models.player.playerLinked.item.enums.Quality.*
+import com.nicolas.models.player.playerLinked.item.enums.Range.*
+import com.nicolas.models.player.playerLinked.item.enums.WeaponType.*
 import com.nicolas.whfrp3companion.R
-import com.nicolas.whfrp3database.entities.player.enums.Characteristic
-import com.nicolas.whfrp3database.entities.player.enums.Characteristic.*
-import com.nicolas.whfrp3database.entities.player.enums.Race
-import com.nicolas.whfrp3database.entities.player.enums.Race.*
-import com.nicolas.whfrp3database.entities.player.playerLinked.item.enums.*
-import com.nicolas.whfrp3database.entities.player.playerLinked.item.enums.ArmorType.*
-import com.nicolas.whfrp3database.entities.player.playerLinked.item.enums.Quality.*
-import com.nicolas.whfrp3database.entities.player.playerLinked.item.enums.Range.*
-import com.nicolas.whfrp3database.entities.player.playerLinked.item.enums.WeaponType.*
 
 internal val Race.labelId: Int
     get() = when (this) {

@@ -17,18 +17,18 @@ import android.widget.TextView
 import butterknife.ButterKnife
 import butterknife.OnClick
 import butterknife.OnLongClick
+import com.nicolas.models.extensions.getItemsOfType
+import com.nicolas.models.player.Player
+import com.nicolas.models.player.playerLinked.item.*
+import com.nicolas.models.player.playerLinked.item.enums.ItemType
+import com.nicolas.models.player.playerLinked.item.enums.ItemType.*
+import com.nicolas.models.player.playerLinked.item.enums.Quality.*
 import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.shared.bind
 import com.nicolas.whfrp3companion.shared.enums.labelId
 import com.nicolas.whfrp3companion.shared.enums.pluralLabelId
 import com.nicolas.whfrp3companion.shared.hide
 import com.nicolas.whfrp3companion.shared.show
-import com.nicolas.whfrp3database.entities.player.Player
-import com.nicolas.whfrp3database.entities.player.playerLinked.item.*
-import com.nicolas.whfrp3database.entities.player.playerLinked.item.enums.ItemType
-import com.nicolas.whfrp3database.entities.player.playerLinked.item.enums.ItemType.*
-import com.nicolas.whfrp3database.entities.player.playerLinked.item.enums.Quality.*
-import com.nicolas.whfrp3database.extensions.getItemsOfType
 
 class PlayerInventoryExpandableAdapter(private val context: Context,
                                        private val player: Player) : BaseExpandableListAdapter() {

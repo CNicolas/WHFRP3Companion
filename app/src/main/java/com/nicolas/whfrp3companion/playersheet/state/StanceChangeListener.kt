@@ -4,9 +4,9 @@ import android.content.Context
 import android.content.res.ColorStateList
 import android.support.v4.content.ContextCompat
 import android.widget.TextView
+import com.nicolas.models.player.Player
 import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3database.PlayerFacade
-import com.nicolas.whfrp3database.entities.player.Player
 import org.adw.library.widgets.discreteseekbar.DiscreteSeekBar
 import org.jetbrains.anko.doAsync
 import java.lang.Math.abs

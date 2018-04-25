@@ -9,10 +9,10 @@ import android.view.ViewGroup
 import butterknife.ButterKnife
 import butterknife.OnTextChanged
 import butterknife.Unbinder
+import com.nicolas.models.player.Player
 import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.shared.PLAYER_NAME_INTENT_ARGUMENT
 import com.nicolas.whfrp3database.PlayerFacade
-import com.nicolas.whfrp3database.entities.player.Player
 import org.jetbrains.anko.doAsync
 
 class PlayerCharacteristicsFragment : Fragment() {

@@ -22,9 +22,10 @@ android {
 }
 
 dependencies {
-    compile project(':whfrp3database')
-    compile project(':dicelauncher')
+    compile project(path: ':models')
+    compile project(path: ':diceroller')
     compile project(':playersheet')
+    compile project(':whfrp3database')
 
     // Android
     compile "com.android.support:appcompat-v7:$android_support_version"

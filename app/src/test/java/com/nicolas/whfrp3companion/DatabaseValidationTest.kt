@@ -1,8 +1,8 @@
 package com.nicolas.whfrp3companion
 
+import com.nicolas.models.player.Player
 import com.nicolas.whfrp3database.PlayerFacade
 import com.nicolas.whfrp3database.database
-import com.nicolas.whfrp3database.entities.player.Player
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.After
 import org.junit.Before

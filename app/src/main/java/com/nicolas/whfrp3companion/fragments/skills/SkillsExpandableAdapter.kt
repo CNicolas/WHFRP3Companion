@@ -8,14 +8,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import butterknife.ButterKnife
+import com.nicolas.models.player.playerLinked.skill.Skill
+import com.nicolas.models.player.playerLinked.skill.SkillType.ADVANCED
+import com.nicolas.models.player.playerLinked.skill.SkillType.BASIC
+import com.nicolas.models.player.playerLinked.skill.Specialization
 import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.shared.adapters.AbstractSkillsExpandableAdapter
 import com.nicolas.whfrp3companion.shared.bind
 import com.nicolas.whfrp3companion.shared.enums.labelId
-import com.nicolas.whfrp3database.entities.player.playerLinked.skill.Skill
-import com.nicolas.whfrp3database.entities.player.playerLinked.skill.SkillType.ADVANCED
-import com.nicolas.whfrp3database.entities.player.playerLinked.skill.SkillType.BASIC
-import com.nicolas.whfrp3database.entities.player.playerLinked.skill.Specialization
 
 class SkillsExpandableAdapter(private val context: Context,
                               skills: List<Skill>) : AbstractSkillsExpandableAdapter(skills) {

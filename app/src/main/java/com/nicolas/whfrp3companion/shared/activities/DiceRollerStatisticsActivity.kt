@@ -8,11 +8,11 @@ import android.widget.TextView
 import butterknife.ButterKnife
 import butterknife.Unbinder
 import com.nicolas.diceroller.roll.rollForStatistics
+import com.nicolas.models.hand.Hand
 import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.shared.HAND_INTENT_ARGUMENT
 import com.nicolas.whfrp3companion.shared.HAND_ROLL_COUNT_INTENT_ARGUMENT
 import com.nicolas.whfrp3companion.shared.bind
-import com.nicolas.whfrp3database.entities.hand.Hand
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 
