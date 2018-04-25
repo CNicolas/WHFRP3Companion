@@ -1,2 +1,2 @@
-include ':app', ':whfrp3database', ':dicelauncher', ':playersheet'
+include ':app', ':models', ':whfrp3database', ':diceroller', ':playersheet'
 
