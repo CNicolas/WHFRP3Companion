@@ -1,10 +1,10 @@
 package com.nicolas.whfrp3database.player
 
 import com.google.gson.GsonBuilder
-import com.nicolas.whfrp3database.entities.player.playerLinked.item.Armor
-import com.nicolas.whfrp3database.entities.player.playerLinked.item.Expandable
-import com.nicolas.whfrp3database.entities.player.playerLinked.item.Item
-import com.nicolas.whfrp3database.entities.player.playerLinked.item.Weapon
+import com.nicolas.models.player.playerLinked.item.Armor
+import com.nicolas.models.player.playerLinked.item.Expandable
+import com.nicolas.models.player.playerLinked.item.Item
+import com.nicolas.models.player.playerLinked.item.Weapon
 import com.nicolas.whfrp3database.tables.parsers.ItemDeserializer
 import com.nicolas.whfrp3database.tables.parsers.genericType
 import org.assertj.core.api.Assertions.assertThat

@@ -2,8 +2,8 @@ package com.nicolas.whfrp3database.staticData
 
 import android.content.Context
 import com.google.gson.Gson
-import com.nicolas.whfrp3database.entities.player.playerLinked.skill.Skill
-import com.nicolas.whfrp3database.entities.player.playerLinked.talent.Talent
+import com.nicolas.models.player.playerLinked.skill.Skill
+import com.nicolas.models.player.playerLinked.talent.Talent
 import com.nicolas.whfrp3database.tables.parsers.genericType
 
 fun loadSkills(context: Context): List<Skill> {

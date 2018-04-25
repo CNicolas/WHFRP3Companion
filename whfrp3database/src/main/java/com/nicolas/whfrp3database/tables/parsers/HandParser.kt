@@ -1,6 +1,6 @@
 package com.nicolas.whfrp3database.tables.parsers
 
-import com.nicolas.whfrp3database.entities.hand.Hand
+import com.nicolas.models.hand.Hand
 import org.jetbrains.anko.db.RowParser
 
 internal class HandParser : RowParser<Hand> {

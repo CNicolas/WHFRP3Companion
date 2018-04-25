@@ -1,10 +1,10 @@
 package com.nicolas.whfrp3database
 
 import android.database.sqlite.SQLiteDatabase
-import com.nicolas.whfrp3database.entities.hand.Hand
-import com.nicolas.whfrp3database.entities.player.Player
-import com.nicolas.whfrp3database.entities.player.enums.Race.DWARF
-import com.nicolas.whfrp3database.entities.player.enums.Race.HUMAN
+import com.nicolas.models.hand.Hand
+import com.nicolas.models.player.Player
+import com.nicolas.models.player.enums.Race.DWARF
+import com.nicolas.models.player.enums.Race.HUMAN
 import com.nicolas.whfrp3database.tables.HAND_TABLE_NAME
 import com.nicolas.whfrp3database.tables.PLAYER_TABLE_NAME
 import com.nicolas.whfrp3database.tables.parsers.HandParser

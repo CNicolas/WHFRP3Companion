@@ -1,6 +1,6 @@
 package com.nicolas.whfrp3database.daos
 
-import com.nicolas.whfrp3database.entities.NamedEntity
+import com.nicolas.models.NamedEntity
 
 internal interface NameKeyDao<E : NamedEntity> : Dao<E> {
     fun add(entity: E): E?

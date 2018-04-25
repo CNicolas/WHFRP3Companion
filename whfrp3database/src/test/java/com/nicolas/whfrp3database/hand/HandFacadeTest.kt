@@ -1,9 +1,9 @@
 package com.nicolas.whfrp3database.hand
 
+import com.nicolas.models.hand.Hand
 import com.nicolas.whfrp3database.BuildConfig
 import com.nicolas.whfrp3database.HandFacade
 import com.nicolas.whfrp3database.database
-import com.nicolas.whfrp3database.entities.hand.Hand
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.After
 import org.junit.Before

@@ -1,10 +1,10 @@
 package com.nicolas.whfrp3database.player
 
+import com.nicolas.models.extensions.*
+import com.nicolas.models.player.Player
+import com.nicolas.models.player.enums.Characteristic.*
+import com.nicolas.models.player.playerLinked.skill.SkillType
 import com.nicolas.whfrp3database.BuildConfig
-import com.nicolas.whfrp3database.entities.player.Player
-import com.nicolas.whfrp3database.entities.player.enums.Characteristic.*
-import com.nicolas.whfrp3database.entities.player.playerLinked.skill.SkillType
-import com.nicolas.whfrp3database.extensions.*
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith

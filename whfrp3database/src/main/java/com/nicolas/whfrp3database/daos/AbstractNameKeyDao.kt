@@ -1,7 +1,7 @@
 package com.nicolas.whfrp3database.daos
 
+import com.nicolas.models.NamedEntity
 import com.nicolas.whfrp3database.DatabaseOpenHelper
-import com.nicolas.whfrp3database.entities.NamedEntity
 import com.nicolas.whfrp3database.tables.parsers.toPairs
 import org.jetbrains.anko.db.delete
 import org.jetbrains.anko.db.insert

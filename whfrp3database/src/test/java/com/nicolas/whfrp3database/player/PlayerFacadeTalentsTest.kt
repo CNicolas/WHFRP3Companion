@@ -1,11 +1,11 @@
 package com.nicolas.whfrp3database.player
 
+import com.nicolas.models.extensions.*
+import com.nicolas.models.player.Player
+import com.nicolas.models.player.playerLinked.talent.TalentCooldown
+import com.nicolas.models.player.playerLinked.talent.TalentCooldown.PASSIVE
+import com.nicolas.models.player.playerLinked.talent.TalentType.FAITH
 import com.nicolas.whfrp3database.BuildConfig
-import com.nicolas.whfrp3database.entities.player.Player
-import com.nicolas.whfrp3database.entities.player.playerLinked.talent.TalentCooldown
-import com.nicolas.whfrp3database.entities.player.playerLinked.talent.TalentCooldown.PASSIVE
-import com.nicolas.whfrp3database.entities.player.playerLinked.talent.TalentType.FAITH
-import com.nicolas.whfrp3database.extensions.*
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith

@@ -1,16 +1,16 @@
 package com.nicolas.whfrp3database.player
 
+import com.nicolas.models.extensions.*
+import com.nicolas.models.player.Player
+import com.nicolas.models.player.playerLinked.item.Armor
+import com.nicolas.models.player.playerLinked.item.Expandable
+import com.nicolas.models.player.playerLinked.item.GenericItem
+import com.nicolas.models.player.playerLinked.item.Weapon
+import com.nicolas.models.player.playerLinked.item.enums.ArmorType.HELMET
+import com.nicolas.models.player.playerLinked.item.enums.ArmorType.PLATE
+import com.nicolas.models.player.playerLinked.item.enums.Quality.LOW
+import com.nicolas.models.player.playerLinked.item.enums.Quality.NORMAL
 import com.nicolas.whfrp3database.BuildConfig
-import com.nicolas.whfrp3database.entities.player.Player
-import com.nicolas.whfrp3database.entities.player.playerLinked.item.Armor
-import com.nicolas.whfrp3database.entities.player.playerLinked.item.Expandable
-import com.nicolas.whfrp3database.entities.player.playerLinked.item.GenericItem
-import com.nicolas.whfrp3database.entities.player.playerLinked.item.Weapon
-import com.nicolas.whfrp3database.entities.player.playerLinked.item.enums.ArmorType.HELMET
-import com.nicolas.whfrp3database.entities.player.playerLinked.item.enums.ArmorType.PLATE
-import com.nicolas.whfrp3database.entities.player.playerLinked.item.enums.Quality.LOW
-import com.nicolas.whfrp3database.entities.player.playerLinked.item.enums.Quality.NORMAL
-import com.nicolas.whfrp3database.extensions.*
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith

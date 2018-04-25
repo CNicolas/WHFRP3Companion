@@ -1,10 +1,10 @@
 package com.nicolas.whfrp3database
 
 import android.content.Context
+import com.nicolas.models.player.Player
+import com.nicolas.models.player.playerLinked.skill.SkillType
+import com.nicolas.models.player.playerLinked.talent.TalentCooldown
 import com.nicolas.whfrp3database.daos.player.PlayerDao
-import com.nicolas.whfrp3database.entities.player.Player
-import com.nicolas.whfrp3database.entities.player.playerLinked.skill.SkillType
-import com.nicolas.whfrp3database.entities.player.playerLinked.talent.TalentCooldown
 import com.nicolas.whfrp3database.staticData.loadSkills
 import com.nicolas.whfrp3database.staticData.loadTalents
 

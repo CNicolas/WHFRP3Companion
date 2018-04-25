@@ -1,9 +1,9 @@
 package com.nicolas.whfrp3database.daos.player
 
 import android.database.Cursor
+import com.nicolas.models.player.Player
 import com.nicolas.whfrp3database.DatabaseOpenHelper
 import com.nicolas.whfrp3database.daos.AbstractNameKeyDao
-import com.nicolas.whfrp3database.entities.player.Player
 import com.nicolas.whfrp3database.tables.PLAYER_TABLE_NAME
 import com.nicolas.whfrp3database.tables.parsers.PlayerParser
 import com.nicolas.whfrp3database.tables.parsers.toColumns

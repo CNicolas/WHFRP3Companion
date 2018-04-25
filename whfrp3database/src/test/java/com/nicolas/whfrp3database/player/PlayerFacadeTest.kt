@@ -1,9 +1,9 @@
 package com.nicolas.whfrp3database.player
 
+import com.nicolas.models.player.CharacteristicValue
+import com.nicolas.models.player.Player
+import com.nicolas.models.player.playerLinked.item.GenericItem
 import com.nicolas.whfrp3database.BuildConfig
-import com.nicolas.whfrp3database.entities.player.CharacteristicValue
-import com.nicolas.whfrp3database.entities.player.Player
-import com.nicolas.whfrp3database.entities.player.playerLinked.item.GenericItem
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith

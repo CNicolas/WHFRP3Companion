@@ -1,12 +1,12 @@
 package com.nicolas.whfrp3database.tables.parsers
 
 import com.google.gson.GsonBuilder
-import com.nicolas.whfrp3database.entities.player.CharacteristicValue
-import com.nicolas.whfrp3database.entities.player.Player
-import com.nicolas.whfrp3database.entities.player.enums.Race
-import com.nicolas.whfrp3database.entities.player.playerLinked.item.Item
-import com.nicolas.whfrp3database.entities.player.playerLinked.skill.Skill
-import com.nicolas.whfrp3database.entities.player.playerLinked.talent.Talent
+import com.nicolas.models.player.CharacteristicValue
+import com.nicolas.models.player.Player
+import com.nicolas.models.player.enums.Race
+import com.nicolas.models.player.playerLinked.item.Item
+import com.nicolas.models.player.playerLinked.skill.Skill
+import com.nicolas.models.player.playerLinked.talent.Talent
 import org.jetbrains.anko.db.RowParser
 
 internal class PlayerParser : RowParser<Player> {

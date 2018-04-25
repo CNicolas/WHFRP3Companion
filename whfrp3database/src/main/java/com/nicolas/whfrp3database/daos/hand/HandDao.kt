@@ -1,9 +1,9 @@
 package com.nicolas.whfrp3database.daos.hand
 
 import android.database.Cursor
+import com.nicolas.models.hand.Hand
 import com.nicolas.whfrp3database.DatabaseOpenHelper
 import com.nicolas.whfrp3database.daos.AbstractNameKeyDao
-import com.nicolas.whfrp3database.entities.hand.Hand
 import com.nicolas.whfrp3database.tables.HAND_TABLE_NAME
 import com.nicolas.whfrp3database.tables.parsers.HandParser
 import com.nicolas.whfrp3database.tables.parsers.toColumns

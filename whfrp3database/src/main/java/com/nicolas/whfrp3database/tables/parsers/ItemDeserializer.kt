@@ -1,8 +1,8 @@
 package com.nicolas.whfrp3database.tables.parsers
 
 import com.google.gson.*
-import com.nicolas.whfrp3database.entities.player.playerLinked.item.*
-import com.nicolas.whfrp3database.entities.player.playerLinked.item.enums.ItemType.*
+import com.nicolas.models.player.playerLinked.item.*
+import com.nicolas.models.player.playerLinked.item.enums.ItemType.*
 import java.lang.reflect.Type
 
 class ItemDeserializer : JsonDeserializer<Item> {
