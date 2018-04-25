@@ -1,16 +1,19 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
-    ext.kotlin_version = '1.2.31'
-    ext.android_support_version = '27.1.0'
-    ext.butterknife_version = '8.8.1'
-    ext.anko_version = '0.10.4'
-    ext.robolectric_version = '3.7.1'
-    ext.assertj_version = '3.9.0'
-    ext.testng_version = '6.13.1'
+    ext {
+        kotlin_version = '1.2.40'
+        android_support_version = '27.1.1'
+        butterknife_version = '8.8.1'
+        anko_version = '0.10.4'
+        robolectric_version = '3.8'
+        assertj_version = '3.9.1'
+        testng_version = '6.13.1'
+    }
 
     repositories {
         jcenter()
+        maven { url "https://maven.google.com" }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:2.3.0'
@@ -26,8 +29,4 @@ allprojects {
     repositories {
         jcenter()
     }
-}
-
-task clean(type: Delete) {
-    delete rootProject.buildDir
 }
