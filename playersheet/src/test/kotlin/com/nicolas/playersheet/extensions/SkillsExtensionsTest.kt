@@ -3,30 +3,17 @@ package com.nicolas.playersheet.extensions
 import com.nicolas.models.player.enums.Characteristic.AGILITY
 import com.nicolas.models.player.enums.Characteristic.STRENGTH
 import com.nicolas.models.player.playerLinked.skill.Skill
-import com.nicolas.whfrp3database.BuildConfig
-import com.nicolas.whfrp3database.staticData.loadSkills
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.Before
 import org.junit.Test
-import org.junit.runner.RunWith
-import org.robolectric.RobolectricTestRunner
-import org.robolectric.RuntimeEnvironment
-import org.robolectric.annotation.Config
 
-@RunWith(RobolectricTestRunner::class)
-@Config(constants = BuildConfig::class)
 class SkillsExtensionsTest {
-    private lateinit var allSkills: List<Skill>
-
-    @Before
-    fun setUp() {
-        allSkills = loadSkills(RuntimeEnvironment.application)
-    }
+    private val allSkills: List<Skill> = listOf(Skill("Capacité de Combat", STRENGTH),
+            Skill("Capacité de Combat", AGILITY))
 
     @Test
     fun should_find_skill_by_extensions() {
         val strengthSkills = allSkills.findByCharacteristic(STRENGTH)
-        assertThat(strengthSkills.size).isEqualTo(3)
+        assertThat(strengthSkills.size).isEqualTo(1)
 
         val fightSkill = strengthSkills.findByText("capacit")
         assertThat(fightSkill.size).isEqualTo(1)

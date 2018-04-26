@@ -6,28 +6,11 @@ import com.nicolas.models.hand.DifficultyLevel.MEDIUM
 import com.nicolas.models.player.CharacteristicValue
 import com.nicolas.models.player.Player
 import com.nicolas.models.player.enums.Characteristic
-import com.nicolas.playersheet.BuildConfig
 import com.nicolas.playersheet.extensions.createHand
-import com.nicolas.whfrp3database.PlayerFacade
-import com.nicolas.whfrp3database.database
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.After
-import org.junit.Before
 import org.junit.Test
-import org.junit.runner.RunWith
-import org.robolectric.RobolectricTestRunner
-import org.robolectric.RuntimeEnvironment
-import org.robolectric.annotation.Config
 
-@RunWith(RobolectricTestRunner::class)
-@Config(constants = BuildConfig::class)
 class PlayerHandTest {
-    private lateinit var playerFacade: PlayerFacade
-
-    @Before
-    fun setUp() {
-        playerFacade = PlayerFacade(RuntimeEnvironment.application)
-    }
 
     @Test
     fun should_create_strength_hand_from_player() {
@@ -41,7 +24,7 @@ class PlayerHandTest {
 
     @Test
     fun should_create_hand_from_skill() {
-        val player = playerFacade.add(Player("John"))
+        val player = Player("John")
         player.strength = CharacteristicValue(4, 2)
         player.getSkillByName("capacité de combat")!!.level = 2
         val hand = player.createHand(player.getSkillByName("capacité de combat")!!, "HandName", HARD)
@@ -55,7 +38,7 @@ class PlayerHandTest {
 
     @Test
     fun should_create_hand_from_specialized_skill() {
-        val player = playerFacade.add(Player("John"))
+        val player = Player("John")
         player.strength = CharacteristicValue(5, 2)
 
         val fightSkill = player.getSkillByName("capacité de combat")!!
@@ -69,11 +52,5 @@ class PlayerHandTest {
         assertThat(hand.fortuneDicesCount).isEqualTo(player.strength.fortuneValue + 1)
         assertThat(hand.expertiseDicesCount).isEqualTo(fightSkill.level)
         assertThat(hand.challengeDicesCount).isEqualTo(MEDIUM.challengeDicesCount)
-    }
-
-    @After
-    fun tearDown() {
-        RuntimeEnvironment.application.database.close()
-        RuntimeEnvironment.application.database.deleteDatabase()
     }
 }
