@@ -8,7 +8,7 @@ import org.junit.Test
 
 class SkillsExtensionsTest {
     private val allSkills: List<Skill> = listOf(Skill("Capacité de Combat", STRENGTH),
-            Skill("Capacité de Combat", AGILITY))
+            Skill("Capacité de Tir", AGILITY))
 
     @Test
     fun should_find_skill_by_extensions() {

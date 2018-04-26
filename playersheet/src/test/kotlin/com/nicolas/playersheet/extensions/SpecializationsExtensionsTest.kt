@@ -13,7 +13,7 @@ class SpecializationsExtensionsTest {
     @Before
     fun setUp() {
         allSkills = listOf(Skill("Résistance", Characteristic.TOUGHNESS, specializations = listOf(Specialization("Récupération Après l'Effort"))),
-                Skill("Capacité de Combat", Characteristic.AGILITY, specializations = listOf(Specialization("Arcs"),Specialization("Arbalètes"))))
+                Skill("Capacité de Tir", Characteristic.AGILITY, specializations = listOf(Specialization("Arcs"),Specialization("Arbalètes"))))
     }
 
     @Test

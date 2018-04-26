@@ -5,6 +5,7 @@ import com.nicolas.models.player.Player
 import com.nicolas.models.player.playerLinked.item.Armor
 import com.nicolas.playersheet.enums.PlayerLivingState.*
 import org.assertj.core.api.Assertions.assertThat
+import org.junit.Test
 
 class PlayerExtensionsTest {
     @Test
@@ -22,7 +23,7 @@ class PlayerExtensionsTest {
 
     @Test
     fun should_receive_damage_taking_soak_and_toughness_in_count() {
-        val player = Player("John", toughness = CharacteristicValue(2), items = listOf(Armor(soak = 1)))
+        val player = Player("John", toughness = CharacteristicValue(2), items = listOf(Armor(soak = 1, isEquipped = true)))
 
         val (reducedDamage, _) = player.receiveDamage(10)
         assertThat(reducedDamage).isEqualTo(7)
