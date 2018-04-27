@@ -1,9 +1,5 @@
-package com.nicolas.playersheet.extensions
+package com.nicolas.models.extensions
 
-import com.nicolas.models.extensions.addItem
-import com.nicolas.models.extensions.getExpandableByName
-import com.nicolas.models.extensions.getWeaponByName
-import com.nicolas.models.extensions.removeItem
 import com.nicolas.models.player.Player
 import com.nicolas.models.player.playerLinked.item.Expandable
 import com.nicolas.models.player.playerLinked.item.Weapon
