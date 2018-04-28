@@ -12,7 +12,7 @@ import butterknife.Unbinder
 import com.nicolas.models.player.Player
 import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.shared.PLAYER_NAME_INTENT_ARGUMENT
-import com.nicolas.whfrp3database.PlayerFacade
+import com.nicolas.whfrp3database.PlayerRepository
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 import org.koin.android.ext.android.inject
@@ -21,7 +21,7 @@ class PlayerCharacteristicsFragment : Fragment() {
     private lateinit var views: PlayerCharacteristicsFragmentViewHolder
     private lateinit var unbinder: Unbinder
 
-    private val playerFacade by inject<PlayerFacade>()
+    private val playerRepository by inject<PlayerRepository>()
 
     private lateinit var player: Player
 
@@ -36,7 +36,7 @@ class PlayerCharacteristicsFragment : Fragment() {
         val playerName = arguments!!.getString(PLAYER_NAME_INTENT_ARGUMENT)
 
         doAsync {
-            player = playerFacade.find(playerName)!!
+            player = playerRepository.find(playerName)!!
 
             uiThread {
                 views = PlayerCharacteristicsFragmentViewHolder(resultingView)
@@ -80,7 +80,7 @@ class PlayerCharacteristicsFragment : Fragment() {
         doAsync {
             val partialPlayer = views.extractPlayerFromViews()
 
-            player = playerFacade.update(
+            player = playerRepository.update(
                     player.copy(
                             name = partialPlayer.name,
                             description = partialPlayer.description,

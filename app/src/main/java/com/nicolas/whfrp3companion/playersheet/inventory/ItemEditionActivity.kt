@@ -21,7 +21,7 @@ import com.nicolas.models.player.playerLinked.item.enums.ItemType.*
 import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.shared.*
 import com.nicolas.whfrp3companion.shared.enums.labelId
-import com.nicolas.whfrp3database.PlayerFacade
+import com.nicolas.whfrp3database.PlayerRepository
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 import org.koin.android.ext.android.inject
@@ -50,7 +50,7 @@ class ItemEditionActivity : AppCompatActivity() {
 
     private lateinit var unbinder: Unbinder
 
-    private val playerFacade by inject<PlayerFacade>()
+    private val playerRepository by inject<PlayerRepository>()
 
     private lateinit var player: Player
     private var item: Item? = null
@@ -63,7 +63,7 @@ class ItemEditionActivity : AppCompatActivity() {
 
         val playerName = intent.extras.getString(PLAYER_NAME_INTENT_ARGUMENT)
         doAsync {
-            player = playerFacade.find(playerName)!!
+            player = playerRepository.find(playerName)!!
         }
         item = intent.extras.getSerializable(ITEM_EDIT_INTENT_ARGUMENT) as Item?
 
@@ -110,7 +110,7 @@ class ItemEditionActivity : AppCompatActivity() {
             }
 
             player.addItem(createItemFromViews())
-            player = playerFacade.update(player)
+            player = playerRepository.update(player)
 
             uiThread {
                 finish()

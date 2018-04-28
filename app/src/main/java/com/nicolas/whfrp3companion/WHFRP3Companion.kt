@@ -3,6 +3,7 @@ package com.nicolas.whfrp3companion
 import android.app.Application
 import android.content.Context
 import com.nicolas.whfrp3database.PlayerFacade
+import com.nicolas.whfrp3database.PlayerRepository
 import org.koin.android.ext.android.startKoin
 import org.koin.dsl.module.applicationContext
 
@@ -17,5 +18,5 @@ class WHFRP3Companion : Application() {
 }
 
 private fun whfrp3ApplicationModule(context: Context) = applicationContext {
-    bean { PlayerFacade(context) }
+    bean { PlayerFacade(context) as PlayerRepository }
 }

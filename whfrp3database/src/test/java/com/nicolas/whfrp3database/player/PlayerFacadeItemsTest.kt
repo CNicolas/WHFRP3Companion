@@ -128,12 +128,12 @@ class PlayerFacadeItemsTest : AbstractPlayerFacadeTest() {
         val updatedPlayer = playerFacade.update(player)
         assertThat(updatedPlayer.items).isEmpty()
 
-        playerFacade.deletePlayer(player)
+        playerFacade.delete(player)
         assertThat(playerFacade.findAll()).isEmpty()
 
         player = playerFacade.add(Player("John", items = listOf(Weapon(name = "Sword", damage = 4, criticalLevel = 3))))
         assertThat(player.items.size).isEqualTo(1)
-        playerFacade.deletePlayer("John")
+        playerFacade.delete("John")
         assertThat(playerFacade.findAll()).isEmpty()
     }
 

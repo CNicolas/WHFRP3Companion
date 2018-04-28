@@ -8,7 +8,7 @@ import com.nicolas.whfrp3database.daos.player.PlayerDao
 import com.nicolas.whfrp3database.staticData.loadSkills
 import com.nicolas.whfrp3database.staticData.loadTalents
 
-class PlayerFacade(context: Context) {
+class PlayerFacade(context: Context) : PlayerRepository {
     private val playerDao = PlayerDao(context.database)
 
     val skills = loadSkills(context)
@@ -20,36 +20,36 @@ class PlayerFacade(context: Context) {
     val passiveTalents = talents.filter { it.cooldown == TalentCooldown.PASSIVE }
     val exhaustibleTalents = talents.filter { it.cooldown == TalentCooldown.TALENT }
 
-    fun add(player: Player): Player {
+    override fun add(player: Player): Player {
         player.createSkills()
         playerDao.add(player)
 
         return find(player.name)!!
     }
 
-    fun find(name: String): Player? = playerDao.findByName(name)
+    override fun find(name: String): Player? = playerDao.findByName(name)
 
-    fun findAll(): List<Player> = playerDao.findAll()
+    override fun findAll(): List<Player> = playerDao.findAll()
 
-    fun update(player: Player): Player {
+    override fun update(player: Player): Player {
         playerDao.update(player)
 
         return find(player.name)!!
     }
 
-    fun deletePlayer(name: String) {
+    override fun delete(name: String) {
         val player = playerDao.findByName(name)
         if (player != null) {
             playerDao.deleteByName(name)
         }
     }
 
-    fun deletePlayer(player: Player) {
+    override fun delete(player: Player) {
         val foundPlayer = playerDao.findById(player.id)
         if (foundPlayer != null) {
             playerDao.delete(foundPlayer)
         } else {
-            deletePlayer(player.name)
+            delete(player.name)
         }
     }
 

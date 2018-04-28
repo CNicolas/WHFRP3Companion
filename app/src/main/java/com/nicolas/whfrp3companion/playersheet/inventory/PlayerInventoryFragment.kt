@@ -19,7 +19,7 @@ import com.nicolas.models.player.playerLinked.item.enums.ItemType
 import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.shared.ITEM_EDIT_INTENT_ARGUMENT
 import com.nicolas.whfrp3companion.shared.PLAYER_NAME_INTENT_ARGUMENT
-import com.nicolas.whfrp3database.PlayerFacade
+import com.nicolas.whfrp3database.PlayerRepository
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.uiThread
@@ -31,7 +31,7 @@ class PlayerInventoryFragment : Fragment() {
 
     private lateinit var unbinder: Unbinder
 
-    private val playerFacade by inject<PlayerFacade>()
+    private val playerRepository by inject<PlayerRepository>()
 
     private lateinit var playerName: String
     private lateinit var player: Player
@@ -83,13 +83,13 @@ class PlayerInventoryFragment : Fragment() {
         }
 
         doAsync {
-            player = playerFacade.find(playerName)!!
+            player = playerRepository.find(playerName)!!
 
             val inventoryAdapter = PlayerInventoryExpandableAdapter(context!!, player)
             inventoryAdapter.addItemListener(object : ItemListener {
                 override fun onEquipment(equipment: Equipment, isEquipped: Boolean) {
                     player.getEquipmentByName(equipment.name)?.isEquipped = isEquipped
-                    playerFacade.update(player)
+                    playerRepository.update(player)
                 }
 
                 override fun onItemEditionDemand(item: Item) {
@@ -98,7 +98,7 @@ class PlayerInventoryFragment : Fragment() {
 
                 override fun onItemDeleted(item: Item) {
                     player.removeItem(item)
-                    playerFacade.update(player)
+                    playerRepository.update(player)
 
                     getPlayerItems()
                 }
