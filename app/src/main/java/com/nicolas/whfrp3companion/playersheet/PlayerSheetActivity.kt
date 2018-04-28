@@ -23,11 +23,13 @@ import com.nicolas.whfrp3companion.shared.PLAYER_NAME_INTENT_ARGUMENT
 import com.nicolas.whfrp3companion.shared.bind
 import com.nicolas.whfrp3companion.shared.enums.labelId
 import com.nicolas.whfrp3database.PlayerFacade
+import org.koin.android.ext.android.inject
 
 class PlayerSheetActivity : AppCompatActivity() {
     private lateinit var player: Player
 
     private val drawer by bind<DrawerLayout>(R.id.playersheet_drawer_layout)
+    private val playerFacade by inject<PlayerFacade>()
 
     private lateinit var toggle: ActionBarDrawerToggle
 
@@ -35,7 +37,7 @@ class PlayerSheetActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_playersheet)
 
-        player = PlayerFacade(this).find(intent.extras.getString(PLAYER_NAME_INTENT_ARGUMENT))!!
+        player = playerFacade.find(intent.extras.getString(PLAYER_NAME_INTENT_ARGUMENT))!!
         title = "${player.name} - ${getString(player.race.labelId)}"
 
         ButterKnife.bind(this)

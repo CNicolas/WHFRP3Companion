@@ -20,6 +20,7 @@ import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.toast
 import org.jetbrains.anko.uiThread
+import org.koin.android.ext.android.inject
 
 class PlayersFragment : Fragment() {
     @BindView(R.id.list_players)
@@ -27,7 +28,8 @@ class PlayersFragment : Fragment() {
 
     private lateinit var unbinder: Unbinder
 
-    private lateinit var playerFacade: PlayerFacade
+    private val playerFacade by inject<PlayerFacade>()
+
     private lateinit var players: List<Player>
 
     override fun onCreateView(inflater: LayoutInflater,
@@ -37,7 +39,6 @@ class PlayersFragment : Fragment() {
         val resultingView: View = inflater.inflate(R.layout.fragment_players, container, false)
 
         unbinder = ButterKnife.bind(this, resultingView)
-        playerFacade = PlayerFacade(context!!)
 
         updatePlayers()
 

@@ -24,6 +24,7 @@ import com.nicolas.whfrp3companion.shared.enums.labelId
 import com.nicolas.whfrp3database.PlayerFacade
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
+import org.koin.android.ext.android.inject
 
 class ItemEditionActivity : AppCompatActivity() {
     private val itemNameEditText by bind<EditText>(R.id.item_name)
@@ -49,7 +50,7 @@ class ItemEditionActivity : AppCompatActivity() {
 
     private lateinit var unbinder: Unbinder
 
-    private lateinit var playerFacade: PlayerFacade
+    private val playerFacade by inject<PlayerFacade>()
 
     private lateinit var player: Player
     private var item: Item? = null
@@ -61,7 +62,6 @@ class ItemEditionActivity : AppCompatActivity() {
         unbinder = ButterKnife.bind(this)
 
         val playerName = intent.extras.getString(PLAYER_NAME_INTENT_ARGUMENT)
-        playerFacade = PlayerFacade(this)
         doAsync {
             player = playerFacade.find(playerName)!!
         }

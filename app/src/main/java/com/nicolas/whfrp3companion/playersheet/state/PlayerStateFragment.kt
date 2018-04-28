@@ -25,6 +25,7 @@ import com.nicolas.whfrp3database.PlayerFacade
 import org.adw.library.widgets.discreteseekbar.DiscreteSeekBar
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.toast
+import org.koin.android.ext.android.inject
 import kotlin.math.abs
 
 class PlayerStateFragment : Fragment() {
@@ -70,7 +71,8 @@ class PlayerStateFragment : Fragment() {
 
     private lateinit var unbinder: Unbinder
 
-    private lateinit var playerFacade: PlayerFacade
+    private val playerFacade by inject<PlayerFacade>()
+
     private lateinit var player: Player
 
     override fun onCreateView(inflater: LayoutInflater,
@@ -81,8 +83,6 @@ class PlayerStateFragment : Fragment() {
         unbinder = ButterKnife.bind(this, resultingView)
 
         val playerName = arguments!!.getString(PLAYER_NAME_INTENT_ARGUMENT)
-
-        playerFacade = PlayerFacade(context!!)
         player = playerFacade.find(playerName)!!
 
         removeWoundView.isEnabled = player.wounds > 0

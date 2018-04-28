@@ -23,6 +23,7 @@ import com.nicolas.whfrp3database.PlayerFacade
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.uiThread
+import org.koin.android.ext.android.inject
 
 class PlayerInventoryFragment : Fragment() {
     @BindView(R.id.inventory)
@@ -30,7 +31,8 @@ class PlayerInventoryFragment : Fragment() {
 
     private lateinit var unbinder: Unbinder
 
-    private lateinit var playerFacade: PlayerFacade
+    private val playerFacade by inject<PlayerFacade>()
+
     private lateinit var playerName: String
     private lateinit var player: Player
 
@@ -42,7 +44,6 @@ class PlayerInventoryFragment : Fragment() {
         unbinder = ButterKnife.bind(this, resultingView)
 
         playerName = arguments!!.getString(PLAYER_NAME_INTENT_ARGUMENT)
-        playerFacade = PlayerFacade(context!!)
 
         getPlayerItems()
 
