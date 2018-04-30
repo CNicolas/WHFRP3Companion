@@ -12,6 +12,7 @@ import android.support.v7.widget.Toolbar
 import android.view.MenuItem
 import android.view.inputmethod.InputMethodManager
 import butterknife.ButterKnife
+import com.nicolas.database.PlayerRepository
 import com.nicolas.models.player.Player
 import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.fragments.EmptyFragment
@@ -22,7 +23,6 @@ import com.nicolas.whfrp3companion.playersheet.state.PlayerStateFragment
 import com.nicolas.whfrp3companion.shared.PLAYER_NAME_INTENT_ARGUMENT
 import com.nicolas.whfrp3companion.shared.bind
 import com.nicolas.whfrp3companion.shared.enums.labelId
-import com.nicolas.whfrp3database.PlayerRepository
 import org.koin.android.ext.android.inject
 
 class PlayerSheetActivity : AppCompatActivity() {

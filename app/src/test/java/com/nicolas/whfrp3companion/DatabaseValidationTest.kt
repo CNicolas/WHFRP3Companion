@@ -1,8 +1,8 @@
 package com.nicolas.whfrp3companion
 
+import com.nicolas.database.anko.AnkoPlayerRepository
+import com.nicolas.database.anko.database
 import com.nicolas.models.player.Player
-import com.nicolas.whfrp3database.anko.AnkoPlayerRepository
-import com.nicolas.whfrp3database.anko.database
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.After
 import org.junit.Before

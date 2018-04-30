@@ -9,13 +9,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import butterknife.*
+import com.nicolas.database.PlayerRepository
 import com.nicolas.models.player.Player
 import com.nicolas.models.player.enums.Race
 import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.playersheet.PlayerSheetActivity
 import com.nicolas.whfrp3companion.shared.PLAYER_NAME_INTENT_ARGUMENT
 import com.nicolas.whfrp3companion.shared.enums.labelId
-import com.nicolas.whfrp3database.PlayerRepository
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.toast

@@ -12,6 +12,7 @@ import butterknife.ButterKnife
 import butterknife.OnClick
 import butterknife.OnItemSelected
 import butterknife.Unbinder
+import com.nicolas.database.PlayerRepository
 import com.nicolas.models.extensions.addItem
 import com.nicolas.models.extensions.removeItem
 import com.nicolas.models.player.Player
@@ -21,7 +22,6 @@ import com.nicolas.models.player.playerLinked.item.enums.ItemType.*
 import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.shared.*
 import com.nicolas.whfrp3companion.shared.enums.labelId
-import com.nicolas.whfrp3database.PlayerRepository
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 import org.koin.android.ext.android.inject

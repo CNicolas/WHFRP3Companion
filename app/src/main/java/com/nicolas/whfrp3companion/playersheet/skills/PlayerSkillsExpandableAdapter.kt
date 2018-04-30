@@ -11,6 +11,7 @@ import android.widget.ImageButton
 import android.widget.TextView
 import butterknife.ButterKnife
 import butterknife.OnClick
+import com.nicolas.database.anko.AnkoPlayerRepository
 import com.nicolas.models.extensions.getSkillByName
 import com.nicolas.models.extensions.getSpecializationByName
 import com.nicolas.models.player.Player
@@ -25,7 +26,6 @@ import com.nicolas.whfrp3companion.shared.activities.DiceRollerActivity
 import com.nicolas.whfrp3companion.shared.adapters.AbstractSkillsExpandableAdapter
 import com.nicolas.whfrp3companion.shared.bind
 import com.nicolas.whfrp3companion.shared.enums.labelId
-import com.nicolas.whfrp3database.anko.AnkoPlayerRepository
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.intentFor
 

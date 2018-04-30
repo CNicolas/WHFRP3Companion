@@ -10,6 +10,7 @@ import butterknife.BindView
 import butterknife.ButterKnife
 import butterknife.OnClick
 import butterknife.Unbinder
+import com.nicolas.database.PlayerRepository
 import com.nicolas.models.extensions.getEquipmentByName
 import com.nicolas.models.extensions.removeItem
 import com.nicolas.models.player.Player
@@ -19,7 +20,6 @@ import com.nicolas.models.player.playerLinked.item.enums.ItemType
 import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.shared.ITEM_EDIT_INTENT_ARGUMENT
 import com.nicolas.whfrp3companion.shared.PLAYER_NAME_INTENT_ARGUMENT
-import com.nicolas.whfrp3database.PlayerRepository
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.uiThread
