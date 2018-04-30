@@ -10,6 +10,6 @@ interface PlayerRepository {
 
     fun update(player: Player): Player
 
-    fun delete(name: String)
-    fun delete(player: Player)
+    fun delete(name: String): Int
+    fun delete(player: Player): Int
 }

@@ -38,16 +38,18 @@ class AnkoPlayerRepository(context: Context) : PlayerRepository {
         return find(player.name)!!
     }
 
-    override fun delete(name: String) {
+    override fun delete(name: String): Int {
         val player = playerDao.findByName(name)
-        if (player != null) {
+        return if (player != null) {
             playerDao.deleteByName(name)
+        } else {
+            -1
         }
     }
 
-    override fun delete(player: Player) {
+    override fun delete(player: Player): Int {
         val foundPlayer = playerDao.findById(player.id)
-        if (foundPlayer != null) {
+        return if (foundPlayer != null) {
             playerDao.delete(foundPlayer)
         } else {
             delete(player.name)
