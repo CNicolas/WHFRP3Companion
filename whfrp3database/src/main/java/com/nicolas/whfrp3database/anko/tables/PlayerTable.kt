@@ -1,4 +1,4 @@
-package com.nicolas.whfrp3database.tables
+package com.nicolas.whfrp3database.anko.tables
 
 import android.database.sqlite.SQLiteDatabase
 import org.jetbrains.anko.db.*

@@ -1,4 +1,4 @@
-package com.nicolas.whfrp3database.tables.parsers
+package com.nicolas.whfrp3database.anko.tables.parsers
 
 import com.google.gson.GsonBuilder
 import com.nicolas.models.player.CharacteristicValue
@@ -7,6 +7,9 @@ import com.nicolas.models.player.enums.Race
 import com.nicolas.models.player.playerLinked.item.Item
 import com.nicolas.models.player.playerLinked.skill.Skill
 import com.nicolas.models.player.playerLinked.talent.Talent
+import com.nicolas.whfrp3database.genericType
+import com.nicolas.whfrp3database.toInt
+import com.nicolas.whfrp3database.toNullableInt
 import org.jetbrains.anko.db.RowParser
 
 internal class PlayerParser : RowParser<Player> {

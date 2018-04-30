@@ -1,4 +1,4 @@
-package com.nicolas.whfrp3database.tables.parsers
+package com.nicolas.whfrp3database.anko.tables.parsers
 
 import com.google.gson.*
 import com.nicolas.models.player.playerLinked.item.*

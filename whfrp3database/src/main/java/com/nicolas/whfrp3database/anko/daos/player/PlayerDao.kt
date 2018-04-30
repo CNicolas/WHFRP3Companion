@@ -1,12 +1,12 @@
-package com.nicolas.whfrp3database.daos.player
+package com.nicolas.whfrp3database.anko.daos.player
 
 import android.database.Cursor
 import com.nicolas.models.player.Player
-import com.nicolas.whfrp3database.DatabaseOpenHelper
-import com.nicolas.whfrp3database.daos.AbstractNameKeyDao
-import com.nicolas.whfrp3database.tables.PLAYER_TABLE_NAME
-import com.nicolas.whfrp3database.tables.parsers.PlayerParser
-import com.nicolas.whfrp3database.tables.parsers.toColumns
+import com.nicolas.whfrp3database.anko.DatabaseOpenHelper
+import com.nicolas.whfrp3database.anko.daos.AbstractNameKeyDao
+import com.nicolas.whfrp3database.anko.tables.PLAYER_TABLE_NAME
+import com.nicolas.whfrp3database.anko.tables.parsers.PlayerParser
+import com.nicolas.whfrp3database.anko.tables.parsers.toColumns
 import org.jetbrains.anko.db.parseList
 import org.jetbrains.anko.db.parseOpt
 

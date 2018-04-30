@@ -18,7 +18,7 @@ import com.nicolas.whfrp3companion.shared.HAND_INTENT_ARGUMENT
 import com.nicolas.whfrp3companion.shared.HAND_ROLL_COUNT_INTENT_ARGUMENT
 import com.nicolas.whfrp3companion.shared.bind
 import com.nicolas.whfrp3companion.shared.dialogs.RollResultDialog
-import com.nicolas.whfrp3database.HandFacade
+import com.nicolas.whfrp3database.anko.HandFacade
 import org.jetbrains.anko.alert
 import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.toast

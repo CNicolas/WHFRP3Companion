@@ -1,11 +1,11 @@
-package com.nicolas.whfrp3database
+package com.nicolas.whfrp3database.anko
 
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
-import com.nicolas.whfrp3database.tables.HAND_TABLE_NAME
-import com.nicolas.whfrp3database.tables.PLAYER_TABLE_NAME
-import com.nicolas.whfrp3database.tables.createHandTable
-import com.nicolas.whfrp3database.tables.createPlayerTable
+import com.nicolas.whfrp3database.anko.tables.HAND_TABLE_NAME
+import com.nicolas.whfrp3database.anko.tables.PLAYER_TABLE_NAME
+import com.nicolas.whfrp3database.anko.tables.createHandTable
+import com.nicolas.whfrp3database.anko.tables.createPlayerTable
 import org.jetbrains.anko.db.ManagedSQLiteOpenHelper
 import org.jetbrains.anko.db.dropTable
 

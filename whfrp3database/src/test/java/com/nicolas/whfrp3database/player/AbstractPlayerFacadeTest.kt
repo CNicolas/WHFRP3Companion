@@ -1,7 +1,7 @@
 package com.nicolas.whfrp3database.player
 
-import com.nicolas.whfrp3database.PlayerFacade
-import com.nicolas.whfrp3database.database
+import com.nicolas.whfrp3database.anko.PlayerFacade
+import com.nicolas.whfrp3database.anko.database
 import org.junit.After
 import org.junit.Before
 import org.robolectric.RuntimeEnvironment

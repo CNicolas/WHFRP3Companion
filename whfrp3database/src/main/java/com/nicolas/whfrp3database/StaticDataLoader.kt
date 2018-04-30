@@ -1,10 +1,9 @@
-package com.nicolas.whfrp3database.staticData
+package com.nicolas.whfrp3database
 
 import android.content.Context
 import com.google.gson.Gson
 import com.nicolas.models.player.playerLinked.skill.Skill
 import com.nicolas.models.player.playerLinked.talent.Talent
-import com.nicolas.whfrp3database.tables.parsers.genericType
 
 fun loadSkills(context: Context): List<Skill> {
     val skillsReader = context.assets.open("skills.json").reader()

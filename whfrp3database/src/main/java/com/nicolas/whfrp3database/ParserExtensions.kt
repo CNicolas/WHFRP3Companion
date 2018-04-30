@@ -1,4 +1,4 @@
-package com.nicolas.whfrp3database.tables.parsers
+package com.nicolas.whfrp3database
 
 import com.google.gson.reflect.TypeToken
 

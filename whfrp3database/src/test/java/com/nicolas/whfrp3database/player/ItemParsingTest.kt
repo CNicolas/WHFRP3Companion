@@ -5,8 +5,8 @@ import com.nicolas.models.player.playerLinked.item.Armor
 import com.nicolas.models.player.playerLinked.item.Expandable
 import com.nicolas.models.player.playerLinked.item.Item
 import com.nicolas.models.player.playerLinked.item.Weapon
-import com.nicolas.whfrp3database.tables.parsers.ItemDeserializer
-import com.nicolas.whfrp3database.tables.parsers.genericType
+import com.nicolas.whfrp3database.anko.tables.parsers.ItemDeserializer
+import com.nicolas.whfrp3database.genericType
 import org.assertj.core.api.Assertions.assertThat
 import org.testng.annotations.Test
 

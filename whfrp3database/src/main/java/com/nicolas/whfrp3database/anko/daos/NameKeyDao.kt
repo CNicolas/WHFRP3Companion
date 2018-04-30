@@ -1,4 +1,4 @@
-package com.nicolas.whfrp3database.daos
+package com.nicolas.whfrp3database.anko.daos
 
 import com.nicolas.models.NamedEntity
 

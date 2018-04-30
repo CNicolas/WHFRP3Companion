@@ -1,8 +1,8 @@
-package com.nicolas.whfrp3database
+package com.nicolas.whfrp3database.anko
 
 import android.content.Context
 import com.nicolas.models.hand.Hand
-import com.nicolas.whfrp3database.daos.hand.HandDao
+import com.nicolas.whfrp3database.anko.daos.hand.HandDao
 
 class HandFacade(context: Context) {
     private val handDao = HandDao(context.database)

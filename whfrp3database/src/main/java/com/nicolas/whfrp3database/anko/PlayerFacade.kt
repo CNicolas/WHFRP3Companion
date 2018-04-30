@@ -1,12 +1,13 @@
-package com.nicolas.whfrp3database
+package com.nicolas.whfrp3database.anko
 
 import android.content.Context
 import com.nicolas.models.player.Player
 import com.nicolas.models.player.playerLinked.skill.SkillType
 import com.nicolas.models.player.playerLinked.talent.TalentCooldown
-import com.nicolas.whfrp3database.daos.player.PlayerDao
-import com.nicolas.whfrp3database.staticData.loadSkills
-import com.nicolas.whfrp3database.staticData.loadTalents
+import com.nicolas.whfrp3database.PlayerRepository
+import com.nicolas.whfrp3database.anko.daos.player.PlayerDao
+import com.nicolas.whfrp3database.loadSkills
+import com.nicolas.whfrp3database.loadTalents
 
 class PlayerFacade(context: Context) : PlayerRepository {
     private val playerDao = PlayerDao(context.database)

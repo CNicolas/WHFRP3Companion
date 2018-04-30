@@ -25,7 +25,7 @@ import com.nicolas.whfrp3companion.shared.activities.DiceRollerActivity
 import com.nicolas.whfrp3companion.shared.adapters.AbstractSkillsExpandableAdapter
 import com.nicolas.whfrp3companion.shared.bind
 import com.nicolas.whfrp3companion.shared.enums.labelId
-import com.nicolas.whfrp3database.PlayerFacade
+import com.nicolas.whfrp3database.anko.PlayerFacade
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.intentFor
 

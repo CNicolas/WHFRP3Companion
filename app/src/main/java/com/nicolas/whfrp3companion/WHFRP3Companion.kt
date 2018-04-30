@@ -2,8 +2,8 @@ package com.nicolas.whfrp3companion
 
 import android.app.Application
 import android.content.Context
-import com.nicolas.whfrp3database.PlayerFacade
 import com.nicolas.whfrp3database.PlayerRepository
+import com.nicolas.whfrp3database.anko.PlayerFacade
 import org.koin.android.ext.android.startKoin
 import org.koin.dsl.module.applicationContext
 

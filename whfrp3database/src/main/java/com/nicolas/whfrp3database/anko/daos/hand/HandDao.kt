@@ -1,12 +1,12 @@
-package com.nicolas.whfrp3database.daos.hand
+package com.nicolas.whfrp3database.anko.daos.hand
 
 import android.database.Cursor
 import com.nicolas.models.hand.Hand
-import com.nicolas.whfrp3database.DatabaseOpenHelper
-import com.nicolas.whfrp3database.daos.AbstractNameKeyDao
-import com.nicolas.whfrp3database.tables.HAND_TABLE_NAME
-import com.nicolas.whfrp3database.tables.parsers.HandParser
-import com.nicolas.whfrp3database.tables.parsers.toColumns
+import com.nicolas.whfrp3database.anko.DatabaseOpenHelper
+import com.nicolas.whfrp3database.anko.daos.AbstractNameKeyDao
+import com.nicolas.whfrp3database.anko.tables.HAND_TABLE_NAME
+import com.nicolas.whfrp3database.anko.tables.parsers.HandParser
+import com.nicolas.whfrp3database.anko.tables.parsers.toColumns
 import org.jetbrains.anko.db.parseList
 import org.jetbrains.anko.db.parseOpt
 
