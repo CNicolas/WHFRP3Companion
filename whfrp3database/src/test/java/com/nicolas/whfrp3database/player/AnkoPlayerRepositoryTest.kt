@@ -12,12 +12,12 @@ import org.robolectric.annotation.Config
 
 @RunWith(RobolectricTestRunner::class)
 @Config(constants = BuildConfig::class, manifest = Config.NONE, assetDir = "src/test/assets")
-class PlayerFacadeTest : AbstractPlayerFacadeTest() {
+class AnkoPlayerRepositoryTest : AbstractAnkoPlayerRepositoryTest() {
     @Test
     fun should_add_a_simple_player() {
         val playerName = "PlayerName"
 
-        val player = playerFacade.add(Player(playerName))
+        val player = ankoPlayerRepository.add(Player(playerName))
         assertThat(player.name).isEqualTo(playerName)
     }
 
@@ -25,10 +25,10 @@ class PlayerFacadeTest : AbstractPlayerFacadeTest() {
     fun should_find_an_added_simple_player() {
         val playerName = "PlayerName"
 
-        val player = playerFacade.add(Player(playerName))
+        val player = ankoPlayerRepository.add(Player(playerName))
         assertThat(player.name).isEqualTo(playerName)
 
-        val foundPlayer = playerFacade.find(playerName)
+        val foundPlayer = ankoPlayerRepository.find(playerName)
         assertThat(foundPlayer).isNotNull()
         assertThat(foundPlayer!!.name).isEqualTo(playerName)
 
@@ -39,13 +39,13 @@ class PlayerFacadeTest : AbstractPlayerFacadeTest() {
     fun should_update_an_added_simple_player() {
         val playerName = "PlayerName"
 
-        val player = playerFacade.add(Player(playerName))
+        val player = ankoPlayerRepository.add(Player(playerName))
         assertThat(player.name).isEqualTo(playerName)
 
         player.careerName = "Soldier"
         player.toughness = CharacteristicValue(4, 1)
 
-        val updatedPlayer = playerFacade.update(player)
+        val updatedPlayer = ankoPlayerRepository.update(player)
         assertThat(updatedPlayer.name).isEqualTo(playerName)
         assertThat(updatedPlayer.careerName).isEqualTo("Soldier")
         assertThat(updatedPlayer.toughness.value).isEqualTo(4)
@@ -55,13 +55,13 @@ class PlayerFacadeTest : AbstractPlayerFacadeTest() {
 
     @Test
     fun should_update_name_of_player() {
-        val player = playerFacade.add(Player("John", items = listOf(GenericItem(name = "Rope"))))
+        val player = ankoPlayerRepository.add(Player("John", items = listOf(GenericItem(name = "Rope"))))
         assertThat(player.name).isEqualTo("John")
         assertThat(player.items.size).isEqualTo(1)
 
         player.name = "Jack"
 
-        val updatedPlayer = playerFacade.update(player)
+        val updatedPlayer = ankoPlayerRepository.update(player)
         assertThat(player.name).isEqualTo("Jack")
         assertThat(player.items.size).isEqualTo(1)
 
@@ -69,7 +69,7 @@ class PlayerFacadeTest : AbstractPlayerFacadeTest() {
         assertThat(updatedPlayer).isEqualToComparingFieldByField(player)
         assertThat(updatedPlayer.items.size).isEqualTo(1)
 
-        val allPlayers = playerFacade.findAll()
+        val allPlayers = ankoPlayerRepository.findAll()
         assertThat(allPlayers.size).isEqualTo(1)
     }
 }

@@ -1,17 +1,17 @@
 package com.nicolas.whfrp3database.player
 
-import com.nicolas.whfrp3database.anko.PlayerFacade
+import com.nicolas.whfrp3database.anko.AnkoPlayerRepository
 import com.nicolas.whfrp3database.anko.database
 import org.junit.After
 import org.junit.Before
 import org.robolectric.RuntimeEnvironment
 
-abstract class AbstractPlayerFacadeTest {
-    protected lateinit var playerFacade: PlayerFacade
+abstract class AbstractAnkoPlayerRepositoryTest {
+    protected lateinit var ankoPlayerRepository: AnkoPlayerRepository
 
     @Before
     fun setUp() {
-        playerFacade = PlayerFacade(RuntimeEnvironment.application)
+        ankoPlayerRepository = AnkoPlayerRepository(RuntimeEnvironment.application)
     }
 
     @After

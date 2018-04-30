@@ -6,7 +6,7 @@ import android.support.v4.content.ContextCompat
 import android.widget.TextView
 import com.nicolas.models.player.Player
 import com.nicolas.whfrp3companion.R
-import com.nicolas.whfrp3database.anko.PlayerFacade
+import com.nicolas.whfrp3database.anko.AnkoPlayerRepository
 import org.adw.library.widgets.discreteseekbar.DiscreteSeekBar
 import org.jetbrains.anko.doAsync
 import java.lang.Math.abs
@@ -14,7 +14,7 @@ import java.lang.Math.abs
 class StanceChangeListener(context: Context,
                            private val player: Player,
                            private val currentStanceView: TextView) : DiscreteSeekBar.OnProgressChangeListener {
-    private val playerFacade = PlayerFacade(context)
+    private val playerFacade = AnkoPlayerRepository(context)
 
     private val conservativeColor = ContextCompat.getColor(context, R.color.conservative)
     private val recklessColor = ContextCompat.getColor(context, R.color.reckless)

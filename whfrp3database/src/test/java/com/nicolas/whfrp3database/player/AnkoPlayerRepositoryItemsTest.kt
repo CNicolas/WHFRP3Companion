@@ -19,19 +19,19 @@ import org.robolectric.annotation.Config
 
 @RunWith(RobolectricTestRunner::class)
 @Config(constants = BuildConfig::class, manifest = Config.NONE, assetDir = "/src/test/assets")
-class PlayerFacadeItemsTest : AbstractPlayerFacadeTest() {
+class AnkoPlayerRepositoryItemsTest : AbstractAnkoPlayerRepositoryTest() {
     @Test
     fun should_update_items_of_a_player() {
         val playerName = "PlayerName"
 
-        val player = playerFacade.add(Player(playerName))
+        val player = ankoPlayerRepository.add(Player(playerName))
         assertThat(player.name).isEqualTo(playerName)
         assertThat(player.items).isEmpty()
         assertThat(player.encumbrance).isZero()
 
         player.addItem(Weapon(name = "Sword", damage = 4, isEquipped = true, encumbrance = 3))
 
-        val updatedPlayer = playerFacade.update(player)
+        val updatedPlayer = ankoPlayerRepository.update(player)
         assertThat(updatedPlayer.name).isEqualTo(playerName)
         assertThat(updatedPlayer.items).isNotEmpty
         assertThat(updatedPlayer.items.size).isEqualTo(1)
@@ -47,7 +47,7 @@ class PlayerFacadeItemsTest : AbstractPlayerFacadeTest() {
 
         player.addItem(Armor(name = "Plates armor", subType = PLATE, isEquipped = false, encumbrance = 3, soak = 4))
 
-        val updatedPlayer2 = playerFacade.update(player)
+        val updatedPlayer2 = ankoPlayerRepository.update(player)
         assertThat(updatedPlayer.name).isEqualTo(playerName)
         assertThat(updatedPlayer.items).isNotEmpty
         assertThat(updatedPlayer.items.size).isEqualTo(2)
@@ -73,7 +73,7 @@ class PlayerFacadeItemsTest : AbstractPlayerFacadeTest() {
 
     @Test
     fun should_update_field_of_item_of_a_player() {
-        val player = playerFacade.add(Player("John", items = listOf(GenericItem(name = "Rope"))))
+        val player = ankoPlayerRepository.add(Player("John", items = listOf(GenericItem(name = "Rope"))))
         assertThat(player.name).isEqualTo("John")
         assertThat(player.items.size).isEqualTo(1)
         assertThat(player.items[0] is GenericItem).isTrue()
@@ -83,7 +83,7 @@ class PlayerFacadeItemsTest : AbstractPlayerFacadeTest() {
 
         genericItem.quality = LOW
 
-        val updatedPlayer = playerFacade.update(player)
+        val updatedPlayer = ankoPlayerRepository.update(player)
         assertThat(updatedPlayer.name).isEqualTo("John")
         assertThat(updatedPlayer.items.size).isEqualTo(1)
         assertThat(updatedPlayer.items[0] is GenericItem).isTrue()
@@ -93,7 +93,7 @@ class PlayerFacadeItemsTest : AbstractPlayerFacadeTest() {
 
     @Test
     fun should_update_name_of_item_of_a_player() {
-        val player = playerFacade.add(
+        val player = ankoPlayerRepository.add(
                 Player("John", items = listOf(Armor(name = "Helmet", soak = 2, subType = HELMET, defense = 1)))
         )
         assertThat(player.name).isEqualTo("John")
@@ -107,7 +107,7 @@ class PlayerFacadeItemsTest : AbstractPlayerFacadeTest() {
 
         armor.name = "Shield"
 
-        val updatedPlayer = playerFacade.update(player)
+        val updatedPlayer = ankoPlayerRepository.update(player)
         assertThat(updatedPlayer.name).isEqualTo("John")
         assertThat(updatedPlayer.items.size).isEqualTo(1)
         assertThat(updatedPlayer.items[0] is Armor).isTrue()
@@ -121,25 +121,25 @@ class PlayerFacadeItemsTest : AbstractPlayerFacadeTest() {
 
     @Test
     fun should_delete_items_of_player_then_player() {
-        var player = playerFacade.add(Player("John", items = listOf(Weapon(name = "Sword", damage = 4, criticalLevel = 3))))
+        var player = ankoPlayerRepository.add(Player("John", items = listOf(Weapon(name = "Sword", damage = 4, criticalLevel = 3))))
         assertThat(player.items.size).isEqualTo(1)
 
         player.removeAllItems()
-        val updatedPlayer = playerFacade.update(player)
+        val updatedPlayer = ankoPlayerRepository.update(player)
         assertThat(updatedPlayer.items).isEmpty()
 
-        playerFacade.delete(player)
-        assertThat(playerFacade.findAll()).isEmpty()
+        ankoPlayerRepository.delete(player)
+        assertThat(ankoPlayerRepository.findAll()).isEmpty()
 
-        player = playerFacade.add(Player("John", items = listOf(Weapon(name = "Sword", damage = 4, criticalLevel = 3))))
+        player = ankoPlayerRepository.add(Player("John", items = listOf(Weapon(name = "Sword", damage = 4, criticalLevel = 3))))
         assertThat(player.items.size).isEqualTo(1)
-        playerFacade.delete("John")
-        assertThat(playerFacade.findAll()).isEmpty()
+        ankoPlayerRepository.delete("John")
+        assertThat(ankoPlayerRepository.findAll()).isEmpty()
     }
 
     @Test
     fun should_delete_an_item_of_player() {
-        val player = playerFacade.add(Player("John", items = listOf(Expandable(name = "Potion", uses = 1))))
+        val player = ankoPlayerRepository.add(Player("John", items = listOf(Expandable(name = "Potion", uses = 1))))
         assertThat(player.items.size).isEqualTo(1)
         assertThat(player.items[0] is Expandable).isTrue()
         assertThat(player.items[0].name).isEqualTo("Potion")
@@ -148,7 +148,7 @@ class PlayerFacadeItemsTest : AbstractPlayerFacadeTest() {
         player.removeItem(expandable)
         assertThat(player.items.size).isEqualTo(0)
 
-        playerFacade.update(player)
+        ankoPlayerRepository.update(player)
 
         assertThat(player.items.size).isEqualTo(0)
     }

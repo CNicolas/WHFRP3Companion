@@ -2,7 +2,7 @@ package com.nicolas.whfrp3database.hand
 
 import com.nicolas.models.hand.Hand
 import com.nicolas.whfrp3database.BuildConfig
-import com.nicolas.whfrp3database.anko.HandFacade
+import com.nicolas.whfrp3database.anko.AnkoHandRepository
 import com.nicolas.whfrp3database.anko.database
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.After
@@ -15,19 +15,19 @@ import org.robolectric.annotation.Config
 
 @RunWith(RobolectricTestRunner::class)
 @Config(constants = BuildConfig::class)
-class HandFacadeTest {
-    private lateinit var handFacade: HandFacade
+class AnkoHandRepositoryTest {
+    private lateinit var ankoHandRepository: AnkoHandRepository
 
     @Before
     fun setUp() {
-        handFacade = HandFacade(RuntimeEnvironment.application)
+        ankoHandRepository = AnkoHandRepository(RuntimeEnvironment.application)
     }
 
     @Test
     fun should_add_a_simple_hand() {
         val handName = "HandName"
 
-        val hand = handFacade.add(Hand(handName))
+        val hand = ankoHandRepository.add(Hand(handName))
         assertThat(hand.name).isEqualTo(handName)
     }
 
@@ -35,10 +35,10 @@ class HandFacadeTest {
     fun should_find_an_added_simple_hand() {
         val handName = "HandName"
 
-        val hand = handFacade.add(Hand(handName))
+        val hand = ankoHandRepository.add(Hand(handName))
         assertThat(hand.name).isEqualTo(handName)
 
-        val foundHand = handFacade.find(handName)
+        val foundHand = ankoHandRepository.find(handName)
         assertThat(foundHand).isNotNull()
         assertThat(foundHand!!.name).isEqualTo(handName)
 
@@ -49,13 +49,13 @@ class HandFacadeTest {
     fun should_update_an_added_simple_hand() {
         val handName = "HandName"
 
-        val hand = handFacade.add(Hand(handName))
+        val hand = ankoHandRepository.add(Hand(handName))
         assertThat(hand.name).isEqualTo(handName)
 
         hand.characteristicDicesCount = 3
         hand.challengeDicesCount = 1
 
-        val updatedHand = handFacade.update(hand)
+        val updatedHand = ankoHandRepository.update(hand)
         assertThat(updatedHand.name).isEqualTo(handName)
         assertThat(updatedHand.characteristicDicesCount).isEqualTo(3)
         assertThat(updatedHand.challengeDicesCount).isEqualTo(1)
@@ -64,16 +64,16 @@ class HandFacadeTest {
 
     @Test
     fun should_update_name_of_hand() {
-        val hand = handFacade.add(Hand("Hand1"))
+        val hand = ankoHandRepository.add(Hand("Hand1"))
         assertThat(hand.name).isEqualTo("Hand1")
 
         hand.name = "Hand2"
 
-        val updatedHand = handFacade.update(hand)
+        val updatedHand = ankoHandRepository.update(hand)
         assertThat(updatedHand.name).isEqualTo("Hand2")
         assertThat(updatedHand).isEqualToComparingFieldByField(hand)
 
-        val allHands = handFacade.findAll()
+        val allHands = ankoHandRepository.findAll()
         assertThat(allHands.size).isEqualTo(1)
     }
 
@@ -81,11 +81,11 @@ class HandFacadeTest {
     fun should_delete_a_hand() {
         val handName = "HandName"
 
-        val hand = handFacade.add(Hand(handName))
+        val hand = ankoHandRepository.add(Hand(handName))
         assertThat(hand.name).isEqualTo(handName)
 
-        handFacade.delete(hand)
-        assertThat(handFacade.findAll()).isEmpty()
+        ankoHandRepository.delete(hand)
+        assertThat(ankoHandRepository.findAll()).isEmpty()
     }
 
     @After

@@ -18,10 +18,11 @@ import com.nicolas.whfrp3companion.shared.HAND_INTENT_ARGUMENT
 import com.nicolas.whfrp3companion.shared.HAND_ROLL_COUNT_INTENT_ARGUMENT
 import com.nicolas.whfrp3companion.shared.bind
 import com.nicolas.whfrp3companion.shared.dialogs.RollResultDialog
-import com.nicolas.whfrp3database.anko.HandFacade
+import com.nicolas.whfrp3database.HandRepository
 import org.jetbrains.anko.alert
 import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.toast
+import org.koin.android.ext.android.inject
 
 class DiceRollerActivity : AppCompatActivity() {
     private val handNameView by bind<EditText>(R.id.hand_name)
@@ -36,7 +37,8 @@ class DiceRollerActivity : AppCompatActivity() {
 
     private lateinit var unbinder: Unbinder
 
-    private lateinit var handFacade: HandFacade
+    private val handRepository by inject<HandRepository>()
+
     private lateinit var hand: Hand
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -54,7 +56,6 @@ class DiceRollerActivity : AppCompatActivity() {
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
 
-        handFacade = HandFacade(this)
         setViewValues(hand)
     }
 
@@ -86,7 +87,7 @@ class DiceRollerActivity : AppCompatActivity() {
 
     @OnClick(R.id.load_hand)
     fun listHands() {
-        val allHands = handFacade.findAll()
+        val allHands = handRepository.findAll()
 
         if (allHands.isEmpty()) {
             toast(R.string.no_saved_hand)
@@ -95,7 +96,7 @@ class DiceRollerActivity : AppCompatActivity() {
                 title = getString(R.string.select_hand)
                 items(allHands.map { it.name },
                         { _, item, _ ->
-                            setViewValues(handFacade.find(item)!!)
+                            setViewValues(handRepository.find(item)!!)
                         }
                 )
             }.show()
@@ -120,11 +121,11 @@ class DiceRollerActivity : AppCompatActivity() {
     }
 
     private fun saveHand() {
-        handFacade.save(getHandFromPickers())
+        handRepository.save(getHandFromPickers())
     }
 
     private fun deleteHand() {
-        handFacade.delete(handNameView.text.toString())
+        handRepository.delete(handNameView.text.toString())
         reset()
     }
 

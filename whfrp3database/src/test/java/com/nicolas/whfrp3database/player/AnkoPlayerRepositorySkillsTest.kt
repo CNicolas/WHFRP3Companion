@@ -13,26 +13,26 @@ import org.robolectric.annotation.Config
 
 @RunWith(RobolectricTestRunner::class)
 @Config(constants = BuildConfig::class, manifest = Config.NONE, assetDir = "src/test/assets")
-class PlayerFacadeSkillsTest : AbstractPlayerFacadeTest() {
+class AnkoPlayerRepositorySkillsTest : AbstractAnkoPlayerRepositoryTest() {
 
     @Test
     fun should_add_advanced_skill_to_player() {
-        val player = playerFacade.add(Player("John"))
+        val player = ankoPlayerRepository.add(Player("John"))
         assertThat(player.name).isEqualTo("John")
         assertThat(player.skills.size).isEqualTo(18)
 
-        val advancedSkills = playerFacade.advancedSkills
+        val advancedSkills = ankoPlayerRepository.advancedSkills
         println(advancedSkills)
         assertThat(advancedSkills.map { it.type }.distinct()).isEqualTo(listOf(SkillType.ADVANCED))
         player.addSkill(advancedSkills[0])
 
-        val updatedPlayer = playerFacade.update(player)
+        val updatedPlayer = ankoPlayerRepository.update(player)
         assertThat(updatedPlayer.skills.size).isEqualTo(19)
     }
 
     @Test
     fun should_update_level_of_skill_of_a_player() {
-        val player = playerFacade.add(Player("John"))
+        val player = ankoPlayerRepository.add(Player("John"))
         assertThat(player.name).isEqualTo("John")
         assertThat(player.skills.size).isEqualTo(18)
 
@@ -44,7 +44,7 @@ class PlayerFacadeSkillsTest : AbstractPlayerFacadeTest() {
         fight.level = 2
         fight.getSpecializationByName("Armes d’Hast")?.isSpecialized = true
 
-        val updatedPlayer = playerFacade.update(player)
+        val updatedPlayer = ankoPlayerRepository.update(player)
         assertThat(updatedPlayer.name).isEqualTo("John")
         assertThat(updatedPlayer.skills.size).isEqualTo(18)
 
@@ -60,7 +60,7 @@ class PlayerFacadeSkillsTest : AbstractPlayerFacadeTest() {
 
     @Test
     fun should_get_skills_by_characteristic() {
-        val player = playerFacade.add(Player("John"))
+        val player = ankoPlayerRepository.add(Player("John"))
         val strengthSkills = player.getSkillsByCharacteristic(STRENGTH)
         val toughnessSkills = player.getSkillsByCharacteristic(TOUGHNESS)
         val agilitySkills = player.getSkillsByCharacteristic(AGILITY)
@@ -89,7 +89,7 @@ class PlayerFacadeSkillsTest : AbstractPlayerFacadeTest() {
 
     @Test
     fun should_map_skill_with_specializations() {
-        val specializationsBySkill = playerFacade.allSpecializations
+        val specializationsBySkill = ankoPlayerRepository.allSpecializations
         val shootingSkill = specializationsBySkill.keys.first { it.name == "Capacité de Tir" }
         val specializations = specializationsBySkill[shootingSkill]!!
 

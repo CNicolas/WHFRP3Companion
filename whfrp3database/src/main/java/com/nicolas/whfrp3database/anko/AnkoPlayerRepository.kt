@@ -9,7 +9,7 @@ import com.nicolas.whfrp3database.anko.daos.player.PlayerDao
 import com.nicolas.whfrp3database.loadSkills
 import com.nicolas.whfrp3database.loadTalents
 
-class PlayerFacade(context: Context) : PlayerRepository {
+class AnkoPlayerRepository(context: Context) : PlayerRepository {
     private val playerDao = PlayerDao(context.database)
 
     val skills = loadSkills(context)
