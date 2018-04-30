@@ -2,13 +2,14 @@
 
 buildscript {
     ext {
-        kotlin_version = '1.2.40'
+        kotlin_version = '1.2.41'
         android_support_version = '27.1.1'
         butterknife_version = '8.8.1'
         anko_version = '0.10.4'
         robolectric_version = '3.8'
         assertj_version = '3.9.1'
         testng_version = '6.13.1'
+        koin_version = '0.9.2'
     }
 
     repositories {
