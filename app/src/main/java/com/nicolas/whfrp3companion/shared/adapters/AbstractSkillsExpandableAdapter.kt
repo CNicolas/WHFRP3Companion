@@ -1,7 +1,7 @@
 package com.nicolas.whfrp3companion.shared.adapters
 
 import android.widget.BaseExpandableListAdapter
-import com.nicolas.whfrp3database.entities.player.playerLinked.skill.Skill
+import com.nicolas.models.player.playerLinked.skill.Skill
 
 abstract class AbstractSkillsExpandableAdapter(protected val skills: List<Skill>) : BaseExpandableListAdapter() {
     override fun getGroup(groupPosition: Int) = skills[groupPosition]

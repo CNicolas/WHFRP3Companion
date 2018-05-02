@@ -5,14 +5,14 @@ import android.widget.EditText
 import butterknife.ButterKnife
 import butterknife.OnClick
 import butterknife.Unbinder
+import com.nicolas.models.hand.Hand
+import com.nicolas.models.player.CharacteristicValue
+import com.nicolas.models.player.Player
 import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.shared.HAND_INTENT_ARGUMENT
 import com.nicolas.whfrp3companion.shared.activities.DiceRollerActivity
 import com.nicolas.whfrp3companion.shared.bind
 import com.nicolas.whfrp3companion.shared.intValue
-import com.nicolas.whfrp3database.entities.hand.Hand
-import com.nicolas.whfrp3database.entities.player.CharacteristicValue
-import com.nicolas.whfrp3database.entities.player.Player
 import org.jetbrains.anko.intentFor
 
 internal class PlayerCharacteristicsFragmentViewHolder(private val view: View) {

@@ -10,19 +10,20 @@ import butterknife.BindView
 import butterknife.ButterKnife
 import butterknife.OnClick
 import butterknife.Unbinder
+import com.nicolas.database.PlayerRepository
+import com.nicolas.models.extensions.getEquipmentByName
+import com.nicolas.models.extensions.removeItem
+import com.nicolas.models.player.Player
+import com.nicolas.models.player.playerLinked.item.Equipment
+import com.nicolas.models.player.playerLinked.item.Item
+import com.nicolas.models.player.playerLinked.item.enums.ItemType
 import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.shared.ITEM_EDIT_INTENT_ARGUMENT
 import com.nicolas.whfrp3companion.shared.PLAYER_NAME_INTENT_ARGUMENT
-import com.nicolas.whfrp3database.PlayerFacade
-import com.nicolas.whfrp3database.entities.player.Player
-import com.nicolas.whfrp3database.entities.player.playerLinked.item.Equipment
-import com.nicolas.whfrp3database.entities.player.playerLinked.item.Item
-import com.nicolas.whfrp3database.entities.player.playerLinked.item.enums.ItemType
-import com.nicolas.whfrp3database.extensions.getEquipmentByName
-import com.nicolas.whfrp3database.extensions.removeItem
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.uiThread
+import org.koin.android.ext.android.inject
 
 class PlayerInventoryFragment : Fragment() {
     @BindView(R.id.inventory)
@@ -30,7 +31,8 @@ class PlayerInventoryFragment : Fragment() {
 
     private lateinit var unbinder: Unbinder
 
-    private lateinit var playerFacade: PlayerFacade
+    private val playerRepository by inject<PlayerRepository>()
+
     private lateinit var playerName: String
     private lateinit var player: Player
 
@@ -42,7 +44,6 @@ class PlayerInventoryFragment : Fragment() {
         unbinder = ButterKnife.bind(this, resultingView)
 
         playerName = arguments!!.getString(PLAYER_NAME_INTENT_ARGUMENT)
-        playerFacade = PlayerFacade(context!!)
 
         getPlayerItems()
 
@@ -82,13 +83,13 @@ class PlayerInventoryFragment : Fragment() {
         }
 
         doAsync {
-            player = playerFacade.find(playerName)!!
+            player = playerRepository.find(playerName)!!
 
             val inventoryAdapter = PlayerInventoryExpandableAdapter(context!!, player)
             inventoryAdapter.addItemListener(object : ItemListener {
                 override fun onEquipment(equipment: Equipment, isEquipped: Boolean) {
                     player.getEquipmentByName(equipment.name)?.isEquipped = isEquipped
-                    playerFacade.update(player)
+                    playerRepository.update(player)
                 }
 
                 override fun onItemEditionDemand(item: Item) {
@@ -97,7 +98,7 @@ class PlayerInventoryFragment : Fragment() {
 
                 override fun onItemDeleted(item: Item) {
                     player.removeItem(item)
-                    playerFacade.update(player)
+                    playerRepository.update(player)
 
                     getPlayerItems()
                 }

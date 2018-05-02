@@ -12,6 +12,8 @@ import android.support.v7.widget.Toolbar
 import android.view.MenuItem
 import android.view.inputmethod.InputMethodManager
 import butterknife.ButterKnife
+import com.nicolas.database.PlayerRepository
+import com.nicolas.models.player.Player
 import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.fragments.EmptyFragment
 import com.nicolas.whfrp3companion.playersheet.characteristics.PlayerCharacteristicsFragment
@@ -21,21 +23,21 @@ import com.nicolas.whfrp3companion.playersheet.state.PlayerStateFragment
 import com.nicolas.whfrp3companion.shared.PLAYER_NAME_INTENT_ARGUMENT
 import com.nicolas.whfrp3companion.shared.bind
 import com.nicolas.whfrp3companion.shared.enums.labelId
-import com.nicolas.whfrp3database.PlayerFacade
-import com.nicolas.whfrp3database.entities.player.Player
+import org.koin.android.ext.android.inject
 
 class PlayerSheetActivity : AppCompatActivity() {
-    private lateinit var player: Player
-
     private val drawer by bind<DrawerLayout>(R.id.playersheet_drawer_layout)
-
     private lateinit var toggle: ActionBarDrawerToggle
+
+    private val playerRepository by inject<PlayerRepository>()
+
+    private lateinit var player: Player
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_playersheet)
 
-        player = PlayerFacade(this).find(intent.extras.getString(PLAYER_NAME_INTENT_ARGUMENT))!!
+        player = playerRepository.find(intent.extras.getString(PLAYER_NAME_INTENT_ARGUMENT))!!
         title = "${player.name} - ${getString(player.race.labelId)}"
 
         ButterKnife.bind(this)

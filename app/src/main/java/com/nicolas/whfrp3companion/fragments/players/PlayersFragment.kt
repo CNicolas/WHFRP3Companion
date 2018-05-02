@@ -9,17 +9,18 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import butterknife.*
+import com.nicolas.database.PlayerRepository
+import com.nicolas.models.player.Player
+import com.nicolas.models.player.enums.Race
 import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.playersheet.PlayerSheetActivity
 import com.nicolas.whfrp3companion.shared.PLAYER_NAME_INTENT_ARGUMENT
 import com.nicolas.whfrp3companion.shared.enums.labelId
-import com.nicolas.whfrp3database.PlayerFacade
-import com.nicolas.whfrp3database.entities.player.Player
-import com.nicolas.whfrp3database.entities.player.enums.Race
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.toast
 import org.jetbrains.anko.uiThread
+import org.koin.android.ext.android.inject
 
 class PlayersFragment : Fragment() {
     @BindView(R.id.list_players)
@@ -27,7 +28,8 @@ class PlayersFragment : Fragment() {
 
     private lateinit var unbinder: Unbinder
 
-    private lateinit var playerFacade: PlayerFacade
+    private val playerRepository by inject<PlayerRepository>()
+
     private lateinit var players: List<Player>
 
     override fun onCreateView(inflater: LayoutInflater,
@@ -37,7 +39,6 @@ class PlayersFragment : Fragment() {
         val resultingView: View = inflater.inflate(R.layout.fragment_players, container, false)
 
         unbinder = ButterKnife.bind(this, resultingView)
-        playerFacade = PlayerFacade(context!!)
 
         updatePlayers()
 
@@ -66,7 +67,7 @@ class PlayersFragment : Fragment() {
         playerPopupMenu.setOnMenuItemClickListener {
             when (it.itemId) {
                 R.id.delete_player -> {
-                    playerFacade.deletePlayer(player)
+                    playerRepository.delete(player)
                     updatePlayers()
                 }
             }
@@ -92,7 +93,7 @@ class PlayersFragment : Fragment() {
         builder.setNegativeButton(android.R.string.cancel, { dialog, _ -> dialog.dismiss() })
         builder.setPositiveButton(android.R.string.ok, { dialog, _ ->
             if (playerNameView.text.trim() != "") {
-                playerFacade.add(Player(name = playerNameView.text.toString(), race = Race[raceView.selectedItemPosition]))
+                playerRepository.add(Player(name = playerNameView.text.toString(), race = Race[raceView.selectedItemPosition]))
                 updatePlayers()
                 dialog.dismiss()
             } else {
@@ -105,7 +106,7 @@ class PlayersFragment : Fragment() {
 
     private fun updatePlayers() {
         doAsync {
-            players = playerFacade.findAll()
+            players = playerRepository.findAll()
             uiThread {
                 playersListView.adapter = PlayersAdapter(context!!, players)
             }
