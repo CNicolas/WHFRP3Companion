@@ -8,11 +8,11 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.TextView
 import butterknife.ButterKnife
+import com.nicolas.models.player.playerLinked.talent.TalentType
 import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.shared.bind
 import com.nicolas.whfrp3companion.shared.enums.colorId
 import com.nicolas.whfrp3companion.shared.enums.labelId
-import com.nicolas.whfrp3database.entities.player.playerLinked.talent.TalentType
 
 class TalentTypesAdapter(context: Context) : BaseAdapter() {
     private val inflater = LayoutInflater.from(context)

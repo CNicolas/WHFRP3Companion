@@ -11,13 +11,13 @@ import android.widget.Spinner
 import butterknife.BindView
 import butterknife.ButterKnife
 import butterknife.Unbinder
+import com.nicolas.models.player.playerLinked.talent.TalentCooldown
+import com.nicolas.models.player.playerLinked.talent.TalentType
 import com.nicolas.playersheet.dtos.TalentSearch
 import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.shared.TALENTS_SEARCH_INTENT_ARGUMENT
 import com.nicolas.whfrp3companion.shared.activities.TalentsActivity
 import com.nicolas.whfrp3companion.shared.enums.labelId
-import com.nicolas.whfrp3database.entities.player.playerLinked.talent.TalentCooldown
-import com.nicolas.whfrp3database.entities.player.playerLinked.talent.TalentType
 import org.jetbrains.anko.intentFor
 
 class TalentSearchDialog : DialogFragment() {

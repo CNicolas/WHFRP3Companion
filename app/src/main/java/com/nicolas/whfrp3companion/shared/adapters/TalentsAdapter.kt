@@ -7,9 +7,9 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.TextView
 import butterknife.ButterKnife
+import com.nicolas.models.player.playerLinked.talent.Talent
 import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.shared.bind
-import com.nicolas.whfrp3database.entities.player.playerLinked.talent.Talent
 
 class TalentsAdapter(context: Context, private val talents: List<Talent>) : BaseAdapter() {
     private val inflater = LayoutInflater.from(context)

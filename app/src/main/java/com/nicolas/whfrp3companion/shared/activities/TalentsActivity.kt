@@ -6,14 +6,14 @@ import android.support.v7.widget.Toolbar
 import android.widget.ListView
 import butterknife.ButterKnife
 import butterknife.Unbinder
+import com.nicolas.database.loadTalents
+import com.nicolas.models.player.playerLinked.talent.Talent
 import com.nicolas.playersheet.dtos.TalentSearch
 import com.nicolas.playersheet.extensions.findTalents
 import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.shared.TALENTS_SEARCH_INTENT_ARGUMENT
 import com.nicolas.whfrp3companion.shared.adapters.TalentsAdapter
 import com.nicolas.whfrp3companion.shared.bind
-import com.nicolas.whfrp3database.entities.player.playerLinked.talent.Talent
-import com.nicolas.whfrp3database.staticData.loadTalents
 import org.jetbrains.anko.longToast
 
 class TalentsActivity : AppCompatActivity() {

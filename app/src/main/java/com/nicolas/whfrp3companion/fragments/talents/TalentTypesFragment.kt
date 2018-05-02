@@ -7,13 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ListView
 import butterknife.*
+import com.nicolas.models.player.playerLinked.talent.TalentType
 import com.nicolas.playersheet.dtos.TalentSearch
 import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.shared.DIALOG_TALENT_TYPE_TAG
 import com.nicolas.whfrp3companion.shared.TALENTS_SEARCH_INTENT_ARGUMENT
 import com.nicolas.whfrp3companion.shared.activities.TalentsActivity
 import com.nicolas.whfrp3companion.shared.dialogs.TalentSearchDialog
-import com.nicolas.whfrp3database.entities.player.playerLinked.talent.TalentType
 import org.jetbrains.anko.intentFor
 
 class TalentTypesFragment : Fragment() {
