@@ -2,8 +2,9 @@ package com.nicolas.whfrp3companion.shared.activities
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.Toolbar
-import android.widget.ListView
 import butterknife.ButterKnife
 import butterknife.Unbinder
 import com.nicolas.database.loadTalents
@@ -17,7 +18,7 @@ import com.nicolas.whfrp3companion.shared.bind
 import org.jetbrains.anko.longToast
 
 class TalentsActivity : AppCompatActivity() {
-    private val talentsListView by bind<ListView>(R.id.talents)
+    private val talentsListView by bind<RecyclerView>(R.id.talents)
 
     private lateinit var unbinder: Unbinder
 
@@ -32,8 +33,9 @@ class TalentsActivity : AppCompatActivity() {
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
 
-        allTalents = loadTalents(this)
+        talentsListView.layoutManager = LinearLayoutManager(this)
 
+        allTalents = loadTalents(this)
         if (intent?.extras !== null) {
             val talentSearch = intent.extras.getSerializable(TALENTS_SEARCH_INTENT_ARGUMENT) as TalentSearch
             talentsListView.adapter = TalentsAdapter(this, applySearch(talentSearch))
