@@ -13,6 +13,7 @@ import com.nicolas.models.player.playerLinked.talent.Talent
 import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.shared.bind
 import com.nicolas.whfrp3companion.shared.enums.colorId
+import com.nicolas.whfrp3companion.shared.enums.labelId
 import org.jetbrains.anko.toast
 
 class TalentsAdapter(context: Context, private val talents: List<Talent>) : RecyclerView.Adapter<TalentsAdapter.ViewHolder>() {
@@ -31,7 +32,10 @@ class TalentsAdapter(context: Context, private val talents: List<Talent>) : Recy
     override fun getItemCount(): Int = talents.size
 
     class ViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
+        private val typeView by view.bind<TextView>(R.id.talent_type)
         private val nameView by view.bind<TextView>(R.id.talent_name)
+        private val descriptionView by view.bind<TextView>(R.id.talent_description)
+
         private lateinit var talent: Talent
 
         init {
@@ -41,10 +45,15 @@ class TalentsAdapter(context: Context, private val talents: List<Talent>) : Recy
         fun setupViews(talent: Talent) {
             this.talent = talent
 
-            nameView.text = talent.name
+            val talentTypeColor = ContextCompat.getColor(view.context, talent.type.colorId)
 
-            val talentTypeColor = ContextCompat.getColor(nameView.context, talent.type.colorId)
+            typeView.setText(talent.type.labelId)
+            typeView.setBackgroundColor(talentTypeColor)
+
+            nameView.text = talent.name
             nameView.setTextColor(talentTypeColor)
+
+            descriptionView.text = talent.description
         }
 
         @OnClick(R.id.talent_name)

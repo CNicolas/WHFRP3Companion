@@ -13,8 +13,13 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:scrollbars="vertical"
+                                            android:scrollbarStyle="outsideOverlay"
                                             android:layout_marginTop="?attr/actionBarSize"
-                                            android:layout_marginBottom="@dimen/giant_padding_2"
+                                            android:layout_marginRight="@dimen/small_padding"
+                                            android:layout_marginLeft="@dimen/small_padding"
+                                            android:paddingTop="@dimen/medium_padding"
+                                            android:paddingBottom="@dimen/giant_padding_2"
+                                            android:clipToPadding="false"
                                             tools:listitem="@layout/list_element_talent" />
 
     <android.support.design.widget.FloatingActionButton android:id="@+id/search"
