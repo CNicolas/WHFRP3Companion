@@ -14,6 +14,7 @@ import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.shared.bind
 import com.nicolas.whfrp3companion.shared.enums.colorId
 import com.nicolas.whfrp3companion.shared.enums.labelId
+import com.nicolas.whfrp3companion.shared.viewModifications.parseTemplatedText
 import org.jetbrains.anko.toast
 
 class TalentsAdapter(context: Context, private val talents: List<Talent>) : RecyclerView.Adapter<TalentsAdapter.ViewHolder>() {
@@ -53,7 +54,7 @@ class TalentsAdapter(context: Context, private val talents: List<Talent>) : Recy
             nameView.text = talent.name
             nameView.setTextColor(talentTypeColor)
 
-            descriptionView.text = talent.description
+            descriptionView.text = parseTemplatedText(view.context, talent.description)
         }
 
         @OnClick(R.id.talent_name)
