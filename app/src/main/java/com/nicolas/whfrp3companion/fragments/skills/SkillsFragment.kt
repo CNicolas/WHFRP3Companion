@@ -5,17 +5,13 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ExpandableListView
-import butterknife.BindView
 import butterknife.ButterKnife
 import butterknife.Unbinder
 import com.nicolas.database.loadSkills
 import com.nicolas.whfrp3companion.R
+import kotlinx.android.synthetic.main.fragment_skills.*
 
 class SkillsFragment : Fragment() {
-    @BindView(R.id.skills_list)
-    lateinit var skillsView: ExpandableListView
-
     private lateinit var unbinder: Unbinder
 
     override fun onCreateView(inflater: LayoutInflater,
@@ -26,8 +22,9 @@ class SkillsFragment : Fragment() {
         unbinder = ButterKnife.bind(this, resultingView)
 
         val skills = loadSkills(context!!)
+
         val skillsAdapter = SkillsExpandableAdapter(context!!, skills)
-        skillsView.setAdapter(skillsAdapter)
+        skillsList.setAdapter(skillsAdapter)
 
         return resultingView
     }
