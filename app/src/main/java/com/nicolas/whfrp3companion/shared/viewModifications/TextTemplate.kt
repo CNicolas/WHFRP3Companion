@@ -10,16 +10,19 @@ import android.text.style.ImageSpan
 fun parseTemplatedText(context: Context, text: String): SpannableString {
     val imagedText = SpannableString(text)
 
-    val regex = Regex("\\{[A-Z_]+}")
+    val regex = Regex("\\{([A-Z_]+)\\}")
     val matched = regex.findAll(text)
-    matched.mapNotNull { it.groups[0] }
+    matched.mapNotNull { it.groups }
             .forEach {
-                val icon = TextIcon.valueOf(it.value)
+                val matchGroupToReplace = it[0]!!
+                val enumName = it[1]!!.value
+
+                val icon = TextIcon.valueOf(enumName)
                 val drawable = ContextCompat.getDrawable(context, icon.drawableId)
                 if (drawable != null) {
                     imagedText.putImageBetweenPositions(drawable,
-                            it.range.start,
-                            it.range.endInclusive + 1,
+                            matchGroupToReplace.range.start,
+                            matchGroupToReplace.range.endInclusive + 1,
                             icon.alignment)
                 }
             }
