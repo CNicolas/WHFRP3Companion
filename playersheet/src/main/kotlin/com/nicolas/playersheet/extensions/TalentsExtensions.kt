@@ -11,12 +11,12 @@ fun List<Talent>.findTalents(text: String? = null,
                              type: TalentType? = null): List<Talent> {
     var filteredTalents = toList()
 
-    if (cooldown != null) {
-        filteredTalents = findByCooldown(cooldown)
+    if (type != null) {
+        filteredTalents = filteredTalents.findByType(type)
     }
 
-    if (type != null) {
-        filteredTalents = findByType(type)
+    if (cooldown != null) {
+        filteredTalents = filteredTalents.findByCooldown(cooldown)
     }
 
     if (text != null) {

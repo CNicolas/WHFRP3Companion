@@ -25,6 +25,5 @@ fun Player.equipTalent(talent: Talent): List<Talent> {
     return getEquippedTalents()
 }
 
-
 fun List<Talent>.findByType(talentType: TalentType) =
         filter { it.type == talentType }
