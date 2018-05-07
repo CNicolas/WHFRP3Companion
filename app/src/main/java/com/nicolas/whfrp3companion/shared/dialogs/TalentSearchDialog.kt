@@ -30,11 +30,15 @@ class TalentSearchDialog : DialogFragment() {
 
     private lateinit var unbinder: Unbinder
 
+    private var talentSearch: TalentSearch? = null
+
     @SuppressLint("InflateParams")
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val builder = AlertDialog.Builder(activity)
         val inflater = activity!!.layoutInflater
         val view = inflater.inflate(R.layout.dialog_talent_search, null, false)
+
+        talentSearch = arguments!!.getSerializable(TALENTS_SEARCH_INTENT_ARGUMENT) as TalentSearch?
 
         builder.setView(view)
         builder.setTitle(R.string.search)
@@ -56,6 +60,16 @@ class TalentSearchDialog : DialogFragment() {
         talentTypeSpinner.adapter = ArrayAdapter(context, R.layout.element_enum_spinner, talentTypes)
         cooldownSpinner.adapter = ArrayAdapter(context, R.layout.element_enum_spinner, talentCooldowns)
 
+        val talentTypePosition = talentSearch?.talentType?.ordinal
+        if (talentTypePosition != null) {
+            talentTypeSpinner.setSelection(talentTypePosition + 1)
+        }
+        val talentCooldownPosition = talentSearch?.cooldown?.ordinal
+        if (talentCooldownPosition != null) {
+            cooldownSpinner.setSelection(talentCooldownPosition + 1)
+        }
+        searchEditText.setText(talentSearch?.text)
+
         return dialog
     }
 
@@ -74,5 +88,19 @@ class TalentSearchDialog : DialogFragment() {
                 text = searchEditText.text.toString(),
                 talentType = talentType,
                 cooldown = talentCooldown)
+    }
+
+    companion object {
+        fun newInstance(talentSearch: TalentSearch? = null): TalentSearchDialog {
+            val args = Bundle()
+            if (talentSearch != null) {
+                args.putSerializable(TALENTS_SEARCH_INTENT_ARGUMENT, talentSearch)
+            }
+
+            val fragment = TalentSearchDialog()
+            fragment.arguments = args
+
+            return fragment
+        }
     }
 }

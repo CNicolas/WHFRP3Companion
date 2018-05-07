@@ -51,7 +51,7 @@ class TalentTypesFragment : Fragment() {
 
     @OnClick(R.id.search)
     fun openTalentSearchDialog() {
-        val talentSearchDialog = TalentSearchDialog()
+        val talentSearchDialog = TalentSearchDialog.newInstance()
         talentSearchDialog.show(activity?.supportFragmentManager, DIALOG_TALENT_TYPE_TAG)
     }
 
