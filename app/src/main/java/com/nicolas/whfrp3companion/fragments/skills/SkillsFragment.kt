@@ -10,6 +10,8 @@ import butterknife.Unbinder
 import com.nicolas.database.loadSkills
 import com.nicolas.whfrp3companion.R
 import kotlinx.android.synthetic.main.fragment_skills.*
+import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.uiThread
 
 class SkillsFragment : Fragment() {
     private lateinit var unbinder: Unbinder
@@ -21,11 +23,15 @@ class SkillsFragment : Fragment() {
 
         unbinder = ButterKnife.bind(this, resultingView)
 
-        val skills = loadSkills(context!!)
+        doAsync {
+            val skills = loadSkills(context!!)
 
-        val skillsAdapter = SkillsExpandableAdapter(context!!, skills)
-        skillsList.setAdapter(skillsAdapter)
-
+            uiThread {
+                val skillsAdapter = SkillsExpandableAdapter(context!!, skills)
+                skillsList.setAdapter(skillsAdapter)
+            }
+        }
+        
         return resultingView
     }
 

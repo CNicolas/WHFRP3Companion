@@ -5,22 +5,18 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ExpandableListView
-import butterknife.BindView
 import butterknife.ButterKnife
 import butterknife.Unbinder
 import com.nicolas.database.PlayerRepository
 import com.nicolas.models.player.Player
 import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.shared.PLAYER_NAME_INTENT_ARGUMENT
+import kotlinx.android.synthetic.main.fragment_skills.*
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 import org.koin.android.ext.android.inject
 
 class PlayerSkillsFragment : Fragment() {
-    @BindView(R.id.skills_list)
-    lateinit var skillsView: ExpandableListView
-
     private lateinit var unbinder: Unbinder
 
     private val playerRepository by inject<PlayerRepository>()
@@ -41,8 +37,8 @@ class PlayerSkillsFragment : Fragment() {
 
             uiThread {
                 val skillsAdapter = PlayerSkillsExpandableAdapter(context!!, player)
-                skillsView.setAdapter(skillsAdapter)
-                skillsView.setGroupIndicator(null)
+                skillsList.setAdapter(skillsAdapter)
+                skillsList.setGroupIndicator(null)
             }
         }
 
