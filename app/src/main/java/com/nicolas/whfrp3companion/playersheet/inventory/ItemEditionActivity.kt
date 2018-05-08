@@ -3,10 +3,7 @@ package com.nicolas.whfrp3companion.playersheet.inventory
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
-import android.view.View
 import android.widget.ArrayAdapter
-import android.widget.EditText
-import android.widget.NumberPicker
 import android.widget.Spinner
 import butterknife.ButterKnife
 import butterknife.OnClick
@@ -22,37 +19,19 @@ import com.nicolas.models.player.playerLinked.item.enums.ItemType.*
 import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.shared.ITEM_EDIT_INTENT_ARGUMENT
 import com.nicolas.whfrp3companion.shared.PLAYER_NAME_INTENT_ARGUMENT
-import com.nicolas.whfrp3companion.shared.bind
 import com.nicolas.whfrp3companion.shared.enums.labelId
 import com.nicolas.whfrp3companion.shared.viewModifications.hide
 import com.nicolas.whfrp3companion.shared.viewModifications.intValue
 import com.nicolas.whfrp3companion.shared.viewModifications.show
+import kotlinx.android.synthetic.main.content_item_edition.*
+import kotlinx.android.synthetic.main.part_armor_edition.*
+import kotlinx.android.synthetic.main.part_expandable_edition.*
+import kotlinx.android.synthetic.main.part_weapon_edition.*
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 import org.koin.android.ext.android.inject
 
 class ItemEditionActivity : AppCompatActivity() {
-    private val itemNameEditText by bind<EditText>(R.id.item_name)
-    private val itemTypeView by bind<Spinner>(R.id.item_type)
-    private val encumbranceEditText by bind<EditText>(R.id.encumbrance)
-    private val quantityEditText by bind<EditText>(R.id.quantity)
-    private val qualitySpinner by bind<Spinner>(R.id.quality)
-    private val descriptionEditText by bind<EditText>(R.id.description)
-
-    private val armorLayout by bind<View>(R.id.armor_layout)
-    private val armorTypeSpinner by bind<Spinner>(R.id.armor_type)
-    private val defenseNumberPicker by bind<NumberPicker>(R.id.defense)
-    private val soakNumberPicker by bind<NumberPicker>(R.id.soak)
-
-    private val expandableLayout by bind<View>(R.id.expandable_layout)
-    private val usesNumberPicker by bind<NumberPicker>(R.id.uses)
-
-    private val weaponLayout by bind<View>(R.id.weapon_layout)
-    private val weaponTypeSpinner by bind<Spinner>(R.id.weapon_type)
-    private val weaponRangeSpinner by bind<Spinner>(R.id.range)
-    private val damageNumberPicker by bind<NumberPicker>(R.id.damage)
-    private val criticalLevelNumberPicker by bind<NumberPicker>(R.id.critical_level)
-
     private lateinit var unbinder: Unbinder
 
     private val playerRepository by inject<PlayerRepository>()
@@ -72,14 +51,14 @@ class ItemEditionActivity : AppCompatActivity() {
         }
         item = intent.extras.getSerializable(ITEM_EDIT_INTENT_ARGUMENT) as Item?
 
-        itemTypeView.adapter = ArrayAdapter(this, R.layout.element_enum_spinner, values().map { getString(it.labelId) })
+        itemTypeSpinner.adapter = ArrayAdapter(this, R.layout.element_enum_spinner, values().map { getString(it.labelId) })
         qualitySpinner.adapter = ArrayAdapter(this, R.layout.element_enum_spinner, Quality.values().map { getString(it.labelId) })
         armorTypeSpinner.adapter = ArrayAdapter(this, R.layout.element_enum_spinner, ArmorType.values().map { getString(it.labelId) })
         weaponTypeSpinner.adapter = ArrayAdapter(this, R.layout.element_enum_spinner, WeaponType.values().map { getString(it.labelId) })
         weaponRangeSpinner.adapter = ArrayAdapter(this, R.layout.element_enum_spinner, Range.values().map { getString(it.labelId) })
 
         if (item == null) {
-            itemTypeView.setSelection(ItemType.GENERIC_ITEM.ordinal)
+            itemTypeSpinner.setSelection(ItemType.GENERIC_ITEM.ordinal)
             qualitySpinner.setSelection(Quality.NORMAL.ordinal)
             armorTypeSpinner.setSelection(ArmorType.LEATHER.ordinal)
             weaponTypeSpinner.setSelection(WeaponType.SWORD.ordinal)
@@ -97,7 +76,7 @@ class ItemEditionActivity : AppCompatActivity() {
         unbinder.unbind()
     }
 
-    @OnItemSelected(R.id.item_type)
+    @OnItemSelected(R.id.itemTypeSpinner)
     fun selectItemType(spinner: Spinner, position: Int) {
         when (ItemType[position]) {
             ARMOR -> showArmorViews()
@@ -125,7 +104,7 @@ class ItemEditionActivity : AppCompatActivity() {
 
     private fun fillViewsWithItem(item: Item) {
         itemNameEditText.setText(item.name)
-        itemTypeView.setSelection(item.type.ordinal)
+        itemTypeSpinner.setSelection(item.type.ordinal)
         quantityEditText.setText(item.quantity.toString())
         encumbranceEditText.setText(item.encumbrance.toString())
         qualitySpinner.setSelection(item.quality.ordinal)
@@ -158,7 +137,7 @@ class ItemEditionActivity : AppCompatActivity() {
     }
 
     private fun createItemFromViews(): Item {
-        return when (ItemType[itemTypeView.selectedItemPosition]) {
+        return when (ItemType[itemTypeSpinner.selectedItemPosition]) {
             ARMOR -> Armor(
                     name = itemNameEditText.text.toString(),
                     description = descriptionEditText.text.toString(),
