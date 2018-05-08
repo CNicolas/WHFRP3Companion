@@ -51,7 +51,7 @@ class PlayersFragment : Fragment() {
         unbinder.unbind()
     }
 
-    @OnItemClick(R.id.list_players)
+    @OnItemClick(R.id.playersList)
     fun onPlayerClick(position: Int) {
         if (activity != null) {
             startActivity(activity!!.intentFor<PlayerSheetActivity>(
@@ -60,7 +60,7 @@ class PlayersFragment : Fragment() {
         }
     }
 
-    @OnItemLongClick(R.id.list_players)
+    @OnItemLongClick(R.id.playersList)
     fun onPlayerLongClick(view: View, position: Int): Boolean {
         val player = players[position]
         val playerPopupMenu = PopupMenu(activity!!, view, Gravity.END)
