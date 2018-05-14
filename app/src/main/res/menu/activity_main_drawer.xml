@@ -15,8 +15,7 @@
 
         <item android:id="@+id/nav_talents"
               android:icon="@drawable/ic_talents_black"
-              android:title="@string/page_talents"
-              android:enabled="false" />
+              android:title="@string/page_talents" />
 
         <item android:id="@+id/nav_careers"
               android:icon="@drawable/ic_work_black"

@@ -20,8 +20,13 @@ import com.nicolas.models.player.playerLinked.item.*
 import com.nicolas.models.player.playerLinked.item.enums.*
 import com.nicolas.models.player.playerLinked.item.enums.ItemType.*
 import com.nicolas.whfrp3companion.R
-import com.nicolas.whfrp3companion.shared.*
+import com.nicolas.whfrp3companion.shared.ITEM_EDIT_INTENT_ARGUMENT
+import com.nicolas.whfrp3companion.shared.PLAYER_NAME_INTENT_ARGUMENT
+import com.nicolas.whfrp3companion.shared.bind
 import com.nicolas.whfrp3companion.shared.enums.labelId
+import com.nicolas.whfrp3companion.shared.viewModifications.hide
+import com.nicolas.whfrp3companion.shared.viewModifications.intValue
+import com.nicolas.whfrp3companion.shared.viewModifications.show
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 import org.koin.android.ext.android.inject

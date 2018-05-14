@@ -27,8 +27,8 @@ import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.shared.bind
 import com.nicolas.whfrp3companion.shared.enums.labelId
 import com.nicolas.whfrp3companion.shared.enums.pluralLabelId
-import com.nicolas.whfrp3companion.shared.hide
-import com.nicolas.whfrp3companion.shared.show
+import com.nicolas.whfrp3companion.shared.viewModifications.hide
+import com.nicolas.whfrp3companion.shared.viewModifications.show
 
 class PlayerInventoryExpandableAdapter(private val context: Context,
                                        private val player: Player) : BaseExpandableListAdapter() {

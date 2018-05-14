@@ -1,4 +1,4 @@
-package com.nicolas.whfrp3companion.shared
+package com.nicolas.whfrp3companion.shared.viewModifications
 
 import android.view.View
 import android.view.View.GONE

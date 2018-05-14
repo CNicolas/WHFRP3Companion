@@ -3,7 +3,7 @@
     "type": "AFFINITY",
     "cooldown": "PASSIVE",
     "name": "Accord Aéthérique",
-    "description": "Vous bénéficiez d'un {MISFORTUNE_DICE} supplémentaire à l'occasion de vos tests de Focalisation, Piété, Observation, Folklore, Éducation et Intuition si la magie y jour un rôle."
+    "description": "Vous bénéficiez d'un {FORTUNE_DICE} supplémentaire à l'occasion de vos tests de Focalisation, Piété, Observation, Folklore, Éducation et Intuition si la magie y jour un rôle."
   },
   {
     "type": "AFFINITY",

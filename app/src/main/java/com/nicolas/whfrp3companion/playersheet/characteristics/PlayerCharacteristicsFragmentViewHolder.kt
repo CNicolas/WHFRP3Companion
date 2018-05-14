@@ -12,7 +12,7 @@ import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.shared.HAND_INTENT_ARGUMENT
 import com.nicolas.whfrp3companion.shared.activities.DiceRollerActivity
 import com.nicolas.whfrp3companion.shared.bind
-import com.nicolas.whfrp3companion.shared.intValue
+import com.nicolas.whfrp3companion.shared.viewModifications.intValue
 import org.jetbrains.anko.intentFor
 
 internal class PlayerCharacteristicsFragmentViewHolder(private val view: View) {
