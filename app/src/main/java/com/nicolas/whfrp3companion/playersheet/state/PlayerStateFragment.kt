@@ -8,11 +8,7 @@ import android.support.v4.content.ContextCompat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ListView
 import android.widget.NumberPicker
-import android.widget.TextView
-import butterknife.BindView
 import butterknife.ButterKnife
 import butterknife.OnClick
 import butterknife.Unbinder
@@ -22,6 +18,7 @@ import com.nicolas.models.player.Player
 import com.nicolas.playersheet.extensions.*
 import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.shared.PLAYER_NAME_INTENT_ARGUMENT
+import kotlinx.android.synthetic.main.fragment_player_state.*
 import org.adw.library.widgets.discreteseekbar.DiscreteSeekBar
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.toast
@@ -29,46 +26,6 @@ import org.koin.android.ext.android.inject
 import kotlin.math.abs
 
 class PlayerStateFragment : Fragment() {
-    @BindView(R.id.remove_wound)
-    lateinit var removeWoundView: Button
-    @BindView(R.id.wounds)
-    lateinit var woundsView: TextView
-
-    @BindView(R.id.remove_stress)
-    lateinit var removeStressView: Button
-    @BindView(R.id.stress)
-    lateinit var stressView: TextView
-
-    @BindView(R.id.remove_exhaustion)
-    lateinit var removeExhaustionView: Button
-    @BindView(R.id.exhaustion)
-    lateinit var exhaustionView: TextView
-
-    @BindView(R.id.current_stance)
-    lateinit var currentStanceView: TextView
-    @BindView(R.id.stance)
-    lateinit var stanceView: DiscreteSeekBar
-
-    @BindView(R.id.defense)
-    lateinit var defenseView: TextView
-    @BindView(R.id.soak)
-    lateinit var soakView: TextView
-
-    @BindView(R.id.weapons)
-    lateinit var weaponsListView: ListView
-
-    @BindView(R.id.encumbrance_bar)
-    lateinit var encumbranceBarView: DiscreteSeekBar
-    @BindView(R.id.encumbrance_label)
-    lateinit var encumbranceLabel: TextView
-
-    @BindView(R.id.gold)
-    lateinit var goldView: TextView
-    @BindView(R.id.silver)
-    lateinit var silverView: TextView
-    @BindView(R.id.brass)
-    lateinit var brassView: TextView
-
     private lateinit var unbinder: Unbinder
 
     private val playerRepository by inject<PlayerRepository>()
@@ -85,19 +42,19 @@ class PlayerStateFragment : Fragment() {
         val playerName = arguments!!.getString(PLAYER_NAME_INTENT_ARGUMENT)
         player = playerRepository.find(playerName)!!
 
-        removeWoundView.isEnabled = player.wounds > 0
+        removeWoundButton.isEnabled = player.wounds > 0
         updateWoundsText()
 
-        removeStressView.isEnabled = player.stress > 0
+        removeStressButton.isEnabled = player.stress > 0
         updateStressText()
 
-        removeExhaustionView.isEnabled = player.exhaustion > 0
+        removeExhaustionButton.isEnabled = player.exhaustion > 0
         updateExhaustionText()
 
         setupStance()
 
-        defenseView.text = "${player.defense}"
-        soakView.text = "${player.soak}"
+        defenseTextView.text = "${player.defense}"
+        soakTextView.text = "${player.soak}"
 
         weaponsListView.adapter = WeaponsAdapter(context!!, player.getEquippedWeapons())
 
@@ -113,10 +70,10 @@ class PlayerStateFragment : Fragment() {
         unbinder.unbind()
     }
 
-    @OnClick(R.id.remove_wound)
+    @OnClick(R.id.removeWoundButton)
     fun removeWound() {
         player.heal(1)
-        removeWoundView.isEnabled = player.wounds > 0
+        removeWoundButton.isEnabled = player.wounds > 0
 
         updateWoundsText()
 
@@ -126,17 +83,17 @@ class PlayerStateFragment : Fragment() {
     @OnClick(R.id.add_wound)
     fun addWound() {
         player.loseHealth(1)
-        removeWoundView.isEnabled = true
+        removeWoundButton.isEnabled = true
 
         updateWoundsText()
 
         updatePlayerAsync()
     }
 
-    @OnClick(R.id.remove_stress)
+    @OnClick(R.id.removeStressButton)
     fun removeStress() {
         player.removeStress(1)
-        removeStressView.isEnabled = player.stress > 0
+        removeStressButton.isEnabled = player.stress > 0
 
         updateStressText()
 
@@ -146,17 +103,17 @@ class PlayerStateFragment : Fragment() {
     @OnClick(R.id.add_stress)
     fun addStress() {
         player.addStress(1)
-        removeStressView.isEnabled = true
+        removeStressButton.isEnabled = true
 
         updateStressText()
 
         updatePlayerAsync()
     }
 
-    @OnClick(R.id.remove_exhaustion)
+    @OnClick(R.id.removeExhaustionButton)
     fun removeExhaustion() {
         player.removeExhaustion(1)
-        removeExhaustionView.isEnabled = player.exhaustion > 0
+        removeExhaustionButton.isEnabled = player.exhaustion > 0
 
         updateExhaustionText()
 
@@ -166,7 +123,7 @@ class PlayerStateFragment : Fragment() {
     @OnClick(R.id.add_exhaustion)
     fun addExhaustion() {
         player.addExhaustion(1)
-        removeExhaustionView.isEnabled = true
+        removeExhaustionButton.isEnabled = true
 
         updateExhaustionText()
 
@@ -209,32 +166,32 @@ class PlayerStateFragment : Fragment() {
     }
 
     private fun updateWoundsText() {
-        woundsView.text = "${player.wounds} / ${player.maxWounds}"
+        woundsTextView.text = "${player.wounds} / ${player.maxWounds}"
     }
 
     private fun updateStressText() {
-        stressView.text = "${player.stress}"
+        stressTextView.text = "${player.stress}"
     }
 
     private fun updateExhaustionText() {
-        exhaustionView.text = "${player.exhaustion}"
+        exhaustionTextView.text = "${player.exhaustion}"
     }
 
     private fun setupStance() {
-        stanceView.min = -player.maxConservative
-        stanceView.max = player.maxReckless
-        stanceView.setOnProgressChangeListener(StanceChangeListener(context!!, player, currentStanceView))
-        stanceView.progress = player.stance
-        stanceView.numericTransformer = object : DiscreteSeekBar.NumericTransformer() {
+        stanceBar.min = -player.maxConservative
+        stanceBar.max = player.maxReckless
+        stanceBar.setOnProgressChangeListener(StanceChangeListener(context!!, player, currentStanceTextView))
+        stanceBar.progress = player.stance
+        stanceBar.numericTransformer = object : DiscreteSeekBar.NumericTransformer() {
             override fun transform(value: Int): Int = abs(value)
         }
     }
 
     private fun setupEncumbrance() {
-        encumbranceBarView.min = 0
-        encumbranceBarView.max = player.maxEncumbrance
-        encumbranceBarView.progress = player.encumbrance
-        encumbranceBarView.isEnabled = false
+        encumbranceBar.min = 0
+        encumbranceBar.max = player.maxEncumbrance
+        encumbranceBar.progress = player.encumbrance
+        encumbranceBar.isEnabled = false
 
         val colorId = when {
             player.encumbrance < player.encumbranceOverload -> R.color.conservative
@@ -243,16 +200,16 @@ class PlayerStateFragment : Fragment() {
         }
         val color = ContextCompat.getColor(context!!, colorId)
         val colorStateList = ColorStateList.valueOf(color)
-        encumbranceBarView.setScrubberColor(colorStateList)
+        encumbranceBar.setScrubberColor(colorStateList)
 
-        encumbranceLabel.text = "${player.encumbrance} / ${player.maxEncumbrance}"
-        encumbranceLabel.setTextColor(colorStateList)
+        encumbranceTextView.text = "${player.encumbrance} / ${player.maxEncumbrance}"
+        encumbranceTextView.setTextColor(colorStateList)
     }
 
     private fun setupMoney() {
-        goldView.text = "${player.gold}"
-        silverView.text = "${player.silver}"
-        brassView.text = "${player.brass}"
+        goldTextView.text = "${player.gold}"
+        silverTextView.text = "${player.silver}"
+        brassTextView.text = "${player.brass}"
     }
 
     private fun updatePlayerAsync() {
