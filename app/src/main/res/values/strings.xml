@@ -69,6 +69,8 @@
     <string name="armor_robe">Robe</string>
     <string name="armor_shield">Shield</string>
 
+    <string name="weapon_axe">Axe</string>
+    <string name="weapon_two_handed_axe">Two handed axe</string>
     <string name="weapon_dagger">Dagger</string>
     <string name="weapon_flail">Flail</string>
     <string name="weapon_halberd">Halberd</string>
@@ -96,6 +98,17 @@
     <string name="range_long">Long</string>
     <string name="range_extreme">Extreme</string>
 
+    <string name="affinity">Affinity</string>
+    <string name="faith">Faith</string>
+    <string name="order">Order</string>
+    <string name="reputation">Reputation</string>
+    <string name="tactics">Tactics</string>
+    <string name="trick">Trick</string>
+
+    <string name="cooldown_passive">Passive</string>
+    <string name="cooldown_talent">Talent</string>
+    <string name="cooldown_session">Session</string>
+
     <string name="create_player">Create a player</string>
     <string name="delete_player">Delete</string>
     <string name="results">Results</string>
@@ -110,6 +123,9 @@
     <string name="equip_item">Equip</string>
     <string name="unequip_item">Unequip</string>
 
+    <string name="no_saved_hand">No saved hand</string>
+    <string name="search">Search</string>
+
     <string name="rolls_count_format">%d rolls</string>
     <string name="successful_rolls_with_percentage_format">%1$d successful rolls (%2$s%%)</string>
     <string name="average_face_count_per_roll">%s per rolls</string>
@@ -119,10 +135,14 @@
     <string name="statistics_average_result_hint">0 / roll</string>
     <string name="hand_name_hint">Hand name</string>
 
+    <string name="cooldown">Cooldown</string>
+    <string name="talent_type">Talent type</string>
+    <string name="talent_name">Talent name</string>
+    <string name="skill">Skill</string>
     <string name="player_name">Player name</string>
     <string name="race">Race</string>
-    <string name="career">Career</string>
     <string name="rank">Rank</string>
+    <string name="career">Career</string>
     <string name="age">Age</string>
     <string name="size">Size</string>
     <string name="description">Description</string>
@@ -144,7 +164,7 @@
     <string name="soak">Soak</string>
     <string name="defense">Defense</string>
     <string name="uses">Uses</string>
-
+    <string name="all">All</string>
     <string name="slash" translatable="false">/</string>
     <string name="hyphen" translatable="false">-</string>
     <string name="plus" translatable="false">+</string>

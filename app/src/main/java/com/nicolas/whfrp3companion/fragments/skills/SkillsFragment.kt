@@ -9,8 +9,8 @@ import android.widget.ExpandableListView
 import butterknife.BindView
 import butterknife.ButterKnife
 import butterknife.Unbinder
+import com.nicolas.database.loadSkills
 import com.nicolas.whfrp3companion.R
-import com.nicolas.whfrp3database.staticData.loadSkills
 
 class SkillsFragment : Fragment() {
     @BindView(R.id.skills_list)

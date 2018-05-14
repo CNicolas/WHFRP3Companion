@@ -11,6 +11,14 @@ import android.widget.ImageButton
 import android.widget.TextView
 import butterknife.ButterKnife
 import butterknife.OnClick
+import com.nicolas.database.anko.AnkoPlayerRepository
+import com.nicolas.models.extensions.getSkillByName
+import com.nicolas.models.extensions.getSpecializationByName
+import com.nicolas.models.player.Player
+import com.nicolas.models.player.playerLinked.skill.Skill
+import com.nicolas.models.player.playerLinked.skill.SkillType.ADVANCED
+import com.nicolas.models.player.playerLinked.skill.SkillType.BASIC
+import com.nicolas.models.player.playerLinked.skill.Specialization
 import com.nicolas.playersheet.extensions.createHand
 import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.shared.HAND_INTENT_ARGUMENT
@@ -18,14 +26,6 @@ import com.nicolas.whfrp3companion.shared.activities.DiceRollerActivity
 import com.nicolas.whfrp3companion.shared.adapters.AbstractSkillsExpandableAdapter
 import com.nicolas.whfrp3companion.shared.bind
 import com.nicolas.whfrp3companion.shared.enums.labelId
-import com.nicolas.whfrp3database.PlayerFacade
-import com.nicolas.whfrp3database.entities.player.Player
-import com.nicolas.whfrp3database.entities.player.playerLinked.skill.Skill
-import com.nicolas.whfrp3database.entities.player.playerLinked.skill.SkillType.ADVANCED
-import com.nicolas.whfrp3database.entities.player.playerLinked.skill.SkillType.BASIC
-import com.nicolas.whfrp3database.entities.player.playerLinked.skill.Specialization
-import com.nicolas.whfrp3database.extensions.getSkillByName
-import com.nicolas.whfrp3database.extensions.getSpecializationByName
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.intentFor
 
@@ -33,7 +33,7 @@ class PlayerSkillsExpandableAdapter(private val context: Context,
                                     private val player: Player) : AbstractSkillsExpandableAdapter(player.skills) {
     private val inflater = LayoutInflater.from(context)
 
-    private val playerFacade: PlayerFacade = PlayerFacade(context)
+    private val ankoPlayerRepository: AnkoPlayerRepository = AnkoPlayerRepository(context)
 
     @SuppressLint("InflateParams")
     override fun getGroupView(groupPosition: Int,
@@ -45,7 +45,7 @@ class PlayerSkillsExpandableAdapter(private val context: Context,
         val skill = getGroup(groupPosition)
 
         holder.player = player
-        holder.playerFacade = playerFacade
+        holder.ankoPlayerRepository = ankoPlayerRepository
         holder.skill = skill
 
         holder.skillNameView.text = skill.name
@@ -72,7 +72,7 @@ class PlayerSkillsExpandableAdapter(private val context: Context,
         val specialization = getChild(groupPosition, childPosition)
 
         holder.player = player
-        holder.playerFacade = playerFacade
+        holder.ankoPlayerRepository = ankoPlayerRepository
         holder.skill = getGroup(groupPosition)
         holder.specialization = specialization
 
@@ -119,7 +119,7 @@ class PlayerSkillsExpandableAdapter(private val context: Context,
         private val launchSpecializationView by view.bind<ImageButton>(R.id.launch_specialization)
 
         internal var player: Player? = null
-        internal var playerFacade: PlayerFacade? = null
+        internal var ankoPlayerRepository: AnkoPlayerRepository? = null
 
         lateinit var skill: Skill
         lateinit var specialization: Specialization
@@ -138,7 +138,7 @@ class PlayerSkillsExpandableAdapter(private val context: Context,
                     player?.getSkillByName(skill.name)
                             ?.getSpecializationByName(specialization.name)
                             ?.isSpecialized = specialization.isSpecialized
-                    playerFacade?.update(player!!)
+                    ankoPlayerRepository?.update(player!!)
                 }
             }
         }
@@ -168,7 +168,7 @@ class PlayerSkillsExpandableAdapter(private val context: Context,
         private val launchSkillView by view.bind<ImageButton>(R.id.launch_skill)
 
         internal var player: Player? = null
-        internal var playerFacade: PlayerFacade? = null
+        internal var ankoPlayerRepository: AnkoPlayerRepository? = null
 
         lateinit var skill: Skill
 
@@ -212,7 +212,7 @@ class PlayerSkillsExpandableAdapter(private val context: Context,
             doAsync {
                 if (player != null) {
                     player?.getSkillByName(skill.name)?.level = skill.level
-                    playerFacade?.update(player!!)
+                    ankoPlayerRepository?.update(player!!)
                 }
             }
         }

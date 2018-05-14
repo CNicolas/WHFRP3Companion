@@ -12,18 +12,24 @@ import butterknife.ButterKnife
 import butterknife.OnClick
 import butterknife.OnItemSelected
 import butterknife.Unbinder
+import com.nicolas.database.PlayerRepository
+import com.nicolas.models.extensions.addItem
+import com.nicolas.models.extensions.removeItem
+import com.nicolas.models.player.Player
+import com.nicolas.models.player.playerLinked.item.*
+import com.nicolas.models.player.playerLinked.item.enums.*
+import com.nicolas.models.player.playerLinked.item.enums.ItemType.*
 import com.nicolas.whfrp3companion.R
-import com.nicolas.whfrp3companion.shared.*
+import com.nicolas.whfrp3companion.shared.ITEM_EDIT_INTENT_ARGUMENT
+import com.nicolas.whfrp3companion.shared.PLAYER_NAME_INTENT_ARGUMENT
+import com.nicolas.whfrp3companion.shared.bind
 import com.nicolas.whfrp3companion.shared.enums.labelId
-import com.nicolas.whfrp3database.PlayerFacade
-import com.nicolas.whfrp3database.entities.player.Player
-import com.nicolas.whfrp3database.entities.player.playerLinked.item.*
-import com.nicolas.whfrp3database.entities.player.playerLinked.item.enums.*
-import com.nicolas.whfrp3database.entities.player.playerLinked.item.enums.ItemType.*
-import com.nicolas.whfrp3database.extensions.addItem
-import com.nicolas.whfrp3database.extensions.removeItem
+import com.nicolas.whfrp3companion.shared.viewModifications.hide
+import com.nicolas.whfrp3companion.shared.viewModifications.intValue
+import com.nicolas.whfrp3companion.shared.viewModifications.show
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
+import org.koin.android.ext.android.inject
 
 class ItemEditionActivity : AppCompatActivity() {
     private val itemNameEditText by bind<EditText>(R.id.item_name)
@@ -49,21 +55,20 @@ class ItemEditionActivity : AppCompatActivity() {
 
     private lateinit var unbinder: Unbinder
 
-    private lateinit var playerFacade: PlayerFacade
+    private val playerRepository by inject<PlayerRepository>()
 
     private lateinit var player: Player
     private var item: Item? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_add_item)
+        setContentView(R.layout.activity_item_edition)
 
         unbinder = ButterKnife.bind(this)
 
         val playerName = intent.extras.getString(PLAYER_NAME_INTENT_ARGUMENT)
-        playerFacade = PlayerFacade(this)
         doAsync {
-            player = playerFacade.find(playerName)!!
+            player = playerRepository.find(playerName)!!
         }
         item = intent.extras.getSerializable(ITEM_EDIT_INTENT_ARGUMENT) as Item?
 
@@ -110,7 +115,7 @@ class ItemEditionActivity : AppCompatActivity() {
             }
 
             player.addItem(createItemFromViews())
-            player = playerFacade.update(player)
+            player = playerRepository.update(player)
 
             uiThread {
                 finish()

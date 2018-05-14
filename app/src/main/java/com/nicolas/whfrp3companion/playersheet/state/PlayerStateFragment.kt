@@ -1,27 +1,31 @@
 package com.nicolas.whfrp3companion.playersheet.state
 
 import android.app.AlertDialog
+import android.content.res.ColorStateList
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v4.content.ContextCompat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ListView
 import android.widget.NumberPicker
-import android.widget.SeekBar
 import android.widget.TextView
 import butterknife.BindView
 import butterknife.ButterKnife
 import butterknife.OnClick
 import butterknife.Unbinder
+import com.nicolas.database.PlayerRepository
+import com.nicolas.models.extensions.getEquippedWeapons
+import com.nicolas.models.player.Player
 import com.nicolas.playersheet.extensions.*
 import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.shared.PLAYER_NAME_INTENT_ARGUMENT
-import com.nicolas.whfrp3database.PlayerFacade
-import com.nicolas.whfrp3database.entities.player.Player
 import org.adw.library.widgets.discreteseekbar.DiscreteSeekBar
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.toast
+import org.koin.android.ext.android.inject
 import kotlin.math.abs
 
 class PlayerStateFragment : Fragment() {
@@ -50,8 +54,11 @@ class PlayerStateFragment : Fragment() {
     @BindView(R.id.soak)
     lateinit var soakView: TextView
 
+    @BindView(R.id.weapons)
+    lateinit var weaponsListView: ListView
+
     @BindView(R.id.encumbrance_bar)
-    lateinit var encumbranceBarView: SeekBar
+    lateinit var encumbranceBarView: DiscreteSeekBar
     @BindView(R.id.encumbrance_label)
     lateinit var encumbranceLabel: TextView
 
@@ -64,7 +71,8 @@ class PlayerStateFragment : Fragment() {
 
     private lateinit var unbinder: Unbinder
 
-    private lateinit var playerFacade: PlayerFacade
+    private val playerRepository by inject<PlayerRepository>()
+
     private lateinit var player: Player
 
     override fun onCreateView(inflater: LayoutInflater,
@@ -75,9 +83,7 @@ class PlayerStateFragment : Fragment() {
         unbinder = ButterKnife.bind(this, resultingView)
 
         val playerName = arguments!!.getString(PLAYER_NAME_INTENT_ARGUMENT)
-
-        playerFacade = PlayerFacade(context!!)
-        player = playerFacade.find(playerName)!!
+        player = playerRepository.find(playerName)!!
 
         removeWoundView.isEnabled = player.wounds > 0
         updateWoundsText()
@@ -93,10 +99,9 @@ class PlayerStateFragment : Fragment() {
         defenseView.text = "${player.defense}"
         soakView.text = "${player.soak}"
 
-        encumbranceBarView.max = player.maxEncumbrance
-        encumbranceBarView.progress = player.encumbrance
-        encumbranceBarView.isEnabled = false
-        encumbranceLabel.text = "${player.encumbrance} / ${player.maxEncumbrance}"
+        weaponsListView.adapter = WeaponsAdapter(context!!, player.getEquippedWeapons())
+
+        setupEncumbrance()
 
         setupMoney()
 
@@ -225,6 +230,25 @@ class PlayerStateFragment : Fragment() {
         }
     }
 
+    private fun setupEncumbrance() {
+        encumbranceBarView.min = 0
+        encumbranceBarView.max = player.maxEncumbrance
+        encumbranceBarView.progress = player.encumbrance
+        encumbranceBarView.isEnabled = false
+
+        val colorId = when {
+            player.encumbrance < player.encumbranceOverload -> R.color.conservative
+            player.encumbrance < player.maxEncumbrance -> R.color.orange
+            else -> R.color.reckless
+        }
+        val color = ContextCompat.getColor(context!!, colorId)
+        val colorStateList = ColorStateList.valueOf(color)
+        encumbranceBarView.setScrubberColor(colorStateList)
+
+        encumbranceLabel.text = "${player.encumbrance} / ${player.maxEncumbrance}"
+        encumbranceLabel.setTextColor(colorStateList)
+    }
+
     private fun setupMoney() {
         goldView.text = "${player.gold}"
         silverView.text = "${player.silver}"
@@ -233,7 +257,7 @@ class PlayerStateFragment : Fragment() {
 
     private fun updatePlayerAsync() {
         doAsync {
-            playerFacade.update(player)
+            playerRepository.update(player)
         }
     }
 

@@ -17,18 +17,18 @@ import android.widget.TextView
 import butterknife.ButterKnife
 import butterknife.OnClick
 import butterknife.OnLongClick
+import com.nicolas.models.extensions.getItemsOfType
+import com.nicolas.models.player.Player
+import com.nicolas.models.player.playerLinked.item.*
+import com.nicolas.models.player.playerLinked.item.enums.ItemType
+import com.nicolas.models.player.playerLinked.item.enums.ItemType.*
+import com.nicolas.models.player.playerLinked.item.enums.Quality.*
 import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.shared.bind
+import com.nicolas.whfrp3companion.shared.enums.labelId
 import com.nicolas.whfrp3companion.shared.enums.pluralLabelId
-import com.nicolas.whfrp3companion.shared.hide
-import com.nicolas.whfrp3companion.shared.show
-import com.nicolas.whfrp3database.entities.player.Player
-import com.nicolas.whfrp3database.entities.player.playerLinked.item.*
-import com.nicolas.whfrp3database.entities.player.playerLinked.item.enums.ItemType
-import com.nicolas.whfrp3database.entities.player.playerLinked.item.enums.ItemType.*
-import com.nicolas.whfrp3database.entities.player.playerLinked.item.enums.Quality.*
-import com.nicolas.whfrp3database.extensions.getItemsOfType
-import org.jetbrains.anko.longToast
+import com.nicolas.whfrp3companion.shared.viewModifications.hide
+import com.nicolas.whfrp3companion.shared.viewModifications.show
 
 class PlayerInventoryExpandableAdapter(private val context: Context,
                                        private val player: Player) : BaseExpandableListAdapter() {
@@ -125,6 +125,7 @@ class PlayerInventoryExpandableAdapter(private val context: Context,
         private val equippedImageView by view.bind<ImageView>(R.id.equipped)
         private val itemNameTextView by view.bind<TextView>(R.id.item_name)
         private val quantityTextView by view.bind<TextView>(R.id.quantity)
+        private val encumbranceTextView by view.bind<TextView>(R.id.encumbrance)
 
         private val defenseTextView by view.bind<TextView>(R.id.defense)
         private val soakTextView by view.bind<TextView>(R.id.soak)
@@ -153,6 +154,7 @@ class PlayerInventoryExpandableAdapter(private val context: Context,
 
             itemNameTextView.text = item.name
             quantityTextView.text = item.quantity.toString()
+            encumbranceTextView.text = "${item.encumbrance}  (${item.encumbrance * item.quantity})"
 
             when (item.quality) {
                 LOW -> itemNameTextView.setTextColor(ContextCompat.getColor(itemNameTextView.context, R.color.colorSecondaryText))
@@ -169,34 +171,20 @@ class PlayerInventoryExpandableAdapter(private val context: Context,
             }
         }
 
-        @OnClick(R.id.item_name)
-        fun selectItem(view: View) {
-            view.context.longToast(item.toString())
+        @OnClick(R.id.inventory_item_layout)
+        fun selectItem() {
+            if (item is Equipment) {
+                changeEquipmentStatus()
+            }
         }
 
-        @OnLongClick(R.id.item_name)
+        @OnLongClick(R.id.inventory_item_layout)
         fun openItemMenu(view: View): Boolean {
             val itemPopupMenu = PopupMenu(view.context, view, Gravity.END)
-            if (item is Equipment) {
-                if ((item as Equipment).isEquipped) {
-                    itemPopupMenu.menuInflater.inflate(R.menu.inventory_equipment_equipped, itemPopupMenu.menu)
-                } else {
-                    itemPopupMenu.menuInflater.inflate(R.menu.inventory_equipment_unequipped, itemPopupMenu.menu)
-                }
-            } else {
-                itemPopupMenu.menuInflater.inflate(R.menu.inventory_item, itemPopupMenu.menu)
-            }
+            itemPopupMenu.menuInflater.inflate(R.menu.inventory_item, itemPopupMenu.menu)
 
             itemPopupMenu.setOnMenuItemClickListener {
                 when (it.itemId) {
-                    R.id.equip_item -> {
-                        itemListeners.notifyEquipment(item as Equipment, true)
-                        showEquippedImage(true)
-                    }
-                    R.id.unequip_item -> {
-                        itemListeners.notifyEquipment(item as Equipment, false)
-                        showEquippedImage(false)
-                    }
                     R.id.edit_item -> {
                         itemListeners.notifyEditionDemand(item)
                     }
@@ -233,12 +221,16 @@ class PlayerInventoryExpandableAdapter(private val context: Context,
             armorViews.hide()
             expandableViews.show()
             weaponViews.hide()
+
+            showEquippedImage(false)
         }
 
         private fun showGenericItemViews() {
             armorViews.hide()
             expandableViews.hide()
             weaponViews.hide()
+
+            showEquippedImage(false)
         }
 
         private fun showWeaponViews() {
@@ -246,7 +238,7 @@ class PlayerInventoryExpandableAdapter(private val context: Context,
 
             damageTextView.text = weapon.damage.toString()
             criticalLevelTextView.text = weapon.criticalLevel.toString()
-            rangeTextView.text = weapon.range.toString()
+            rangeTextView.setText(weapon.range.labelId)
 
             armorViews.hide()
             expandableViews.hide()
@@ -261,6 +253,14 @@ class PlayerInventoryExpandableAdapter(private val context: Context,
         } else {
             itemNameTextView.typeface = null
             equippedImageView.visibility = INVISIBLE
+        }
+
+        private fun changeEquipmentStatus(isEquipped: Boolean? = null) {
+            val equipment = item as Equipment
+            equipment.isEquipped = isEquipped ?: !equipment.isEquipped
+
+            itemListeners.notifyEquipment(equipment, equipment.isEquipped)
+            showEquippedImage(equipment.isEquipped)
         }
     }
 }

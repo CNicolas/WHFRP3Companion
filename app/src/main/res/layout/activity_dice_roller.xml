@@ -11,11 +11,11 @@
 
     <include layout="@layout/content_dice_roller" />
 
-    <android.support.design.widget.FloatingActionButton android:id="@+id/fab_list_hands"
+    <android.support.design.widget.FloatingActionButton android:id="@+id/fab_save_hand"
                                                         android:layout_width="wrap_content"
                                                         android:layout_height="wrap_content"
                                                         android:layout_gravity="bottom|end"
                                                         android:layout_margin="@dimen/fab_margin"
-                                                        app:srcCompat="@drawable/ic_file_upload_white" />
+                                                        app:srcCompat="@drawable/ic_save_white" />
 
 </android.support.design.widget.CoordinatorLayout>

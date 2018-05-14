@@ -10,17 +10,19 @@ import android.widget.NumberPicker
 import butterknife.ButterKnife
 import butterknife.OnClick
 import butterknife.Unbinder
+import com.nicolas.database.HandRepository
 import com.nicolas.diceroller.roll.roll
+import com.nicolas.models.hand.Hand
 import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.shared.DIALOG_ROLL_RESULT_TAG
 import com.nicolas.whfrp3companion.shared.HAND_INTENT_ARGUMENT
 import com.nicolas.whfrp3companion.shared.HAND_ROLL_COUNT_INTENT_ARGUMENT
 import com.nicolas.whfrp3companion.shared.bind
 import com.nicolas.whfrp3companion.shared.dialogs.RollResultDialog
-import com.nicolas.whfrp3database.HandFacade
-import com.nicolas.whfrp3database.entities.hand.Hand
 import org.jetbrains.anko.alert
 import org.jetbrains.anko.intentFor
+import org.jetbrains.anko.toast
+import org.koin.android.ext.android.inject
 
 class DiceRollerActivity : AppCompatActivity() {
     private val handNameView by bind<EditText>(R.id.hand_name)
@@ -35,7 +37,8 @@ class DiceRollerActivity : AppCompatActivity() {
 
     private lateinit var unbinder: Unbinder
 
-    private lateinit var handFacade: HandFacade
+    private val handRepository by inject<HandRepository>()
+
     private lateinit var hand: Hand
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -53,7 +56,6 @@ class DiceRollerActivity : AppCompatActivity() {
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
 
-        handFacade = HandFacade(this)
         setViewValues(hand)
     }
 
@@ -70,7 +72,6 @@ class DiceRollerActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
             R.id.reset_hand -> reset()
-            R.id.save_hand -> saveHand()
             R.id.delete_hand -> deleteHand()
             R.id.roll_statistics_100 -> rollHandStatistics(100)
             R.id.roll_statistics_1000 -> rollHandStatistics(1000)
@@ -79,15 +80,27 @@ class DiceRollerActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-    @OnClick(R.id.fab_list_hands)
+    @OnClick(R.id.fab_save_hand)
+    fun clickSaveHand() {
+        saveHand()
+    }
+
+    @OnClick(R.id.load_hand)
     fun listHands() {
-        alert {
-            title = getString(R.string.select_hand)
-            items(handFacade.findAll()
-                    .map { it.name }) { _, item, _ ->
-                setViewValues(handFacade.find(item)!!)
-            }
-        }.show()
+        val allHands = handRepository.findAll()
+
+        if (allHands.isEmpty()) {
+            toast(R.string.no_saved_hand)
+        } else {
+            alert {
+                title = getString(R.string.select_hand)
+                items(allHands.map { it.name },
+                        { _, item, _ ->
+                            setViewValues(handRepository.find(item)!!)
+                        }
+                )
+            }.show()
+        }
     }
 
     @OnClick(R.id.roll_button)
@@ -108,11 +121,12 @@ class DiceRollerActivity : AppCompatActivity() {
     }
 
     private fun saveHand() {
-        handFacade.save(getHandFromPickers())
+        handRepository.save(getHandFromPickers())
     }
 
     private fun deleteHand() {
-        handFacade.delete(handNameView.text.toString())
+        handRepository.delete(handNameView.text.toString())
+        reset()
     }
 
     private fun getHandFromPickers(): Hand =

@@ -9,10 +9,13 @@ import android.widget.ExpandableListView
 import butterknife.BindView
 import butterknife.ButterKnife
 import butterknife.Unbinder
+import com.nicolas.database.PlayerRepository
+import com.nicolas.models.player.Player
 import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.shared.PLAYER_NAME_INTENT_ARGUMENT
-import com.nicolas.whfrp3database.PlayerFacade
-import com.nicolas.whfrp3database.entities.player.Player
+import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.uiThread
+import org.koin.android.ext.android.inject
 
 class PlayerSkillsFragment : Fragment() {
     @BindView(R.id.skills_list)
@@ -20,7 +23,7 @@ class PlayerSkillsFragment : Fragment() {
 
     private lateinit var unbinder: Unbinder
 
-    private lateinit var playerFacade: PlayerFacade
+    private val playerRepository by inject<PlayerRepository>()
 
     private lateinit var player: Player
 
@@ -33,12 +36,15 @@ class PlayerSkillsFragment : Fragment() {
 
         val playerName = arguments!!.getString(PLAYER_NAME_INTENT_ARGUMENT)
 
-        playerFacade = PlayerFacade(context!!)
-        player = playerFacade.find(playerName)!!
+        doAsync {
+            player = playerRepository.find(playerName)!!
 
-        val skillsAdapter = PlayerSkillsExpandableAdapter(context!!, player)
-        skillsView.setAdapter(skillsAdapter)
-        skillsView.setGroupIndicator(null)
+            uiThread {
+                val skillsAdapter = PlayerSkillsExpandableAdapter(context!!, player)
+                skillsView.setAdapter(skillsAdapter)
+                skillsView.setGroupIndicator(null)
+            }
+        }
 
         return resultingView
     }

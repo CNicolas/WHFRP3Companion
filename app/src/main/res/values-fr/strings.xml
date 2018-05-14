@@ -127,4 +127,22 @@
     <string name="edit_item">Éditer</string>
     <string name="equip_item">Équiper</string>
     <string name="unequip_item">Déséquiper</string>
+    <string name="no_saved_hand">Aucune main sauvegardée</string>
+    <string name="weapon_axe">Hache</string>
+    <string name="weapon_two_handed_axe">Hace à deux mains</string>
+    <string name="affinity">Affinité</string>
+    <string name="faith">Foi</string>
+    <string name="order">Ordre</string>
+    <string name="reputation">Réputation</string>
+    <string name="tactics">Tactique</string>
+    <string name="trick">Tour</string>
+    <string name="search">Recherche</string>
+    <string name="talent_name">Nom du talent</string>
+    <string name="cooldown">Temps de recharge</string>
+    <string name="talent_type">Type de talent</string>
+    <string name="skill">Compétence</string>
+    <string name="cooldown_passive">Passif</string>
+    <string name="cooldown_session">Session</string>
+    <string name="cooldown_talent">Talent</string>
+    <string name="all">Tout</string>
 </resources>

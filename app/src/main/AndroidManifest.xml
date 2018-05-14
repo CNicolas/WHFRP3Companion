@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.nicolas.whfrp3companion">
+    package="com.nicolas.whfrp3companion">
 
-    <application android:allowBackup="true"
-                 android:icon="@drawable/warhammer_v3_logo"
-                 android:label="@string/app_name"
-                 android:supportsRtl="true"
-                 android:theme="@style/AppTheme">
+    <application
+        android:name=".WHFRP3Companion"
+        android:allowBackup="true"
+        android:icon="@drawable/warhammer_v3_logo"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
 
-        <activity android:name=".MainActivity"
-                  android:screenOrientation="portrait"
-                  android:theme="@style/AppTheme">
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -18,38 +21,49 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".playersheet.PlayerSheetActivity"
-                  android:parentActivityName=".MainActivity"
-                  android:screenOrientation="portrait"
-                  android:theme="@style/AppTheme"
-                  android:windowSoftInputMode="stateHidden|adjustResize">
-            <meta-data android:name="android.support.PARENT_ACTIVITY"
-                       android:value=".MainActivity" />
+        <activity
+            android:name=".playersheet.PlayerSheetActivity"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="stateHidden|adjustResize">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
         </activity>
 
-        <activity android:name=".playersheet.inventory.ItemEditionActivity"
-                  android:parentActivityName=".playersheet.PlayerSheetActivity"
-                  android:label="@string/page_add_item"
-                  android:screenOrientation="portrait"
-                  android:theme="@style/AppTheme"
-                  android:windowSoftInputMode="stateHidden|adjustPan">
-            <meta-data android:name="android.support.PARENT_ACTIVITY"
-                       android:value=".playersheet.PlayerSheetActivity" />
+        <activity
+            android:name=".playersheet.inventory.ItemEditionActivity"
+            android:label="@string/page_add_item"
+            android:parentActivityName=".playersheet.PlayerSheetActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="stateHidden|adjustPan">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".playersheet.PlayerSheetActivity" />
         </activity>
 
-        <activity android:name=".shared.activities.DiceRollerActivity"
-                  android:label="@string/page_dice_roller"
+        <activity
+            android:name=".shared.activities.DiceRollerActivity"
+            android:label="@string/page_dice_roller"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"></activity>
+        <activity
+            android:name=".shared.activities.DiceRollerStatisticsActivity"
+            android:label="@string/page_dice_roller_statistics"
+            android:parentActivityName=".shared.activities.DiceRollerActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".shared.activities.DiceRollerActivity" />
+        </activity>
+
+        <activity android:name=".shared.activities.TalentsActivity"
+                  android:label="@string/page_talents"
                   android:screenOrientation="portrait"
                   android:theme="@style/AppTheme">
         </activity>
-        <activity android:name=".shared.activities.DiceRollerStatisticsActivity"
-                  android:parentActivityName=".shared.activities.DiceRollerActivity"
-                  android:label="@string/page_dice_roller_statistics"
-                  android:screenOrientation="portrait"
-                  android:theme="@style/AppTheme">
-            <meta-data android:name="android.support.PARENT_ACTIVITY"
-                       android:value=".shared.activities.DiceRollerActivity" />
-        </activity>
-
     </application>
 </manifest>
