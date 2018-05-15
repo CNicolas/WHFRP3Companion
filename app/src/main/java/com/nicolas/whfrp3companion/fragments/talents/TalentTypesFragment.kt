@@ -17,7 +17,9 @@ import com.nicolas.whfrp3companion.shared.TALENTS_SEARCH_INTENT_ARGUMENT
 import com.nicolas.whfrp3companion.shared.activities.TalentsActivity
 import com.nicolas.whfrp3companion.shared.dialogs.TalentSearchDialog
 import kotlinx.android.synthetic.main.fragment_talent_types.*
+import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.intentFor
+import org.jetbrains.anko.uiThread
 
 class TalentTypesFragment : Fragment() {
     private lateinit var unbinder: Unbinder
@@ -29,8 +31,13 @@ class TalentTypesFragment : Fragment() {
 
         unbinder = ButterKnife.bind(this, resultingView)
 
-        val talentTypesAdapter = TalentTypesAdapter(context!!)
-        talentTypesListView.adapter = talentTypesAdapter
+        doAsync {
+            val talentTypesAdapter = TalentTypesAdapter(context!!)
+
+            uiThread {
+                talentTypesListView.adapter = talentTypesAdapter
+            }
+        }
 
         return resultingView
     }
