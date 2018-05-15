@@ -5,8 +5,6 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ExpandableListView
-import butterknife.BindView
 import butterknife.ButterKnife
 import butterknife.OnClick
 import butterknife.Unbinder
@@ -20,15 +18,13 @@ import com.nicolas.models.player.playerLinked.item.enums.ItemType
 import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.shared.ITEM_EDIT_INTENT_ARGUMENT
 import com.nicolas.whfrp3companion.shared.PLAYER_NAME_INTENT_ARGUMENT
+import kotlinx.android.synthetic.main.fragment_player_inventory.*
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.uiThread
 import org.koin.android.ext.android.inject
 
 class PlayerInventoryFragment : Fragment() {
-    @BindView(R.id.inventory)
-    lateinit var inventoryView: ExpandableListView
-
     private lateinit var unbinder: Unbinder
 
     private val playerRepository by inject<PlayerRepository>()
@@ -76,10 +72,10 @@ class PlayerInventoryFragment : Fragment() {
     }
 
     private fun getPlayerItems() {
-        val expandedGroups = if (inventoryView.adapter != null) {
-            ItemType.values().map { inventoryView.isGroupExpanded(it.ordinal) }
-        } else {
-            null
+        val expandedGroups = inventoryExpandableList?.let {
+            it.adapter?.let {
+                ItemType.values().map { inventoryExpandableList.isGroupExpanded(it.ordinal) }
+            }
         }
 
         doAsync {
@@ -105,10 +101,10 @@ class PlayerInventoryFragment : Fragment() {
             })
 
             uiThread {
-                inventoryView.setAdapter(inventoryAdapter)
+                inventoryExpandableList.setAdapter(inventoryAdapter)
                 expandedGroups?.forEachIndexed { groupIndex, expanded ->
                     if (expanded) {
-                        inventoryView.expandGroup(groupIndex)
+                        inventoryExpandableList.expandGroup(groupIndex)
                     }
                 }
             }
