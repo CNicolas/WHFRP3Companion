@@ -12,6 +12,7 @@ import com.nicolas.models.player.playerLinked.talent.TalentCooldown
 import com.nicolas.models.player.playerLinked.talent.TalentType
 import com.nicolas.playersheet.dtos.TalentSearch
 import com.nicolas.whfrp3companion.R
+import com.nicolas.whfrp3companion.shared.ADD_MODE_INTENT_ARGUMENT
 import com.nicolas.whfrp3companion.shared.TALENTS_SEARCH_INTENT_ARGUMENT
 import com.nicolas.whfrp3companion.shared.activities.TalentsActivity
 import com.nicolas.whfrp3companion.shared.enums.labelId
@@ -30,13 +31,15 @@ class TalentSearchDialog : DialogFragment() {
         val view = inflater.inflate(R.layout.dialog_talent_search, null, false)
 
         talentSearch = arguments!!.getSerializable(TALENTS_SEARCH_INTENT_ARGUMENT) as TalentSearch?
+        val addMode = arguments!!.getBoolean(ADD_MODE_INTENT_ARGUMENT) as Boolean? ?: false
 
         builder.setView(view)
         builder.setTitle(R.string.search)
         builder.setPositiveButton(R.string.search, { _, _ ->
             if (activity != null) {
                 startActivity(activity!!.intentFor<TalentsActivity>(
-                        TALENTS_SEARCH_INTENT_ARGUMENT to getTalentSearchFromViews()
+                        TALENTS_SEARCH_INTENT_ARGUMENT to getTalentSearchFromViews(),
+                        ADD_MODE_INTENT_ARGUMENT to addMode
                 ))
                 dismiss()
             }
@@ -82,16 +85,25 @@ class TalentSearchDialog : DialogFragment() {
     }
 
     companion object {
-        fun newInstance(talentSearch: TalentSearch? = null): TalentSearchDialog {
-            val args = Bundle()
-            if (talentSearch != null) {
-                args.putSerializable(TALENTS_SEARCH_INTENT_ARGUMENT, talentSearch)
-            }
-
-            val fragment = TalentSearchDialog()
-            fragment.arguments = args
-
-            return fragment
+        fun newInstance(): TalentSearchDialog {
+            return createFragment(Bundle())
         }
+
+        fun newInstance(talentSearch: TalentSearch): TalentSearchDialog {
+            val args = Bundle()
+            args.putSerializable(TALENTS_SEARCH_INTENT_ARGUMENT, talentSearch)
+
+            return createFragment(args)
+        }
+
+        fun newInstance(addMode: Boolean): TalentSearchDialog {
+            val args = Bundle()
+            args.putBoolean(ADD_MODE_INTENT_ARGUMENT, addMode)
+
+            return createFragment(args)
+        }
+
+        private fun createFragment(args: Bundle): TalentSearchDialog =
+                TalentSearchDialog().apply { arguments = args }
     }
 }

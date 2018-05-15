@@ -12,6 +12,7 @@ import com.nicolas.models.player.playerLinked.talent.Talent
 import com.nicolas.playersheet.dtos.TalentSearch
 import com.nicolas.playersheet.extensions.findTalents
 import com.nicolas.whfrp3companion.R
+import com.nicolas.whfrp3companion.shared.ADD_MODE_INTENT_ARGUMENT
 import com.nicolas.whfrp3companion.shared.DIALOG_TALENT_TYPE_TAG
 import com.nicolas.whfrp3companion.shared.TALENTS_SEARCH_INTENT_ARGUMENT
 import com.nicolas.whfrp3companion.shared.adapters.TalentsAdapter
@@ -23,6 +24,7 @@ class TalentsActivity : AppCompatActivity() {
 
     private lateinit var allTalents: List<Talent>
     private var talentSearch: TalentSearch? = null
+    private var addMode: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,6 +40,7 @@ class TalentsActivity : AppCompatActivity() {
         allTalents = loadTalents(this)
 
         talentSearch = intent?.extras?.getSerializable(TALENTS_SEARCH_INTENT_ARGUMENT) as TalentSearch
+        addMode = intent?.extras?.getBoolean(ADD_MODE_INTENT_ARGUMENT) as Boolean
 
         val search = talentSearch
         val talents = if (search !== null) {
@@ -56,7 +59,11 @@ class TalentsActivity : AppCompatActivity() {
 
     @OnClick(R.id.search)
     fun search() {
-        val talentSearchDialog = TalentSearchDialog.newInstance(talentSearch)
+        val talentSearchDialog =
+                talentSearch
+                        ?.let { TalentSearchDialog.newInstance(it) }
+                        ?: TalentSearchDialog.newInstance()
+
         talentSearchDialog.show(supportFragmentManager, DIALOG_TALENT_TYPE_TAG)
     }
 

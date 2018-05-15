@@ -17,14 +17,13 @@
               android:icon="@drawable/ic_bag_black"
               android:title="@string/page_inventory" />
 
+        <item android:id="@+id/nav_player_talents"
+              android:icon="@drawable/ic_talents_black"
+              android:title="@string/page_talents" />
+
         <item android:id="@+id/nav_player_actions"
               android:icon="@drawable/ic_action_black"
               android:title="@string/page_actions"
-              android:enabled="false" />
-
-        <item android:id="@+id/nav_player_talents"
-              android:icon="@drawable/ic_talents_black"
-              android:title="@string/page_talents"
               android:enabled="false" />
     </group>
 </menu>
