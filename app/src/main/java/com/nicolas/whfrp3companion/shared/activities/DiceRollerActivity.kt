@@ -93,7 +93,7 @@ class DiceRollerActivity : AppCompatActivity() {
 
     @OnClick(R.id.roll_button)
     fun rollHand() {
-        val rollResultsDialog = RollResultDialog(getHandFromPickers().roll())
+        val rollResultsDialog = RollResultDialog.newInstance(getHandFromPickers().roll())
         rollResultsDialog.show(supportFragmentManager, DIALOG_ROLL_RESULT_TAG)
     }
 
