@@ -3,27 +3,28 @@ package com.nicolas.whfrp3companion.playersheet.talents
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import butterknife.BindView
 import butterknife.ButterKnife
 import butterknife.OnClick
 import butterknife.Unbinder
 import com.nicolas.database.PlayerRepository
+import com.nicolas.models.extensions.addTalent
+import com.nicolas.models.extensions.removeTalent
+import com.nicolas.models.extensions.toggleEquipment
 import com.nicolas.models.player.Player
+import com.nicolas.models.player.playerLinked.talent.Talent
 import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.shared.DIALOG_TALENT_TYPE_TAG
 import com.nicolas.whfrp3companion.shared.PLAYER_NAME_INTENT_ARGUMENT
-import com.nicolas.whfrp3companion.shared.adapters.TalentsAdapter
 import com.nicolas.whfrp3companion.shared.dialogs.TalentSearchDialog
+import kotlinx.android.synthetic.main.fragment_player_talents.*
+import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.uiThread
 import org.koin.android.ext.android.inject
 
-class PlayerTalentsFragment : Fragment() {
-    @BindView(R.id.talentsRecyclerView)
-    lateinit var talentsRecyclerView: RecyclerView
-
+class PlayerTalentsFragment : Fragment(), TalentListener {
     private lateinit var unbinder: Unbinder
 
     private val playerRepository by inject<PlayerRepository>()
@@ -40,8 +41,14 @@ class PlayerTalentsFragment : Fragment() {
         val playerName = arguments!!.getString(PLAYER_NAME_INTENT_ARGUMENT)
         player = playerRepository.find(playerName)!!
 
-        talentsRecyclerView.layoutManager = LinearLayoutManager(activity)
-        talentsRecyclerView.adapter = TalentsAdapter(activity!!, player.talents)
+        doAsync {
+            talentsRecyclerView.layoutManager = LinearLayoutManager(activity)
+            val adapter = createTalentsAdapter()
+
+            uiThread {
+                talentsRecyclerView.adapter = adapter
+            }
+        }
 
         return resultingView
     }
@@ -51,10 +58,51 @@ class PlayerTalentsFragment : Fragment() {
         unbinder.unbind()
     }
 
+    override fun onAddTalent(talent: Talent) {
+        doAsync {
+            player.addTalent(talent)
+            player = playerRepository.update(player)
+
+            uiThread {
+                talentsRecyclerView.adapter = createTalentsAdapter()
+            }
+        }
+    }
+
+    override fun onToggleTalentEquipment(talent: Talent) {
+        doAsync {
+            player.toggleEquipment(talent)
+            player = playerRepository.update(player)
+
+            uiThread {
+                talentsRecyclerView.adapter = createTalentsAdapter()
+            }
+        }
+    }
+
+    override fun onRemoveTalent(talent: Talent) {
+        doAsync {
+            player.removeTalent(talent)
+            player = playerRepository.update(player)
+
+            val adapter = PlayerTalentsAdapter(activity!!, player.talents, TalentEditionMode.EQUIPABLE_OR_REMOVABLE)
+            uiThread {
+                talentsRecyclerView.adapter = adapter
+            }
+        }
+    }
+
     @OnClick(R.id.search)
     fun openTalentSearchDialog() {
         val talentSearchDialog = TalentSearchDialog.newInstance(true)
         talentSearchDialog.show(activity?.supportFragmentManager, DIALOG_TALENT_TYPE_TAG)
+    }
+
+    private fun createTalentsAdapter(): PlayerTalentsAdapter {
+        val adapter = PlayerTalentsAdapter(activity!!, player.talents, TalentEditionMode.EQUIPABLE_OR_REMOVABLE)
+        adapter.addTalentListener(this)
+
+        return adapter
     }
 
     companion object {
