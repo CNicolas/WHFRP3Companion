@@ -4,7 +4,7 @@
                                                  android:layout_width="match_parent"
                                                  android:layout_height="match_parent">
 
-    <ListView android:id="@+id/talent_types_list"
+    <ListView android:id="@+id/talentTypesListView"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:layout_gravity="center" />
@@ -14,6 +14,6 @@
                                                         android:layout_height="wrap_content"
                                                         android:layout_margin="@dimen/fab_margin"
                                                         android:src="@drawable/ic_search_white"
-                                                        app:layout_anchor="@id/talent_types_list"
+                                                        app:layout_anchor="@id/talentTypesListView"
                                                         app:layout_anchorGravity="bottom|end" />
 </android.support.design.widget.CoordinatorLayout>

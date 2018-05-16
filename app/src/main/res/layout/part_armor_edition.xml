@@ -8,28 +8,31 @@
                                              app:layout_constraintBottom_toBottomOf="parent"
                                              app:layout_constraintLeft_toLeftOf="parent">
 
-    <Spinner android:id="@+id/armor_type"
+    <Spinner
+        android:id="@+id/armorTypeSpinner"
              android:layout_width="0dp"
              android:layout_height="50dp"
              app:layout_constraintTop_toTopOf="parent"
              app:layout_constraintRight_toRightOf="parent"
-             app:layout_constraintBottom_toTopOf="@+id/defense"
+        app:layout_constraintBottom_toTopOf="@+id/defenseNumberPicker"
              app:layout_constraintLeft_toLeftOf="parent" />
 
     <ImageView android:id="@+id/defense_label"
                android:layout_width="40dp"
                android:layout_height="50dp"
                android:src="@drawable/ic_shield_black_36"
-               android:labelFor="@+id/defense"
+        android:labelFor="@+id/defenseNumberPicker"
                android:contentDescription="@string/defense"
-               app:layout_constraintTop_toBottomOf="@id/armor_type"
-               app:layout_constraintRight_toLeftOf="@+id/defense"
+        app:layout_constraintTop_toBottomOf="@id/armorTypeSpinner"
+        app:layout_constraintRight_toLeftOf="@+id/defenseNumberPicker"
                app:layout_constraintBottom_toBottomOf="parent"
                app:layout_constraintLeft_toLeftOf="parent" />
-    <com.nicolas.whfrp3companion.shared.components.NumberPickerMinMax android:id="@+id/defense"
+
+    <com.nicolas.whfrp3companion.shared.components.NumberPickerMinMax
+        android:id="@+id/defenseNumberPicker"
                                                                       android:layout_width="wrap_content"
                                                                       android:layout_height="wrap_content"
-                                                                      app:layout_constraintTop_toBottomOf="@id/armor_type"
+        app:layout_constraintTop_toBottomOf="@id/armorTypeSpinner"
                                                                       app:layout_constraintRight_toLeftOf="@+id/soak_label"
                                                                       app:layout_constraintBottom_toBottomOf="parent"
                                                                       app:layout_constraintLeft_toRightOf="@id/defense_label" />
@@ -40,15 +43,17 @@
                android:layout_marginStart="@dimen/big_padding"
                android:src="@drawable/ic_armor_black_36"
                android:contentDescription="@string/soak"
-               app:layout_constraintTop_toBottomOf="@id/armor_type"
-               app:layout_constraintRight_toLeftOf="@+id/soak"
+        app:layout_constraintTop_toBottomOf="@id/armorTypeSpinner"
+        app:layout_constraintRight_toLeftOf="@+id/soakNumberPicker"
                app:layout_constraintBottom_toBottomOf="parent"
-               app:layout_constraintLeft_toRightOf="@id/defense" />
-    <com.nicolas.whfrp3companion.shared.components.NumberPickerMinMax android:id="@+id/soak"
+        app:layout_constraintLeft_toRightOf="@id/defenseNumberPicker" />
+
+    <com.nicolas.whfrp3companion.shared.components.NumberPickerMinMax
+        android:id="@+id/soakNumberPicker"
                                                                       android:layout_width="wrap_content"
                                                                       android:layout_height="wrap_content"
                                                                       android:layout_marginEnd="@dimen/giant_padding"
-                                                                      app:layout_constraintTop_toBottomOf="@id/armor_type"
+        app:layout_constraintTop_toBottomOf="@id/armorTypeSpinner"
                                                                       app:layout_constraintRight_toRightOf="parent"
                                                                       app:layout_constraintBottom_toBottomOf="parent"
                                                                       app:layout_constraintLeft_toRightOf="@id/soak_label" />

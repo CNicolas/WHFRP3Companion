@@ -3,7 +3,6 @@ package com.nicolas.whfrp3companion.shared.activities
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.Toolbar
 import butterknife.ButterKnife
 import butterknife.OnClick
@@ -16,12 +15,10 @@ import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.shared.DIALOG_TALENT_TYPE_TAG
 import com.nicolas.whfrp3companion.shared.TALENTS_SEARCH_INTENT_ARGUMENT
 import com.nicolas.whfrp3companion.shared.adapters.TalentsAdapter
-import com.nicolas.whfrp3companion.shared.bind
 import com.nicolas.whfrp3companion.shared.dialogs.TalentSearchDialog
+import kotlinx.android.synthetic.main.activity_talents.*
 
 class TalentsActivity : AppCompatActivity() {
-    private val talentsListView by bind<RecyclerView>(R.id.talents)
-
     private lateinit var unbinder: Unbinder
 
     private lateinit var allTalents: List<Talent>
@@ -36,7 +33,7 @@ class TalentsActivity : AppCompatActivity() {
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
 
-        talentsListView.layoutManager = LinearLayoutManager(this)
+        talentsRecyclerView.layoutManager = LinearLayoutManager(this)
 
         allTalents = loadTalents(this)
 
@@ -49,7 +46,7 @@ class TalentsActivity : AppCompatActivity() {
             allTalents
         }
 
-        talentsListView.adapter = TalentsAdapter(this, talents)
+        talentsRecyclerView.adapter = TalentsAdapter(this, talents)
     }
 
     override fun onDestroy() {

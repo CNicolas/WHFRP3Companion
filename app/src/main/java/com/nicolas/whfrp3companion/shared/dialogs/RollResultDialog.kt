@@ -13,9 +13,10 @@ import butterknife.Unbinder
 import com.nicolas.diceroller.dices.Face
 import com.nicolas.diceroller.roll.RollResult
 import com.nicolas.whfrp3companion.R
+import com.nicolas.whfrp3companion.shared.DIALOG_ROLL_RESULT_TAG
 
 
-class RollResultDialog() : DialogFragment() {
+class RollResultDialog : DialogFragment() {
     @BindView(R.id.success_result)
     lateinit var successResult: TextView
     @BindView(R.id.boon_result)
@@ -37,15 +38,13 @@ class RollResultDialog() : DialogFragment() {
 
     private lateinit var rollResult: RollResult
 
-    constructor(rollResult: RollResult) : this() {
-        this.rollResult = rollResult
-    }
-
     @SuppressLint("InflateParams")
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val builder = AlertDialog.Builder(activity)
         val inflater = activity!!.layoutInflater
         val view = inflater.inflate(R.layout.dialog_roll_result, null, false)
+
+        rollResult = arguments!!.getSerializable(DIALOG_ROLL_RESULT_TAG) as RollResult
 
         builder.setView(view)
         builder.setTitle(R.string.results)
@@ -103,6 +102,18 @@ class RollResultDialog() : DialogFragment() {
         when (rollResult.report[Face.CHAOS]) {
             null -> chaosResult.visibility = GONE
             else -> chaosResult.text = rollResult.report[Face.CHAOS].toString()
+        }
+    }
+
+    companion object {
+        fun newInstance(rollResult: RollResult): RollResultDialog {
+            val args = Bundle()
+            args.putSerializable(DIALOG_ROLL_RESULT_TAG, rollResult)
+
+            val fragment = RollResultDialog()
+            fragment.arguments = args
+
+            return fragment
         }
     }
 }
