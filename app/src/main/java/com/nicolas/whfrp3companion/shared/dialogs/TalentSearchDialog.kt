@@ -6,6 +6,9 @@ import android.app.Dialog
 import android.os.Bundle
 import android.support.v4.app.DialogFragment
 import android.widget.ArrayAdapter
+import android.widget.EditText
+import android.widget.Spinner
+import butterknife.BindView
 import butterknife.ButterKnife
 import butterknife.Unbinder
 import com.nicolas.models.player.playerLinked.talent.TalentCooldown
@@ -16,10 +19,16 @@ import com.nicolas.whfrp3companion.shared.ADD_MODE_INTENT_ARGUMENT
 import com.nicolas.whfrp3companion.shared.TALENTS_SEARCH_INTENT_ARGUMENT
 import com.nicolas.whfrp3companion.shared.activities.TalentsActivity
 import com.nicolas.whfrp3companion.shared.enums.labelId
-import kotlinx.android.synthetic.main.dialog_talent_search.*
 import org.jetbrains.anko.intentFor
 
 class TalentSearchDialog : DialogFragment() {
+    @BindView(R.id.talentTypeSpinner)
+    lateinit var talentTypeSpinner: Spinner
+    @BindView(R.id.cooldownSpinner)
+    lateinit var cooldownSpinner: Spinner
+    @BindView(R.id.searchEditText)
+    lateinit var searchEditText: EditText
+
     private lateinit var unbinder: Unbinder
 
     private var talentSearch: TalentSearch? = null
