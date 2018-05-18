@@ -58,6 +58,13 @@ class PlayerTalentsFragment : Fragment(), TalentListener {
         unbinder.unbind()
     }
 
+    @OnClick(R.id.search)
+    fun openTalentSearchDialog() {
+        val talentSearchDialog = TalentSearchDialog.newInstance(true)
+        talentSearchDialog.show(activity?.supportFragmentManager, DIALOG_TALENT_TYPE_TAG)
+    }
+
+    // region TalentListener
     override fun onAddTalent(talent: Talent) {
         doAsync {
             player.addTalent(talent)
@@ -91,12 +98,7 @@ class PlayerTalentsFragment : Fragment(), TalentListener {
             }
         }
     }
-
-    @OnClick(R.id.search)
-    fun openTalentSearchDialog() {
-        val talentSearchDialog = TalentSearchDialog.newInstance(true)
-        talentSearchDialog.show(activity?.supportFragmentManager, DIALOG_TALENT_TYPE_TAG)
-    }
+    // endregion
 
     private fun createTalentsAdapter(): PlayerTalentsAdapter {
         val adapter = PlayerTalentsAdapter(activity!!, player.talents, TalentEditionMode.EQUIPABLE_OR_REMOVABLE)

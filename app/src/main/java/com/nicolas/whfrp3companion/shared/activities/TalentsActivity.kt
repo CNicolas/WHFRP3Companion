@@ -12,8 +12,10 @@ import com.nicolas.models.player.playerLinked.talent.Talent
 import com.nicolas.playersheet.dtos.TalentSearch
 import com.nicolas.playersheet.extensions.findTalents
 import com.nicolas.whfrp3companion.R
-import com.nicolas.whfrp3companion.shared.ADD_MODE_INTENT_ARGUMENT
+import com.nicolas.whfrp3companion.playersheet.talents.PlayerTalentsAdapter
+import com.nicolas.whfrp3companion.playersheet.talents.TalentEditionMode
 import com.nicolas.whfrp3companion.shared.DIALOG_TALENT_TYPE_TAG
+import com.nicolas.whfrp3companion.shared.PLAYER_MODE_INTENT_ARGUMENT
 import com.nicolas.whfrp3companion.shared.TALENTS_SEARCH_INTENT_ARGUMENT
 import com.nicolas.whfrp3companion.shared.adapters.TalentsAdapter
 import com.nicolas.whfrp3companion.shared.dialogs.TalentSearchDialog
@@ -24,7 +26,7 @@ class TalentsActivity : AppCompatActivity() {
 
     private lateinit var allTalents: List<Talent>
     private var talentSearch: TalentSearch? = null
-    private var addMode: Boolean = false
+    private var playerMode: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,7 +42,7 @@ class TalentsActivity : AppCompatActivity() {
         allTalents = loadTalents(this)
 
         talentSearch = intent?.extras?.getSerializable(TALENTS_SEARCH_INTENT_ARGUMENT) as TalentSearch
-        addMode = intent?.extras?.getBoolean(ADD_MODE_INTENT_ARGUMENT) as Boolean
+        playerMode = intent?.extras?.getBoolean(PLAYER_MODE_INTENT_ARGUMENT) as Boolean
 
         val search = talentSearch
         val talents = if (search !== null) {
@@ -49,7 +51,11 @@ class TalentsActivity : AppCompatActivity() {
             allTalents
         }
 
-        talentsRecyclerView.adapter = TalentsAdapter(this, talents)
+        talentsRecyclerView.adapter = if (playerMode) {
+            createTalentsAdapter(talents)
+        } else {
+            TalentsAdapter(this, talents)
+        }
     }
 
     override fun onDestroy() {
@@ -65,6 +71,13 @@ class TalentsActivity : AppCompatActivity() {
                         ?: TalentSearchDialog.newInstance()
 
         talentSearchDialog.show(supportFragmentManager, DIALOG_TALENT_TYPE_TAG)
+    }
+
+    private fun createTalentsAdapter(talents: List<Talent>): PlayerTalentsAdapter {
+        val adapter = PlayerTalentsAdapter(this, talents, TalentEditionMode.EQUIPABLE_OR_REMOVABLE)
+//        adapter.addTalentListener(this)
+
+        return adapter
     }
 
     private fun applySearch(talentSearch: TalentSearch): List<Talent> {

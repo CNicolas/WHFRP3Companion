@@ -15,7 +15,7 @@ import com.nicolas.models.player.playerLinked.talent.TalentCooldown
 import com.nicolas.models.player.playerLinked.talent.TalentType
 import com.nicolas.playersheet.dtos.TalentSearch
 import com.nicolas.whfrp3companion.R
-import com.nicolas.whfrp3companion.shared.ADD_MODE_INTENT_ARGUMENT
+import com.nicolas.whfrp3companion.shared.PLAYER_MODE_INTENT_ARGUMENT
 import com.nicolas.whfrp3companion.shared.TALENTS_SEARCH_INTENT_ARGUMENT
 import com.nicolas.whfrp3companion.shared.activities.TalentsActivity
 import com.nicolas.whfrp3companion.shared.enums.labelId
@@ -40,7 +40,7 @@ class TalentSearchDialog : DialogFragment() {
         val view = inflater.inflate(R.layout.dialog_talent_search, null, false)
 
         talentSearch = arguments!!.getSerializable(TALENTS_SEARCH_INTENT_ARGUMENT) as TalentSearch?
-        val addMode = arguments!!.getBoolean(ADD_MODE_INTENT_ARGUMENT) as Boolean? ?: false
+        val playerMode = arguments!!.getBoolean(PLAYER_MODE_INTENT_ARGUMENT) as Boolean? ?: false
 
         builder.setView(view)
         builder.setTitle(R.string.search)
@@ -48,7 +48,7 @@ class TalentSearchDialog : DialogFragment() {
             if (activity != null) {
                 startActivity(activity!!.intentFor<TalentsActivity>(
                         TALENTS_SEARCH_INTENT_ARGUMENT to getTalentSearchFromViews(),
-                        ADD_MODE_INTENT_ARGUMENT to addMode
+                        PLAYER_MODE_INTENT_ARGUMENT to playerMode
                 ))
                 dismiss()
             }
@@ -105,9 +105,9 @@ class TalentSearchDialog : DialogFragment() {
             return createFragment(args)
         }
 
-        fun newInstance(addMode: Boolean): TalentSearchDialog {
+        fun newInstance(playerMode: Boolean): TalentSearchDialog {
             val args = Bundle()
-            args.putBoolean(ADD_MODE_INTENT_ARGUMENT, addMode)
+            args.putBoolean(PLAYER_MODE_INTENT_ARGUMENT, playerMode)
 
             return createFragment(args)
         }
