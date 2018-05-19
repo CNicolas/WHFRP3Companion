@@ -42,10 +42,10 @@ class PlayerTalentsFragment : Fragment(), TalentListener {
         player = playerRepository.find(playerName)!!
 
         doAsync {
-            talentsRecyclerView.layoutManager = LinearLayoutManager(activity)
             val adapter = createTalentsAdapter()
 
             uiThread {
+                talentsRecyclerView.layoutManager = LinearLayoutManager(activity!!)
                 talentsRecyclerView.adapter = adapter
             }
         }
@@ -60,7 +60,7 @@ class PlayerTalentsFragment : Fragment(), TalentListener {
 
     @OnClick(R.id.search)
     fun openTalentSearchDialog() {
-        val talentSearchDialog = TalentSearchDialog.newInstance(true)
+        val talentSearchDialog = TalentSearchDialog.newInstance(TalentEditionMode.ADDABLE)
         talentSearchDialog.show(activity?.supportFragmentManager, DIALOG_TALENT_TYPE_TAG)
     }
 

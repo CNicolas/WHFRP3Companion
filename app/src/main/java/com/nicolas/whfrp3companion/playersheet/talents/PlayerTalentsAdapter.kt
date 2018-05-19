@@ -1,6 +1,7 @@
 package com.nicolas.whfrp3companion.playersheet.talents
 
 import android.content.Context
+import android.content.res.ColorStateList
 import android.graphics.Typeface.BOLD_ITALIC
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.RecyclerView
@@ -13,7 +14,8 @@ import butterknife.ButterKnife
 import butterknife.OnClick
 import com.nicolas.models.player.playerLinked.talent.Talent
 import com.nicolas.whfrp3companion.R
-import com.nicolas.whfrp3companion.playersheet.talents.TalentEditionMode.*
+import com.nicolas.whfrp3companion.playersheet.talents.TalentEditionMode.ADDABLE
+import com.nicolas.whfrp3companion.playersheet.talents.TalentEditionMode.EQUIPABLE_OR_REMOVABLE
 import com.nicolas.whfrp3companion.shared.bind
 import com.nicolas.whfrp3companion.shared.enums.colorId
 import com.nicolas.whfrp3companion.shared.enums.labelId
@@ -45,6 +47,7 @@ class PlayerTalentsAdapter(context: Context,
         private val talentNameTextView by view.bind<TextView>(R.id.talentNameTextView)
         private val talentDescriptionTextView by view.bind<TextView>(R.id.talentDescriptionTextView)
         private val addTalentButton by view.bind<ImageButton>(R.id.addTalentButton)
+        private val toggleTalentEquipmentButton by view.bind<ImageButton>(R.id.toggleTalentEquipmentButton)
         private val removeTalentButton by view.bind<ImageButton>(R.id.removeTalentButton)
 
         private lateinit var talent: Talent
@@ -55,14 +58,12 @@ class PlayerTalentsAdapter(context: Context,
             when (talentEditionMode) {
                 ADDABLE -> {
                     addTalentButton.visibility = View.VISIBLE
+                    toggleTalentEquipmentButton.visibility = View.GONE
                     removeTalentButton.visibility = View.GONE
                 }
                 EQUIPABLE_OR_REMOVABLE -> {
                     addTalentButton.visibility = View.GONE
-                    removeTalentButton.visibility = View.VISIBLE
-                }
-                REMOVABLE -> {
-                    addTalentButton.visibility = View.GONE
+                    toggleTalentEquipmentButton.visibility = View.VISIBLE
                     removeTalentButton.visibility = View.VISIBLE
                 }
             }
@@ -81,6 +82,10 @@ class PlayerTalentsAdapter(context: Context,
             if (talent.isEquipped) {
                 talentNameTextView.setTypeface(null, BOLD_ITALIC)
             }
+
+            addTalentButton.imageTintList = ColorStateList.valueOf(talentTypeColor)
+            toggleTalentEquipmentButton.imageTintList = ColorStateList.valueOf(talentTypeColor)
+            removeTalentButton.imageTintList = ColorStateList.valueOf(talentTypeColor)
 
             talentDescriptionTextView.text = parseTemplatedText(view.context, talent.description)
         }
