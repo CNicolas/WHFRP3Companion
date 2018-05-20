@@ -41,16 +41,15 @@ class PlayerTalentsFragment : Fragment(), TalentListener {
         val playerName = arguments!!.getString(PLAYER_NAME_INTENT_ARGUMENT)
         player = playerRepository.find(playerName)!!
 
-        doAsync {
-            val adapter = createTalentsAdapter()
-
-            uiThread {
-                talentsRecyclerView.layoutManager = LinearLayoutManager(activity!!)
-                talentsRecyclerView.adapter = adapter
-            }
-        }
+        setPlayerTalentsAdapter()
 
         return resultingView
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        setPlayerTalentsAdapter()
     }
 
     override fun onDestroyView() {
@@ -60,7 +59,7 @@ class PlayerTalentsFragment : Fragment(), TalentListener {
 
     @OnClick(R.id.search)
     fun openTalentSearchDialog() {
-        val talentSearchDialog = TalentSearchDialog.newInstance(TalentEditionMode.ADDABLE)
+        val talentSearchDialog = TalentSearchDialog.newInstance(player.name)
         talentSearchDialog.show(activity?.supportFragmentManager, DIALOG_TALENT_TYPE_TAG)
     }
 
@@ -100,7 +99,21 @@ class PlayerTalentsFragment : Fragment(), TalentListener {
     }
     // endregion
 
+    private fun setPlayerTalentsAdapter() {
+        doAsync {
+            val adapter = createTalentsAdapter()
+
+            uiThread {
+                talentsRecyclerView?.let {
+                    talentsRecyclerView.layoutManager = LinearLayoutManager(activity!!)
+                    talentsRecyclerView.adapter = adapter
+                }
+            }
+        }
+    }
+
     private fun createTalentsAdapter(): PlayerTalentsAdapter {
+        player = playerRepository.find(player.name)!!
         val adapter = PlayerTalentsAdapter(activity!!, player.talents, TalentEditionMode.EQUIPABLE_OR_REMOVABLE)
         adapter.addTalentListener(this)
 
