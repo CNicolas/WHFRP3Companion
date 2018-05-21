@@ -97,26 +97,21 @@ class TalentsActivity : AppCompatActivity(), TalentListener {
         toast(talent.name)
         doAsync {
             player?.let {
-                playerRepository.update(it.addTalent(talent))
+                player = playerRepository.update(it.addTalent(talent))
             }
         }
     }
 
     override fun onToggleTalentEquipment(talent: Talent) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun onRemoveTalent(talent: Talent) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     // endregion
 
     private fun createTalentsAdapter(talents: List<Talent>): PlayerTalentsAdapter {
-        val adapter = PlayerTalentsAdapter(this, talents, TalentEditionMode.ADDABLE)
-        adapter.addTalentListener(this)
-
-        return adapter
+        return PlayerTalentsAdapter(this, talents, this, TalentEditionMode.ADDABLE)
     }
 
     private fun applySearch(talentSearch: TalentSearch): List<Talent> {

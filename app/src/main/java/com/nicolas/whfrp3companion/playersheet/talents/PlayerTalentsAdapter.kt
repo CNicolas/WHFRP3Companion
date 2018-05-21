@@ -24,15 +24,14 @@ import org.jetbrains.anko.toast
 
 class PlayerTalentsAdapter(context: Context,
                            private val talents: List<Talent>,
+                           private val talentListener: TalentListener,
                            private val talentEditionMode: TalentEditionMode) : RecyclerView.Adapter<PlayerTalentsAdapter.ViewHolder>() {
     private val inflater = LayoutInflater.from(context)
-
-    private val talentListeners: MutableList<TalentListener> = mutableListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = inflater.inflate(R.layout.list_element_player_talent, parent, false)
 
-        return ViewHolder(view, talentListeners, talentEditionMode)
+        return ViewHolder(view, talentListener, talentEditionMode)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -41,9 +40,7 @@ class PlayerTalentsAdapter(context: Context,
 
     override fun getItemCount(): Int = talents.size
 
-    fun addTalentListener(talentListener: TalentListener) = talentListeners.add(talentListener)
-
-    class ViewHolder(private val view: View, private val talentListeners: List<TalentListener>, talentEditionMode: TalentEditionMode) : RecyclerView.ViewHolder(view) {
+    class ViewHolder(private val view: View, private val talentListener: TalentListener, talentEditionMode: TalentEditionMode) : RecyclerView.ViewHolder(view) {
         private val talentTypeTextView by view.bind<TextView>(R.id.talentTypeTextView)
         private val talentNameTextView by view.bind<TextView>(R.id.talentNameTextView)
         private val talentDescriptionTextView by view.bind<TextView>(R.id.talentDescriptionTextView)
@@ -98,18 +95,18 @@ class PlayerTalentsAdapter(context: Context,
 
         @OnClick(R.id.addTalentButton)
         fun onAddTalent() {
-            talentListeners.notifyAddTalent(talent)
+            talentListener.onAddTalent(talent)
             view.context.toast(talent.name)
         }
 
         @OnClick(R.id.toggleTalentEquipmentButton)
         fun onToggleTalentEquipment() {
-            talentListeners.notifyToggleTalentEquipment(talent)
+            talentListener.onToggleTalentEquipment(talent)
         }
 
         @OnClick(R.id.removeTalentButton)
         fun onRemoveTalent() {
-            talentListeners.notifyRemoveTalent(talent)
+            talentListener.onRemoveTalent(talent)
         }
     }
 }

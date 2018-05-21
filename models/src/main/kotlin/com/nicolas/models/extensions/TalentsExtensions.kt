@@ -8,7 +8,12 @@ import com.nicolas.models.player.playerLinked.talent.TalentType
 
 fun Player.addTalent(talent: Talent): Player {
     val mutableTalents = talents.toMutableList()
-    mutableTalents.add(talent)
+
+    val alreadyExistingTalent = mutableTalents.find { talent.name == name }
+    if (alreadyExistingTalent == null) {
+        mutableTalents.add(talent)
+    }
+
     talents = mutableTalents.toList()
 
     return this

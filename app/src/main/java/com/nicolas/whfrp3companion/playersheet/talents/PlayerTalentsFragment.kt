@@ -91,7 +91,7 @@ class PlayerTalentsFragment : Fragment(), TalentListener {
             player.removeTalent(talent)
             player = playerRepository.update(player)
 
-            val adapter = PlayerTalentsAdapter(activity!!, player.talents, TalentEditionMode.EQUIPABLE_OR_REMOVABLE)
+            val adapter = PlayerTalentsAdapter(activity!!, player.talents, this@PlayerTalentsFragment, TalentEditionMode.EQUIPABLE_OR_REMOVABLE)
             uiThread {
                 talentsRecyclerView.adapter = adapter
             }
@@ -101,23 +101,19 @@ class PlayerTalentsFragment : Fragment(), TalentListener {
 
     private fun setPlayerTalentsAdapter() {
         doAsync {
-            val adapter = createTalentsAdapter()
+            player = playerRepository.find(player.name)!!
 
             uiThread {
                 talentsRecyclerView?.let {
                     talentsRecyclerView.layoutManager = LinearLayoutManager(activity!!)
-                    talentsRecyclerView.adapter = adapter
+                    talentsRecyclerView.adapter = createTalentsAdapter()
                 }
             }
         }
     }
 
     private fun createTalentsAdapter(): PlayerTalentsAdapter {
-        player = playerRepository.find(player.name)!!
-        val adapter = PlayerTalentsAdapter(activity!!, player.talents, TalentEditionMode.EQUIPABLE_OR_REMOVABLE)
-        adapter.addTalentListener(this)
-
-        return adapter
+        return PlayerTalentsAdapter(activity!!, player.talents, this, TalentEditionMode.EQUIPABLE_OR_REMOVABLE)
     }
 
     companion object {
