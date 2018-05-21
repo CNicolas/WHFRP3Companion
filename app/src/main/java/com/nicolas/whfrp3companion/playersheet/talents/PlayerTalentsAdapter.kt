@@ -20,6 +20,7 @@ import com.nicolas.whfrp3companion.shared.bind
 import com.nicolas.whfrp3companion.shared.enums.colorId
 import com.nicolas.whfrp3companion.shared.enums.labelId
 import com.nicolas.whfrp3companion.shared.viewModifications.parseTemplatedText
+import org.jetbrains.anko.toast
 
 class PlayerTalentsAdapter(context: Context,
                            private val talents: List<Talent>,
@@ -90,6 +91,8 @@ class PlayerTalentsAdapter(context: Context,
         @OnClick(R.id.addTalentButton)
         fun onAddTalent() {
             talentListener.onAddTalent(talent)
+            addTalentButton.isEnabled = false
+            view.context.toast("${talent.name} Added")
         }
 
         @OnClick(R.id.toggleTalentEquipmentButton)
