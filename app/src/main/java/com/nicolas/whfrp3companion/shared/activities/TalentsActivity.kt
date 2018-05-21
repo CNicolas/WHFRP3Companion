@@ -25,7 +25,6 @@ import com.nicolas.whfrp3companion.shared.adapters.TalentsAdapter
 import com.nicolas.whfrp3companion.shared.dialogs.TalentSearchDialog
 import kotlinx.android.synthetic.main.activity_talents.*
 import org.jetbrains.anko.doAsync
-import org.jetbrains.anko.toast
 import org.jetbrains.anko.uiThread
 import org.koin.android.ext.android.inject
 
@@ -94,7 +93,6 @@ class TalentsActivity : AppCompatActivity(), TalentListener {
     // region TalentListener
 
     override fun onAddTalent(talent: Talent) {
-        toast(talent.name)
         doAsync {
             player?.let {
                 player = playerRepository.update(it.addTalent(talent))
