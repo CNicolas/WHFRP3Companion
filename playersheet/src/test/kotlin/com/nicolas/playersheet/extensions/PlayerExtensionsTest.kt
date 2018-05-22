@@ -2,7 +2,7 @@ package com.nicolas.playersheet.extensions
 
 import com.nicolas.models.player.CharacteristicValue
 import com.nicolas.models.player.Player
-import com.nicolas.models.player.playerLinked.item.Armor
+import com.nicolas.models.player.item.Armor
 import com.nicolas.playersheet.enums.PlayerLivingState.*
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test

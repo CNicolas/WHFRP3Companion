@@ -13,7 +13,7 @@ import android.widget.ImageButton
 import android.widget.TextView
 import butterknife.ButterKnife
 import butterknife.OnClick
-import com.nicolas.models.player.playerLinked.talent.Talent
+import com.nicolas.models.player.talent.Talent
 import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.playersheet.talents.TalentEditionMode.ADDABLE
 import com.nicolas.whfrp3companion.playersheet.talents.TalentEditionMode.EQUIPABLE_OR_REMOVABLE

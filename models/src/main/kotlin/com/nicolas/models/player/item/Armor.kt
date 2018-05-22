@@ -1,8 +1,8 @@
-package com.nicolas.models.player.playerLinked.item
+package com.nicolas.models.player.item
 
-import com.nicolas.models.player.playerLinked.item.enums.ArmorType
-import com.nicolas.models.player.playerLinked.item.enums.ItemType.ARMOR
-import com.nicolas.models.player.playerLinked.item.enums.Quality
+import com.nicolas.models.player.item.enums.ArmorType
+import com.nicolas.models.player.item.enums.ItemType.ARMOR
+import com.nicolas.models.player.item.enums.Quality
 
 data class Armor(override var name: String = "Armor",
                  override var description: String? = null,

@@ -5,8 +5,8 @@ import com.nicolas.models.hand.DifficultyLevel
 import com.nicolas.models.hand.Hand
 import com.nicolas.models.player.Player
 import com.nicolas.models.player.enums.Characteristic
-import com.nicolas.models.player.playerLinked.skill.Skill
-import com.nicolas.models.player.playerLinked.skill.Specialization
+import com.nicolas.models.player.skill.Skill
+import com.nicolas.models.player.skill.Specialization
 
 fun Player.createHand(characteristic: Characteristic,
                       name: String = "Hand",

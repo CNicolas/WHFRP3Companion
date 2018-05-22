@@ -1,4 +1,4 @@
-package com.nicolas.models.player.playerLinked.skill
+package com.nicolas.models.player.skill
 
 import com.nicolas.models.player.enums.Characteristic
 import java.io.Serializable

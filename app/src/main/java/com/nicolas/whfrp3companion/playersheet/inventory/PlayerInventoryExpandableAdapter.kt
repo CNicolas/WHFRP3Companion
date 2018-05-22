@@ -19,10 +19,10 @@ import butterknife.OnClick
 import butterknife.OnLongClick
 import com.nicolas.models.extensions.getItemsOfType
 import com.nicolas.models.player.Player
-import com.nicolas.models.player.playerLinked.item.*
-import com.nicolas.models.player.playerLinked.item.enums.ItemType
-import com.nicolas.models.player.playerLinked.item.enums.ItemType.*
-import com.nicolas.models.player.playerLinked.item.enums.Quality.*
+import com.nicolas.models.player.item.*
+import com.nicolas.models.player.item.enums.ItemType
+import com.nicolas.models.player.item.enums.ItemType.*
+import com.nicolas.models.player.item.enums.Quality.*
 import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.shared.bind
 import com.nicolas.whfrp3companion.shared.enums.labelId

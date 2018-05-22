@@ -1,9 +1,9 @@
-package com.nicolas.models.player.playerLinked.item
+package com.nicolas.models.player.item
 
-import com.nicolas.models.player.playerLinked.item.enums.ItemType.WEAPON
-import com.nicolas.models.player.playerLinked.item.enums.Quality
-import com.nicolas.models.player.playerLinked.item.enums.Range
-import com.nicolas.models.player.playerLinked.item.enums.WeaponType
+import com.nicolas.models.player.item.enums.ItemType.WEAPON
+import com.nicolas.models.player.item.enums.Quality
+import com.nicolas.models.player.item.enums.Range
+import com.nicolas.models.player.item.enums.WeaponType
 
 data class Weapon(override var name: String = "Weapon",
                   override var description: String? = null,

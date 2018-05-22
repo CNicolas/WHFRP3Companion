@@ -2,7 +2,7 @@ package com.nicolas.playersheet.extensions
 
 import com.nicolas.models.player.enums.Characteristic.AGILITY
 import com.nicolas.models.player.enums.Characteristic.STRENGTH
-import com.nicolas.models.player.playerLinked.skill.Skill
+import com.nicolas.models.player.skill.Skill
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 

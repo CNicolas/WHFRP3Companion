@@ -14,7 +14,7 @@ import com.nicolas.models.extensions.addTalent
 import com.nicolas.models.extensions.removeTalent
 import com.nicolas.models.extensions.toggleEquipment
 import com.nicolas.models.player.Player
-import com.nicolas.models.player.playerLinked.talent.Talent
+import com.nicolas.models.player.talent.Talent
 import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.shared.DIALOG_TALENT_TYPE_TAG
 import com.nicolas.whfrp3companion.shared.PLAYER_NAME_INTENT_ARGUMENT

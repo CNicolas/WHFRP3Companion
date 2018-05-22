@@ -9,7 +9,7 @@ import butterknife.ButterKnife
 import butterknife.OnClick
 import butterknife.OnItemClick
 import butterknife.Unbinder
-import com.nicolas.models.player.playerLinked.talent.TalentType
+import com.nicolas.models.player.talent.TalentType
 import com.nicolas.playersheet.dtos.TalentSearch
 import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.shared.DIALOG_TALENT_TYPE_TAG

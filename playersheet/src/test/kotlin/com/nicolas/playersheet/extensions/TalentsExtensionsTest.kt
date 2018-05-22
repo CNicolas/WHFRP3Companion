@@ -1,11 +1,11 @@
 package com.nicolas.playersheet.extensions
 
 import com.nicolas.models.extensions.findByType
-import com.nicolas.models.player.playerLinked.talent.Talent
-import com.nicolas.models.player.playerLinked.talent.TalentCooldown.PASSIVE
-import com.nicolas.models.player.playerLinked.talent.TalentCooldown.TALENT
-import com.nicolas.models.player.playerLinked.talent.TalentType.AFFINITY
-import com.nicolas.models.player.playerLinked.talent.TalentType.REPUTATION
+import com.nicolas.models.player.talent.Talent
+import com.nicolas.models.player.talent.TalentCooldown.PASSIVE
+import com.nicolas.models.player.talent.TalentCooldown.TALENT
+import com.nicolas.models.player.talent.TalentType.AFFINITY
+import com.nicolas.models.player.talent.TalentType.REPUTATION
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 

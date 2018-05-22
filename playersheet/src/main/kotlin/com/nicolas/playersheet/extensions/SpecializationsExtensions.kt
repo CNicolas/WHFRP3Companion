@@ -1,8 +1,8 @@
 package com.nicolas.playersheet.extensions
 
 import com.nicolas.models.player.enums.Characteristic
-import com.nicolas.models.player.playerLinked.skill.Skill
-import com.nicolas.models.player.playerLinked.skill.Specialization
+import com.nicolas.models.player.skill.Skill
+import com.nicolas.models.player.skill.Specialization
 
 fun List<Skill>.findSpecializations(text: String? = null,
                         characteristic: Characteristic? = null,

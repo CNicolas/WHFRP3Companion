@@ -11,8 +11,8 @@ import android.widget.Spinner
 import butterknife.BindView
 import butterknife.ButterKnife
 import butterknife.Unbinder
-import com.nicolas.models.player.playerLinked.talent.TalentCooldown
-import com.nicolas.models.player.playerLinked.talent.TalentType
+import com.nicolas.models.player.talent.TalentCooldown
+import com.nicolas.models.player.talent.TalentType
 import com.nicolas.playersheet.dtos.TalentSearch
 import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.shared.PLAYER_NAME_INTENT_ARGUMENT

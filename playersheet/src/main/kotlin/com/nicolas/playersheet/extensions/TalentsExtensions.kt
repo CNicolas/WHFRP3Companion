@@ -1,10 +1,10 @@
 package com.nicolas.playersheet.extensions
 
 import com.nicolas.models.extensions.findByType
-import com.nicolas.models.player.playerLinked.talent.Talent
-import com.nicolas.models.player.playerLinked.talent.TalentCooldown
-import com.nicolas.models.player.playerLinked.talent.TalentCooldown.*
-import com.nicolas.models.player.playerLinked.talent.TalentType
+import com.nicolas.models.player.talent.Talent
+import com.nicolas.models.player.talent.TalentCooldown
+import com.nicolas.models.player.talent.TalentCooldown.*
+import com.nicolas.models.player.talent.TalentType
 
 fun List<Talent>.findTalents(text: String? = null,
                              cooldown: TalentCooldown? = null,

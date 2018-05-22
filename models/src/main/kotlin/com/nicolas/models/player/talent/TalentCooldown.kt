@@ -1,4 +1,4 @@
-package com.nicolas.models.player.playerLinked.talent
+package com.nicolas.models.player.talent
 
 enum class TalentCooldown {
     PASSIVE,

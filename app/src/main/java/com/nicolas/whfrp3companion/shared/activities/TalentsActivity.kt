@@ -11,7 +11,7 @@ import com.nicolas.database.PlayerRepository
 import com.nicolas.database.loadTalents
 import com.nicolas.models.extensions.addTalent
 import com.nicolas.models.player.Player
-import com.nicolas.models.player.playerLinked.talent.Talent
+import com.nicolas.models.player.talent.Talent
 import com.nicolas.playersheet.dtos.TalentSearch
 import com.nicolas.playersheet.extensions.findTalents
 import com.nicolas.whfrp3companion.R

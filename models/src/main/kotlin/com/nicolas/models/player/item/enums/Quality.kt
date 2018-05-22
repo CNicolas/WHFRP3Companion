@@ -1,4 +1,4 @@
-package com.nicolas.models.player.playerLinked.item.enums
+package com.nicolas.models.player.item.enums
 
 enum class Quality {
     LOW,

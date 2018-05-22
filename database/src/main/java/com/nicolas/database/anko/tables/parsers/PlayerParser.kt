@@ -7,9 +7,9 @@ import com.nicolas.database.toNullableInt
 import com.nicolas.models.player.CharacteristicValue
 import com.nicolas.models.player.Player
 import com.nicolas.models.player.enums.Race
-import com.nicolas.models.player.playerLinked.item.Item
-import com.nicolas.models.player.playerLinked.skill.Skill
-import com.nicolas.models.player.playerLinked.talent.Talent
+import com.nicolas.models.player.item.Item
+import com.nicolas.models.player.skill.Skill
+import com.nicolas.models.player.talent.Talent
 import org.jetbrains.anko.db.RowParser
 
 internal class PlayerParser : RowParser<Player> {

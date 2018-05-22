@@ -15,10 +15,10 @@ import com.nicolas.database.anko.AnkoPlayerRepository
 import com.nicolas.models.extensions.getSkillByName
 import com.nicolas.models.extensions.getSpecializationByName
 import com.nicolas.models.player.Player
-import com.nicolas.models.player.playerLinked.skill.Skill
-import com.nicolas.models.player.playerLinked.skill.SkillType.ADVANCED
-import com.nicolas.models.player.playerLinked.skill.SkillType.BASIC
-import com.nicolas.models.player.playerLinked.skill.Specialization
+import com.nicolas.models.player.skill.Skill
+import com.nicolas.models.player.skill.SkillType.ADVANCED
+import com.nicolas.models.player.skill.SkillType.BASIC
+import com.nicolas.models.player.skill.Specialization
 import com.nicolas.playersheet.extensions.createHand
 import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.shared.HAND_INTENT_ARGUMENT

@@ -1,7 +1,7 @@
-package com.nicolas.models.player.playerLinked.item
+package com.nicolas.models.player.item
 
-import com.nicolas.models.player.playerLinked.item.enums.ItemType
-import com.nicolas.models.player.playerLinked.item.enums.Quality
+import com.nicolas.models.player.item.enums.ItemType
+import com.nicolas.models.player.item.enums.Quality
 
 data class Expandable(override var name: String = "Expandable",
                       override var description: String? = null,
