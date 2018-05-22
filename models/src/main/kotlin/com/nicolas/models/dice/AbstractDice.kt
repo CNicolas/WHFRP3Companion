@@ -1,4 +1,4 @@
-package com.nicolas.diceroller.dices
+package com.nicolas.models.dice
 
 import java.util.*
 
@@ -8,5 +8,5 @@ abstract class AbstractDice : Dice {
 
     override fun roll(): List<Face> = listOf(takeRandomFace())
 
-    internal fun takeRandomFace() = faces[Random().nextInt(facesCount)]
+    fun takeRandomFace() = faces[Random().nextInt(facesCount)]
 }

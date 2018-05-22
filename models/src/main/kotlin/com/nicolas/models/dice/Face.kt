@@ -1,4 +1,4 @@
-package com.nicolas.diceroller.dices
+package com.nicolas.models.dice
 
 enum class Face {
     VOID,

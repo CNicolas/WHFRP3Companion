@@ -1,9 +1,10 @@
 package com.nicolas.diceroller.dices
 
-import com.nicolas.diceroller.dices.Face.*
-import com.nicolas.diceroller.dices.impl.good.ConservativeDice
-import com.nicolas.diceroller.dices.impl.good.ExpertiseDice
-import com.nicolas.diceroller.dices.impl.good.RecklessDice
+import com.nicolas.models.dice.Face
+import com.nicolas.models.dice.Face.*
+import com.nicolas.models.dice.impl.good.ConservativeDice
+import com.nicolas.models.dice.impl.good.ExpertiseDice
+import com.nicolas.models.dice.impl.good.RecklessDice
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 

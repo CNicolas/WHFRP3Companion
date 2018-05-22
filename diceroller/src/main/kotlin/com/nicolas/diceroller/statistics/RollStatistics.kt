@@ -1,9 +1,9 @@
 package com.nicolas.diceroller.statistics
 
-import com.nicolas.diceroller.dices.Face.*
 import com.nicolas.diceroller.roll.FacesReport
 import com.nicolas.diceroller.roll.RollResult
 import com.nicolas.diceroller.roll.mergeReports
+import com.nicolas.models.dice.Face.*
 
 data class RollStatistics(private val rollResults: List<RollResult>) {
     val rollCount = rollResults.size

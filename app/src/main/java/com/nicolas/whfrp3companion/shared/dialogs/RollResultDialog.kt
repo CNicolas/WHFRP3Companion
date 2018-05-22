@@ -10,8 +10,8 @@ import android.widget.TextView
 import butterknife.BindView
 import butterknife.ButterKnife
 import butterknife.Unbinder
-import com.nicolas.diceroller.dices.Face
 import com.nicolas.diceroller.roll.RollResult
+import com.nicolas.models.dice.Face
 import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.shared.DIALOG_ROLL_RESULT_TAG
 
