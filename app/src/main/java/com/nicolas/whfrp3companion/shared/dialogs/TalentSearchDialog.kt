@@ -51,6 +51,10 @@ class TalentSearchDialog : DialogFragment() {
                         PLAYER_NAME_INTENT_ARGUMENT to playerName
                 ))
                 dismiss()
+
+                if (it is TalentsActivity) {
+                    it.finish()
+                }
             }
         })
 

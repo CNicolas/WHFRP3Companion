@@ -28,6 +28,7 @@
                   android:layout_height="50dp"
                   android:gravity="center"
                   android:textSize="@dimen/medium_text_size"
+                  android:ellipsize="end"
                   android:hint="@string/talent_name"
                   app:layout_constraintTop_toTopOf="parent"
                   app:layout_constraintRight_toLeftOf="@+id/addTalentButton"

@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.Typeface.BOLD_ITALIC
 import android.support.v4.content.ContextCompat
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -20,6 +21,7 @@ import com.nicolas.whfrp3companion.shared.bind
 import com.nicolas.whfrp3companion.shared.enums.colorId
 import com.nicolas.whfrp3companion.shared.enums.labelId
 import com.nicolas.whfrp3companion.shared.viewModifications.parseTemplatedText
+import org.jetbrains.anko.design.snackbar
 import org.jetbrains.anko.toast
 
 class PlayerTalentsAdapter(context: Context,
@@ -27,20 +29,24 @@ class PlayerTalentsAdapter(context: Context,
                            private val talentListener: TalentListener,
                            private val talentEditionMode: TalentEditionMode) : RecyclerView.Adapter<PlayerTalentsAdapter.ViewHolder>() {
     private val inflater = LayoutInflater.from(context)
+    private val addedTalents = mutableListOf<Talent>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = inflater.inflate(R.layout.list_element_player_talent, parent, false)
 
-        return ViewHolder(view, talentListener, talentEditionMode)
+        return ViewHolder(view, talentListener, talentEditionMode) { talent -> addedTalents.add(talent) }
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.setupViews(talents[position])
+        holder.setupViews(talents[position], addedTalents)
     }
 
     override fun getItemCount(): Int = talents.size
 
-    class ViewHolder(private val view: View, private val talentListener: TalentListener, talentEditionMode: TalentEditionMode) : RecyclerView.ViewHolder(view) {
+    class ViewHolder(private val view: View,
+                     private val talentListener: TalentListener,
+                     talentEditionMode: TalentEditionMode,
+                     private val addTalent: (Talent) -> Unit) : RecyclerView.ViewHolder(view) {
         private val talentTypeTextView by view.bind<TextView>(R.id.talentTypeTextView)
         private val talentNameTextView by view.bind<TextView>(R.id.talentNameTextView)
         private val talentDescriptionTextView by view.bind<TextView>(R.id.talentDescriptionTextView)
@@ -49,6 +55,7 @@ class PlayerTalentsAdapter(context: Context,
         private val removeTalentButton by view.bind<ImageButton>(R.id.removeTalentButton)
 
         private lateinit var talent: Talent
+        private lateinit var addedTalents: List<Talent>
 
         init {
             ButterKnife.bind(this, view)
@@ -67,8 +74,9 @@ class PlayerTalentsAdapter(context: Context,
             }
         }
 
-        fun setupViews(talent: Talent) {
+        fun setupViews(talent: Talent, addedTalents: List<Talent>) {
             this.talent = talent
+            this.addedTalents = addedTalents
 
             val talentTypeColor = ContextCompat.getColor(view.context, talent.type.colorId)
 
@@ -79,6 +87,7 @@ class PlayerTalentsAdapter(context: Context,
             talentNameTextView.setTextColor(talentTypeColor)
             if (talent.isEquipped) {
                 talentNameTextView.setTypeface(null, BOLD_ITALIC)
+                talentTypeTextView.setTypeface(null, BOLD_ITALIC)
             }
 
             addTalentButton.imageTintList = ColorStateList.valueOf(talentTypeColor)
@@ -86,13 +95,22 @@ class PlayerTalentsAdapter(context: Context,
             removeTalentButton.imageTintList = ColorStateList.valueOf(talentTypeColor)
 
             talentDescriptionTextView.text = parseTemplatedText(view.context, talent.description)
+
+            addedTalents.find { it.name == talent.name }?.let {
+                this.addTalentButton.visibility = View.GONE
+            }
         }
 
         @OnClick(R.id.addTalentButton)
         fun onAddTalent() {
             talentListener.onAddTalent(talent)
-            addTalentButton.isEnabled = false
-            view.context.toast("${talent.name} Added")
+            addTalent(talent)
+            this.addTalentButton.visibility = View.GONE
+
+            (view.context as AppCompatActivity).let { activity ->
+                val snackbarText = activity.getString(R.string.talent_added_format).format(talent.name)
+                snackbar(view, snackbarText).show()
+            }
         }
 
         @OnClick(R.id.toggleTalentEquipmentButton)
@@ -103,6 +121,11 @@ class PlayerTalentsAdapter(context: Context,
         @OnClick(R.id.removeTalentButton)
         fun onRemoveTalent() {
             talentListener.onRemoveTalent(talent)
+        }
+
+        @OnClick(R.id.talentNameTextView)
+        fun onClickOnTalentName() {
+            view.context.toast(talent.name)
         }
     }
 }
