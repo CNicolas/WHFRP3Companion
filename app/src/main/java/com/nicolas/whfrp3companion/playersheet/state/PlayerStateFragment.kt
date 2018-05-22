@@ -13,9 +13,8 @@ import butterknife.ButterKnife
 import butterknife.OnClick
 import butterknife.Unbinder
 import com.nicolas.database.PlayerRepository
-import com.nicolas.models.extensions.getEquippedWeapons
+import com.nicolas.models.extensions.*
 import com.nicolas.models.player.Player
-import com.nicolas.playersheet.extensions.*
 import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.shared.PLAYER_NAME_INTENT_ARGUMENT
 import kotlinx.android.synthetic.main.fragment_player_state.*

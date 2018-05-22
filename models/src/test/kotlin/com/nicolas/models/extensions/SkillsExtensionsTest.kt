@@ -1,4 +1,4 @@
-package com.nicolas.playersheet.extensions
+package com.nicolas.models.extensions
 
 import com.nicolas.models.player.enums.Characteristic.AGILITY
 import com.nicolas.models.player.enums.Characteristic.STRENGTH

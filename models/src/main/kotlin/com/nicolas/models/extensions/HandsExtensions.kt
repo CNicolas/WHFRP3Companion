@@ -1,6 +1,5 @@
-package com.nicolas.playersheet.extensions
+package com.nicolas.models.extensions
 
-import com.nicolas.models.extensions.getSpecializationByName
 import com.nicolas.models.hand.DifficultyLevel
 import com.nicolas.models.hand.Hand
 import com.nicolas.models.player.Player

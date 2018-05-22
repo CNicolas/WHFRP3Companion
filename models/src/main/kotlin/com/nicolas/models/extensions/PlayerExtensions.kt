@@ -1,7 +1,7 @@
-package com.nicolas.playersheet.extensions
+package com.nicolas.models.extensions
 
 import com.nicolas.models.player.Player
-import com.nicolas.playersheet.enums.PlayerLivingState
+import com.nicolas.models.player.enums.PlayerLivingState
 
 fun Player.earnExperiencePoints(experiencePoints: Int): Player {
     experience += experiencePoints

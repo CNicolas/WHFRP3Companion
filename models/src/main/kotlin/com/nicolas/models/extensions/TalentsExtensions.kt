@@ -48,3 +48,4 @@ fun Player.toggleEquipment(talent: Talent): Player {
 
 fun List<Talent>.findByType(talentType: TalentType) =
         filter { it.type == talentType }
+

@@ -1,4 +1,4 @@
-package com.nicolas.playersheet.extensions
+package com.nicolas.models.extensions
 
 import com.nicolas.models.player.Player
 import org.assertj.core.api.Assertions.assertThat

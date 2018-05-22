@@ -1,7 +1,5 @@
-package com.nicolas.playersheet.dtos
+package com.nicolas.models.player.talent
 
-import com.nicolas.models.player.talent.TalentCooldown
-import com.nicolas.models.player.talent.TalentType
 import java.io.Serializable
 
 data class TalentSearch(val text: String,

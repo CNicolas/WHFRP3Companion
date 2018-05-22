@@ -12,8 +12,8 @@ import butterknife.BindView
 import butterknife.ButterKnife
 import butterknife.Unbinder
 import com.nicolas.models.player.talent.TalentCooldown
+import com.nicolas.models.player.talent.TalentSearch
 import com.nicolas.models.player.talent.TalentType
-import com.nicolas.playersheet.dtos.TalentSearch
 import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.shared.PLAYER_NAME_INTENT_ARGUMENT
 import com.nicolas.whfrp3companion.shared.TALENTS_SEARCH_INTENT_ARGUMENT

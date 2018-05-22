@@ -1,9 +1,7 @@
-package com.nicolas.playersheet.extensions
+package com.nicolas.models.extensions
 
-import com.nicolas.models.extensions.findByType
 import com.nicolas.models.player.talent.Talent
 import com.nicolas.models.player.talent.TalentCooldown
-import com.nicolas.models.player.talent.TalentCooldown.*
 import com.nicolas.models.player.talent.TalentType
 
 fun List<Talent>.findTalents(text: String? = null,
@@ -27,9 +25,9 @@ fun List<Talent>.findTalents(text: String? = null,
 }
 
 fun List<Talent>.findByCooldown(talentCooldown: TalentCooldown) = when (talentCooldown) {
-    PASSIVE -> filter { it.cooldown == PASSIVE }
-    TALENT -> filter { it.cooldown == TALENT }
-    SESSION -> filter { it.cooldown == SESSION }
+    TalentCooldown.PASSIVE -> filter { it.cooldown == TalentCooldown.PASSIVE }
+    TalentCooldown.TALENT -> filter { it.cooldown == TalentCooldown.TALENT }
+    TalentCooldown.SESSION -> filter { it.cooldown == TalentCooldown.SESSION }
 }
 
 fun List<Talent>.findByText(text: String) =

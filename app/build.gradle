@@ -25,7 +25,6 @@ android {
 dependencies {
     compile project(path: ':models')
     compile project(path: ':diceroller')
-    compile project(':playersheet')
     compile project(':database')
 
     // Android

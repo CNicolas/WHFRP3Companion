@@ -1,9 +1,9 @@
-package com.nicolas.playersheet.extensions
+package com.nicolas.models.extensions
 
 import com.nicolas.models.player.CharacteristicValue
 import com.nicolas.models.player.Player
-import com.nicolas.playersheet.enums.ExhaustionState.*
-import com.nicolas.playersheet.enums.StressState.*
+import com.nicolas.models.player.enums.ExhaustionState.*
+import com.nicolas.models.player.enums.StressState.*
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 
