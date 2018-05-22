@@ -53,8 +53,8 @@ class PlayersFragment : Fragment() {
 
     @OnItemClick(R.id.playersList)
     fun onPlayerClick(position: Int) {
-        if (activity != null) {
-            startActivity(activity!!.intentFor<PlayerSheetActivity>(
+        activity?.let {
+            startActivity(it.intentFor<PlayerSheetActivity>(
                     PLAYER_NAME_INTENT_ARGUMENT to players[position].name
             ))
         }

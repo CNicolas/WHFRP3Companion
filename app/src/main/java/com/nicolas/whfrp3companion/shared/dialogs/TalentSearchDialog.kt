@@ -6,19 +6,29 @@ import android.app.Dialog
 import android.os.Bundle
 import android.support.v4.app.DialogFragment
 import android.widget.ArrayAdapter
+import android.widget.EditText
+import android.widget.Spinner
+import butterknife.BindView
 import butterknife.ButterKnife
 import butterknife.Unbinder
 import com.nicolas.models.player.playerLinked.talent.TalentCooldown
 import com.nicolas.models.player.playerLinked.talent.TalentType
 import com.nicolas.playersheet.dtos.TalentSearch
 import com.nicolas.whfrp3companion.R
+import com.nicolas.whfrp3companion.shared.PLAYER_NAME_INTENT_ARGUMENT
 import com.nicolas.whfrp3companion.shared.TALENTS_SEARCH_INTENT_ARGUMENT
 import com.nicolas.whfrp3companion.shared.activities.TalentsActivity
 import com.nicolas.whfrp3companion.shared.enums.labelId
-import kotlinx.android.synthetic.main.dialog_talent_search.*
 import org.jetbrains.anko.intentFor
 
 class TalentSearchDialog : DialogFragment() {
+    @BindView(R.id.talentTypeSpinner)
+    lateinit var talentTypeSpinner: Spinner
+    @BindView(R.id.cooldownSpinner)
+    lateinit var cooldownSpinner: Spinner
+    @BindView(R.id.searchEditText)
+    lateinit var searchEditText: EditText
+
     private lateinit var unbinder: Unbinder
 
     private var talentSearch: TalentSearch? = null
@@ -30,15 +40,21 @@ class TalentSearchDialog : DialogFragment() {
         val view = inflater.inflate(R.layout.dialog_talent_search, null, false)
 
         talentSearch = arguments!!.getSerializable(TALENTS_SEARCH_INTENT_ARGUMENT) as TalentSearch?
+        val playerName = arguments!!.getSerializable(PLAYER_NAME_INTENT_ARGUMENT) as String?
 
         builder.setView(view)
         builder.setTitle(R.string.search)
         builder.setPositiveButton(R.string.search, { _, _ ->
-            if (activity != null) {
-                startActivity(activity!!.intentFor<TalentsActivity>(
-                        TALENTS_SEARCH_INTENT_ARGUMENT to getTalentSearchFromViews()
+            activity?.let {
+                startActivity(it.intentFor<TalentsActivity>(
+                        TALENTS_SEARCH_INTENT_ARGUMENT to getTalentSearchFromViews(),
+                        PLAYER_NAME_INTENT_ARGUMENT to playerName
                 ))
                 dismiss()
+
+                if (it is TalentsActivity) {
+                    it.finish()
+                }
             }
         })
 
@@ -82,16 +98,25 @@ class TalentSearchDialog : DialogFragment() {
     }
 
     companion object {
-        fun newInstance(talentSearch: TalentSearch? = null): TalentSearchDialog {
-            val args = Bundle()
-            if (talentSearch != null) {
-                args.putSerializable(TALENTS_SEARCH_INTENT_ARGUMENT, talentSearch)
-            }
-
-            val fragment = TalentSearchDialog()
-            fragment.arguments = args
-
-            return fragment
+        fun newInstance(): TalentSearchDialog {
+            return createFragment(Bundle())
         }
+
+        fun newInstance(talentSearch: TalentSearch): TalentSearchDialog {
+            val args = Bundle()
+            args.putSerializable(TALENTS_SEARCH_INTENT_ARGUMENT, talentSearch)
+
+            return createFragment(args)
+        }
+
+        fun newInstance(playerName: String): TalentSearchDialog {
+            val args = Bundle()
+            args.putSerializable(PLAYER_NAME_INTENT_ARGUMENT, playerName)
+
+            return createFragment(args)
+        }
+
+        private fun createFragment(args: Bundle): TalentSearchDialog =
+                TalentSearchDialog().apply { arguments = args }
     }
 }

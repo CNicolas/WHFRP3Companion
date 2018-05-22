@@ -8,14 +8,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import butterknife.ButterKnife
-import butterknife.OnClick
 import com.nicolas.models.player.playerLinked.talent.Talent
 import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.shared.bind
 import com.nicolas.whfrp3companion.shared.enums.colorId
 import com.nicolas.whfrp3companion.shared.enums.labelId
 import com.nicolas.whfrp3companion.shared.viewModifications.parseTemplatedText
-import org.jetbrains.anko.toast
 
 class TalentsAdapter(context: Context, private val talents: List<Talent>) : RecyclerView.Adapter<TalentsAdapter.ViewHolder>() {
     private val inflater = LayoutInflater.from(context)
@@ -55,11 +53,6 @@ class TalentsAdapter(context: Context, private val talents: List<Talent>) : Recy
             nameView.setTextColor(talentTypeColor)
 
             descriptionView.text = parseTemplatedText(view.context, talent.description)
-        }
-
-        @OnClick(R.id.talent_name)
-        fun selectTalent() {
-            view.context.toast(talent.toString())
         }
     }
 }

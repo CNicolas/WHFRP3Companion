@@ -63,8 +63,8 @@ class PlayerInventoryFragment : Fragment() {
     }
 
     private fun startItemEditionActivity(item: Item? = null) {
-        if (activity != null) {
-            startActivity(activity!!.intentFor<ItemEditionActivity>(
+        activity?.let {
+            startActivity(it.intentFor<ItemEditionActivity>(
                     PLAYER_NAME_INTENT_ARGUMENT to player.name,
                     ITEM_EDIT_INTENT_ARGUMENT to item
             ))
