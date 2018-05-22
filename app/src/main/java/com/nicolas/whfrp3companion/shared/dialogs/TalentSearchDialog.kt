@@ -45,8 +45,8 @@ class TalentSearchDialog : DialogFragment() {
         builder.setView(view)
         builder.setTitle(R.string.search)
         builder.setPositiveButton(R.string.search, { _, _ ->
-            if (activity != null) {
-                startActivity(activity!!.intentFor<TalentsActivity>(
+            activity?.let {
+                startActivity(it.intentFor<TalentsActivity>(
                         TALENTS_SEARCH_INTENT_ARGUMENT to getTalentSearchFromViews(),
                         PLAYER_NAME_INTENT_ARGUMENT to playerName
                 ))

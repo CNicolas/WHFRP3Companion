@@ -49,8 +49,8 @@ class TalentTypesFragment : Fragment() {
 
     @OnItemClick(R.id.talentTypesListView)
     fun onTalentTypeClick(position: Int) {
-        if (activity != null) {
-            startActivity(activity!!.intentFor<TalentsActivity>(
+        activity?.let {
+            startActivity(it.intentFor<TalentsActivity>(
                     TALENTS_SEARCH_INTENT_ARGUMENT to TalentSearch(text = "", talentType = TalentType[position], cooldown = null)
             ))
         }
