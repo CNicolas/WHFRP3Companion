@@ -4,10 +4,8 @@ import android.content.res.Configuration
 import android.os.Bundle
 import android.support.design.widget.NavigationView
 import android.support.v4.view.GravityCompat
-import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.Toolbar
 import android.view.MenuItem
 import butterknife.ButterKnife
 import butterknife.Unbinder
@@ -16,13 +14,11 @@ import com.nicolas.whfrp3companion.fragments.players.PlayersFragment
 import com.nicolas.whfrp3companion.fragments.skills.SkillsFragment
 import com.nicolas.whfrp3companion.fragments.talents.TalentTypesFragment
 import com.nicolas.whfrp3companion.shared.activities.DiceRollerActivity
-import com.nicolas.whfrp3companion.shared.bind
+import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.toolbar.*
 import org.jetbrains.anko.intentFor
 
-
 class MainActivity : AppCompatActivity() {
-    private val drawer by bind<DrawerLayout>(R.id.main_drawer_layout)
-
     private lateinit var unbinder: Unbinder
 
     private lateinit var toggle: ActionBarDrawerToggle
@@ -33,11 +29,10 @@ class MainActivity : AppCompatActivity() {
 
         unbinder = ButterKnife.bind(this)
 
-        val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
 
-        toggle = ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
-        drawer.addDrawerListener(toggle)
+        toggle = ActionBarDrawerToggle(this, mainDrawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
+        mainDrawerLayout.addDrawerListener(toggle)
 
         val navigationView = findViewById<NavigationView>(R.id.nav_view)
         setupDrawerContent(navigationView)
@@ -83,14 +78,14 @@ class MainActivity : AppCompatActivity() {
                 .replace(R.id.main_content_frame, fragment)
                 .commit()
 
-        drawer.closeDrawer(GravityCompat.START)
+        mainDrawerLayout.closeDrawer(GravityCompat.START)
     }
 
     private fun displaySelectedFragment(menuItem: MenuItem) {
         if (menuItem.itemId == R.id.nav_dice_roller) {
             startActivity(this.intentFor<DiceRollerActivity>())
 
-            drawer.closeDrawer(GravityCompat.START)
+            mainDrawerLayout.closeDrawer(GravityCompat.START)
         } else {
             displaySelectedFragment(menuItem.itemId)
 

@@ -14,7 +14,8 @@
                android:src="@drawable/ic_potion_black_24dp"
                android:contentDescription="@string/uses" />
 
-    <com.nicolas.whfrp3companion.shared.components.NumberPickerMinMax android:id="@+id/uses"
+    <com.nicolas.whfrp3companion.shared.components.NumberPickerMinMax
+        android:id="@+id/usesNumberPicker"
                                                                       android:layout_width="wrap_content"
                                                                       android:layout_height="wrap_content"
                                                                       app:minValue="@integer/zero"

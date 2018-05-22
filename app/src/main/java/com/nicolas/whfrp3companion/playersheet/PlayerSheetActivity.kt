@@ -20,6 +20,7 @@ import com.nicolas.whfrp3companion.playersheet.characteristics.PlayerCharacteris
 import com.nicolas.whfrp3companion.playersheet.inventory.PlayerInventoryFragment
 import com.nicolas.whfrp3companion.playersheet.skills.PlayerSkillsFragment
 import com.nicolas.whfrp3companion.playersheet.state.PlayerStateFragment
+import com.nicolas.whfrp3companion.playersheet.talents.PlayerTalentsFragment
 import com.nicolas.whfrp3companion.shared.PLAYER_NAME_INTENT_ARGUMENT
 import com.nicolas.whfrp3companion.shared.bind
 import com.nicolas.whfrp3companion.shared.enums.labelId
@@ -81,8 +82,8 @@ class PlayerSheetActivity : AppCompatActivity() {
             R.id.nav_player_state -> PlayerStateFragment.newInstance(player.name)
             R.id.nav_player_skills -> PlayerSkillsFragment.newInstance(player.name)
             R.id.nav_player_inventory -> PlayerInventoryFragment.newInstance(player.name)
+            R.id.nav_player_talents -> PlayerTalentsFragment.newInstance(player.name)
 //            R.id.nav_player_actions -> PlayerActionsFragment()
-//            R.id.nav_player_talents -> PlayerTalentsFragment()
             else -> EmptyFragment.newInstance()
         }
 

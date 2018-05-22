@@ -159,7 +159,7 @@ class PlayerInventoryExpandableAdapter(private val context: Context,
             when (item.quality) {
                 LOW -> itemNameTextView.setTextColor(ContextCompat.getColor(itemNameTextView.context, R.color.colorSecondaryText))
                 NORMAL -> itemNameTextView.setTextColor(ContextCompat.getColor(itemNameTextView.context, R.color.colorPrimaryText))
-                SUPERIOR -> itemNameTextView.setTextColor(ContextCompat.getColor(itemNameTextView.context, R.color.colorAccent))
+                SUPERIOR -> itemNameTextView.setTextColor(ContextCompat.getColor(itemNameTextView.context, R.color.colorSecondary))
                 MAGIC -> itemNameTextView.setTextColor(ContextCompat.getColor(itemNameTextView.context, R.color.orange))
             }
 

@@ -5,8 +5,10 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ListView
-import butterknife.*
+import butterknife.ButterKnife
+import butterknife.OnClick
+import butterknife.OnItemClick
+import butterknife.Unbinder
 import com.nicolas.models.player.playerLinked.talent.TalentType
 import com.nicolas.playersheet.dtos.TalentSearch
 import com.nicolas.whfrp3companion.R
@@ -14,12 +16,12 @@ import com.nicolas.whfrp3companion.shared.DIALOG_TALENT_TYPE_TAG
 import com.nicolas.whfrp3companion.shared.TALENTS_SEARCH_INTENT_ARGUMENT
 import com.nicolas.whfrp3companion.shared.activities.TalentsActivity
 import com.nicolas.whfrp3companion.shared.dialogs.TalentSearchDialog
+import kotlinx.android.synthetic.main.fragment_talent_types.*
+import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.intentFor
+import org.jetbrains.anko.uiThread
 
 class TalentTypesFragment : Fragment() {
-    @BindView(R.id.talent_types_list)
-    lateinit var talentTypesListView: ListView
-
     private lateinit var unbinder: Unbinder
 
     override fun onCreateView(inflater: LayoutInflater,
@@ -29,8 +31,13 @@ class TalentTypesFragment : Fragment() {
 
         unbinder = ButterKnife.bind(this, resultingView)
 
-        val talentTypesAdapter = TalentTypesAdapter(context!!)
-        talentTypesListView.adapter = talentTypesAdapter
+        doAsync {
+            val talentTypesAdapter = TalentTypesAdapter(context!!)
+
+            uiThread {
+                talentTypesListView.adapter = talentTypesAdapter
+            }
+        }
 
         return resultingView
     }
@@ -40,10 +47,10 @@ class TalentTypesFragment : Fragment() {
         unbinder.unbind()
     }
 
-    @OnItemClick(R.id.talent_types_list)
+    @OnItemClick(R.id.talentTypesListView)
     fun onTalentTypeClick(position: Int) {
-        if (activity != null) {
-            startActivity(activity!!.intentFor<TalentsActivity>(
+        activity?.let {
+            startActivity(it.intentFor<TalentsActivity>(
                     TALENTS_SEARCH_INTENT_ARGUMENT to TalentSearch(text = "", talentType = TalentType[position], cooldown = null)
             ))
         }

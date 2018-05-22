@@ -5,8 +5,6 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.EditText
-import android.widget.NumberPicker
 import butterknife.ButterKnife
 import butterknife.OnClick
 import butterknife.Unbinder
@@ -17,24 +15,14 @@ import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.shared.DIALOG_ROLL_RESULT_TAG
 import com.nicolas.whfrp3companion.shared.HAND_INTENT_ARGUMENT
 import com.nicolas.whfrp3companion.shared.HAND_ROLL_COUNT_INTENT_ARGUMENT
-import com.nicolas.whfrp3companion.shared.bind
 import com.nicolas.whfrp3companion.shared.dialogs.RollResultDialog
+import kotlinx.android.synthetic.main.content_dice_roller.*
 import org.jetbrains.anko.alert
 import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.toast
 import org.koin.android.ext.android.inject
 
 class DiceRollerActivity : AppCompatActivity() {
-    private val handNameView by bind<EditText>(R.id.hand_name)
-
-    private val characteristicDicePicker by bind<NumberPicker>(R.id.characteristic_dice_picker)
-    private val conservativeDicePicker by bind<NumberPicker>(R.id.conservative_dice_picker)
-    private val recklessDicePicker by bind<NumberPicker>(R.id.reckless_dice_picker)
-    private val expertiseDicePicker by bind<NumberPicker>(R.id.expertise_dice_picker)
-    private val fortuneDicePicker by bind<NumberPicker>(R.id.fortune_dice_picker)
-    private val challengeDicePicker by bind<NumberPicker>(R.id.challenge_dice_picker)
-    private val misfortuneDicePicker by bind<NumberPicker>(R.id.misfortune_dice_picker)
-
     private lateinit var unbinder: Unbinder
 
     private val handRepository by inject<HandRepository>()
@@ -105,7 +93,7 @@ class DiceRollerActivity : AppCompatActivity() {
 
     @OnClick(R.id.roll_button)
     fun rollHand() {
-        val rollResultsDialog = RollResultDialog(getHandFromPickers().roll())
+        val rollResultsDialog = RollResultDialog.newInstance(getHandFromPickers().roll())
         rollResultsDialog.show(supportFragmentManager, DIALOG_ROLL_RESULT_TAG)
     }
 

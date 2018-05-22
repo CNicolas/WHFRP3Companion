@@ -14,7 +14,7 @@
                    android:contentDescription="@string/app_name"
                    android:src="@drawable/warhammer_v3_logo" />
 
-        <ListView android:id="@+id/list_players"
+        <ListView android:id="@+id/playersList"
                   android:layout_width="match_parent"
                   android:layout_height="wrap_content"
                   android:textAlignment="center"

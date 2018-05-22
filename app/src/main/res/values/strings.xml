@@ -138,6 +138,8 @@
     <string name="cooldown">Cooldown</string>
     <string name="talent_type">Talent type</string>
     <string name="talent_name">Talent name</string>
+    <string name="talent_added_format">%1$s added</string>
+
     <string name="skill">Skill</string>
     <string name="player_name">Player name</string>
     <string name="race">Race</string>

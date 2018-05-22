@@ -7,7 +7,10 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
+import android.widget.ArrayAdapter
+import android.widget.EditText
+import android.widget.PopupMenu
+import android.widget.Spinner
 import butterknife.*
 import com.nicolas.database.PlayerRepository
 import com.nicolas.models.player.Player
@@ -16,6 +19,7 @@ import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.playersheet.PlayerSheetActivity
 import com.nicolas.whfrp3companion.shared.PLAYER_NAME_INTENT_ARGUMENT
 import com.nicolas.whfrp3companion.shared.enums.labelId
+import kotlinx.android.synthetic.main.fragment_players.*
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.toast
@@ -23,9 +27,6 @@ import org.jetbrains.anko.uiThread
 import org.koin.android.ext.android.inject
 
 class PlayersFragment : Fragment() {
-    @BindView(R.id.list_players)
-    lateinit var playersListView: ListView
-
     private lateinit var unbinder: Unbinder
 
     private val playerRepository by inject<PlayerRepository>()
@@ -50,16 +51,16 @@ class PlayersFragment : Fragment() {
         unbinder.unbind()
     }
 
-    @OnItemClick(R.id.list_players)
+    @OnItemClick(R.id.playersList)
     fun onPlayerClick(position: Int) {
-        if (activity != null) {
-            startActivity(activity!!.intentFor<PlayerSheetActivity>(
+        activity?.let {
+            startActivity(it.intentFor<PlayerSheetActivity>(
                     PLAYER_NAME_INTENT_ARGUMENT to players[position].name
             ))
         }
     }
 
-    @OnItemLongClick(R.id.list_players)
+    @OnItemLongClick(R.id.playersList)
     fun onPlayerLongClick(view: View, position: Int): Boolean {
         val player = players[position]
         val playerPopupMenu = PopupMenu(activity!!, view, Gravity.END)
@@ -108,7 +109,7 @@ class PlayersFragment : Fragment() {
         doAsync {
             players = playerRepository.findAll()
             uiThread {
-                playersListView.adapter = PlayersAdapter(context!!, players)
+                playersList.adapter = PlayersAdapter(context!!, players)
             }
         }
     }
