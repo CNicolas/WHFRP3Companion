@@ -41,25 +41,29 @@ class PlayerStateFragment : Fragment() {
         val playerName = arguments!!.getString(PLAYER_NAME_INTENT_ARGUMENT)
         player = playerRepository.find(playerName)!!
 
-        removeWoundButton.isEnabled = player.wounds > 0
-        updateWoundsText()
+        doAsync {
+            uiThread {
+                removeWoundButton.isEnabled = player.wounds > 0
+                updateWoundsText()
 
-        removeStressButton.isEnabled = player.stress > 0
-        updateStressText()
+                removeStressButton.isEnabled = player.stress > 0
+                updateStressText()
 
-        removeExhaustionButton.isEnabled = player.exhaustion > 0
-        updateExhaustionText()
+                removeExhaustionButton.isEnabled = player.exhaustion > 0
+                updateExhaustionText()
 
-        setupStance()
+                setupStance()
 
-        defenseTextView.text = "${player.defense}"
-        soakTextView.text = "${player.soak}"
+                defenseTextView.text = "${player.defense}"
+                soakTextView.text = "${player.soak}"
 
-        weaponsListView.adapter = WeaponsAdapter(context!!, player.getEquippedWeapons())
+                weaponsListView.adapter = WeaponsAdapter(context!!, player.getEquippedWeapons())
 
-        setupEncumbrance()
+                setupEncumbrance()
 
-        setupMoney()
+                setupMoney()
+            }
+        }
 
         return resultingView
     }
