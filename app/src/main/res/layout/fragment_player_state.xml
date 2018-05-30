@@ -216,9 +216,19 @@
               android:layout_marginBottom="@dimen/medium_padding"
               app:layout_constraintTop_toBottomOf="@id/defenseTextView"
               app:layout_constraintRight_toRightOf="parent"
-              app:layout_constraintBottom_toTopOf="@+id/encumbranceBar"
+              app:layout_constraintBottom_toTopOf="@+id/openEffects"
               app:layout_constraintLeft_toLeftOf="parent"
               tools:listitem="@layout/list_element_weapon" />
+
+    <Button android:id="@+id/openEffects"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_marginBottom="@dimen/medium_padding"
+            android:text="Effects"
+            app:layout_constraintTop_toBottomOf="@id/weaponsListView"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/encumbranceBar"
+            app:layout_constraintLeft_toLeftOf="parent" />
 
     <!--region Encumbrance-->
     <ImageView android:id="@+id/encumbrance_icon"

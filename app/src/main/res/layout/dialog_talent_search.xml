@@ -58,7 +58,7 @@
               android:layout_width="0dp"
               android:layout_height="40dp"
               android:gravity="center_vertical|end"
-              android:text="@string/search"
+              android:text="@string/search_talent"
               android:labelFor="@+id/searchEditText"
               android:paddingEnd="@dimen/medium_padding"
               app:layout_constraintBottom_toBottomOf="parent"

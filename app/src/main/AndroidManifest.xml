@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.nicolas.whfrp3companion">
+          package="com.nicolas.whfrp3companion">
 
     <application
         android:name=".WHFRP3Companion"
@@ -44,11 +44,27 @@
                 android:value=".playersheet.PlayerSheetActivity" />
         </activity>
 
+        <activity android:name=".playersheet.state.EffectsActivity"
+                  android:label="@string/page_effects"
+                  android:parentActivityName=".playersheet.PlayerSheetActivity"
+                  android:screenOrientation="portrait"
+                  android:theme="@style/AppTheme"
+                  android:windowSoftInputMode="stateHidden|adjustPan"
+                  android:launchMode="singleTop">
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
+            <meta-data android:name="android.app.searchable"
+                       android:value="@xml/searchable" />
+            <meta-data android:name="android.support.PARENT_ACTIVITY"
+                       android:value=".playersheet.PlayerSheetActivity" />
+        </activity>
+
         <activity
             android:name=".shared.activities.DiceRollerActivity"
             android:label="@string/page_dice_roller"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".shared.activities.DiceRollerStatisticsActivity"
             android:label="@string/page_dice_roller_statistics"
