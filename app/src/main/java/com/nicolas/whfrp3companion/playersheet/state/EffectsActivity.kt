@@ -1,10 +1,11 @@
 package com.nicolas.whfrp3companion.playersheet.state
 
-import android.app.ListActivity
 import android.app.SearchManager
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.widget.ArrayAdapter
 import android.widget.SearchView
@@ -12,7 +13,7 @@ import com.nicolas.models.player.effect.Effect
 import com.nicolas.whfrp3companion.R
 import kotlinx.android.synthetic.main.activity_effects.*
 
-class EffectsActivity internal constructor() : ListActivity() {
+class EffectsActivity internal constructor() : AppCompatActivity() {
     private val allEffects = listOf(
             Effect("First"),
             Effect("Second"),
@@ -20,29 +21,32 @@ class EffectsActivity internal constructor() : ListActivity() {
             Effect("Fourth"),
             Effect("Fifth"))
 
-    override fun onCreate(savedInstanceState: Bundle) {
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_effects)
+
+        val toolbar = findViewById<Toolbar>(R.id.toolbar)
+        setSupportActionBar(toolbar)
 
         handleIntent(intent)
     }
 
     override fun onNewIntent(intent: Intent?) {
-        intent?.let {
-            setIntent(intent)
-            handleIntent(intent)
-        }
+        setIntent(intent)
+        handleIntent(intent)
     }
 
-    private fun handleIntent(intent: Intent) {
-        val effects = if (Intent.ACTION_SEARCH == intent.action) {
-            val query = intent.getStringExtra(SearchManager.QUERY)
-            searchEffectByName(query)
-        } else {
-            allEffects.toList()
-        }
+    private fun handleIntent(intent: Intent?) {
+        intent?.let {
+            val effects = if (Intent.ACTION_SEARCH == intent.action) {
+                val query = intent.getStringExtra(SearchManager.QUERY)
+                searchEffectByName(query)
+            } else {
+                allEffects.toList()
+            }
 
-        effectsListView.adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, effects.map { it.name })
+            effectsListView.adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, effects.map { it.name })
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
