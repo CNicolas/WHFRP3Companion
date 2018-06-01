@@ -1,6 +1,7 @@
 package com.nicolas.whfrp3companion.playersheet.state
 
 import android.app.AlertDialog
+import android.app.SearchManager
 import android.content.res.ColorStateList
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -19,8 +20,7 @@ import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.shared.PLAYER_NAME_INTENT_ARGUMENT
 import kotlinx.android.synthetic.main.fragment_player_state.*
 import org.adw.library.widgets.discreteseekbar.DiscreteSeekBar
-import org.jetbrains.anko.doAsync
-import org.jetbrains.anko.toast
+import org.jetbrains.anko.*
 import org.koin.android.ext.android.inject
 import kotlin.math.abs
 
@@ -131,6 +131,21 @@ class PlayerStateFragment : Fragment() {
         updateExhaustionText()
 
         updatePlayerAsync()
+    }
+
+    @OnClick(R.id.openEffects)
+    fun openEffects() {
+        activity?.let { act ->
+            act.alert {
+                title = "Effects ?"
+                yesButton {
+                    startActivity(act.intentFor<EffectsActivity>(
+                            SearchManager.QUERY to ""
+                    ))
+                }
+                noButton {}
+            }.show()
+        }
     }
 
     @OnClick(R.id.change_money)

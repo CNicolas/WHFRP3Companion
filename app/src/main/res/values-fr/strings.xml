@@ -145,4 +145,8 @@
     <string name="cooldown_session">Session</string>
     <string name="cooldown_talent">Talent</string>
     <string name="all">Tout</string>
+    <string name="page_effects">Effets</string>
+    <string name="search_effect">Rechercher un effet</string>
+    <string name="search_talent">Rechercher un talent</string>
+    <string name="talent_added_format">%1$s ajoutés</string>
 </resources>

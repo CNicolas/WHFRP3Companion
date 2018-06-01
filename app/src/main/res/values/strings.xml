@@ -26,6 +26,7 @@
     <string name="page_inventory">Inventory</string>
     <string name="page_actions">Actions</string>
     <string name="page_add_item">Add Item</string>
+    <string name="page_effects">Effects</string>
 
     <string name="characteristic">Characteristic</string>
     <string name="conservative">Conservative</string>
@@ -139,6 +140,9 @@
     <string name="talent_type">Talent type</string>
     <string name="talent_name">Talent name</string>
     <string name="talent_added_format">%1$s added</string>
+    <string name="search_talent">Search talent</string>
+
+    <string name="search_effect">Search effect</string>
 
     <string name="skill">Skill</string>
     <string name="player_name">Player name</string>
