@@ -49,8 +49,7 @@
                   android:parentActivityName=".playersheet.PlayerSheetActivity"
                   android:screenOrientation="portrait"
                   android:theme="@style/AppTheme"
-                  android:windowSoftInputMode="stateHidden|adjustPan"
-                  android:launchMode="singleTop">
+                  android:windowSoftInputMode="stateHidden|adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
