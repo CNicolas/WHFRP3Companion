@@ -1,0 +1,100 @@
+[
+  {
+    "name": "Abasourdi",
+    "description": "Ôtez {EXPERTISE_DICE} de votre réserve avant chaque jet. Quand des dégâts vous sont infligés, ces dégâts sont augmentés de 1.",
+    "allThrows": true,
+    "removedDices": [
+      "EXPERTISE"
+    ],
+    "damageTakenModifier": 1
+  },
+  {
+    "name": "Affaibli",
+    "description": "Ajoutez {MISFORTUNE_DICE} {MISFORTUNE_DICE} à vos test de FOR. Vos attaques basées sur la FOR infligent –2 dégâts.",
+    "characteristics": [
+      "STRENGTH"
+    ],
+    "addedDices": [
+      "MISFORTUNE",
+      "MISFORTUNE"
+    ],
+    "damageDealtModifier": -2
+  },
+  {
+    "name": "Aveuglé",
+    "description": "Ajoutez {CHALLENGE_DICE} à tous vos tests basés sur la vision.",
+    "skills": [
+      "Observation"
+    ],
+    "specializations": [
+      "Acuité Visuelle"
+    ],
+    "addedDices": [
+      "CHALLENGE"
+    ]
+  },
+  {
+    "name": "Démoralisé",
+    "description": "Annule Inspiré. Ajoute {MISFORTUNE_DICE} à vos tests de compétence.",
+    "allSkills": true,
+    "addedDices": [
+      "MISFORTUNE"
+    ],
+    "counterEffectName": "Inspiré"
+  },
+  {
+    "name": "Entravé",
+    "description": "Gagnez {EXERTION} supplémentaire lorsque vous effectuez une manoeuvre. Gagnez {EXERTION} {EXERTION} quand vous effectuez une action physique.",
+    "allManeuvers": true,
+    "exertion": 1
+  },
+  {
+    "name": "Endommagé",
+    "description": "Les armes affectée voient leur ND diminuer de 2. Tous les autres objets subissent {MISFORTUNE_DICE} {MISFORTUNE_DICE} à leur utilisation jusqu’à ce qu’il soient réparés.",
+    "allWeapons": true,
+    "damageDealtModifier": -2
+  },
+  {
+    "name": "Effrayé",
+    "description": "Tant qu’engagé avec une créature ayant un score de Peur ou de Terreur, convertissez un dé de moins d’attitude. Au début du tour, subissez {STRESS}.",
+    "stress": 1
+  },
+  {
+    "name": "Exposé",
+    "description": "Les attaquants ajoutent {FORTUNE_DICE} à leur jet."
+  },
+  {
+    "name": "Inspiré",
+    "description": "Annule Démoralisé. Ajoute {FORTUNE_DICE} à vos tests de compétence.",
+    "allSkills": true,
+    "addedDices": [
+      "FORTUNE"
+    ],
+    "counterEffectName": "Démoralisé"
+  },
+  {
+    "name": "Intimidé",
+    "description": "Vous ne pouvez pas convertir de dé de carac en dé de témérité."
+  },
+  {
+    "name": "Intoxiqué",
+    "description": "Ajouter {MISFORTUNE_DICE} {MISFORTUNE_DICE} et {FORTUNE_DICE} à tous vos jets.",
+    "allThrows": true,
+    "addedDices": [
+      "MISFORTUNE",
+      "MISFORTUNE",
+      "FORTUNE"
+    ]
+  },
+  {
+    "name": "Lent",
+    "description": "Annule Stimulé. Gagner {EXERTION} pour chaque manoeuvre du tour.",
+    "allManeuvers": true,
+    "exertion": 1
+  },
+  {
+    "name": "Malchanceux",
+    "description": "Gagner {STRESS} chaque fois que vous subissez 1 ou + blessure.",
+    "stress": 1
+  }
+]

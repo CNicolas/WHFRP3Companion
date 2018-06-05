@@ -11,6 +11,7 @@ import com.nicolas.models.player.skill.Specialization
 import java.io.Serializable
 
 data class Effect(val name: String,
+                  val description: String? = null,
 
                   val allThrows: Boolean = false,
 
@@ -38,4 +39,12 @@ data class Effect(val name: String,
                   val defense: Int? = null,
 
                   val damageDealtModifier: Int? = null,
-                  val damageTakenModifier: Int? = null) : Serializable
+                  val damageTakenModifier: Int? = null,
+
+                  val stress: Int? = null,
+                  val exertion: Int? = null,
+
+                  val allManeuvers: Boolean? = null,
+                  val engaged: Boolean? = null,
+
+                  val counterEffectName: String? = null) : Serializable

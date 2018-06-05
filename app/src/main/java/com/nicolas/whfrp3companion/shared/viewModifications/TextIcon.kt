@@ -16,10 +16,13 @@ enum class TextIcon(val drawableId: Int, val alignment: Int) {
     BANE_FACE(R.drawable.ic_bane_black_16, ImageSpan.ALIGN_BOTTOM),
     SUCCESS_FACE(R.drawable.ic_success_black_16, ImageSpan.ALIGN_BOTTOM),
     DELAY_FACE(R.drawable.ic_delay_black_16, ImageSpan.ALIGN_BOTTOM),
-    EXERTION_FACE(R.drawable.ic_exertion_black_16, ImageSpan.ALIGN_BOTTOM),
+    EXERTION_FACE(R.drawable.ic_exertion_16, ImageSpan.ALIGN_BOTTOM),
     FAILURE_FACE(R.drawable.ic_failure_black_16, ImageSpan.ALIGN_BOTTOM),
     SIGMAR_FACE(R.drawable.ic_sigmar_black_16, ImageSpan.ALIGN_BOTTOM),
     CHAOS_FACE(R.drawable.ic_chaos_black_16, ImageSpan.ALIGN_BOTTOM),
+
+    EXERTION(R.drawable.ic_exertion_16, ImageSpan.ALIGN_BOTTOM),
+    STRESS(R.drawable.ic_stress_16, ImageSpan.ALIGN_BOTTOM),
 
     P(R.drawable.circle_conservative, ImageSpan.ALIGN_BASELINE),
     N(R.drawable.circle_neutral, ImageSpan.ALIGN_BASELINE),
