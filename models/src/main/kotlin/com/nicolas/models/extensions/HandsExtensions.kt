@@ -14,11 +14,8 @@ fun Player.createHand(characteristic: Characteristic,
                       difficultyLevel: DifficultyLevel = DifficultyLevel.NONE): Hand {
     val hand = this[characteristic].getHand(name, difficultyLevel)
 
-    effects.forEach { effect ->
-        if (effect.characteristics?.contains(characteristic) == true) {
-            hand.applyEffectDices(effect)
-        }
-    }
+    getEffectsApplyingTo(characteristic)
+            .forEach { hand.applyEffectDices(it) }
 
     return hand
 }
@@ -29,11 +26,8 @@ fun Player.createHand(skill: Skill,
     val hand = this.createHand(skill.characteristic, name, difficultyLevel)
     hand.expertiseDicesCount += skill.level
 
-    effects.forEach { effect ->
-        if (effect.allSkills || effect.skills?.contains(skill) == true) {
-            hand.applyEffectDices(effect)
-        }
-    }
+    getEffectsApplyingTo(skill, true)
+            .forEach { hand.applyEffectDices(it) }
 
     return hand
 }
@@ -48,11 +42,8 @@ fun Player.createHand(skill: Skill,
         hand.fortuneDicesCount += 1
     }
 
-    effects.forEach { effect ->
-        if (effect.specializations?.contains(specialization) == true) {
-            hand.applyEffectDices(effect)
-        }
-    }
+    getEffectsApplyingTo(skill, specialization, true)
+            .forEach { hand.applyEffectDices(it) }
 
     return hand
 }

@@ -59,7 +59,14 @@ fun Player.removeAllItems() {
 }
 
 fun Player.getWeaponDamage(weapon: Weapon): Int {
-    val weaponDamage = weapon.damage
+    var weaponDamage = weapon.damage
+
+    getEffectApplyingTo(weapon).forEach {
+        it.damageDealtModifier?.let { damageModifier ->
+            weaponDamage += damageModifier
+        }
+    }
+
     return when (weapon.range) {
         Range.ENGAGED -> strength.value + weaponDamage
         else -> agility.value + weaponDamage

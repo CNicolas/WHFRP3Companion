@@ -1,5 +1,6 @@
 package com.nicolas.models.player.item
 
+import com.nicolas.models.player.item.enums.ArmorCategory
 import com.nicolas.models.player.item.enums.ArmorType
 import com.nicolas.models.player.item.enums.ItemType.ARMOR
 import com.nicolas.models.player.item.enums.Quality
@@ -17,4 +18,8 @@ data class Armor(override var name: String = "Armor",
                  var defense: Int = 0) : Equipment {
 
     override var type = ARMOR
+
+
+    val category: ArmorCategory
+        get() = subType.category
 }

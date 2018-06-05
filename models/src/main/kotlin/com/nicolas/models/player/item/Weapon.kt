@@ -3,6 +3,7 @@ package com.nicolas.models.player.item
 import com.nicolas.models.player.item.enums.ItemType.WEAPON
 import com.nicolas.models.player.item.enums.Quality
 import com.nicolas.models.player.item.enums.Range
+import com.nicolas.models.player.item.enums.WeaponCategory
 import com.nicolas.models.player.item.enums.WeaponType
 
 data class Weapon(override var name: String = "Weapon",
@@ -19,4 +20,7 @@ data class Weapon(override var name: String = "Weapon",
                   var range: Range = Range.ENGAGED) : Equipment {
 
     override var type = WEAPON
+
+    val category: WeaponCategory
+        get() = subType.category
 }
