@@ -2,6 +2,7 @@ package com.nicolas.database
 
 import android.content.Context
 import com.google.gson.Gson
+import com.nicolas.models.player.effect.Effect
 import com.nicolas.models.player.skill.Skill
 import com.nicolas.models.player.talent.Talent
 
@@ -15,4 +16,10 @@ fun loadTalents(context: Context): List<Talent> {
     val talentsReader = context.assets.open("talents.json").reader()
 
     return Gson().fromJson(talentsReader, genericType<List<Talent>>()) ?: listOf()
+}
+
+fun loadEffects(context: Context): List<Effect> {
+    val talentsReader = context.assets.open("effects.json").reader()
+
+    return Gson().fromJson(talentsReader, genericType<List<Effect>>()) ?: listOf()
 }
