@@ -50,7 +50,7 @@ fun Player.createHand(skill: Skill,
 
 private fun Hand.applyEffectDices(effect: Effect): Hand {
     effect.addedDices?.forEach {
-        when (it.type) {
+        when (it) {
             CHARACTERISTIC -> characteristicDicesCount += 1
             CONSERVATIVE -> conservativeDicesCount += 1
             RECKLESS -> recklessDicesCount += 1
@@ -62,7 +62,7 @@ private fun Hand.applyEffectDices(effect: Effect): Hand {
     }
 
     effect.removedDices?.forEach {
-        when (it.type) {
+        when (it) {
             CHARACTERISTIC -> characteristicDicesCount -= 1
             CONSERVATIVE -> conservativeDicesCount -= 1
             RECKLESS -> recklessDicesCount -= 1

@@ -1,12 +1,11 @@
 package com.nicolas.diceroller.hand
 
-import com.nicolas.models.dice.impl.bad.ChallengeDice
-import com.nicolas.models.dice.impl.good.ExpertiseDice
-import com.nicolas.models.dice.impl.good.FortuneDice
+import com.nicolas.models.dice.DiceType.*
 import com.nicolas.models.extensions.createHand
 import com.nicolas.models.player.CharacteristicValue
 import com.nicolas.models.player.Player
 import com.nicolas.models.player.effect.Effect
+import com.nicolas.models.player.effect.Trigger
 import com.nicolas.models.player.enums.Characteristic
 import com.nicolas.models.player.skill.Skill
 import org.assertj.core.api.Assertions.assertThat
@@ -25,14 +24,14 @@ class HandEffectTest {
                 skills = skills,
                 effects = listOf(
                         Effect("Inspiré",
-                                allThrows = true,
-                                addedDices = listOf(FortuneDice())),
+                                trigger = Trigger(everyThrow = true),
+                                addedDices = listOf(FORTUNE)),
                         Effect("Borgne",
-                                skills = listOf(Skill("Distance", Characteristic.AGILITY)),
-                                addedDices = listOf(ChallengeDice())),
+                                trigger = Trigger(skills = listOf(Skill("Distance", Characteristic.AGILITY))),
+                                addedDices = listOf(CHALLENGE)),
                         Effect("Agile",
-                                characteristics = listOf(Characteristic.AGILITY),
-                                addedDices = listOf(ExpertiseDice()))
+                                trigger = Trigger(characteristics = listOf(Characteristic.AGILITY)),
+                                addedDices = listOf(EXPERTISE))
                 )
         )
 

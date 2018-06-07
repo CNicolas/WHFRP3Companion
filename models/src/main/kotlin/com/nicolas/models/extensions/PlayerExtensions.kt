@@ -23,7 +23,8 @@ val Player.livingState: PlayerLivingState
     }
 
 fun Player.receiveDamage(damage: Int): Pair<Int, PlayerLivingState> {
-    val maximumDamage = damage - soak - toughness.value + effects.sumBy { it.damageTakenModifier ?: 0 }
+    val maximumDamage = damage - soak - toughness.value +
+            effects.filter { it.trigger.damageTaken }.sumBy { it.damageModifier ?: 0 }
     val damageDealt = when {
         maximumDamage <= 0 -> 1
         else -> maximumDamage

@@ -1,50 +1,23 @@
 package com.nicolas.models.player.effect
 
-import com.nicolas.models.dice.Dice
-import com.nicolas.models.player.enums.Characteristic
-import com.nicolas.models.player.item.enums.ArmorCategory
-import com.nicolas.models.player.item.enums.ArmorType
-import com.nicolas.models.player.item.enums.WeaponCategory
-import com.nicolas.models.player.item.enums.WeaponType
-import com.nicolas.models.player.skill.Skill
-import com.nicolas.models.player.skill.Specialization
+import com.nicolas.models.dice.DiceType
 import java.io.Serializable
 
 data class Effect(val name: String,
-                  val description: String? = null,
+                  val trigger: Trigger = Trigger(unknown = true),
+                  val duration: EffectDuration = EffectDuration.LINGERING,
+                  val description: String = "",
 
-                  val allThrows: Boolean = false,
-
-                  val allCharacteristics: Boolean = false,
-                  val characteristics: List<Characteristic>? = null,
-
-                  val allSkills: Boolean = false,
-                  val skills: List<Skill>? = null,
-                  val specializations: List<Specialization>? = null,
-
-                  val allItems: Boolean = false,
-
-                  val allWeapons: Boolean = false,
-                  val weaponCategories: List<WeaponCategory>? = null,
-                  val weaponTypes: List<WeaponType>? = null,
-
-                  val allArmors: Boolean = false,
-                  val armorCategories: List<ArmorCategory>? = null,
-                  val armorTypes: List<ArmorType>? = null,
-
-                  val addedDices: List<Dice>? = null,
-                  val removedDices: List<Dice>? = null,
+                  val addedDices: List<DiceType>? = null,
+                  val removedDices: List<DiceType>? = null,
 
                   val soak: Int? = null,
                   val defense: Int? = null,
-
-                  val damageDealtModifier: Int? = null,
-                  val damageTakenModifier: Int? = null,
-
+                  val damageModifier: Int? = null,
+                  val conservativeModifier: Int? = null,
+                  val recklessModifier: Int? = null,
+                  val cooldown: Int? = null,
                   val stress: Int? = null,
                   val exertion: Int? = null,
-
-                  val allManeuvers: Boolean? = null,
-                  val engaged: Boolean? = null,
 
                   val counterEffectName: String? = null) : Serializable

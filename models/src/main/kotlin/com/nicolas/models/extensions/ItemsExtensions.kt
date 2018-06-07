@@ -61,8 +61,8 @@ fun Player.removeAllItems() {
 fun Player.getWeaponDamage(weapon: Weapon): Int {
     var weaponDamage = weapon.damage
 
-    getEffectApplyingTo(weapon).forEach {
-        it.damageDealtModifier?.let { damageModifier ->
+    getEffectsApplyingToWeapons().forEach {
+        it.damageModifier?.let { damageModifier ->
             weaponDamage += damageModifier
         }
     }
