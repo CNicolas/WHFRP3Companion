@@ -148,7 +148,7 @@ class PlayerStateFragment : Fragment() {
             act.alert {
                 title = getString(R.string.page_effects)
                 yesButton {
-                    startActivity(act.intentFor<EffectsActivity>(
+                    startActivity(act.intentFor<PlayerEffectsActivity>(
                             PLAYER_NAME_INTENT_ARGUMENT to player.name
                     ))
                 }

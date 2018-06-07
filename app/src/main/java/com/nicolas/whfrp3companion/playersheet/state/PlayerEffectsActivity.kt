@@ -11,14 +11,14 @@ import android.widget.ArrayAdapter
 import com.nicolas.database.loadEffects
 import com.nicolas.models.player.effect.Effect
 import com.nicolas.whfrp3companion.R
-import kotlinx.android.synthetic.main.activity_effects.*
+import kotlinx.android.synthetic.main.activity_player_effects.*
 
-class EffectsActivity internal constructor() : AppCompatActivity() {
+class PlayerEffectsActivity internal constructor() : AppCompatActivity() {
     private lateinit var allEffects: List<Effect>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_effects)
+        setContentView(R.layout.activity_player_effects)
 
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
