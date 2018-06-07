@@ -1,7 +1,6 @@
 package com.nicolas.whfrp3companion.playersheet.state
 
 import android.app.AlertDialog
-import android.app.SearchManager
 import android.content.res.ColorStateList
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -29,6 +28,7 @@ class PlayerStateFragment : Fragment() {
 
     private val playerRepository by inject<PlayerRepository>()
 
+    private lateinit var playerName: String
     private lateinit var player: Player
 
     override fun onCreateView(inflater: LayoutInflater,
@@ -38,10 +38,26 @@ class PlayerStateFragment : Fragment() {
 
         unbinder = ButterKnife.bind(this, resultingView)
 
-        val playerName = arguments!!.getString(PLAYER_NAME_INTENT_ARGUMENT)
-        player = playerRepository.find(playerName)!!
+        playerName = arguments!!.getString(PLAYER_NAME_INTENT_ARGUMENT)
 
+        return resultingView
+    }
+
+    override fun onResume() {
+        setupViews()
+
+        super.onResume()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        unbinder.unbind()
+    }
+
+    private fun setupViews() {
         doAsync {
+            player = playerRepository.find(playerName)!!
+
             uiThread {
                 removeWoundButton.isEnabled = player.wounds > 0
                 updateWoundsText()
@@ -64,13 +80,6 @@ class PlayerStateFragment : Fragment() {
                 setupMoney()
             }
         }
-
-        return resultingView
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        unbinder.unbind()
     }
 
     @OnClick(R.id.removeWoundButton)
@@ -137,10 +146,10 @@ class PlayerStateFragment : Fragment() {
     fun openEffects() {
         activity?.let { act ->
             act.alert {
-                title = "Effects ?"
+                title = getString(R.string.page_effects)
                 yesButton {
                     startActivity(act.intentFor<EffectsActivity>(
-                            SearchManager.QUERY to ""
+                            PLAYER_NAME_INTENT_ARGUMENT to player.name
                     ))
                 }
                 noButton {}
@@ -232,7 +241,7 @@ class PlayerStateFragment : Fragment() {
 
     private fun updatePlayerAsync() {
         doAsync {
-            playerRepository.update(player)
+            player = playerRepository.update(player)
         }
     }
 
