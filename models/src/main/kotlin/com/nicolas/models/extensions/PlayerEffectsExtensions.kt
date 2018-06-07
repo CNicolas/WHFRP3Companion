@@ -6,6 +6,27 @@ import com.nicolas.models.player.enums.Characteristic
 import com.nicolas.models.player.skill.Skill
 import com.nicolas.models.player.skill.Specialization
 
+fun Player.addEffect(effect: Effect): Player {
+    val mutableEffects = effects.toMutableList()
+
+    val alreadyExistingEffect = mutableEffects.find { effect.name == name }
+    if (alreadyExistingEffect == null) {
+        mutableEffects.add(effect)
+    }
+
+    effects = mutableEffects.toList()
+
+    return this
+}
+
+fun Player.removeEffect(effect: Effect): Player {
+    val mutableEffects = effects.toMutableList()
+    mutableEffects.remove(effect)
+    effects = mutableEffects.toList()
+
+    return this
+}
+
 fun Player.getEffectsApplyingTo(characteristic: Characteristic): List<Effect> =
         effects.filter { effect ->
             effect.trigger.let {
