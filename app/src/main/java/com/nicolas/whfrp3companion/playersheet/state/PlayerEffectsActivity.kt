@@ -16,10 +16,10 @@ import com.nicolas.models.player.Player
 import com.nicolas.models.player.effect.Effect
 import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.shared.PLAYER_NAME_INTENT_ARGUMENT
+import com.nicolas.whfrp3companion.shared.normalized
 import kotlinx.android.synthetic.main.activity_player_effects.*
 import org.jetbrains.anko.act
 import org.jetbrains.anko.doAsync
-import org.jetbrains.anko.longToast
 import org.jetbrains.anko.uiThread
 import org.koin.android.ext.android.inject
 
@@ -43,7 +43,6 @@ class PlayerEffectsActivity internal constructor() : AppCompatActivity(), Effect
 
             uiThread {
                 updateEffectsList(allEffects)
-                longToast(player.name)
             }
         }
     }
@@ -91,6 +90,8 @@ class PlayerEffectsActivity internal constructor() : AppCompatActivity(), Effect
     }
 
     private fun searchEffectByName(searchText: String): List<Effect> {
-        return allEffects.filter { it.name.contains(searchText, true) }
+        return allEffects.filter {
+            it.name.normalized.contains(searchText.normalized, true)
+        }
     }
 }
