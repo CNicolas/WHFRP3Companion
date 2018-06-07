@@ -8,12 +8,25 @@ import android.support.v7.widget.SearchView
 import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.widget.ArrayAdapter
+import com.nicolas.database.PlayerRepository
 import com.nicolas.database.loadEffects
+import com.nicolas.models.extensions.addEffect
+import com.nicolas.models.extensions.removeEffect
+import com.nicolas.models.player.Player
 import com.nicolas.models.player.effect.Effect
 import com.nicolas.whfrp3companion.R
+import com.nicolas.whfrp3companion.shared.PLAYER_NAME_INTENT_ARGUMENT
 import kotlinx.android.synthetic.main.activity_player_effects.*
+import org.jetbrains.anko.act
+import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.longToast
+import org.jetbrains.anko.uiThread
+import org.koin.android.ext.android.inject
 
-class PlayerEffectsActivity internal constructor() : AppCompatActivity() {
+class PlayerEffectsActivity internal constructor() : AppCompatActivity(), EffectListener {
+    private val playerRepository by inject<PlayerRepository>()
+
+    private lateinit var player: Player
     private lateinit var allEffects: List<Effect>
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,8 +36,16 @@ class PlayerEffectsActivity internal constructor() : AppCompatActivity() {
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
 
-        allEffects = loadEffects(this)
-        updateEffectsList(allEffects)
+        doAsync {
+            player = playerRepository.find(intent.extras.getString(PLAYER_NAME_INTENT_ARGUMENT))!!
+
+            allEffects = loadEffects(act)
+
+            uiThread {
+                updateEffectsList(allEffects)
+                longToast(player.name)
+            }
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -55,6 +76,14 @@ class PlayerEffectsActivity internal constructor() : AppCompatActivity() {
         }
 
         return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onAddEffect(effect: Effect) {
+        player.addEffect(effect)
+    }
+
+    override fun onRemoveEffect(effect: Effect) {
+        player.removeEffect(effect)
     }
 
     private fun updateEffectsList(effects: List<Effect>) {
