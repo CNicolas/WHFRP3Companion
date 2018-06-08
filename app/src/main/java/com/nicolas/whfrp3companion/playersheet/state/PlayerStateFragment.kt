@@ -16,12 +16,11 @@ import com.nicolas.database.PlayerRepository
 import com.nicolas.models.extensions.*
 import com.nicolas.models.player.Player
 import com.nicolas.whfrp3companion.R
-import com.nicolas.whfrp3companion.shared.DIALOG_PLAYER_EFFECTS_TAG
 import com.nicolas.whfrp3companion.shared.PLAYER_NAME_INTENT_ARGUMENT
-import com.nicolas.whfrp3companion.shared.dialogs.PlayerEffectsDialog
 import kotlinx.android.synthetic.main.fragment_player_state.*
 import org.adw.library.widgets.discreteseekbar.DiscreteSeekBar
 import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.toast
 import org.jetbrains.anko.uiThread
 import org.koin.android.ext.android.inject
@@ -149,8 +148,9 @@ class PlayerStateFragment : Fragment() {
     @OnClick(R.id.openEffects)
     fun openEffects() {
         activity?.let {
-            val playerEffectsDialog = PlayerEffectsDialog.newInstance(player.name, player.effects)
-            playerEffectsDialog.show(it.supportFragmentManager, DIALOG_PLAYER_EFFECTS_TAG)
+            startActivity(it.intentFor<PlayerEffectsActivity>(
+                    PLAYER_NAME_INTENT_ARGUMENT to player.name
+            ))
         }
     }
 
