@@ -7,7 +7,6 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.SearchView
 import android.support.v7.widget.Toolbar
 import android.view.Menu
-import android.widget.ArrayAdapter
 import com.nicolas.database.PlayerRepository
 import com.nicolas.database.loadEffects
 import com.nicolas.models.extensions.addEffect
@@ -59,7 +58,6 @@ class PlayerEffectsActivity internal constructor() : AppCompatActivity(), Effect
 
             searchView?.let {
                 searchView.setSearchableInfo(info)
-                searchView.setIconifiedByDefault(false)
                 searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
                     override fun onQueryTextSubmit(query: String): Boolean {
                         updateEffectsList(searchEffectByName(query))
@@ -78,15 +76,19 @@ class PlayerEffectsActivity internal constructor() : AppCompatActivity(), Effect
     }
 
     override fun onAddEffect(effect: Effect) {
-        player.addEffect(effect)
+        doAsync {
+            player = playerRepository.update(player.addEffect(effect))
+        }
     }
 
     override fun onRemoveEffect(effect: Effect) {
-        player.removeEffect(effect)
+        doAsync {
+            player = playerRepository.update(player.removeEffect(effect))
+        }
     }
 
     private fun updateEffectsList(effects: List<Effect>) {
-        effectsListView.adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, effects.map { it.name })
+        effectsListView.adapter = PlayerEffectsAdapter(this, effects, player.effects, this)
     }
 
     private fun searchEffectByName(searchText: String): List<Effect> {
