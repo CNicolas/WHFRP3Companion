@@ -63,9 +63,7 @@ class PlayerEffectsAdapter(context: Context,
             this.effect = effect
 
             effectNameCheckBox.text = effect.name
-            addedEffects.forEach {
-                effectNameCheckBox.isChecked = it.name == effect.name
-            }
+            effectNameCheckBox.isChecked = addedEffects.contains(effect)
         }
 
         @OnClick(R.id.effectDescriptionImageButton)
@@ -73,7 +71,7 @@ class PlayerEffectsAdapter(context: Context,
             val styledText = parseTemplatedText(view.context, effect.description)
 
             (0..2).forEach {
-                view.context.longToast(styledText)
+                view.context.longToast("${effect.name}:\n $styledText")
             }
         }
 

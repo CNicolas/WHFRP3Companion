@@ -27,5 +27,10 @@ class EffectTest {
         player.addEffect(Effect("Stressed", stress = 3))
         player.addEffect(Effect("Cooldowned", cooldown = 1))
         assertThat(player.effects.size).isEqualTo(2)
+        assertThat(player.effects.map { it.name }).containsExactly("Stressed", "Cooldowned")
+        player.removeEffect(Effect("Stressed", stress = 3))
+        player.addEffect(Effect("OK", exhaustion = 1))
+        assertThat(player.effects.size).isEqualTo(2)
+        assertThat(player.effects.map { it.name }).containsExactly("Cooldowned", "OK")
     }
 }
