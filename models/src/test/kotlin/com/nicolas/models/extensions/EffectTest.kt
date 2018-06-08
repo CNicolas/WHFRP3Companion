@@ -18,4 +18,14 @@ class EffectTest {
 
         assertThat(player.soak).isEqualTo(1)
     }
+
+    @Test
+    fun should_add_an_effect() {
+        val player = Player("PlayerName")
+
+        assertThat(player.effects).isEmpty()
+        player.addEffect(Effect("Stressed", stress = 3))
+        player.addEffect(Effect("Cooldowned", cooldown = 1))
+        assertThat(player.effects.size).isEqualTo(2)
+    }
 }
