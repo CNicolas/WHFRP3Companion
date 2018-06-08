@@ -1,6 +1,7 @@
 package com.nicolas.whfrp3companion.playersheet.state
 
 import android.content.Context
+import android.support.design.widget.Snackbar
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -11,7 +12,7 @@ import butterknife.OnClick
 import com.nicolas.models.player.effect.Effect
 import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.shared.bind
-import org.jetbrains.anko.design.longSnackbar
+import org.jetbrains.anko.design.snackbar
 
 class PlayerEffectsAdapter(context: Context,
                            private val effects: List<Effect>,
@@ -21,7 +22,7 @@ class PlayerEffectsAdapter(context: Context,
     private val addedEffects = addedEffects.toMutableList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = inflater.inflate(R.layout.list_element_player_talent, parent, false)
+        val view = inflater.inflate(R.layout.list_element_player_effects, parent, false)
 
         return ViewHolder(view, effectListener,
                 addEffect = { effect -> addedEffects.add(effect) },
@@ -60,7 +61,9 @@ class PlayerEffectsAdapter(context: Context,
 
         @OnClick(R.id.effectDescriptionImageButton)
         fun showEffectDescription() {
-            longSnackbar(view, effect.description).show()
+            snackbar(view, effect.description)
+                    .setDuration(Snackbar.LENGTH_INDEFINITE)
+                    .show()
         }
 
         @OnClick(R.id.effectNameCheckBox)
