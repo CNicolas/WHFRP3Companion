@@ -52,12 +52,12 @@
   },
   {
     "name": "Entravé",
-    "description": "Gagnez {EXERTION} supplémentaire lorsque vous effectuez une manoeuvre. Gagnez {EXERTION} {EXERTION} quand vous effectuez une action physique.",
+    "description": "Gagnez {EXHAUSTION} supplémentaire lorsque vous effectuez une manoeuvre. Gagnez {EXHAUSTION} {EXHAUSTION} quand vous effectuez une action physique.",
     "duration": "LINGERING",
     "trigger": {
       "maneuver": true
     },
-    "exertion": 1
+    "exhaustion": 1
   },
   {
     "name": "Endommagé",
@@ -129,12 +129,12 @@
   },
   {
     "name": "Lent",
-    "description": "Annule Stimulé. Gagnez {EXERTION} pour chaque manoeuvre du tour.",
+    "description": "Annule Stimulé. Gagnez {EXHAUSTION} pour chaque manoeuvre du tour.",
     "duration": "BRIEF",
     "trigger": {
       "maneuver": true
     },
-    "exertion": 1,
+    "exhaustion": 1,
     "counterEffectName": "Stimulé"
   },
   {
@@ -148,12 +148,12 @@
   },
   {
     "name": "Patraque",
-    "description": "Si vous gagnez {EXERTION} gagner {EXERTION} {EXERTION} à la place.",
+    "description": "Si vous gagnez {EXHAUSTION} gagner {EXHAUSTION} {EXHAUSTION} à la place.",
     "duration": "LINGERING",
     "trigger": {
-      "exertion": true
+      "exhaustion": true
     },
-    "exertion": 1
+    "exhaustion": 1
   },
   {
     "name": "Perplexe",

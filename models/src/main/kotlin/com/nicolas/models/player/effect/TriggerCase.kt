@@ -16,5 +16,5 @@ enum class TriggerCase {
     INITIATIVE_THROW,
     TURN_START,
     TURN_END,
-    EXERTION
+    EXHAUSTION
 }

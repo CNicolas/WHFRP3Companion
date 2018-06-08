@@ -18,6 +18,6 @@ data class Effect(val name: String,
                   val recklessModifier: Int? = null,
                   val cooldown: Int? = null,
                   val stress: Int? = null,
-                  val exertion: Int? = null,
+                  val exhaustion: Int? = null,
 
                   val counterEffectName: String? = null) : Serializable

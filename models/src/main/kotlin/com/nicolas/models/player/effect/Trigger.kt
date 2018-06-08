@@ -25,6 +25,6 @@ data class Trigger(val characteristics: List<Characteristic>? = null,
                    val initiativeThrow: Boolean = false,
                    val turnStart: Boolean = false,
                    val turnEnd: Boolean = false,
-                   val exertion: Boolean = false,
+                   val exhaustion: Boolean = false,
                    val stress: Boolean = false) : Serializable
 
