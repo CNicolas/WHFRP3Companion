@@ -13,8 +13,7 @@ import butterknife.Unbinder
 import com.nicolas.diceroller.roll.RollResult
 import com.nicolas.models.dice.Face
 import com.nicolas.whfrp3companion.R
-import com.nicolas.whfrp3companion.shared.DIALOG_ROLL_RESULT_TAG
-
+import com.nicolas.whfrp3companion.shared.ROLL_RESULT_INTENT_ARGUMENT
 
 class RollResultDialog : DialogFragment() {
     @BindView(R.id.success_result)
@@ -44,7 +43,7 @@ class RollResultDialog : DialogFragment() {
         val inflater = activity!!.layoutInflater
         val view = inflater.inflate(R.layout.dialog_roll_result, null, false)
 
-        rollResult = arguments!!.getSerializable(DIALOG_ROLL_RESULT_TAG) as RollResult
+        rollResult = arguments!!.getSerializable(ROLL_RESULT_INTENT_ARGUMENT) as RollResult
 
         builder.setView(view)
         builder.setTitle(R.string.results)
@@ -108,7 +107,7 @@ class RollResultDialog : DialogFragment() {
     companion object {
         fun newInstance(rollResult: RollResult): RollResultDialog {
             val args = Bundle()
-            args.putSerializable(DIALOG_ROLL_RESULT_TAG, rollResult)
+            args.putSerializable(ROLL_RESULT_INTENT_ARGUMENT, rollResult)
 
             val fragment = RollResultDialog()
             fragment.arguments = args

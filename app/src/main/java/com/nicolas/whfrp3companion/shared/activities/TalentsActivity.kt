@@ -18,7 +18,7 @@ import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.playersheet.talents.PlayerTalentsAdapter
 import com.nicolas.whfrp3companion.playersheet.talents.TalentEditionMode
 import com.nicolas.whfrp3companion.playersheet.talents.TalentListener
-import com.nicolas.whfrp3companion.shared.DIALOG_TALENT_TYPE_TAG
+import com.nicolas.whfrp3companion.shared.DIALOG_TALENT_SEARCH_TAG
 import com.nicolas.whfrp3companion.shared.PLAYER_NAME_INTENT_ARGUMENT
 import com.nicolas.whfrp3companion.shared.TALENTS_SEARCH_INTENT_ARGUMENT
 import com.nicolas.whfrp3companion.shared.adapters.TalentsAdapter
@@ -87,7 +87,7 @@ class TalentsActivity : AppCompatActivity(), TalentListener {
                         ?.let { TalentSearchDialog.newInstance(it) }
                         ?: TalentSearchDialog.newInstance()
 
-        talentSearchDialog.show(supportFragmentManager, DIALOG_TALENT_TYPE_TAG)
+        talentSearchDialog.show(supportFragmentManager, DIALOG_TALENT_SEARCH_TAG)
     }
 
     // region TalentListener

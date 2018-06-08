@@ -12,7 +12,7 @@ import butterknife.Unbinder
 import com.nicolas.models.player.talent.TalentSearch
 import com.nicolas.models.player.talent.TalentType
 import com.nicolas.whfrp3companion.R
-import com.nicolas.whfrp3companion.shared.DIALOG_TALENT_TYPE_TAG
+import com.nicolas.whfrp3companion.shared.DIALOG_TALENT_SEARCH_TAG
 import com.nicolas.whfrp3companion.shared.TALENTS_SEARCH_INTENT_ARGUMENT
 import com.nicolas.whfrp3companion.shared.activities.TalentsActivity
 import com.nicolas.whfrp3companion.shared.dialogs.TalentSearchDialog
@@ -59,7 +59,7 @@ class TalentTypesFragment : Fragment() {
     @OnClick(R.id.search)
     fun openTalentSearchDialog() {
         val talentSearchDialog = TalentSearchDialog.newInstance()
-        talentSearchDialog.show(activity?.supportFragmentManager, DIALOG_TALENT_TYPE_TAG)
+        talentSearchDialog.show(activity?.supportFragmentManager, DIALOG_TALENT_SEARCH_TAG)
     }
 
     companion object {

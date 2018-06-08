@@ -126,6 +126,7 @@
 
     <string name="no_saved_hand">No saved hand</string>
     <string name="search">Search</string>
+    <string name="modify">Modify</string>
 
     <string name="rolls_count_format">%d rolls</string>
     <string name="successful_rolls_with_percentage_format">%1$d successful rolls (%2$s%%)</string>
