@@ -7,13 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.CheckBox
+import android.widget.TextView
 import butterknife.ButterKnife
 import butterknife.OnClick
 import com.nicolas.models.player.effect.Effect
 import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.shared.bind
 import com.nicolas.whfrp3companion.shared.viewModifications.parseTemplatedText
-import org.jetbrains.anko.longToast
+import org.jetbrains.anko.design.indefiniteSnackbar
 
 class PlayerEffectsAdapter(context: Context,
                            private val effects: List<Effect>,
@@ -68,11 +69,14 @@ class PlayerEffectsAdapter(context: Context,
 
         @OnClick(R.id.effectDescriptionImageButton)
         fun showEffectDescription() {
-            val styledText = parseTemplatedText(view.context, effect.description)
+            val styledText = parseTemplatedText(view.context, "${effect.name}:\n${effect.description}")
 
-            (0..2).forEach {
-                view.context.longToast("${effect.name}:\n $styledText")
-            }
+            val snackbar = indefiniteSnackbar(view, "")
+            snackbar.setAction(android.R.string.ok) { snackbar.dismiss() }
+
+            val snackbarTextView = snackbar.view.findViewById(android.support.design.R.id.snackbar_text) as TextView
+            snackbarTextView.text = styledText
+            snackbarTextView.maxLines = 10
         }
 
         @OnClick(R.id.effectNameCheckBox)
