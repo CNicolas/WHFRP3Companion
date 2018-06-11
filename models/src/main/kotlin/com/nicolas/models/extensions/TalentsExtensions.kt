@@ -1,10 +1,10 @@
 package com.nicolas.models.extensions
 
 import com.nicolas.models.player.Player
-import com.nicolas.models.player.playerLinked.talent.Talent
-import com.nicolas.models.player.playerLinked.talent.TalentCooldown.PASSIVE
-import com.nicolas.models.player.playerLinked.talent.TalentCooldown.TALENT
-import com.nicolas.models.player.playerLinked.talent.TalentType
+import com.nicolas.models.player.talent.Talent
+import com.nicolas.models.player.talent.TalentCooldown.PASSIVE
+import com.nicolas.models.player.talent.TalentCooldown.TALENT
+import com.nicolas.models.player.talent.TalentType
 
 fun Player.addTalent(talent: Talent): Player {
     val mutableTalents = talents.toMutableList()
@@ -48,3 +48,4 @@ fun Player.toggleEquipment(talent: Talent): Player {
 
 fun List<Talent>.findByType(talentType: TalentType) =
         filter { it.type == talentType }
+

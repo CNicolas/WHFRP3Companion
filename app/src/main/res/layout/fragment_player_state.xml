@@ -21,12 +21,12 @@
               app:layout_constraintLeft_toLeftOf="parent" />
     <Button android:id="@+id/removeWoundButton"
             android:layout_width="50dp"
-            android:layout_height="40dp"
+            android:layout_height="50dp"
             android:text="@string/hyphen"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/wounds_label"
             app:layout_constraintRight_toLeftOf="@+id/woundsTextView"
-            app:layout_constraintBottom_toTopOf="@+id/stress_label"
-            app:layout_constraintLeft_toRightOf="@id/wounds_label" />
+            app:layout_constraintBottom_toBottomOf="@+id/wounds_label"
+            app:layout_constraintLeft_toRightOf="@+id/wounds_label" />
     <TextView android:id="@+id/woundsTextView"
               android:layout_width="75dp"
               android:layout_height="50dp"
@@ -34,28 +34,28 @@
               android:textSize="@dimen/big_text_size"
               android:textStyle="bold"
               android:hint="@string/zero"
-              app:layout_constraintTop_toTopOf="parent"
+              app:layout_constraintTop_toTopOf="@+id/removeWoundButton"
               app:layout_constraintRight_toLeftOf="@+id/add_wound"
-              app:layout_constraintBottom_toTopOf="@+id/stress_label"
-              app:layout_constraintLeft_toRightOf="@id/removeWoundButton" />
+              app:layout_constraintBottom_toBottomOf="@+id/removeWoundButton"
+              app:layout_constraintLeft_toRightOf="@+id/removeWoundButton" />
     <Button android:id="@+id/add_wound"
             android:layout_width="50dp"
-            android:layout_height="40dp"
+            android:layout_height="50dp"
             android:layout_marginEnd="@dimen/giant_padding_2"
             android:text="@string/plus"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/woundsTextView"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/stress_label"
-            app:layout_constraintLeft_toRightOf="@id/woundsTextView" />
+            app:layout_constraintBottom_toBottomOf="@+id/woundsTextView"
+            app:layout_constraintLeft_toRightOf="@+id/woundsTextView" />
     <!--endregion-->
 
     <!--region Stress-->
     <TextView android:id="@+id/stress_label"
-              android:layout_width="100dp"
+              android:layout_width="150dp"
               android:layout_height="30dp"
               android:gravity="center|bottom"
               android:hint="@string/stress"
-              app:layout_constraintTop_toBottomOf="@id/woundsTextView"
+              app:layout_constraintTop_toBottomOf="@+id/woundsTextView"
               app:layout_constraintRight_toLeftOf="@+id/exhaustion_label"
               app:layout_constraintBottom_toTopOf="@+id/stressTextView"
               app:layout_constraintLeft_toLeftOf="parent" />
@@ -64,9 +64,9 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:text="@string/hyphen"
-            app:layout_constraintTop_toBottomOf="@id/stress_label"
+            app:layout_constraintTop_toTopOf="@+id/stressTextView"
             app:layout_constraintRight_toLeftOf="@+id/stressTextView"
-            app:layout_constraintBottom_toTopOf="@+id/currentStanceTextView"
+            app:layout_constraintBottom_toBottomOf="@+id/stressTextView"
             app:layout_constraintLeft_toLeftOf="parent" />
     <TextView android:id="@+id/stressTextView"
               android:layout_width="50dp"
@@ -74,68 +74,68 @@
               android:gravity="center"
               android:textSize="@dimen/medium_text_size"
               android:hint="@string/zero"
-              app:layout_constraintTop_toBottomOf="@id/stress_label"
+              app:layout_constraintTop_toTopOf="@+id/add_stress"
               app:layout_constraintRight_toLeftOf="@+id/add_stress"
-              app:layout_constraintBottom_toTopOf="@+id/currentStanceTextView"
-              app:layout_constraintLeft_toRightOf="@id/removeStressButton" />
+              app:layout_constraintBottom_toBottomOf="@+id/add_stress"
+              app:layout_constraintLeft_toRightOf="@+id/removeStressButton" />
     <Button android:id="@+id/add_stress"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:text="@string/plus"
-            app:layout_constraintTop_toBottomOf="@id/stress_label"
+            app:layout_constraintTop_toTopOf="@+id/removeExhaustionButton"
             app:layout_constraintRight_toLeftOf="@+id/removeExhaustionButton"
-            app:layout_constraintBottom_toTopOf="@+id/currentStanceTextView"
-            app:layout_constraintLeft_toRightOf="@id/stressTextView" />
+            app:layout_constraintBottom_toBottomOf="@+id/removeExhaustionButton"
+            app:layout_constraintLeft_toRightOf="@+id/stressTextView" />
     <!--endregion-->
 
     <!--region Exhaustion-->
     <TextView android:id="@+id/exhaustion_label"
-              android:layout_width="100dp"
+              android:layout_width="150dp"
               android:layout_height="30dp"
               android:gravity="center|bottom"
               android:hint="@string/exhaustion"
-              app:layout_constraintTop_toBottomOf="@id/woundsTextView"
+              app:layout_constraintTop_toBottomOf="@+id/woundsTextView"
               app:layout_constraintRight_toRightOf="parent"
               app:layout_constraintBottom_toTopOf="@+id/exhaustionTextView"
-              app:layout_constraintLeft_toRightOf="@id/stress_label" />
+              app:layout_constraintLeft_toRightOf="@+id/stress_label" />
 
     <Button android:id="@+id/removeExhaustionButton"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:text="@string/hyphen"
-            app:layout_constraintTop_toBottomOf="@id/exhaustion_label"
+            app:layout_constraintTop_toTopOf="@+id/exhaustionTextView"
             app:layout_constraintRight_toLeftOf="@+id/exhaustionTextView"
-            app:layout_constraintBottom_toTopOf="@+id/currentStanceTextView"
-            app:layout_constraintLeft_toRightOf="@id/add_stress" />
+            app:layout_constraintBottom_toBottomOf="@+id/exhaustionTextView"
+            app:layout_constraintLeft_toRightOf="@+id/add_stress" />
     <TextView android:id="@+id/exhaustionTextView"
               android:layout_width="50dp"
               android:layout_height="50dp"
               android:gravity="center"
               android:textSize="@dimen/medium_text_size"
               android:hint="@string/zero"
-              app:layout_constraintTop_toBottomOf="@id/exhaustion_label"
+              app:layout_constraintTop_toTopOf="@+id/add_exhaustion"
               app:layout_constraintRight_toLeftOf="@+id/add_exhaustion"
-              app:layout_constraintBottom_toTopOf="@+id/currentStanceTextView"
-              app:layout_constraintLeft_toRightOf="@id/removeExhaustionButton" />
+              app:layout_constraintBottom_toBottomOf="@+id/add_exhaustion"
+              app:layout_constraintLeft_toRightOf="@+id/removeExhaustionButton" />
     <Button android:id="@+id/add_exhaustion"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:text="@string/plus"
-            app:layout_constraintTop_toBottomOf="@id/exhaustion_label"
+            app:layout_constraintTop_toBottomOf="@+id/exhaustion_label"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/currentStanceTextView"
-            app:layout_constraintLeft_toRightOf="@id/exhaustionTextView" />
+            app:layout_constraintLeft_toRightOf="@+id/exhaustionTextView" />
     <!--endregion-->
 
     <!--region Stance-->
     <TextView android:id="@+id/conservative_label"
-              android:layout_width="0dp"
+              android:layout_width="110dp"
               android:layout_height="30dp"
               android:layout_marginEnd="@dimen/giant_padding_2"
               android:gravity="center_vertical|end"
               android:textColor="@color/conservative"
               android:text="@string/conservative"
-              app:layout_constraintTop_toBottomOf="@id/stressTextView"
+              app:layout_constraintTop_toBottomOf="@+id/stressTextView"
               app:layout_constraintRight_toLeftOf="@+id/currentStanceTextView"
               app:layout_constraintBottom_toTopOf="@+id/stanceBar"
               app:layout_constraintLeft_toLeftOf="parent"
@@ -148,23 +148,23 @@
               android:textSize="@dimen/big_text_size"
               android:textStyle="bold"
               android:hint="@string/zero"
-              app:layout_constraintTop_toBottomOf="@id/stressTextView"
+              app:layout_constraintTop_toTopOf="@+id/conservative_label"
               app:layout_constraintRight_toLeftOf="@+id/reckless_label"
-              app:layout_constraintBottom_toTopOf="@+id/stanceBar"
-              app:layout_constraintLeft_toRightOf="@id/conservative_label"
+              app:layout_constraintBottom_toBottomOf="@+id/conservative_label"
+              app:layout_constraintLeft_toRightOf="@+id/conservative_label"
               app:layout_constraintHorizontal_weight="1" />
 
     <TextView android:id="@+id/reckless_label"
-              android:layout_width="0dp"
+              android:layout_width="110dp"
               android:layout_height="30dp"
               android:layout_marginStart="@dimen/giant_padding_2"
               android:gravity="center_vertical"
               android:textColor="@color/reckless"
               android:text="@string/reckless"
-              app:layout_constraintTop_toBottomOf="@id/stressTextView"
+              app:layout_constraintTop_toTopOf="@+id/currentStanceTextView"
               app:layout_constraintRight_toRightOf="parent"
-              app:layout_constraintBottom_toTopOf="@+id/stanceBar"
-              app:layout_constraintLeft_toRightOf="@id/currentStanceTextView"
+              app:layout_constraintBottom_toBottomOf="@+id/currentStanceTextView"
+              app:layout_constraintLeft_toRightOf="@+id/currentStanceTextView"
               app:layout_constraintHorizontal_weight="3" />
 
     <org.adw.library.widgets.discreteseekbar.DiscreteSeekBar android:id="@+id/stanceBar"
@@ -174,7 +174,7 @@
                                                              app:dsb_scrubberHeight="10dp"
                                                              app:dsb_thumbSize="30dp"
                                                              app:dsb_indicatorPopupEnabled="false"
-                                                             app:layout_constraintTop_toBottomOf="@id/conservative_label"
+                                                             app:layout_constraintTop_toBottomOf="@+id/conservative_label"
                                                              app:layout_constraintRight_toRightOf="parent"
                                                              app:layout_constraintBottom_toTopOf="@+id/defenseTextView"
                                                              app:layout_constraintLeft_toLeftOf="parent" />
@@ -190,7 +190,7 @@
               android:textSize="@dimen/big_text_size"
               android:textStyle="bold"
               android:hint="@string/zero"
-              app:layout_constraintTop_toBottomOf="@id/stanceBar"
+              app:layout_constraintTop_toBottomOf="@+id/stanceBar"
               app:layout_constraintRight_toLeftOf="@+id/soakTextView"
               app:layout_constraintBottom_toTopOf="@+id/weaponsListView"
               app:layout_constraintLeft_toLeftOf="parent" />
@@ -203,10 +203,10 @@
               android:textSize="@dimen/big_text_size"
               android:textStyle="bold"
               android:hint="@string/zero"
-              app:layout_constraintTop_toBottomOf="@id/stanceBar"
+              app:layout_constraintTop_toTopOf="@+id/defenseTextView"
               app:layout_constraintRight_toRightOf="parent"
-              app:layout_constraintBottom_toTopOf="@+id/weaponsListView"
-              app:layout_constraintLeft_toRightOf="@id/defenseTextView" />
+              app:layout_constraintBottom_toBottomOf="@+id/defenseTextView"
+              app:layout_constraintLeft_toRightOf="@+id/defenseTextView" />
     <!--endregion-->
 
     <ListView android:id="@+id/weaponsListView"
@@ -214,11 +214,21 @@
               android:layout_height="110dp"
               android:layout_marginTop="@dimen/medium_padding"
               android:layout_marginBottom="@dimen/medium_padding"
-              app:layout_constraintTop_toBottomOf="@id/defenseTextView"
+              app:layout_constraintTop_toBottomOf="@+id/defenseTextView"
               app:layout_constraintRight_toRightOf="parent"
-              app:layout_constraintBottom_toTopOf="@+id/encumbranceBar"
+              app:layout_constraintBottom_toTopOf="@+id/openEffects"
               app:layout_constraintLeft_toLeftOf="parent"
               tools:listitem="@layout/list_element_weapon" />
+
+    <Button android:id="@+id/openEffects"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginBottom="@dimen/big_padding"
+            android:text="@string/page_effects"
+            app:layout_constraintTop_toBottomOf="@+id/weaponsListView"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/encumbranceBar"
+            app:layout_constraintLeft_toLeftOf="parent" />
 
     <!--region Encumbrance-->
     <ImageView android:id="@+id/encumbrance_icon"
@@ -226,15 +236,14 @@
                android:layout_height="wrap_content"
                android:src="@drawable/ic_weight_black_36"
                android:contentDescription="@string/encumbrance"
-               app:layout_constraintTop_toBottomOf="@id/weaponsListView"
+               app:layout_constraintTop_toBottomOf="@+id/openEffects"
                app:layout_constraintRight_toLeftOf="@+id/encumbranceBar"
                app:layout_constraintBottom_toTopOf="@+id/goldTextView"
                app:layout_constraintLeft_toLeftOf="parent"
                app:layout_constraintHorizontal_weight="1" />
     <org.adw.library.widgets.discreteseekbar.DiscreteSeekBar android:id="@+id/encumbranceBar"
                                                              android:layout_width="0dp"
-                                                             android:layout_height="40dp"
-                                                             android:minHeight="10dp"
+                                                             android:layout_height="wrap_content"
                                                              android:background="@drawable/black_border"
                                                              android:focusable="false"
                                                              app:dsb_allowTrackClickToDrag="false"
@@ -243,10 +252,10 @@
                                                              app:dsb_thumbSize="0dp"
                                                              app:dsb_trackHeight="10dp"
                                                              app:dsb_trackColor="@color/spinner_background"
-                                                             app:layout_constraintTop_toBottomOf="@id/weaponsListView"
+                                                             app:layout_constraintTop_toTopOf="@+id/encumbrance_icon"
                                                              app:layout_constraintRight_toLeftOf="@+id/encumbranceTextView"
-                                                             app:layout_constraintBottom_toTopOf="@+id/goldTextView"
-                                                             app:layout_constraintLeft_toRightOf="@id/encumbrance_icon"
+                                                             app:layout_constraintBottom_toBottomOf="@+id/encumbrance_icon"
+                                                             app:layout_constraintLeft_toRightOf="@+id/encumbrance_icon"
                                                              app:layout_constraintHorizontal_weight="7" />
     <TextView android:id="@+id/encumbranceTextView"
               android:layout_width="0dp"
@@ -254,10 +263,10 @@
               android:gravity="center"
               android:textSize="@dimen/medium_text_size"
               android:hint="@string/zero"
-              app:layout_constraintTop_toBottomOf="@id/weaponsListView"
+              app:layout_constraintTop_toTopOf="@+id/encumbranceBar"
               app:layout_constraintRight_toRightOf="parent"
-              app:layout_constraintBottom_toTopOf="@+id/goldTextView"
-              app:layout_constraintLeft_toRightOf="@id/encumbranceBar"
+              app:layout_constraintLeft_toRightOf="@+id/encumbranceBar"
+              app:layout_constraintBottom_toBottomOf="@+id/encumbranceBar"
               app:layout_constraintHorizontal_weight="2" />
     <!--endregion-->
 
@@ -270,7 +279,7 @@
               android:drawableStart="@drawable/coins_gold"
               android:textSize="@dimen/medium_text_size"
               android:hint="@string/zero"
-              app:layout_constraintTop_toBottomOf="@id/encumbranceBar"
+              app:layout_constraintTop_toBottomOf="@+id/encumbranceBar"
               app:layout_constraintRight_toLeftOf="@+id/silverTextView"
               app:layout_constraintBottom_toBottomOf="parent"
               app:layout_constraintLeft_toLeftOf="parent" />
@@ -282,10 +291,10 @@
               android:drawableStart="@drawable/coins_silver"
               android:textSize="@dimen/medium_text_size"
               android:hint="@string/zero"
-              app:layout_constraintTop_toBottomOf="@id/encumbranceBar"
+              app:layout_constraintTop_toTopOf="@+id/goldTextView"
               app:layout_constraintRight_toLeftOf="@+id/brassTextView"
-              app:layout_constraintBottom_toBottomOf="parent"
-              app:layout_constraintLeft_toRightOf="@id/goldTextView" />
+              app:layout_constraintBottom_toBottomOf="@+id/goldTextView"
+              app:layout_constraintLeft_toRightOf="@+id/goldTextView" />
     <TextView android:id="@+id/brassTextView"
               android:layout_width="0dp"
               android:layout_height="40dp"
@@ -294,10 +303,10 @@
               android:drawableStart="@drawable/coins_brass"
               android:textSize="@dimen/medium_text_size"
               android:hint="@string/zero"
-              app:layout_constraintTop_toBottomOf="@id/encumbranceBar"
+              app:layout_constraintTop_toTopOf="@+id/silverTextView"
               app:layout_constraintRight_toLeftOf="@+id/change_money"
-              app:layout_constraintBottom_toBottomOf="parent"
-              app:layout_constraintLeft_toRightOf="@id/silverTextView" />
+              app:layout_constraintBottom_toBottomOf="@+id/silverTextView"
+              app:layout_constraintLeft_toRightOf="@+id/silverTextView" />
     <ImageButton android:id="@+id/change_money"
                  android:layout_width="60dp"
                  android:layout_height="50dp"
@@ -305,9 +314,9 @@
                  android:gravity="center"
                  android:src="@drawable/ic_coin_black_24dp"
                  android:contentDescription="@string/change_money"
-                 app:layout_constraintTop_toBottomOf="@id/encumbranceTextView"
+                 app:layout_constraintTop_toTopOf="@+id/brassTextView"
                  app:layout_constraintRight_toRightOf="parent"
-                 app:layout_constraintBottom_toBottomOf="parent"
-                 app:layout_constraintLeft_toRightOf="@id/brassTextView" />
+                 app:layout_constraintBottom_toBottomOf="@+id/brassTextView"
+                 app:layout_constraintLeft_toRightOf="@+id/brassTextView" />
     <!--endregion-->
 </android.support.constraint.ConstraintLayout>

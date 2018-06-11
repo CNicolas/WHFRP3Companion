@@ -1,8 +1,8 @@
 package com.nicolas.models.extensions
 
 import com.nicolas.models.player.Player
-import com.nicolas.models.player.playerLinked.item.Expandable
-import com.nicolas.models.player.playerLinked.item.Weapon
+import com.nicolas.models.player.item.Expandable
+import com.nicolas.models.player.item.Weapon
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 

@@ -1,10 +1,10 @@
 package com.nicolas.models.extensions
 
 import com.nicolas.models.player.Player
-import com.nicolas.models.player.playerLinked.item.*
-import com.nicolas.models.player.playerLinked.item.enums.ItemType
-import com.nicolas.models.player.playerLinked.item.enums.ItemType.*
-import com.nicolas.models.player.playerLinked.item.enums.Range
+import com.nicolas.models.player.item.*
+import com.nicolas.models.player.item.enums.ItemType
+import com.nicolas.models.player.item.enums.ItemType.*
+import com.nicolas.models.player.item.enums.Range
 
 fun Player.addItem(item: Item): List<Item> {
     val mutableItems = items.toMutableList()
@@ -59,7 +59,14 @@ fun Player.removeAllItems() {
 }
 
 fun Player.getWeaponDamage(weapon: Weapon): Int {
-    val weaponDamage = weapon.damage
+    var weaponDamage = weapon.damage
+
+    getEffectsApplyingToWeapons().forEach {
+        it.damageModifier?.let { damageModifier ->
+            weaponDamage += damageModifier
+        }
+    }
+
     return when (weapon.range) {
         Range.ENGAGED -> strength.value + weaponDamage
         else -> agility.value + weaponDamage
