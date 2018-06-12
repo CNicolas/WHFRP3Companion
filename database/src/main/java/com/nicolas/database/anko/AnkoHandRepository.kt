@@ -25,8 +25,4 @@ class AnkoHandRepository(context: Context) : HandRepository {
     override fun delete(name: String) {
         handDao.deleteByName(name)
     }
-
-    override fun delete(hand: Hand) {
-        handDao.delete(hand)
-    }
 }
