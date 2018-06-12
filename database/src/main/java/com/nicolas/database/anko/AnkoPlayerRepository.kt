@@ -4,19 +4,13 @@ import android.content.Context
 import com.nicolas.database.PlayerRepository
 import com.nicolas.database.anko.daos.player.PlayerDao
 import com.nicolas.database.loadSkills
-import com.nicolas.database.loadTalents
 import com.nicolas.models.player.Player
 import com.nicolas.models.player.skill.SkillType
-import com.nicolas.models.player.talent.TalentCooldown
 
 class AnkoPlayerRepository(context: Context) : PlayerRepository {
     private val playerDao = PlayerDao(context.database)
 
     private val basicSkills = loadSkills(context).filter { it.type == SkillType.BASIC }
-
-    val talents = loadTalents(context)
-    val passiveTalents = talents.filter { it.cooldown == TalentCooldown.PASSIVE }
-    val exhaustibleTalents = talents.filter { it.cooldown == TalentCooldown.TALENT }
 
     override fun add(player: Player): Player {
         player.createSkills()
