@@ -32,7 +32,7 @@ data class RollStatistics(private val rollResults: List<RollResult>) {
     val averageChaos: Double = totalChaos.toDouble() / rollCount
 
     val averageResult: FacesReport = hashMapOf(
-            // VOID to Math.round(averageVoid).toInt(),
+            VOID to Math.round(averageVoid).toInt(),
             SUCCESS to Math.round(averageSuccess).toInt(),
             BOON to Math.round(averageBoon).toInt(),
             DELAY to Math.round(averageDelay).toInt(),

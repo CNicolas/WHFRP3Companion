@@ -13,7 +13,7 @@ class AnkoPlayerRepository(context: Context) : PlayerRepository {
     private val playerDao = PlayerDao(context.database)
 
     val skills = loadSkills(context)
-    val basicSkills = skills.filter { it.type == SkillType.BASIC }
+    private val basicSkills = skills.filter { it.type == SkillType.BASIC }
     val advancedSkills = skills.filter { it.type == SkillType.ADVANCED }
     val allSpecializations = skills.map { it to it.specializations }.toMap()
 
@@ -54,10 +54,6 @@ class AnkoPlayerRepository(context: Context) : PlayerRepository {
         } else {
             delete(player.name)
         }
-    }
-
-    fun deleteAll() {
-        playerDao.deleteAll()
     }
 
     private fun Player.createSkills() {
