@@ -12,10 +12,7 @@ import com.nicolas.models.player.talent.TalentCooldown
 class AnkoPlayerRepository(context: Context) : PlayerRepository {
     private val playerDao = PlayerDao(context.database)
 
-    val skills = loadSkills(context)
-    private val basicSkills = skills.filter { it.type == SkillType.BASIC }
-    val advancedSkills = skills.filter { it.type == SkillType.ADVANCED }
-    val allSpecializations = skills.map { it to it.specializations }.toMap()
+    private val basicSkills = loadSkills(context).filter { it.type == SkillType.BASIC }
 
     val talents = loadTalents(context)
     val passiveTalents = talents.filter { it.cooldown == TalentCooldown.PASSIVE }
