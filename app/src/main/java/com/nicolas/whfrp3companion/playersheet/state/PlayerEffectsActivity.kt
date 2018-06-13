@@ -9,10 +9,10 @@ import android.support.v7.widget.Toolbar
 import android.view.Menu
 import com.nicolas.database.PlayerRepository
 import com.nicolas.database.loadEffects
+import com.nicolas.models.effect.Effect
 import com.nicolas.models.extensions.addEffect
 import com.nicolas.models.extensions.removeEffect
 import com.nicolas.models.player.Player
-import com.nicolas.models.player.effect.Effect
 import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.shared.PLAYER_NAME_INTENT_ARGUMENT
 import com.nicolas.whfrp3companion.shared.normalized

@@ -1,4 +1,4 @@
-package com.nicolas.models.player.effect
+package com.nicolas.models.effect
 
 import com.nicolas.models.player.enums.Characteristic
 import com.nicolas.models.player.skill.Skill

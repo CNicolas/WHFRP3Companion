@@ -1,4 +1,4 @@
-package com.nicolas.models.player.effect
+package com.nicolas.models.effect
 
 enum class EffectDuration {
     BRIEF,

@@ -4,9 +4,9 @@ import com.google.gson.GsonBuilder
 import com.nicolas.database.genericType
 import com.nicolas.database.toInt
 import com.nicolas.database.toNullableInt
+import com.nicolas.models.effect.Effect
 import com.nicolas.models.player.CharacteristicValue
 import com.nicolas.models.player.Player
-import com.nicolas.models.player.effect.Effect
 import com.nicolas.models.player.enums.Race
 import com.nicolas.models.player.item.Item
 import com.nicolas.models.player.skill.Skill

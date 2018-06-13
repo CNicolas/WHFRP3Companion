@@ -1,10 +1,10 @@
 package com.nicolas.models.extensions
 
 import com.nicolas.models.dice.DiceType.*
+import com.nicolas.models.effect.Effect
 import com.nicolas.models.hand.DifficultyLevel
 import com.nicolas.models.hand.Hand
 import com.nicolas.models.player.Player
-import com.nicolas.models.player.effect.Effect
 import com.nicolas.models.player.enums.Characteristic
 import com.nicolas.models.player.skill.Skill
 import com.nicolas.models.player.skill.Specialization

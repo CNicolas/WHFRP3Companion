@@ -2,7 +2,7 @@ package com.nicolas.database
 
 import android.content.Context
 import com.google.gson.Gson
-import com.nicolas.models.player.effect.Effect
+import com.nicolas.models.effect.Effect
 import com.nicolas.models.player.skill.Skill
 import com.nicolas.models.player.talent.Talent
 

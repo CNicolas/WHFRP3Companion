@@ -1,8 +1,8 @@
 package com.nicolas.models.player
 
 import com.nicolas.models.NamedEntity
+import com.nicolas.models.effect.Effect
 import com.nicolas.models.extensions.getEquippedArmors
-import com.nicolas.models.player.effect.Effect
 import com.nicolas.models.player.enums.Characteristic
 import com.nicolas.models.player.enums.Characteristic.*
 import com.nicolas.models.player.enums.Race

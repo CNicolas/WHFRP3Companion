@@ -1,11 +1,11 @@
 package com.nicolas.diceroller.hand
 
 import com.nicolas.models.dice.DiceType.*
+import com.nicolas.models.effect.Effect
+import com.nicolas.models.effect.Trigger
 import com.nicolas.models.extensions.createHand
 import com.nicolas.models.player.CharacteristicValue
 import com.nicolas.models.player.Player
-import com.nicolas.models.player.effect.Effect
-import com.nicolas.models.player.effect.Trigger
 import com.nicolas.models.player.enums.Characteristic
 import com.nicolas.models.player.skill.Skill
 import org.assertj.core.api.Assertions.assertThat

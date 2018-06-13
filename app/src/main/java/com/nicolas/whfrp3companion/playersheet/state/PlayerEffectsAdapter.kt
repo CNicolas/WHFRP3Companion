@@ -10,7 +10,7 @@ import android.widget.CheckBox
 import android.widget.TextView
 import butterknife.ButterKnife
 import butterknife.OnClick
-import com.nicolas.models.player.effect.Effect
+import com.nicolas.models.effect.Effect
 import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.shared.bind
 import com.nicolas.whfrp3companion.shared.viewModifications.parseTemplatedText
