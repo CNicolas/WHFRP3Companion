@@ -8,7 +8,7 @@ import android.widget.BaseAdapter
 import android.widget.ImageView
 import android.widget.TextView
 import butterknife.ButterKnife
-import com.nicolas.models.player.item.Weapon
+import com.nicolas.models.item.Weapon
 import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.shared.bind
 import com.nicolas.whfrp3companion.shared.enums.drawableId

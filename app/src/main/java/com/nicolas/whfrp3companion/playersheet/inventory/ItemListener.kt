@@ -1,7 +1,7 @@
 package com.nicolas.whfrp3companion.playersheet.inventory
 
-import com.nicolas.models.player.item.Equipment
-import com.nicolas.models.player.item.Item
+import com.nicolas.models.item.Equipment
+import com.nicolas.models.item.Item
 
 interface ItemListener {
     fun onEquipment(equipment: Equipment, isEquipped: Boolean)

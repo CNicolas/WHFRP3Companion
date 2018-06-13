@@ -1,7 +1,7 @@
-package com.nicolas.models.player.item.enums
+package com.nicolas.models.item.enums
 
-import com.nicolas.models.player.item.enums.ArmorCategory.BODY
-import com.nicolas.models.player.item.enums.ArmorCategory.HEAD
+import com.nicolas.models.item.enums.ArmorCategory.BODY
+import com.nicolas.models.item.enums.ArmorCategory.HEAD
 
 enum class ArmorCategory {
     HEAD,

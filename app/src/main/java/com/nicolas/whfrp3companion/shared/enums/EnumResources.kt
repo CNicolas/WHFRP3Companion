@@ -1,14 +1,14 @@
 package com.nicolas.whfrp3companion.shared.enums
 
+import com.nicolas.models.item.enums.*
+import com.nicolas.models.item.enums.ArmorType.*
+import com.nicolas.models.item.enums.Quality.*
+import com.nicolas.models.item.enums.Range.*
+import com.nicolas.models.item.enums.WeaponType.*
 import com.nicolas.models.player.enums.Characteristic
 import com.nicolas.models.player.enums.Characteristic.*
 import com.nicolas.models.player.enums.Race
 import com.nicolas.models.player.enums.Race.*
-import com.nicolas.models.player.item.enums.*
-import com.nicolas.models.player.item.enums.ArmorType.*
-import com.nicolas.models.player.item.enums.Quality.*
-import com.nicolas.models.player.item.enums.Range.*
-import com.nicolas.models.player.item.enums.WeaponType.*
 import com.nicolas.models.talent.TalentCooldown
 import com.nicolas.models.talent.TalentCooldown.*
 import com.nicolas.models.talent.TalentType

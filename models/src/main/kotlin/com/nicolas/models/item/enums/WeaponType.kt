@@ -1,6 +1,6 @@
-package com.nicolas.models.player.item.enums
+package com.nicolas.models.item.enums
 
-import com.nicolas.models.player.item.enums.WeaponCategory.*
+import com.nicolas.models.item.enums.WeaponCategory.*
 
 enum class WeaponCategory {
     MELEE,

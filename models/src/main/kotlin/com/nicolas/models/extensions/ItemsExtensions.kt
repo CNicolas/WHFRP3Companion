@@ -1,10 +1,10 @@
 package com.nicolas.models.extensions
 
+import com.nicolas.models.item.*
+import com.nicolas.models.item.enums.ItemType
+import com.nicolas.models.item.enums.ItemType.*
+import com.nicolas.models.item.enums.Range
 import com.nicolas.models.player.Player
-import com.nicolas.models.player.item.*
-import com.nicolas.models.player.item.enums.ItemType
-import com.nicolas.models.player.item.enums.ItemType.*
-import com.nicolas.models.player.item.enums.Range
 
 fun Player.addItem(item: Item): List<Item> {
     val mutableItems = items.toMutableList()

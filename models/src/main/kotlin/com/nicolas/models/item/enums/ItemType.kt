@@ -1,4 +1,4 @@
-package com.nicolas.models.player.item.enums
+package com.nicolas.models.item.enums
 
 enum class ItemType {
     ARMOR,

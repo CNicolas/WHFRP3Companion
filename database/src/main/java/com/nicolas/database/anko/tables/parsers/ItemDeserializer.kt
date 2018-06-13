@@ -1,8 +1,8 @@
 package com.nicolas.database.anko.tables.parsers
 
 import com.google.gson.*
-import com.nicolas.models.player.item.*
-import com.nicolas.models.player.item.enums.ItemType.*
+import com.nicolas.models.item.*
+import com.nicolas.models.item.enums.ItemType.*
 import java.lang.reflect.Type
 
 class ItemDeserializer : JsonDeserializer<Item> {

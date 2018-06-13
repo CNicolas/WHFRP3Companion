@@ -5,10 +5,10 @@ import com.nicolas.database.genericType
 import com.nicolas.database.toInt
 import com.nicolas.database.toNullableInt
 import com.nicolas.models.effect.Effect
+import com.nicolas.models.item.Item
 import com.nicolas.models.player.CharacteristicValue
 import com.nicolas.models.player.Player
 import com.nicolas.models.player.enums.Race
-import com.nicolas.models.player.item.Item
 import com.nicolas.models.skill.Skill
 import com.nicolas.models.talent.Talent
 import org.jetbrains.anko.db.RowParser
