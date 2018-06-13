@@ -12,8 +12,8 @@ import com.nicolas.database.loadTalents
 import com.nicolas.models.extensions.addTalent
 import com.nicolas.models.extensions.findTalents
 import com.nicolas.models.player.Player
-import com.nicolas.models.player.talent.Talent
-import com.nicolas.models.player.talent.TalentSearch
+import com.nicolas.models.talent.Talent
+import com.nicolas.models.talent.TalentSearch
 import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.playersheet.talents.PlayerTalentsAdapter
 import com.nicolas.whfrp3companion.playersheet.talents.TalentEditionMode

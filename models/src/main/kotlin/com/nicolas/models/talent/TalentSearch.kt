@@ -1,4 +1,4 @@
-package com.nicolas.models.player.talent
+package com.nicolas.models.talent
 
 import java.io.Serializable
 

@@ -1,4 +1,4 @@
-package com.nicolas.models.player.talent
+package com.nicolas.models.talent
 
 enum class TalentType {
     AFFINITY,

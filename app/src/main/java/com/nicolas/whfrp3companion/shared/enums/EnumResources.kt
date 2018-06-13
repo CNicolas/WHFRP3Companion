@@ -9,10 +9,10 @@ import com.nicolas.models.player.item.enums.ArmorType.*
 import com.nicolas.models.player.item.enums.Quality.*
 import com.nicolas.models.player.item.enums.Range.*
 import com.nicolas.models.player.item.enums.WeaponType.*
-import com.nicolas.models.player.talent.TalentCooldown
-import com.nicolas.models.player.talent.TalentCooldown.*
-import com.nicolas.models.player.talent.TalentType
-import com.nicolas.models.player.talent.TalentType.*
+import com.nicolas.models.talent.TalentCooldown
+import com.nicolas.models.talent.TalentCooldown.*
+import com.nicolas.models.talent.TalentType
+import com.nicolas.models.talent.TalentType.*
 import com.nicolas.whfrp3companion.R
 
 internal val Race.labelId: Int

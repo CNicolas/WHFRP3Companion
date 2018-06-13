@@ -7,8 +7,8 @@ import com.nicolas.models.player.enums.Characteristic
 import com.nicolas.models.player.enums.Characteristic.*
 import com.nicolas.models.player.enums.Race
 import com.nicolas.models.player.item.Item
-import com.nicolas.models.player.talent.Talent
 import com.nicolas.models.skill.Skill
+import com.nicolas.models.talent.Talent
 import java.io.Serializable
 
 data class Player(override var name: String,

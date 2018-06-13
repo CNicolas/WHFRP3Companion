@@ -9,8 +9,8 @@ import butterknife.ButterKnife
 import butterknife.OnClick
 import butterknife.OnItemClick
 import butterknife.Unbinder
-import com.nicolas.models.player.talent.TalentSearch
-import com.nicolas.models.player.talent.TalentType
+import com.nicolas.models.talent.TalentSearch
+import com.nicolas.models.talent.TalentType
 import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.shared.DIALOG_TALENT_SEARCH_TAG
 import com.nicolas.whfrp3companion.shared.TALENTS_SEARCH_INTENT_ARGUMENT
