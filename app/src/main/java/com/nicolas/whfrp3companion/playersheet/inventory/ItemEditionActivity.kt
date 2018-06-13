@@ -13,9 +13,9 @@ import com.nicolas.database.PlayerRepository
 import com.nicolas.models.extensions.addItem
 import com.nicolas.models.extensions.removeItem
 import com.nicolas.models.player.Player
-import com.nicolas.models.player.playerLinked.item.*
-import com.nicolas.models.player.playerLinked.item.enums.*
-import com.nicolas.models.player.playerLinked.item.enums.ItemType.*
+import com.nicolas.models.player.item.*
+import com.nicolas.models.player.item.enums.*
+import com.nicolas.models.player.item.enums.ItemType.*
 import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.shared.ITEM_EDIT_INTENT_ARGUMENT
 import com.nicolas.whfrp3companion.shared.PLAYER_NAME_INTENT_ARGUMENT

@@ -84,7 +84,7 @@ class AnkoHandRepositoryTest {
         val hand = ankoHandRepository.add(Hand(handName))
         assertThat(hand.name).isEqualTo(handName)
 
-        ankoHandRepository.delete(hand)
+        ankoHandRepository.delete(handName)
         assertThat(ankoHandRepository.findAll()).isEmpty()
     }
 

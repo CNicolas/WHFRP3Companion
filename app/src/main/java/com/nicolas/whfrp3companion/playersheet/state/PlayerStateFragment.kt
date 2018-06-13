@@ -13,15 +13,16 @@ import butterknife.ButterKnife
 import butterknife.OnClick
 import butterknife.Unbinder
 import com.nicolas.database.PlayerRepository
-import com.nicolas.models.extensions.getEquippedWeapons
+import com.nicolas.models.extensions.*
 import com.nicolas.models.player.Player
-import com.nicolas.playersheet.extensions.*
 import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.shared.PLAYER_NAME_INTENT_ARGUMENT
 import kotlinx.android.synthetic.main.fragment_player_state.*
 import org.adw.library.widgets.discreteseekbar.DiscreteSeekBar
 import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.toast
+import org.jetbrains.anko.uiThread
 import org.koin.android.ext.android.inject
 import kotlin.math.abs
 
@@ -30,6 +31,7 @@ class PlayerStateFragment : Fragment() {
 
     private val playerRepository by inject<PlayerRepository>()
 
+    private lateinit var playerName: String
     private lateinit var player: Player
 
     override fun onCreateView(inflater: LayoutInflater,
@@ -39,35 +41,48 @@ class PlayerStateFragment : Fragment() {
 
         unbinder = ButterKnife.bind(this, resultingView)
 
-        val playerName = arguments!!.getString(PLAYER_NAME_INTENT_ARGUMENT)
-        player = playerRepository.find(playerName)!!
-
-        removeWoundButton.isEnabled = player.wounds > 0
-        updateWoundsText()
-
-        removeStressButton.isEnabled = player.stress > 0
-        updateStressText()
-
-        removeExhaustionButton.isEnabled = player.exhaustion > 0
-        updateExhaustionText()
-
-        setupStance()
-
-        defenseTextView.text = "${player.defense}"
-        soakTextView.text = "${player.soak}"
-
-        weaponsListView.adapter = WeaponsAdapter(context!!, player.getEquippedWeapons())
-
-        setupEncumbrance()
-
-        setupMoney()
+        playerName = arguments!!.getString(PLAYER_NAME_INTENT_ARGUMENT)
 
         return resultingView
+    }
+
+    override fun onResume() {
+        setupViews()
+
+        super.onResume()
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         unbinder.unbind()
+    }
+
+    private fun setupViews() {
+        doAsync {
+            player = playerRepository.find(playerName)!!
+
+            uiThread {
+                removeWoundButton.isEnabled = player.wounds > 0
+                updateWoundsText()
+
+                removeStressButton.isEnabled = player.stress > 0
+                updateStressText()
+
+                removeExhaustionButton.isEnabled = player.exhaustion > 0
+                updateExhaustionText()
+
+                setupStance()
+
+                defenseTextView.text = "${player.defense}"
+                soakTextView.text = "${player.soak}"
+
+                weaponsListView.adapter = WeaponsAdapter(context!!, player.getEquippedWeapons())
+
+                setupEncumbrance()
+
+                setupMoney()
+            }
+        }
     }
 
     @OnClick(R.id.removeWoundButton)
@@ -80,7 +95,7 @@ class PlayerStateFragment : Fragment() {
         updatePlayerAsync()
     }
 
-    @OnClick(R.id.add_wound)
+    @OnClick(R.id.addWoundButton)
     fun addWound() {
         player.loseHealth(1)
         removeWoundButton.isEnabled = true
@@ -100,7 +115,7 @@ class PlayerStateFragment : Fragment() {
         updatePlayerAsync()
     }
 
-    @OnClick(R.id.add_stress)
+    @OnClick(R.id.addStressButton)
     fun addStress() {
         player.addStress(1)
         removeStressButton.isEnabled = true
@@ -120,7 +135,7 @@ class PlayerStateFragment : Fragment() {
         updatePlayerAsync()
     }
 
-    @OnClick(R.id.add_exhaustion)
+    @OnClick(R.id.addExhaustionButton)
     fun addExhaustion() {
         player.addExhaustion(1)
         removeExhaustionButton.isEnabled = true
@@ -130,7 +145,16 @@ class PlayerStateFragment : Fragment() {
         updatePlayerAsync()
     }
 
-    @OnClick(R.id.change_money)
+    @OnClick(R.id.openEffects)
+    fun openEffects() {
+        activity?.let {
+            startActivity(it.intentFor<PlayerEffectsActivity>(
+                    PLAYER_NAME_INTENT_ARGUMENT to player.name
+            ))
+        }
+    }
+
+    @OnClick(R.id.changeMoney)
     fun changeMoney() {
         val builder = AlertDialog.Builder(activity)
         val inflater = activity!!.layoutInflater
@@ -214,7 +238,7 @@ class PlayerStateFragment : Fragment() {
 
     private fun updatePlayerAsync() {
         doAsync {
-            playerRepository.update(player)
+            player = playerRepository.update(player)
         }
     }
 

@@ -12,9 +12,9 @@ import com.nicolas.database.PlayerRepository
 import com.nicolas.models.extensions.getEquipmentByName
 import com.nicolas.models.extensions.removeItem
 import com.nicolas.models.player.Player
-import com.nicolas.models.player.playerLinked.item.Equipment
-import com.nicolas.models.player.playerLinked.item.Item
-import com.nicolas.models.player.playerLinked.item.enums.ItemType
+import com.nicolas.models.player.item.Equipment
+import com.nicolas.models.player.item.Item
+import com.nicolas.models.player.item.enums.ItemType
 import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.shared.ITEM_EDIT_INTENT_ARGUMENT
 import com.nicolas.whfrp3companion.shared.PLAYER_NAME_INTENT_ARGUMENT
@@ -24,7 +24,7 @@ import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.uiThread
 import org.koin.android.ext.android.inject
 
-class PlayerInventoryFragment : Fragment() {
+class PlayerInventoryFragment : Fragment(), ItemListener {
     private lateinit var unbinder: Unbinder
 
     private val playerRepository by inject<PlayerRepository>()
@@ -62,6 +62,22 @@ class PlayerInventoryFragment : Fragment() {
         startItemEditionActivity()
     }
 
+    override fun onEquipment(equipment: Equipment, isEquipped: Boolean) {
+        player.getEquipmentByName(equipment.name)?.isEquipped = isEquipped
+        playerRepository.update(player)
+    }
+
+    override fun onItemEditionDemand(item: Item) {
+        startItemEditionActivity(item)
+    }
+
+    override fun onItemDeleted(item: Item) {
+        player.removeItem(item)
+        playerRepository.update(player)
+
+        getPlayerItems()
+    }
+
     private fun startItemEditionActivity(item: Item? = null) {
         activity?.let {
             startActivity(it.intentFor<ItemEditionActivity>(
@@ -81,24 +97,7 @@ class PlayerInventoryFragment : Fragment() {
         doAsync {
             player = playerRepository.find(playerName)!!
 
-            val inventoryAdapter = PlayerInventoryExpandableAdapter(context!!, player)
-            inventoryAdapter.addItemListener(object : ItemListener {
-                override fun onEquipment(equipment: Equipment, isEquipped: Boolean) {
-                    player.getEquipmentByName(equipment.name)?.isEquipped = isEquipped
-                    playerRepository.update(player)
-                }
-
-                override fun onItemEditionDemand(item: Item) {
-                    startItemEditionActivity(item)
-                }
-
-                override fun onItemDeleted(item: Item) {
-                    player.removeItem(item)
-                    playerRepository.update(player)
-
-                    getPlayerItems()
-                }
-            })
+            val inventoryAdapter = PlayerInventoryExpandableAdapter(context!!, player, this@PlayerInventoryFragment)
 
             uiThread {
                 inventoryExpandableList.setAdapter(inventoryAdapter)

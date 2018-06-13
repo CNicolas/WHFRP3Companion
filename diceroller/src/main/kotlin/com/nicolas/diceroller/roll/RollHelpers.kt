@@ -1,12 +1,12 @@
 package com.nicolas.diceroller.roll
 
-import com.nicolas.diceroller.dices.Dice
-import com.nicolas.diceroller.dices.Face
-import com.nicolas.diceroller.dices.Face.*
-import com.nicolas.diceroller.dices.impl.bad.ChallengeDice
-import com.nicolas.diceroller.dices.impl.bad.MisfortuneDice
-import com.nicolas.diceroller.dices.impl.good.*
 import com.nicolas.diceroller.statistics.RollStatistics
+import com.nicolas.models.dice.Dice
+import com.nicolas.models.dice.Face
+import com.nicolas.models.dice.Face.*
+import com.nicolas.models.dice.impl.bad.ChallengeDice
+import com.nicolas.models.dice.impl.bad.MisfortuneDice
+import com.nicolas.models.dice.impl.good.*
 import com.nicolas.models.hand.Hand
 
 fun Hand.roll(): RollResult = rollHand(this)

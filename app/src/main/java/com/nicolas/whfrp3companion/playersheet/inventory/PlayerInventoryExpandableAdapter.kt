@@ -19,10 +19,10 @@ import butterknife.OnClick
 import butterknife.OnLongClick
 import com.nicolas.models.extensions.getItemsOfType
 import com.nicolas.models.player.Player
-import com.nicolas.models.player.playerLinked.item.*
-import com.nicolas.models.player.playerLinked.item.enums.ItemType
-import com.nicolas.models.player.playerLinked.item.enums.ItemType.*
-import com.nicolas.models.player.playerLinked.item.enums.Quality.*
+import com.nicolas.models.player.item.*
+import com.nicolas.models.player.item.enums.ItemType
+import com.nicolas.models.player.item.enums.ItemType.*
+import com.nicolas.models.player.item.enums.Quality.*
 import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.shared.bind
 import com.nicolas.whfrp3companion.shared.enums.labelId
@@ -31,11 +31,10 @@ import com.nicolas.whfrp3companion.shared.viewModifications.hide
 import com.nicolas.whfrp3companion.shared.viewModifications.show
 
 class PlayerInventoryExpandableAdapter(private val context: Context,
-                                       private val player: Player) : BaseExpandableListAdapter() {
+                                       private val player: Player,
+                                       private val itemListener: ItemListener) : BaseExpandableListAdapter() {
     private val inflater = LayoutInflater.from(context)
     private val groupedItems = ItemType.values().map { it to player.getItemsOfType(it) }.toMap()
-
-    private val itemListeners: MutableList<ItemListener> = mutableListOf()
 
     @SuppressLint("InflateParams")
     override fun getGroupView(groupPosition: Int,
@@ -79,8 +78,6 @@ class PlayerInventoryExpandableAdapter(private val context: Context,
     override fun isChildSelectable(groupPosition: Int, childPosition: Int): Boolean = true
     // endregion
 
-    fun addItemListener(itemListener: ItemListener) = itemListeners.add(itemListener)
-
     // region Group and Child ViewHolders creation
     private fun getGroupViewHolderOfView(savedView: View?, parent: ViewGroup?): Pair<View, GroupViewHolder> {
         var view = savedView
@@ -105,7 +102,7 @@ class PlayerInventoryExpandableAdapter(private val context: Context,
             holder = view.tag as ChildViewHolder
         } else {
             view = inflater.inflate(R.layout.list_player_inventory_child, parent, false)
-            holder = ChildViewHolder(itemListeners, view)
+            holder = ChildViewHolder(itemListener, view)
             view!!.tag = holder
         }
 
@@ -121,7 +118,7 @@ class PlayerInventoryExpandableAdapter(private val context: Context,
         }
     }
 
-    internal class ChildViewHolder(private val itemListeners: List<ItemListener>, view: View) {
+    internal class ChildViewHolder(private val itemListener: ItemListener, view: View) {
         private val equippedImageView by view.bind<ImageView>(R.id.equipped)
         private val itemNameTextView by view.bind<TextView>(R.id.item_name)
         private val quantityTextView by view.bind<TextView>(R.id.quantity)
@@ -186,10 +183,10 @@ class PlayerInventoryExpandableAdapter(private val context: Context,
             itemPopupMenu.setOnMenuItemClickListener {
                 when (it.itemId) {
                     R.id.edit_item -> {
-                        itemListeners.notifyEditionDemand(item)
+                        itemListener.onItemEditionDemand(item)
                     }
                     R.id.delete_item -> {
-                        itemListeners.notifyDeletion(item)
+                        itemListener.onItemDeleted(item)
                     }
                 }
                 true
@@ -259,7 +256,7 @@ class PlayerInventoryExpandableAdapter(private val context: Context,
             val equipment = item as Equipment
             equipment.isEquipped = isEquipped ?: !equipment.isEquipped
 
-            itemListeners.notifyEquipment(equipment, equipment.isEquipped)
+            itemListener.onEquipment(equipment, equipment.isEquipped)
             showEquippedImage(equipment.isEquipped)
         }
     }

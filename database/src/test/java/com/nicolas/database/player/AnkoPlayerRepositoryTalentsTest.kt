@@ -3,9 +3,9 @@ package com.nicolas.database.player
 import com.nicolas.database.BuildConfig
 import com.nicolas.models.extensions.*
 import com.nicolas.models.player.Player
-import com.nicolas.models.player.playerLinked.talent.TalentCooldown
-import com.nicolas.models.player.playerLinked.talent.TalentCooldown.PASSIVE
-import com.nicolas.models.player.playerLinked.talent.TalentType.FAITH
+import com.nicolas.models.player.talent.TalentCooldown
+import com.nicolas.models.player.talent.TalentCooldown.PASSIVE
+import com.nicolas.models.player.talent.TalentType.FAITH
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -20,7 +20,7 @@ class AnkoPlayerRepositoryTalentsTest : AbstractAnkoPlayerRepositoryTest() {
         val player = ankoPlayerRepository.add(Player("John"))
         assertThat(player.talents).isEmpty()
 
-        val passiveTalents = ankoPlayerRepository.passiveTalents
+        val passiveTalents = allTalents.passive
         val selectedTalent = passiveTalents.first { it.type == FAITH }
         player.addTalent(selectedTalent)
 
@@ -39,7 +39,7 @@ class AnkoPlayerRepositoryTalentsTest : AbstractAnkoPlayerRepositoryTest() {
         val player = ankoPlayerRepository.add(Player("John"))
         assertThat(player.talents).isEmpty()
 
-        val exhaustibleTalent = ankoPlayerRepository.exhaustibleTalents[0]
+        val exhaustibleTalent = allTalents.exhaustible[0]
         player.addTalent(exhaustibleTalent)
 
         val updatedPlayer1 = ankoPlayerRepository.update(player)
@@ -68,8 +68,8 @@ class AnkoPlayerRepositoryTalentsTest : AbstractAnkoPlayerRepositoryTest() {
 
     @Test
     fun should_load_talent_by_type_and_passive() {
-        val passiveFaithTalent = ankoPlayerRepository.passiveTalents.first { it.type == FAITH }
-        val faithPassiveTalent = ankoPlayerRepository.talents.filter { it.type == FAITH }.first { it.cooldown == PASSIVE }
+        val passiveFaithTalent = allTalents.passive.first { it.type == FAITH }
+        val faithPassiveTalent = allTalents.filter { it.type == FAITH }.first { it.cooldown == PASSIVE }
 
         assertThat(passiveFaithTalent).isEqualToComparingFieldByField(faithPassiveTalent)
     }

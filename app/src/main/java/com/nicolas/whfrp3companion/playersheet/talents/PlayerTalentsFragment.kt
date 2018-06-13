@@ -14,9 +14,9 @@ import com.nicolas.models.extensions.addTalent
 import com.nicolas.models.extensions.removeTalent
 import com.nicolas.models.extensions.toggleEquipment
 import com.nicolas.models.player.Player
-import com.nicolas.models.player.playerLinked.talent.Talent
+import com.nicolas.models.player.talent.Talent
 import com.nicolas.whfrp3companion.R
-import com.nicolas.whfrp3companion.shared.DIALOG_TALENT_TYPE_TAG
+import com.nicolas.whfrp3companion.shared.DIALOG_TALENT_SEARCH_TAG
 import com.nicolas.whfrp3companion.shared.PLAYER_NAME_INTENT_ARGUMENT
 import com.nicolas.whfrp3companion.shared.dialogs.TalentSearchDialog
 import kotlinx.android.synthetic.main.fragment_player_talents.*
@@ -60,7 +60,7 @@ class PlayerTalentsFragment : Fragment(), TalentListener {
     @OnClick(R.id.search)
     fun openTalentSearchDialog() {
         val talentSearchDialog = TalentSearchDialog.newInstance(player.name)
-        talentSearchDialog.show(activity?.supportFragmentManager, DIALOG_TALENT_TYPE_TAG)
+        talentSearchDialog.show(activity?.supportFragmentManager, DIALOG_TALENT_SEARCH_TAG)
     }
 
     // region TalentListener

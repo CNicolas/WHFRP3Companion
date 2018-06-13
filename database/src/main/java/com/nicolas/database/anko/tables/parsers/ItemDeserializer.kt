@@ -1,8 +1,8 @@
 package com.nicolas.database.anko.tables.parsers
 
 import com.google.gson.*
-import com.nicolas.models.player.playerLinked.item.*
-import com.nicolas.models.player.playerLinked.item.enums.ItemType.*
+import com.nicolas.models.player.item.*
+import com.nicolas.models.player.item.enums.ItemType.*
 import java.lang.reflect.Type
 
 class ItemDeserializer : JsonDeserializer<Item> {
@@ -11,7 +11,8 @@ class ItemDeserializer : JsonDeserializer<Item> {
         val prim = jsonObject.get("type") as JsonPrimitive
         val itemTypeString = prim.asString
         val clazz = getClassInstance(itemTypeString)
-        return context.deserialize(jsonObject, clazz) ?: throw JsonParseException("haaaa")
+
+        return context.deserialize(jsonObject, clazz) ?: throw JsonParseException("Can not deserialize this object")
     }
 
     private fun getClassInstance(itemTypeString: String): Type {

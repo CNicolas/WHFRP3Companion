@@ -4,7 +4,7 @@ import com.nicolas.database.BuildConfig
 import com.nicolas.models.extensions.*
 import com.nicolas.models.player.Player
 import com.nicolas.models.player.enums.Characteristic.*
-import com.nicolas.models.player.playerLinked.skill.SkillType
+import com.nicolas.models.player.skill.SkillType
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -21,7 +21,7 @@ class AnkoPlayerRepositorySkillsTest : AbstractAnkoPlayerRepositoryTest() {
         assertThat(player.name).isEqualTo("John")
         assertThat(player.skills.size).isEqualTo(18)
 
-        val advancedSkills = ankoPlayerRepository.advancedSkills
+        val advancedSkills = allSkills.advanced
         println(advancedSkills)
         assertThat(advancedSkills.map { it.type }.distinct()).isEqualTo(listOf(SkillType.ADVANCED))
         player.addSkill(advancedSkills[0])
@@ -37,7 +37,7 @@ class AnkoPlayerRepositorySkillsTest : AbstractAnkoPlayerRepositoryTest() {
         assertThat(player.skills.size).isEqualTo(18)
 
         val fight = player.getSkillByName("capacité de combat")
-        assertThat(fight).isNotNull()
+        assertThat(fight).isNotNull
         assertThat(fight!!.level).isEqualTo(0)
         assertThat(fight.getSpecializationByName("Armes d’Hast")?.isSpecialized).isFalse()
 
@@ -49,7 +49,7 @@ class AnkoPlayerRepositorySkillsTest : AbstractAnkoPlayerRepositoryTest() {
         assertThat(updatedPlayer.skills.size).isEqualTo(18)
 
         val newSkill = updatedPlayer.getSkillByName("capacité de combat")
-        assertThat(newSkill).isNotNull()
+        assertThat(newSkill).isNotNull
         assertThat(newSkill!!.type).isEqualTo(SkillType.BASIC)
         assertThat(newSkill.characteristic).isEqualTo(STRENGTH)
         assertThat(newSkill.level).isEqualTo(2)
@@ -85,15 +85,5 @@ class AnkoPlayerRepositorySkillsTest : AbstractAnkoPlayerRepositoryTest() {
 
         assertThat(fellowshipSkills).isNotEmpty
         assertThat(fellowshipSkills.size).isEqualTo(4)
-    }
-
-    @Test
-    fun should_map_skill_with_specializations() {
-        val specializationsBySkill = ankoPlayerRepository.allSpecializations
-        val shootingSkill = specializationsBySkill.keys.first { it.name == "Capacité de Tir" }
-        val specializations = specializationsBySkill[shootingSkill]!!
-
-        assertThat(specializations.size).isEqualTo(4)
-        assertThat(specializations.map { it.name }).containsExactly("Arcs", "Arbalètes", "Armes de Jet", "Armes à Poudre")
     }
 }

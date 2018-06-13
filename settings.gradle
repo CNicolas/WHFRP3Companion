@@ -1,2 +1,2 @@
-include ':app', ':models', ':database', ':diceroller', ':playersheet'
+include ':app', ':models', ':database', ':diceroller'
 

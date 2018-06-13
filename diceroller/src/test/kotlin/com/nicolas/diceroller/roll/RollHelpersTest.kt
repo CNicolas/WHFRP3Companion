@@ -1,6 +1,6 @@
 package com.nicolas.diceroller.roll
 
-import com.nicolas.diceroller.dices.Face.*
+import com.nicolas.models.dice.Face.*
 import com.nicolas.models.hand.Hand
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test

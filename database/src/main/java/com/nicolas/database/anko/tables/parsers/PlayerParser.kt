@@ -6,10 +6,11 @@ import com.nicolas.database.toInt
 import com.nicolas.database.toNullableInt
 import com.nicolas.models.player.CharacteristicValue
 import com.nicolas.models.player.Player
+import com.nicolas.models.player.effect.Effect
 import com.nicolas.models.player.enums.Race
-import com.nicolas.models.player.playerLinked.item.Item
-import com.nicolas.models.player.playerLinked.skill.Skill
-import com.nicolas.models.player.playerLinked.talent.Talent
+import com.nicolas.models.player.item.Item
+import com.nicolas.models.player.skill.Skill
+import com.nicolas.models.player.talent.Talent
 import org.jetbrains.anko.db.RowParser
 
 internal class PlayerParser : RowParser<Player> {
@@ -50,8 +51,8 @@ internal class PlayerParser : RowParser<Player> {
                     gold = columns[33].toInt(),
                     items = gson.fromJson(columns[34] as String, genericType<List<Item>>()),
                     skills = gson.fromJson(columns[35] as String, genericType<List<Skill>>()),
-                    talents = gson.fromJson(columns[36] as String, genericType<List<Talent>>())
-            )
+                    talents = gson.fromJson(columns[36] as String, genericType<List<Talent>>()),
+                    effects = gson.fromJson(columns[37] as String, genericType<List<Effect>>()))
 }
 
 fun Player.toColumns(): Map<String, Any?> {
@@ -106,6 +107,7 @@ fun Player.toColumns(): Map<String, Any?> {
 
             "items" to gson.toJson(items),
             "skills" to gson.toJson(skills),
-            "talents" to gson.toJson(talents)
+            "talents" to gson.toJson(talents),
+            "effects" to gson.toJson(effects)
     )
 }

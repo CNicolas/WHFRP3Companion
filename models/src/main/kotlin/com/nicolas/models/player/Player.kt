@@ -2,12 +2,13 @@ package com.nicolas.models.player
 
 import com.nicolas.models.NamedEntity
 import com.nicolas.models.extensions.getEquippedArmors
+import com.nicolas.models.player.effect.Effect
 import com.nicolas.models.player.enums.Characteristic
 import com.nicolas.models.player.enums.Characteristic.*
 import com.nicolas.models.player.enums.Race
-import com.nicolas.models.player.playerLinked.item.Item
-import com.nicolas.models.player.playerLinked.skill.Skill
-import com.nicolas.models.player.playerLinked.talent.Talent
+import com.nicolas.models.player.item.Item
+import com.nicolas.models.player.skill.Skill
+import com.nicolas.models.player.talent.Talent
 import java.io.Serializable
 
 data class Player(override var name: String,
@@ -47,6 +48,7 @@ data class Player(override var name: String,
                   var items: List<Item> = listOf(),
                   var skills: List<Skill> = listOf(),
                   var talents: List<Talent> = listOf(),
+                  var effects: List<Effect> = listOf(),
 
                   override val id: Int = -1) : NamedEntity, Serializable {
 
@@ -69,10 +71,10 @@ data class Player(override var name: String,
         get() = encumbranceOverload + 5
 
     val defense: Int
-        get() = getEquippedArmors().sumBy { it.defense }
+        get() = getEquippedArmors().sumBy { it.defense } + effects.sumBy { it.defense ?: 0 }
 
     val soak: Int
-        get() = getEquippedArmors().sumBy { it.soak }
+        get() = getEquippedArmors().sumBy { it.soak } + effects.sumBy { it.soak ?: 0 }
 
     operator fun get(characteristic: Characteristic): CharacteristicValue = when (characteristic) {
         STRENGTH -> strength

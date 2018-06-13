@@ -1,6 +1,6 @@
 package com.nicolas.diceroller.roll
 
-import com.nicolas.diceroller.dices.Face
+import com.nicolas.models.dice.Face
 
 typealias FacesReport = Map<Face, Int>
 
