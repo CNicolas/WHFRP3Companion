@@ -4,7 +4,7 @@ import com.nicolas.database.BuildConfig
 import com.nicolas.models.extensions.*
 import com.nicolas.models.player.Player
 import com.nicolas.models.player.enums.Characteristic.*
-import com.nicolas.models.player.skill.SkillType
+import com.nicolas.models.skill.SkillType
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith

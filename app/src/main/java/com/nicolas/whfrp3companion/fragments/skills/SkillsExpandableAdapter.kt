@@ -8,10 +8,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import butterknife.ButterKnife
-import com.nicolas.models.player.skill.Skill
-import com.nicolas.models.player.skill.SkillType.ADVANCED
-import com.nicolas.models.player.skill.SkillType.BASIC
-import com.nicolas.models.player.skill.Specialization
+import com.nicolas.models.skill.Skill
+import com.nicolas.models.skill.SkillType.ADVANCED
+import com.nicolas.models.skill.SkillType.BASIC
+import com.nicolas.models.skill.Specialization
 import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.shared.adapters.AbstractSkillsExpandableAdapter
 import com.nicolas.whfrp3companion.shared.bind

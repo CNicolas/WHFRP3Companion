@@ -16,10 +16,10 @@ import com.nicolas.models.extensions.createHand
 import com.nicolas.models.extensions.getSkillByName
 import com.nicolas.models.extensions.getSpecializationByName
 import com.nicolas.models.player.Player
-import com.nicolas.models.player.skill.Skill
-import com.nicolas.models.player.skill.SkillType.ADVANCED
-import com.nicolas.models.player.skill.SkillType.BASIC
-import com.nicolas.models.player.skill.Specialization
+import com.nicolas.models.skill.Skill
+import com.nicolas.models.skill.SkillType.ADVANCED
+import com.nicolas.models.skill.SkillType.BASIC
+import com.nicolas.models.skill.Specialization
 import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.shared.HAND_INTENT_ARGUMENT
 import com.nicolas.whfrp3companion.shared.activities.DiceRollerActivity

@@ -1,8 +1,8 @@
 package com.nicolas.models.effect
 
 import com.nicolas.models.player.enums.Characteristic
-import com.nicolas.models.player.skill.Skill
-import com.nicolas.models.player.skill.Specialization
+import com.nicolas.models.skill.Skill
+import com.nicolas.models.skill.Specialization
 import java.io.Serializable
 
 data class Trigger(val characteristics: List<Characteristic>? = null,

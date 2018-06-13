@@ -7,7 +7,7 @@ import com.nicolas.models.extensions.createHand
 import com.nicolas.models.player.CharacteristicValue
 import com.nicolas.models.player.Player
 import com.nicolas.models.player.enums.Characteristic
-import com.nicolas.models.player.skill.Skill
+import com.nicolas.models.skill.Skill
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 

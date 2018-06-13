@@ -1,7 +1,7 @@
 package com.nicolas.models.extensions
 
 import com.nicolas.models.player.enums.Characteristic
-import com.nicolas.models.player.skill.Skill
+import com.nicolas.models.skill.Skill
 
 fun List<Skill>.findSkills(text: String? = null, characteristic: Characteristic? = null): List<Skill> {
     var filteredSkills = toList()

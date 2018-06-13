@@ -5,7 +5,7 @@ import com.nicolas.database.PlayerRepository
 import com.nicolas.database.anko.daos.player.PlayerDao
 import com.nicolas.database.loadSkills
 import com.nicolas.models.player.Player
-import com.nicolas.models.player.skill.SkillType
+import com.nicolas.models.skill.SkillType
 
 class AnkoPlayerRepository(context: Context) : PlayerRepository {
     private val playerDao = PlayerDao(context.database)

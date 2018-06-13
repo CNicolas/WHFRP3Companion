@@ -3,8 +3,8 @@ package com.nicolas.models.extensions
 import com.nicolas.models.effect.Effect
 import com.nicolas.models.player.Player
 import com.nicolas.models.player.enums.Characteristic
-import com.nicolas.models.player.skill.Skill
-import com.nicolas.models.player.skill.Specialization
+import com.nicolas.models.skill.Skill
+import com.nicolas.models.skill.Specialization
 
 fun Player.addEffect(effect: Effect): Player {
     val mutableEffects = effects.toMutableList()
