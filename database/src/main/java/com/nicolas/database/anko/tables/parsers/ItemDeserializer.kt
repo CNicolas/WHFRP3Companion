@@ -11,7 +11,8 @@ class ItemDeserializer : JsonDeserializer<Item> {
         val prim = jsonObject.get("type") as JsonPrimitive
         val itemTypeString = prim.asString
         val clazz = getClassInstance(itemTypeString)
-        return context.deserialize(jsonObject, clazz) ?: throw JsonParseException("haaaa")
+
+        return context.deserialize(jsonObject, clazz) ?: throw JsonParseException("Can not deserialize this object")
     }
 
     private fun getClassInstance(itemTypeString: String): Type {

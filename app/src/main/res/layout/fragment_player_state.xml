@@ -6,10 +6,11 @@
                                              android:layout_height="wrap_content"
                                              android:paddingStart="@dimen/medium_padding"
                                              android:paddingEnd="@dimen/medium_padding"
+                                             android:paddingTop="@dimen/medium_padding"
                                              tools:context=".playersheet.PlayerSheetActivity"
                                              tools:ignore="RtlSymmetry">
     <!--region Wounds-->
-    <TextView android:id="@+id/wounds_label"
+    <TextView android:id="@+id/woundsLabel"
               android:layout_width="0dp"
               android:layout_height="40dp"
               android:gravity="center|end"
@@ -17,16 +18,16 @@
               android:hint="@string/wounds"
               app:layout_constraintTop_toTopOf="parent"
               app:layout_constraintRight_toLeftOf="@+id/removeWoundButton"
-              app:layout_constraintBottom_toTopOf="@+id/stress_label"
+              app:layout_constraintBottom_toTopOf="@+id/exhaustionLabel"
               app:layout_constraintLeft_toLeftOf="parent" />
     <Button android:id="@+id/removeWoundButton"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:text="@string/hyphen"
-            app:layout_constraintTop_toTopOf="@+id/wounds_label"
+            app:layout_constraintTop_toTopOf="@+id/woundsLabel"
             app:layout_constraintRight_toLeftOf="@+id/woundsTextView"
-            app:layout_constraintBottom_toBottomOf="@+id/wounds_label"
-            app:layout_constraintLeft_toRightOf="@+id/wounds_label" />
+            app:layout_constraintBottom_toBottomOf="@+id/woundsLabel"
+            app:layout_constraintLeft_toRightOf="@+id/woundsLabel" />
     <TextView android:id="@+id/woundsTextView"
               android:layout_width="75dp"
               android:layout_height="50dp"
@@ -35,10 +36,10 @@
               android:textStyle="bold"
               android:hint="@string/zero"
               app:layout_constraintTop_toTopOf="@+id/removeWoundButton"
-              app:layout_constraintRight_toLeftOf="@+id/add_wound"
+              app:layout_constraintRight_toLeftOf="@+id/addWoundButton"
               app:layout_constraintBottom_toBottomOf="@+id/removeWoundButton"
               app:layout_constraintLeft_toRightOf="@+id/removeWoundButton" />
-    <Button android:id="@+id/add_wound"
+    <Button android:id="@+id/addWoundButton"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginEnd="@dimen/giant_padding_2"
@@ -49,55 +50,16 @@
             app:layout_constraintLeft_toRightOf="@+id/woundsTextView" />
     <!--endregion-->
 
-    <!--region Stress-->
-    <TextView android:id="@+id/stress_label"
-              android:layout_width="150dp"
-              android:layout_height="30dp"
-              android:gravity="center|bottom"
-              android:hint="@string/stress"
-              app:layout_constraintTop_toBottomOf="@+id/woundsTextView"
-              app:layout_constraintRight_toLeftOf="@+id/exhaustion_label"
-              app:layout_constraintBottom_toTopOf="@+id/stressTextView"
-              app:layout_constraintLeft_toLeftOf="parent" />
-
-    <Button android:id="@+id/removeStressButton"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:text="@string/hyphen"
-            app:layout_constraintTop_toTopOf="@+id/stressTextView"
-            app:layout_constraintRight_toLeftOf="@+id/stressTextView"
-            app:layout_constraintBottom_toBottomOf="@+id/stressTextView"
-            app:layout_constraintLeft_toLeftOf="parent" />
-    <TextView android:id="@+id/stressTextView"
-              android:layout_width="50dp"
-              android:layout_height="50dp"
-              android:gravity="center"
-              android:textSize="@dimen/medium_text_size"
-              android:hint="@string/zero"
-              app:layout_constraintTop_toTopOf="@+id/add_stress"
-              app:layout_constraintRight_toLeftOf="@+id/add_stress"
-              app:layout_constraintBottom_toBottomOf="@+id/add_stress"
-              app:layout_constraintLeft_toRightOf="@+id/removeStressButton" />
-    <Button android:id="@+id/add_stress"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:text="@string/plus"
-            app:layout_constraintTop_toTopOf="@+id/removeExhaustionButton"
-            app:layout_constraintRight_toLeftOf="@+id/removeExhaustionButton"
-            app:layout_constraintBottom_toBottomOf="@+id/removeExhaustionButton"
-            app:layout_constraintLeft_toRightOf="@+id/stressTextView" />
-    <!--endregion-->
-
     <!--region Exhaustion-->
-    <TextView android:id="@+id/exhaustion_label"
+    <TextView android:id="@+id/exhaustionLabel"
               android:layout_width="150dp"
               android:layout_height="30dp"
               android:gravity="center|bottom"
               android:hint="@string/exhaustion"
               app:layout_constraintTop_toBottomOf="@+id/woundsTextView"
-              app:layout_constraintRight_toRightOf="parent"
+              app:layout_constraintRight_toLeftOf="@+id/stressLabel"
               app:layout_constraintBottom_toTopOf="@+id/exhaustionTextView"
-              app:layout_constraintLeft_toRightOf="@+id/stress_label" />
+              app:layout_constraintLeft_toLeftOf="parent" />
 
     <Button android:id="@+id/removeExhaustionButton"
             android:layout_width="50dp"
@@ -106,25 +68,64 @@
             app:layout_constraintTop_toTopOf="@+id/exhaustionTextView"
             app:layout_constraintRight_toLeftOf="@+id/exhaustionTextView"
             app:layout_constraintBottom_toBottomOf="@+id/exhaustionTextView"
-            app:layout_constraintLeft_toRightOf="@+id/add_stress" />
+            app:layout_constraintLeft_toLeftOf="parent" />
     <TextView android:id="@+id/exhaustionTextView"
               android:layout_width="50dp"
               android:layout_height="50dp"
               android:gravity="center"
               android:textSize="@dimen/medium_text_size"
               android:hint="@string/zero"
-              app:layout_constraintTop_toTopOf="@+id/add_exhaustion"
-              app:layout_constraintRight_toLeftOf="@+id/add_exhaustion"
-              app:layout_constraintBottom_toBottomOf="@+id/add_exhaustion"
+              app:layout_constraintTop_toTopOf="@+id/addExhaustionButton"
+              app:layout_constraintRight_toLeftOf="@+id/addExhaustionButton"
+              app:layout_constraintBottom_toBottomOf="@+id/addExhaustionButton"
               app:layout_constraintLeft_toRightOf="@+id/removeExhaustionButton" />
-    <Button android:id="@+id/add_exhaustion"
+    <Button android:id="@+id/addExhaustionButton"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:text="@string/plus"
-            app:layout_constraintTop_toBottomOf="@+id/exhaustion_label"
+            app:layout_constraintTop_toTopOf="@+id/removeStressButton"
+            app:layout_constraintRight_toLeftOf="@+id/removeStressButton"
+            app:layout_constraintBottom_toBottomOf="@+id/removeStressButton"
+            app:layout_constraintLeft_toRightOf="@+id/exhaustionTextView" />
+    <!--endregion-->
+
+    <!--region Stress-->
+    <TextView android:id="@+id/stressLabel"
+              android:layout_width="150dp"
+              android:layout_height="30dp"
+              android:gravity="center|bottom"
+              android:hint="@string/stress"
+              app:layout_constraintTop_toBottomOf="@+id/woundsTextView"
+              app:layout_constraintRight_toRightOf="parent"
+              app:layout_constraintBottom_toTopOf="@+id/stressTextView"
+              app:layout_constraintLeft_toRightOf="@+id/exhaustionLabel" />
+
+    <Button android:id="@+id/removeStressButton"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:text="@string/hyphen"
+            app:layout_constraintTop_toTopOf="@+id/stressTextView"
+            app:layout_constraintRight_toLeftOf="@+id/stressTextView"
+            app:layout_constraintBottom_toBottomOf="@+id/stressTextView"
+            app:layout_constraintLeft_toRightOf="@+id/addExhaustionButton" />
+    <TextView android:id="@+id/stressTextView"
+              android:layout_width="50dp"
+              android:layout_height="50dp"
+              android:gravity="center"
+              android:textSize="@dimen/medium_text_size"
+              android:hint="@string/zero"
+              app:layout_constraintTop_toTopOf="@+id/addStressButton"
+              app:layout_constraintRight_toLeftOf="@+id/addStressButton"
+              app:layout_constraintBottom_toBottomOf="@+id/addStressButton"
+              app:layout_constraintLeft_toRightOf="@+id/removeStressButton" />
+    <Button android:id="@+id/addStressButton"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:text="@string/plus"
+            app:layout_constraintTop_toBottomOf="@+id/stressLabel"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/currentStanceTextView"
-            app:layout_constraintLeft_toRightOf="@+id/exhaustionTextView" />
+            app:layout_constraintLeft_toRightOf="@+id/stressTextView" />
     <!--endregion-->
 
     <!--region Stance-->
@@ -135,7 +136,7 @@
               android:gravity="center_vertical|end"
               android:textColor="@color/conservative"
               android:text="@string/conservative"
-              app:layout_constraintTop_toBottomOf="@+id/stressTextView"
+              app:layout_constraintTop_toBottomOf="@+id/exhaustionTextView"
               app:layout_constraintRight_toLeftOf="@+id/currentStanceTextView"
               app:layout_constraintBottom_toTopOf="@+id/stanceBar"
               app:layout_constraintLeft_toLeftOf="parent"
@@ -304,10 +305,10 @@
               android:textSize="@dimen/medium_text_size"
               android:hint="@string/zero"
               app:layout_constraintTop_toTopOf="@+id/silverTextView"
-              app:layout_constraintRight_toLeftOf="@+id/change_money"
+              app:layout_constraintRight_toLeftOf="@+id/changeMoney"
               app:layout_constraintBottom_toBottomOf="@+id/silverTextView"
               app:layout_constraintLeft_toRightOf="@+id/silverTextView" />
-    <ImageButton android:id="@+id/change_money"
+    <ImageButton android:id="@+id/changeMoney"
                  android:layout_width="60dp"
                  android:layout_height="50dp"
                  android:layout_marginStart="@dimen/medium_padding"

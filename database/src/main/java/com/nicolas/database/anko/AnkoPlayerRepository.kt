@@ -4,22 +4,13 @@ import android.content.Context
 import com.nicolas.database.PlayerRepository
 import com.nicolas.database.anko.daos.player.PlayerDao
 import com.nicolas.database.loadSkills
-import com.nicolas.database.loadTalents
 import com.nicolas.models.player.Player
 import com.nicolas.models.player.skill.SkillType
-import com.nicolas.models.player.talent.TalentCooldown
 
 class AnkoPlayerRepository(context: Context) : PlayerRepository {
     private val playerDao = PlayerDao(context.database)
 
-    val skills = loadSkills(context)
-    val basicSkills = skills.filter { it.type == SkillType.BASIC }
-    val advancedSkills = skills.filter { it.type == SkillType.ADVANCED }
-    val allSpecializations = skills.map { it to it.specializations }.toMap()
-
-    val talents = loadTalents(context)
-    val passiveTalents = talents.filter { it.cooldown == TalentCooldown.PASSIVE }
-    val exhaustibleTalents = talents.filter { it.cooldown == TalentCooldown.TALENT }
+    private val basicSkills = loadSkills(context).filter { it.type == SkillType.BASIC }
 
     override fun add(player: Player): Player {
         player.createSkills()
@@ -54,10 +45,6 @@ class AnkoPlayerRepository(context: Context) : PlayerRepository {
         } else {
             delete(player.name)
         }
-    }
-
-    fun deleteAll() {
-        playerDao.deleteAll()
     }
 
     private fun Player.createSkills() {

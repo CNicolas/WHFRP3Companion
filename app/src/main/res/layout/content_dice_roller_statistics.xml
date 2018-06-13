@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                                              xmlns:app="http://schemas.android.com/apk/res-auto"
                                               xmlns:tools="http://schemas.android.com/tools"
                                               android:id="@+id/swipeRefreshLayout"
                                               android:layout_width="match_parent"
@@ -8,110 +7,73 @@
                                               android:layout_marginTop="?attr/actionBarSize"
                                               tools:showIn="@layout/activity_dice_roller_statistics"
                                               tools:context=".shared.activities.DiceRollerStatisticsActivity">
-    <android.support.constraint.ConstraintLayout android:layout_width="match_parent"
-                                                 android:layout_height="match_parent"
-                                                 android:orientation="vertical">
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:paddingStart="@dimen/big_padding"
+                  android:paddingEnd="@dimen/big_padding"
+                  android:orientation="vertical">
 
         <TextView android:id="@+id/totalRollCountView"
-                  android:layout_width="wrap_content"
+                  android:layout_width="match_parent"
                   android:layout_height="wrap_content"
                   android:gravity="center"
                   android:hint="@string/total_rolls_count_hint"
-                  android:textSize="@dimen/giant_text_size"
-                  app:layout_constraintTop_toTopOf="parent"
-                  app:layout_constraintLeft_toLeftOf="parent"
-                  app:layout_constraintRight_toRightOf="parent"
-                  app:layout_constraintBottom_toTopOf="@+id/successfulRollsView" />
+                  android:textSize="@dimen/giant_text_size" />
 
         <TextView android:id="@+id/successfulRollsView"
-                  android:layout_width="wrap_content"
+                  android:layout_width="match_parent"
                   android:layout_height="wrap_content"
                   android:layout_marginTop="@dimen/medium_padding"
                   android:gravity="center"
                   android:hint="@string/successful_rolls_hint"
-                  android:textSize="@dimen/big_text_size"
-                  app:layout_constraintTop_toBottomOf="@+id/totalRollCountView"
-                  app:layout_constraintLeft_toLeftOf="parent"
-                  app:layout_constraintRight_toRightOf="parent"
-                  app:layout_constraintBottom_toTopOf="@+id/averageSuccessView" />
+                  android:textSize="@dimen/big_text_size" />
 
         <TextView android:id="@+id/averageSuccessView"
-                  android:layout_width="wrap_content"
+                  android:layout_width="match_parent"
                   android:layout_height="56dp"
                   android:drawableStart="@drawable/ic_success_black_36"
-                  style="@style/StatisticsAverageFaceTextView"
-                  app:layout_constraintTop_toBottomOf="@+id/successfulRollsView"
-                  app:layout_constraintLeft_toLeftOf="parent"
-                  app:layout_constraintRight_toRightOf="parent"
-                  app:layout_constraintBottom_toTopOf="@+id/averageBoonView" />
+                  style="@style/StatisticsAverageFaceTextView" />
 
         <TextView android:id="@+id/averageBoonView"
-                  android:layout_width="wrap_content"
+                  android:layout_width="match_parent"
                   android:layout_height="56dp"
                   android:drawableStart="@drawable/ic_boon_black_36"
-                  style="@style/StatisticsAverageFaceTextView"
-                  app:layout_constraintTop_toBottomOf="@+id/averageSuccessView"
-                  app:layout_constraintLeft_toLeftOf="parent"
-                  app:layout_constraintRight_toRightOf="parent"
-                  app:layout_constraintBottom_toTopOf="@+id/averageSigmarView" />
+                  style="@style/StatisticsAverageFaceTextView" />
 
         <TextView android:id="@+id/averageSigmarView"
-                  android:layout_width="wrap_content"
+                  android:layout_width="match_parent"
                   android:layout_height="56dp"
                   android:drawableStart="@drawable/ic_sigmar_black_36"
-                  style="@style/StatisticsAverageFaceTextView"
-                  app:layout_constraintTop_toBottomOf="@+id/averageBoonView"
-                  app:layout_constraintLeft_toLeftOf="parent"
-                  app:layout_constraintRight_toRightOf="parent"
-                  app:layout_constraintBottom_toTopOf="@+id/averageFailureView" />
+                  style="@style/StatisticsAverageFaceTextView" />
 
         <TextView android:id="@+id/averageFailureView"
-                  android:layout_width="wrap_content"
+                  android:layout_width="match_parent"
                   android:layout_height="57dp"
                   android:drawableStart="@drawable/ic_failure_black_36"
-                  style="@style/StatisticsAverageFaceTextView"
-                  app:layout_constraintTop_toBottomOf="@+id/averageSigmarView"
-                  app:layout_constraintLeft_toLeftOf="parent"
-                  app:layout_constraintRight_toRightOf="parent"
-                  app:layout_constraintBottom_toTopOf="@+id/averageBaneView" />
+                  style="@style/StatisticsAverageFaceTextView" />
 
         <TextView android:id="@+id/averageBaneView"
-                  android:layout_width="wrap_content"
+                  android:layout_width="match_parent"
                   android:layout_height="56dp"
                   android:drawableStart="@drawable/ic_bane_black_36"
-                  style="@style/StatisticsAverageFaceTextView"
-                  app:layout_constraintTop_toBottomOf="@+id/averageFailureView"
-                  app:layout_constraintLeft_toLeftOf="parent"
-                  app:layout_constraintRight_toRightOf="parent"
-                  app:layout_constraintBottom_toTopOf="@+id/averageChaosView" />
+                  style="@style/StatisticsAverageFaceTextView" />
 
         <TextView android:id="@+id/averageChaosView"
-                  android:layout_width="wrap_content"
+                  android:layout_width="match_parent"
                   android:layout_height="57dp"
                   android:drawableStart="@drawable/ic_chaos_black_36"
-                  style="@style/StatisticsAverageFaceTextView"
-                  app:layout_constraintTop_toBottomOf="@+id/averageBaneView"
-                  app:layout_constraintLeft_toLeftOf="parent"
-                  app:layout_constraintRight_toRightOf="parent" />
+                  style="@style/StatisticsAverageFaceTextView" />
 
         <TextView android:id="@+id/averageDelayView"
-                  android:layout_width="wrap_content"
+                  android:layout_width="match_parent"
                   android:layout_height="56dp"
                   android:drawableStart="@drawable/ic_delay_black_36"
-                  style="@style/StatisticsAverageFaceTextView"
-                  app:layout_constraintTop_toBottomOf="@+id/averageChaosView"
-                  app:layout_constraintLeft_toLeftOf="parent"
-                  app:layout_constraintRight_toRightOf="parent"
-                  app:layout_constraintBottom_toTopOf="@+id/averageExhaustionView" />
+                  style="@style/StatisticsAverageFaceTextView" />
 
         <TextView android:id="@+id/averageExhaustionView"
-                  android:layout_width="wrap_content"
+                  android:layout_width="match_parent"
                   android:layout_height="56dp"
                   android:drawableStart="@drawable/ic_exhaustion_black_36"
-                  style="@style/StatisticsAverageFaceTextView"
-                  app:layout_constraintTop_toBottomOf="@+id/averageDelayView"
-                  app:layout_constraintLeft_toLeftOf="parent"
-                  app:layout_constraintRight_toRightOf="parent"
-                  app:layout_constraintBottom_toTopOf="parent" />
-    </android.support.constraint.ConstraintLayout>
+                  style="@style/StatisticsAverageFaceTextView" />
+    </LinearLayout>
 </android.support.v4.widget.SwipeRefreshLayout>

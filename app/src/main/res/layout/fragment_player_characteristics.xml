@@ -4,14 +4,14 @@
             xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:paddingStart="@dimen/medium_padding"
+            android:paddingEnd="@dimen/medium_padding"
+            android:paddingTop="@dimen/medium_padding"
             android:orientation="vertical"
             tools:context=".playersheet.PlayerSheetActivity"
             tools:ignore="LabelFor">
     <android.support.constraint.ConstraintLayout android:layout_width="match_parent"
                                                  android:layout_height="wrap_content"
-                                                 android:paddingStart="@dimen/medium_padding"
-                                                 android:paddingEnd="@dimen/medium_padding"
-                                                 android:orientation="vertical"
                                                  android:focusableInTouchMode="true">
 
         <EditText android:id="@+id/career"
@@ -83,7 +83,7 @@
         <EditText android:id="@+id/experience"
                   android:layout_width="0dp"
                   android:layout_height="0dp"
-                  android:gravity="center"
+                  android:gravity="center_vertical|end"
                   android:hint="@string/zero"
                   app:layout_constraintTop_toBottomOf="@id/career"
                   app:layout_constraintRight_toLeftOf="@+id/experience_separator"

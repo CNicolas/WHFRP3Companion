@@ -9,6 +9,7 @@ import com.nicolas.database.anko.AnkoPlayerRepository
 import org.koin.android.ext.android.startKoin
 import org.koin.dsl.module.applicationContext
 
+@Suppress("unused")
 class WHFRP3Companion : Application() {
     private val whfrp3ApplicationContexts = listOf(whfrp3ApplicationModule(this))
 

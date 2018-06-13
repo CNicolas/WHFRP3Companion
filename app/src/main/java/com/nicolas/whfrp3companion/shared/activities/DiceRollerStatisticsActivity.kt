@@ -46,7 +46,7 @@ class DiceRollerStatisticsActivity : AppCompatActivity() {
 
                 averageSuccessView.text = formatAverageFacePerRoll(statistics.averageSuccess)
                 averageBoonView.text = formatAverageFacePerRoll(statistics.averageBoon)
-                averageSigmarView.text = formatAverageFacePerRoll(statistics.averageBoon)
+                averageSigmarView.text = formatAverageFacePerRoll(statistics.averageSigmar)
                 averageFailureView.text = formatAverageFacePerRoll(statistics.averageFailure)
                 averageBaneView.text = formatAverageFacePerRoll(statistics.averageBane)
                 averageDelayView.text = formatAverageFacePerRoll(statistics.averageDelay)

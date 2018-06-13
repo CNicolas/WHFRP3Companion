@@ -95,7 +95,7 @@ class PlayerStateFragment : Fragment() {
         updatePlayerAsync()
     }
 
-    @OnClick(R.id.add_wound)
+    @OnClick(R.id.addWoundButton)
     fun addWound() {
         player.loseHealth(1)
         removeWoundButton.isEnabled = true
@@ -115,7 +115,7 @@ class PlayerStateFragment : Fragment() {
         updatePlayerAsync()
     }
 
-    @OnClick(R.id.add_stress)
+    @OnClick(R.id.addStressButton)
     fun addStress() {
         player.addStress(1)
         removeStressButton.isEnabled = true
@@ -135,7 +135,7 @@ class PlayerStateFragment : Fragment() {
         updatePlayerAsync()
     }
 
-    @OnClick(R.id.add_exhaustion)
+    @OnClick(R.id.addExhaustionButton)
     fun addExhaustion() {
         player.addExhaustion(1)
         removeExhaustionButton.isEnabled = true
@@ -154,7 +154,7 @@ class PlayerStateFragment : Fragment() {
         }
     }
 
-    @OnClick(R.id.change_money)
+    @OnClick(R.id.changeMoney)
     fun changeMoney() {
         val builder = AlertDialog.Builder(activity)
         val inflater = activity!!.layoutInflater

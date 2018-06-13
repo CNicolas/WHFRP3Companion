@@ -46,6 +46,10 @@ fun Player.toggleEquipment(talent: Talent): Player {
     return this
 }
 
+val List<Talent>.passive: List<Talent>
+    get() = filter { it.cooldown == PASSIVE }
+val List<Talent>.exhaustible: List<Talent>
+    get() = filter { it.cooldown == TALENT }
+
 fun List<Talent>.findByType(talentType: TalentType) =
         filter { it.type == talentType }
-

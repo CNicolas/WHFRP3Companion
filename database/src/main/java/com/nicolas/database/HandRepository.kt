@@ -13,5 +13,4 @@ interface HandRepository {
     fun update(hand: Hand): Hand
 
     fun delete(name: String)
-    fun delete(hand: Hand)
 }

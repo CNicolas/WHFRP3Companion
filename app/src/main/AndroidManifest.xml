@@ -8,7 +8,8 @@
         android:icon="@drawable/warhammer_v3_logo"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:fullBackupContent="@xml/backup_descriptor">
 
         <activity
             android:name=".MainActivity"

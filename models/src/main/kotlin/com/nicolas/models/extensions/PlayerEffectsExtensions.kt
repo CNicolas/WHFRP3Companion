@@ -30,7 +30,7 @@ fun Player.removeEffect(effect: Effect): Player {
 fun Player.getEffectsApplyingTo(characteristic: Characteristic): List<Effect> =
         effects.filter { effect ->
             effect.trigger.let {
-                it.everyThrow || it.everyCharacteristic || it.characteristics?.contains(characteristic) == true
+                it.everyRoll || it.everyCharacteristic || it.characteristics?.contains(characteristic) == true
             }
         }
 
@@ -44,7 +44,7 @@ fun Player.getEffectsApplyingTo(skill: Skill, strict: Boolean = false): List<Eff
     } else {
         effects.filter { effect ->
             effect.trigger.let {
-                it.everyThrow || it.everyCharacteristic || it.everySkill || it.skills?.contains(skill) == true
+                it.everyRoll || it.everyCharacteristic || it.everySkill || it.skills?.contains(skill) == true
             }
         }
     }
@@ -60,7 +60,7 @@ fun Player.getEffectsApplyingTo(skill: Skill, specialization: Specialization, st
     } else {
         effects.filter { effect ->
             effect.trigger.let {
-                it.everyThrow || it.everyCharacteristic || it.everySkill
+                it.everyRoll || it.everyCharacteristic || it.everySkill
                         || it.skills?.contains(skill) == true
                         || it.specializations?.contains(specialization) == true
             }
