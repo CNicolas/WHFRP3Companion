@@ -1,6 +1,7 @@
 package com.nicolas.models.player
 
 import com.nicolas.models.NamedEntity
+import com.nicolas.models.action.Action
 import com.nicolas.models.effect.Effect
 import com.nicolas.models.extensions.getEquippedArmors
 import com.nicolas.models.item.Item
@@ -49,6 +50,7 @@ data class Player(override var name: String,
                   var skills: List<Skill> = listOf(),
                   var talents: List<Talent> = listOf(),
                   var effects: List<Effect> = listOf(),
+                  var actions: List<Action> = listOf(),
 
                   override val id: Int = -1) : NamedEntity, Serializable {
 

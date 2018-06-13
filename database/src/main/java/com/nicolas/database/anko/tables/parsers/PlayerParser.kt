@@ -4,6 +4,7 @@ import com.google.gson.GsonBuilder
 import com.nicolas.database.genericType
 import com.nicolas.database.toInt
 import com.nicolas.database.toNullableInt
+import com.nicolas.models.action.Action
 import com.nicolas.models.effect.Effect
 import com.nicolas.models.item.Item
 import com.nicolas.models.player.CharacteristicValue
@@ -52,7 +53,8 @@ internal class PlayerParser : RowParser<Player> {
                     items = gson.fromJson(columns[34] as String, genericType<List<Item>>()),
                     skills = gson.fromJson(columns[35] as String, genericType<List<Skill>>()),
                     talents = gson.fromJson(columns[36] as String, genericType<List<Talent>>()),
-                    effects = gson.fromJson(columns[37] as String, genericType<List<Effect>>()))
+                    effects = gson.fromJson(columns[37] as String, genericType<List<Effect>>()),
+                    actions = gson.fromJson(columns[38] as String, genericType<List<Action>>()))
 }
 
 fun Player.toColumns(): Map<String, Any?> {
@@ -108,6 +110,7 @@ fun Player.toColumns(): Map<String, Any?> {
             "items" to gson.toJson(items),
             "skills" to gson.toJson(skills),
             "talents" to gson.toJson(talents),
-            "effects" to gson.toJson(effects)
+            "effects" to gson.toJson(effects),
+            "actions" to gson.toJson(actions)
     )
 }

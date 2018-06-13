@@ -56,5 +56,6 @@ internal fun createPlayerTable(db: SQLiteDatabase) {
             "items" to TEXT,
             "skills" to TEXT,
             "talents" to TEXT,
-            "effects" to TEXT)
+            "effects" to TEXT,
+            "actions" to TEXT)
 }
