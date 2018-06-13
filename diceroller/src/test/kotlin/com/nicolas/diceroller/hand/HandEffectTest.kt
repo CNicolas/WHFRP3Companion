@@ -24,7 +24,7 @@ class HandEffectTest {
                 skills = skills,
                 effects = listOf(
                         Effect("Inspiré",
-                                trigger = Trigger(everyThrow = true),
+                                trigger = Trigger(everyRoll = true),
                                 addedDices = listOf(FORTUNE)),
                         Effect("Borgne",
                                 trigger = Trigger(skills = listOf(Skill("Distance", Characteristic.AGILITY))),

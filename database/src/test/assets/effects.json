@@ -4,7 +4,7 @@
     "description": "Ôtez {EXPERTISE_DICE} de votre réserve avant chaque jet. Quand des dégâts vous sont infligés, ces dégâts sont augmentés de 1.",
     "duration": "LINGERING",
     "trigger": {
-      "everyThrow": true,
+      "everyRoll": true,
       "damageTaken": true
     },
     "removedDices": [
@@ -119,7 +119,7 @@
     "description": "Ajoutez {MISFORTUNE_DICE} {MISFORTUNE_DICE} et {FORTUNE_DICE} à tous vos jets.",
     "duration": "LINGERING",
     "trigger": {
-      "everyThrow": true
+      "everyRoll": true
     },
     "addedDices": [
       "MISFORTUNE",
@@ -228,7 +228,7 @@
     "description": "Ajouter {CHALLENGE_DICE} à vos tests d’Initiative. Vous ne pouvez pas utiliser le 1er marqueur héros sur la piste d’Init. À moins qu’il soit le seul présent.",
     "duration": "LINGERING",
     "trigger": {
-      "initiativeThrow": true
+      "initiativeRoll": true
     },
     "addedDices": [
       "CHALLENGE"
