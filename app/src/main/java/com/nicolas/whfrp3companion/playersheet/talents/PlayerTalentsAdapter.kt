@@ -15,19 +15,19 @@ import butterknife.ButterKnife
 import butterknife.OnClick
 import com.nicolas.models.talent.Talent
 import com.nicolas.whfrp3companion.R
-import com.nicolas.whfrp3companion.playersheet.talents.TalentEditionMode.ADDABLE
-import com.nicolas.whfrp3companion.playersheet.talents.TalentEditionMode.EQUIPABLE_OR_REMOVABLE
 import com.nicolas.whfrp3companion.shared.bind
+import com.nicolas.whfrp3companion.shared.enums.PlayerElementEditionMode
+import com.nicolas.whfrp3companion.shared.enums.PlayerElementEditionMode.ADDABLE
+import com.nicolas.whfrp3companion.shared.enums.PlayerElementEditionMode.EQUIPABLE_OR_REMOVABLE
 import com.nicolas.whfrp3companion.shared.enums.colorId
 import com.nicolas.whfrp3companion.shared.enums.labelId
 import com.nicolas.whfrp3companion.shared.viewModifications.parseTemplatedText
 import org.jetbrains.anko.design.snackbar
-import org.jetbrains.anko.toast
 
 class PlayerTalentsAdapter(context: Context,
                            private val talents: List<Talent>,
                            private val talentListener: TalentListener,
-                           private val talentEditionMode: TalentEditionMode) : RecyclerView.Adapter<PlayerTalentsAdapter.ViewHolder>() {
+                           private val talentEditionMode: PlayerElementEditionMode) : RecyclerView.Adapter<PlayerTalentsAdapter.ViewHolder>() {
     private val inflater = LayoutInflater.from(context)
     private val addedTalents = mutableListOf<Talent>()
 
@@ -45,7 +45,7 @@ class PlayerTalentsAdapter(context: Context,
 
     class ViewHolder(private val view: View,
                      private val talentListener: TalentListener,
-                     talentEditionMode: TalentEditionMode,
+                     talentEditionMode: PlayerElementEditionMode,
                      private val addTalent: (Talent) -> Unit) : RecyclerView.ViewHolder(view) {
         private val talentTypeTextView by view.bind<TextView>(R.id.talentTypeTextView)
         private val talentNameTextView by view.bind<TextView>(R.id.talentNameTextView)
@@ -121,11 +121,6 @@ class PlayerTalentsAdapter(context: Context,
         @OnClick(R.id.removeTalentButton)
         fun onRemoveTalent() {
             talentListener.onRemoveTalent(talent)
-        }
-
-        @OnClick(R.id.talentNameTextView)
-        fun onClickOnTalentName() {
-            view.context.toast(talent.name)
         }
     }
 }

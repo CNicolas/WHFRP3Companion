@@ -16,13 +16,13 @@ import com.nicolas.models.talent.Talent
 import com.nicolas.models.talent.TalentSearch
 import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.playersheet.talents.PlayerTalentsAdapter
-import com.nicolas.whfrp3companion.playersheet.talents.TalentEditionMode
 import com.nicolas.whfrp3companion.playersheet.talents.TalentListener
 import com.nicolas.whfrp3companion.shared.DIALOG_TALENT_SEARCH_TAG
 import com.nicolas.whfrp3companion.shared.PLAYER_NAME_INTENT_ARGUMENT
 import com.nicolas.whfrp3companion.shared.TALENTS_SEARCH_INTENT_ARGUMENT
 import com.nicolas.whfrp3companion.shared.adapters.TalentsAdapter
 import com.nicolas.whfrp3companion.shared.dialogs.TalentSearchDialog
+import com.nicolas.whfrp3companion.shared.enums.PlayerElementEditionMode
 import kotlinx.android.synthetic.main.activity_talents.*
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
@@ -109,7 +109,7 @@ class TalentsActivity : AppCompatActivity(), TalentListener {
     // endregion
 
     private fun createTalentsAdapter(talents: List<Talent>): PlayerTalentsAdapter {
-        return PlayerTalentsAdapter(this, talents, this, TalentEditionMode.ADDABLE)
+        return PlayerTalentsAdapter(this, talents, this, PlayerElementEditionMode.ADDABLE)
     }
 
     private fun applySearch(talentSearch: TalentSearch): List<Talent> {

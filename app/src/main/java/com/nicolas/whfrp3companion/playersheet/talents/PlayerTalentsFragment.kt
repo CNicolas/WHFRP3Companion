@@ -19,6 +19,7 @@ import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.shared.DIALOG_TALENT_SEARCH_TAG
 import com.nicolas.whfrp3companion.shared.PLAYER_NAME_INTENT_ARGUMENT
 import com.nicolas.whfrp3companion.shared.dialogs.TalentSearchDialog
+import com.nicolas.whfrp3companion.shared.enums.PlayerElementEditionMode
 import kotlinx.android.synthetic.main.fragment_player_talents.*
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
@@ -91,7 +92,7 @@ class PlayerTalentsFragment : Fragment(), TalentListener {
             player.removeTalent(talent)
             player = playerRepository.update(player)
 
-            val adapter = PlayerTalentsAdapter(activity!!, player.talents, this@PlayerTalentsFragment, TalentEditionMode.EQUIPABLE_OR_REMOVABLE)
+            val adapter = PlayerTalentsAdapter(activity!!, player.talents, this@PlayerTalentsFragment, PlayerElementEditionMode.EQUIPABLE_OR_REMOVABLE)
             uiThread {
                 talentsRecyclerView.adapter = adapter
             }
@@ -113,7 +114,7 @@ class PlayerTalentsFragment : Fragment(), TalentListener {
     }
 
     private fun createTalentsAdapter(): PlayerTalentsAdapter {
-        return PlayerTalentsAdapter(activity!!, player.talents, this, TalentEditionMode.EQUIPABLE_OR_REMOVABLE)
+        return PlayerTalentsAdapter(activity!!, player.talents, this, PlayerElementEditionMode.EQUIPABLE_OR_REMOVABLE)
     }
 
     companion object {

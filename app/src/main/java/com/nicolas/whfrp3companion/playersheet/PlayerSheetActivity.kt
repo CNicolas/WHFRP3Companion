@@ -16,6 +16,7 @@ import com.nicolas.database.PlayerRepository
 import com.nicolas.models.player.Player
 import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.fragments.EmptyFragment
+import com.nicolas.whfrp3companion.playersheet.actions.PlayerActionsFragment
 import com.nicolas.whfrp3companion.playersheet.characteristics.PlayerCharacteristicsFragment
 import com.nicolas.whfrp3companion.playersheet.inventory.PlayerInventoryFragment
 import com.nicolas.whfrp3companion.playersheet.skills.PlayerSkillsFragment
@@ -83,7 +84,7 @@ class PlayerSheetActivity : AppCompatActivity() {
             R.id.nav_player_skills -> PlayerSkillsFragment.newInstance(player.name)
             R.id.nav_player_inventory -> PlayerInventoryFragment.newInstance(player.name)
             R.id.nav_player_talents -> PlayerTalentsFragment.newInstance(player.name)
-//            R.id.nav_player_actions -> PlayerActionsFragment()
+            R.id.nav_player_actions -> PlayerActionsFragment.newInstance(player.name)
             else -> EmptyFragment.newInstance()
         }
 
