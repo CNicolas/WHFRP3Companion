@@ -150,4 +150,6 @@
     <string name="search_talent">Rechercher un talent</string>
     <string name="talent_added_format">%1$s ajoutés</string>
     <string name="modify">Modifier</string>
+    <string name="action_name">Nom de l\'action</string>
+    <string name="action_type">Type d\'action</string>
 </resources>

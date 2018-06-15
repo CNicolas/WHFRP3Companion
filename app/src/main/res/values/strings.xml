@@ -145,6 +145,9 @@
 
     <string name="search_effect">Search effect</string>
 
+    <string name="action_name">Action name</string>
+    <string name="action_type">Action type</string>
+
     <string name="skill">Skill</string>
     <string name="player_name">Player name</string>
     <string name="race">Race</string>
@@ -172,9 +175,11 @@
     <string name="defense">Defense</string>
     <string name="uses">Uses</string>
     <string name="all">All</string>
+
     <string name="slash" translatable="false">/</string>
     <string name="hyphen" translatable="false">-</string>
     <string name="plus" translatable="false">+</string>
     <string name="more_less" translatable="false">+ / -</string>
+
     <string name="lorem">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor…</string>
 </resources>
