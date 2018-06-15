@@ -39,7 +39,6 @@ dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
     // Tests
-    testCompile "org.testng:testng:$testng_version"
     testCompile "org.assertj:assertj-core:$assertj_version"
     testCompile 'junit:junit:4.12'
     testCompile "org.robolectric:robolectric:$robolectric_version"
