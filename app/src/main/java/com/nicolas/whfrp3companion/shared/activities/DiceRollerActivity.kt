@@ -82,11 +82,9 @@ class DiceRollerActivity : AppCompatActivity() {
         } else {
             alert {
                 title = getString(R.string.select_hand)
-                items(allHands.map { it.name },
-                        { _, item, _ ->
-                            setViewValues(handRepository.find(item)!!)
-                        }
-                )
+                items(allHands.map { it.name }) { _, item, _ ->
+                    setViewValues(handRepository.find(item)!!)
+                }
             }.show()
         }
     }
