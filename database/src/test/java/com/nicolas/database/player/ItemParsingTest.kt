@@ -8,7 +8,7 @@ import com.nicolas.models.item.Expandable
 import com.nicolas.models.item.Item
 import com.nicolas.models.item.Weapon
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.Test
+import org.testng.annotations.Test
 
 class ItemParsingTest {
     private val armor = Armor("SampleName")
