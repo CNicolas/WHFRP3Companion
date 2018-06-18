@@ -5,6 +5,7 @@ import android.app.AlertDialog
 import android.app.Dialog
 import android.os.Bundle
 import android.support.v4.app.DialogFragment
+import android.widget.ImageView
 import android.widget.TextView
 import butterknife.BindView
 import butterknife.ButterKnife
@@ -14,8 +15,18 @@ import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.shared.ACTION_INTENT_ARGUMENT
 
 class ActionDialog : DialogFragment() {
+    @BindView(R.id.actionTypeImageView)
+    lateinit var actionTypeImageView: ImageView
     @BindView(R.id.actionNameTextView)
     lateinit var actionNameTextView: TextView
+    @BindView(R.id.actionCooldownTextView)
+    lateinit var actionCooldownTextView: TextView
+    @BindView(R.id.actionTraitsTextView)
+    lateinit var actionTraitsTextView: TextView
+    @BindView(R.id.actionSkillsTextView)
+    lateinit var actionSkillsTextView: TextView
+    @BindView(R.id.actionConditionsTextView)
+    lateinit var actionConditionsTextView: TextView
 
     private lateinit var unbinder: Unbinder
 
@@ -48,6 +59,12 @@ class ActionDialog : DialogFragment() {
 
     private fun setupViews() {
         actionNameTextView.text = action.name
+        actionCooldownTextView.text = action.cooldown.toString()
+        actionTraitsTextView.text = action.traits.joinToString()
+
+        actionSkillsTextView.text = action.skillsString
+
+        actionConditionsTextView.text = action.conditions?.joinToString()
     }
 
     companion object {

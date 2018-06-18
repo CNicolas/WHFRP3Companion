@@ -6,4 +6,8 @@ import java.io.Serializable
 data class ActionConditionWeapon(val categories: List<WeaponCategory>? = listOf(),
                                  val oneHanded: Boolean? = null,
                                  val twoHanded: Boolean? = null,
-                                 val equipped: Boolean? = null) : Serializable
+                                 val equipped: Boolean? = null) : Serializable {
+    override fun toString(): String {
+        return super.toString()
+    }
+}
