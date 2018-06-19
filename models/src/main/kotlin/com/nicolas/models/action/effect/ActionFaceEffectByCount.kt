@@ -1,8 +1,6 @@
 package com.nicolas.models.action.effect
 
-import java.io.Serializable
+typealias ActionFaceEffectByCount = Map<Int, ActionFaceEffect>
 
-data class ActionFaceEffectByCount(val one: ActionFaceEffect? = null,
-                                   val two: ActionFaceEffect? = null,
-                                   val three: ActionFaceEffect? = null,
-                                   val four: ActionFaceEffect? = null) : Serializable
+val ActionFaceEffectByCount?.size: Int
+    get() = this?.size ?: 0

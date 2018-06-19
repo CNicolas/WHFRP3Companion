@@ -2,8 +2,6 @@
   {
     "name": "Backstab",
     "type": "ATTACK",
-    "cooldown": 4,
-    "difficulty": [ "MISFORTUNE", "MISFORTUNE", "MISFORTUNE" ],
     "traits": [ "TEAMWORK" ],
     "skill": "Furtivité",
     "targetSkill": "Observation",
@@ -18,6 +16,8 @@
       { "range": "ENGAGED", "target": true }
     ],
     "recklessSide": {
+      "cooldown": 4,
+      "difficulty": [ "MISFORTUNE", "MISFORTUNE", "MISFORTUNE" ],
       "special": {
         "difficultyReducer": {
           "range": "ENGAGED",
@@ -28,15 +28,15 @@
         }
       },
       "effects": {
-        "success": {
-          "one": { "damage": 1 },
-          "two": { "damage": 1, "ignoreSoak": true }
+        "SUCCESS": {
+          "1": { "damage": 1 },
+          "2": { "damage": 1, "ignoreSoak": true }
         },
-        "boon": {
-          "two": { "damage": 2 }
+        "BOON": {
+          "2": { "damage": 2 }
         },
-        "bane": {
-          "two": { "cooldown": 2 }
+        "BANE": {
+          "2": { "cooldown": 2 }
         }
       }
     }
@@ -44,8 +44,6 @@
   {
     "name": "Corps-à-corps",
     "type": "ATTACK",
-    "cooldown": 0,
-    "difficulty": [ ],
     "traits": [ "BASIC" ],
     "skill": "Capacité de Combat",
     "targetDefense": true,
@@ -59,30 +57,34 @@
       { "range": "ENGAGED", "target": true }
     ],
     "conservativeSide": {
+      "cooldown": 0,
+      "difficulty": [ ],
       "effects": {
-        "success": {
-          "one": { "damage": 0 },
-          "three": { "damage": 2 }
+        "SUCCESS": {
+          "1": { "damage": 0 },
+          "3": { "damage": 2 }
         },
-        "boon": {
-          "two": { "maneuver": 1 }
+        "BOON": {
+          "2": { "maneuver": true }
         },
-        "bane": {
-          "two": { "canDisengage": "TARGET" }
+        "BANE": {
+          "2": { "canDisengage": "TARGET" }
         }
       }
     },
     "recklessSide": {
+      "cooldown": 0,
+      "difficulty": [ ],
       "effects": {
-        "success": {
-          "one": { "damage": 0 },
-          "three": { "damage": 2 }
+        "SUCCESS": {
+          "1": { "damage": 0 },
+          "3": { "damage": 2 }
         },
-        "boon": {
-          "two": { "maneuver": 1 }
+        "BOON": {
+          "2": { "maneuver": true }
         },
-        "bane": {
-          "two": { "canDisengage": "TARGET" }
+        "BANE": {
+          "2": { "canDisengage": "TARGET" }
         }
       }
     }
@@ -90,8 +92,6 @@
   {
     "name": "Attaque à distance",
     "type": "ATTACK",
-    "cooldown": 0,
-    "difficulty": [ ],
     "traits": [ "BASIC" ],
     "skill": "Capacité de Tir",
     "targetDefense": true,
@@ -105,30 +105,34 @@
       { "range": "ENGAGED", "target": false }
     ],
     "conservativeSide": {
+      "cooldown": 0,
+      "difficulty": [ ],
       "effects": {
-        "success": {
-          "one": { "damage": 0 },
-          "three": { "damage": 2 }
+        "SUCCESS": {
+          "1": { "damage": 0 },
+          "3": { "damage": 2 }
         },
-        "boon": {
-          "two": { "maneuver": 1 }
+        "BOON": {
+          "2": { "maneuver": true }
         },
-        "bane": {
-          "two": { "canEngage": "TARGET" }
+        "BANE": {
+          "2": { "canEngage": "TARGET" }
         }
       }
     },
     "recklessSide": {
+      "cooldown": 0,
+      "difficulty": [ ],
       "effects": {
-        "success": {
-          "one": { "damage": 0 },
-          "three": { "damage": 2 }
+        "SUCCESS": {
+          "1": { "damage": 0 },
+          "3": { "damage": 2 }
         },
-        "boon": {
-          "two": { "maneuver": 1 }
+        "BOON": {
+          "2": { "maneuver": true }
         },
-        "bane": {
-          "two": { "canEngage": "TARGET" }
+        "BANE": {
+          "2": { "canEngage": "TARGET" }
         }
       }
     }
