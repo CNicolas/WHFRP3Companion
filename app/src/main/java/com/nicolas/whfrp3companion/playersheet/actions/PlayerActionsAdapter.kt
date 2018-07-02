@@ -50,7 +50,7 @@ class PlayerActionsAdapter(context: Context,
 
             actionTypeImageView.setImageResource(R.drawable.ic_handgun_black)
             actionNameTextView.text = action.name
-            actionCooldownTextView.text = action.cooldown?.toString() ?: "0"
+            actionCooldownTextView.text = action.conservativeSide.cooldown?.toString() ?: "0"
         }
 
         @OnClick(R.id.actionNameTextView)

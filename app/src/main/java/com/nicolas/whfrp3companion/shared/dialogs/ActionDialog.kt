@@ -6,6 +6,7 @@ import android.app.Dialog
 import android.os.Bundle
 import android.support.v4.app.DialogFragment
 import android.widget.ImageView
+import android.widget.ListView
 import android.widget.TextView
 import butterknife.BindView
 import butterknife.ButterKnife
@@ -13,6 +14,7 @@ import butterknife.Unbinder
 import com.nicolas.models.action.Action
 import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.shared.ACTION_INTENT_ARGUMENT
+import com.nicolas.whfrp3companion.shared.adapters.ActionEffectsAdapter
 
 class ActionDialog : DialogFragment() {
     @BindView(R.id.actionTypeImageView)
@@ -27,6 +29,8 @@ class ActionDialog : DialogFragment() {
     lateinit var actionSkillsTextView: TextView
     @BindView(R.id.actionConditionsTextView)
     lateinit var actionConditionsTextView: TextView
+    @BindView(R.id.actionEffectsRecyclerView)
+    lateinit var actionEffectsRecyclerView: ListView
 
     private lateinit var unbinder: Unbinder
 
@@ -41,7 +45,6 @@ class ActionDialog : DialogFragment() {
         action = arguments!!.getSerializable(ACTION_INTENT_ARGUMENT) as Action
 
         builder.setView(view)
-        builder.setTitle(action.name)
         builder.setPositiveButton(android.R.string.ok) { _, _ -> dismiss() }
 
         val dialog = builder.create()
@@ -59,12 +62,16 @@ class ActionDialog : DialogFragment() {
 
     private fun setupViews() {
         actionNameTextView.text = action.name
-        actionCooldownTextView.text = action.cooldown.toString()
+        actionCooldownTextView.text = action.conservativeSide.cooldown.toString()
         actionTraitsTextView.text = action.traits.joinToString()
 
         actionSkillsTextView.text = action.skillsString
 
         actionConditionsTextView.text = action.conditions?.joinToString()
+
+        action.conservativeSide.effects?.let {
+            actionEffectsRecyclerView.adapter = ActionEffectsAdapter(context!!, it)
+        }
     }
 
     companion object {
