@@ -1,5 +1,7 @@
 package com.nicolas.whfrp3companion.shared.enums
 
+import com.nicolas.models.dice.Face
+import com.nicolas.models.dice.Face.*
 import com.nicolas.models.item.enums.*
 import com.nicolas.models.item.enums.ArmorType.*
 import com.nicolas.models.item.enums.Quality.*
@@ -31,6 +33,18 @@ internal val Characteristic.labelId: Int
         INTELLIGENCE -> R.string.intelligence
         WILLPOWER -> R.string.willpower
         FELLOWSHIP -> R.string.fellowship
+    }
+
+internal val Face.drawableId: Int
+    get() = when (this) {
+        SUCCESS -> R.drawable.ic_success_black_16
+        BOON -> R.drawable.ic_boon_black_16
+        DELAY -> R.drawable.ic_delay_black_16
+        SIGMAR -> R.drawable.ic_sigmar_black_16
+        FAILURE -> R.drawable.ic_failure_black_16
+        BANE -> R.drawable.ic_bane_black_16
+        CHAOS -> R.drawable.ic_chaos_black_16
+        else -> R.drawable.transparent_button
     }
 
 internal val ItemType.labelId: Int
