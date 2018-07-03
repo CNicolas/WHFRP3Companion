@@ -1,9 +1,8 @@
 package com.nicolas.whfrp3companion.shared.enums
 
-import com.nicolas.models.dice.Face
-import com.nicolas.models.dice.Face.*
 import com.nicolas.models.item.enums.*
 import com.nicolas.models.item.enums.ArmorType.*
+import com.nicolas.models.item.enums.ItemType.*
 import com.nicolas.models.item.enums.Quality.*
 import com.nicolas.models.item.enums.Range.*
 import com.nicolas.models.item.enums.WeaponType.*
@@ -35,31 +34,19 @@ internal val Characteristic.labelId: Int
         FELLOWSHIP -> R.string.fellowship
     }
 
-internal val Face.drawableId: Int
-    get() = when (this) {
-        SUCCESS -> R.drawable.ic_success_black_16
-        BOON -> R.drawable.ic_boon_black_16
-        DELAY -> R.drawable.ic_delay_black_16
-        SIGMAR -> R.drawable.ic_sigmar_black_16
-        FAILURE -> R.drawable.ic_failure_black_16
-        BANE -> R.drawable.ic_bane_black_16
-        CHAOS -> R.drawable.ic_chaos_black_16
-        else -> R.drawable.transparent_button
-    }
-
 internal val ItemType.labelId: Int
     get() = when (this) {
-        ItemType.ARMOR -> R.string.armor
-        ItemType.EXPANDABLE -> R.string.expandable
-        ItemType.GENERIC_ITEM -> R.string.generic_item
-        ItemType.WEAPON -> R.string.weapon
+        ARMOR -> R.string.armor
+        EXPANDABLE -> R.string.expandable
+        GENERIC_ITEM -> R.string.generic_item
+        WEAPON -> R.string.weapon
     }
 internal val ItemType.pluralLabelId: Int
     get() = when (this) {
-        ItemType.ARMOR -> R.string.armors
-        ItemType.EXPANDABLE -> R.string.expandables
-        ItemType.GENERIC_ITEM -> R.string.generic_items
-        ItemType.WEAPON -> R.string.weapons
+        ARMOR -> R.string.armors
+        EXPANDABLE -> R.string.expandables
+        GENERIC_ITEM -> R.string.generic_items
+        WEAPON -> R.string.weapons
     }
 
 internal val Quality.labelId: Int
@@ -106,31 +93,6 @@ internal val WeaponType.labelId: Int
         REPEATING_GUN -> R.string.weapon_repeating_gun
         REPEATING_CROSSBOW -> R.string.weapon_repeating_crossbow
     }
-internal val WeaponType.drawableId: Int
-    get() = when (this) {
-        AXE -> R.drawable.ic_axe_black
-        TWO_HANDED_AXE -> R.drawable.ic_two_handed_axe_black
-        DAGGER -> R.drawable.ic_dagger_black
-        FLAIL -> R.drawable.ic_flail_black
-        HALBERD -> R.drawable.ic_halberd_black
-        HAMMER -> R.drawable.ic_hammer_black
-        TWO_HANDED_HAMMER -> R.drawable.ic_two_handed_hammer_black
-        MACE -> R.drawable.ic_mace_black
-        TWO_HANDED_MACE -> R.drawable.ic_two_handed_mace_black
-        SPEAR -> R.drawable.ic_spear_black
-        STICK -> R.drawable.ic_stick_black
-        SWORD -> R.drawable.ic_sword_black
-        TWO_HANDED_SWORD -> R.drawable.ic_two_handed_sword_black
-        WHIP -> R.drawable.ic_whip_black
-        BOW -> R.drawable.ic_bow_black
-        CROSSBOW -> R.drawable.ic_crossbow_black
-        ONE_HANDED_CROSSBOW -> R.drawable.ic_one_handed_crossbow_black
-        SLINGSHOT -> R.drawable.ic_slingshot_black
-        HANDGUN -> R.drawable.ic_handgun_black
-        RIFLE -> R.drawable.ic_rifle_black
-        REPEATING_GUN -> R.drawable.ic_repeating_hanggun_black
-        REPEATING_CROSSBOW -> R.drawable.ic_repeating_crossbow_black
-    }
 
 internal val Range.labelId: Int
     get() = when (this) {
@@ -150,16 +112,6 @@ internal val TalentType.labelId: Int
         REPUTATION -> R.string.reputation
         TACTICS -> R.string.tactics
         TRICK -> R.string.trick
-    }
-internal val TalentType.colorId: Int
-    get() = when (this) {
-        AFFINITY -> R.color.blue
-        CAREER -> android.R.color.black
-        FAITH -> R.color.colorPrimary
-        ORDER -> R.color.violet
-        REPUTATION -> R.color.orange
-        TACTICS -> R.color.dark_red
-        TRICK -> R.color.conservative
     }
 
 internal val TalentCooldown.labelId: Int
