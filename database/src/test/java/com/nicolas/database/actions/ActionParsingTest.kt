@@ -24,7 +24,6 @@ class ActionParsingTest {
                             3 to ActionFaceEffect(2)),
                     BOON to hashMapOf(2 to ActionFaceEffect(maneuver = true)),
                     BANE to hashMapOf(2 to ActionFaceEffect(canEngage = Target.TARGET)))
-
     )
     private val rangeAttack: Action =
             Action(

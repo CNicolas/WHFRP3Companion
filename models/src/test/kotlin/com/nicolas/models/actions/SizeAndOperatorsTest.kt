@@ -83,6 +83,8 @@ class SizeAndOperatorsTest {
         assertThat(effects[3]!!.face).isEqualTo(BANE)
         assertThat(effects[3]!!.effect.canEngage).isEqualTo(Target.TARGET)
         assertThat(effects[4]).isNull()
+
+        assertThat(effects.effectsCount).isEqualTo(4)
     }
 
     @Test

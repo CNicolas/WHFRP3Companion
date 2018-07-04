@@ -18,7 +18,7 @@ import com.nicolas.whfrp3companion.shared.enums.drawableId
 class ActionEffectsAdapter(context: Context, private val effects: ActionEffects) : BaseAdapter() {
     private val inflater = LayoutInflater.from(context)
 
-    override fun getCount(): Int = effects.size
+    override fun getCount(): Int = effects.effectsCount
     override fun getItem(position: Int) = effects[position]
     override fun getItemId(position: Int) = position.toLong()
 
@@ -49,15 +49,12 @@ class ActionEffectsAdapter(context: Context, private val effects: ActionEffects)
         private val face3ImageView by view.bind<ImageView>(R.id.effectFace3ImageView)
         private val face4ImageView by view.bind<ImageView>(R.id.effectFace4ImageView)
 
-
         init {
             ButterKnife.bind(this, view)
         }
 
         fun setupViews(effect: ActionEffect?) {
             this.effect = effect
-
-            descriptionTextView.text = "Rien"
 
             this.effect?.let {
                 setFaceDrawable(it.face.drawableId)
@@ -79,11 +76,15 @@ class ActionEffectsAdapter(context: Context, private val effects: ActionEffects)
             face3ImageView.visibility = GONE
             face4ImageView.visibility = GONE
 
-            when (faceCount) {
-                1 -> face1ImageView.visibility = VISIBLE
-                2 -> face2ImageView.visibility = VISIBLE
-                3 -> face3ImageView.visibility = VISIBLE
-                4 -> face4ImageView.visibility = VISIBLE
+            if (faceCount > 0) {
+                face1ImageView.visibility = VISIBLE
+                if (faceCount > 1) {
+                    face2ImageView.visibility = VISIBLE
+                    if (faceCount > 2) {
+                        face3ImageView.visibility = VISIBLE
+                        if (faceCount > 3) face4ImageView.visibility = VISIBLE
+                    }
+                }
             }
         }
     }

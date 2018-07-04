@@ -29,8 +29,8 @@ class ActionDialog : DialogFragment() {
     lateinit var actionSkillsTextView: TextView
     @BindView(R.id.actionConditionsTextView)
     lateinit var actionConditionsTextView: TextView
-    @BindView(R.id.actionEffectsRecyclerView)
-    lateinit var actionEffectsRecyclerView: ListView
+    @BindView(R.id.actionEffectsListView)
+    lateinit var actionEffectsListView: ListView
 
     private lateinit var unbinder: Unbinder
 
@@ -70,7 +70,7 @@ class ActionDialog : DialogFragment() {
         actionConditionsTextView.text = action.conditions?.joinToString()
 
         action.conservativeSide.effects?.let {
-            actionEffectsRecyclerView.adapter = ActionEffectsAdapter(context!!, it)
+            actionEffectsListView.adapter = ActionEffectsAdapter(context!!, it)
         }
     }
 
