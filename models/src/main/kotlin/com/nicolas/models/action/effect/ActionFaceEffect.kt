@@ -14,21 +14,22 @@ data class ActionFaceEffect(val damage: Int? = null,
                             val canEngage: Target? = null,
                             val canDisengage: Target? = null) : Serializable {
 
-    override fun toString(): String {
-        return listOfNotNull(damageString,
-                criticalString,
-                ignoreSoakString,
-                cooldownString,
-                exhaustionString,
-                stressString,
-                maneuverString,
-                canEngageString,
-                canDisengageString).joinToString(", ")
-    }
+    override fun toString(): String =
+            listOfNotNull(damageString,
+                    criticalString,
+                    ignoreSoakString,
+                    cooldownString,
+                    exhaustionString,
+                    stressString,
+                    maneuverString,
+                    canEngageString,
+                    canDisengageString)
+                    .joinToString()
+                    .capitalize()
 
     private val damageString: String?
         get() {
-            val res = "Vous infligez les dégâts"
+            val res = "vous infligez les dégâts"
 
             return when {
                 damage == null -> null
@@ -63,8 +64,8 @@ data class ActionFaceEffect(val damage: Int? = null,
 
             return when {
                 cooldown == null || cooldown == 0 -> null
-                cooldown < 0 -> "Enlevez ${abs(cooldown)} res"
-                cooldown > 0 -> "Ajoutez $cooldown $res"
+                cooldown < 0 -> "enlevez ${abs(cooldown)} res"
+                cooldown > 0 -> "ajoutez $cooldown $res"
                 else -> null
             }
         }
@@ -73,8 +74,8 @@ data class ActionFaceEffect(val damage: Int? = null,
         get () {
             return when {
                 exhaustion == null || exhaustion == 0 -> null
-                exhaustion < 0 -> "Subissez ${abs(exhaustion)} fatigue"
-                exhaustion > 0 -> "Récupérez $exhaustion fatigue"
+                exhaustion < 0 -> "subissez ${abs(exhaustion)} fatigue"
+                exhaustion > 0 -> "récupérez $exhaustion fatigue"
                 else -> null
             }
         }
@@ -83,8 +84,8 @@ data class ActionFaceEffect(val damage: Int? = null,
         get () {
             return when {
                 stress == null || stress == 0 -> null
-                stress < 0 -> "Subissez ${abs(stress)} stress"
-                stress > 0 -> "Récupérez $stress stress"
+                stress < 0 -> "subissez ${abs(stress)} stress"
+                stress > 0 -> "récupérez $stress stress"
                 else -> null
             }
         }

@@ -39,7 +39,7 @@ class SizeAndOperatorsTest {
                             ),
                             ActionCondition(
                                     range = Range.ENGAGED,
-                                    target = false
+                                    target = Target.NONE
                             )
                     ),
                     skill = "Capacité de Tir",
@@ -92,7 +92,16 @@ class SizeAndOperatorsTest {
         val successEffect = ActionFaceEffect(damage = 0, ignoreSoak = true)
         val sigmarEffect = ActionFaceEffect(damage = 2, critical = 1)
 
-        assertThat(successEffect.toString()).isEqualToIgnoringCase("Vous infligez les dégâts normaux, Ignorez l'encaissement")
-        assertThat(sigmarEffect.toString()).isEqualToIgnoringCase("Vous infligez les dégâts +2, +1 critique")
+        assertThat(successEffect.toString()).isEqualTo("Vous infligez les dégâts normaux, ignorez l'encaissement")
+        assertThat(sigmarEffect.toString()).isEqualTo("Vous infligez les dégâts +2, +1 critique")
+    }
+
+    @Test
+    fun should_toString_of_WeaponCondition() {
+        val conditionRange = ActionConditionWeapon(categories = listOf(WeaponCategory.RANGE))
+        assertThat(conditionRange.toString()).isEqualTo("Arme à distance")
+
+        val conditionTwoMeleeHand = ActionConditionWeapon(categories = listOf(WeaponCategory.MELEE), twoHanded = true, inHand = true)
+        assertThat(conditionTwoMeleeHand.toString()).isEqualTo("Arme de mêlée à deux mains en main")
     }
 }

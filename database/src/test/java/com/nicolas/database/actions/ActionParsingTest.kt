@@ -41,7 +41,7 @@ class ActionParsingTest {
                             ),
                             ActionCondition(
                                     range = Range.ENGAGED,
-                                    target = false
+                                    target = Target.NONE
                             )
                     ),
                     skill = "Capacité de Tir",
@@ -60,7 +60,7 @@ class ActionParsingTest {
           "equipped": true
         }
       },
-      { "range": "ENGAGED", "target": false }
+      { "range": "ENGAGED" }
     ],
     "conservativeSide": {
       "cooldown": 0,
@@ -107,7 +107,7 @@ class ActionParsingTest {
     fun should_serialize_action() {
         val parsedRangeAttack = Gson().toJson(rangeAttack)
         val action = Gson().fromJson<Action>(parsedRangeAttack, genericType<Action>())
-        println(parsedRangeAttack)
+
         assertThat(action).isEqualTo(rangeAttack)
     }
 }

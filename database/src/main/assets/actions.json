@@ -13,7 +13,7 @@
           "equipped": true
         }
       },
-      { "range": "ENGAGED", "target": true }
+      { "range": "ENGAGED", "target": "TARGET" }
     ],
     "recklessSide": {
       "cooldown": 4,
@@ -21,7 +21,7 @@
       "special": {
         "difficultyReducer": {
           "range": "ENGAGED",
-          "target": true,
+          "target": "TARGET",
           "player": false,
           "ally": "COUNT",
           "dice": "MISFORTUNE"
@@ -54,7 +54,7 @@
           "equipped": true
         }
       },
-      { "range": "ENGAGED", "target": true }
+      { "range": "ENGAGED", "target": "TARGET" }
     ],
     "conservativeSide": {
       "cooldown": 0,
@@ -102,7 +102,7 @@
           "equipped": true
         }
       },
-      { "range": "ENGAGED", "target": false }
+      { "range": "ENGAGED", "target": "NONE" }
     ],
     "conservativeSide": {
       "cooldown": 0,
