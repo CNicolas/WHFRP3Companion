@@ -9,21 +9,24 @@ import com.nicolas.models.action.condition.ActionCondition
 import com.nicolas.models.action.condition.ActionConditionWeapon
 import com.nicolas.models.action.effect.ActionFaceEffect
 import com.nicolas.models.action.effect.Target
-import com.nicolas.models.dice.Face.*
+import com.nicolas.models.dice.Face
 import com.nicolas.models.item.enums.Range
-import com.nicolas.models.item.enums.WeaponCategory.*
+import com.nicolas.models.item.enums.WeaponCategory
 import org.assertj.core.api.Assertions.assertThat
-import org.testng.annotations.Test
+import org.junit.Before
+import org.junit.Test
 
-class ActionParsingTest {
+class ActionsFileTest {
+    private lateinit var allActions: List<Action>
+
     private val rangeAttackSides: ActionSide = ActionSide(
             cooldown = 0,
             difficulty = listOf(),
             effects = hashMapOf(
-                    SUCCESS to hashMapOf(1 to ActionFaceEffect(0),
+                    Face.SUCCESS to hashMapOf(1 to ActionFaceEffect(0),
                             3 to ActionFaceEffect(2)),
-                    BOON to hashMapOf(2 to ActionFaceEffect(maneuver = true)),
-                    BANE to hashMapOf(2 to ActionFaceEffect(canEngage = Target.TARGET)))
+                    Face.BOON to hashMapOf(2 to ActionFaceEffect(maneuver = true)),
+                    Face.BANE to hashMapOf(2 to ActionFaceEffect(canEngage = Target.TARGET)))
     )
     private val rangeAttack: Action =
             Action(
@@ -35,7 +38,7 @@ class ActionParsingTest {
                     conditions = listOf(
                             ActionCondition(
                                     ActionConditionWeapon(
-                                            listOf(RANGE, FIRE_ARM, REPEATING),
+                                            listOf(WeaponCategory.RANGE, WeaponCategory.FIRE_ARM, WeaponCategory.REPEATING),
                                             equipped = true
                                     )
                             ),
@@ -47,59 +50,21 @@ class ActionParsingTest {
                     skill = "Capacité de Tir",
                     targetDefense = true
             )
-    private val rangeAttackJson: String = """{
-    "name": "Attaque à distance",
-    "type": "ATTACK",
-    "traits": [ "BASIC" ],
-    "skill": "Capacité de Tir",
-    "targetDefense": true,
-    "conditions": [
-      {
-        "weapon": {
-          "categories": [ "RANGE", "FIRE_ARM", "REPEATING" ],
-          "equipped": true
-        }
-      },
-      { "range": "ENGAGED" }
-    ],
-    "conservativeSide": {
-      "cooldown": 0,
-      "difficulty": [ ],
-      "effects": {
-        "SUCCESS": {
-          "1": { "damage": 0 },
-          "3": { "damage": 2 }
-        },
-        "BOON": {
-          "2": { "maneuver": true }
-        },
-        "BANE": {
-          "2": { "canEngage": "TARGET" }
-        }
-      }
-    },
-    "recklessSide": {
-      "cooldown": 0,
-      "difficulty": [ ],
-      "effects": {
-        "SUCCESS": {
-          "1": { "damage": 0 },
-          "3": { "damage": 2 }
-        },
-        "BOON": {
-          "2": { "maneuver": true }
-        },
-        "BANE": {
-          "2": { "canEngage": "TARGET" }
-        }
-      }
+
+    @Before
+    fun setup() {
+        val actionsReader = javaClass.classLoader.getResourceAsStream("actions.json").reader()
+        allActions = Gson().fromJson(actionsReader, genericType<List<Action>>()) ?: listOf()
     }
-  }"""
+
+    @Test
+    fun should_load_actions_file() {
+        assertThat(allActions.size).isEqualTo(3)
+    }
 
     @Test
     fun should_deserialize_action() {
-        val action = Gson().fromJson<Action>(rangeAttackJson, genericType<Action>())
-
+        val action = allActions.find { it.name == "Attaque à distance" }
         assertThat(action).isEqualTo(rangeAttack)
     }
 

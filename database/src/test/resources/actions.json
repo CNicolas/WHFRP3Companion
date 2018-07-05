@@ -1,0 +1,140 @@
+[
+  {
+    "name": "Backstab",
+    "type": "ATTACK",
+    "traits": [ "TEAMWORK" ],
+    "skill": "Furtivité",
+    "targetSkill": "Observation",
+    "conditions": [
+      {
+        "weapon": {
+          "categories": [ "MELEE" ],
+          "oneHanded": true,
+          "equipped": true
+        }
+      },
+      { "range": "ENGAGED", "target": "TARGET" }
+    ],
+    "recklessSide": {
+      "cooldown": 4,
+      "difficulty": [ "MISFORTUNE", "MISFORTUNE", "MISFORTUNE" ],
+      "special": {
+        "difficultyReducer": {
+          "range": "ENGAGED",
+          "target": "TARGET",
+          "player": false,
+          "ally": "COUNT",
+          "dice": "MISFORTUNE"
+        }
+      },
+      "effects": {
+        "SUCCESS": {
+          "1": { "damage": 1 },
+          "2": { "damage": 1, "ignoreSoak": true }
+        },
+        "BOON": {
+          "2": { "damage": 2 }
+        },
+        "BANE": {
+          "2": { "cooldown": 2 }
+        }
+      }
+    }
+  },
+  {
+    "name": "Corps-à-corps",
+    "type": "ATTACK",
+    "traits": [ "BASIC" ],
+    "skill": "Capacité de Combat",
+    "targetDefense": true,
+    "conditions": [
+      {
+        "weapon": {
+          "categories": [ "MELEE" ],
+          "equipped": true
+        }
+      },
+      { "range": "ENGAGED", "target": "TARGET" }
+    ],
+    "conservativeSide": {
+      "cooldown": 0,
+      "difficulty": [ ],
+      "effects": {
+        "SUCCESS": {
+          "1": { "damage": 0 },
+          "3": { "damage": 2 }
+        },
+        "BOON": {
+          "2": { "maneuver": true }
+        },
+        "BANE": {
+          "2": { "canDisengage": "TARGET" }
+        }
+      }
+    },
+    "recklessSide": {
+      "cooldown": 0,
+      "difficulty": [ ],
+      "effects": {
+        "SUCCESS": {
+          "1": { "damage": 0 },
+          "3": { "damage": 2 }
+        },
+        "BOON": {
+          "2": { "maneuver": true }
+        },
+        "BANE": {
+          "2": { "canDisengage": "TARGET" }
+        }
+      }
+    }
+  },
+  {
+    "name": "Attaque à distance",
+    "type": "ATTACK",
+    "traits": [ "BASIC" ],
+    "skill": "Capacité de Tir",
+    "targetDefense": true,
+    "conditions": [
+      {
+        "weapon": {
+          "categories": [ "RANGE", "FIRE_ARM", "REPEATING" ],
+          "equipped": true
+        }
+      },
+      { "range": "ENGAGED", "target": "NONE" }
+    ],
+    "conservativeSide": {
+      "cooldown": 0,
+      "difficulty": [ ],
+      "effects": {
+        "SUCCESS": {
+          "1": { "damage": 0 },
+          "3": { "damage": 2 }
+        },
+        "BOON": {
+          "2": { "maneuver": true }
+        },
+        "BANE": {
+          "2": { "canEngage": "TARGET" }
+        }
+      }
+    },
+    "recklessSide": {
+      "cooldown": 0,
+      "difficulty": [ ],
+      "effects": {
+        "SUCCESS": {
+          "1": { "damage": 0 },
+          "3": { "damage": 2 }
+        },
+        "BOON": {
+          "2": { "maneuver": true }
+        },
+        "BANE": {
+          "2": { "canEngage": "TARGET" }
+        }
+      }
+    }
+  }
+]
