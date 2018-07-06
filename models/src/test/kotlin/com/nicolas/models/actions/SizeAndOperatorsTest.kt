@@ -110,7 +110,6 @@ class SizeAndOperatorsTest {
 
     @Test
     fun should_toString_of_Condition() {
-        println("${rangeAttack.conditions?.get(0)}_${rangeAttack.conditions?.get(1)}")
         assertThat(rangeAttack.conditionsString).isEqualTo("Arme à distance, arme à feu, arme à répétition équipée. Désengagé")
     }
 }

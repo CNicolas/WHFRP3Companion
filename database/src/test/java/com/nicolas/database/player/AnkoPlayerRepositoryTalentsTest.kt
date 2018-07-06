@@ -28,7 +28,6 @@ class AnkoPlayerRepositoryTalentsTest : AbstractAnkoPlayerRepositoryTest() {
         assertThat(updatedPlayer.talents.size).isEqualTo(1)
         assertThat(updatedPlayer.talents[0].cooldown).isEqualTo(PASSIVE)
         assertThat(updatedPlayer.talents[0].type).isEqualTo(FAITH)
-        println(updatedPlayer.talents[0])
 
         assertThat(updatedPlayer.getTalentsByType(FAITH)[0]).isEqualToComparingFieldByField(selectedTalent)
         assertThat(updatedPlayer.getPassiveTalents()[0]).isEqualToComparingFieldByField(selectedTalent)

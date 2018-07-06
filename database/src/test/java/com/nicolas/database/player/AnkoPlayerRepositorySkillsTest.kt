@@ -22,7 +22,6 @@ class AnkoPlayerRepositorySkillsTest : AbstractAnkoPlayerRepositoryTest() {
         assertThat(player.skills.size).isEqualTo(18)
 
         val advancedSkills = allSkills.advanced
-        println(advancedSkills)
         assertThat(advancedSkills.map { it.type }.distinct()).isEqualTo(listOf(SkillType.ADVANCED))
         player.addSkill(advancedSkills[0])
 

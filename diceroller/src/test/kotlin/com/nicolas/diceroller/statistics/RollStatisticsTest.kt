@@ -13,8 +13,6 @@ class RollStatisticsTest {
         val hand = Hand(name = "SampleHand", expertiseDicesCount = 5)
         val statistics = rollHandForStatistics(hand, rollCount)
 
-        println(statistics.totalResultReport)
-
         assertThat(statistics.rollCount).isEqualTo(rollCount)
         assertThat(statistics.successfulRollCount).isLessThanOrEqualTo(rollCount)
         assertThat(statistics.totalFailure).isZero()
@@ -28,8 +26,6 @@ class RollStatisticsTest {
 
         val statistics = hand.rollForStatistics(rollCount)
 
-        println(statistics.totalResultReport)
-
         assertThat(statistics.rollCount).isEqualTo(rollCount)
         assertThat(statistics.successfulRollCount).isLessThanOrEqualTo(rollCount)
         assertThat(statistics.totalSigmar).isZero()
@@ -41,9 +37,6 @@ class RollStatisticsTest {
         val rollCount = 1000
         val hand = Hand(name = "SampleHand", characteristicDicesCount = 3, fortuneDicesCount = 1, challengeDicesCount = 1)
         val statistics = rollHandForStatistics(hand, rollCount)
-
-        println(statistics.totalResultReport)
-        println(statistics.averageResult)
 
         assertThat(statistics.rollCount).isEqualTo(rollCount)
         assertThat(statistics.successfulRollCount).isLessThanOrEqualTo(rollCount)
