@@ -103,5 +103,14 @@ class SizeAndOperatorsTest {
 
         val conditionTwoMeleeHand = ActionConditionWeapon(categories = listOf(WeaponCategory.MELEE), twoHanded = true, inHand = true)
         assertThat(conditionTwoMeleeHand.toString()).isEqualTo("Arme de mêlée à deux mains en main")
+
+        assertThat(rangeAttack.conditions?.get(0).toString()).isEqualTo("Arme à distance, arme à feu, arme à répétition équipée")
+        assertThat(rangeAttack.conditions?.get(1).toString()).isEqualTo("Désengagé")
+    }
+
+    @Test
+    fun should_toString_of_Condition() {
+        println("${rangeAttack.conditions?.get(0)}_${rangeAttack.conditions?.get(1)}")
+        assertThat(rangeAttack.conditionsString).isEqualTo("Arme à distance, arme à feu, arme à répétition équipée. Désengagé")
     }
 }

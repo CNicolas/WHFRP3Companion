@@ -22,4 +22,10 @@ data class Action(val name: String,
             }
             else -> null
         }
+
+    val conditionsString: String?
+        get() = when {
+            conditions != null -> conditions.joinToString(". ")
+            else -> ""
+        }
 }

@@ -46,7 +46,6 @@
               android:gravity="center_vertical"
               android:layout_gravity="center_vertical"
               android:paddingStart="@dimen/medium_padding"
-              android:textSize="@dimen/small_text_size"
               android:hint="@string/page_effects" />
 
 </LinearLayout>

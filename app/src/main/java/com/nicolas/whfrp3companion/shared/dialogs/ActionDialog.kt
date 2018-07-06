@@ -67,7 +67,7 @@ class ActionDialog : DialogFragment() {
 
         actionSkillsTextView.text = action.skillsString
 
-        actionConditionsTextView.text = action.conditions?.joinToString()
+        actionConditionsTextView.text = action.conditionsString
 
         action.conservativeSide.effects?.let {
             actionEffectsListView.adapter = ActionEffectsAdapter(context!!, it)

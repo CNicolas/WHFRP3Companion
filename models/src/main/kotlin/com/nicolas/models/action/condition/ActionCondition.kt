@@ -1,8 +1,7 @@
 package com.nicolas.models.action.condition
 
 import com.nicolas.models.action.effect.Target
-import com.nicolas.models.action.effect.Target.ALLY
-import com.nicolas.models.action.effect.Target.TARGET
+import com.nicolas.models.action.effect.Target.*
 import com.nicolas.models.item.enums.Range
 import com.nicolas.models.item.enums.Range.*
 import java.io.Serializable
@@ -11,10 +10,15 @@ data class ActionCondition(val weapon: ActionConditionWeapon? = null,
                            val range: Range? = null,
                            val target: Target? = null) : Serializable {
 
-    override fun toString(): String =
+    override fun toString(): String {
+        return if (weapon != null) {
             listOfNotNull(weapon.toString(), rangeString)
                     .joinToString(", ")
                     .capitalize()
+        } else {
+            rangeString?.capitalize() ?: ""
+        }
+    }
 
     private val rangeString: String?
         get() {
@@ -37,13 +41,14 @@ data class ActionCondition(val weapon: ActionConditionWeapon? = null,
                     LONG -> "jusqu'à longue portée d'un allié"
                     EXTREME -> "jusqu'à portée extrême d'un allié"
                 }
-                else -> when (range) {
+                NONE, PLAYER -> when (range) {
                     ENGAGED -> "désengagé"
                     SHORT -> "aucun ennemi à courte portée"
                     MEDIUM -> "aucun ennemi à moyenne portée"
                     LONG -> "aucun ennemi à longue portée"
                     EXTREME -> "aucun ennemi à portée extrême"
                 }
+                else -> null
             }
         }
 }
