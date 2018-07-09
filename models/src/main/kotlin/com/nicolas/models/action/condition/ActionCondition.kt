@@ -7,17 +7,15 @@ import com.nicolas.models.item.enums.Range.*
 import java.io.Serializable
 
 data class ActionCondition(val weapon: ActionConditionWeapon? = null,
+                           val characteristic: ActionConditionCharacteristic? = null,
                            val range: Range? = null,
-                           val target: Target? = null) : Serializable {
+                           val target: Target? = null,
+                           val encumbrance: Boolean? = null) : Serializable {
 
     override fun toString(): String {
-        return if (weapon != null) {
-            listOfNotNull(weapon.toString(), rangeString)
-                    .joinToString(", ")
-                    .capitalize()
-        } else {
-            rangeString?.capitalize() ?: ""
-        }
+        return listOfNotNull(weapon.toString(), characteristic.toString(), rangeString, encumbranceString)
+                .joinToString(", ")
+                .capitalize()
     }
 
     private val rangeString: String?
@@ -50,5 +48,12 @@ data class ActionCondition(val weapon: ActionConditionWeapon? = null,
                 }
                 else -> null
             }
+        }
+
+    private val encumbranceString: String?
+        get() = when (encumbrance) {
+            true -> "encombré"
+            false -> "non encombré"
+            else -> null
         }
 }

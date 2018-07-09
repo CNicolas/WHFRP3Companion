@@ -2,6 +2,7 @@ package com.nicolas.models.actions
 
 import com.nicolas.models.action.Action
 import com.nicolas.models.action.ActionSide
+import com.nicolas.models.action.ActionType
 import com.nicolas.models.action.Trait
 import com.nicolas.models.action.condition.ActionCondition
 import com.nicolas.models.action.condition.ActionConditionWeapon
@@ -25,8 +26,8 @@ class SizeAndOperatorsTest {
     )
     private val rangeAttack: Action =
             Action(
-                    name = "Attaque à distance",
-                    type = "ATTACK",
+                    name = "Tir",
+                    type = ActionType.ATTACK,
                     conservativeSide = rangeAttackSides,
                     recklessSide = rangeAttackSides,
                     traits = listOf(Trait.BASIC),

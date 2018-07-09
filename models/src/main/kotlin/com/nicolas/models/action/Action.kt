@@ -4,7 +4,7 @@ import com.nicolas.models.action.condition.ActionCondition
 import java.io.Serializable
 
 data class Action(val name: String,
-                  val type: String,
+                  val type: ActionType,
                   val traits: List<Trait> = listOf(),
 
                   val skill: String? = null,

@@ -25,7 +25,8 @@
           "player": false,
           "ally": "COUNT",
           "dice": "MISFORTUNE"
-        }
+        },
+        "text": "Réduisez la difficulté de {MISFORTUNE_DICE} pour chaque allié engagé avec la cible."
       },
       "effects": {
         "SUCCESS": {
@@ -42,7 +43,7 @@
     }
   },
   {
-    "name": "Corps-à-corps",
+    "name": "Attaque de Corps-à-corps",
     "type": "ATTACK",
     "traits": [ "BASIC" ],
     "skill": "Capacité de Combat",
@@ -90,7 +91,7 @@
     }
   },
   {
-    "name": "Attaque à distance",
+    "name": "Tir",
     "type": "ATTACK",
     "traits": [ "BASIC" ],
     "skill": "Capacité de Tir",
@@ -133,6 +134,236 @@
         },
         "BANE": {
           "2": { "canEngage": "TARGET" }
+        }
+      }
+    }
+  },
+  {
+    "name": "Position Défensive",
+    "type": "DEFENSE",
+    "traits": [ "BASIC", "DEFENSE" ],
+    "skill": "Discipline",
+    "conditions": [
+      {
+        "characteristic": {
+          "characteristic": "AGILITY",
+          "comparator": "GREATER_OR_EQUAL",
+          "value": 3
+        }
+      },
+      { "encumbrance": false }
+    ],
+    "conservativeSide": {
+      "cooldown": 0,
+      "difficulty": [ ],
+      "effects": {
+        "SUCCESS": {
+          "1": {
+            "addedDices": [ "MISFORTUNE" ],
+            "actionType": [ "ATTACK" ],
+            "target": "PLAYER",
+            "text": "Jusqu'au début de votre prochain tour, ajoutez {MISFORTUNE_DICE} à toute Attaque de Corps-à-corps ou d'Attaque à distance vous visant, vous et vos alliés présents dans le même engagement que vous."
+          },
+          "3": {
+            "addedDices": [ "MISFORTUNE", "MISFORTUNE" ],
+            "actionType": [ "ATTACK" ],
+            "target": "PLAYER",
+            "text": "Jusqu'au début de votre prochain tour, ajoutez {MISFORTUNE_DICE} {MISFORTUNE_DICE} à toute Attaque de Corps-à-corps ou d'Attaque à distance vous visant, vous et vos alliés présents dans le même engagement que vous."
+          }
+        },
+        "BOON": {
+          "2": {
+            "cooldown": -1,
+            "target": "ALLY",
+            "range": "ENGAGED",
+            "text": "Un allié engagé peut ôter 1 jeton de recharge de n'importe laquelle de ses cartes en cours de recharge."
+          }
+        },
+        "BANE": {
+          "1": {
+            "stress": 1,
+            "target": "PLAYER"
+          }
+        }
+      }
+    },
+    "recklessSide": {
+      "cooldown": 0,
+      "difficulty": [ ],
+      "effects": {
+        "SUCCESS": {
+          "1": {
+            "addedDices": [ "MISFORTUNE" ],
+            "actionType": [ "ATTACK" ],
+            "target": "PLAYER",
+            "text": "Jusqu'au début de votre prochain tour, ajoutez {MISFORTUNE_DICE} à toute Attaque de Corps-à-corps ou d'Attaque à distance vous visant, vous et vos alliés présents dans le même engagement que vous."
+          },
+          "3": {
+            "addedDices": [ "MISFORTUNE", "MISFORTUNE" ],
+            "actionType": [ "ATTACK" ],
+            "target": "PLAYER",
+            "text": "Jusqu'au début de votre prochain tour, ajoutez {MISFORTUNE_DICE} {MISFORTUNE_DICE} à toute Attaque de Corps-à-corps ou d'Attaque à distance vous visant, vous et vos alliés présents dans le même engagement que vous."
+          }
+        },
+        "BOON": {
+          "2": {
+            "cooldown": -1,
+            "target": "ALLY",
+            "range": "ENGAGED",
+            "text": "Un allié engagé peut ôter 1 jeton de recharge de n'importe laquelle de ses cartes en cours de recharge."
+          }
+        },
+        "BANE": {
+          "1": {
+            "stress": 1,
+            "target": "PLAYER"
+          }
+        }
+      }
+    }
+  },
+  {
+    "name": "Évaluitation de la situation",
+    "type": "DEFENSE",
+    "traits": [ "BASIC", "DEFENSE" ],
+    "skill": "Intuition",
+    "conditions": [ ],
+    "conservativeSide": {
+      "cooldown": 0,
+      "difficulty": [ ],
+      "special": {
+        "text": "Ajoutez {CHALLENGE_DICE} à la réserve de dés de cette action si vous êtes engagé contre un ennemi."
+      },
+      "effects": {
+        "SUCCESS": {
+          "1": {
+            "stress": -1,
+            "exhaustion": -1,
+            "addedDices": [ "MISFORTUNE" ],
+            "actionType": [ "ATTACK" ],
+            "target": "PLAYER",
+            "text": "Jusqu'au début de votre prochain tour, ajoutez {MISFORTUNE_DICE} à toute Attaque de Corps-à-corps ou d'Attaque à distance vous visant."
+          }
+        },
+        "BOON": {
+          "2": {
+            "cooldown": -1,
+            "target": "PLAYER"
+          }
+        },
+        "BANE": {
+          "2": {
+            "cooldown": 1,
+            "target": "PLAYER"
+          }
+        }
+      }
+    },
+    "recklessSide": {
+      "cooldown": 0,
+      "difficulty": [ ],
+      "special": {
+        "text": "Ajoutez {CHALLENGE_DICE} à la réserve de dés de cette action si vous êtes engagé contre un ennemi."
+      },
+      "effects": {
+        "SUCCESS": {
+          "1": {
+            "stress": -1,
+            "exhaustion": -1,
+            "addedDices": [ "MISFORTUNE" ],
+            "actionType": [ "ATTACK" ],
+            "target": "PLAYER",
+            "text": "Jusqu'au début de votre prochain tour, ajoutez {MISFORTUNE_DICE} à toute Attaque de Corps-à-corps ou d'Attaque à distance vous visant."
+          }
+        },
+        "BOON": {
+          "2": {
+            "cooldown": -1,
+            "target": "PLAYER"
+          }
+        },
+        "BANE": {
+          "2": {
+            "cooldown": 1,
+            "target": "PLAYER"
+          }
+        }
+      }
+    }
+  },
+  {
+    "name": "Coup du Casseur de Trolls",
+    "type": "ATTACK",
+    "traits": [ "KILLER" ],
+    "skill": "Capacité de Combat",
+    "targetDefense": true,
+    "conditions": [
+      {
+        "weapon": {
+          "categories": [ "MELEE" ],
+          "equipped": true,
+          "inHand": true
+        }
+      },
+      { "range": "ENGAGED", "target": "TARGET" }
+    ],
+    "conservativeSide": {
+      "cooldown": 2,
+      "difficulty": [ "MISFORTUNE" ],
+      "special": {
+        "text": "Vous ne pouvez pas utiliser de Défense Active quand cette carte est en cours de recharge."
+      },
+      "effects": {
+        "SUCCESS": {
+          "1": { "damage": 1 },
+          "3": { "damage": 3 }
+        },
+        "BOON": {
+          "1": {
+            "damage": 1,
+            "ignoreSoak": true
+          },
+          "2": {
+            "damage": 3,
+            "critical": 1
+          }
+        },
+        "SIGMAR": {
+          "1": {
+            "critical": 1,
+            "text": "Infligez 1 blessure critique, puis un nbombre de blessures normales égal à sa gravité."
+          }
+        },
+        "BANE": {
+          "1": { "exhaustion": 1 }
+        },
+        "CHAOS": {
+          "1": { "wounds": -1 }
+        }
+      }
+    },
+    "recklessSide": {
+      "cooldown": 2,
+      "difficulty": [ ],
+      "special": {
+        "text": "Vous ne pouvez pas utiliser de Défense Active quand cette carte est en cours de recharge."
+      },
+      "effects": {
+        "SUCCESS": {
+          "1": { "damage": 1 },
+          "3": { "damage": 3 }
+        },
+        "BOON": {
+          "1": {
+            "damage": 1,
+            "ignoreSoak": true
+          }
+        },
+        "BANE": {
+          "1": { "exhaustion": 1 }
+        },
+        "CHAOS": {
+          "1": { "wounds": -1 }
         }
       }
     }

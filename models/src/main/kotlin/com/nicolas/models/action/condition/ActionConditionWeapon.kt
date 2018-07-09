@@ -49,3 +49,7 @@ data class ActionConditionWeapon(val categories: List<WeaponCategory>? = listOf(
             else -> null
         }
 }
+
+fun ActionConditionWeapon?.toString(): String? {
+    return this?.toString()
+}

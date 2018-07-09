@@ -1,6 +1,9 @@
 package com.nicolas.models.action.effect
 
+import com.nicolas.models.action.ActionType
 import com.nicolas.models.action.effect.Target.*
+import com.nicolas.models.dice.DiceType
+import com.nicolas.models.item.enums.Range
 import java.io.Serializable
 import java.lang.Math.abs
 
@@ -10,22 +13,29 @@ data class ActionFaceEffect(val damage: Int? = null,
                             val cooldown: Int? = null,
                             val exhaustion: Int? = null,
                             val stress: Int? = null,
+                            val wounds: Int? = null,
                             val maneuver: Boolean? = null,
                             val canEngage: Target? = null,
-                            val canDisengage: Target? = null) : Serializable {
+                            val canDisengage: Target? = null,
+                            val addedDices: List<DiceType>? = null,
+                            val actionType: List<ActionType>? = null,
+                            val target: Target? = null,
+                            val range: Range? = null,
 
-    override fun toString(): String =
-            listOfNotNull(damageString,
-                    criticalString,
-                    ignoreSoakString,
-                    cooldownString,
-                    exhaustionString,
-                    stressString,
-                    maneuverString,
-                    canEngageString,
-                    canDisengageString)
-                    .joinToString()
-                    .capitalize()
+                            val text: String? = null) : Serializable {
+
+    override fun toString(): String = text ?: listOfNotNull(damageString,
+            criticalString,
+            ignoreSoakString,
+            cooldownString,
+            exhaustionString,
+            stressString,
+            woundsString,
+            maneuverString,
+            canEngageString,
+            canDisengageString)
+            .joinToString()
+            .capitalize()
 
     private val damageString: String?
         get() {
@@ -74,8 +84,10 @@ data class ActionFaceEffect(val damage: Int? = null,
         get () {
             return when {
                 exhaustion == null || exhaustion == 0 -> null
-                exhaustion < 0 -> "subissez ${abs(exhaustion)} fatigue"
-                exhaustion > 0 -> "récupérez $exhaustion fatigue"
+                exhaustion == -1 -> "subissez ${abs(exhaustion)} fatigue"
+                exhaustion < -1 -> "subissez ${abs(exhaustion)} fatigues"
+                exhaustion == 1 -> "récupérez $exhaustion fatigue"
+                exhaustion > 1 -> "récupérez $exhaustion fatigues"
                 else -> null
             }
         }
@@ -86,6 +98,18 @@ data class ActionFaceEffect(val damage: Int? = null,
                 stress == null || stress == 0 -> null
                 stress < 0 -> "subissez ${abs(stress)} stress"
                 stress > 0 -> "récupérez $stress stress"
+                else -> null
+            }
+        }
+
+    private val woundsString: String?
+        get () {
+            return when {
+                wounds == null || wounds == 0 -> null
+                wounds == -1 -> "subissez ${abs(wounds)} blessure"
+                wounds < 0 -> "subissez ${abs(wounds)} blessures"
+                wounds == 1 -> "subissez ${abs(wounds)} blessure"
+                wounds > 0 -> "récupérez $wounds blessures"
                 else -> null
             }
         }

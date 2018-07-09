@@ -4,6 +4,7 @@ import com.google.gson.Gson
 import com.nicolas.database.genericType
 import com.nicolas.models.action.Action
 import com.nicolas.models.action.ActionSide
+import com.nicolas.models.action.ActionType
 import com.nicolas.models.action.Trait
 import com.nicolas.models.action.condition.ActionCondition
 import com.nicolas.models.action.condition.ActionConditionWeapon
@@ -30,8 +31,8 @@ class ActionsFileTest {
     )
     private val rangeAttack: Action =
             Action(
-                    name = "Attaque à distance",
-                    type = "ATTACK",
+                    name = "Tir",
+                    type = ActionType.ATTACK,
                     conservativeSide = rangeAttackSides,
                     recklessSide = rangeAttackSides,
                     traits = listOf(Trait.BASIC),
@@ -59,12 +60,12 @@ class ActionsFileTest {
 
     @Test
     fun should_load_actions_file() {
-        assertThat(allActions.size).isEqualTo(3)
+        assertThat(allActions.size).isEqualTo(6)
     }
 
     @Test
     fun should_deserialize_action() {
-        val action = allActions.find { it.name == "Attaque à distance" }
+        val action = allActions.find { it.name == "Tir" }
         assertThat(action).isEqualTo(rangeAttack)
     }
 
