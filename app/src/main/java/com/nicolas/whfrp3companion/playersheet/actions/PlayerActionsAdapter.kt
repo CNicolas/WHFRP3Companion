@@ -15,6 +15,7 @@ import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.shared.DIALOG_ACTION_TAG
 import com.nicolas.whfrp3companion.shared.bind
 import com.nicolas.whfrp3companion.shared.dialogs.ActionDialog
+import com.nicolas.whfrp3companion.shared.enums.drawableId
 
 class PlayerActionsAdapter(context: Context,
                            private val actions: List<Action>,
@@ -48,7 +49,7 @@ class PlayerActionsAdapter(context: Context,
         fun setupViews(action: Action) {
             this.action = action
 
-            actionTypeImageView.setImageResource(R.drawable.ic_handgun_black)
+            actionTypeImageView.setImageResource(action.type.drawableId)
             actionNameTextView.text = action.name
             actionCooldownTextView.text = action.conservativeSide.cooldown?.toString() ?: "0"
         }

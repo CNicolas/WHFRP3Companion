@@ -15,6 +15,7 @@ import com.nicolas.models.action.Action
 import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.shared.ACTION_INTENT_ARGUMENT
 import com.nicolas.whfrp3companion.shared.adapters.ActionEffectsAdapter
+import com.nicolas.whfrp3companion.shared.enums.drawableId
 
 class ActionDialog : DialogFragment() {
     @BindView(R.id.actionTypeImageView)
@@ -61,6 +62,7 @@ class ActionDialog : DialogFragment() {
     }
 
     private fun setupViews() {
+        actionTypeImageView.setImageResource(action.type.drawableId)
         actionNameTextView.text = action.name
         actionCooldownTextView.text = action.conservativeSide.cooldown.toString()
         actionTraitsTextView.text = action.traits.joinToString()

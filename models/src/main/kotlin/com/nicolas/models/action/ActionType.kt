@@ -1,6 +1,9 @@
 package com.nicolas.models.action
 
 enum class ActionType {
-    ATTACK,
-    DEFENSE
+    MELEE_ATTACK,
+    RANGE_ATTACK,
+    SUPPORT,
+    SPELL,
+    SUMMONING
 }

@@ -1,5 +1,7 @@
 package com.nicolas.whfrp3companion.shared.enums
 
+import com.nicolas.models.action.ActionType
+import com.nicolas.models.action.ActionType.*
 import com.nicolas.models.dice.Face
 import com.nicolas.models.dice.Face.*
 import com.nicolas.models.item.enums.WeaponType
@@ -42,4 +44,13 @@ internal val WeaponType.drawableId: Int
         RIFLE -> R.drawable.ic_rifle_black
         REPEATING_GUN -> R.drawable.ic_repeating_hanggun_black
         REPEATING_CROSSBOW -> R.drawable.ic_repeating_crossbow_black
+    }
+
+internal val ActionType.drawableId: Int
+    get() = when (this) {
+        MELEE_ATTACK -> R.drawable.ic_sword_black
+        RANGE_ATTACK -> R.drawable.ic_handgun_black
+        SUPPORT -> R.drawable.ic_flag_black
+        SPELL -> R.drawable.ic_spell_black
+        SUMMONING -> R.drawable.ic_summoning_black
     }

@@ -1,7 +1,7 @@
 [
   {
     "name": "Backstab",
-    "type": "ATTACK",
+    "type": "MELEE_ATTACK",
     "traits": [ "TEAMWORK" ],
     "skill": "Furtivité",
     "targetSkill": "Observation",
@@ -44,7 +44,7 @@
   },
   {
     "name": "Attaque de Corps-à-corps",
-    "type": "ATTACK",
+    "type": "MELEE_ATTACK",
     "traits": [ "BASIC" ],
     "skill": "Capacité de Combat",
     "targetDefense": true,
@@ -92,7 +92,7 @@
   },
   {
     "name": "Tir",
-    "type": "ATTACK",
+    "type": "RANGE_ATTACK",
     "traits": [ "BASIC" ],
     "skill": "Capacité de Tir",
     "targetDefense": true,
@@ -140,7 +140,7 @@
   },
   {
     "name": "Position Défensive",
-    "type": "DEFENSE",
+    "type": "SUPPORT",
     "traits": [ "BASIC", "DEFENSE" ],
     "skill": "Discipline",
     "conditions": [
@@ -223,8 +223,8 @@
     }
   },
   {
-    "name": "Évaluitation de la situation",
-    "type": "DEFENSE",
+    "name": "Évaluation de la situation",
+    "type": "SUPPORT",
     "traits": [ "BASIC", "DEFENSE" ],
     "skill": "Intuition",
     "conditions": [ ],
@@ -293,7 +293,7 @@
   },
   {
     "name": "Coup du Casseur de Trolls",
-    "type": "ATTACK",
+    "type": "MELEE_ATTACK",
     "traits": [ "KILLER" ],
     "skill": "Capacité de Combat",
     "targetDefense": true,
