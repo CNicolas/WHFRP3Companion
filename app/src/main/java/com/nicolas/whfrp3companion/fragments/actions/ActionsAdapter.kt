@@ -52,7 +52,7 @@ class ActionsAdapter(context: Context,
             actionCooldownTextView.text = action.conservativeSide.cooldown?.toString() ?: "0"
         }
 
-        @OnClick(R.id.actionNameTextView)
+        @OnClick(R.id.actionLayout)
         fun openActionInDialog() {
             val activity = view.context as? AppCompatActivity
 

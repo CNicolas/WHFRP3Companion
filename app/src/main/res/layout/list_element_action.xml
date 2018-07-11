@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
                                              xmlns:app="http://schemas.android.com/apk/res-auto"
+                                             android:id="@+id/actionLayout"
                                              android:layout_width="match_parent"
                                              android:layout_height="wrap_content">
+
     <ImageView android:id="@+id/actionTypeImageView"
                android:layout_width="50dp"
                android:layout_height="0dp"
@@ -13,6 +15,7 @@
                app:layout_constraintBottom_toBottomOf="parent"
                app:layout_constraintLeft_toLeftOf="parent"
                app:layout_constraintHorizontal_weight="1" />
+
     <TextView android:id="@+id/actionNameTextView"
               android:layout_width="0dp"
               android:layout_height="40dp"
@@ -24,6 +27,7 @@
               app:layout_constraintBottom_toBottomOf="parent"
               app:layout_constraintLeft_toRightOf="@+id/actionTypeImageView"
               app:layout_constraintHorizontal_weight="8" />
+
     <TextView android:id="@+id/actionCooldownTextView"
               android:layout_width="50dp"
               android:layout_height="0dp"

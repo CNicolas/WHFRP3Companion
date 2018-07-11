@@ -61,19 +61,25 @@ class ActionDialog : DialogFragment() {
         unbinder.unbind()
     }
 
-    private fun setupViews() {
+    private fun setupViews(conservative: Boolean = true) {
         actionTypeImageView.setImageResource(action.type.drawableId)
         actionNameTextView.text = action.name
-        actionCooldownTextView.text = action.conservativeSide.cooldown.toString()
         actionTraitsTextView.text = action.traits.joinToString()
-
         actionSkillsTextView.text = action.skillsString
-
         actionConditionsTextView.text = action.conditionsString
 
-        action.conservativeSide.effects?.let {
-            actionEffectsListView.adapter = ActionEffectsAdapter(context!!, it)
+        if (conservative) {
+            actionCooldownTextView.text = action.conservativeSide.cooldown.toString()
+            action.conservativeSide.effects?.let {
+                actionEffectsListView.adapter = ActionEffectsAdapter(context!!, it)
+            }
+        } else {
+            actionCooldownTextView.text = action.recklessSide.cooldown.toString()
+            action.recklessSide.effects?.let {
+                actionEffectsListView.adapter = ActionEffectsAdapter(context!!, it)
+            }
         }
+
     }
 
     companion object {

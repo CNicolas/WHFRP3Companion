@@ -14,6 +14,7 @@ import com.nicolas.models.action.effect.*
 import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.shared.bind
 import com.nicolas.whfrp3companion.shared.enums.drawableId
+import com.nicolas.whfrp3companion.shared.viewModifications.parseTemplatedText
 
 class ActionEffectsAdapter(context: Context, private val effects: ActionEffects) : BaseAdapter() {
     private val inflater = LayoutInflater.from(context)
@@ -40,7 +41,7 @@ class ActionEffectsAdapter(context: Context, private val effects: ActionEffects)
         return view
     }
 
-    internal class ViewHolder(view: View) {
+    internal class ViewHolder(private val view: View) {
         private var effect: ActionEffect? = null
 
         private val descriptionTextView by view.bind<TextView>(R.id.effectDescriptionTextView)
@@ -59,7 +60,7 @@ class ActionEffectsAdapter(context: Context, private val effects: ActionEffects)
             this.effect?.let {
                 setFaceDrawable(it.face.drawableId)
                 setImagesVisibility(it.faceCount)
-                descriptionTextView.text = it.third.toString()
+                descriptionTextView.text = parseTemplatedText(view.context, it.third.toString())
             }
         }
 

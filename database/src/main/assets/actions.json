@@ -15,6 +15,45 @@
       },
       { "range": "ENGAGED", "target": "TARGET" }
     ],
+    "conservativeSide": {
+      "cooldown": 4,
+      "difficulty": [
+        "MISFORTUNE",
+        "MISFORTUNE",
+        "MISFORTUNE"
+      ],
+      "special": {
+        "difficultyReducer": {
+          "range": "ENGAGED",
+          "target": "TARGET",
+          "player": false,
+          "ally": "COUNT",
+          "dice": "MISFORTUNE"
+        },
+        "text": "Réduisez la difficulté de {MISFORTUNE_DICE} pour chaque allié engagé avec la cible."
+      },
+      "effects": {
+        "SUCCESS": {
+          "1": {
+            "damage": 1
+          },
+          "2": {
+            "damage": 1,
+            "ignoreSoak": true
+          }
+        },
+        "BOON": {
+          "2": {
+            "damage": 2
+          }
+        },
+        "BANE": {
+          "2": {
+            "cooldown": 2
+          }
+        }
+      }
+    },
     "recklessSide": {
       "cooldown": 4,
       "difficulty": [ "MISFORTUNE", "MISFORTUNE", "MISFORTUNE" ],
