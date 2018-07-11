@@ -17,6 +17,10 @@
               android:icon="@drawable/ic_talents_black"
               android:title="@string/page_talents" />
 
+        <item android:id="@+id/nav_actions"
+              android:icon="@drawable/ic_action_black"
+              android:title="@string/page_actions" />
+
         <item android:id="@+id/nav_careers"
               android:icon="@drawable/ic_work_black"
               android:title="@string/page_careers"
