@@ -10,6 +10,7 @@ data class ActionCondition(val weapon: ActionConditionWeapon? = null,
                            val characteristic: ActionConditionCharacteristic? = null,
                            val range: Range? = null,
                            val target: Target? = null,
+                           val preparation: Boolean? = null,
                            val encumbrance: Boolean? = null) : Serializable {
 
     override fun toString(): String {

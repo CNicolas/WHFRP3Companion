@@ -32,7 +32,7 @@ class ActionsFileTest {
     private val rangeAttack: Action =
             Action(
                     name = "Tir",
-                    type = ActionType.ATTACK,
+                    type = ActionType.RANGE_ATTACK,
                     conservativeSide = rangeAttackSides,
                     recklessSide = rangeAttackSides,
                     traits = listOf(Trait.BASIC),

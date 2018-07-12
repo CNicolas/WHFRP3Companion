@@ -1,0 +1,316 @@
+[
+  {
+    "name": "Tir",
+    "type": "RANGE_ATTACK",
+    "traits": [ "BASIC" ],
+    "skill": "Capacité de Tir",
+    "targetDefense": true,
+    "conditions": [
+      {
+        "weapon": {
+          "categories": [ "RANGE", "FIRE_ARM", "REPEATING" ],
+          "equipped": true
+        }
+      },
+      { "range": "ENGAGED", "target": "NONE" }
+    ],
+    "conservativeSide": {
+      "cooldown": 0,
+      "difficulty": [ ],
+      "effects": {
+        "SUCCESS": {
+          "1": { "damage": 0 },
+          "3": { "damage": 2 }
+        },
+        "BOON": {
+          "2": { "maneuver": true }
+        },
+        "BANE": {
+          "2": { "canEngage": "TARGET" }
+        }
+      }
+    },
+    "recklessSide": {
+      "cooldown": 0,
+      "difficulty": [ ],
+      "effects": {
+        "SUCCESS": {
+          "1": { "damage": 0 },
+          "3": { "damage": 2 }
+        },
+        "BOON": {
+          "2": { "maneuver": true }
+        },
+        "BANE": {
+          "2": { "canEngage": "TARGET" }
+        }
+      }
+    }
+  },
+  {
+    "name": "Tir Immobilisant",
+    "type": "RANGE_ATTACK",
+    "traits": [ "CONTINUOUS" ],
+    "skill": "Capacité de Tir",
+    "targetDefense": true,
+    "conditions": [
+      {
+        "weapon": {
+          "categories": [ "RANGE" ],
+          "inHand": true
+        }
+      },
+      { "range": "SHORT", "target": "TARGET" }
+    ],
+    "conservativeSide": {
+      "cooldown": 4,
+      "difficulty": [ "MISFORTUNE", "MISFORTUNE" ],
+      "special": {
+        "text": "Vous clouez la cible au sol ou l'épinglez contre un mur. Quand cette carte est en cours de recharge, la cible ne peut pas bouger. Elle peut toutefois dépenser une action pour ôter 1 {DELAY_FACE} de cette carte"
+      },
+      "effects": {
+        "SUCCESS": {
+          "1": { "damage": -2 },
+          "2": { "damage": 0 }
+        },
+        "BOON": {
+          "1": { "cooldown": 1 }
+        },
+        "BANE": {
+          "2": { "cooldown": -1 }
+        }
+      }
+    },
+    "recklessSide": {
+      "cooldown": 4,
+      "difficulty": [ "MISFORTUNE", "MISFORTUNE" ],
+      "special": {
+        "text": "Vous clouez la cible au sol ou l'épinglez contre un mur. Quand cette carte est en cours de recharge, la cible ne peut pas bouger. Elle peut toutefois dépenser une action pour ôter 1 {DELAY_FACE} de cette carte"
+      },
+      "effects": {
+        "SUCCESS": {
+          "1": { "damage": -2 },
+          "2": { "damage": 0 }
+        },
+        "BOON": {
+          "2": { "cooldown": 1 }
+        },
+        "SIGMAR": {
+          "1": { "text": "Vous touchez et immobilisez une seconde cible" }
+        },
+        "BANE": {
+          "1": { "cooldown": -1 }
+        },
+        "CHAOS": {
+          "1": {
+            "stress": 1,
+            "exhaustion": 1
+          }
+        }
+      }
+    }
+  },
+  {
+    "name": "Tir de Couverture",
+    "type": "RANGE_ATTACK",
+    "traits": [ "CONTINUOUS" ],
+    "skill": "Capacité de Tir",
+    "conditions": [
+      {
+        "weapon": {
+          "categories": [ "RANGE" ],
+          "equipped": true
+        }
+      }
+    ],
+    "conservativeSide": {
+      "cooldown": 4,
+      "difficulty": [ "CHALLENGE", "MISFORTUNE" ],
+      "special": {
+        "text": "En effectuant un tir nourri, vous obligez l'ennemi à rester à couvert ! Choisissez un élément de terrain ou une zone située à portée moyenne ou moins. Quand cette carte est en cours de recharge, tout ennemi qui tente d'y manoeuvrer subit 1 fatigue. Les ennemis situés dans la zone subissent {MISFORTUNE_DICE} à tous les tests."
+      },
+      "effects": {
+        "SUCCESS": {
+          "1": { "text": "Vous maintenez le feu de couverture comme décrit ci-dessus." },
+          "3": {
+            "damage": 0,
+            "text": "Comme ci-dessus, et vous infligez les dégâts normaux à un ennemi situé dans la zone."
+          }
+        },
+        "BOON": {
+          "1": {
+            "maneuver": true,
+            "target": "ALLY",
+            "range": "SHORT"
+          }
+        },
+        "BANE": {
+          "1": {
+            "maneuver": true,
+            "target": "TARGET",
+            "text": "Un ennemi situé dans la zone peut effectuer une manoeuvre gratuite sans subir les malus décrits ci-dessus."
+          }
+        }
+      }
+    },
+    "recklessSide": {
+      "cooldown": 4,
+      "difficulty": [ "CHALLENGE", "MISFORTUNE" ],
+      "effects": {
+        "SUCCESS": {
+          "1": {
+            "target": "TARGET",
+            "exhaustion": 1,
+            "text": "Vous abattez une plue de projectiles sur l'engagement de la Cible. Tous les ennemis qui s'y situent subissent 1 {EXHAUSTION}"
+          }
+        },
+        "BOON": {
+          "1": {
+            "maneuver": true,
+            "target": "ALLY",
+            "text": "Un allié situé à portée courte de l'engagement de la Cible peut exécuter une manoeuvre gratuite."
+          }
+        },
+        "BANE": {
+          "2": {
+            "target": "ALLY",
+            "exhaustion": 1,
+            "text": "Les alliés situés à ce niveau d'engagmeent subissent 1 {EXHAUSTION}."
+          }
+        }
+      }
+    }
+  },
+  {
+    "name": "Tir d'Élite",
+    "type": "RANGE_ATTACK",
+    "traits": [ ],
+    "skill": "Capacité de Tir",
+    "targetDefense": true,
+    "conditions": [
+      {
+        "weapon": {
+          "categories": [ "RANGE", "FIRE_ARM", "REPEATING" ],
+          "equipped": true
+        }
+      },
+      { "range": "MEDIUM", "target": "TARGET" },
+      { "range": "ENGAGED", "target": "NONE" },
+      { "preparation": true }
+    ],
+    "conservativeSide": {
+      "cooldown": 2,
+      "difficulty": [ "MISFORTUNE" ],
+      "effects": {
+        "SUCCESS": {
+          "1": { "damage": 0 },
+          "2": {
+            "damage": 1,
+            "critical": 1
+          }
+        },
+        "BOON": {
+          "1": { "damage": 1 }
+        },
+        "SIGMAR": {
+          "1": { "text": "Votre attaque inflige des dégâts supplémentaires égaux au niveau de dégâts de votre arme" }
+        },
+        "BANE": {
+          "2": {
+            "stress": 1,
+            "exhaustion": 1
+          }
+        }
+      }
+    },
+    "recklessSide": {
+      "cooldown": 3,
+      "difficulty": [ "MISFORTUNE", "MISFORTUNE" ],
+      "effects": {
+        "SUCCESS": {
+          "1": { "damage": 1 },
+          "3": {
+            "damage": 2,
+            "critical": 1
+          }
+        },
+        "BOON": {
+          "1": { "damage": 1 },
+          "2": { "ignoreSoak": true }
+        },
+        "BANE": {
+          "1": {
+            "stress": 1,
+            "exhaustion": 1
+          }
+        }
+      }
+    }
+  },
+  {
+    "name": "Tir Extrême",
+    "type": "RANGE_ATTACK",
+    "traits": [ ],
+    "skill": "Capacité de Tir",
+    "targetDefense": true,
+    "conditions": [
+      {
+        "weapon": {
+          "categories": [ "RANGE", "FIRE_ARM", "REPEATING" ],
+          "equipped": true
+        }
+      },
+      { "range": "ENGAGED", "target": "NONE" }
+    ],
+    "conservativeSide": {
+      "cooldown": 0,
+      "difficulty": [ "MISFORTUNE" ],
+      "special": {
+        "text": "Si vous exécutez la manoeuvre préparer avant d'entreprendre cette action, ôtez {MISFORTUNE} de votre réserve de dés.",
+        "text2": "Vous pouvez attaquer une cible située jusqu'à un cran de portée de plus que la portée maximale habituelle de votre arme."
+      },
+      "effects": {
+        "SUCCESS": {
+          "1": { "damage": 0 }
+        },
+        "BOON": {
+          "1": { "damage": 1 },
+          "2": { "damage": 2 }
+        },
+        "BANE": {
+          "2": {
+            "text": "Votre cible peut exécuter une manoeuvre gratuite."
+          }
+        }
+      }
+    },
+    "recklessSide": {
+      "cooldown": 0,
+      "difficulty": [ "CHALLENGE" ],
+      "special": {
+        "text": "Si vous exécutez la manoeuvre préparer avant d'entreprendre cette action, échangez un {CHALLENGE} contre un {MISFORTUNE} dans votre réserve de dés.",
+        "text2": "Vous pouvez attaquer une cible située jusqu'à un cran de portée de plus que la portée maximale habituelle de votre arme."
+      },
+      "effects": {
+        "SUCCESS": {
+          "1": { "damage": 0 }
+        },
+        "BOON": {
+          "1": { "damage": 1 },
+          "2": { "damage": 2 }
+        },
+        "SIGMAR": {
+          "1": {
+            "damage": 2,
+            "critical": 1
+          }
+        },
+        "BANE": {
+          "1": {
+            "text": "Votre cible peut exécuter une manoeuvre gratuite."
+          }
+        }
+      }
+    }
+  }
+]
