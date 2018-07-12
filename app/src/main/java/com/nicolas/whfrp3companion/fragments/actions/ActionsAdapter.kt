@@ -8,14 +8,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import butterknife.ButterKnife
-import butterknife.OnClick
 import com.nicolas.models.action.Action
 import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.shared.DIALOG_ACTION_TAG
 import com.nicolas.whfrp3companion.shared.bind
 import com.nicolas.whfrp3companion.shared.dialogs.ActionDialog
 import com.nicolas.whfrp3companion.shared.enums.drawableId
+import com.nicolas.whfrp3companion.shared.getView
 
 class ActionsAdapter(context: Context,
                      private val actions: List<Action>) : RecyclerView.Adapter<ActionsAdapter.ViewHolder>() {
@@ -40,20 +39,18 @@ class ActionsAdapter(context: Context,
 
         private lateinit var action: Action
 
-        init {
-            ButterKnife.bind(this, view)
-        }
-
         fun setupViews(action: Action) {
             this.action = action
 
             actionTypeImageView.setImageResource(action.type.drawableId)
             actionNameTextView.text = action.name
             actionCooldownTextView.text = action.conservativeSide.cooldown?.toString() ?: "0"
+
+            view.getView<View>(R.id.actionLayout)
+                    .setOnClickListener(this::openActionInDialog)
         }
 
-        @OnClick(R.id.actionLayout)
-        fun openActionInDialog() {
+        private fun openActionInDialog(view: View) {
             val activity = view.context as? AppCompatActivity
 
             activity?.let {

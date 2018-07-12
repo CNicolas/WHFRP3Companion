@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import butterknife.ButterKnife
 import com.nicolas.models.talent.Talent
 import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.shared.bind
@@ -36,10 +35,6 @@ class TalentsAdapter(context: Context, private val talents: List<Talent>) : Recy
         private val descriptionView by view.bind<TextView>(R.id.talent_description)
 
         private lateinit var talent: Talent
-
-        init {
-            ButterKnife.bind(this, view)
-        }
 
         fun setupViews(talent: Talent) {
             this.talent = talent

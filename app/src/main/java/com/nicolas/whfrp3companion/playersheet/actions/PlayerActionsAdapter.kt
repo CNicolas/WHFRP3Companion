@@ -8,8 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import butterknife.ButterKnife
-import butterknife.OnClick
 import com.nicolas.models.action.Action
 import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.shared.DIALOG_ACTION_TAG
@@ -42,20 +40,17 @@ class PlayerActionsAdapter(context: Context,
 
         private lateinit var action: Action
 
-        init {
-            ButterKnife.bind(this, view)
-        }
-
         fun setupViews(action: Action) {
             this.action = action
 
             actionTypeImageView.setImageResource(action.type.drawableId)
             actionNameTextView.text = action.name
             actionCooldownTextView.text = action.conservativeSide.cooldown?.toString() ?: "0"
+
+            actionNameTextView.setOnClickListener { openActionInDialog() }
         }
 
-        @OnClick(R.id.actionNameTextView)
-        fun openActionInDialog() {
+        private fun openActionInDialog() {
             val activity = view.context as? AppCompatActivity
 
             activity?.let {

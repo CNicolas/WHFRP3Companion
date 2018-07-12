@@ -5,9 +5,6 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.view.MenuItem
-import butterknife.ButterKnife
-import butterknife.OnClick
-import butterknife.Unbinder
 import com.nicolas.database.HandRepository
 import com.nicolas.diceroller.roll.roll
 import com.nicolas.models.hand.Hand
@@ -16,6 +13,7 @@ import com.nicolas.whfrp3companion.shared.DIALOG_ROLL_RESULT_TAG
 import com.nicolas.whfrp3companion.shared.HAND_INTENT_ARGUMENT
 import com.nicolas.whfrp3companion.shared.HAND_ROLL_COUNT_INTENT_ARGUMENT
 import com.nicolas.whfrp3companion.shared.dialogs.RollResultDialog
+import kotlinx.android.synthetic.main.activity_dice_roller.*
 import kotlinx.android.synthetic.main.content_dice_roller.*
 import org.jetbrains.anko.alert
 import org.jetbrains.anko.intentFor
@@ -23,8 +21,6 @@ import org.jetbrains.anko.toast
 import org.koin.android.ext.android.inject
 
 class DiceRollerActivity : AppCompatActivity() {
-    private lateinit var unbinder: Unbinder
-
     private val handRepository by inject<HandRepository>()
 
     private lateinit var hand: Hand
@@ -32,8 +28,6 @@ class DiceRollerActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dice_roller)
-
-        unbinder = ButterKnife.bind(this)
 
         hand = if (intent?.extras !== null) {
             intent.extras.getSerializable(HAND_INTENT_ARGUMENT) as Hand
@@ -44,12 +38,8 @@ class DiceRollerActivity : AppCompatActivity() {
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
 
-        setViewValues(hand)
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        unbinder.unbind()
+        setupViewsEvents()
+        fillViews(hand)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -68,13 +58,18 @@ class DiceRollerActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-    @OnClick(R.id.fab_save_hand)
-    fun clickSaveHand() {
-        saveHand()
+    private fun setupViewsEvents() {
+        fab_save_hand.setOnClickListener { saveHand() }
+
+        load_hand.setOnClickListener { listHands() }
+
+        roll_button.setOnClickListener {
+            val rollResultsDialog = RollResultDialog.newInstance(getHandFromPickers().roll())
+            rollResultsDialog.show(supportFragmentManager, DIALOG_ROLL_RESULT_TAG)
+        }
     }
 
-    @OnClick(R.id.load_hand)
-    fun listHands() {
+    private fun listHands() {
         val allHands = handRepository.findAll()
 
         if (allHands.isEmpty()) {
@@ -83,16 +78,10 @@ class DiceRollerActivity : AppCompatActivity() {
             alert {
                 title = getString(R.string.select_hand)
                 items(allHands.map { it.name }) { _, item, _ ->
-                    setViewValues(handRepository.find(item)!!)
+                    fillViews(handRepository.find(item)!!)
                 }
             }.show()
         }
-    }
-
-    @OnClick(R.id.roll_button)
-    fun rollHand() {
-        val rollResultsDialog = RollResultDialog.newInstance(getHandFromPickers().roll())
-        rollResultsDialog.show(supportFragmentManager, DIALOG_ROLL_RESULT_TAG)
     }
 
     private fun rollHandStatistics(rollCount: Int) {
@@ -103,7 +92,7 @@ class DiceRollerActivity : AppCompatActivity() {
     }
 
     private fun reset() {
-        setViewValues(Hand(""))
+        fillViews(Hand(""))
     }
 
     private fun saveHand() {
@@ -125,7 +114,7 @@ class DiceRollerActivity : AppCompatActivity() {
                     challengeDicesCount = challengeDicePicker.value,
                     misfortuneDicesCount = misfortuneDicePicker.value)
 
-    private fun setViewValues(hand: Hand) {
+    private fun fillViews(hand: Hand) {
         handNameView.setText(hand.name)
         characteristicDicePicker.value = hand.characteristicDicesCount
         expertiseDicePicker.value = hand.expertiseDicesCount

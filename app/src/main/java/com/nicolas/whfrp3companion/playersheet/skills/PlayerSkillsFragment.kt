@@ -5,8 +5,6 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import butterknife.ButterKnife
-import butterknife.Unbinder
 import com.nicolas.database.PlayerRepository
 import com.nicolas.models.player.Player
 import com.nicolas.whfrp3companion.R
@@ -17,8 +15,6 @@ import org.jetbrains.anko.uiThread
 import org.koin.android.ext.android.inject
 
 class PlayerSkillsFragment : Fragment() {
-    private lateinit var unbinder: Unbinder
-
     private val playerRepository by inject<PlayerRepository>()
 
     private lateinit var player: Player
@@ -27,8 +23,6 @@ class PlayerSkillsFragment : Fragment() {
                               container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         val resultingView: View = inflater.inflate(R.layout.fragment_skills, container, false)
-
-        unbinder = ButterKnife.bind(this, resultingView)
 
         val playerName = arguments!!.getString(PLAYER_NAME_INTENT_ARGUMENT)
 
@@ -43,11 +37,6 @@ class PlayerSkillsFragment : Fragment() {
         }
 
         return resultingView
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        unbinder.unbind()
     }
 
     companion object {

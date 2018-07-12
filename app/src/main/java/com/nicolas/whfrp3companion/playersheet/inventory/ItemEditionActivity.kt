@@ -3,12 +3,9 @@ package com.nicolas.whfrp3companion.playersheet.inventory
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
+import android.view.View
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.Spinner
-import butterknife.ButterKnife
-import butterknife.OnClick
-import butterknife.OnItemSelected
-import butterknife.Unbinder
 import com.nicolas.database.PlayerRepository
 import com.nicolas.models.extensions.addItem
 import com.nicolas.models.extensions.removeItem
@@ -23,6 +20,7 @@ import com.nicolas.whfrp3companion.shared.enums.labelId
 import com.nicolas.whfrp3companion.shared.viewModifications.hide
 import com.nicolas.whfrp3companion.shared.viewModifications.intValue
 import com.nicolas.whfrp3companion.shared.viewModifications.show
+import kotlinx.android.synthetic.main.activity_item_edition.*
 import kotlinx.android.synthetic.main.content_item_edition.*
 import kotlinx.android.synthetic.main.part_armor_edition.*
 import kotlinx.android.synthetic.main.part_expandable_edition.*
@@ -32,8 +30,6 @@ import org.jetbrains.anko.uiThread
 import org.koin.android.ext.android.inject
 
 class ItemEditionActivity : AppCompatActivity() {
-    private lateinit var unbinder: Unbinder
-
     private val playerRepository by inject<PlayerRepository>()
 
     private lateinit var player: Player
@@ -43,22 +39,40 @@ class ItemEditionActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_item_edition)
 
-        unbinder = ButterKnife.bind(this)
-
         val playerName = intent.extras.getString(PLAYER_NAME_INTENT_ARGUMENT)
         doAsync {
             player = playerRepository.find(playerName)!!
         }
         item = intent.extras.getSerializable(ITEM_EDIT_INTENT_ARGUMENT) as Item?
 
+        setupViews()
+
+        val toolbar = findViewById<Toolbar>(R.id.toolbar)
+        setSupportActionBar(toolbar)
+    }
+
+    private fun setupViews() {
         itemTypeSpinner.adapter = ArrayAdapter(this, R.layout.element_enum_spinner, values().map { getString(it.labelId) })
         qualitySpinner.adapter = ArrayAdapter(this, R.layout.element_enum_spinner, Quality.values().map { getString(it.labelId) })
         armorTypeSpinner.adapter = ArrayAdapter(this, R.layout.element_enum_spinner, ArmorType.values().map { getString(it.labelId) })
         weaponTypeSpinner.adapter = ArrayAdapter(this, R.layout.element_enum_spinner, WeaponType.values().map { getString(it.labelId) })
         weaponRangeSpinner.adapter = ArrayAdapter(this, R.layout.element_enum_spinner, Range.values().map { getString(it.labelId) })
 
+        itemTypeSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) = showGenericItemViews()
+
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                when (ItemType[position]) {
+                    ARMOR -> showArmorViews()
+                    EXPANDABLE -> showExpandableViews()
+                    GENERIC_ITEM -> showGenericItemViews()
+                    WEAPON -> showWeaponViews()
+                }
+            }
+        }
+
         if (item == null) {
-            itemTypeSpinner.setSelection(ItemType.GENERIC_ITEM.ordinal)
+            itemTypeSpinner.setSelection(GENERIC_ITEM.ordinal)
             qualitySpinner.setSelection(Quality.NORMAL.ordinal)
             armorTypeSpinner.setSelection(ArmorType.LEATHER.ordinal)
             weaponTypeSpinner.setSelection(WeaponType.SWORD.ordinal)
@@ -67,27 +81,10 @@ class ItemEditionActivity : AppCompatActivity() {
             fillViewsWithItem(item!!)
         }
 
-        val toolbar = findViewById<Toolbar>(R.id.toolbar)
-        setSupportActionBar(toolbar)
+        save_item.setOnClickListener { save() }
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        unbinder.unbind()
-    }
-
-    @OnItemSelected(R.id.itemTypeSpinner)
-    fun selectItemType(spinner: Spinner, position: Int) {
-        when (ItemType[position]) {
-            ARMOR -> showArmorViews()
-            EXPANDABLE -> showExpandableViews()
-            GENERIC_ITEM -> showGenericItemViews()
-            WEAPON -> showWeaponViews()
-        }
-    }
-
-    @OnClick(R.id.save_item)
-    fun save() {
+    private fun save() {
         doAsync {
             if (item != null) {
                 player.removeItem(item!!)

@@ -3,24 +3,22 @@ package com.nicolas.whfrp3companion.playersheet.characteristics
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import butterknife.ButterKnife
-import butterknife.OnTextChanged
-import butterknife.Unbinder
+import android.widget.EditText
 import com.nicolas.database.PlayerRepository
 import com.nicolas.models.player.Player
 import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.shared.PLAYER_NAME_INTENT_ARGUMENT
+import com.nicolas.whfrp3companion.shared.getView
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 import org.koin.android.ext.android.inject
 
 class PlayerCharacteristicsFragment : Fragment() {
     private lateinit var views: PlayerCharacteristicsFragmentViewHolder
-    private lateinit var unbinder: Unbinder
-
     private val playerRepository by inject<PlayerRepository>()
 
     private lateinit var player: Player
@@ -31,8 +29,6 @@ class PlayerCharacteristicsFragment : Fragment() {
         super.onCreateView(inflater, container, savedInstanceState)
         val resultingView: View = inflater.inflate(R.layout.fragment_player_characteristics, container, false)
 
-        unbinder = ButterKnife.bind(this, resultingView)
-
         val playerName = arguments!!.getString(PLAYER_NAME_INTENT_ARGUMENT)
 
         doAsync {
@@ -40,42 +36,40 @@ class PlayerCharacteristicsFragment : Fragment() {
 
             uiThread {
                 views = PlayerCharacteristicsFragmentViewHolder(resultingView)
-                views.fillViews(player)
+                views.setupViews(player)
             }
         }
+
+        setupTextWatchersEvents(resultingView)
 
         return resultingView
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-
-        views.destroy()
+    private fun setupTextWatchersEvents(view: View) {
+        view.getView<EditText>(R.id.career).addTextChangedListener(playerSavingTextWatcher)
+        view.getView<EditText>(R.id.rank).addTextChangedListener(playerSavingTextWatcher)
+        view.getView<EditText>(R.id.experience).addTextChangedListener(playerSavingTextWatcher)
+        view.getView<EditText>(R.id.max_experience).addTextChangedListener(playerSavingTextWatcher)
+        view.getView<EditText>(R.id.max_wounds).addTextChangedListener(playerSavingTextWatcher)
+        view.getView<EditText>(R.id.max_corruption).addTextChangedListener(playerSavingTextWatcher)
+        view.getView<EditText>(R.id.strength).addTextChangedListener(playerSavingTextWatcher)
+        view.getView<EditText>(R.id.strength_fortune).addTextChangedListener(playerSavingTextWatcher)
+        view.getView<EditText>(R.id.toughness).addTextChangedListener(playerSavingTextWatcher)
+        view.getView<EditText>(R.id.toughness_fortune).addTextChangedListener(playerSavingTextWatcher)
+        view.getView<EditText>(R.id.agility).addTextChangedListener(playerSavingTextWatcher)
+        view.getView<EditText>(R.id.agility_fortune).addTextChangedListener(playerSavingTextWatcher)
+        view.getView<EditText>(R.id.intelligence).addTextChangedListener(playerSavingTextWatcher)
+        view.getView<EditText>(R.id.intelligence_fortune).addTextChangedListener(playerSavingTextWatcher)
+        view.getView<EditText>(R.id.willpower).addTextChangedListener(playerSavingTextWatcher)
+        view.getView<EditText>(R.id.willpower_fortune).addTextChangedListener(playerSavingTextWatcher)
+        view.getView<EditText>(R.id.fellowship).addTextChangedListener(playerSavingTextWatcher)
+        view.getView<EditText>(R.id.fellowship_fortune).addTextChangedListener(playerSavingTextWatcher)
+        view.getView<EditText>(R.id.max_conservative).addTextChangedListener(playerSavingTextWatcher)
+        view.getView<EditText>(R.id.max_reckless).addTextChangedListener(playerSavingTextWatcher)
+        view.getView<EditText>(R.id.description).addTextChangedListener(playerSavingTextWatcher)
     }
 
     @Suppress("UNUSED_PARAMETER")
-    @OnTextChanged(R.id.career,
-            R.id.rank,
-            R.id.experience,
-            R.id.max_experience,
-            R.id.max_wounds,
-            R.id.max_corruption,
-            R.id.strength,
-            R.id.strength_fortune,
-            R.id.toughness,
-            R.id.toughness_fortune,
-            R.id.agility,
-            R.id.agility_fortune,
-            R.id.intelligence,
-            R.id.intelligence_fortune,
-            R.id.willpower,
-            R.id.willpower_fortune,
-            R.id.fellowship,
-            R.id.fellowship_fortune,
-            R.id.max_conservative,
-            R.id.max_reckless,
-            R.id.description,
-            callback = OnTextChanged.Callback.AFTER_TEXT_CHANGED)
     fun save(editable: Editable) {
         doAsync {
             val partialPlayer = views.extractPlayerFromViews()
@@ -102,6 +96,13 @@ class PlayerCharacteristicsFragment : Fragment() {
             )
         }
     }
+
+    private val playerSavingTextWatcher: TextWatcher
+        get() = object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+            override fun afterTextChanged(s: Editable) = save(s)
+        }
 
     companion object {
         fun newInstance(playerName: String): PlayerCharacteristicsFragment {

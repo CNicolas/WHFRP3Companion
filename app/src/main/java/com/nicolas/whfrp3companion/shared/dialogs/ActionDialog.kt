@@ -5,35 +5,25 @@ import android.app.AlertDialog
 import android.app.Dialog
 import android.os.Bundle
 import android.support.v4.app.DialogFragment
+import android.view.View
 import android.widget.ImageView
 import android.widget.ListView
 import android.widget.TextView
-import butterknife.BindView
-import butterknife.ButterKnife
-import butterknife.Unbinder
 import com.nicolas.models.action.Action
 import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.shared.ACTION_INTENT_ARGUMENT
 import com.nicolas.whfrp3companion.shared.adapters.ActionEffectsAdapter
 import com.nicolas.whfrp3companion.shared.enums.drawableId
+import com.nicolas.whfrp3companion.shared.getView
 
 class ActionDialog : DialogFragment() {
-    @BindView(R.id.actionTypeImageView)
     lateinit var actionTypeImageView: ImageView
-    @BindView(R.id.actionNameTextView)
     lateinit var actionNameTextView: TextView
-    @BindView(R.id.actionCooldownTextView)
     lateinit var actionCooldownTextView: TextView
-    @BindView(R.id.actionTraitsTextView)
     lateinit var actionTraitsTextView: TextView
-    @BindView(R.id.actionSkillsTextView)
     lateinit var actionSkillsTextView: TextView
-    @BindView(R.id.actionConditionsTextView)
     lateinit var actionConditionsTextView: TextView
-    @BindView(R.id.actionEffectsListView)
     lateinit var actionEffectsListView: ListView
-
-    private lateinit var unbinder: Unbinder
 
     private lateinit var action: Action
 
@@ -49,16 +39,10 @@ class ActionDialog : DialogFragment() {
         builder.setPositiveButton(android.R.string.ok) { _, _ -> dismiss() }
 
         val dialog = builder.create()
-        unbinder = ButterKnife.bind(this, view)
-
+        bindViews(view)
         setupViews()
 
         return dialog
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        unbinder.unbind()
     }
 
     private fun setupViews(conservative: Boolean = true) {
@@ -80,6 +64,16 @@ class ActionDialog : DialogFragment() {
             }
         }
 
+    }
+
+    private fun bindViews(view: View) {
+        actionTypeImageView = view.getView(R.id.actionTypeImageView)
+        actionNameTextView = view.getView(R.id.actionNameTextView)
+        actionCooldownTextView = view.getView(R.id.actionCooldownTextView)
+        actionTraitsTextView = view.getView(R.id.actionTraitsTextView)
+        actionSkillsTextView = view.getView(R.id.actionSkillsTextView)
+        actionConditionsTextView = view.getView(R.id.actionConditionsTextView)
+        actionEffectsListView = view.getView(R.id.actionEffectsListView)
     }
 
     companion object {

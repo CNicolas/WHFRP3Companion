@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.TextView
-import butterknife.ButterKnife
 import com.nicolas.models.talent.TalentType
 import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.shared.bind
@@ -40,10 +39,6 @@ class TalentTypesAdapter(context: Context) : BaseAdapter() {
 
     internal class ViewHolder(view: View) {
         private val talentTypeTextView by view.bind<TextView>(R.id.talent_type)
-
-        init {
-            ButterKnife.bind(this, view)
-        }
 
         fun setupViews(talentType: TalentType) {
             talentTypeTextView.setText(talentType.labelId)

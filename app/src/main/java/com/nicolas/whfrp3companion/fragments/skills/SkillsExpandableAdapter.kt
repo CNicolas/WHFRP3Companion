@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import butterknife.ButterKnife
 import com.nicolas.models.skill.Skill
 import com.nicolas.models.skill.SkillType.ADVANCED
 import com.nicolas.models.skill.SkillType.BASIC
@@ -95,10 +94,6 @@ class SkillsExpandableAdapter(private val context: Context,
 
         lateinit var skill: Skill
         lateinit var specialization: Specialization
-
-        init {
-            ButterKnife.bind(this, view)
-        }
     }
 
     internal class GroupViewHolder(view: View) {
@@ -106,9 +101,5 @@ class SkillsExpandableAdapter(private val context: Context,
         val characteristicView by view.bind<TextView>(R.id.characteristic)
 
         lateinit var skill: Skill
-
-        init {
-            ButterKnife.bind(this, view)
-        }
     }
 }
