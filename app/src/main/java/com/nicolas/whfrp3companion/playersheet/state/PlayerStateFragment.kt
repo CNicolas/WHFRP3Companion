@@ -9,9 +9,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.NumberPicker
-import butterknife.ButterKnife
-import butterknife.OnClick
-import butterknife.Unbinder
 import com.nicolas.database.PlayerRepository
 import com.nicolas.models.extensions.*
 import com.nicolas.models.player.Player
@@ -27,8 +24,6 @@ import org.koin.android.ext.android.inject
 import kotlin.math.abs
 
 class PlayerStateFragment : Fragment() {
-    private lateinit var unbinder: Unbinder
-
     private val playerRepository by inject<PlayerRepository>()
 
     private lateinit var playerName: String
@@ -39,8 +34,6 @@ class PlayerStateFragment : Fragment() {
                               savedInstanceState: Bundle?): View? {
         val resultingView: View = inflater.inflate(R.layout.fragment_player_state, container, false)
 
-        unbinder = ButterKnife.bind(this, resultingView)
-
         playerName = arguments!!.getString(PLAYER_NAME_INTENT_ARGUMENT)
 
         return resultingView
@@ -48,13 +41,9 @@ class PlayerStateFragment : Fragment() {
 
     override fun onResume() {
         setupViews()
+        setupViewsEvents()
 
         super.onResume()
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        unbinder.unbind()
     }
 
     private fun setupViews() {
@@ -85,8 +74,22 @@ class PlayerStateFragment : Fragment() {
         }
     }
 
-    @OnClick(R.id.removeWoundButton)
-    fun removeWound() {
+    private fun setupViewsEvents() {
+        removeWoundButton.setOnClickListener { removeWound() }
+        addWoundButton.setOnClickListener { addWound() }
+
+        removeStressButton.setOnClickListener { removeStress() }
+        addStressButton.setOnClickListener { addStress() }
+
+        removeExhaustionButton.setOnClickListener { removeExhaustion() }
+        addExhaustionButton.setOnClickListener { addExhaustion() }
+
+        openEffects.setOnClickListener { startEffectsActivity() }
+
+        changeMoney.setOnClickListener { changeMoney() }
+    }
+
+    private fun removeWound() {
         player.heal(1)
         removeWoundButton.isEnabled = player.wounds > 0
 
@@ -95,8 +98,7 @@ class PlayerStateFragment : Fragment() {
         updatePlayerAsync()
     }
 
-    @OnClick(R.id.addWoundButton)
-    fun addWound() {
+    private fun addWound() {
         player.loseHealth(1)
         removeWoundButton.isEnabled = true
 
@@ -105,8 +107,7 @@ class PlayerStateFragment : Fragment() {
         updatePlayerAsync()
     }
 
-    @OnClick(R.id.removeStressButton)
-    fun removeStress() {
+    private fun removeStress() {
         player.removeStress(1)
         removeStressButton.isEnabled = player.stress > 0
 
@@ -115,8 +116,7 @@ class PlayerStateFragment : Fragment() {
         updatePlayerAsync()
     }
 
-    @OnClick(R.id.addStressButton)
-    fun addStress() {
+    private fun addStress() {
         player.addStress(1)
         removeStressButton.isEnabled = true
 
@@ -125,8 +125,7 @@ class PlayerStateFragment : Fragment() {
         updatePlayerAsync()
     }
 
-    @OnClick(R.id.removeExhaustionButton)
-    fun removeExhaustion() {
+    private fun removeExhaustion() {
         player.removeExhaustion(1)
         removeExhaustionButton.isEnabled = player.exhaustion > 0
 
@@ -135,8 +134,7 @@ class PlayerStateFragment : Fragment() {
         updatePlayerAsync()
     }
 
-    @OnClick(R.id.addExhaustionButton)
-    fun addExhaustion() {
+    private fun addExhaustion() {
         player.addExhaustion(1)
         removeExhaustionButton.isEnabled = true
 
@@ -145,8 +143,7 @@ class PlayerStateFragment : Fragment() {
         updatePlayerAsync()
     }
 
-    @OnClick(R.id.openEffects)
-    fun openEffects() {
+    private fun startEffectsActivity() {
         activity?.let {
             startActivity(it.intentFor<PlayerEffectsActivity>(
                     PLAYER_NAME_INTENT_ARGUMENT to player.name
@@ -154,8 +151,7 @@ class PlayerStateFragment : Fragment() {
         }
     }
 
-    @OnClick(R.id.changeMoney)
-    fun changeMoney() {
+    private fun changeMoney() {
         val builder = AlertDialog.Builder(activity)
         val inflater = activity!!.layoutInflater
         val view = inflater.inflate(R.layout.dialog_money, null, false)
@@ -167,19 +163,19 @@ class PlayerStateFragment : Fragment() {
         builder.setView(view)
         builder.setTitle(R.string.change_money)
 
-        builder.setNegativeButton(R.string.remove, { dialog, _ ->
+        builder.setNegativeButton(R.string.remove) { dialog, _ ->
             try {
                 player.removeMoney(goldPicker.value, silverPicker.value, brassPicker.value)
                 dialog.dismiss()
             } catch (exception: IllegalArgumentException) {
                 context?.toast(R.string.not_enough_money)
             }
-        })
+        }
 
-        builder.setPositiveButton(R.string.add, { dialog, _ ->
+        builder.setPositiveButton(R.string.add) { dialog, _ ->
             player.addMoney(goldPicker.value, silverPicker.value, brassPicker.value)
             dialog.dismiss()
-        })
+        }
 
         builder.setOnDismissListener {
             updatePlayerAsync()

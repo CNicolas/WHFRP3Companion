@@ -6,8 +6,6 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import butterknife.ButterKnife
-import butterknife.Unbinder
 import com.nicolas.database.PlayerRepository
 import com.nicolas.models.player.Player
 import com.nicolas.whfrp3companion.R
@@ -19,8 +17,6 @@ import org.jetbrains.anko.uiThread
 import org.koin.android.ext.android.inject
 
 class PlayerActionsFragment : Fragment(), ActionListener {
-    private lateinit var unbinder: Unbinder
-
     private val playerRepository by inject<PlayerRepository>()
 
     private lateinit var player: Player
@@ -29,8 +25,6 @@ class PlayerActionsFragment : Fragment(), ActionListener {
                               container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         val resultingView: View = inflater.inflate(R.layout.fragment_player_actions, container, false)
-
-        unbinder = ButterKnife.bind(this, resultingView)
 
         val playerName = arguments!!.getString(PLAYER_NAME_INTENT_ARGUMENT)
         player = playerRepository.find(playerName)!!
@@ -44,11 +38,6 @@ class PlayerActionsFragment : Fragment(), ActionListener {
         super.onResume()
 
         setPlayerActionsAdapter()
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        unbinder.unbind()
     }
 
     private fun setPlayerActionsAdapter() {

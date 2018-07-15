@@ -5,12 +5,10 @@ import android.app.AlertDialog
 import android.app.Dialog
 import android.os.Bundle
 import android.support.v4.app.DialogFragment
+import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.EditText
 import android.widget.Spinner
-import butterknife.BindView
-import butterknife.ButterKnife
-import butterknife.Unbinder
 import com.nicolas.models.talent.TalentCooldown
 import com.nicolas.models.talent.TalentSearch
 import com.nicolas.models.talent.TalentType
@@ -19,17 +17,13 @@ import com.nicolas.whfrp3companion.shared.PLAYER_NAME_INTENT_ARGUMENT
 import com.nicolas.whfrp3companion.shared.TALENTS_SEARCH_INTENT_ARGUMENT
 import com.nicolas.whfrp3companion.shared.activities.TalentsActivity
 import com.nicolas.whfrp3companion.shared.enums.labelId
+import com.nicolas.whfrp3companion.shared.getView
 import org.jetbrains.anko.intentFor
 
 class TalentSearchDialog : DialogFragment() {
-    @BindView(R.id.talentTypeSpinner)
     lateinit var talentTypeSpinner: Spinner
-    @BindView(R.id.cooldownSpinner)
     lateinit var cooldownSpinner: Spinner
-    @BindView(R.id.searchEditText)
     lateinit var searchEditText: EditText
-
-    private lateinit var unbinder: Unbinder
 
     private var talentSearch: TalentSearch? = null
 
@@ -44,23 +38,18 @@ class TalentSearchDialog : DialogFragment() {
 
         builder.setView(view)
         builder.setTitle(R.string.search)
-        builder.setPositiveButton(R.string.search, { _, _ ->
-            activity?.let {
-                startActivity(it.intentFor<TalentsActivity>(
-                        TALENTS_SEARCH_INTENT_ARGUMENT to getTalentSearchFromViews(),
-                        PLAYER_NAME_INTENT_ARGUMENT to playerName
-                ))
-                dismiss()
-
-                if (it is TalentsActivity) {
-                    it.finish()
-                }
-            }
-        })
+        builder.setPositiveButton(R.string.search) { _, _ ->
+            launchTalentsActivity(playerName)
+        }
 
         val dialog = builder.create()
-        unbinder = ButterKnife.bind(this, view)
+        bindViews(view)
+        setupViews()
 
+        return dialog
+    }
+
+    private fun setupViews() {
         val talentTypes = listOf(getString(R.string.all)) + TalentType.values().map { getString(it.labelId) }
         val talentCooldowns = listOf(getString(R.string.all)) + TalentCooldown.values().map { getString(it.labelId) }
 
@@ -76,8 +65,26 @@ class TalentSearchDialog : DialogFragment() {
             cooldownSpinner.setSelection(talentCooldownPosition + 1)
         }
         searchEditText.setText(talentSearch?.text)
+    }
 
-        return dialog
+    private fun bindViews(view: View) {
+        talentTypeSpinner = view.getView(R.id.talentTypeSpinner)
+        cooldownSpinner = view.getView(R.id.cooldownSpinner)
+        searchEditText = view.getView(R.id.searchEditText)
+    }
+
+    private fun launchTalentsActivity(playerName: String?) {
+        activity?.let {
+            startActivity(it.intentFor<TalentsActivity>(
+                    TALENTS_SEARCH_INTENT_ARGUMENT to getTalentSearchFromViews(),
+                    PLAYER_NAME_INTENT_ARGUMENT to playerName
+            ))
+            dismiss()
+
+            if (it is TalentsActivity) {
+                it.finish()
+            }
+        }
     }
 
     private fun getTalentSearchFromViews(): TalentSearch {

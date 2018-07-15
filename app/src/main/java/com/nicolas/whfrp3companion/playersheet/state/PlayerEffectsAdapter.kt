@@ -7,12 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.CheckBox
+import android.widget.ImageButton
 import android.widget.TextView
-import butterknife.ButterKnife
-import butterknife.OnClick
 import com.nicolas.models.effect.Effect
 import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.shared.bind
+import com.nicolas.whfrp3companion.shared.getView
 import com.nicolas.whfrp3companion.shared.viewModifications.parseTemplatedText
 import org.jetbrains.anko.design.indefiniteSnackbar
 
@@ -57,7 +57,7 @@ class PlayerEffectsAdapter(context: Context,
         private lateinit var effect: Effect
 
         init {
-            ButterKnife.bind(this, view)
+            setupViewsEvents(view)
         }
 
         fun setupViews(effect: Effect, addedEffects: List<Effect>) {
@@ -67,8 +67,15 @@ class PlayerEffectsAdapter(context: Context,
             effectNameCheckBox.isChecked = addedEffects.contains(effect)
         }
 
-        @OnClick(R.id.effectDescriptionImageButton)
-        fun showEffectDescription() {
+        private fun setupViewsEvents(view: View) {
+            view.getView<ImageButton>(R.id.effectDescriptionImageButton)
+                    .setOnClickListener { showEffectDescription() }
+
+            view.getView<CheckBox>(R.id.effectNameCheckBox)
+                    .setOnClickListener { onToggleEffect(it as CheckBox) }
+        }
+
+        private fun showEffectDescription() {
             val styledText = parseTemplatedText(view.context, "${effect.name}:\n${effect.description}")
 
             val snackbar = indefiniteSnackbar(view, "")
@@ -79,8 +86,7 @@ class PlayerEffectsAdapter(context: Context,
             snackbarTextView.maxLines = 10
         }
 
-        @OnClick(R.id.effectNameCheckBox)
-        fun onToggleEffect(view: CheckBox) {
+        private fun onToggleEffect(view: CheckBox) {
             if (view.isChecked) {
                 effectListener.onAddEffect(effect)
                 addEffect(effect)

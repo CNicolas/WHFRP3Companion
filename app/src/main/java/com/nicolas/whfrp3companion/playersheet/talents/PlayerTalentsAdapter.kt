@@ -11,8 +11,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.TextView
-import butterknife.ButterKnife
-import butterknife.OnClick
 import com.nicolas.models.talent.Talent
 import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.shared.bind
@@ -58,7 +56,7 @@ class PlayerTalentsAdapter(context: Context,
         private lateinit var addedTalents: List<Talent>
 
         init {
-            ButterKnife.bind(this, view)
+            setupViewsEvents()
 
             when (talentEditionMode) {
                 ADDABLE -> {
@@ -101,8 +99,15 @@ class PlayerTalentsAdapter(context: Context,
             }
         }
 
-        @OnClick(R.id.addTalentButton)
-        fun onAddTalent() {
+        private fun setupViewsEvents() {
+            addTalentButton.setOnClickListener { onAddTalent() }
+
+            toggleTalentEquipmentButton.setOnClickListener { talentListener.onToggleTalentEquipment(talent) }
+
+            removeTalentButton.setOnClickListener { talentListener.onRemoveTalent(talent) }
+        }
+
+        private fun onAddTalent() {
             talentListener.onAddTalent(talent)
             addTalent(talent)
             this.addTalentButton.visibility = View.GONE
@@ -111,16 +116,6 @@ class PlayerTalentsAdapter(context: Context,
                 val snackbarText = activity.getString(R.string.talent_added_format).format(talent.name)
                 snackbar(view, snackbarText).show()
             }
-        }
-
-        @OnClick(R.id.toggleTalentEquipmentButton)
-        fun onToggleTalentEquipment() {
-            talentListener.onToggleTalentEquipment(talent)
-        }
-
-        @OnClick(R.id.removeTalentButton)
-        fun onRemoveTalent() {
-            talentListener.onRemoveTalent(talent)
         }
     }
 }

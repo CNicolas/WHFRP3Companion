@@ -1,17 +1,15 @@
 package com.nicolas.whfrp3companion.fragments.players
 
+import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.os.Bundle
+import android.support.design.widget.FloatingActionButton
 import android.support.v4.app.Fragment
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.EditText
-import android.widget.PopupMenu
-import android.widget.Spinner
-import butterknife.*
+import android.widget.*
 import com.nicolas.database.PlayerRepository
 import com.nicolas.models.player.Player
 import com.nicolas.models.player.enums.Race
@@ -19,6 +17,7 @@ import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.playersheet.PlayerSheetActivity
 import com.nicolas.whfrp3companion.shared.PLAYER_NAME_INTENT_ARGUMENT
 import com.nicolas.whfrp3companion.shared.enums.labelId
+import com.nicolas.whfrp3companion.shared.getView
 import kotlinx.android.synthetic.main.fragment_players.*
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.intentFor
@@ -27,8 +26,6 @@ import org.jetbrains.anko.uiThread
 import org.koin.android.ext.android.inject
 
 class PlayersFragment : Fragment() {
-    private lateinit var unbinder: Unbinder
-
     private val playerRepository by inject<PlayerRepository>()
 
     private lateinit var players: List<Player>
@@ -39,20 +36,28 @@ class PlayersFragment : Fragment() {
         super.onCreateView(inflater, container, savedInstanceState)
         val resultingView: View = inflater.inflate(R.layout.fragment_players, container, false)
 
-        unbinder = ButterKnife.bind(this, resultingView)
-
+        setupViewEvents(resultingView)
         updatePlayers()
 
         return resultingView
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        unbinder.unbind()
+
+    private fun setupViewEvents(view: View) {
+        val playersList = view.getView<ListView>(R.id.playersList)
+
+        playersList.setOnItemClickListener { _, _, position, _ ->
+            onPlayerClick(position)
+        }
+        playersList.setOnItemLongClickListener { _, clickedView, position, _ ->
+            onPlayerLongClick(clickedView, position)
+        }
+
+        view.getView<FloatingActionButton>(R.id.fab_new_player)
+                .setOnClickListener { createNewPlayer() }
     }
 
-    @OnItemClick(R.id.playersList)
-    fun onPlayerClick(position: Int) {
+    private fun onPlayerClick(position: Int) {
         activity?.let {
             startActivity(it.intentFor<PlayerSheetActivity>(
                     PLAYER_NAME_INTENT_ARGUMENT to players[position].name
@@ -60,8 +65,7 @@ class PlayersFragment : Fragment() {
         }
     }
 
-    @OnItemLongClick(R.id.playersList)
-    fun onPlayerLongClick(view: View, position: Int): Boolean {
+    private fun onPlayerLongClick(view: View, position: Int): Boolean {
         val player = players[position]
         val playerPopupMenu = PopupMenu(activity!!, view, Gravity.END)
         playerPopupMenu.menuInflater.inflate(R.menu.list_element_player, playerPopupMenu.menu)
@@ -79,20 +83,20 @@ class PlayersFragment : Fragment() {
         return true
     }
 
-    @OnClick(R.id.fab_new_player)
-    fun createNewPlayer() {
+    @SuppressLint("InflateParams")
+    private fun createNewPlayer() {
         val builder = AlertDialog.Builder(activity)
         val inflater = activity!!.layoutInflater
-        val view = inflater.inflate(R.layout.dialog_create_player, null, false)
+        val dialogView = inflater.inflate(R.layout.dialog_create_player, null, false)
 
-        val playerNameView: EditText = view.findViewById(R.id.player_name) as EditText
-        val raceView: Spinner = view.findViewById(R.id.race) as Spinner
-        raceView.adapter = ArrayAdapter(view.context!!, R.layout.element_enum_spinner, Race.values().map { view.context.getString(it.labelId) })
+        val playerNameView: EditText = dialogView.findViewById(R.id.player_name) as EditText
+        val raceView: Spinner = dialogView.findViewById(R.id.race) as Spinner
+        raceView.adapter = ArrayAdapter(dialogView.context!!, R.layout.element_enum_spinner, Race.values().map { dialogView.context.getString(it.labelId) })
 
-        builder.setView(view)
+        builder.setView(dialogView)
         builder.setTitle(R.string.create_player)
-        builder.setNegativeButton(android.R.string.cancel, { dialog, _ -> dialog.dismiss() })
-        builder.setPositiveButton(android.R.string.ok, { dialog, _ ->
+        builder.setNegativeButton(android.R.string.cancel) { dialog, _ -> dialog.dismiss() }
+        builder.setPositiveButton(android.R.string.ok) { dialog, _ ->
             if (playerNameView.text.trim() != "") {
                 playerRepository.add(Player(name = playerNameView.text.toString(), race = Race[raceView.selectedItemPosition]))
                 updatePlayers()
@@ -100,7 +104,7 @@ class PlayersFragment : Fragment() {
             } else {
                 context?.toast("No name entered")
             }
-        })
+        }
 
         builder.create().show()
     }

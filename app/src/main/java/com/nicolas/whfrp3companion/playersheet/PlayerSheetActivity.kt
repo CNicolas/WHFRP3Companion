@@ -11,7 +11,6 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.view.MenuItem
 import android.view.inputmethod.InputMethodManager
-import butterknife.ButterKnife
 import com.nicolas.database.PlayerRepository
 import com.nicolas.models.player.Player
 import com.nicolas.whfrp3companion.R
@@ -41,8 +40,6 @@ class PlayerSheetActivity : AppCompatActivity() {
 
         player = playerRepository.find(intent.extras.getString(PLAYER_NAME_INTENT_ARGUMENT))!!
         title = "${player.name} - ${getString(player.race.labelId)}"
-
-        ButterKnife.bind(this)
 
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)

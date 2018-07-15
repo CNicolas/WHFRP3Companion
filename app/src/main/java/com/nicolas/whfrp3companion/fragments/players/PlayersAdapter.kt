@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.TextView
-import butterknife.ButterKnife
 import com.nicolas.models.player.Player
 import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.shared.bind
@@ -42,9 +41,5 @@ class PlayersAdapter(context: Context, private val players: List<Player>) : Base
     internal class ViewHolder(view: View) {
         val nameView by view.bind<TextView>(R.id.player_name)
         val raceView by view.bind<TextView>(R.id.race)
-
-        init {
-            ButterKnife.bind(this, view)
-        }
     }
 }

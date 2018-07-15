@@ -7,8 +7,6 @@ import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
-import butterknife.ButterKnife
-import butterknife.Unbinder
 import com.nicolas.whfrp3companion.fragments.EmptyFragment
 import com.nicolas.whfrp3companion.fragments.actions.ActionsFragment
 import com.nicolas.whfrp3companion.fragments.players.PlayersFragment
@@ -20,15 +18,11 @@ import kotlinx.android.synthetic.main.toolbar.*
 import org.jetbrains.anko.intentFor
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var unbinder: Unbinder
-
     private lateinit var toggle: ActionBarDrawerToggle
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        unbinder = ButterKnife.bind(this)
 
         setSupportActionBar(toolbar)
 
@@ -45,11 +39,6 @@ class MainActivity : AppCompatActivity() {
         super.onPostCreate(savedInstanceState)
         // Sync the toggle state after onRestoreInstanceState has occurred.
         toggle.syncState()
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        unbinder.unbind()
     }
 
     override fun onConfigurationChanged(newConfig: Configuration) {

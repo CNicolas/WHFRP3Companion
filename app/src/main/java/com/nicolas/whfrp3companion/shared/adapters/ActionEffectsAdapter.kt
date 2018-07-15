@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.ImageView
 import android.widget.TextView
-import butterknife.ButterKnife
 import com.nicolas.models.action.effect.*
 import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.shared.bind
@@ -49,10 +48,6 @@ class ActionEffectsAdapter(context: Context, private val effects: ActionEffects)
         private val face2ImageView by view.bind<ImageView>(R.id.effectFace2ImageView)
         private val face3ImageView by view.bind<ImageView>(R.id.effectFace3ImageView)
         private val face4ImageView by view.bind<ImageView>(R.id.effectFace4ImageView)
-
-        init {
-            ButterKnife.bind(this, view)
-        }
 
         fun setupViews(effect: ActionEffect?) {
             this.effect = effect

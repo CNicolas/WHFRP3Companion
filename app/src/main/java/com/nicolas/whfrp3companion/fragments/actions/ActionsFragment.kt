@@ -6,8 +6,6 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import butterknife.ButterKnife
-import butterknife.Unbinder
 import com.nicolas.database.loadActions
 import com.nicolas.models.action.Action
 import com.nicolas.whfrp3companion.R
@@ -16,14 +14,10 @@ import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 
 class ActionsFragment : Fragment() {
-    private lateinit var unbinder: Unbinder
-
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         val resultingView: View = inflater.inflate(R.layout.fragment_player_actions, container, false)
-
-        unbinder = ButterKnife.bind(this, resultingView)
 
         setActionsAdapter()
 
@@ -34,11 +28,6 @@ class ActionsFragment : Fragment() {
         super.onResume()
 
         setActionsAdapter()
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        unbinder.unbind()
     }
 
     private fun setActionsAdapter() {
