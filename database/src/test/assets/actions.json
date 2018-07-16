@@ -1,7 +1,7 @@
 [
   {
     "name": "Backstab",
-    "type": "ATTACK",
+    "type": "MELEE_ATTACK",
     "traits": [ "TEAMWORK" ],
     "skill": "Furtivité",
     "targetSkill": "Observation",
@@ -15,7 +15,48 @@
       },
       { "range": "ENGAGED", "target": "TARGET" }
     ],
+    "conservativeSide": {
+      "stance": "CONSERVATIVE",
+      "cooldown": 4,
+      "difficulty": [
+        "MISFORTUNE",
+        "MISFORTUNE",
+        "MISFORTUNE"
+      ],
+      "special": {
+        "difficultyReducer": {
+          "range": "ENGAGED",
+          "target": "TARGET",
+          "player": false,
+          "ally": "COUNT",
+          "dice": "MISFORTUNE"
+        },
+        "text": "Réduisez la difficulté de {MISFORTUNE_DICE} pour chaque allié engagé avec la cible."
+      },
+      "effects": {
+        "SUCCESS": {
+          "1": {
+            "damage": 1
+          },
+          "2": {
+            "damage": 1,
+            "ignoreSoak": true
+          }
+        },
+        "BOON": {
+          "2": {
+            "damage": 2
+          }
+        },
+        "BANE": {
+          "2": {
+            "cooldown": 2
+          }
+        }
+      }
+    },
     "recklessSide": {
+      "stance": "RECKLESS",
       "cooldown": 4,
       "difficulty": [ "MISFORTUNE", "MISFORTUNE", "MISFORTUNE" ],
       "special": {
@@ -44,7 +85,7 @@
   },
   {
     "name": "Attaque de Corps-à-corps",
-    "type": "ATTACK",
+    "type": "MELEE_ATTACK",
     "traits": [ "BASIC" ],
     "skill": "Capacité de Combat",
     "targetDefense": true,
@@ -58,6 +99,7 @@
       { "range": "ENGAGED", "target": "TARGET" }
     ],
     "conservativeSide": {
+      "stance": "CONSERVATIVE",
       "cooldown": 0,
       "difficulty": [ ],
       "effects": {
@@ -74,6 +116,7 @@
       }
     },
     "recklessSide": {
+      "stance": "RECKLESS",
       "cooldown": 0,
       "difficulty": [ ],
       "effects": {
@@ -92,7 +135,7 @@
   },
   {
     "name": "Tir",
-    "type": "ATTACK",
+    "type": "RANGE_ATTACK",
     "traits": [ "BASIC" ],
     "skill": "Capacité de Tir",
     "targetDefense": true,
@@ -106,6 +149,7 @@
       { "range": "ENGAGED", "target": "NONE" }
     ],
     "conservativeSide": {
+      "stance": "CONSERVATIVE",
       "cooldown": 0,
       "difficulty": [ ],
       "effects": {
@@ -122,6 +166,7 @@
       }
     },
     "recklessSide": {
+      "stance": "RECKLESS",
       "cooldown": 0,
       "difficulty": [ ],
       "effects": {
@@ -140,7 +185,7 @@
   },
   {
     "name": "Position Défensive",
-    "type": "DEFENSE",
+    "type": "SUPPORT",
     "traits": [ "BASIC", "DEFENSE" ],
     "skill": "Discipline",
     "conditions": [
@@ -154,6 +199,7 @@
       { "encumbrance": false }
     ],
     "conservativeSide": {
+      "stance": "CONSERVATIVE",
       "cooldown": 0,
       "difficulty": [ ],
       "effects": {
@@ -188,6 +234,7 @@
       }
     },
     "recklessSide": {
+      "stance": "RECKLESS",
       "cooldown": 0,
       "difficulty": [ ],
       "effects": {
@@ -223,12 +270,13 @@
     }
   },
   {
-    "name": "Évaluitation de la situation",
-    "type": "DEFENSE",
+    "name": "Évaluation de la situation",
+    "type": "SUPPORT",
     "traits": [ "BASIC", "DEFENSE" ],
     "skill": "Intuition",
     "conditions": [ ],
     "conservativeSide": {
+      "stance": "CONSERVATIVE",
       "cooldown": 0,
       "difficulty": [ ],
       "special": {
@@ -260,6 +308,7 @@
       }
     },
     "recklessSide": {
+      "stance": "RECKLESS",
       "cooldown": 0,
       "difficulty": [ ],
       "special": {
@@ -293,7 +342,7 @@
   },
   {
     "name": "Coup du Casseur de Trolls",
-    "type": "ATTACK",
+    "type": "MELEE_ATTACK",
     "traits": [ "KILLER" ],
     "skill": "Capacité de Combat",
     "targetDefense": true,
@@ -308,6 +357,7 @@
       { "range": "ENGAGED", "target": "TARGET" }
     ],
     "conservativeSide": {
+      "stance": "CONSERVATIVE",
       "cooldown": 2,
       "difficulty": [ "MISFORTUNE" ],
       "special": {
@@ -343,6 +393,7 @@
       }
     },
     "recklessSide": {
+      "stance": "RECKLESS",
       "cooldown": 2,
       "difficulty": [ ],
       "special": {

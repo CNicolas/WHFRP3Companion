@@ -16,6 +16,7 @@
       { "range": "ENGAGED", "target": "TARGET" }
     ],
     "conservativeSide": {
+      "stance": "CONSERVATIVE",
       "cooldown": 4,
       "difficulty": [
         "MISFORTUNE",
@@ -55,6 +56,7 @@
       }
     },
     "recklessSide": {
+      "stance": "RECKLESS",
       "cooldown": 4,
       "difficulty": [ "MISFORTUNE", "MISFORTUNE", "MISFORTUNE" ],
       "special": {
@@ -97,6 +99,7 @@
       { "range": "ENGAGED", "target": "TARGET" }
     ],
     "conservativeSide": {
+      "stance": "CONSERVATIVE",
       "cooldown": 0,
       "difficulty": [ ],
       "effects": {
@@ -113,6 +116,7 @@
       }
     },
     "recklessSide": {
+      "stance": "RECKLESS",
       "cooldown": 0,
       "difficulty": [ ],
       "effects": {
@@ -145,6 +149,7 @@
       { "range": "ENGAGED", "target": "NONE" }
     ],
     "conservativeSide": {
+      "stance": "CONSERVATIVE",
       "cooldown": 0,
       "difficulty": [ ],
       "effects": {
@@ -161,6 +166,7 @@
       }
     },
     "recklessSide": {
+      "stance": "RECKLESS",
       "cooldown": 0,
       "difficulty": [ ],
       "effects": {
@@ -193,6 +199,7 @@
       { "encumbrance": false }
     ],
     "conservativeSide": {
+      "stance": "CONSERVATIVE",
       "cooldown": 0,
       "difficulty": [ ],
       "effects": {
@@ -227,6 +234,7 @@
       }
     },
     "recklessSide": {
+      "stance": "RECKLESS",
       "cooldown": 0,
       "difficulty": [ ],
       "effects": {
@@ -268,6 +276,7 @@
     "skill": "Intuition",
     "conditions": [ ],
     "conservativeSide": {
+      "stance": "CONSERVATIVE",
       "cooldown": 0,
       "difficulty": [ ],
       "special": {
@@ -299,6 +308,7 @@
       }
     },
     "recklessSide": {
+      "stance": "RECKLESS",
       "cooldown": 0,
       "difficulty": [ ],
       "special": {
@@ -347,6 +357,7 @@
       { "range": "ENGAGED", "target": "TARGET" }
     ],
     "conservativeSide": {
+      "stance": "CONSERVATIVE",
       "cooldown": 2,
       "difficulty": [ "MISFORTUNE" ],
       "special": {
@@ -382,6 +393,7 @@
       }
     },
     "recklessSide": {
+      "stance": "RECKLESS",
       "cooldown": 2,
       "difficulty": [ ],
       "special": {
