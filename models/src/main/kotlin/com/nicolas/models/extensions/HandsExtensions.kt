@@ -14,6 +14,17 @@ fun Player.createHand(characteristic: Characteristic,
                       difficultyLevel: DifficultyLevel = DifficultyLevel.NONE): Hand {
     val hand = this[characteristic].getHand(name, difficultyLevel)
 
+    when {
+        stance < 0 -> {
+            hand.characteristicDicesCount -= Math.abs(stance)
+            hand.conservativeDicesCount += Math.abs(stance)
+        }
+        stance > 0 -> {
+            hand.characteristicDicesCount -= Math.abs(stance)
+            hand.recklessDicesCount += Math.abs(stance)
+        }
+    }
+
     getEffectsApplyingTo(characteristic)
             .forEach { hand.applyEffectDices(it) }
 

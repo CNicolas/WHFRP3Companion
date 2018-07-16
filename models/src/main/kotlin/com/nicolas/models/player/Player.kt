@@ -8,6 +8,8 @@ import com.nicolas.models.item.Item
 import com.nicolas.models.player.enums.Characteristic
 import com.nicolas.models.player.enums.Characteristic.*
 import com.nicolas.models.player.enums.Race
+import com.nicolas.models.player.enums.Stance
+import com.nicolas.models.player.enums.Stance.*
 import com.nicolas.models.skill.Skill
 import com.nicolas.models.talent.Talent
 import java.io.Serializable
@@ -77,6 +79,20 @@ data class Player(override var name: String,
 
     val soak: Int
         get() = getEquippedArmors().sumBy { it.soak } + effects.sumBy { it.soak ?: 0 }
+
+    val dominantStance: Stance
+        get() = when {
+            maxConservative > maxReckless -> CONSERVATIVE
+            maxConservative < maxReckless -> RECKLESS
+            else -> NEUTRAL
+        }
+
+    val currentStance: Stance
+        get() = when {
+            stance < 0 -> CONSERVATIVE
+            stance == 0 -> NEUTRAL
+            else -> RECKLESS
+        }
 
     operator fun get(characteristic: Characteristic): CharacteristicValue = when (characteristic) {
         STRENGTH -> strength

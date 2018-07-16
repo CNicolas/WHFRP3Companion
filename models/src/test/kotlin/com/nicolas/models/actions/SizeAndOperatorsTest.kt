@@ -11,11 +11,13 @@ import com.nicolas.models.action.effect.Target
 import com.nicolas.models.dice.Face.*
 import com.nicolas.models.item.enums.Range
 import com.nicolas.models.item.enums.WeaponCategory
+import com.nicolas.models.player.enums.Stance
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 
 class SizeAndOperatorsTest {
     private val rangeAttackSides: ActionSide = ActionSide(
+            stance = Stance.CONSERVATIVE,
             cooldown = 0,
             difficulty = listOf(),
             effects = hashMapOf(
