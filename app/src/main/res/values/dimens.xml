@@ -19,5 +19,7 @@
     <dimen name="giant_padding">32dp</dimen>
     <dimen name="giant_padding_2">64dp</dimen>
 
+    <dimen name="list_std_margin">16dp</dimen>
+
     <dimen name="dice_picker_height">130dp</dimen>
 </resources>
