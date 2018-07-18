@@ -37,6 +37,7 @@ class PlayerActionsAdapter(context: Context,
 
     class ViewHolder(private val view: View,
                      private val actionListener: ActionListener) : RecyclerView.ViewHolder(view) {
+        private val actionLayout by view.bind<View>(R.id.actionLayout)
         private val actionTypeImageView by view.bind<ImageView>(R.id.actionTypeImageView)
         private val actionNameTextView by view.bind<TextView>(R.id.actionNameTextView)
         private val actionCooldownTextView by view.bind<TextView>(R.id.actionCooldownTextView)
@@ -51,8 +52,8 @@ class PlayerActionsAdapter(context: Context,
             actionNameTextView.text = action.name
             actionCooldownTextView.text = action.conservativeSide.cooldown?.toString() ?: "0"
 
-            actionNameTextView.setOnClickListener { openActionInDialog() }
-            actionMenuImageButton.setOnClickListener { openActionMenu(actionMenuImageButton) }
+            actionLayout.setOnClickListener { actionListener.launchAction(action) }
+            actionMenuImageButton.setOnClickListener { openActionInDialog() }
         }
 
         private fun openActionInDialog() {

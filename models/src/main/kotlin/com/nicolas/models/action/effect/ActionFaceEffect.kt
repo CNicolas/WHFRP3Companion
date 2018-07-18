@@ -74,7 +74,7 @@ data class ActionFaceEffect(val damage: Int? = null,
 
             return when {
                 cooldown == null || cooldown == 0 -> null
-                cooldown < 0 -> "enlevez ${abs(cooldown)} res"
+                cooldown < 0 -> "enlevez ${abs(cooldown)} $res"
                 cooldown > 0 -> "ajoutez $cooldown $res"
                 else -> null
             }

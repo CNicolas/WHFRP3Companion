@@ -3,7 +3,9 @@
                                              xmlns:app="http://schemas.android.com/apk/res-auto"
                                              android:id="@+id/actionLayout"
                                              android:layout_width="match_parent"
-                                             android:layout_height="wrap_content">
+                                             android:layout_height="wrap_content"
+                                             android:clickable="true"
+                                             android:background="?attr/selectableItemBackground">
 
     <ImageView android:id="@+id/actionTypeImageView"
                android:layout_width="50dp"
@@ -18,7 +20,7 @@
 
     <TextView android:id="@+id/actionNameTextView"
               android:layout_width="0dp"
-              android:layout_height="40dp"
+              android:layout_height="56dp"
               android:gravity="center"
               android:textSize="@dimen/medium_text_size"
               android:hint="@string/action_name"
@@ -43,9 +45,9 @@
               app:layout_constraintHorizontal_weight="1" />
 
     <ImageButton android:id="@+id/actionMenuImageButton"
-                 android:layout_width="30dp"
+                 android:layout_width="35dp"
                  android:layout_height="0dp"
-                 android:background="@drawable/transparent_button"
+                 android:background="?attr/selectableItemBackground"
                  android:src="@drawable/ic_options_black_24dp"
                  android:contentDescription="@string/page_actions"
                  app:layout_constraintTop_toTopOf="parent"
