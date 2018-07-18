@@ -10,9 +10,11 @@ import com.nicolas.models.action.condition.ActionCondition
 import com.nicolas.models.action.condition.ActionConditionWeapon
 import com.nicolas.models.action.effect.ActionFaceEffect
 import com.nicolas.models.action.effect.Target
-import com.nicolas.models.dice.Face
+import com.nicolas.models.dice.Face.*
 import com.nicolas.models.item.enums.Range
 import com.nicolas.models.item.enums.WeaponCategory
+import com.nicolas.models.player.enums.Stance.CONSERVATIVE
+import com.nicolas.models.player.enums.Stance.RECKLESS
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Before
 import org.junit.Test
@@ -20,21 +22,30 @@ import org.junit.Test
 class ActionsFileTest {
     private lateinit var allActions: List<Action>
 
-    private val rangeAttackSides: ActionSide = ActionSide(
-            cooldown = 0,
-            difficulty = listOf(),
-            effects = hashMapOf(
-                    Face.SUCCESS to hashMapOf(1 to ActionFaceEffect(0),
-                            3 to ActionFaceEffect(2)),
-                    Face.BOON to hashMapOf(2 to ActionFaceEffect(maneuver = true)),
-                    Face.BANE to hashMapOf(2 to ActionFaceEffect(canEngage = Target.TARGET)))
-    )
     private val rangeAttack: Action =
             Action(
                     name = "Tir",
                     type = ActionType.RANGE_ATTACK,
-                    conservativeSide = rangeAttackSides,
-                    recklessSide = rangeAttackSides,
+                    conservativeSide = ActionSide(
+                            stance = CONSERVATIVE,
+                            cooldown = 0,
+                            difficulty = listOf(),
+                            effects = hashMapOf(
+                                    SUCCESS to hashMapOf(1 to ActionFaceEffect(0),
+                                            3 to ActionFaceEffect(2)),
+                                    BOON to hashMapOf(2 to ActionFaceEffect(maneuver = true)),
+                                    BANE to hashMapOf(2 to ActionFaceEffect(canEngage = Target.TARGET)))
+                    ),
+                    recklessSide = ActionSide(
+                            stance = RECKLESS,
+                            cooldown = 0,
+                            difficulty = listOf(),
+                            effects = hashMapOf(
+                                    SUCCESS to hashMapOf(1 to ActionFaceEffect(0),
+                                            3 to ActionFaceEffect(2)),
+                                    BOON to hashMapOf(2 to ActionFaceEffect(maneuver = true)),
+                                    BANE to hashMapOf(2 to ActionFaceEffect(canEngage = Target.TARGET)))
+                    ),
                     traits = listOf(Trait.BASIC),
                     conditions = listOf(
                             ActionCondition(

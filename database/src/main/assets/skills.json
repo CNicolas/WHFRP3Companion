@@ -17,10 +17,19 @@
     "type": "BASIC",
     "name": "Capacité de Tir",
     "specializations": [
-      { "name": "Arcs" },
-      { "name": "Arbalètes" },
+      {
+        "name": "Arcs",
+        "weaponTypes": [ "BOW" ]
+      },
+      {
+        "name": "Arbalètes",
+        "weaponTypes": [ "CROSSBOW", "ONE_HANDED_CROSSBOW", "REPEATING_CROSSBOW" ]
+      },
       { "name": "Armes de Jet" },
-      { "name": "Armes à Poudre" }
+      {
+        "name": "Armes à Poudre",
+        "weaponTypes": [ "HANDGUN", "RIFLE", "REPEATING_GUN" ]
+      }
     ]
   },
   {
@@ -99,11 +108,56 @@
     "type": "BASIC",
     "name": "Capacité de Combat",
     "specializations": [
-      { "name": "Armes à Une Main" },
-      { "name": "Armes à Deux Mains" },
-      { "name": "Armes d’Hast" },
-      { "name": "Parade (Armes à Une Main)" },
-      { "name": "Parade (Armes à Deux Mains)" }
+      {
+        "name": "Armes à Une Main",
+        "weaponTypes": [
+          "AXE",
+          "DAGGER",
+          "FLAIL",
+          "HAMMER",
+          "MACE",
+          "SWORD",
+          "WHIP"
+        ]
+      },
+      {
+        "name": "Armes à Deux Mains",
+        "weaponTypes": [
+          "TWO_HANDED_AXE",
+          "TWO_HANDED_HAMMER",
+          "TWO_HANDED_MACE",
+          "TWO_HANDED_SWORD",
+          "STICK"
+        ]
+      },
+      {
+        "name": "Armes d’Hast",
+        "weaponTypes": [ "HALBERD", "SPEAR" ]
+      },
+      {
+        "name": "Parade (Armes à Une Main)",
+        "weaponTypes": [
+          "AXE",
+          "DAGGER",
+          "FLAIL",
+          "HAMMER",
+          "MACE",
+          "SWORD",
+          "WHIP"
+        ]
+      },
+      {
+        "name": "Parade (Armes à Deux Mains)",
+        "weaponTypes": [
+          "TWO_HANDED_AXE",
+          "TWO_HANDED_HAMMER",
+          "TWO_HANDED_MACE",
+          "TWO_HANDED_SWORD",
+          "STICK",
+          "HALBERD",
+          "SPEAR"
+        ]
+      }
     ]
   },
   {
