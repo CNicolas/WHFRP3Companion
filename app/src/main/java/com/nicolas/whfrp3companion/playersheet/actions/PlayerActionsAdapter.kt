@@ -3,10 +3,13 @@ package com.nicolas.whfrp3companion.playersheet.actions
 import android.content.Context
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.RecyclerView
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.ImageView
+import android.widget.PopupMenu
 import android.widget.TextView
 import com.nicolas.models.action.Action
 import com.nicolas.whfrp3companion.R
@@ -37,6 +40,7 @@ class PlayerActionsAdapter(context: Context,
         private val actionTypeImageView by view.bind<ImageView>(R.id.actionTypeImageView)
         private val actionNameTextView by view.bind<TextView>(R.id.actionNameTextView)
         private val actionCooldownTextView by view.bind<TextView>(R.id.actionCooldownTextView)
+        private val actionMenuImageButton by view.bind<ImageButton>(R.id.actionMenuImageButton)
 
         private lateinit var action: Action
 
@@ -48,6 +52,7 @@ class PlayerActionsAdapter(context: Context,
             actionCooldownTextView.text = action.conservativeSide.cooldown?.toString() ?: "0"
 
             actionNameTextView.setOnClickListener { openActionInDialog() }
+            actionMenuImageButton.setOnClickListener { openActionMenu(actionMenuImageButton) }
         }
 
         private fun openActionInDialog() {
@@ -57,6 +62,24 @@ class PlayerActionsAdapter(context: Context,
                 val actionDialog = ActionDialog.newInstance(action)
                 actionDialog.show(activity.supportFragmentManager, DIALOG_ACTION_TAG)
             }
+        }
+
+        private fun openActionMenu(view: View): Boolean {
+            val itemPopupMenu = PopupMenu(view.context, view, Gravity.END)
+            itemPopupMenu.menuInflater.inflate(R.menu.action, itemPopupMenu.menu)
+
+            itemPopupMenu.setOnMenuItemClickListener {
+                when (it.itemId) {
+                    R.id.launch_action -> {
+                        actionListener.launchAction(action)
+                    }
+                }
+                true
+            }
+
+            itemPopupMenu.show()
+
+            return true
         }
     }
 }

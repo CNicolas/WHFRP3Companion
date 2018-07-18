@@ -154,4 +154,5 @@
     <string name="action_type">Type d\'action</string>
     <string name="action_conditions">Conditions</string>
     <string name="action_traits">Traits de l\'action</string>
+    <string name="launch_action">Lancer l\'action</string>
 </resources>

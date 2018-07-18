@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/launch_action"
+          android:title="@string/launch_action"
+          android:icon="@drawable/ic_dice_black" />
+</menu>

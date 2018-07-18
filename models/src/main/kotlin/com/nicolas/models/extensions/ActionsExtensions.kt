@@ -11,12 +11,10 @@ import com.nicolas.models.player.enums.Stance
 import com.nicolas.models.player.enums.Stance.*
 import com.nicolas.models.skill.Skill
 
-fun Player.createHandOfAction(action: Action): Hand? {
+fun Player.createHand(action: Action): Hand? {
     return action.skill?.let { skillName ->
         getSkillByName(skillName)?.let { skill ->
             val actionSide = getSideOfAction(action)
-            println(actionSide)
-
             actionSide?.let { side ->
                 val hand = side.difficulty?.let {
                     val tmpHand = createHandWithDifficulty(action, skill, it)
@@ -26,8 +24,6 @@ fun Player.createHandOfAction(action: Action): Hand? {
                     createHand(skill, action.name, DifficultyLevel.EASY)
                 }()
 
-                println(hand)
-
                 hand
             }
         }
@@ -35,9 +31,8 @@ fun Player.createHandOfAction(action: Action): Hand? {
 }
 
 fun Action.getSideByStance(stance: Stance): ActionSide? = when (stance) {
-    CONSERVATIVE -> conservativeSide
+    CONSERVATIVE, NEUTRAL -> conservativeSide
     RECKLESS -> recklessSide
-    NEUTRAL -> null
 }
 
 private fun Player.getSideOfAction(action: Action): ActionSide? {

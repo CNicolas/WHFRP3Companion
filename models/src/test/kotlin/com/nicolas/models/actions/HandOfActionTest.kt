@@ -10,7 +10,7 @@ import com.nicolas.models.action.effect.ActionFaceEffect
 import com.nicolas.models.action.effect.Target
 import com.nicolas.models.dice.DiceType
 import com.nicolas.models.dice.Face
-import com.nicolas.models.extensions.createHandOfAction
+import com.nicolas.models.extensions.createHand
 import com.nicolas.models.item.enums.Range
 import com.nicolas.models.item.enums.WeaponCategory
 import com.nicolas.models.item.enums.WeaponType
@@ -81,7 +81,7 @@ class HandOfActionTest {
 
     @Test
     fun should_have_the_skill_dices_neutral() {
-        val hand = player.createHandOfAction(rangeAttack)
+        val hand = player.createHand(rangeAttack)
 
         val softly = SoftAssertions()
         softly.apply {
@@ -110,7 +110,7 @@ class HandOfActionTest {
     @Test
     fun should_have_the_skill_dices_reckless() {
         player.stance = 1
-        val hand = player.createHandOfAction(rangeAttack)
+        val hand = player.createHand(rangeAttack)
 
         val softly = SoftAssertions()
         softly.apply {
@@ -132,6 +132,38 @@ class HandOfActionTest {
                     .isEqualTo(1)
             assertThat(hand.misfortuneDicesCount).`as`("Misfortune")
                     .isEqualTo(0)
+        }
+        softly.assertAll()
+    }
+
+
+    @Test
+    fun should_have_the_skill_dices_fully_neutral() {
+        val hand = Player("PlayerName",
+                agility = CharacteristicValue(3, 1),
+                skills = listOf(shootingSkill)
+        ).createHand(rangeAttack)
+
+        val softly = SoftAssertions()
+        softly.apply {
+            assertThat(hand).`as`("Not null")
+                    .isNotNull
+            assertThat(hand!!.name).`as`("Name")
+                    .isEqualTo("Tir")
+            assertThat(hand.characteristicDicesCount).`as`("Characteristics")
+                    .isEqualTo(3)
+            assertThat(hand.expertiseDicesCount).`as`("Expertise")
+                    .isEqualTo(1)
+            assertThat(hand.fortuneDicesCount).`as`("Fortune")
+                    .isEqualTo(2)
+            assertThat(hand.conservativeDicesCount).`as`("Conservative")
+                    .isEqualTo(0)
+            assertThat(hand.recklessDicesCount).`as`("Reckless")
+                    .isEqualTo(0)
+            assertThat(hand.challengeDicesCount).`as`("Challenge")
+                    .isEqualTo(0)
+            assertThat(hand.misfortuneDicesCount).`as`("Misfortune")
+                    .isEqualTo(1)
         }
         softly.assertAll()
     }

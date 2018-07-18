@@ -149,6 +149,7 @@
     <string name="action_type">Action type</string>
     <string name="action_traits">Action traits</string>
     <string name="action_conditions">Action conditions</string>
+    <string name="launch_action">Launch action</string>
 
     <string name="skill">Skill</string>
     <string name="player_name">Player name</string>
