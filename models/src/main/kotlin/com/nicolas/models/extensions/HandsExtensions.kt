@@ -13,17 +13,7 @@ fun Player.createHand(characteristic: Characteristic,
                       name: String = "Hand",
                       difficultyLevel: DifficultyLevel = DifficultyLevel.NONE): Hand {
     val hand = this[characteristic].getHand(name, difficultyLevel)
-
-    when {
-        stance < 0 -> {
-            hand.characteristicDicesCount -= Math.abs(stance)
-            hand.conservativeDicesCount += Math.abs(stance)
-        }
-        stance > 0 -> {
-            hand.characteristicDicesCount -= Math.abs(stance)
-            hand.recklessDicesCount += Math.abs(stance)
-        }
-    }
+            .applyStanceDices(stance)
 
     getEffectsApplyingTo(characteristic)
             .forEach { hand.applyEffectDices(it) }
@@ -85,4 +75,41 @@ private fun Hand.applyEffectDices(effect: Effect): Hand {
     }
 
     return this
+}
+
+private fun Hand.applyStanceDices(stance: Int): Hand {
+    val hand = copy()
+
+    if (hand.characteristicDicesCount > 0) {
+        when {
+            stance < 0 -> {
+                val diff = hand.characteristicDicesCount - Math.abs(stance)
+                when {
+                    diff < 0 -> {
+                        hand.characteristicDicesCount = 0
+                        hand.conservativeDicesCount += Math.abs(stance) - Math.abs(diff)
+                    }
+                    else -> {
+                        hand.characteristicDicesCount -= Math.abs(stance)
+                        hand.conservativeDicesCount += Math.abs(stance)
+                    }
+                }
+            }
+            stance > 0 -> {
+                val diff = hand.characteristicDicesCount - Math.abs(stance)
+                when {
+                    diff < 0 -> {
+                        hand.characteristicDicesCount = 0
+                        hand.recklessDicesCount += Math.abs(stance) - Math.abs(diff)
+                    }
+                    else -> {
+                        hand.characteristicDicesCount -= Math.abs(stance)
+                        hand.recklessDicesCount += Math.abs(stance)
+                    }
+                }
+            }
+        }
+    }
+
+    return hand
 }
