@@ -18,7 +18,6 @@ import com.nicolas.whfrp3companion.shared.getView
 
 class ActionDialog : DialogFragment() {
     lateinit var actionTypeImageView: ImageView
-    lateinit var actionNameTextView: TextView
     lateinit var actionCooldownTextView: TextView
     lateinit var actionTraitsTextView: TextView
     lateinit var actionSkillsTextView: TextView
@@ -36,6 +35,7 @@ class ActionDialog : DialogFragment() {
         action = arguments!!.getSerializable(ACTION_INTENT_ARGUMENT) as Action
 
         builder.setView(view)
+        builder.setTitle(action.name)
         builder.setPositiveButton(android.R.string.ok) { _, _ -> dismiss() }
 
         val dialog = builder.create()
@@ -47,7 +47,6 @@ class ActionDialog : DialogFragment() {
 
     private fun setupViews(conservative: Boolean = true) {
         actionTypeImageView.setImageResource(action.type.drawableId)
-        actionNameTextView.text = action.name
         actionTraitsTextView.text = action.traits.joinToString()
         actionSkillsTextView.text = action.skillsString
         actionConditionsTextView.text = action.conditionsString
@@ -68,7 +67,6 @@ class ActionDialog : DialogFragment() {
 
     private fun bindViews(view: View) {
         actionTypeImageView = view.getView(R.id.actionTypeImageView)
-        actionNameTextView = view.getView(R.id.actionNameTextView)
         actionCooldownTextView = view.getView(R.id.actionCooldownTextView)
         actionTraitsTextView = view.getView(R.id.actionTraitsTextView)
         actionSkillsTextView = view.getView(R.id.actionSkillsTextView)
