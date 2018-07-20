@@ -11,6 +11,7 @@ data class Action(val name: String,
                   val targetSkill: String? = null,
                   val targetDefense: Boolean? = null,
                   val conditions: List<ActionCondition>? = null,
+                  val conditionsText: String? = null,
 
                   val conservativeSide: ActionSide,
                   val recklessSide: ActionSide) : Serializable {
@@ -25,6 +26,7 @@ data class Action(val name: String,
 
     val conditionsString: String?
         get() = when {
+            conditionsText != null -> conditionsText
             conditions != null -> conditions.joinToString(". ")
             else -> ""
         }

@@ -15,6 +15,6 @@ class ActionsMeleeFileTest {
 
     @Test
     fun should_load_actions_file() {
-        assertThat(meleeActions.size).isEqualTo(4)
+        assertThat(meleeActions.size).isEqualTo(5)
     }
 }

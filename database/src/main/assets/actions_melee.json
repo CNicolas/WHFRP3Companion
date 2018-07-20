@@ -274,7 +274,7 @@
           "1": [
             {
               "damage": -2,
-              "text": "Vous vous déplacez pour engager la cible, lui infligez les dégâts -2, puis vous vous désengagez et finisser quelque part à portée courte. Quand cette carte est en cours de recharge, vos actions Voie de l'Êpée gagnent {FORTUNE_DICE}."
+              "text": "Vous vous déplacez pour engager la cible, lui infligez les dégâts -2, puis vous vous désengagez et finisser quelque part à portée courte. Quand cette carte est en cours de recharge, vos actions Voie de l'Épée gagnent {FORTUNE_DICE}."
             }
           ]
         },
@@ -283,6 +283,92 @@
         },
         "BANE": {
           "2": [ { "stress": "1" } ]
+        }
+      }
+    }
+  },
+  {
+    "name": "Botte décisive du Maître",
+    "type": "MELEE_ATTACK",
+    "traits": [ "SWORD_WAY" ],
+    "skill": "Capacité de Combat",
+    "targetDefense": true,
+    "conditions": [
+      {
+        "weapon": {
+          "categories": [ "MELEE" ],
+          "types": [ "SWORD", "TWO_HANDED_SWORD" ],
+          "equipped": true,
+          "inHand": true
+        }
+      },
+      { "range": "SHORT", "target": "TARGET" }
+    ],
+    "conditionsText": "Au moins 1 autre carte de Voie de l'Épée en cours de recharge, épée ou épée à deux mains en main, engagé avec la cible",
+    "conservativeSide": {
+      "stance": "CONSERVATIVE",
+      "cooldown": 4,
+      "difficulty": [ "CHALLENGE" ],
+      "effects": {
+        "SUCCESS": {
+          "1": [
+            {
+              "damage": 0,
+              "cooldown": -99,
+              "text": "Vous infligez les dégâts normaux et cette carte se recharge sur le champ."
+            }
+          ],
+          "2": [
+            {
+              "damage": 0,
+              "text": "Vous infligez les dégâts normaux, +1 dégât par jeton de recharge sur chacune de vos autres cartes de Voie de l'Épée."
+            }
+          ]
+        },
+        "BOON": {
+          "2": [
+            {
+              "damage": 1,
+              "critical": 1
+            }
+          ]
+        },
+        "SIGMAR": {
+          "1": [
+            {
+              "text": "Tirez 3 blessures critiques. Choisissez-en 1 à appliquer à la cible en tant que critique ; appliquez les autres sous forme de dégâts normaux."
+            }
+          ]
+        },
+        "BANE": {
+          "2": [ { "damage": -1 } ]
+        }
+      }
+    },
+    "recklessSide": {
+      "stance": "RECKLESS",
+      "cooldown": 4,
+      "difficulty": [ "CHALLENGE" ],
+      "effects": {
+        "SUCCESS": {
+          "1": [ { "damage": 0 } ],
+          "2": [
+            {
+              "damage": 0,
+              "text": "Vous infligez les dégâts normaux, +1 dégât par jeton de recharge sur chacune de vos autres cartes de Voie de l'Épée."
+            }
+          ]
+        },
+        "BOON": {
+          "2": [
+            {
+              "damage": 2,
+              "critical": 1
+            }
+          ]
+        },
+        "BANE": {
+          "2": [ { "damage": -1 } ]
         }
       }
     }
