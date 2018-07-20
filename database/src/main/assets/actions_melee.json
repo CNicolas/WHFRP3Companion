@@ -1,0 +1,290 @@
+[
+  {
+    "name": "Attaque de Corps-à-corps",
+    "type": "MELEE_ATTACK",
+    "traits": [ "BASIC" ],
+    "skill": "Capacité de Combat",
+    "targetDefense": true,
+    "conditions": [
+      {
+        "weapon": {
+          "categories": [ "MELEE" ],
+          "equipped": true
+        }
+      },
+      { "range": "ENGAGED", "target": "TARGET" }
+    ],
+    "conservativeSide": {
+      "stance": "CONSERVATIVE",
+      "cooldown": 0,
+      "difficulty": [ ],
+      "effects": {
+        "SUCCESS": {
+          "1": [ { "damage": 0 } ],
+          "3": [ { "damage": 2 } ]
+        },
+        "BOON": {
+          "2": [ { "maneuver": true } ]
+        },
+        "BANE": {
+          "2": [ { "canDisengage": "TARGET" } ]
+        }
+      }
+    },
+    "recklessSide": {
+      "stance": "RECKLESS",
+      "cooldown": 0,
+      "difficulty": [ ],
+      "effects": {
+        "SUCCESS": {
+          "1": [ { "damage": 0 } ],
+          "3": [ { "damage": 2 } ]
+        },
+        "BOON": {
+          "2": [ { "maneuver": true } ]
+        },
+        "BANE": {
+          "2": [ { "canDisengage": "TARGET" } ]
+        }
+      }
+    }
+  },
+  {
+    "name": "Backstab",
+    "type": "MELEE_ATTACK",
+    "traits": [ "TEAMWORK" ],
+    "skill": "Furtivité",
+    "targetSkill": "Observation",
+    "conditions": [
+      {
+        "weapon": {
+          "categories": [ "MELEE" ],
+          "oneHanded": true,
+          "equipped": true
+        }
+      },
+      { "range": "ENGAGED", "target": "TARGET" }
+    ],
+    "conservativeSide": {
+      "stance": "CONSERVATIVE",
+      "cooldown": 4,
+      "difficulty": [
+        "MISFORTUNE",
+        "MISFORTUNE",
+        "MISFORTUNE"
+      ],
+      "special": {
+        "difficultyReducer": {
+          "range": "ENGAGED",
+          "target": "TARGET",
+          "player": false,
+          "ally": "COUNT",
+          "dice": "MISFORTUNE"
+        },
+        "text": "Réduisez la difficulté de {MISFORTUNE_DICE} pour chaque allié engagé avec la cible."
+      },
+      "effects": {
+        "SUCCESS": {
+          "1": [ { "damage": 1 } ],
+          "2": [
+            {
+              "damage": 1,
+              "ignoreSoak": true
+            }
+          ]
+        },
+        "BOON": {
+          "2": [ { "damage": 2 } ]
+        },
+        "BANE": {
+          "2": [ { "cooldown": 2 } ]
+        }
+      }
+    },
+    "recklessSide": {
+      "stance": "RECKLESS",
+      "cooldown": 4,
+      "difficulty": [ "MISFORTUNE", "MISFORTUNE", "MISFORTUNE" ],
+      "special": {
+        "difficultyReducer": {
+          "range": "ENGAGED",
+          "target": "TARGET",
+          "player": false,
+          "ally": "COUNT",
+          "dice": "MISFORTUNE"
+        },
+        "text": "Réduisez la difficulté de {MISFORTUNE_DICE} pour chaque allié engagé avec la cible."
+      },
+      "effects": {
+        "SUCCESS": {
+          "1": [ { "damage": 1 } ],
+          "2": [
+            {
+              "damage": 1,
+              "ignoreSoak": true
+            }
+          ]
+        },
+        "BOON": {
+          "2": [ { "damage": 2 } ]
+        },
+        "BANE": {
+          "2": [ { "cooldown": 2 } ]
+        }
+      }
+    }
+  },
+  {
+    "name": "Coup du Casseur de Trolls",
+    "type": "MELEE_ATTACK",
+    "traits": [ "KILLER" ],
+    "skill": "Capacité de Combat",
+    "targetDefense": true,
+    "conditions": [
+      {
+        "weapon": {
+          "categories": [ "MELEE" ],
+          "equipped": true,
+          "inHand": true
+        }
+      },
+      { "range": "ENGAGED", "target": "TARGET" }
+    ],
+    "conservativeSide": {
+      "stance": "CONSERVATIVE",
+      "cooldown": 2,
+      "difficulty": [ "MISFORTUNE" ],
+      "special": {
+        "text": "Vous ne pouvez pas utiliser de Défense Active quand cette carte est en cours de recharge."
+      },
+      "effects": {
+        "SUCCESS": {
+          "1": [ { "damage": 1 } ],
+          "3": [ { "damage": 3 } ]
+        },
+        "BOON": {
+          "1": [
+            {
+              "damage": 1,
+              "ignoreSoak": true
+            }
+          ],
+          "2": [
+            {
+              "damage": 3,
+              "critical": 1
+            }
+          ]
+        },
+        "SIGMAR": {
+          "1": [
+            {
+              "critical": 1,
+              "text": "Infligez 1 blessure critique, puis un nbombre de blessures normales égal à sa gravité."
+            }
+          ]
+        },
+        "BANE": {
+          "1": [ { "exhaustion": 1 } ]
+        },
+        "CHAOS": {
+          "1": [ { "wounds": -1 } ]
+        }
+      }
+    },
+    "recklessSide": {
+      "stance": "RECKLESS",
+      "cooldown": 2,
+      "difficulty": [ ],
+      "special": {
+        "text": "Vous ne pouvez pas utiliser de Défense Active quand cette carte est en cours de recharge."
+      },
+      "effects": {
+        "SUCCESS": {
+          "1": [ { "damage": 1 } ],
+          "3": [ { "damage": 3 } ]
+        },
+        "BOON": {
+          "1": [
+            {
+              "damage": 1,
+              "ignoreSoak": true
+            }
+          ]
+        },
+        "BANE": {
+          "1": [ { "exhaustion": 1 } ]
+        },
+        "CHAOS": {
+          "1": [ { "wounds": -1 } ]
+        }
+      }
+    }
+  },
+  {
+    "name": "Voie de la chute d'eau",
+    "type": "MELEE_ATTACK",
+    "traits": [ "CONTINUOUS", "SWORD_WAY" ],
+    "skill": "Capacité de Combat",
+    "targetDefense": true,
+    "conditions": [
+      {
+        "weapon": {
+          "categories": [ "MELEE" ],
+          "types": [ "SWORD", "TWO_HANDED_SWORD" ],
+          "equipped": true,
+          "inHand": true
+        }
+      },
+      { "range": "SHORT", "target": "TARGET" }
+    ],
+    "conservativeSide": {
+      "stance": "CONSERVATIVE",
+      "cooldown": 5,
+      "difficulty": [ ],
+      "effects": {
+        "SUCCESS": {
+          "1": [
+            {
+              "damage": -2,
+              "text": "Vous vous déplacez pour engager la cible, lui infligez les dégâts -2, puis vous vous désengagez et finisser quelque part à portée courte. Quand cette carte est en cours de recharge, vos actions Voie de l'Êpée gagnent {FORTUNE_DICE}."
+            }
+          ]
+        },
+        "BOON": {
+          "2": [
+            { "damage": 2 },
+            {
+              "cooldown": -99,
+              "text": "L'une de vos Défenses Actives se recharge complètement."
+            }
+          ]
+        },
+        "BANE": {
+          "2": [ { "stress": "1" } ]
+        }
+      }
+    },
+    "recklessSide": {
+      "stance": "RECKLESS",
+      "cooldown": 5,
+      "difficulty": [ ],
+      "effects": {
+        "SUCCESS": {
+          "1": [
+            {
+              "damage": -2,
+              "text": "Vous vous déplacez pour engager la cible, lui infligez les dégâts -2, puis vous vous désengagez et finisser quelque part à portée courte. Quand cette carte est en cours de recharge, vos actions Voie de l'Êpée gagnent {FORTUNE_DICE}."
+            }
+          ]
+        },
+        "BOON": {
+          "2": [ { "critical": 1 } ]
+        },
+        "BANE": {
+          "2": [ { "stress": "1" } ]
+        }
+      }
+    }
+  }
+]

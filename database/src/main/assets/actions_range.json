@@ -20,14 +20,14 @@
       "difficulty": [ ],
       "effects": {
         "SUCCESS": {
-          "1": { "damage": 0 },
-          "3": { "damage": 2 }
+          "1": [ { "damage": 0 } ],
+          "3": [ { "damage": 2 } ]
         },
         "BOON": {
-          "2": { "maneuver": true }
+          "2": [ { "maneuver": true } ]
         },
         "BANE": {
-          "2": { "canEngage": "TARGET" }
+          "2": [ { "canEngage": "TARGET" } ]
         }
       }
     },
@@ -37,14 +37,14 @@
       "difficulty": [ ],
       "effects": {
         "SUCCESS": {
-          "1": { "damage": 0 },
-          "3": { "damage": 2 }
+          "1": [ { "damage": 0 } ],
+          "3": [ { "damage": 2 } ]
         },
         "BOON": {
-          "2": { "maneuver": true }
+          "2": [ { "maneuver": true } ]
         },
         "BANE": {
-          "2": { "canEngage": "TARGET" }
+          "2": [ { "canEngage": "TARGET" } ]
         }
       }
     }
@@ -73,14 +73,14 @@
       },
       "effects": {
         "SUCCESS": {
-          "1": { "damage": -2 },
-          "2": { "damage": 0 }
+          "1": [ { "damage": -2 } ],
+          "2": [ { "damage": 0 } ]
         },
         "BOON": {
-          "1": { "cooldown": 1 }
+          "1": [ { "cooldown": 1 } ]
         },
         "BANE": {
-          "2": { "cooldown": -1 }
+          "2": [ { "cooldown": -1 } ]
         }
       }
     },
@@ -93,23 +93,25 @@
       },
       "effects": {
         "SUCCESS": {
-          "1": { "damage": -2 },
-          "2": { "damage": 0 }
+          "1": [ { "damage": -2 } ],
+          "2": [ { "damage": 0 } ]
         },
         "BOON": {
-          "2": { "cooldown": 1 }
+          "2": [ { "cooldown": 1 } ]
         },
         "SIGMAR": {
-          "1": { "text": "Vous touchez et immobilisez une seconde cible" }
+          "1": [ { "text": "Vous touchez et immobilisez une seconde cible" } ]
         },
         "BANE": {
-          "1": { "cooldown": -1 }
+          "1": [ { "cooldown": -1 } ]
         },
         "CHAOS": {
-          "1": {
+          "1": [
+            {
             "stress": 1,
             "exhaustion": 1
-          }
+            }
+          ]
         }
       }
     }
@@ -136,25 +138,31 @@
       },
       "effects": {
         "SUCCESS": {
-          "1": { "text": "Vous maintenez le feu de couverture comme décrit ci-dessus." },
-          "3": {
+          "1": [ { "text": "Vous maintenez le feu de couverture comme décrit ci-dessus." } ],
+          "3": [
+            {
             "damage": 0,
             "text": "Comme ci-dessus, et vous infligez les dégâts normaux à un ennemi situé dans la zone."
-          }
+            }
+          ]
         },
         "BOON": {
-          "1": {
+          "1": [
+            {
             "maneuver": true,
             "target": "ALLY",
             "range": "SHORT"
-          }
+            }
+          ]
         },
         "BANE": {
-          "1": {
+          "1": [
+            {
             "maneuver": true,
             "target": "TARGET",
             "text": "Un ennemi situé dans la zone peut effectuer une manoeuvre gratuite sans subir les malus décrits ci-dessus."
-          }
+            }
+          ]
         }
       }
     },
@@ -164,25 +172,31 @@
       "difficulty": [ "CHALLENGE", "MISFORTUNE" ],
       "effects": {
         "SUCCESS": {
-          "1": {
+          "1": [
+            {
             "target": "TARGET",
             "exhaustion": 1,
             "text": "Vous abattez une plue de projectiles sur l'engagement de la Cible. Tous les ennemis qui s'y situent subissent 1 {EXHAUSTION}"
-          }
+            }
+          ]
         },
         "BOON": {
-          "1": {
+          "1": [
+            {
             "maneuver": true,
             "target": "ALLY",
             "text": "Un allié situé à portée courte de l'engagement de la Cible peut exécuter une manoeuvre gratuite."
-          }
+            }
+          ]
         },
         "BANE": {
-          "2": {
+          "2": [
+            {
             "target": "ALLY",
             "exhaustion": 1,
             "text": "Les alliés situés à ce niveau d'engagmeent subissent 1 {EXHAUSTION}."
-          }
+            }
+          ]
         }
       }
     }
@@ -210,23 +224,29 @@
       "difficulty": [ "MISFORTUNE" ],
       "effects": {
         "SUCCESS": {
-          "1": { "damage": 0 },
-          "2": {
+          "1": [ { "damage": 0 } ],
+          "2": [
+            {
             "damage": 1,
             "critical": 1
-          }
+            }
+          ]
         },
         "BOON": {
-          "1": { "damage": 1 }
+          "1": [ { "damage": 1 } ]
         },
         "SIGMAR": {
-          "1": { "text": "Votre attaque inflige des dégâts supplémentaires égaux au niveau de dégâts de votre arme" }
+          "1": [
+            { "text": "Votre attaque inflige des dégâts supplémentaires égaux au niveau de dégâts de votre arme" }
+          ]
         },
         "BANE": {
-          "2": {
+          "2": [
+            {
             "stress": 1,
             "exhaustion": 1
-          }
+            }
+          ]
         }
       }
     },
@@ -236,21 +256,25 @@
       "difficulty": [ "MISFORTUNE", "MISFORTUNE" ],
       "effects": {
         "SUCCESS": {
-          "1": { "damage": 1 },
-          "3": {
+          "1": [ { "damage": 1 } ],
+          "3": [
+            {
             "damage": 2,
             "critical": 1
-          }
+            }
+          ]
         },
         "BOON": {
-          "1": { "damage": 1 },
-          "2": { "ignoreSoak": true }
+          "1": [ { "damage": 1 } ],
+          "2": [ { "ignoreSoak": true } ]
         },
         "BANE": {
-          "1": {
+          "1": [
+            {
             "stress": 1,
             "exhaustion": 1
-          }
+            }
+          ]
         }
       }
     }
@@ -280,16 +304,18 @@
       },
       "effects": {
         "SUCCESS": {
-          "1": { "damage": 0 }
+          "1": [ { "damage": 0 } ]
         },
         "BOON": {
-          "1": { "damage": 1 },
-          "2": { "damage": 2 }
+          "1": [ { "damage": 1 } ],
+          "2": [ { "damage": 2 } ]
         },
         "BANE": {
-          "2": {
+          "2": [
+            {
             "text": "Votre cible peut exécuter une manoeuvre gratuite."
-          }
+            }
+          ]
         }
       }
     },
@@ -303,22 +329,26 @@
       },
       "effects": {
         "SUCCESS": {
-          "1": { "damage": 0 }
+          "1": [ { "damage": 0 } ]
         },
         "BOON": {
-          "1": { "damage": 1 },
-          "2": { "damage": 2 }
+          "1": [ { "damage": 1 } ],
+          "2": [ { "damage": 2 } ]
         },
         "SIGMAR": {
-          "1": {
+          "1": [
+            {
             "damage": 2,
             "critical": 1
-          }
+            }
+          ]
         },
         "BANE": {
-          "1": {
+          "1": [
+            {
             "text": "Votre cible peut exécuter une manoeuvre gratuite."
-          }
+            }
+          ]
         }
       }
     }

@@ -47,20 +47,20 @@ class HandOfActionTest {
                             cooldown = 0,
                             difficulty = listOf(DiceType.MISFORTUNE),
                             effects = hashMapOf(
-                                    Face.SUCCESS to hashMapOf(1 to ActionFaceEffect(0),
-                                            3 to ActionFaceEffect(2)),
-                                    Face.BOON to hashMapOf(2 to ActionFaceEffect(maneuver = true)),
-                                    Face.BANE to hashMapOf(2 to ActionFaceEffect(canEngage = Target.TARGET)))
+                                    Face.SUCCESS to hashMapOf(1 to listOf(ActionFaceEffect(0)),
+                                            3 to listOf(ActionFaceEffect(2))),
+                                    Face.BOON to hashMapOf(2 to listOf(ActionFaceEffect(maneuver = true))),
+                                    Face.BANE to hashMapOf(2 to listOf(ActionFaceEffect(canEngage = Target.TARGET))))
                     ),
                     recklessSide = ActionSide(
                             stance = Stance.RECKLESS,
                             cooldown = 0,
                             difficulty = listOf(),
                             effects = hashMapOf(
-                                    Face.SUCCESS to hashMapOf(1 to ActionFaceEffect(0),
-                                            3 to ActionFaceEffect(2)),
-                                    Face.BOON to hashMapOf(2 to ActionFaceEffect(maneuver = true)),
-                                    Face.BANE to hashMapOf(2 to ActionFaceEffect(canEngage = Target.TARGET)))
+                                    Face.SUCCESS to hashMapOf(1 to listOf(ActionFaceEffect(0)),
+                                            3 to listOf(ActionFaceEffect(2))),
+                                    Face.BOON to hashMapOf(2 to listOf(ActionFaceEffect(maneuver = true))),
+                                    Face.BANE to hashMapOf(2 to listOf(ActionFaceEffect(canEngage = Target.TARGET))))
                     ),
                     traits = listOf(Trait.BASIC),
                     conditions = listOf(

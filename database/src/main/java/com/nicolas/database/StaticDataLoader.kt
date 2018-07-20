@@ -26,7 +26,39 @@ fun loadEffects(context: Context): List<Effect> {
 }
 
 fun loadActions(context: Context): List<Action> {
-    val actionsReader = context.assets.open("actions.json").reader()
+    return loadMeleeActions(context) +
+            loadRangeActions(context) +
+            loadSpellActions(context) +
+            loadSummoningActions(context) +
+            loadSupportActions(context)
+}
 
-    return Gson().fromJson(actionsReader, genericType<List<Action>>()) ?: listOf()
+fun loadMeleeActions(context: Context): List<Action> {
+    val meleeActionsReader = context.assets.open("actions_melee.json").reader()
+
+    return Gson().fromJson(meleeActionsReader, genericType<List<Action>>()) ?: listOf()
+}
+
+fun loadRangeActions(context: Context): List<Action> {
+    val rangeActionsReader = context.assets.open("actions_range.json").reader()
+
+    return Gson().fromJson(rangeActionsReader, genericType<List<Action>>()) ?: listOf()
+}
+
+fun loadSpellActions(context: Context): List<Action> {
+    val spellActionsReader = context.assets.open("actions_spell.json").reader()
+
+    return Gson().fromJson(spellActionsReader, genericType<List<Action>>()) ?: listOf()
+}
+
+fun loadSummoningActions(context: Context): List<Action> {
+    val summoningActionsReader = context.assets.open("actions_summoning.json").reader()
+
+    return Gson().fromJson(summoningActionsReader, genericType<List<Action>>()) ?: listOf()
+}
+
+fun loadSupportActions(context: Context): List<Action> {
+    val supportActionsReader = context.assets.open("actions_support.json").reader()
+
+    return Gson().fromJson(supportActionsReader, genericType<List<Action>>()) ?: listOf()
 }

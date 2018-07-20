@@ -21,10 +21,10 @@ class SizeAndOperatorsTest {
             cooldown = 0,
             difficulty = listOf(),
             effects = hashMapOf(
-                    SUCCESS to hashMapOf(1 to ActionFaceEffect(0),
-                            3 to ActionFaceEffect(2)),
-                    BOON to hashMapOf(2 to ActionFaceEffect(maneuver = true)),
-                    BANE to hashMapOf(2 to ActionFaceEffect(canEngage = Target.TARGET)))
+                    SUCCESS to hashMapOf(1 to listOf(ActionFaceEffect(0)),
+                            3 to listOf(ActionFaceEffect(2))),
+                    BOON to hashMapOf(2 to listOf(ActionFaceEffect(maneuver = true))),
+                    BANE to hashMapOf(2 to listOf(ActionFaceEffect(canEngage = Target.TARGET))))
     )
     private val rangeAttack: Action =
             Action(
@@ -51,15 +51,15 @@ class SizeAndOperatorsTest {
 
     @Test
     fun should_return_success_size() {
-        val success = hashMapOf(1 to ActionFaceEffect(), 3 to ActionFaceEffect(), 4 to ActionFaceEffect())
+        val success = hashMapOf(1 to listOf(ActionFaceEffect()), 3 to listOf(ActionFaceEffect()), 4 to listOf(ActionFaceEffect()))
 
         assertThat(success.size).isEqualTo(3)
     }
 
     @Test
     fun should_return_effects_size() {
-        val success: ActionFaceEffectByCount = hashMapOf(1 to ActionFaceEffect(), 3 to ActionFaceEffect(), 4 to ActionFaceEffect())
-        val bane: ActionFaceEffectByCount = hashMapOf(2 to ActionFaceEffect())
+        val success: ActionFaceEffectByCount = hashMapOf(1 to listOf(ActionFaceEffect()), 3 to listOf(ActionFaceEffect()), 4 to listOf(ActionFaceEffect()))
+        val bane: ActionFaceEffectByCount = hashMapOf(2 to listOf(ActionFaceEffect()))
         val effects: ActionEffects = hashMapOf(SUCCESS to success, BANE to bane)
 
         assertThat(success.size).isEqualTo(3)
@@ -114,5 +114,27 @@ class SizeAndOperatorsTest {
     @Test
     fun should_toString_of_Condition() {
         assertThat(rangeAttack.conditionsString).isEqualTo("Arme à distance, arme à feu, arme à répétition équipée. Désengagé")
+    }
+
+    @Test
+    fun should() {
+        val effects: ActionEffects = hashMapOf(
+                SUCCESS to hashMapOf(
+                        2 to listOf(
+                                ActionFaceEffect(1),
+                                ActionFaceEffect(critical = 1)
+                        )
+                )
+        )
+
+        val effectsList = effects.getEffectsListByFace(SUCCESS)
+        println(effectsList)
+
+        assertThat(effectsList.size).isEqualTo(2)
+        assertThat(effectsList[0].effect.damage).isEqualTo(1)
+        assertThat(effectsList[0].effect.critical).isNull()
+        assertThat(effectsList[1].effect.damage).isNull()
+        assertThat(effectsList[1].effect.critical).isEqualTo(1)
+
     }
 }

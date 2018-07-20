@@ -5,16 +5,16 @@ import org.assertj.core.api.Assertions.assertThat
 import org.junit.Before
 import org.junit.Test
 
-class ActionsRangeFileTest {
-    private lateinit var rangeActions: List<Action>
+class ActionsSupportFileTest {
+    private lateinit var supportActions: List<Action>
 
     @Before
     fun setup() {
-        rangeActions = ActionsFilesLoader().loadRangeActions()
+        supportActions = ActionsFilesLoader().loadSupportActions()
     }
 
     @Test
     fun should_load_actions_file() {
-        assertThat(rangeActions.size).isEqualTo(5)
+        assertThat(supportActions.size).isEqualTo(2)
     }
 }

@@ -32,10 +32,14 @@ fun ActionEffects.getEffectsList(): List<ActionEffect> {
             getEffectsListByFace(EXHAUSTION)
 }
 
-fun ActionEffects.getEffectsListByFace(face: Face): Iterable<ActionEffect> {
-    val list = this[face]?.map {
-        ActionEffect(face, it.key, it.value)
-    } ?: listOf()
+fun ActionEffects.getEffectsListByFace(face: Face): List<ActionEffect> {
+    val list: List<ActionEffect> = this[face]?.map { effectsByCount: Map.Entry<Int, List<ActionFaceEffect>> ->
+        if (effectsByCount.value.size == 1) {
+            listOf(ActionEffect(face, effectsByCount.key, effectsByCount.value[0]))
+        } else {
+            effectsByCount.value.map { ActionEffect(face, effectsByCount.key, it) }
+        }
+    }?.flatten() ?: listOf()
 
     return list.sortedBy { it.faceCount }
 }
