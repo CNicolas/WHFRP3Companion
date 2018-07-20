@@ -20,6 +20,11 @@
     <dimen name="giant_padding_2">64dp</dimen>
 
     <dimen name="list_std_margin">16dp</dimen>
+    <dimen name="list_std_drawable">24dp</dimen>
+    <dimen name="list_std_drawable_text_space">32dp</dimen>
+    <dimen name="list_child_std_margin">72dp</dimen>
+
+    <dimen name="list_std_main_text">16sp</dimen>
 
     <dimen name="dice_picker_height">130dp</dimen>
 </resources>

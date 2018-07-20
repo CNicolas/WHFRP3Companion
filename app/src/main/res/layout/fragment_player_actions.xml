@@ -7,17 +7,12 @@
                                                  android:layout_height="match_parent"
                                                  android:fitsSystemWindows="true">
 
-    <android.support.v7.widget.RecyclerView android:id="@+id/actionsRecyclerView"
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:scrollbars="vertical"
-                                            android:scrollbarStyle="outsideOverlay"
-                                            android:layout_marginRight="@dimen/small_padding"
-                                            android:layout_marginLeft="@dimen/small_padding"
-                                            android:paddingTop="@dimen/medium_padding"
-                                            android:paddingBottom="@dimen/giant_padding_2"
-                                            android:clipToPadding="false"
-                                            tools:listitem="@layout/list_element_action" />
+    <ExpandableListView android:id="@+id/actionsExpandableListView"
+                        android:layout_height="match_parent"
+                        android:layout_width="match_parent"
+                        android:groupIndicator="@null"
+                        tools:listheader="@layout/list_actions_group"
+                        tools:listitem="@layout/list_actions_child" />
 
     <android.support.design.widget.FloatingActionButton android:id="@+id/search"
                                                         android:layout_width="wrap_content"

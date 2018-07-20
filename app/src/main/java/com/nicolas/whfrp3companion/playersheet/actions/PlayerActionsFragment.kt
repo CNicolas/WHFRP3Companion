@@ -2,7 +2,6 @@ package com.nicolas.whfrp3companion.playersheet.actions
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,6 +13,8 @@ import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.shared.HAND_INTENT_ARGUMENT
 import com.nicolas.whfrp3companion.shared.PLAYER_NAME_INTENT_ARGUMENT
 import com.nicolas.whfrp3companion.shared.activities.DiceRollerActivity
+import com.nicolas.whfrp3companion.shared.adapters.ActionExpandableAdapter
+import com.nicolas.whfrp3companion.shared.adapters.ActionListener
 import kotlinx.android.synthetic.main.fragment_player_actions.*
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.intentFor
@@ -57,16 +58,13 @@ class PlayerActionsFragment : Fragment(), ActionListener {
             player = playerRepository.find(player.name)!!
 
             uiThread {
-                actionsRecyclerView?.let {
-                    actionsRecyclerView.layoutManager = LinearLayoutManager(activity!!)
-                    actionsRecyclerView.adapter = createActionsAdapter()
-                }
+                actionsExpandableListView?.setAdapter(createActionsAdapter())
             }
         }
     }
 
-    private fun createActionsAdapter(): PlayerActionsAdapter {
-        return PlayerActionsAdapter(activity!!, player.actions, this)
+    private fun createActionsAdapter(): ActionExpandableAdapter {
+        return ActionExpandableAdapter(activity!!, player.actions, this)
     }
 
     companion object {

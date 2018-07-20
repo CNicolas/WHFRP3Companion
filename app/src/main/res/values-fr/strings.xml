@@ -155,4 +155,9 @@
     <string name="action_conditions">Conditions</string>
     <string name="action_traits">Traits de l\'action</string>
     <string name="launch_action">Lancer l\'action</string>
+    <string name="melee_attack">Attaque de mêlée</string>
+    <string name="range_attack">Attaque à distance</string>
+    <string name="spell">Sort</string>
+    <string name="summoning">Invocation</string>
+    <string name="support">Support</string>
 </resources>

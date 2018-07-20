@@ -2,13 +2,12 @@ package com.nicolas.whfrp3companion.fragments.actions
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.nicolas.database.loadActions
-import com.nicolas.models.action.Action
 import com.nicolas.whfrp3companion.R
+import com.nicolas.whfrp3companion.shared.adapters.ActionExpandableAdapter
 import kotlinx.android.synthetic.main.fragment_player_actions.*
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
@@ -35,16 +34,11 @@ class ActionsFragment : Fragment() {
             val actions = loadActions(context!!)
 
             uiThread {
-                actionsRecyclerView?.let {
-                    actionsRecyclerView.layoutManager = LinearLayoutManager(activity!!)
-                    actionsRecyclerView.adapter = createActionsAdapter(actions)
+                activity?.let {
+                    actionsExpandableListView?.setAdapter(ActionExpandableAdapter(it, actions))
                 }
             }
         }
-    }
-
-    private fun createActionsAdapter(actions: List<Action>): ActionsAdapter {
-        return ActionsAdapter(activity!!, actions)
     }
 
     companion object {

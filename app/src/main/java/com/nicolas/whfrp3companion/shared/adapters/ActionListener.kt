@@ -1,4 +1,4 @@
-package com.nicolas.whfrp3companion.playersheet.actions
+package com.nicolas.whfrp3companion.shared.adapters
 
 import com.nicolas.models.action.Action
 

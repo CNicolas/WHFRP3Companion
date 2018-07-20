@@ -1,5 +1,7 @@
 package com.nicolas.whfrp3companion.shared.enums
 
+import com.nicolas.models.action.ActionType
+import com.nicolas.models.action.ActionType.*
 import com.nicolas.models.item.enums.*
 import com.nicolas.models.item.enums.ArmorType.*
 import com.nicolas.models.item.enums.ItemType.*
@@ -119,4 +121,13 @@ internal val TalentCooldown.labelId: Int
         PASSIVE -> R.string.cooldown_passive
         TALENT -> R.string.cooldown_talent
         SESSION -> R.string.cooldown_session
+    }
+
+internal val ActionType.labelId: Int
+    get() = when (this) {
+        MELEE_ATTACK -> R.string.melee_attack
+        RANGE_ATTACK -> R.string.range_attack
+        SUPPORT -> R.string.support
+        SPELL -> R.string.spell
+        SUMMONING -> R.string.summoning
     }

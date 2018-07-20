@@ -151,6 +151,12 @@
     <string name="action_conditions">Action conditions</string>
     <string name="launch_action">Launch action</string>
 
+    <string name="melee_attack">Melee attack</string>
+    <string name="range_attack">Range attack</string>
+    <string name="support">Support</string>
+    <string name="spell">Spell</string>
+    <string name="summoning">Summoning</string>
+
     <string name="skill">Skill</string>
     <string name="player_name">Player name</string>
     <string name="race">Race</string>
