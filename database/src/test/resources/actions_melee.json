@@ -372,5 +372,63 @@
         }
       }
     }
+  },
+  {
+    "name": "Voie du Faucon",
+    "type": "MELEE_ATTACK",
+    "traits": [ "SWORD_WAY" ],
+    "skill": "Capacité de Combat",
+    "targetDefense": true,
+    "conditions": [
+      {
+        "weapon": {
+          "categories": [ "MELEE" ],
+          "types": [ "SWORD", "TWO_HANDED_SWORD" ],
+          "equipped": true,
+          "inHand": true
+        }
+      },
+      { "range": "SHORT", "target": "TARGET" }
+    ],
+    "conservativeSide": {
+      "stance": "CONSERVATIVE",
+      "cooldown": 3,
+      "difficulty": [ ],
+      "effects": {
+        "SUCCESS": {
+          "1": [ { "damage": 0 } ],
+          "2": [ { "damage": 2 } ]
+        },
+        "BOON": {
+          "1": [ { "text": "Vous pouvez ôter 1 jeton de recharge de l'une de vos cartes d'action de Voie de l'Épée." } ]
+        },
+        "BANE": {
+          "2": [ { "cooldown": 1 } ]
+        },
+        "CHAOS": {
+          "1": [ { "cooldown": 1 } ]
+        }
+      }
+    },
+    "recklessSide": {
+      "stance": "RECKLESS",
+      "cooldown": 4,
+      "difficulty": [ ],
+      "effects": {
+        "SUCCESS": {
+          "1": [ { "damage": 1 } ],
+          "2": [ { "damage": 2 } ]
+        },
+        "BOON": {
+          "1": [ { "text": "Vous pouvez ôter 1 jeton de recharge de l'une de vos cartes d'action de Voie de l'Épée." } ]
+        },
+        "BANE": {
+          "2": [ { "cooldown": 1 } ]
+        },
+        "CHAOS": {
+          "1": [ { "cooldown": 2 } ]
+        }
+      }
+    }
   }
 ]
