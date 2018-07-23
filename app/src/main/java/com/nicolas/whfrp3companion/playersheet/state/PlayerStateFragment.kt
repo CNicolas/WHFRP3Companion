@@ -14,6 +14,7 @@ import com.nicolas.models.extensions.*
 import com.nicolas.models.player.Player
 import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.shared.PLAYER_NAME_INTENT_ARGUMENT
+import kotlinx.android.synthetic.main.content_stance_bar.*
 import kotlinx.android.synthetic.main.fragment_player_state.*
 import org.adw.library.widgets.discreteseekbar.DiscreteSeekBar
 import org.jetbrains.anko.doAsync
@@ -200,7 +201,12 @@ class PlayerStateFragment : Fragment() {
     private fun setupStance() {
         stanceBar.min = -player.maxConservative
         stanceBar.max = player.maxReckless
-        stanceBar.setOnProgressChangeListener(StanceChangeListener(context!!, player, currentStanceTextView))
+
+        val stanceChangeListener = StanceChangeListener(context!!,
+                { currentStanceTextView.setTextColor(it) },
+                { changeStance(it) })
+        stanceBar.setOnProgressChangeListener(stanceChangeListener)
+
         stanceBar.progress = player.stance
         stanceBar.numericTransformer = object : DiscreteSeekBar.NumericTransformer() {
             override fun transform(value: Int): Int = abs(value)
@@ -230,6 +236,13 @@ class PlayerStateFragment : Fragment() {
         goldTextView.text = "${player.gold}"
         silverTextView.text = "${player.silver}"
         brassTextView.text = "${player.brass}"
+    }
+
+    private fun changeStance(newStanceValue: Int) {
+        currentStanceTextView.text = Math.abs(newStanceValue).toString()
+        player.stance = newStanceValue
+
+        updatePlayerAsync()
     }
 
     private fun updatePlayerAsync() {

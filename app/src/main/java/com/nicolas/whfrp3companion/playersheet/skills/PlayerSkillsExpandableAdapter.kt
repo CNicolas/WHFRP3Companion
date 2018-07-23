@@ -20,8 +20,9 @@ import com.nicolas.models.skill.SkillType.ADVANCED
 import com.nicolas.models.skill.SkillType.BASIC
 import com.nicolas.models.skill.Specialization
 import com.nicolas.whfrp3companion.R
+import com.nicolas.whfrp3companion.playersheet.PlayerDiceRollerActivity
 import com.nicolas.whfrp3companion.shared.HAND_INTENT_ARGUMENT
-import com.nicolas.whfrp3companion.shared.activities.DiceRollerActivity
+import com.nicolas.whfrp3companion.shared.PLAYER_NAME_INTENT_ARGUMENT
 import com.nicolas.whfrp3companion.shared.adapters.AbstractSkillsExpandableAdapter
 import com.nicolas.whfrp3companion.shared.bind
 import com.nicolas.whfrp3companion.shared.enums.labelId
@@ -145,7 +146,8 @@ class PlayerSkillsExpandableAdapter(context: Context,
 
         private fun startDiceRollerActivityForSpecialization(view: View) {
             val context = view.context
-            context.startActivity(context.intentFor<DiceRollerActivity>(
+            context.startActivity(context.intentFor<PlayerDiceRollerActivity>(
+                    PLAYER_NAME_INTENT_ARGUMENT to player?.name,
                     HAND_INTENT_ARGUMENT to player?.createHand(skill, specialization, skill.name)
             ))
         }
@@ -243,7 +245,8 @@ class PlayerSkillsExpandableAdapter(context: Context,
 
         private fun startDiceRollerActivityForSkill() {
             val context = view.context
-            context.startActivity(context.intentFor<DiceRollerActivity>(
+            context.startActivity(context.intentFor<PlayerDiceRollerActivity>(
+                    PLAYER_NAME_INTENT_ARGUMENT to player?.name,
                     HAND_INTENT_ARGUMENT to player?.createHand(skill, skill.name)
             ))
         }

@@ -10,9 +10,9 @@ import com.nicolas.models.action.Action
 import com.nicolas.models.extensions.createHand
 import com.nicolas.models.player.Player
 import com.nicolas.whfrp3companion.R
+import com.nicolas.whfrp3companion.playersheet.PlayerDiceRollerActivity
 import com.nicolas.whfrp3companion.shared.HAND_INTENT_ARGUMENT
 import com.nicolas.whfrp3companion.shared.PLAYER_NAME_INTENT_ARGUMENT
-import com.nicolas.whfrp3companion.shared.activities.DiceRollerActivity
 import com.nicolas.whfrp3companion.shared.adapters.ActionExpandableAdapter
 import com.nicolas.whfrp3companion.shared.adapters.ActionListener
 import kotlinx.android.synthetic.main.fragment_player_actions.*
@@ -47,7 +47,8 @@ class PlayerActionsFragment : Fragment(), ActionListener {
 
     override fun launchAction(action: Action) {
         activity?.let {
-            startActivity(it.intentFor<DiceRollerActivity>(
+            startActivity(it.intentFor<PlayerDiceRollerActivity>(
+                    PLAYER_NAME_INTENT_ARGUMENT to player.name,
                     HAND_INTENT_ARGUMENT to player.createHand(action)
             ))
         }

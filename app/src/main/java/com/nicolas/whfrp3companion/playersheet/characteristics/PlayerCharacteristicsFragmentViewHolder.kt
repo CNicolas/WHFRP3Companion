@@ -7,14 +7,16 @@ import com.nicolas.models.hand.Hand
 import com.nicolas.models.player.CharacteristicValue
 import com.nicolas.models.player.Player
 import com.nicolas.whfrp3companion.R
+import com.nicolas.whfrp3companion.playersheet.PlayerDiceRollerActivity
 import com.nicolas.whfrp3companion.shared.HAND_INTENT_ARGUMENT
-import com.nicolas.whfrp3companion.shared.activities.DiceRollerActivity
+import com.nicolas.whfrp3companion.shared.PLAYER_NAME_INTENT_ARGUMENT
 import com.nicolas.whfrp3companion.shared.bind
 import com.nicolas.whfrp3companion.shared.getView
 import com.nicolas.whfrp3companion.shared.viewModifications.intValue
 import org.jetbrains.anko.intentFor
 
-internal class PlayerCharacteristicsFragmentViewHolder(private val view: View) {
+internal class PlayerCharacteristicsFragmentViewHolder(private val player: Player,
+                                                       private val view: View) {
     private val career by view.bind<EditText>(R.id.career)
     private val rank by view.bind<EditText>(R.id.rank)
     private val experience by view.bind<EditText>(R.id.experience)
@@ -39,10 +41,8 @@ internal class PlayerCharacteristicsFragmentViewHolder(private val view: View) {
     private val maxReckless by view.bind<EditText>(R.id.max_reckless)
     private val description by view.bind<EditText>(R.id.description)
 
-    private var playerName: String = ""
-
     fun extractPlayerFromViews(): Player = Player(
-            name = playerName,
+            name = player.name,
             description = description.text.toString(),
             strength = CharacteristicValue(strength.intValue, strengthFortune.intValue),
             toughness = CharacteristicValue(toughness.intValue, toughnessFortune.intValue),
@@ -61,8 +61,6 @@ internal class PlayerCharacteristicsFragmentViewHolder(private val view: View) {
     )
 
     fun setupViews(player: Player) {
-        playerName = player.name
-
         career.setText(player.careerName)
         rank.setText(player.rank.toString())
         experience.setText(player.experience.toString())
@@ -102,7 +100,9 @@ internal class PlayerCharacteristicsFragmentViewHolder(private val view: View) {
     }
 
     private fun launchDiceRollerActivity(hand: Hand) {
-        view.context.startActivity(view.context.intentFor<DiceRollerActivity>(
+        val context = view.context
+        context.startActivity(context.intentFor<PlayerDiceRollerActivity>(
+                PLAYER_NAME_INTENT_ARGUMENT to player.name,
                 HAND_INTENT_ARGUMENT to hand
         ))
     }

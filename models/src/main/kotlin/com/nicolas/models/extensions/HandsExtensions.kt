@@ -8,6 +8,7 @@ import com.nicolas.models.player.Player
 import com.nicolas.models.player.enums.Characteristic
 import com.nicolas.models.skill.Skill
 import com.nicolas.models.skill.Specialization
+import java.lang.Math.abs
 
 fun Player.createHand(characteristic: Characteristic,
                       name: String = "Hand",
@@ -77,34 +78,37 @@ private fun Hand.applyEffectDices(effect: Effect): Hand {
     return this
 }
 
-private fun Hand.applyStanceDices(stance: Int): Hand {
+fun Hand.applyStanceDices(stance: Int): Hand {
     val hand = copy()
+    hand.characteristicDicesCount = hand.characteristicDicesCount + hand.conservativeDicesCount + hand.recklessDicesCount
+    hand.conservativeDicesCount = 0
+    hand.recklessDicesCount = 0
 
     if (hand.characteristicDicesCount > 0) {
         when {
             stance < 0 -> {
-                val diff = hand.characteristicDicesCount - Math.abs(stance)
+                val diff = hand.characteristicDicesCount - abs(stance)
                 when {
                     diff < 0 -> {
                         hand.characteristicDicesCount = 0
-                        hand.conservativeDicesCount += Math.abs(stance) - Math.abs(diff)
+                        hand.conservativeDicesCount += abs(stance) - abs(diff)
                     }
                     else -> {
-                        hand.characteristicDicesCount -= Math.abs(stance)
-                        hand.conservativeDicesCount += Math.abs(stance)
+                        hand.characteristicDicesCount -= abs(stance)
+                        hand.conservativeDicesCount += abs(stance)
                     }
                 }
             }
             stance > 0 -> {
-                val diff = hand.characteristicDicesCount - Math.abs(stance)
+                val diff = hand.characteristicDicesCount - abs(stance)
                 when {
                     diff < 0 -> {
                         hand.characteristicDicesCount = 0
-                        hand.recklessDicesCount += Math.abs(stance) - Math.abs(diff)
+                        hand.recklessDicesCount += abs(stance) - abs(diff)
                     }
                     else -> {
-                        hand.characteristicDicesCount -= Math.abs(stance)
-                        hand.recklessDicesCount += Math.abs(stance)
+                        hand.characteristicDicesCount -= abs(stance)
+                        hand.recklessDicesCount += abs(stance)
                     }
                 }
             }

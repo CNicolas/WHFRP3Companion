@@ -35,7 +35,7 @@ class PlayerCharacteristicsFragment : Fragment() {
             player = playerRepository.find(playerName)!!
 
             uiThread {
-                views = PlayerCharacteristicsFragmentViewHolder(resultingView)
+                views = PlayerCharacteristicsFragmentViewHolder(player, resultingView)
                 views.setupViews(player)
             }
         }
@@ -69,8 +69,7 @@ class PlayerCharacteristicsFragment : Fragment() {
         view.getView<EditText>(R.id.description).addTextChangedListener(playerSavingTextWatcher)
     }
 
-    @Suppress("UNUSED_PARAMETER")
-    fun save(editable: Editable) {
+    fun save() {
         doAsync {
             val partialPlayer = views.extractPlayerFromViews()
 
@@ -101,7 +100,7 @@ class PlayerCharacteristicsFragment : Fragment() {
         get() = object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-            override fun afterTextChanged(s: Editable) = save(s)
+            override fun afterTextChanged(s: Editable) = save()
         }
 
     companion object {
