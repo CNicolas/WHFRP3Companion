@@ -40,12 +40,6 @@ class PlayerActionsFragment : Fragment(), ActionListener {
         return resultingView
     }
 
-    override fun onResume() {
-        super.onResume()
-
-        setPlayerActionsAdapter()
-    }
-
     override fun launchAction(action: Action) {
         activity?.let {
             startActivity(it.intentFor<PlayerDiceRollerActivity>(

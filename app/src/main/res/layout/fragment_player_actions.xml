@@ -14,10 +14,11 @@
                         tools:listheader="@layout/list_actions_group"
                         tools:listitem="@layout/list_actions_child" />
 
-    <android.support.design.widget.FloatingActionButton android:id="@+id/search"
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/addActionFloatingActionButton"
                                                         android:layout_width="wrap_content"
                                                         android:layout_height="wrap_content"
                                                         android:layout_gravity="bottom|end"
                                                         android:layout_margin="@dimen/fab_margin"
-                                                        app:srcCompat="@drawable/ic_search_white" />
+        app:srcCompat="@drawable/ic_add_white" />
 </android.support.design.widget.CoordinatorLayout>

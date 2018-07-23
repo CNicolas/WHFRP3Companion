@@ -1,6 +1,7 @@
 package com.nicolas.whfrp3companion.fragments.actions
 
 import android.os.Bundle
+import android.support.design.widget.FloatingActionButton
 import android.support.v4.app.Fragment
 import android.view.*
 import com.nicolas.database.loadActions
@@ -10,6 +11,7 @@ import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.shared.ACTION_TALENT_SEARCH_TAG
 import com.nicolas.whfrp3companion.shared.adapters.ActionExpandableAdapter
 import com.nicolas.whfrp3companion.shared.dialogs.ActionSearchDialog
+import com.nicolas.whfrp3companion.shared.getView
 import kotlinx.android.synthetic.main.fragment_player_actions.*
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
@@ -20,19 +22,14 @@ class ActionsFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        val resultingView: View = inflater.inflate(R.layout.fragment_player_actions, container, false)
+        val resultingView: View = inflater.inflate(R.layout.fragment_actions, container, false)
+        setHasOptionsMenu(true)
 
         resetActions()
 
-        search.setOnClickListener { openSearchDialog() }
+        setupViewsEvents(resultingView)
 
         return resultingView
-    }
-
-    override fun onResume() {
-        super.onResume()
-
-        setActionsAdapter()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
@@ -45,6 +42,10 @@ class ActionsFragment : Fragment() {
             R.id.reset_actions_filters -> resetActions()
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun setupViewsEvents(view: View) {
+        view.getView<FloatingActionButton>(R.id.search).setOnClickListener { openSearchDialog() }
     }
 
     private fun openSearchDialog() {
