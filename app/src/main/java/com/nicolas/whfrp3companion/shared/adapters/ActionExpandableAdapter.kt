@@ -8,16 +8,20 @@ import android.view.ViewGroup
 import android.widget.*
 import com.nicolas.models.action.Action
 import com.nicolas.models.action.ActionType
+import com.nicolas.models.player.enums.Stance
 import com.nicolas.whfrp3companion.R
-import com.nicolas.whfrp3companion.shared.DIALOG_ACTION_TAG
+import com.nicolas.whfrp3companion.shared.ACTION_INTENT_ARGUMENT
+import com.nicolas.whfrp3companion.shared.STANCE_INTENT_ARGUMENT
+import com.nicolas.whfrp3companion.shared.activities.ActionDetailActivity
 import com.nicolas.whfrp3companion.shared.bind
-import com.nicolas.whfrp3companion.shared.dialogs.ActionDialog
 import com.nicolas.whfrp3companion.shared.enums.drawableId
 import com.nicolas.whfrp3companion.shared.enums.labelId
+import org.jetbrains.anko.intentFor
 
 class ActionExpandableAdapter(context: Context,
                               private val actions: List<Action>,
-                              private val actionListener: ActionListener? = null) : BaseExpandableListAdapter() {
+                              private val actionListener: ActionListener? = null,
+                              private val dominantStance: Stance = Stance.CONSERVATIVE) : BaseExpandableListAdapter() {
 
     private val inflater = LayoutInflater.from(context)
 
@@ -83,7 +87,7 @@ class ActionExpandableAdapter(context: Context,
             holder = view.tag as ChildViewHolder
         } else {
             view = inflater.inflate(R.layout.list_actions_child, parent, false)
-            holder = ChildViewHolder(view, actionListener)
+            holder = ChildViewHolder(view, actionListener, dominantStance)
             view!!.tag = holder
         }
 
@@ -108,7 +112,8 @@ class ActionExpandableAdapter(context: Context,
     }
 
     internal class ChildViewHolder(private val view: View,
-                                   private val actionListener: ActionListener?) {
+                                   private val actionListener: ActionListener?,
+                                   private val dominantStance: Stance) {
         private val actionChildLinearLayout by view.bind<LinearLayout>(R.id.actionChildLinearLayout)
         private val actionNameTextView by view.bind<TextView>(R.id.actionNameTextView)
         private val actionMenuImageButton by view.bind<ImageButton>(R.id.actionMenuImageButton)
@@ -141,8 +146,10 @@ class ActionExpandableAdapter(context: Context,
             val activity = view.context as? AppCompatActivity
 
             activity?.let {
-                val actionDialog = ActionDialog.newInstance(action)
-                actionDialog.show(activity.supportFragmentManager, DIALOG_ACTION_TAG)
+                it.startActivity(it.intentFor<ActionDetailActivity>(
+                        ACTION_INTENT_ARGUMENT to action,
+                        STANCE_INTENT_ARGUMENT to dominantStance
+                ))
             }
         }
     }

@@ -11,3 +11,5 @@ const val ITEM_EDIT_INTENT_ARGUMENT = "item"
 const val TALENTS_SEARCH_INTENT_ARGUMENT = "talentsSearch"
 
 const val ACTION_INTENT_ARGUMENT = "action"
+
+const val STANCE_INTENT_ARGUMENT = "stance"

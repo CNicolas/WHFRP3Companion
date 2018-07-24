@@ -2,7 +2,6 @@
 <resources>
     <color name="expertise_dice">#F4EA4A</color>
     <color name="characteristic_dice">#4471B5</color>
-    <color name="conservative_dice">#6ABE45</color>
     <color name="reckless_dice">#D42424</color>
     <color name="challenge_dice">#8D5FAA</color>
     <!-- end -->
