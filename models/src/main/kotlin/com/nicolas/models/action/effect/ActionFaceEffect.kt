@@ -4,6 +4,9 @@ import com.nicolas.models.action.ActionType
 import com.nicolas.models.action.effect.Target.*
 import com.nicolas.models.dice.DiceType
 import com.nicolas.models.item.enums.Range
+import com.nicolas.models.item.enums.or
+import com.nicolas.models.or
+import com.nicolas.models.plus
 import java.io.Serializable
 import java.lang.Math.abs
 
@@ -84,10 +87,10 @@ data class ActionFaceEffect(val damage: Int? = null,
         get () {
             return when {
                 exhaustion == null || exhaustion == 0 -> null
-                exhaustion == -1 -> "subissez ${abs(exhaustion)} fatigue"
-                exhaustion < -1 -> "subissez ${abs(exhaustion)} fatigues"
-                exhaustion == 1 -> "récupérez $exhaustion fatigue"
-                exhaustion > 1 -> "récupérez $exhaustion fatigues"
+                exhaustion == 1 -> "subissez ${abs(exhaustion)} fatigue"
+                exhaustion > 1 -> "subissez ${abs(exhaustion)} fatigues"
+                exhaustion == -1 -> "récupérez $exhaustion fatigue"
+                exhaustion > -1 -> "récupérez $exhaustion fatigues"
                 else -> null
             }
         }
@@ -96,8 +99,8 @@ data class ActionFaceEffect(val damage: Int? = null,
         get () {
             return when {
                 stress == null || stress == 0 -> null
-                stress < 0 -> "subissez ${abs(stress)} stress"
-                stress > 0 -> "récupérez $stress stress"
+                stress > 0 -> "subissez ${abs(stress)} stress"
+                stress < 0 -> "récupérez $stress stress"
                 else -> null
             }
         }
@@ -135,4 +138,22 @@ data class ActionFaceEffect(val damage: Int? = null,
             ALLY -> "Vous pouvez vous désengager d'un allié"
             else -> null
         }
+
+    operator fun plus(other: ActionFaceEffect): ActionFaceEffect =
+            ActionFaceEffect(
+                    damage = damage + other.damage,
+                    critical = critical + other.critical,
+                    ignoreSoak = ignoreSoak.or(other.ignoreSoak),
+                    cooldown = cooldown + other.cooldown,
+                    exhaustion = exhaustion + other.exhaustion,
+                    stress = stress + other.stress,
+                    wounds = wounds + other.wounds,
+                    maneuver = maneuver.or(other.maneuver),
+                    canEngage = canEngage.or(other.canEngage),
+                    canDisengage = canDisengage.or(other.canDisengage),
+                    addedDices = addedDices + other.addedDices,
+                    actionType = actionType + other.actionType,
+                    target = target.or(other.target),
+                    range = range.or(other.range)
+            )
 }
