@@ -2,6 +2,8 @@ package com.nicolas.whfrp3companion.playersheet
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.Menu
 import android.view.MenuItem
 import com.nicolas.database.HandRepository
@@ -85,10 +87,11 @@ internal class PlayerDiceRollerActivity : AppCompatActivity() {
         load_hand.setOnClickListener { listHands() }
 
         roll_button.setOnClickListener {
-            val rollResultsDialog = RollResultDialog.newInstance(getHandFromPickers().roll())
+            val rollResultsDialog = RollResultDialog.newInstance(hand.roll())
             rollResultsDialog.show(supportFragmentManager, DIALOG_ROLL_RESULT_TAG)
         }
 
+        handNameTextView.addTextChangedListener(handNameTextWatcher)
         characteristicDicePicker.setOnValueChangedListener { _, _, newVal -> hand.characteristicDicesCount = newVal }
         expertiseDicePicker.setOnValueChangedListener { _, _, newVal -> hand.expertiseDicesCount = newVal }
         fortuneDicePicker.setOnValueChangedListener { _, _, newVal -> hand.fortuneDicesCount = newVal }
@@ -117,38 +120,27 @@ internal class PlayerDiceRollerActivity : AppCompatActivity() {
 
     private fun rollHandStatistics(rollCount: Int) {
         startActivity(intentFor<DiceRollerStatisticsActivity>(
-                HAND_INTENT_ARGUMENT to getHandFromPickers(),
+                HAND_INTENT_ARGUMENT to hand,
                 HAND_ROLL_COUNT_INTENT_ARGUMENT to rollCount
         ))
     }
 
     private fun reset() {
         hand = emptyHand
-
         fillViews()
     }
 
     private fun saveHand() {
-        handRepository.save(getHandFromPickers())
+        handRepository.save(hand)
     }
 
     private fun deleteHand() {
-        handRepository.delete(handNameView.text.toString())
+        handRepository.delete(hand.name)
         reset()
     }
 
-    private fun getHandFromPickers(): Hand =
-            Hand(handNameView.text.toString(),
-                    characteristicDicesCount = characteristicDicePicker.value,
-                    expertiseDicesCount = expertiseDicePicker.value,
-                    fortuneDicesCount = fortuneDicePicker.value,
-                    conservativeDicesCount = conservativeDicePicker.value,
-                    recklessDicesCount = recklessDicePicker.value,
-                    challengeDicesCount = challengeDicePicker.value,
-                    misfortuneDicesCount = misfortuneDicePicker.value)
-
     private fun fillViews() {
-        handNameView.setText(hand.name)
+        handNameTextView.setText(hand.name)
         characteristicDicePicker.value = hand.characteristicDicesCount
         expertiseDicePicker.value = hand.expertiseDicesCount
         fortuneDicePicker.value = hand.fortuneDicesCount
@@ -186,4 +178,13 @@ internal class PlayerDiceRollerActivity : AppCompatActivity() {
             }
         }
     }
+
+    private val handNameTextWatcher: TextWatcher
+        get() = object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+            override fun afterTextChanged(s: Editable) {
+                hand.name = s.toString()
+            }
+        }
 }

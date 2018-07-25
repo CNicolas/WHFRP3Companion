@@ -13,7 +13,7 @@
                                                  android:layout_height="wrap_content"
                                                  android:fitsSystemWindows="true">
 
-        <EditText android:id="@+id/handNameView"
+        <EditText android:id="@+id/handNameTextView"
                   android:layout_width="0dp"
                   android:layout_height="wrap_content"
                   android:gravity="center"
@@ -34,7 +34,7 @@
                      app:layout_constraintTop_toTopOf="parent"
                      app:layout_constraintRight_toRightOf="parent"
                      app:layout_constraintBottom_toTopOf="@+id/characteristic_dice"
-                     app:layout_constraintLeft_toRightOf="@+id/handNameView"
+                     app:layout_constraintLeft_toRightOf="@+id/handNameTextView"
                      app:layout_constraintHorizontal_weight="2" />
 
         <ImageView android:id="@+id/characteristic_dice"
@@ -42,7 +42,7 @@
                    android:layout_height="wrap_content"
                    android:src="@drawable/dice_characteristic"
                    android:contentDescription="@string/characteristic"
-                   app:layout_constraintTop_toBottomOf="@+id/handNameView"
+                   app:layout_constraintTop_toBottomOf="@+id/handNameTextView"
                    app:layout_constraintRight_toLeftOf="@+id/conservative_dice"
                    app:layout_constraintBottom_toTopOf="@+id/characteristicDicePicker"
                    app:layout_constraintLeft_toLeftOf="parent" />
