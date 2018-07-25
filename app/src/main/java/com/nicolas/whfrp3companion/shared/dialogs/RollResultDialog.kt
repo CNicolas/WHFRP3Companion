@@ -14,17 +14,17 @@ import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.shared.ROLL_RESULT_INTENT_ARGUMENT
 import com.nicolas.whfrp3companion.shared.getView
 
-class RollResultDialog : DialogFragment() {
-    lateinit var successResult: TextView
-    lateinit var boonResult: TextView
-    lateinit var sigmarResult: TextView
-    lateinit var failureResult: TextView
-    lateinit var baneResult: TextView
-    lateinit var delayResult: TextView
-    lateinit var exhaustionResult: TextView
-    lateinit var chaosResult: TextView
+open class RollResultDialog : DialogFragment() {
+    private lateinit var successResult: TextView
+    private lateinit var boonResult: TextView
+    private lateinit var sigmarResult: TextView
+    private lateinit var failureResult: TextView
+    private lateinit var baneResult: TextView
+    private lateinit var delayResult: TextView
+    private lateinit var exhaustionResult: TextView
+    private lateinit var chaosResult: TextView
 
-    private lateinit var rollResult: RollResult
+    protected lateinit var rollResult: RollResult
 
     @SuppressLint("InflateParams")
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -36,16 +36,16 @@ class RollResultDialog : DialogFragment() {
 
         builder.setView(view)
         builder.setTitle(R.string.results)
-        builder.setPositiveButton(android.R.string.ok, { _, _ -> dismiss() })
+        builder.setPositiveButton(android.R.string.ok) { _, _ -> dismiss() }
 
         val dialog = builder.create()
         bindViews(view)
-        setResultsContent()
+        setResultsContent(rollResult)
 
         return dialog
     }
 
-    private fun setResultsContent() {
+    protected fun setResultsContent(rollResult: RollResult) {
         when (rollResult.report[Face.SUCCESS]) {
             null -> successResult.visibility = GONE
             else -> successResult.text = rollResult.report[Face.SUCCESS].toString()
@@ -87,7 +87,7 @@ class RollResultDialog : DialogFragment() {
         }
     }
 
-    private fun bindViews(view: View) {
+    protected open fun bindViews(view: View) {
         successResult = view.getView(R.id.success_result)
         boonResult = view.getView(R.id.boon_result)
         sigmarResult = view.getView(R.id.sigmar_result)

@@ -9,15 +9,14 @@ import android.view.MenuItem
 import com.nicolas.database.HandRepository
 import com.nicolas.database.PlayerRepository
 import com.nicolas.diceroller.roll.roll
+import com.nicolas.models.action.Action
 import com.nicolas.models.extensions.applyStanceDices
 import com.nicolas.models.hand.Hand
 import com.nicolas.models.player.Player
 import com.nicolas.whfrp3companion.R
+import com.nicolas.whfrp3companion.playersheet.actions.ActionRollResultDialog
 import com.nicolas.whfrp3companion.playersheet.state.StanceChangeListener
-import com.nicolas.whfrp3companion.shared.DIALOG_ROLL_RESULT_TAG
-import com.nicolas.whfrp3companion.shared.HAND_INTENT_ARGUMENT
-import com.nicolas.whfrp3companion.shared.HAND_ROLL_COUNT_INTENT_ARGUMENT
-import com.nicolas.whfrp3companion.shared.PLAYER_NAME_INTENT_ARGUMENT
+import com.nicolas.whfrp3companion.shared.*
 import com.nicolas.whfrp3companion.shared.activities.DiceRollerStatisticsActivity
 import com.nicolas.whfrp3companion.shared.dialogs.RollResultDialog
 import kotlinx.android.synthetic.main.activity_dice_roller.*
@@ -37,6 +36,7 @@ internal class PlayerDiceRollerActivity : AppCompatActivity() {
 
     private lateinit var hand: Hand
     private lateinit var player: Player
+    private var action: Action? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,6 +46,7 @@ internal class PlayerDiceRollerActivity : AppCompatActivity() {
         if (intent?.extras !== null) {
             hand = intent.extras.getSerializable(HAND_INTENT_ARGUMENT) as Hand
             playerName = intent.extras.getString(PLAYER_NAME_INTENT_ARGUMENT)
+            action = intent.extras.getSerializable(ACTION_INTENT_ARGUMENT) as? Action
         } else {
             hand = emptyHand
         }
@@ -86,10 +87,7 @@ internal class PlayerDiceRollerActivity : AppCompatActivity() {
 
         load_hand.setOnClickListener { listHands() }
 
-        roll_button.setOnClickListener {
-            val rollResultsDialog = RollResultDialog.newInstance(hand.roll())
-            rollResultsDialog.show(supportFragmentManager, DIALOG_ROLL_RESULT_TAG)
-        }
+        roll_button.setOnClickListener { rollHand() }
 
         handNameTextView.addTextChangedListener(handNameTextWatcher)
         characteristicDicePicker.setOnValueChangedListener { _, _, newVal -> hand.characteristicDicesCount = newVal }
@@ -118,6 +116,16 @@ internal class PlayerDiceRollerActivity : AppCompatActivity() {
         }
     }
 
+    private fun rollHand() {
+        val rollResultsDialog = action?.let {
+            ActionRollResultDialog.newInstance(hand.roll(), it, player.currentStance)
+        } ?: {
+            RollResultDialog.newInstance(hand.roll())
+        }()
+
+        rollResultsDialog.show(supportFragmentManager, DIALOG_ROLL_RESULT_TAG)
+    }
+
     private fun rollHandStatistics(rollCount: Int) {
         startActivity(intentFor<DiceRollerStatisticsActivity>(
                 HAND_INTENT_ARGUMENT to hand,
@@ -138,6 +146,8 @@ internal class PlayerDiceRollerActivity : AppCompatActivity() {
         handRepository.delete(hand.name)
         reset()
     }
+
+    // region Methods for views
 
     private fun fillViews() {
         handNameTextView.setText(hand.name)
@@ -187,4 +197,6 @@ internal class PlayerDiceRollerActivity : AppCompatActivity() {
                 hand.name = s.toString()
             }
         }
+
+    // endregion
 }
