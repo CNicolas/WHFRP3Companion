@@ -62,7 +62,7 @@ class ActionDetailActivity : AppCompatActivity() {
         action.recklessSide.effects?.let { setEffectsAdapter(it) }
     }
 
-    private fun setEffectsAdapter(it: ActionEffects) {
-        actionEffectsListView.adapter = ActionEffectsAdapter(this, it)
+    private fun setEffectsAdapter(actionEffects: ActionEffects) {
+        actionEffectsListView.adapter = ActionEffectsAdapter(this, actionEffects)
     }
 }

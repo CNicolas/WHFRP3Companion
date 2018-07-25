@@ -15,7 +15,9 @@ import com.nicolas.whfrp3companion.shared.bind
 import com.nicolas.whfrp3companion.shared.enums.drawableId
 import com.nicolas.whfrp3companion.shared.viewModifications.parseTemplatedText
 
-class ActionEffectsAdapter(context: Context, private val effects: ActionEffects) : BaseAdapter() {
+class ActionEffectsAdapter(context: Context,
+                           private val effects: ActionEffects,
+                           private val activatedEffects: List<ActionEffect>? = null) : BaseAdapter() {
     private val inflater = LayoutInflater.from(context)
 
     override fun getCount(): Int = effects.effectsCount
@@ -35,7 +37,7 @@ class ActionEffectsAdapter(context: Context, private val effects: ActionEffects)
         }
 
         val effect = getItem(position)
-        holder.setupViews(effect)
+        holder.setupViews(effect, activatedEffects)
 
         return view
     }
@@ -49,13 +51,19 @@ class ActionEffectsAdapter(context: Context, private val effects: ActionEffects)
         private val face3ImageView by view.bind<ImageView>(R.id.effectFace3ImageView)
         private val face4ImageView by view.bind<ImageView>(R.id.effectFace4ImageView)
 
-        fun setupViews(effect: ActionEffect?) {
+        fun setupViews(effect: ActionEffect?, activatedEffects: List<ActionEffect>?) {
             this.effect = effect
 
             this.effect?.let {
                 setFaceDrawable(it.face.drawableId)
                 setImagesVisibility(it.faceCount)
                 descriptionTextView.text = parseTemplatedText(view.context, it.third.toString())
+            }
+
+            activatedEffects?.let {
+                if (!it.contains(this.effect)) {
+                    descriptionTextView.isEnabled = false
+                }
             }
         }
 

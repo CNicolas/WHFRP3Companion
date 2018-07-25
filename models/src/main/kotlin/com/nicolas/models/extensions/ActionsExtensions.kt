@@ -30,13 +30,13 @@ fun Player.createHand(action: Action): Hand? {
     }
 }
 
-fun Action.getSideByStance(stance: Stance): ActionSide? = when (stance) {
+fun Action.getSideByStance(stance: Stance): ActionSide = when (stance) {
     CONSERVATIVE, NEUTRAL -> conservativeSide
     RECKLESS -> recklessSide
 }
 
 private fun Player.getSideOfAction(action: Action): ActionSide? {
-    return action.getSideByStance(currentStance) ?: action.getSideByStance(dominantStance)
+    return action.getSideByStance(currentStance)
 }
 
 private fun Player.createHandWithDifficulty(action: Action, skill: Skill, difficulty: List<DiceType>): Hand {

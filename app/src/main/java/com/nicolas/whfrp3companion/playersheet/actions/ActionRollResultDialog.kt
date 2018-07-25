@@ -5,20 +5,22 @@ import android.app.AlertDialog
 import android.app.Dialog
 import android.os.Bundle
 import android.view.View
-import android.widget.TextView
+import android.widget.ListView
 import com.nicolas.diceroller.roll.RollResult
 import com.nicolas.diceroller.roll.getRollResult
 import com.nicolas.models.action.Action
+import com.nicolas.models.extensions.getSideByStance
 import com.nicolas.models.player.enums.Stance
 import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.shared.ACTION_INTENT_ARGUMENT
 import com.nicolas.whfrp3companion.shared.ROLL_RESULT_INTENT_ARGUMENT
 import com.nicolas.whfrp3companion.shared.STANCE_INTENT_ARGUMENT
+import com.nicolas.whfrp3companion.shared.adapters.ActionEffectsAdapter
 import com.nicolas.whfrp3companion.shared.dialogs.RollResultDialog
 import com.nicolas.whfrp3companion.shared.getView
 
 class ActionRollResultDialog : RollResultDialog() {
-    private lateinit var effectsTextView: TextView
+    private lateinit var actionEffectsListView: ListView
 
     private lateinit var action: Action
     private lateinit var stance: Stance
@@ -47,13 +49,13 @@ class ActionRollResultDialog : RollResultDialog() {
 
     override fun bindViews(view: View) {
         super.bindViews(view)
-        effectsTextView = view.getView(R.id.effectsTextView)
+        actionEffectsListView = view.getView(R.id.actionEffectsListView)
     }
 
     private fun fillViews(action: Action) {
         val (finalEffect, remainingReport, activatedEffects) = action.getRollResult(stance, rollResult)
 
-        effectsTextView.text = finalEffect.toString()
+        actionEffectsListView.adapter = ActionEffectsAdapter(context!!, action.getSideByStance(stance).effects!!, activatedEffects)
     }
 
     companion object {
