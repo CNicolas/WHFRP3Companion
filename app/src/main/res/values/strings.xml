@@ -138,6 +138,8 @@
     <string name="statistics_average_result_hint">0 / roll</string>
     <string name="hand_name_hint">Hand name</string>
 
+    <string name="failure">Failure</string>
+
     <string name="cooldown">Cooldown</string>
     <string name="talent_type">Talent type</string>
     <string name="talent_name">Talent name</string>

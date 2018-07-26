@@ -70,8 +70,13 @@ class ActionRollResultDialog : RollResultDialog() {
 
         actionEffectsListView.adapter = ActionEffectsAdapter(context!!, action.getSideByStance(player.currentStance).effects!!, activatedEffects)
 
-        damageTextView.text = getString(R.string.action_damage_format)
-                .format(getDamage(finalEffect, remainingReport), getCritical(finalEffect))
+        val damageText = if (rollResult.isSuccessful) {
+            getString(R.string.action_damage_format)
+                    .format(getDamage(finalEffect, remainingReport), getCritical(finalEffect))
+        } else {
+            getString(R.string.failure)
+        }
+        damageTextView.text = damageText
     }
 
     private fun getDamage(effect: ActionFaceEffect, remainingReport: FacesReport): Int =
