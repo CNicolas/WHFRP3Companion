@@ -4,6 +4,7 @@ import com.nicolas.models.item.*
 import com.nicolas.models.item.enums.ItemType
 import com.nicolas.models.item.enums.ItemType.*
 import com.nicolas.models.item.enums.Range
+import com.nicolas.models.item.enums.WeaponCategory
 import com.nicolas.models.player.Player
 
 fun Player.addItem(item: Item): List<Item> {
@@ -35,6 +36,10 @@ fun Player.getWeaponByName(name: String): Weapon? = getWeapons().firstOrNull { i
 
 fun Player.getEquippedArmors() = getArmors().filter { it.isEquipped }
 fun Player.getEquippedWeapons() = getWeapons().filter { it.isEquipped }
+fun Player.getEquippedWeaponsForRange(range: Range) = getEquippedWeapons().filter { it.range == range }
+fun Player.getEquippedWeaponsForCategory(weaponCategory: WeaponCategory) = getEquippedWeapons().filter { it.category == weaponCategory }
+fun Player.getEquippedWeaponsForCategories(weaponCategories: List<WeaponCategory>) =
+        getEquippedWeapons().filter { weaponCategories.contains(it.category) }
 
 fun Player.removeItem(item: Item): List<Item> {
     val mutableItems = items.toMutableList()
@@ -89,3 +94,10 @@ fun List<Item>.getWeapons(): List<Weapon> =
         filter { it.type == WEAPON }
                 .map { it as Weapon }
 
+fun Weapon.isCriticalTriggered(boonCount: Int?): Boolean {
+    if (boonCount == null) {
+        return false
+    }
+
+    return boonCount >= criticalLevel
+}

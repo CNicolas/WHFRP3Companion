@@ -2,14 +2,18 @@ package com.nicolas.models.extensions
 
 import com.nicolas.models.action.Action
 import com.nicolas.models.action.ActionSide
+import com.nicolas.models.action.effect.ActionFaceEffect
 import com.nicolas.models.dice.DiceType
 import com.nicolas.models.hand.DifficultyLevel
 import com.nicolas.models.hand.Hand
+import com.nicolas.models.item.Weapon
 import com.nicolas.models.item.enums.WeaponCategory
 import com.nicolas.models.player.Player
 import com.nicolas.models.player.enums.Stance
 import com.nicolas.models.player.enums.Stance.*
+import com.nicolas.models.plus
 import com.nicolas.models.skill.Skill
+import com.nicolas.models.toInt
 
 fun Player.createHand(action: Action): Hand? {
     return action.skill?.let { skillName ->
@@ -33,6 +37,30 @@ fun Player.createHand(action: Action): Hand? {
 fun Action.getSideByStance(stance: Stance): ActionSide = when (stance) {
     CONSERVATIVE, NEUTRAL -> conservativeSide
     RECKLESS -> recklessSide
+}
+
+fun Player.getActionEffectDamage(skillName: String, effect: ActionFaceEffect, overSuccess: Int? = null, weapon: Weapon? = null): Int {
+    val actionSkill = getSkillByName(skillName)
+    val characteristicValue = actionSkill?.let {
+        get(actionSkill.characteristic).value
+    } ?: 0
+    val overSuccessDamage = actionSkill?.let {
+        when (overSuccess) {
+            0 -> 0
+            else -> when {
+                it.level >= (overSuccess ?: 0) -> overSuccess
+                else -> it.level
+            }
+        }
+    }
+
+    return (weapon?.damage ?: 0) + effect.damage + characteristicValue + overSuccessDamage ?: 0
+}
+
+fun getActionEffectCritical(effect: ActionFaceEffect, boonCount: Int? = null, weapon: Weapon? = null): Int {
+    val weaponCritical = weapon?.isCriticalTriggered(boonCount)?.toInt() ?: 0
+
+    return effect.critical + weaponCritical ?: 0
 }
 
 private fun Player.getSideOfAction(action: Action): ActionSide? {

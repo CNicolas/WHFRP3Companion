@@ -23,3 +23,5 @@ operator fun <T> List<T>?.plus(other: List<T>?): List<T>? {
         else -> this + other
     }
 }
+
+fun Boolean.toInt() = if (this) 1 else 0

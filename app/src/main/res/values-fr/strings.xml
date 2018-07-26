@@ -160,4 +160,5 @@
     <string name="spell">Sort</string>
     <string name="summoning">Invocation</string>
     <string name="support">Support</string>
+    <string name="action_damage_format">%1$d dégât(s), dont %2$d critique(s)</string>
 </resources>

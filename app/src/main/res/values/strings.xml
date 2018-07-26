@@ -151,6 +151,7 @@
     <string name="action_traits">Action traits</string>
     <string name="action_conditions">Action conditions</string>
     <string name="launch_action">Launch action</string>
+    <string name="action_damage_format">%1$d damage, of which %2$d critical</string>
 
     <string name="melee_attack">Melee attack</string>
     <string name="range_attack">Range attack</string>

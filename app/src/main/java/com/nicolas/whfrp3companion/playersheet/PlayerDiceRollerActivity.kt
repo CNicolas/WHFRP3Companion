@@ -118,7 +118,7 @@ internal class PlayerDiceRollerActivity : AppCompatActivity() {
 
     private fun rollHand() {
         val rollResultsDialog = action?.let {
-            ActionRollResultDialog.newInstance(hand.roll(), it, player.currentStance)
+            ActionRollResultDialog.newInstance(hand.roll(), it, player.name)
         } ?: {
             RollResultDialog.newInstance(hand.roll())
         }()

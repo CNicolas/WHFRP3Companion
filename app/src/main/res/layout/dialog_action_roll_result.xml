@@ -16,7 +16,7 @@
               app:layout_constraintLeft_toLeftOf="parent"
               app:layout_constraintTop_toTopOf="parent"
               app:layout_constraintRight_toLeftOf="@+id/boon_result"
-              app:layout_constraintBottom_toTopOf="@+id/actionEffectsListView" />
+              app:layout_constraintBottom_toTopOf="@+id/damageTextView" />
 
     <TextView android:id="@+id/boon_result"
               android:layout_width="48dp"
@@ -26,7 +26,7 @@
               app:layout_constraintLeft_toRightOf="@+id/success_result"
               app:layout_constraintTop_toTopOf="parent"
               app:layout_constraintRight_toLeftOf="@+id/sigmar_result"
-              app:layout_constraintBottom_toTopOf="@+id/actionEffectsListView" />
+              app:layout_constraintBottom_toTopOf="@+id/damageTextView" />
 
     <TextView android:id="@+id/sigmar_result"
               android:layout_width="48dp"
@@ -36,7 +36,7 @@
               app:layout_constraintLeft_toRightOf="@+id/boon_result"
               app:layout_constraintTop_toTopOf="parent"
               app:layout_constraintRight_toLeftOf="@+id/failure_result"
-              app:layout_constraintBottom_toTopOf="@+id/actionEffectsListView" />
+              app:layout_constraintBottom_toTopOf="@+id/damageTextView" />
 
     <TextView android:id="@+id/failure_result"
               android:layout_width="48dp"
@@ -46,7 +46,7 @@
               app:layout_constraintLeft_toRightOf="@+id/sigmar_result"
               app:layout_constraintTop_toTopOf="parent"
               app:layout_constraintRight_toLeftOf="@+id/bane_result"
-              app:layout_constraintBottom_toTopOf="@+id/actionEffectsListView" />
+              app:layout_constraintBottom_toTopOf="@+id/damageTextView" />
 
     <TextView android:id="@+id/bane_result"
               android:layout_width="48dp"
@@ -56,7 +56,7 @@
               app:layout_constraintLeft_toRightOf="@+id/failure_result"
               app:layout_constraintTop_toTopOf="parent"
               app:layout_constraintRight_toLeftOf="@+id/delay_result"
-              app:layout_constraintBottom_toTopOf="@+id/actionEffectsListView" />
+              app:layout_constraintBottom_toTopOf="@+id/damageTextView" />
 
     <TextView android:id="@+id/delay_result"
               android:layout_width="48dp"
@@ -66,7 +66,7 @@
               app:layout_constraintLeft_toRightOf="@+id/bane_result"
               app:layout_constraintTop_toTopOf="parent"
               app:layout_constraintRight_toLeftOf="@+id/exhaustion_result"
-              app:layout_constraintBottom_toTopOf="@+id/actionEffectsListView" />
+              app:layout_constraintBottom_toTopOf="@+id/damageTextView" />
 
     <TextView android:id="@+id/exhaustion_result"
               android:layout_width="48dp"
@@ -76,7 +76,7 @@
               app:layout_constraintLeft_toRightOf="@+id/delay_result"
               app:layout_constraintTop_toTopOf="parent"
               app:layout_constraintRight_toLeftOf="@+id/chaos_result"
-              app:layout_constraintBottom_toTopOf="@+id/actionEffectsListView" />
+              app:layout_constraintBottom_toTopOf="@+id/damageTextView" />
 
     <TextView android:id="@+id/chaos_result"
               android:layout_width="48dp"
@@ -86,13 +86,24 @@
               app:layout_constraintLeft_toRightOf="@+id/exhaustion_result"
               app:layout_constraintTop_toTopOf="parent"
               app:layout_constraintRight_toRightOf="parent"
-              app:layout_constraintBottom_toTopOf="@+id/actionEffectsListView" />
+              app:layout_constraintBottom_toTopOf="@+id/damageTextView" />
+
+    <TextView android:id="@+id/damageTextView"
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              android:gravity="center"
+              android:textSize="@dimen/big_text_size"
+              android:hint="@string/zero"
+              app:layout_constraintLeft_toLeftOf="parent"
+              app:layout_constraintTop_toBottomOf="@+id/success_result"
+              app:layout_constraintRight_toRightOf="parent"
+              app:layout_constraintBottom_toTopOf="@id/actionEffectsListView" />
 
     <ListView android:id="@+id/actionEffectsListView"
               android:layout_width="0dp"
               android:layout_height="wrap_content"
               tools:listitem="@layout/list_element_action_effect"
               app:layout_constraintLeft_toLeftOf="parent"
-              app:layout_constraintTop_toBottomOf="@+id/success_result"
+              app:layout_constraintTop_toBottomOf="@+id/damageTextView"
               app:layout_constraintRight_toRightOf="parent" />
 </android.support.constraint.ConstraintLayout>
