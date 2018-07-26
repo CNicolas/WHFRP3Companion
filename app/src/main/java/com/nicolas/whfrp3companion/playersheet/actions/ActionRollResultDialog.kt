@@ -16,17 +16,13 @@ import com.nicolas.models.action.effect.ActionFaceEffect
 import com.nicolas.models.dice.Face
 import com.nicolas.models.extensions.getActionEffectCritical
 import com.nicolas.models.extensions.getActionEffectDamage
-import com.nicolas.models.extensions.getEquippedWeaponsForCategories
 import com.nicolas.models.extensions.getSideByStance
 import com.nicolas.models.item.Weapon
 import com.nicolas.models.player.Player
 import com.nicolas.whfrp3companion.R
-import com.nicolas.whfrp3companion.shared.ACTION_INTENT_ARGUMENT
-import com.nicolas.whfrp3companion.shared.PLAYER_NAME_INTENT_ARGUMENT
-import com.nicolas.whfrp3companion.shared.ROLL_RESULT_INTENT_ARGUMENT
+import com.nicolas.whfrp3companion.shared.*
 import com.nicolas.whfrp3companion.shared.adapters.ActionEffectsAdapter
 import com.nicolas.whfrp3companion.shared.dialogs.RollResultDialog
-import com.nicolas.whfrp3companion.shared.getView
 import org.koin.android.ext.android.inject
 
 class ActionRollResultDialog : RollResultDialog() {
@@ -37,6 +33,7 @@ class ActionRollResultDialog : RollResultDialog() {
 
     private lateinit var player: Player
     private lateinit var action: Action
+    private var weapon: Weapon? = null
 
     @SuppressLint("InflateParams")
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -47,6 +44,7 @@ class ActionRollResultDialog : RollResultDialog() {
         val playerName = arguments!!.getString(PLAYER_NAME_INTENT_ARGUMENT)
         player = playerRepository.find(playerName)!!
         action = arguments!!.getSerializable(ACTION_INTENT_ARGUMENT) as Action
+        weapon = arguments!!.getSerializable(WEAPON_INTENT_ARGUMENT) as? Weapon
         rollResult = arguments!!.getSerializable(ROLL_RESULT_INTENT_ARGUMENT) as RollResult
 
         builder.setView(view)
@@ -83,28 +81,19 @@ class ActionRollResultDialog : RollResultDialog() {
                     else -> 0
                 }
 
-                player.getActionEffectDamage(it, effect, overSuccess, getUsedWeapon())
+                player.getActionEffectDamage(it, effect, overSuccess, weapon)
             } ?: 0
 
     private fun getCritical(effect: ActionFaceEffect): Int =
-            getActionEffectCritical(effect, rollResult.report[Face.BOON], getUsedWeapon())
-
-    private fun getUsedWeapon(): Weapon? {
-        val actionWeaponCategories = action.conditions?.flatMap { it.weapon?.categories ?: listOf() } ?: listOf()
-        val weapons = player.getEquippedWeaponsForCategories(actionWeaponCategories)
-
-        return when {
-            weapons.isNotEmpty() -> weapons[0]
-            else -> null
-        }
-    }
+            getActionEffectCritical(effect, rollResult.report[Face.BOON], weapon)
 
     companion object {
-        fun newInstance(rollResult: RollResult, action: Action, playerName: String): ActionRollResultDialog {
+        fun newInstance(rollResult: RollResult, action: Action, playerName: String, weapon: Weapon?): ActionRollResultDialog {
             val args = Bundle()
             args.putString(PLAYER_NAME_INTENT_ARGUMENT, playerName)
             args.putSerializable(ACTION_INTENT_ARGUMENT, action)
             args.putSerializable(ROLL_RESULT_INTENT_ARGUMENT, rollResult)
+            args.putSerializable(WEAPON_INTENT_ARGUMENT, weapon)
 
             val fragment = ActionRollResultDialog()
             fragment.arguments = args

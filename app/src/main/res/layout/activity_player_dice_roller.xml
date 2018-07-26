@@ -14,21 +14,21 @@
                   android:orientation="vertical">
         <include layout="@layout/content_dice_roller" />
 
-        <Button android:id="@+id/roll_button"
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="@dimen/medium_padding"
-                android:text="@string/roll" />
+        <Spinner android:id="@+id/weapon_spinner"
+                 android:layout_width="match_parent"
+                 android:layout_height="60dp"
+                 android:layout_marginStart="@dimen/big_padding"
+                 android:layout_marginTop="@dimen/medium_padding"
+                 android:layout_marginEnd="@dimen/big_padding" />
 
         <include layout="@layout/content_stance_bar" />
     </LinearLayout>
 
-    <android.support.design.widget.FloatingActionButton android:id="@+id/fab_save_hand"
-                                                        android:layout_width="wrap_content"
-                                                        android:layout_height="wrap_content"
+    <android.support.design.widget.FloatingActionButton android:id="@+id/fab_roll_hand"
+                                                        android:layout_width="72dp"
+                                                        android:layout_height="72dp"
                                                         android:layout_gravity="bottom|end"
                                                         android:layout_margin="@dimen/fab_margin"
-                                                        app:srcCompat="@drawable/ic_save_white" />
+                                                        app:srcCompat="@drawable/ic_roll_dices_white" />
 
 </android.support.design.widget.CoordinatorLayout>

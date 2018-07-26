@@ -8,6 +8,7 @@ const val HAND_ROLL_COUNT_INTENT_ARGUMENT = "rollCount"
 const val ROLL_RESULT_INTENT_ARGUMENT = "rollResult"
 
 const val ITEM_EDIT_INTENT_ARGUMENT = "item"
+const val WEAPON_INTENT_ARGUMENT = "weapon"
 
 const val TALENTS_SEARCH_INTENT_ARGUMENT = "talentsSearch"
 

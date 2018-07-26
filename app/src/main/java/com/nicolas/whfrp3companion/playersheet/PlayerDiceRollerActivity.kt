@@ -6,20 +6,25 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import android.widget.AdapterView
 import com.nicolas.database.HandRepository
 import com.nicolas.database.PlayerRepository
 import com.nicolas.diceroller.roll.roll
 import com.nicolas.models.action.Action
 import com.nicolas.models.extensions.applyStanceDices
+import com.nicolas.models.extensions.getEquippedWeapons
 import com.nicolas.models.hand.Hand
+import com.nicolas.models.item.Weapon
 import com.nicolas.models.player.Player
 import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.playersheet.actions.ActionRollResultDialog
 import com.nicolas.whfrp3companion.playersheet.state.StanceChangeListener
+import com.nicolas.whfrp3companion.playersheet.state.WeaponsAdapter
 import com.nicolas.whfrp3companion.shared.*
 import com.nicolas.whfrp3companion.shared.activities.DiceRollerStatisticsActivity
 import com.nicolas.whfrp3companion.shared.dialogs.RollResultDialog
-import kotlinx.android.synthetic.main.activity_dice_roller.*
+import kotlinx.android.synthetic.main.activity_player_dice_roller.*
 import kotlinx.android.synthetic.main.content_dice_roller.*
 import kotlinx.android.synthetic.main.content_stance_bar.*
 import kotlinx.android.synthetic.main.toolbar.*
@@ -37,6 +42,7 @@ internal class PlayerDiceRollerActivity : AppCompatActivity() {
     private lateinit var hand: Hand
     private lateinit var player: Player
     private var action: Action? = null
+    private var weapon: Weapon? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -73,30 +79,14 @@ internal class PlayerDiceRollerActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
-            R.id.reset_hand -> reset()
+            R.id.save_hand -> saveHand()
             R.id.delete_hand -> deleteHand()
+            R.id.reset_hand -> reset()
             R.id.roll_statistics_100 -> rollHandStatistics(100)
             R.id.roll_statistics_1000 -> rollHandStatistics(1000)
             R.id.roll_statistics_5000 -> rollHandStatistics(5000)
         }
         return super.onOptionsItemSelected(item)
-    }
-
-    private fun setupViewsEvents() {
-        fab_save_hand.setOnClickListener { saveHand() }
-
-        load_hand.setOnClickListener { listHands() }
-
-        roll_button.setOnClickListener { rollHand() }
-
-        handNameTextView.addTextChangedListener(handNameTextWatcher)
-        characteristicDicePicker.setOnValueChangedListener { _, _, newVal -> hand.characteristicDicesCount = newVal }
-        expertiseDicePicker.setOnValueChangedListener { _, _, newVal -> hand.expertiseDicesCount = newVal }
-        fortuneDicePicker.setOnValueChangedListener { _, _, newVal -> hand.fortuneDicesCount = newVal }
-        conservativeDicePicker.setOnValueChangedListener { _, _, newVal -> hand.conservativeDicesCount = newVal }
-        recklessDicePicker.setOnValueChangedListener { _, _, newVal -> hand.recklessDicesCount = newVal }
-        challengeDicePicker.setOnValueChangedListener { _, _, newVal -> hand.challengeDicesCount = newVal }
-        misfortuneDicePicker.setOnValueChangedListener { _, _, newVal -> hand.misfortuneDicesCount = newVal }
     }
 
     private fun listHands() {
@@ -118,7 +108,7 @@ internal class PlayerDiceRollerActivity : AppCompatActivity() {
 
     private fun rollHand() {
         val rollResultsDialog = action?.let {
-            ActionRollResultDialog.newInstance(hand.roll(), it, player.name)
+            ActionRollResultDialog.newInstance(hand.roll(), it, player.name, weapon)
         } ?: {
             RollResultDialog.newInstance(hand.roll())
         }()
@@ -149,7 +139,34 @@ internal class PlayerDiceRollerActivity : AppCompatActivity() {
 
     // region Methods for views
 
+    private fun setupViewsEvents() {
+        fab_roll_hand.setOnClickListener { rollHand() }
+
+        load_hand.setOnClickListener { listHands() }
+
+        weapon_spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                weapon = null
+            }
+
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                weapon = player.getEquippedWeapons()[position]
+            }
+        }
+
+        handNameTextView.addTextChangedListener(handNameTextWatcher)
+        characteristicDicePicker.setOnValueChangedListener { _, _, newVal -> hand.characteristicDicesCount = newVal }
+        expertiseDicePicker.setOnValueChangedListener { _, _, newVal -> hand.expertiseDicesCount = newVal }
+        fortuneDicePicker.setOnValueChangedListener { _, _, newVal -> hand.fortuneDicesCount = newVal }
+        conservativeDicePicker.setOnValueChangedListener { _, _, newVal -> hand.conservativeDicesCount = newVal }
+        recklessDicePicker.setOnValueChangedListener { _, _, newVal -> hand.recklessDicesCount = newVal }
+        challengeDicePicker.setOnValueChangedListener { _, _, newVal -> hand.challengeDicesCount = newVal }
+        misfortuneDicePicker.setOnValueChangedListener { _, _, newVal -> hand.misfortuneDicesCount = newVal }
+    }
+
     private fun fillViews() {
+        weapon_spinner.adapter = WeaponsAdapter(this, player.getEquippedWeapons())
+
         handNameTextView.setText(hand.name)
         characteristicDicePicker.value = hand.characteristicDicesCount
         expertiseDicePicker.value = hand.expertiseDicesCount
