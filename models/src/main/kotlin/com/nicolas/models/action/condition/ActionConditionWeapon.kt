@@ -4,7 +4,7 @@ import com.nicolas.models.item.enums.WeaponCategory
 import com.nicolas.models.item.enums.WeaponCategory.*
 import java.io.Serializable
 
-data class ActionConditionWeapon(val categories: List<WeaponCategory>? = listOf(),
+data class ActionConditionWeapon(val categories: List<WeaponCategory> = listOf(),
                                  val oneHanded: Boolean? = null,
                                  val twoHanded: Boolean? = null,
                                  val equipped: Boolean? = null,
@@ -16,7 +16,7 @@ data class ActionConditionWeapon(val categories: List<WeaponCategory>? = listOf(
 
     private val categoriesString: String?
         get() {
-            val categoriesTextList = categories?.map {
+            val categoriesTextList = categories.map {
                 when (it) {
                     MELEE -> "arme de mêlée"
                     RANGE -> "arme à distance"
@@ -25,7 +25,7 @@ data class ActionConditionWeapon(val categories: List<WeaponCategory>? = listOf(
                 }
             }
 
-            return categoriesTextList?.joinToString()
+            return categoriesTextList.joinToString()
         }
 
     private val weaponHandlingString: String?

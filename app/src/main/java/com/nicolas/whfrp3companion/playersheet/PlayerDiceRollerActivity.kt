@@ -14,6 +14,7 @@ import com.nicolas.diceroller.roll.roll
 import com.nicolas.models.action.Action
 import com.nicolas.models.extensions.applyStanceDices
 import com.nicolas.models.extensions.getEquippedWeapons
+import com.nicolas.models.extensions.getEquippedWeaponsForCategories
 import com.nicolas.models.hand.Hand
 import com.nicolas.models.item.Weapon
 import com.nicolas.models.player.Player
@@ -172,7 +173,12 @@ internal class PlayerDiceRollerActivity : AppCompatActivity() {
     }
 
     private fun fillViews() {
-        weapon_spinner.adapter = WeaponsAdapter(this, player.getEquippedWeapons())
+        val weaponCategories = action?.conditions?.mapNotNull { it.weapon }?.flatMap { it.categories }
+        val weapons = weaponCategories?.let {
+            player.getEquippedWeaponsForCategories(it)
+        } ?: player.getEquippedWeapons()
+
+        weapon_spinner.adapter = WeaponsAdapter(this, weapons)
 
         handNameTextView.setText(hand.name)
         characteristicDicePicker.value = hand.characteristicDicesCount
