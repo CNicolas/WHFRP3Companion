@@ -39,22 +39,13 @@ fun Action.getSideByStance(stance: Stance): ActionSide = when (stance) {
     RECKLESS -> recklessSide
 }
 
-fun Player.getActionEffectDamage(skillName: String, effect: ActionFaceEffect, overSuccess: Int? = null, weapon: Weapon? = null): Int {
+fun Player.getActionEffectDamage(skillName: String, effect: ActionFaceEffect, weapon: Weapon? = null): Int {
     val actionSkill = getSkillByName(skillName)
     val characteristicValue = actionSkill?.let {
         get(actionSkill.characteristic).value
     } ?: 0
-    val overSuccessDamage = actionSkill?.let {
-        when (overSuccess) {
-            0 -> 0
-            else -> when {
-                it.level >= (overSuccess ?: 0) -> overSuccess
-                else -> it.level
-            }
-        }
-    }
 
-    return (weapon?.damage ?: 0) + effect.damage + characteristicValue + overSuccessDamage ?: 0
+    return (weapon?.damage ?: 0) + effect.damage + characteristicValue ?: 0
 }
 
 fun getActionEffectCritical(effect: ActionFaceEffect, boonCount: Int? = null, weapon: Weapon? = null): Int {

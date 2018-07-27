@@ -51,15 +51,13 @@ class PlayerActionEffectTest {
 
     @Test
     fun should_return_damages_with_weapon() {
-        val damage10 = player.getActionEffectDamage(action.skill!!, actionEffect, 0, weapon)
-        val damage11 = player.getActionEffectDamage(action.skill!!, actionEffect, 1, weapon)
-        val damage14 = player.getActionEffectDamage(action.skill!!, actionEffect2, 8, weapon)
-        val damage13 = player.getActionEffectDamage(action.skill!!, actionEffect3, 0, weapon)
-        val damage15 = player.getActionEffectDamage(action.skill!!, actionEffect + actionEffect2 + actionEffect3, 0, weapon)
+        val damage10 = player.getActionEffectDamage(action.skill!!, actionEffect, weapon)
+        val damage12 = player.getActionEffectDamage(action.skill!!, actionEffect2, weapon)
+        val damage13 = player.getActionEffectDamage(action.skill!!, actionEffect3, weapon)
+        val damage15 = player.getActionEffectDamage(action.skill!!, actionEffect + actionEffect2 + actionEffect3, weapon)
 
         assertThat(damage10).isEqualTo(10)
-        assertThat(damage11).isEqualTo(11)
-        assertThat(damage14).isEqualTo(14)
+        assertThat(damage12).isEqualTo(12)
         assertThat(damage13).isEqualTo(13)
         assertThat(damage15).isEqualTo(15)
     }

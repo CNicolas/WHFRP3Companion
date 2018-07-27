@@ -8,7 +8,6 @@ import android.view.View
 import android.widget.ListView
 import android.widget.TextView
 import com.nicolas.database.PlayerRepository
-import com.nicolas.diceroller.roll.FacesReport
 import com.nicolas.diceroller.roll.RollResult
 import com.nicolas.diceroller.roll.getRollResult
 import com.nicolas.models.action.Action
@@ -72,21 +71,16 @@ class ActionRollResultDialog : RollResultDialog() {
 
         val damageText = if (rollResult.isSuccessful) {
             getString(R.string.action_damage_format)
-                    .format(getDamage(finalEffect, remainingReport), getCritical(finalEffect))
+                    .format(getDamage(finalEffect), getCritical(finalEffect))
         } else {
             getString(R.string.failure)
         }
         damageTextView.text = damageText
     }
 
-    private fun getDamage(effect: ActionFaceEffect, remainingReport: FacesReport): Int =
+    private fun getDamage(effect: ActionFaceEffect): Int =
             action.skill?.let {
-                val overSuccess = when {
-                    remainingReport[Face.SIGMAR] == null -> remainingReport[Face.SUCCESS]
-                    else -> 0
-                }
-
-                player.getActionEffectDamage(it, effect, overSuccess, weapon)
+                player.getActionEffectDamage(it, effect, weapon)
             } ?: 0
 
     private fun getCritical(effect: ActionFaceEffect): Int =
