@@ -2,6 +2,8 @@ package com.nicolas.whfrp3companion.shared.enums
 
 import com.nicolas.models.action.ActionType
 import com.nicolas.models.action.ActionType.*
+import com.nicolas.models.action.Trait
+import com.nicolas.models.action.Trait.*
 import com.nicolas.models.item.enums.*
 import com.nicolas.models.item.enums.ArmorType.*
 import com.nicolas.models.item.enums.ItemType.*
@@ -130,4 +132,14 @@ internal val ActionType.labelId: Int
         SUPPORT -> R.string.support
         SPELL -> R.string.spell
         SUMMONING -> R.string.summoning
+    }
+
+internal val Trait.labelId: Int
+    get() = when (this) {
+        BASIC -> R.string.trait_basic
+        DEFENSE -> R.string.trait_defense
+        TEAMWORK -> R.string.trait_teamwork
+        KILLER -> R.string.trait_killer
+        CONTINUOUS -> R.string.trait_continuous
+        SWORD_WAY -> R.string.trait_sword_way
     }

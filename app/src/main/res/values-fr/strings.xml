@@ -162,4 +162,10 @@
     <string name="support">Support</string>
     <string name="action_damage_format">%1$d dégât(s), dont %2$d critique(s)</string>
     <string name="failure">Échec</string>
+    <string name="trait_basic">Base</string>
+    <string name="trait_continuous">Continu</string>
+    <string name="trait_defense">Défense</string>
+    <string name="trait_killer">Tueur</string>
+    <string name="trait_sword_way">Voie de l\'Épée</string>
+    <string name="trait_teamwork">Travail d\'Équipe</string>
 </resources>

@@ -6,5 +6,9 @@ enum class Trait {
     TEAMWORK,
     KILLER,
     CONTINUOUS,
-    SWORD_WAY
+    SWORD_WAY;
+
+    companion object {
+        operator fun get(ordinal: Int): Trait = Trait.values()[ordinal]
+    }
 }

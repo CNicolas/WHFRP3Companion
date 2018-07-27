@@ -13,3 +13,4 @@ const val WEAPON_INTENT_ARGUMENT = "weapon"
 const val TALENTS_SEARCH_INTENT_ARGUMENT = "talentsSearch"
 
 const val ACTION_INTENT_ARGUMENT = "action"
+const val ACTION_SEARCH_INTENT_ARGUMENT = "actionSearch"

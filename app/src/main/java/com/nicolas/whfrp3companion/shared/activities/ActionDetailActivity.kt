@@ -10,6 +10,7 @@ import com.nicolas.whfrp3companion.shared.ACTION_INTENT_ARGUMENT
 import com.nicolas.whfrp3companion.shared.STANCE_INTENT_ARGUMENT
 import com.nicolas.whfrp3companion.shared.adapters.ActionEffectsAdapter
 import com.nicolas.whfrp3companion.shared.enums.drawableId
+import com.nicolas.whfrp3companion.shared.enums.labelId
 import kotlinx.android.synthetic.main.activity_action_detail.*
 import kotlinx.android.synthetic.main.content_action_side.*
 import kotlinx.android.synthetic.main.toolbar.*
@@ -51,7 +52,7 @@ class ActionDetailActivity : AppCompatActivity() {
 
     private fun setupViews(side: Stance?) {
         actionTypeImageView.setImageResource(action.type.drawableId)
-        actionTraitsTextView.text = action.traits.joinToString()
+        actionTraitsTextView.text = action.traits.joinToString { getString(it.labelId) }
         actionSkillsTextView.text = action.skillsString
         actionConditionsTextView.text = action.conditionsString
 
