@@ -90,13 +90,7 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme">
         </activity>
-        <activity
-            android:name=".shared.activities.ActionDetailActivity"
-            android:parentActivityName=".MainActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.nicolas.whfrp3companion.MainActivity" />
-        </activity>
+        <activity android:name=".shared.activities.ActionDetailActivity" />
     </application>
 
 </manifest>

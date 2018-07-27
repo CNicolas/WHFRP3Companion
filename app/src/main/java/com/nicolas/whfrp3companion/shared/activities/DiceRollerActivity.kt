@@ -32,6 +32,8 @@ class DiceRollerActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dice_roller)
+        setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         hand = if (intent?.extras !== null) {
             intent.extras.getSerializable(HAND_INTENT_ARGUMENT) as Hand
@@ -39,9 +41,13 @@ class DiceRollerActivity : AppCompatActivity() {
             emptyHand
         }
 
-        setSupportActionBar(toolbar)
         setupViewsEvents()
         fillViews()
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        finish()
+        return true
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

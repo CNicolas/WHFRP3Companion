@@ -2,7 +2,6 @@ package com.nicolas.whfrp3companion.playersheet.inventory
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.Toolbar
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -25,6 +24,7 @@ import kotlinx.android.synthetic.main.content_item_edition.*
 import kotlinx.android.synthetic.main.part_armor_edition.*
 import kotlinx.android.synthetic.main.part_expandable_edition.*
 import kotlinx.android.synthetic.main.part_weapon_edition.*
+import kotlinx.android.synthetic.main.toolbar.*
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 import org.koin.android.ext.android.inject
@@ -38,6 +38,8 @@ class ItemEditionActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_item_edition)
+        setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         val playerName = intent.extras.getString(PLAYER_NAME_INTENT_ARGUMENT)
         doAsync {
@@ -46,9 +48,11 @@ class ItemEditionActivity : AppCompatActivity() {
         item = intent.extras.getSerializable(ITEM_EDIT_INTENT_ARGUMENT) as Item?
 
         setupViews()
+    }
 
-        val toolbar = findViewById<Toolbar>(R.id.toolbar)
-        setSupportActionBar(toolbar)
+    override fun onSupportNavigateUp(): Boolean {
+        finish()
+        return true
     }
 
     private fun setupViews() {

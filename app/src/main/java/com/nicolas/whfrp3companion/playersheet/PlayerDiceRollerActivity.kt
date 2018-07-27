@@ -47,6 +47,8 @@ internal class PlayerDiceRollerActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_player_dice_roller)
+        setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         var playerName: String? = null
         if (intent?.extras !== null) {
@@ -70,6 +72,11 @@ internal class PlayerDiceRollerActivity : AppCompatActivity() {
         }
 
         setSupportActionBar(toolbar)
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        finish()
+        return true
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

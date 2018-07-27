@@ -21,6 +21,7 @@ class ActionDetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_action_detail)
         setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         action = intent.extras.getSerializable(ACTION_INTENT_ARGUMENT) as Action
         val dominantStance = intent.extras.getSerializable(STANCE_INTENT_ARGUMENT) as Stance?
@@ -30,14 +31,25 @@ class ActionDetailActivity : AppCompatActivity() {
 
         navigation.setOnNavigationItemSelectedListener {
             when (it.itemId) {
-                R.id.conservative_side -> setupViews(Stance.CONSERVATIVE)
-                R.id.reckless_side -> setupViews(Stance.RECKLESS)
+                R.id.conservative_side -> {
+                    setupViews(Stance.CONSERVATIVE)
+                    true
+                }
+                R.id.reckless_side -> {
+                    setupViews(Stance.RECKLESS)
+                    true
+                }
                 else -> false
             }
         }
     }
 
-    private fun setupViews(side: Stance?): Boolean {
+    override fun onSupportNavigateUp(): Boolean {
+        finish()
+        return true
+    }
+
+    private fun setupViews(side: Stance?) {
         actionTypeImageView.setImageResource(action.type.drawableId)
         actionTraitsTextView.text = action.traits.joinToString()
         actionSkillsTextView.text = action.skillsString
@@ -49,7 +61,7 @@ class ActionDetailActivity : AppCompatActivity() {
             else -> fillViewsWithConservativeSide()
         }
 
-        return true
+        navigation.itemIconTintList = null
     }
 
     private fun fillViewsWithConservativeSide() {
