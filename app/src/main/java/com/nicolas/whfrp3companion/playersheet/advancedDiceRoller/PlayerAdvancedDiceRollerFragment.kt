@@ -1,5 +1,7 @@
 package com.nicolas.whfrp3companion.playersheet.advancedDiceRoller
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.FloatingActionButton
 import android.support.v4.app.Fragment
@@ -7,10 +9,14 @@ import android.view.*
 import android.widget.Button
 import com.nicolas.database.PlayerRepository
 import com.nicolas.diceroller.roll.roll
+import com.nicolas.models.action.Action
 import com.nicolas.models.extensions.applyStanceDices
+import com.nicolas.models.extensions.createHand
 import com.nicolas.models.hand.Hand
+import com.nicolas.models.item.Weapon
 import com.nicolas.models.player.Player
 import com.nicolas.whfrp3companion.R
+import com.nicolas.whfrp3companion.playersheet.actions.ActionRollResultDialog
 import com.nicolas.whfrp3companion.playersheet.state.StanceChangeListener
 import com.nicolas.whfrp3companion.shared.*
 import com.nicolas.whfrp3companion.shared.activities.DiceRollerStatisticsActivity
@@ -25,11 +31,15 @@ import org.jetbrains.anko.uiThread
 import org.koin.android.ext.android.inject
 import kotlin.math.abs
 
+
 class PlayerAdvancedDiceRollerFragment : Fragment() {
     private val playerRepository by inject<PlayerRepository>()
 
     private lateinit var player: Player
     private lateinit var hand: Hand
+
+    private var action: Action? = null
+    private var weapon: Weapon? = null
 
     private val emptyHand = Hand("")
 
@@ -70,6 +80,22 @@ class PlayerAdvancedDiceRollerFragment : Fragment() {
             R.id.roll_statistics_5000 -> rollHandStatistics(5000)
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (requestCode == ACTION_REQUEST_CODE) {
+            if (resultCode == Activity.RESULT_OK) {
+                action = data?.getSerializableExtra(ACTION_INTENT_ARGUMENT) as Action?
+                action?.let {
+                    val actionHand = player.createHand(it)
+                    actionHand?.let {
+                        hand = it
+                    }
+                }
+                weapon = data?.getSerializableExtra(WEAPON_INTENT_ARGUMENT) as Weapon?
+            }
+        }
+        super.onActivityResult(requestCode, resultCode, data)
     }
 
     private fun setupViewEvents(view: View) {
@@ -116,7 +142,11 @@ class PlayerAdvancedDiceRollerFragment : Fragment() {
     }
 
     private fun rollHand() {
-        val rollResultsDialog = RollResultDialog.newInstance(hand.roll())
+        val rollResultsDialog = action?.let {
+            ActionRollResultDialog.newInstance(hand.roll(), it, player.name, weapon)
+        } ?: {
+            RollResultDialog.newInstance(hand.roll())
+        }()
 
         activity?.let {
             rollResultsDialog.show(it.supportFragmentManager, DIALOG_ROLL_RESULT_TAG)
@@ -137,7 +167,11 @@ class PlayerAdvancedDiceRollerFragment : Fragment() {
     }
 
     private fun openActionsSelection() {
-        activity?.toast("Select action")
+        activity?.let {
+            startActivityForResult(it.intentFor<PlayerAdvancedDiceRollerActionsActivity>(
+                    PLAYER_NAME_INTENT_ARGUMENT to player.name
+            ), ACTION_REQUEST_CODE)
+        }
     }
 
     private fun setupStance() {

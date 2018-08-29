@@ -71,8 +71,6 @@ internal class PlayerDiceRollerActivity : AppCompatActivity() {
                 }
             }
         }
-
-        setSupportActionBar(toolbar)
     }
 
     override fun onSupportNavigateUp(): Boolean {
