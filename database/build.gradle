@@ -17,7 +17,7 @@ android {
     }
 
     defaultConfig {
-        minSdkVersion 22
+        minSdkVersion 24
         targetSdkVersion 27
         versionCode 1
         versionName "1.0"
@@ -39,6 +39,7 @@ dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
     // Tests
+    testCompile "org.testng:testng:$testng_version"
     testCompile "org.assertj:assertj-core:$assertj_version"
     testCompile 'junit:junit:4.12'
     testCompile "org.robolectric:robolectric:$robolectric_version"

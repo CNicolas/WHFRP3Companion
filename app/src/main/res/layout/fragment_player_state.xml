@@ -124,61 +124,20 @@
             android:text="@string/plus"
             app:layout_constraintTop_toBottomOf="@+id/stressLabel"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/currentStanceTextView"
+            app:layout_constraintBottom_toTopOf="@+id/stanceBarLayout"
             app:layout_constraintLeft_toRightOf="@+id/stressTextView" />
     <!--endregion-->
 
     <!--region Stance-->
-    <TextView android:id="@+id/conservative_label"
-              android:layout_width="110dp"
-              android:layout_height="30dp"
-              android:layout_marginEnd="@dimen/giant_padding_2"
-              android:gravity="center_vertical|end"
-              android:textColor="@color/conservative"
-              android:text="@string/conservative"
-              app:layout_constraintTop_toBottomOf="@+id/exhaustionTextView"
-              app:layout_constraintRight_toLeftOf="@+id/currentStanceTextView"
-              app:layout_constraintBottom_toTopOf="@+id/stanceBar"
-              app:layout_constraintLeft_toLeftOf="parent"
-              app:layout_constraintHorizontal_weight="3" />
-
-    <TextView android:id="@+id/currentStanceTextView"
-              android:layout_width="0dp"
-              android:layout_height="40dp"
-              android:gravity="center"
-              android:textSize="@dimen/big_text_size"
-              android:textStyle="bold"
-              android:hint="@string/zero"
-              app:layout_constraintTop_toTopOf="@+id/conservative_label"
-              app:layout_constraintRight_toLeftOf="@+id/reckless_label"
-              app:layout_constraintBottom_toBottomOf="@+id/conservative_label"
-              app:layout_constraintLeft_toRightOf="@+id/conservative_label"
-              app:layout_constraintHorizontal_weight="1" />
-
-    <TextView android:id="@+id/reckless_label"
-              android:layout_width="110dp"
-              android:layout_height="30dp"
-              android:layout_marginStart="@dimen/giant_padding_2"
-              android:gravity="center_vertical"
-              android:textColor="@color/reckless"
-              android:text="@string/reckless"
-              app:layout_constraintTop_toTopOf="@+id/currentStanceTextView"
-              app:layout_constraintRight_toRightOf="parent"
-              app:layout_constraintBottom_toBottomOf="@+id/currentStanceTextView"
-              app:layout_constraintLeft_toRightOf="@+id/currentStanceTextView"
-              app:layout_constraintHorizontal_weight="3" />
-
-    <org.adw.library.widgets.discreteseekbar.DiscreteSeekBar android:id="@+id/stanceBar"
-                                                             android:layout_width="0dp"
-                                                             android:layout_height="wrap_content"
-                                                             app:dsb_progressColor="@color/colorPrimaryDark"
-                                                             app:dsb_scrubberHeight="10dp"
-                                                             app:dsb_thumbSize="30dp"
-                                                             app:dsb_indicatorPopupEnabled="false"
-                                                             app:layout_constraintTop_toBottomOf="@+id/conservative_label"
-                                                             app:layout_constraintRight_toRightOf="parent"
-                                                             app:layout_constraintBottom_toTopOf="@+id/defenseTextView"
-                                                             app:layout_constraintLeft_toLeftOf="parent" />
+    <LinearLayout android:id="@+id/stanceBarLayout"
+                  android:layout_width="0dp"
+                  android:layout_height="wrap_content"
+                  app:layout_constraintTop_toBottomOf="@+id/exhaustionTextView"
+                  app:layout_constraintRight_toRightOf="parent"
+                  app:layout_constraintBottom_toTopOf="@+id/defenseTextView"
+                  app:layout_constraintLeft_toLeftOf="parent">
+        <include layout="@layout/content_stance_bar" />
+    </LinearLayout>
     <!--endregion-->
 
     <!--region Defense/Soak-->
@@ -191,7 +150,7 @@
               android:textSize="@dimen/big_text_size"
               android:textStyle="bold"
               android:hint="@string/zero"
-              app:layout_constraintTop_toBottomOf="@+id/stanceBar"
+              app:layout_constraintTop_toBottomOf="@+id/stanceBarLayout"
               app:layout_constraintRight_toLeftOf="@+id/soakTextView"
               app:layout_constraintBottom_toTopOf="@+id/weaponsListView"
               app:layout_constraintLeft_toLeftOf="parent" />

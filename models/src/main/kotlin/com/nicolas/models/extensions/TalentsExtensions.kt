@@ -1,10 +1,10 @@
 package com.nicolas.models.extensions
 
 import com.nicolas.models.player.Player
-import com.nicolas.models.player.talent.Talent
-import com.nicolas.models.player.talent.TalentCooldown.PASSIVE
-import com.nicolas.models.player.talent.TalentCooldown.TALENT
-import com.nicolas.models.player.talent.TalentType
+import com.nicolas.models.talent.Talent
+import com.nicolas.models.talent.TalentCooldown.PASSIVE
+import com.nicolas.models.talent.TalentCooldown.TALENT
+import com.nicolas.models.talent.TalentType
 
 fun Player.addTalent(talent: Talent): Player {
     val mutableTalents = talents.toMutableList()

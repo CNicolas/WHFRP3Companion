@@ -1,13 +1,13 @@
 package com.nicolas.models.extensions
 
 import com.nicolas.models.player.enums.Characteristic
-import com.nicolas.models.player.skill.Skill
-import com.nicolas.models.player.skill.Specialization
+import com.nicolas.models.skill.Skill
+import com.nicolas.models.skill.Specialization
 
 fun List<Skill>.findSpecializations(text: String? = null,
-                        characteristic: Characteristic? = null,
-                        skill: Skill? = null,
-                        skillName: String? = null): Map<Skill, List<Specialization>> {
+                                    characteristic: Characteristic? = null,
+                                    skill: Skill? = null,
+                                    skillName: String? = null): Map<Skill, List<Specialization>> {
     var filteredSkills = this
 
     if (skill != null) {

@@ -1,6 +1,6 @@
 package com.nicolas.whfrp3companion.playersheet.state
 
-import com.nicolas.models.player.effect.Effect
+import com.nicolas.models.effect.Effect
 
 interface EffectListener {
     fun onAddEffect(effect: Effect)

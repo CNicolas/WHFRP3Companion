@@ -1,9 +1,9 @@
 package com.nicolas.models.extensions
 
+import com.nicolas.models.effect.Effect
+import com.nicolas.models.effect.EffectDuration
+import com.nicolas.models.effect.Trigger
 import com.nicolas.models.player.Player
-import com.nicolas.models.player.effect.Effect
-import com.nicolas.models.player.effect.EffectDuration
-import com.nicolas.models.player.effect.Trigger
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 

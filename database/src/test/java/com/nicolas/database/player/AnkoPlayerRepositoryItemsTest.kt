@@ -2,15 +2,15 @@ package com.nicolas.database.player
 
 import com.nicolas.database.BuildConfig
 import com.nicolas.models.extensions.*
+import com.nicolas.models.item.Armor
+import com.nicolas.models.item.Expandable
+import com.nicolas.models.item.GenericItem
+import com.nicolas.models.item.Weapon
+import com.nicolas.models.item.enums.ArmorType.HELMET
+import com.nicolas.models.item.enums.ArmorType.PLATE
+import com.nicolas.models.item.enums.Quality.LOW
+import com.nicolas.models.item.enums.Quality.NORMAL
 import com.nicolas.models.player.Player
-import com.nicolas.models.player.item.Armor
-import com.nicolas.models.player.item.Expandable
-import com.nicolas.models.player.item.GenericItem
-import com.nicolas.models.player.item.Weapon
-import com.nicolas.models.player.item.enums.ArmorType.HELMET
-import com.nicolas.models.player.item.enums.ArmorType.PLATE
-import com.nicolas.models.player.item.enums.Quality.LOW
-import com.nicolas.models.player.item.enums.Quality.NORMAL
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith

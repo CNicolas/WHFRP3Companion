@@ -2,20 +2,21 @@ package com.nicolas.whfrp3companion.playersheet.characteristics
 
 import android.view.View
 import android.widget.EditText
-import butterknife.ButterKnife
-import butterknife.OnClick
-import butterknife.Unbinder
+import android.widget.ImageButton
 import com.nicolas.models.hand.Hand
 import com.nicolas.models.player.CharacteristicValue
 import com.nicolas.models.player.Player
 import com.nicolas.whfrp3companion.R
+import com.nicolas.whfrp3companion.playersheet.PlayerDiceRollerActivity
 import com.nicolas.whfrp3companion.shared.HAND_INTENT_ARGUMENT
-import com.nicolas.whfrp3companion.shared.activities.DiceRollerActivity
+import com.nicolas.whfrp3companion.shared.PLAYER_NAME_INTENT_ARGUMENT
 import com.nicolas.whfrp3companion.shared.bind
+import com.nicolas.whfrp3companion.shared.getView
 import com.nicolas.whfrp3companion.shared.viewModifications.intValue
 import org.jetbrains.anko.intentFor
 
-internal class PlayerCharacteristicsFragmentViewHolder(private val view: View) {
+internal class PlayerCharacteristicsFragmentViewHolder(private val player: Player,
+                                                       private val view: View) {
     private val career by view.bind<EditText>(R.id.career)
     private val rank by view.bind<EditText>(R.id.rank)
     private val experience by view.bind<EditText>(R.id.experience)
@@ -40,43 +41,26 @@ internal class PlayerCharacteristicsFragmentViewHolder(private val view: View) {
     private val maxReckless by view.bind<EditText>(R.id.max_reckless)
     private val description by view.bind<EditText>(R.id.description)
 
-    private var unbinder: Unbinder = ButterKnife.bind(this, view)
+    fun extractPlayerFromViews(): Player = Player(
+            name = player.name,
+            description = description.text.toString(),
+            strength = CharacteristicValue(strength.intValue, strengthFortune.intValue),
+            toughness = CharacteristicValue(toughness.intValue, toughnessFortune.intValue),
+            agility = CharacteristicValue(agility.intValue, agilityFortune.intValue),
+            intelligence = CharacteristicValue(intelligence.intValue, intelligenceFortune.intValue),
+            willpower = CharacteristicValue(willpower.intValue, willpowerFortune.intValue),
+            fellowship = CharacteristicValue(fellowship.intValue, fellowshipFortune.intValue),
+            careerName = career.text.toString(),
+            rank = rank.intValue,
+            experience = experience.intValue,
+            maxExperience = maxExperience.intValue,
+            maxConservative = maxConservative.intValue,
+            maxReckless = maxReckless.intValue,
+            maxWounds = maxWounds.intValue,
+            maxCorruption = maxCorruption.intValue
+    )
 
-    private var playerName: String = ""
-
-    @OnClick(R.id.launch_strength)
-    fun launchStrength() {
-        launchDiceRollerActivity(CharacteristicValue(strength.intValue, strengthFortune.intValue).getHand("Strength"))
-    }
-
-    @OnClick(R.id.launch_toughness)
-    fun launchToughness() {
-        launchDiceRollerActivity(CharacteristicValue(toughness.intValue, toughnessFortune.intValue).getHand("Toughness"))
-    }
-
-    @OnClick(R.id.launch_agility)
-    fun launchAgility() {
-        launchDiceRollerActivity(CharacteristicValue(agility.intValue, agilityFortune.intValue).getHand("Agility"))
-    }
-
-    @OnClick(R.id.launch_intelligence)
-    fun launchIntelligence() {
-        launchDiceRollerActivity(CharacteristicValue(intelligence.intValue, intelligenceFortune.intValue).getHand("Intelligence"))
-    }
-
-    @OnClick(R.id.launch_willpower)
-    fun launchWillpower() {
-        launchDiceRollerActivity(CharacteristicValue(willpower.intValue, willpowerFortune.intValue).getHand("Willpower"))
-    }
-
-    @OnClick(R.id.launch_fellowship)
-    fun launchFellowship() {
-        launchDiceRollerActivity(CharacteristicValue(fellowship.intValue, fellowshipFortune.intValue).getHand("Fellowship"))
-    }
-
-    fun fillViews(player: Player) {
-        playerName = player.name
-
+    fun setupViews(player: Player) {
         career.setText(player.careerName)
         rank.setText(player.rank.toString())
         experience.setText(player.experience.toString())
@@ -101,34 +85,43 @@ internal class PlayerCharacteristicsFragmentViewHolder(private val view: View) {
         maxReckless.setText(player.maxReckless.toString())
 
         description.setText(player.description)
+
+        setupViewEvents()
     }
 
-    fun extractPlayerFromViews(): Player = Player(
-            name = playerName,
-            description = description.text.toString(),
-            strength = CharacteristicValue(strength.intValue, strengthFortune.intValue),
-            toughness = CharacteristicValue(toughness.intValue, toughnessFortune.intValue),
-            agility = CharacteristicValue(agility.intValue, agilityFortune.intValue),
-            intelligence = CharacteristicValue(intelligence.intValue, intelligenceFortune.intValue),
-            willpower = CharacteristicValue(willpower.intValue, willpowerFortune.intValue),
-            fellowship = CharacteristicValue(fellowship.intValue, fellowshipFortune.intValue),
-            careerName = career.text.toString(),
-            rank = rank.intValue,
-            experience = experience.intValue,
-            maxExperience = maxExperience.intValue,
-            maxConservative = maxConservative.intValue,
-            maxReckless = maxReckless.intValue,
-            maxWounds = maxWounds.intValue,
-            maxCorruption = maxCorruption.intValue
-    )
 
-    fun destroy() {
-        unbinder.unbind()
+    private fun setupViewEvents() {
+        view.getView<ImageButton>(R.id.launch_strength).setOnClickListener { launchStrength() }
+        view.getView<ImageButton>(R.id.launch_toughness).setOnClickListener { launchToughness() }
+        view.getView<ImageButton>(R.id.launch_agility).setOnClickListener { launchAgility() }
+        view.getView<ImageButton>(R.id.launch_intelligence).setOnClickListener { launchIntelligence() }
+        view.getView<ImageButton>(R.id.launch_willpower).setOnClickListener { launchWillpower() }
+        view.getView<ImageButton>(R.id.launch_fellowship).setOnClickListener { launchFellowship() }
     }
 
     private fun launchDiceRollerActivity(hand: Hand) {
-        view.context.startActivity(view.context.intentFor<DiceRollerActivity>(
+        val context = view.context
+        context.startActivity(context.intentFor<PlayerDiceRollerActivity>(
+                PLAYER_NAME_INTENT_ARGUMENT to player.name,
                 HAND_INTENT_ARGUMENT to hand
         ))
     }
+
+    private fun launchStrength() =
+            launchDiceRollerActivity(CharacteristicValue(strength.intValue, strengthFortune.intValue).getHand("Strength"))
+
+    private fun launchToughness() =
+            launchDiceRollerActivity(CharacteristicValue(toughness.intValue, toughnessFortune.intValue).getHand("Toughness"))
+
+    private fun launchAgility() =
+            launchDiceRollerActivity(CharacteristicValue(agility.intValue, agilityFortune.intValue).getHand("Agility"))
+
+    private fun launchIntelligence() =
+            launchDiceRollerActivity(CharacteristicValue(intelligence.intValue, intelligenceFortune.intValue).getHand("Intelligence"))
+
+    private fun launchWillpower() =
+            launchDiceRollerActivity(CharacteristicValue(willpower.intValue, willpowerFortune.intValue).getHand("Willpower"))
+
+    private fun launchFellowship() =
+            launchDiceRollerActivity(CharacteristicValue(fellowship.intValue, fellowshipFortune.intValue).getHand("Fellowship"))
 }

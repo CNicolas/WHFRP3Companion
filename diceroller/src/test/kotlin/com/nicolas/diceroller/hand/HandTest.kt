@@ -12,8 +12,6 @@ class HandTest {
         val roll = rollHand(hand)
 
         assertThat(roll.faces.size).isEqualTo(3)
-
-        println(roll)
     }
 
     @Test
@@ -24,7 +22,5 @@ class HandTest {
                 expertiseDicesCount = 2,
                 challengeDicesCount = 1,
                 misfortuneDicesCount = 2)
-
-        println(rollHand(hand))
     }
 }

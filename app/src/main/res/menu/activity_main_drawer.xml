@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <group android:checkableBehavior="single">
         <item android:id="@+id/nav_home"
-              android:icon="@drawable/ic_home_black"
+              android:icon="@drawable/ic_home_black_24dp"
               android:title="@string/page_home" />
 
         <item android:id="@+id/nav_dice_roller"
@@ -16,6 +16,10 @@
         <item android:id="@+id/nav_talents"
               android:icon="@drawable/ic_talents_black"
               android:title="@string/page_talents" />
+
+        <item android:id="@+id/nav_actions"
+              android:icon="@drawable/ic_action_black"
+              android:title="@string/page_actions" />
 
         <item android:id="@+id/nav_careers"
               android:icon="@drawable/ic_work_black"

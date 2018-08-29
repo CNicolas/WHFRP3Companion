@@ -2,34 +2,35 @@ package com.nicolas.whfrp3companion.playersheet.skills
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.graphics.Typeface
+import android.graphics.Typeface.BOLD
+import android.graphics.Typeface.BOLD_ITALIC
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
 import android.widget.ImageButton
 import android.widget.TextView
-import butterknife.ButterKnife
-import butterknife.OnClick
 import com.nicolas.database.anko.AnkoPlayerRepository
 import com.nicolas.models.extensions.createHand
 import com.nicolas.models.extensions.getSkillByName
 import com.nicolas.models.extensions.getSpecializationByName
 import com.nicolas.models.player.Player
-import com.nicolas.models.player.skill.Skill
-import com.nicolas.models.player.skill.SkillType.ADVANCED
-import com.nicolas.models.player.skill.SkillType.BASIC
-import com.nicolas.models.player.skill.Specialization
+import com.nicolas.models.skill.Skill
+import com.nicolas.models.skill.SkillType.ADVANCED
+import com.nicolas.models.skill.SkillType.BASIC
+import com.nicolas.models.skill.Specialization
 import com.nicolas.whfrp3companion.R
+import com.nicolas.whfrp3companion.playersheet.PlayerDiceRollerActivity
 import com.nicolas.whfrp3companion.shared.HAND_INTENT_ARGUMENT
-import com.nicolas.whfrp3companion.shared.activities.DiceRollerActivity
+import com.nicolas.whfrp3companion.shared.PLAYER_NAME_INTENT_ARGUMENT
 import com.nicolas.whfrp3companion.shared.adapters.AbstractSkillsExpandableAdapter
 import com.nicolas.whfrp3companion.shared.bind
 import com.nicolas.whfrp3companion.shared.enums.labelId
+import com.nicolas.whfrp3companion.shared.getView
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.intentFor
 
-class PlayerSkillsExpandableAdapter(private val context: Context,
+class PlayerSkillsExpandableAdapter(context: Context,
                                     private val player: Player) : AbstractSkillsExpandableAdapter(player.skills) {
     private val inflater = LayoutInflater.from(context)
 
@@ -42,21 +43,10 @@ class PlayerSkillsExpandableAdapter(private val context: Context,
                               parent: ViewGroup?): View {
         val (resultingView, holder) = getGroupViewHolderOfView(convertView, parent)
 
-        val skill = getGroup(groupPosition)
-
         holder.player = player
         holder.ankoPlayerRepository = ankoPlayerRepository
-        holder.skill = skill
 
-        holder.skillNameView.text = skill.name
-        when (skill.type) {
-            BASIC -> holder.skillNameView.setTypeface(null, Typeface.BOLD)
-            ADVANCED -> holder.skillNameView.setTypeface(null, Typeface.BOLD_ITALIC)
-        }
-        holder.characteristicView.text = context.getString(skill.characteristic.labelId).substring(0..2)
-
-        holder.checkLevel()
-        holder.loseFocus()
+        holder.setupViews(getGroup(groupPosition))
 
         return resultingView
     }
@@ -69,17 +59,10 @@ class PlayerSkillsExpandableAdapter(private val context: Context,
                               parent: ViewGroup?): View {
         val (resultingView, holder) = getChildViewHolderOfView(convertView, parent)
 
-        val specialization = getChild(groupPosition, childPosition)
-
         holder.player = player
         holder.ankoPlayerRepository = ankoPlayerRepository
-        holder.skill = getGroup(groupPosition)
-        holder.specialization = specialization
 
-        holder.specializationNameCheckableView.text = specialization.name
-        holder.specializationNameCheckableView.isChecked = specialization.isSpecialized
-
-        holder.loseFocus()
+        holder.setupViews(getGroup(groupPosition), getChild(groupPosition, childPosition))
 
         return resultingView
     }
@@ -114,9 +97,9 @@ class PlayerSkillsExpandableAdapter(private val context: Context,
         return Pair(view, holder)
     }
 
-    internal class ChildViewHolder(private val view: View) {
-        val specializationNameCheckableView by view.bind<CheckBox>(R.id.specialization_name_checkable)
-        private val launchSpecializationView by view.bind<ImageButton>(R.id.launch_specialization)
+    internal class ChildViewHolder(view: View) {
+        private val specializationNameCheckableView by view.bind<CheckBox>(R.id.specialization_name_checkable)
+        private val launchSpecializationImageButton by view.bind<ImageButton>(R.id.launch_specialization)
 
         internal var player: Player? = null
         internal var ankoPlayerRepository: AnkoPlayerRepository? = null
@@ -125,13 +108,31 @@ class PlayerSkillsExpandableAdapter(private val context: Context,
         lateinit var specialization: Specialization
 
         init {
-            ButterKnife.bind(this, view)
+            setupViewsEvents(view)
         }
 
-        @OnClick(R.id.specialization_name_checkable)
-        fun toggleSpecialization(view: View) {
+        fun setupViews(skill: Skill, specialization: Specialization) {
+            this.skill = skill
+            this.specialization = specialization
+
+            specializationNameCheckableView.text = specialization.name
+            specializationNameCheckableView.isChecked = specialization.isSpecialized
+
+            specializationNameCheckableView.isFocusable = false
+            launchSpecializationImageButton.isFocusable = false
+        }
+
+        private fun setupViewsEvents(view: View) {
+            view.getView<CheckBox>(R.id.specialization_name_checkable)
+                    .setOnClickListener { toggleSpecialization(it as CheckBox) }
+
+            launchSpecializationImageButton
+                    .setOnClickListener { startDiceRollerActivityForSpecialization(it) }
+        }
+
+        private fun toggleSpecialization(checkbox: CheckBox) {
             specialization.isSpecialized = !specialization.isSpecialized
-            (view as CheckBox).isChecked = specialization.isSpecialized
+            checkbox.isChecked = specialization.isSpecialized
 
             doAsync {
                 if (player != null) {
@@ -143,29 +144,23 @@ class PlayerSkillsExpandableAdapter(private val context: Context,
             }
         }
 
-        @OnClick(R.id.launch_specialization)
-        fun launchSpecialization() {
+        private fun startDiceRollerActivityForSpecialization(view: View) {
             val context = view.context
-            context.startActivity(context.intentFor<DiceRollerActivity>(
+            context.startActivity(context.intentFor<PlayerDiceRollerActivity>(
+                    PLAYER_NAME_INTENT_ARGUMENT to player?.name,
                     HAND_INTENT_ARGUMENT to player?.createHand(skill, specialization, skill.name)
             ))
         }
 
-        fun loseFocus() {
-            specializationNameCheckableView.isFocusable = false
-            launchSpecializationView.isFocusable = false
-        }
     }
 
     internal class GroupViewHolder(private val view: View) {
-        private val level1View by view.bind<CheckBox>(R.id.level_1)
-        private val level2View by view.bind<CheckBox>(R.id.level_2)
-        private val level3View by view.bind<CheckBox>(R.id.level_3)
-
-        val skillNameView by view.bind<TextView>(R.id.skill_name)
-        val characteristicView by view.bind<TextView>(R.id.characteristic)
-
-        private val launchSkillView by view.bind<ImageButton>(R.id.launch_skill)
+        private val level1CheckBox by view.bind<CheckBox>(R.id.level_1)
+        private val level2CheckBox by view.bind<CheckBox>(R.id.level_2)
+        private val level3CheckBox by view.bind<CheckBox>(R.id.level_3)
+        private val skillNameTextView by view.bind<TextView>(R.id.skill_name)
+        private val characteristicTextView by view.bind<TextView>(R.id.characteristic)
+        private val launchSkillImageButton by view.bind<ImageButton>(R.id.launch_skill)
 
         internal var player: Player? = null
         internal var ankoPlayerRepository: AnkoPlayerRepository? = null
@@ -173,31 +168,37 @@ class PlayerSkillsExpandableAdapter(private val context: Context,
         lateinit var skill: Skill
 
         init {
-            ButterKnife.bind(this, view)
+            setupViewsEvents()
         }
 
-        @OnClick(R.id.level_1)
-        fun checkFormationLevel1() = setFormationLevel(1)
+        fun setupViews(skill: Skill) {
+            this.skill = skill
 
-        @OnClick(R.id.level_2)
-        fun checkFormationLevel2() = setFormationLevel(2)
+            skillNameTextView.text = skill.name
+            when (skill.type) {
+                BASIC -> skillNameTextView.setTypeface(null, BOLD)
+                ADVANCED -> skillNameTextView.setTypeface(null, BOLD_ITALIC)
+            }
 
-        @OnClick(R.id.level_3)
-        fun checkFormationLevel3() = setFormationLevel(3)
+            characteristicTextView.text = view.context.getString(skill.characteristic.labelId).substring(0..2)
 
-        @OnClick(R.id.launch_skill)
-        fun launchSkill() {
-            val context = view.context
-            context.startActivity(context.intentFor<DiceRollerActivity>(
-                    HAND_INTENT_ARGUMENT to player?.createHand(skill, skill.name)
-            ))
+            checkLevel()
+            loseFocus()
         }
 
-        fun loseFocus() {
-            launchSkillView.isFocusable = false
-            level1View.isFocusable = false
-            level2View.isFocusable = false
-            level3View.isFocusable = false
+        private fun setupViewsEvents() {
+            level1CheckBox.setOnClickListener { setFormationLevel(1) }
+            level2CheckBox.setOnClickListener { setFormationLevel(2) }
+            level3CheckBox.setOnClickListener { setFormationLevel(3) }
+
+            launchSkillImageButton.setOnClickListener { startDiceRollerActivityForSkill() }
+        }
+
+        private fun loseFocus() {
+            launchSkillImageButton.isFocusable = false
+            level1CheckBox.isFocusable = false
+            level2CheckBox.isFocusable = false
+            level3CheckBox.isFocusable = false
         }
 
         private fun setFormationLevel(level: Int) {
@@ -217,29 +218,37 @@ class PlayerSkillsExpandableAdapter(private val context: Context,
             }
         }
 
-        fun checkLevel() {
+        private fun checkLevel() {
             when (skill.level) {
                 1 -> {
-                    level1View.isChecked = true
-                    level2View.isChecked = false
-                    level3View.isChecked = false
+                    level1CheckBox.isChecked = true
+                    level2CheckBox.isChecked = false
+                    level3CheckBox.isChecked = false
                 }
                 2 -> {
-                    level1View.isChecked = true
-                    level2View.isChecked = true
-                    level3View.isChecked = false
+                    level1CheckBox.isChecked = true
+                    level2CheckBox.isChecked = true
+                    level3CheckBox.isChecked = false
                 }
                 3 -> {
-                    level1View.isChecked = true
-                    level2View.isChecked = true
-                    level3View.isChecked = true
+                    level1CheckBox.isChecked = true
+                    level2CheckBox.isChecked = true
+                    level3CheckBox.isChecked = true
                 }
                 else -> {
-                    level1View.isChecked = false
-                    level2View.isChecked = false
-                    level3View.isChecked = false
+                    level1CheckBox.isChecked = false
+                    level2CheckBox.isChecked = false
+                    level3CheckBox.isChecked = false
                 }
             }
+        }
+
+        private fun startDiceRollerActivityForSkill() {
+            val context = view.context
+            context.startActivity(context.intentFor<PlayerDiceRollerActivity>(
+                    PLAYER_NAME_INTENT_ARGUMENT to player?.name,
+                    HAND_INTENT_ARGUMENT to player?.createHand(skill, skill.name)
+            ))
         }
     }
 }

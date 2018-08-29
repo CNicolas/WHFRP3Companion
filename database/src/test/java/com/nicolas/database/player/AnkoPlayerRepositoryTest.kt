@@ -1,9 +1,9 @@
 package com.nicolas.database.player
 
 import com.nicolas.database.BuildConfig
+import com.nicolas.models.item.GenericItem
 import com.nicolas.models.player.CharacteristicValue
 import com.nicolas.models.player.Player
-import com.nicolas.models.player.item.GenericItem
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith

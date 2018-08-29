@@ -14,19 +14,17 @@ import android.widget.BaseExpandableListAdapter
 import android.widget.ImageView
 import android.widget.PopupMenu
 import android.widget.TextView
-import butterknife.ButterKnife
-import butterknife.OnClick
-import butterknife.OnLongClick
 import com.nicolas.models.extensions.getItemsOfType
+import com.nicolas.models.item.*
+import com.nicolas.models.item.enums.ItemType
+import com.nicolas.models.item.enums.ItemType.*
+import com.nicolas.models.item.enums.Quality.*
 import com.nicolas.models.player.Player
-import com.nicolas.models.player.item.*
-import com.nicolas.models.player.item.enums.ItemType
-import com.nicolas.models.player.item.enums.ItemType.*
-import com.nicolas.models.player.item.enums.Quality.*
 import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.shared.bind
 import com.nicolas.whfrp3companion.shared.enums.labelId
 import com.nicolas.whfrp3companion.shared.enums.pluralLabelId
+import com.nicolas.whfrp3companion.shared.getView
 import com.nicolas.whfrp3companion.shared.viewModifications.hide
 import com.nicolas.whfrp3companion.shared.viewModifications.show
 
@@ -112,10 +110,6 @@ class PlayerInventoryExpandableAdapter(private val context: Context,
 
     private class GroupViewHolder(view: View) {
         val itemTypeView by view.bind<TextView>(R.id.item_type)
-
-        init {
-            ButterKnife.bind(this, view)
-        }
     }
 
     internal class ChildViewHolder(private val itemListener: ItemListener, view: View) {
@@ -143,9 +137,10 @@ class PlayerInventoryExpandableAdapter(private val context: Context,
             get () = listOf(damageTextView, criticalLevelTextView, rangeTextView)
 
         init {
-            ButterKnife.bind(this, view)
+            setupViewsEvents(view)
         }
 
+        @SuppressLint("SetTextI18n")
         fun setupViews(item: Item) {
             this.item = item
 
@@ -168,14 +163,18 @@ class PlayerInventoryExpandableAdapter(private val context: Context,
             }
         }
 
-        @OnClick(R.id.inventory_item_layout)
-        fun selectItem() {
-            if (item is Equipment) {
-                changeEquipmentStatus()
+        private fun setupViewsEvents(view: View) {
+            val layout = view.getView<View>(R.id.inventory_item_layout)
+
+            layout.setOnClickListener {
+                if (item is Equipment) {
+                    changeEquipmentStatus()
+                }
             }
+
+            layout.setOnLongClickListener { openItemMenu(it) }
         }
 
-        @OnLongClick(R.id.inventory_item_layout)
         fun openItemMenu(view: View): Boolean {
             val itemPopupMenu = PopupMenu(view.context, view, Gravity.END)
             itemPopupMenu.menuInflater.inflate(R.menu.inventory_item, itemPopupMenu.menu)

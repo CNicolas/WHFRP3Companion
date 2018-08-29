@@ -7,8 +7,7 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.ImageView
 import android.widget.TextView
-import butterknife.ButterKnife
-import com.nicolas.models.player.item.Weapon
+import com.nicolas.models.item.Weapon
 import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.shared.bind
 import com.nicolas.whfrp3companion.shared.enums.drawableId
@@ -33,8 +32,7 @@ class WeaponsAdapter(context: Context, private val weapons: List<Weapon>) : Base
             view!!.tag = holder
         }
 
-        val weapon = getItem(position)
-        holder.setupViews(weapon)
+        holder.setupViews(getItem(position))
 
         return view
     }
@@ -48,10 +46,6 @@ class WeaponsAdapter(context: Context, private val weapons: List<Weapon>) : Base
         private val rangeTextView by view.bind<TextView>(R.id.range)
 
         private lateinit var weapon: Weapon
-
-        init {
-            ButterKnife.bind(this, view)
-        }
 
         fun setupViews(weapon: Weapon) {
             this.weapon = weapon

@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name" translatable="false">WHFRP3Companion</string>
     <string name="zero" translatable="false">0</string>
+    <string name="double_zero" translatable="false">00</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -137,6 +138,8 @@
     <string name="statistics_average_result_hint">0 / roll</string>
     <string name="hand_name_hint">Hand name</string>
 
+    <string name="failure">Failure</string>
+
     <string name="cooldown">Cooldown</string>
     <string name="talent_type">Talent type</string>
     <string name="talent_name">Talent name</string>
@@ -144,6 +147,26 @@
     <string name="search_talent">Search talent</string>
 
     <string name="search_effect">Search effect</string>
+
+    <string name="action_name">Action name</string>
+    <string name="action_type">Action type</string>
+    <string name="action_traits">Action traits</string>
+    <string name="action_conditions">Action conditions</string>
+    <string name="launch_action">Launch action</string>
+    <string name="action_damage_format">%1$d damage, of which %2$d critical</string>
+
+    <string name="melee_attack">Melee attack</string>
+    <string name="range_attack">Range attack</string>
+    <string name="support">Support</string>
+    <string name="spell">Spell</string>
+    <string name="summoning">Summoning</string>
+
+    <string name="trait_basic">Basic</string>
+    <string name="trait_defense">Defense</string>
+    <string name="trait_teamwork">Teamwork</string>
+    <string name="trait_killer">Killer</string>
+    <string name="trait_continuous">Continuous</string>
+    <string name="trait_sword_way">Sword Way</string>
 
     <string name="skill">Skill</string>
     <string name="player_name">Player name</string>
@@ -172,9 +195,11 @@
     <string name="defense">Defense</string>
     <string name="uses">Uses</string>
     <string name="all">All</string>
+
     <string name="slash" translatable="false">/</string>
     <string name="hyphen" translatable="false">-</string>
     <string name="plus" translatable="false">+</string>
     <string name="more_less" translatable="false">+ / -</string>
+
     <string name="lorem">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor…</string>
 </resources>

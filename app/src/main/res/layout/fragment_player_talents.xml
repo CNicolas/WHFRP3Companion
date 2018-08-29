@@ -19,7 +19,7 @@
                                             android:clipToPadding="false"
                                             tools:listitem="@layout/list_element_talent" />
 
-    <android.support.design.widget.FloatingActionButton android:id="@+id/search"
+    <android.support.design.widget.FloatingActionButton android:id="@+id/searchTalentFAB"
                                                         android:layout_width="wrap_content"
                                                         android:layout_height="wrap_content"
                                                         android:layout_gravity="bottom|end"

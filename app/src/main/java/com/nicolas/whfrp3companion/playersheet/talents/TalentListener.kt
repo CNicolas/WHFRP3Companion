@@ -1,6 +1,6 @@
 package com.nicolas.whfrp3companion.playersheet.talents
 
-import com.nicolas.models.player.talent.Talent
+import com.nicolas.models.talent.Talent
 
 interface TalentListener {
     fun onAddTalent(talent: Talent)

@@ -2,7 +2,6 @@
 <resources>
     <color name="expertise_dice">#F4EA4A</color>
     <color name="characteristic_dice">#4471B5</color>
-    <color name="conservative_dice">#6ABE45</color>
     <color name="reckless_dice">#D42424</color>
     <color name="challenge_dice">#8D5FAA</color>
     <!-- end -->
@@ -16,9 +15,12 @@
     <color name="colorSecondaryDark">#00675b</color>
     <color name="colorPrimaryText">#000000</color>
     <color name="colorSecondaryText">#000000</color>
+    <color name="colorDisabledText">#9D9FA2</color>
     <!--endregion-->
 
     <color name="spinner_background">#cfd8dc</color>
+    <color name="white_transparent">#90ffffff</color>
+
     <color name="characteristic_blue">#3f51b5</color>
     <color name="conservative">#2f8f3f</color>
     <color name="reckless">#dd0000</color>

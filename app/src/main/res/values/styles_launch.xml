@@ -7,6 +7,14 @@
         <item name="android:gravity">center</item>
         <item name="android:padding">@dimen/very_small_padding</item>
         <item name="android:textSize">35sp</item>
+        <item name="android:hint">@string/double_zero</item>
+    </style>
+
+    <style name="ActionRollResultDialogFaceTextView">
+        <item name="android:gravity">center</item>
+        <item name="android:padding">@dimen/very_small_padding</item>
+        <item name="android:textSize">@dimen/big_text_size</item>
+        <item name="android:hint">@string/double_zero</item>
     </style>
 
     <style name="StatisticsAverageFaceTextView">
