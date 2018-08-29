@@ -27,4 +27,5 @@
     <dimen name="list_std_main_text">16sp</dimen>
 
     <dimen name="dice_picker_height">130dp</dimen>
+    <dimen name="dice_picker_big_height">170dp</dimen>
 </resources>
