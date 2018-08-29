@@ -1,0 +1,187 @@
+[
+  {
+    "name": "Évaluation de la situation",
+    "type": "SUPPORT",
+    "traits": [ "BASIC", "DEFENSE" ],
+    "skill": "Intuition",
+    "conditions": [ ],
+    "conservativeSide": {
+      "stance": "CONSERVATIVE",
+      "cooldown": 0,
+      "difficulty": [ ],
+      "special": {
+        "text": "Ajoutez {CHALLENGE_DICE} à la réserve de dés de cette action si vous êtes engagé contre un ennemi."
+      },
+      "effects": {
+        "SUCCESS": {
+          "1": [
+            {
+              "stress": -1,
+              "exhaustion": -1,
+              "addedDices": [ "MISFORTUNE" ],
+              "actionType": [ "ATTACK" ],
+              "target": "PLAYER",
+              "text": "Jusqu'au début de votre prochain tour, ajoutez {MISFORTUNE_DICE} à toute Attaque de Corps-à-corps ou d'Attaque à distance vous visant."
+            }
+          ]
+        },
+        "BOON": {
+          "2": [
+            {
+              "cooldown": -1,
+              "target": "PLAYER"
+            }
+          ]
+        },
+        "BANE": {
+          "2": [
+            {
+              "cooldown": 1,
+              "target": "PLAYER"
+            }
+          ]
+        }
+      }
+    },
+    "recklessSide": {
+      "stance": "RECKLESS",
+      "cooldown": 0,
+      "difficulty": [ ],
+      "special": {
+        "text": "Ajoutez {CHALLENGE_DICE} à la réserve de dés de cette action si vous êtes engagé contre un ennemi."
+      },
+      "effects": {
+        "SUCCESS": {
+          "1": [
+            {
+              "stress": -1,
+              "exhaustion": -1,
+              "addedDices": [ "MISFORTUNE" ],
+              "actionType": [ "ATTACK" ],
+              "target": "PLAYER",
+              "text": "Jusqu'au début de votre prochain tour, ajoutez {MISFORTUNE_DICE} à toute Attaque de Corps-à-corps ou d'Attaque à distance vous visant."
+            }
+          ]
+        },
+        "BOON": {
+          "2": [
+            {
+              "cooldown": -1,
+              "target": "PLAYER"
+            }
+          ]
+        },
+        "BANE": {
+          "2": [
+            {
+              "cooldown": 1,
+              "target": "PLAYER"
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "name": "Position Défensive",
+    "type": "SUPPORT",
+    "traits": [ "BASIC", "DEFENSE" ],
+    "skill": "Discipline",
+    "conditions": [
+      {
+        "characteristic": {
+          "characteristic": "AGILITY",
+          "comparator": "GREATER_OR_EQUAL",
+          "value": 3
+        }
+      },
+      { "encumbrance": false }
+    ],
+    "conservativeSide": {
+      "stance": "CONSERVATIVE",
+      "cooldown": 0,
+      "difficulty": [ ],
+      "effects": {
+        "SUCCESS": {
+          "1": [
+            {
+              "addedDices": [ "MISFORTUNE" ],
+              "actionType": [ "ATTACK" ],
+              "target": "PLAYER",
+              "text": "Jusqu'au début de votre prochain tour, ajoutez {MISFORTUNE_DICE} à toute Attaque de Corps-à-corps ou d'Attaque à distance vous visant, vous et vos alliés présents dans le même engagement que vous."
+            }
+          ],
+          "3": [
+            {
+              "addedDices": [ "MISFORTUNE", "MISFORTUNE" ],
+              "actionType": [ "ATTACK" ],
+              "target": "PLAYER",
+              "text": "Jusqu'au début de votre prochain tour, ajoutez {MISFORTUNE_DICE} {MISFORTUNE_DICE} à toute Attaque de Corps-à-corps ou d'Attaque à distance vous visant, vous et vos alliés présents dans le même engagement que vous."
+            }
+          ]
+        },
+        "BOON": {
+          "2": [
+            {
+              "cooldown": -1,
+              "target": "ALLY",
+              "range": "ENGAGED",
+              "text": "Un allié engagé peut ôter 1 jeton de recharge de n'importe laquelle de ses cartes en cours de recharge."
+            }
+          ]
+        },
+        "BANE": {
+          "1": [
+            {
+              "stress": 1,
+              "target": "PLAYER"
+            }
+          ]
+        }
+      }
+    },
+    "recklessSide": {
+      "stance": "RECKLESS",
+      "cooldown": 0,
+      "difficulty": [ ],
+      "effects": {
+        "SUCCESS": {
+          "1": [
+            {
+              "addedDices": [ "MISFORTUNE" ],
+              "actionType": [ "ATTACK" ],
+              "target": "PLAYER",
+              "text": "Jusqu'au début de votre prochain tour, ajoutez {MISFORTUNE_DICE} à toute Attaque de Corps-à-corps ou d'Attaque à distance vous visant, vous et vos alliés présents dans le même engagement que vous."
+            }
+          ],
+          "3": [
+            {
+              "addedDices": [ "MISFORTUNE", "MISFORTUNE" ],
+              "actionType": [ "ATTACK" ],
+              "target": "PLAYER",
+              "text": "Jusqu'au début de votre prochain tour, ajoutez {MISFORTUNE_DICE} {MISFORTUNE_DICE} à toute Attaque de Corps-à-corps ou d'Attaque à distance vous visant, vous et vos alliés présents dans le même engagement que vous."
+            }
+          ]
+        },
+        "BOON": {
+          "2": [
+            {
+              "cooldown": -1,
+              "target": "ALLY",
+              "range": "ENGAGED",
+              "text": "Un allié engagé peut ôter 1 jeton de recharge de n'importe laquelle de ses cartes en cours de recharge."
+            }
+          ]
+        },
+        "BANE": {
+          "1": [
+            {
+              "stress": 1,
+              "target": "PLAYER"
+            }
+          ]
+        }
+      }
+    }
+  }
+]

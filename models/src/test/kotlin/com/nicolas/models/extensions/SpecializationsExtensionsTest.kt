@@ -1,8 +1,8 @@
 package com.nicolas.models.extensions
 
 import com.nicolas.models.player.enums.Characteristic
-import com.nicolas.models.player.skill.Skill
-import com.nicolas.models.player.skill.Specialization
+import com.nicolas.models.skill.Skill
+import com.nicolas.models.skill.Specialization
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Before
 import org.junit.Test
@@ -13,7 +13,7 @@ class SpecializationsExtensionsTest {
     @Before
     fun setUp() {
         allSkills = listOf(Skill("Résistance", Characteristic.TOUGHNESS, specializations = listOf(Specialization("Récupération Après l'Effort"))),
-                Skill("Capacité de Tir", Characteristic.AGILITY, specializations = listOf(Specialization("Arcs"),Specialization("Arbalètes"))))
+                Skill("Capacité de Tir", Characteristic.AGILITY, specializations = listOf(Specialization("Arcs"), Specialization("Arbalètes"))))
     }
 
     @Test

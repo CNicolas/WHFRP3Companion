@@ -3,9 +3,9 @@ package com.nicolas.database.player
 import com.nicolas.database.BuildConfig
 import com.nicolas.models.extensions.*
 import com.nicolas.models.player.Player
-import com.nicolas.models.player.talent.TalentCooldown
-import com.nicolas.models.player.talent.TalentCooldown.PASSIVE
-import com.nicolas.models.player.talent.TalentType.FAITH
+import com.nicolas.models.talent.TalentCooldown
+import com.nicolas.models.talent.TalentCooldown.PASSIVE
+import com.nicolas.models.talent.TalentType.FAITH
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -28,7 +28,6 @@ class AnkoPlayerRepositoryTalentsTest : AbstractAnkoPlayerRepositoryTest() {
         assertThat(updatedPlayer.talents.size).isEqualTo(1)
         assertThat(updatedPlayer.talents[0].cooldown).isEqualTo(PASSIVE)
         assertThat(updatedPlayer.talents[0].type).isEqualTo(FAITH)
-        println(updatedPlayer.talents[0])
 
         assertThat(updatedPlayer.getTalentsByType(FAITH)[0]).isEqualToComparingFieldByField(selectedTalent)
         assertThat(updatedPlayer.getPassiveTalents()[0]).isEqualToComparingFieldByField(selectedTalent)

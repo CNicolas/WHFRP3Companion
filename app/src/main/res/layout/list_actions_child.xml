@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/actionChildLinearLayout"
+              android:orientation="horizontal"
+              android:layout_width="match_parent"
+              android:layout_height="48dp"
+              android:paddingStart="@dimen/list_child_std_margin">
+
+    <TextView android:id="@+id/actionNameTextView"
+              android:layout_width="0dp"
+              android:layout_height="match_parent"
+              android:gravity="center_vertical"
+              android:textSize="@dimen/list_std_main_text"
+              android:hint="@string/action_name"
+              android:layout_weight="1" />
+
+    <ImageButton android:id="@+id/actionMenuImageButton"
+                 android:layout_width="48dp"
+                 android:layout_height="match_parent"
+                 android:background="?attr/selectableItemBackground"
+                 android:src="@drawable/ic_options_black_24dp"
+                 android:contentDescription="@string/action_conditions" />
+</LinearLayout>

@@ -11,9 +11,6 @@ class RollHelpersTest {
         val faces = listOf(DELAY, SUCCESS, FAILURE, BOON, BANE, BOON)
         val finalFaces = simplifyFaces(faces)
 
-        println(faces)
-        println(finalFaces)
-
         assertThat(finalFaces).isNotEmpty
         assertThat(finalFaces.size).isEqualTo(2)
         assertThat(finalFaces).containsExactlyInAnyOrder(BOON, DELAY)
@@ -25,8 +22,6 @@ class RollHelpersTest {
         val rollResult = hand.roll()
 
         assertThat(rollResult.isSuccessful).isTrue()
-
-        println(rollResult)
     }
 
     @Test
@@ -35,7 +30,5 @@ class RollHelpersTest {
         val rollResult = rollHand(hand)
 
         assertThat(rollResult.isSuccessful).isFalse()
-
-        println(rollResult)
     }
 }

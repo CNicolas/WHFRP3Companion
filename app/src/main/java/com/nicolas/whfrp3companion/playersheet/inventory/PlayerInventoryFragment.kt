@@ -1,23 +1,22 @@
 package com.nicolas.whfrp3companion.playersheet.inventory
 
 import android.os.Bundle
+import android.support.design.widget.FloatingActionButton
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import butterknife.ButterKnife
-import butterknife.OnClick
-import butterknife.Unbinder
 import com.nicolas.database.PlayerRepository
 import com.nicolas.models.extensions.getEquipmentByName
 import com.nicolas.models.extensions.removeItem
+import com.nicolas.models.item.Equipment
+import com.nicolas.models.item.Item
+import com.nicolas.models.item.enums.ItemType
 import com.nicolas.models.player.Player
-import com.nicolas.models.player.item.Equipment
-import com.nicolas.models.player.item.Item
-import com.nicolas.models.player.item.enums.ItemType
 import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.shared.ITEM_EDIT_INTENT_ARGUMENT
 import com.nicolas.whfrp3companion.shared.PLAYER_NAME_INTENT_ARGUMENT
+import com.nicolas.whfrp3companion.shared.getView
 import kotlinx.android.synthetic.main.fragment_player_inventory.*
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.intentFor
@@ -25,8 +24,6 @@ import org.jetbrains.anko.uiThread
 import org.koin.android.ext.android.inject
 
 class PlayerInventoryFragment : Fragment(), ItemListener {
-    private lateinit var unbinder: Unbinder
-
     private val playerRepository by inject<PlayerRepository>()
 
     private lateinit var playerName: String
@@ -37,11 +34,11 @@ class PlayerInventoryFragment : Fragment(), ItemListener {
                               savedInstanceState: Bundle?): View? {
         val resultingView: View = inflater.inflate(R.layout.fragment_player_inventory, container, false)
 
-        unbinder = ButterKnife.bind(this, resultingView)
-
         playerName = arguments!!.getString(PLAYER_NAME_INTENT_ARGUMENT)
 
         getPlayerItems()
+
+        setupViewsEvents(resultingView)
 
         return resultingView
     }
@@ -52,15 +49,7 @@ class PlayerInventoryFragment : Fragment(), ItemListener {
         getPlayerItems()
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        unbinder.unbind()
-    }
-
-    @OnClick(R.id.add_item)
-    fun openAddItemActivity() {
-        startItemEditionActivity()
-    }
+    // region ItemListener
 
     override fun onEquipment(equipment: Equipment, isEquipped: Boolean) {
         player.getEquipmentByName(equipment.name)?.isEquipped = isEquipped
@@ -76,6 +65,13 @@ class PlayerInventoryFragment : Fragment(), ItemListener {
         playerRepository.update(player)
 
         getPlayerItems()
+    }
+
+    // endregion
+
+    private fun setupViewsEvents(view: View) {
+        view.getView<FloatingActionButton>(R.id.add_item)
+                .setOnClickListener { startItemEditionActivity() }
     }
 
     private fun startItemEditionActivity(item: Item? = null) {

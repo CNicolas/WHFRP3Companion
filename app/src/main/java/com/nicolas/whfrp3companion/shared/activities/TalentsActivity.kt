@@ -1,36 +1,32 @@
 package com.nicolas.whfrp3companion.shared.activities
 
 import android.os.Bundle
+import android.support.design.widget.FloatingActionButton
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.Toolbar
-import butterknife.ButterKnife
-import butterknife.OnClick
-import butterknife.Unbinder
 import com.nicolas.database.PlayerRepository
 import com.nicolas.database.loadTalents
 import com.nicolas.models.extensions.addTalent
 import com.nicolas.models.extensions.findTalents
 import com.nicolas.models.player.Player
-import com.nicolas.models.player.talent.Talent
-import com.nicolas.models.player.talent.TalentSearch
+import com.nicolas.models.talent.Talent
+import com.nicolas.models.talent.TalentSearch
 import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.playersheet.talents.PlayerTalentsAdapter
-import com.nicolas.whfrp3companion.playersheet.talents.TalentEditionMode
 import com.nicolas.whfrp3companion.playersheet.talents.TalentListener
 import com.nicolas.whfrp3companion.shared.DIALOG_TALENT_SEARCH_TAG
 import com.nicolas.whfrp3companion.shared.PLAYER_NAME_INTENT_ARGUMENT
 import com.nicolas.whfrp3companion.shared.TALENTS_SEARCH_INTENT_ARGUMENT
 import com.nicolas.whfrp3companion.shared.adapters.TalentsAdapter
 import com.nicolas.whfrp3companion.shared.dialogs.TalentSearchDialog
+import com.nicolas.whfrp3companion.shared.enums.PlayerElementEditionMode
+import com.nicolas.whfrp3companion.shared.getView
 import kotlinx.android.synthetic.main.activity_talents.*
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 import org.koin.android.ext.android.inject
 
 class TalentsActivity : AppCompatActivity(), TalentListener {
-    private lateinit var unbinder: Unbinder
-
     private lateinit var allTalents: List<Talent>
     private var talentSearch: TalentSearch? = null
 
@@ -42,10 +38,7 @@ class TalentsActivity : AppCompatActivity(), TalentListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_talents)
 
-        unbinder = ButterKnife.bind(this)
-
-        val toolbar = findViewById<Toolbar>(R.id.toolbar)
-        setSupportActionBar(toolbar)
+        setSupportActionBar(getView(R.id.toolbar))
 
         talentsRecyclerView.layoutManager = LinearLayoutManager(this)
 
@@ -54,40 +47,7 @@ class TalentsActivity : AppCompatActivity(), TalentListener {
         talentSearch = intent?.extras?.getSerializable(TALENTS_SEARCH_INTENT_ARGUMENT) as TalentSearch
         val playerName = intent?.extras?.getString(PLAYER_NAME_INTENT_ARGUMENT)
 
-        val search = talentSearch
-        val talents = if (search !== null) {
-            applySearch(search)
-        } else {
-            allTalents
-        }
-        doAsync {
-            player = playerName?.let {
-                playerRepository.find(playerName)
-            }
-
-            uiThread { activity ->
-                talentsRecyclerView.adapter = if (player != null) {
-                    createTalentsAdapter(talents)
-                } else {
-                    TalentsAdapter(activity, talents)
-                }
-            }
-        }
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        unbinder.unbind()
-    }
-
-    @OnClick(R.id.search)
-    fun search() {
-        val talentSearchDialog =
-                talentSearch
-                        ?.let { TalentSearchDialog.newInstance(it) }
-                        ?: TalentSearchDialog.newInstance()
-
-        talentSearchDialog.show(supportFragmentManager, DIALOG_TALENT_SEARCH_TAG)
+        setupViews(playerName)
     }
 
     // region TalentListener
@@ -108,8 +68,38 @@ class TalentsActivity : AppCompatActivity(), TalentListener {
 
     // endregion
 
+    private fun setupViews(playerName: String?) {
+        val talents = talentSearch?.let { applySearch(it) } ?: allTalents
+
+        doAsync {
+            player = playerName?.let {
+                playerRepository.find(playerName)
+            }
+
+            uiThread { activity ->
+                talentsRecyclerView.adapter = if (player != null) {
+                    createTalentsAdapter(talents)
+                } else {
+                    TalentsAdapter(activity, talents)
+                }
+            }
+        }
+
+        getView<FloatingActionButton>(R.id.searchTalentFAB)
+                .setOnClickListener { search() }
+    }
+
+    private fun search() {
+        val talentSearchDialog =
+                talentSearch
+                        ?.let { TalentSearchDialog.newInstance(it) }
+                        ?: TalentSearchDialog.newInstance()
+
+        talentSearchDialog.show(supportFragmentManager, DIALOG_TALENT_SEARCH_TAG)
+    }
+
     private fun createTalentsAdapter(talents: List<Talent>): PlayerTalentsAdapter {
-        return PlayerTalentsAdapter(this, talents, this, TalentEditionMode.ADDABLE)
+        return PlayerTalentsAdapter(this, talents, this, PlayerElementEditionMode.ADDABLE)
     }
 
     private fun applySearch(talentSearch: TalentSearch): List<Talent> {

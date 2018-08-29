@@ -11,23 +11,21 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.TextView
-import butterknife.ButterKnife
-import butterknife.OnClick
-import com.nicolas.models.player.talent.Talent
+import com.nicolas.models.talent.Talent
 import com.nicolas.whfrp3companion.R
-import com.nicolas.whfrp3companion.playersheet.talents.TalentEditionMode.ADDABLE
-import com.nicolas.whfrp3companion.playersheet.talents.TalentEditionMode.EQUIPABLE_OR_REMOVABLE
 import com.nicolas.whfrp3companion.shared.bind
+import com.nicolas.whfrp3companion.shared.enums.PlayerElementEditionMode
+import com.nicolas.whfrp3companion.shared.enums.PlayerElementEditionMode.ADDABLE
+import com.nicolas.whfrp3companion.shared.enums.PlayerElementEditionMode.EQUIPABLE_OR_REMOVABLE
 import com.nicolas.whfrp3companion.shared.enums.colorId
 import com.nicolas.whfrp3companion.shared.enums.labelId
 import com.nicolas.whfrp3companion.shared.viewModifications.parseTemplatedText
 import org.jetbrains.anko.design.snackbar
-import org.jetbrains.anko.toast
 
 class PlayerTalentsAdapter(context: Context,
                            private val talents: List<Talent>,
                            private val talentListener: TalentListener,
-                           private val talentEditionMode: TalentEditionMode) : RecyclerView.Adapter<PlayerTalentsAdapter.ViewHolder>() {
+                           private val talentEditionMode: PlayerElementEditionMode) : RecyclerView.Adapter<PlayerTalentsAdapter.ViewHolder>() {
     private val inflater = LayoutInflater.from(context)
     private val addedTalents = mutableListOf<Talent>()
 
@@ -45,7 +43,7 @@ class PlayerTalentsAdapter(context: Context,
 
     class ViewHolder(private val view: View,
                      private val talentListener: TalentListener,
-                     talentEditionMode: TalentEditionMode,
+                     talentEditionMode: PlayerElementEditionMode,
                      private val addTalent: (Talent) -> Unit) : RecyclerView.ViewHolder(view) {
         private val talentTypeTextView by view.bind<TextView>(R.id.talentTypeTextView)
         private val talentNameTextView by view.bind<TextView>(R.id.talentNameTextView)
@@ -58,7 +56,7 @@ class PlayerTalentsAdapter(context: Context,
         private lateinit var addedTalents: List<Talent>
 
         init {
-            ButterKnife.bind(this, view)
+            setupViewsEvents()
 
             when (talentEditionMode) {
                 ADDABLE -> {
@@ -101,8 +99,15 @@ class PlayerTalentsAdapter(context: Context,
             }
         }
 
-        @OnClick(R.id.addTalentButton)
-        fun onAddTalent() {
+        private fun setupViewsEvents() {
+            addTalentButton.setOnClickListener { onAddTalent() }
+
+            toggleTalentEquipmentButton.setOnClickListener { talentListener.onToggleTalentEquipment(talent) }
+
+            removeTalentButton.setOnClickListener { talentListener.onRemoveTalent(talent) }
+        }
+
+        private fun onAddTalent() {
             talentListener.onAddTalent(talent)
             addTalent(talent)
             this.addTalentButton.visibility = View.GONE
@@ -111,21 +116,6 @@ class PlayerTalentsAdapter(context: Context,
                 val snackbarText = activity.getString(R.string.talent_added_format).format(talent.name)
                 snackbar(view, snackbarText).show()
             }
-        }
-
-        @OnClick(R.id.toggleTalentEquipmentButton)
-        fun onToggleTalentEquipment() {
-            talentListener.onToggleTalentEquipment(talent)
-        }
-
-        @OnClick(R.id.removeTalentButton)
-        fun onRemoveTalent() {
-            talentListener.onRemoveTalent(talent)
-        }
-
-        @OnClick(R.id.talentNameTextView)
-        fun onClickOnTalentName() {
-            view.context.toast(talent.name)
         }
     }
 }

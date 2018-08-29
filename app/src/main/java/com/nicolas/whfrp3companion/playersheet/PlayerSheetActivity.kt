@@ -8,14 +8,13 @@ import android.support.v4.view.GravityCompat
 import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.Toolbar
 import android.view.MenuItem
 import android.view.inputmethod.InputMethodManager
-import butterknife.ButterKnife
 import com.nicolas.database.PlayerRepository
 import com.nicolas.models.player.Player
 import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.fragments.EmptyFragment
+import com.nicolas.whfrp3companion.playersheet.actions.PlayerActionsFragment
 import com.nicolas.whfrp3companion.playersheet.characteristics.PlayerCharacteristicsFragment
 import com.nicolas.whfrp3companion.playersheet.inventory.PlayerInventoryFragment
 import com.nicolas.whfrp3companion.playersheet.skills.PlayerSkillsFragment
@@ -24,6 +23,7 @@ import com.nicolas.whfrp3companion.playersheet.talents.PlayerTalentsFragment
 import com.nicolas.whfrp3companion.shared.PLAYER_NAME_INTENT_ARGUMENT
 import com.nicolas.whfrp3companion.shared.bind
 import com.nicolas.whfrp3companion.shared.enums.labelId
+import kotlinx.android.synthetic.main.toolbar.*
 import org.koin.android.ext.android.inject
 
 class PlayerSheetActivity : AppCompatActivity() {
@@ -41,9 +41,6 @@ class PlayerSheetActivity : AppCompatActivity() {
         player = playerRepository.find(intent.extras.getString(PLAYER_NAME_INTENT_ARGUMENT))!!
         title = "${player.name} - ${getString(player.race.labelId)}"
 
-        ButterKnife.bind(this)
-
-        val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
 
         toggle = ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
@@ -83,7 +80,7 @@ class PlayerSheetActivity : AppCompatActivity() {
             R.id.nav_player_skills -> PlayerSkillsFragment.newInstance(player.name)
             R.id.nav_player_inventory -> PlayerInventoryFragment.newInstance(player.name)
             R.id.nav_player_talents -> PlayerTalentsFragment.newInstance(player.name)
-//            R.id.nav_player_actions -> PlayerActionsFragment()
+            R.id.nav_player_actions -> PlayerActionsFragment.newInstance(player.name)
             else -> EmptyFragment.newInstance()
         }
 

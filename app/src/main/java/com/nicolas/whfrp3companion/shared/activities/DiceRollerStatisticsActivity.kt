@@ -19,6 +19,8 @@ class DiceRollerStatisticsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dice_roller_statistics)
+        setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         swipeRefreshLayout.setOnRefreshListener { calculateStatistics() }
 
@@ -29,9 +31,12 @@ class DiceRollerStatisticsActivity : AppCompatActivity() {
             hand = Hand("")
         }
 
-        setSupportActionBar(toolbar)
-
         calculateStatistics()
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        finish()
+        return true
     }
 
     private fun calculateStatistics() {

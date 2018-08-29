@@ -14,5 +14,4 @@ data class RollResult(val faces: List<Face>) : Serializable {
     override fun toString(): String {
         return "$successfulString $report"
     }
-
 }

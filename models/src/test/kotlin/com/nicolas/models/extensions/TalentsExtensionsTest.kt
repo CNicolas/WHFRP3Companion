@@ -1,10 +1,10 @@
 package com.nicolas.models.extensions
 
-import com.nicolas.models.player.talent.Talent
-import com.nicolas.models.player.talent.TalentCooldown.PASSIVE
-import com.nicolas.models.player.talent.TalentCooldown.TALENT
-import com.nicolas.models.player.talent.TalentType.AFFINITY
-import com.nicolas.models.player.talent.TalentType.REPUTATION
+import com.nicolas.models.talent.Talent
+import com.nicolas.models.talent.TalentCooldown.PASSIVE
+import com.nicolas.models.talent.TalentCooldown.TALENT
+import com.nicolas.models.talent.TalentType.AFFINITY
+import com.nicolas.models.talent.TalentType.REPUTATION
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 

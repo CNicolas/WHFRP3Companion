@@ -9,7 +9,19 @@
 
     <include layout="@layout/toolbar" />
 
-    <include layout="@layout/content_dice_roller" />
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:orientation="vertical">
+        <include layout="@layout/content_dice_roller" />
+
+        <Button android:id="@+id/roll_button"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/medium_padding"
+                android:text="@string/roll" />
+    </LinearLayout>
+
 
     <android.support.design.widget.FloatingActionButton android:id="@+id/fab_save_hand"
                                                         android:layout_width="wrap_content"

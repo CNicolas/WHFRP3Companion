@@ -2,9 +2,9 @@ package com.nicolas.models.extensions
 
 import com.nicolas.models.player.Player
 import com.nicolas.models.player.enums.Characteristic
-import com.nicolas.models.player.skill.Skill
-import com.nicolas.models.player.skill.SkillType
-import com.nicolas.models.player.skill.Specialization
+import com.nicolas.models.skill.Skill
+import com.nicolas.models.skill.SkillType
+import com.nicolas.models.skill.Specialization
 
 fun Player.addSkill(skill: Skill): List<Skill> {
     val mutableSkills = skills.toMutableList()

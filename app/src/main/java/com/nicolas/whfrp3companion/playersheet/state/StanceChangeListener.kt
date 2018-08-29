@@ -3,32 +3,17 @@ package com.nicolas.whfrp3companion.playersheet.state
 import android.content.Context
 import android.content.res.ColorStateList
 import android.support.v4.content.ContextCompat
-import android.widget.TextView
-import com.nicolas.database.anko.AnkoPlayerRepository
-import com.nicolas.models.player.Player
 import com.nicolas.whfrp3companion.R
 import org.adw.library.widgets.discreteseekbar.DiscreteSeekBar
-import org.jetbrains.anko.doAsync
-import java.lang.Math.abs
 
 class StanceChangeListener(context: Context,
-                           private val player: Player,
-                           private val currentStanceView: TextView) : DiscreteSeekBar.OnProgressChangeListener {
-    private val playerFacade = AnkoPlayerRepository(context)
-
+                           private val onColorChanged: (colorStateList: ColorStateList) -> Unit,
+                           private val onStanceChanged: (stance: Int) -> Unit) : DiscreteSeekBar.OnProgressChangeListener {
     private val conservativeColor = ContextCompat.getColor(context, R.color.conservative)
     private val recklessColor = ContextCompat.getColor(context, R.color.reckless)
     private val neutralColor = ContextCompat.getColor(context, R.color.colorPrimaryDark)
 
-    override fun onProgressChanged(seekBar: DiscreteSeekBar, value: Int, fromUser: Boolean) {
-        seekBar.changeColorForStance(value)
-        player.stance = value
-        currentStanceView.text = abs(value).toString()
-
-        doAsync {
-            playerFacade.update(player)
-        }
-    }
+    override fun onProgressChanged(seekBar: DiscreteSeekBar, value: Int, fromUser: Boolean) = onStanceChanged(value)
 
     override fun onStartTrackingTouch(seekBar: DiscreteSeekBar) {
         seekBar.changeColorForStance(seekBar.progress)
@@ -50,6 +35,6 @@ class StanceChangeListener(context: Context,
         setThumbColor(colorStateList, color)
         setTrackColor(colorStateList)
 
-        currentStanceView.setTextColor(colorStateList)
+        onColorChanged(colorStateList)
     }
 }

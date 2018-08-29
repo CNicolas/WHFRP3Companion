@@ -31,8 +31,6 @@ class MoneyExtensionsTest {
 
         player.removeMoney(1, 60, 30)
 
-        println("Gold = ${player.gold}, Silver = ${player.silver}, Brass = ${player.brass}")
-
         assertThat(player.gold).isEqualTo(8)
         assertThat(player.silver).isEqualTo(89)
         assertThat(player.brass).isEqualTo(15)

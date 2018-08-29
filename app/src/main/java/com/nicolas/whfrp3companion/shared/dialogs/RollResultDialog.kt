@@ -5,37 +5,26 @@ import android.app.AlertDialog
 import android.app.Dialog
 import android.os.Bundle
 import android.support.v4.app.DialogFragment
+import android.view.View
 import android.view.View.GONE
 import android.widget.TextView
-import butterknife.BindView
-import butterknife.ButterKnife
-import butterknife.Unbinder
 import com.nicolas.diceroller.roll.RollResult
 import com.nicolas.models.dice.Face
 import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.shared.ROLL_RESULT_INTENT_ARGUMENT
+import com.nicolas.whfrp3companion.shared.getView
 
-class RollResultDialog : DialogFragment() {
-    @BindView(R.id.success_result)
-    lateinit var successResult: TextView
-    @BindView(R.id.boon_result)
-    lateinit var boonResult: TextView
-    @BindView(R.id.sigmar_result)
-    lateinit var sigmarResult: TextView
-    @BindView(R.id.failure_result)
-    lateinit var failureResult: TextView
-    @BindView(R.id.bane_result)
-    lateinit var baneResult: TextView
-    @BindView(R.id.delay_result)
-    lateinit var delayResult: TextView
-    @BindView(R.id.exhaustion_result)
-    lateinit var exhaustionResult: TextView
-    @BindView(R.id.chaos_result)
-    lateinit var chaosResult: TextView
+open class RollResultDialog : DialogFragment() {
+    private lateinit var successResult: TextView
+    private lateinit var boonResult: TextView
+    private lateinit var sigmarResult: TextView
+    private lateinit var failureResult: TextView
+    private lateinit var baneResult: TextView
+    private lateinit var delayResult: TextView
+    private lateinit var exhaustionResult: TextView
+    private lateinit var chaosResult: TextView
 
-    private lateinit var unbinder: Unbinder
-
-    private lateinit var rollResult: RollResult
+    protected lateinit var rollResult: RollResult
 
     @SuppressLint("InflateParams")
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -47,22 +36,16 @@ class RollResultDialog : DialogFragment() {
 
         builder.setView(view)
         builder.setTitle(R.string.results)
-        builder.setPositiveButton(android.R.string.ok, { _, _ -> dismiss() })
+        builder.setPositiveButton(android.R.string.ok) { _, _ -> dismiss() }
 
         val dialog = builder.create()
-        unbinder = ButterKnife.bind(this, view)
-
-        setResultsContent()
+        bindViews(view)
+        setResultsContent(rollResult)
 
         return dialog
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        unbinder.unbind()
-    }
-
-    private fun setResultsContent() {
+    protected fun setResultsContent(rollResult: RollResult) {
         when (rollResult.report[Face.SUCCESS]) {
             null -> successResult.visibility = GONE
             else -> successResult.text = rollResult.report[Face.SUCCESS].toString()
@@ -102,6 +85,17 @@ class RollResultDialog : DialogFragment() {
             null -> chaosResult.visibility = GONE
             else -> chaosResult.text = rollResult.report[Face.CHAOS].toString()
         }
+    }
+
+    protected open fun bindViews(view: View) {
+        successResult = view.getView(R.id.success_result)
+        boonResult = view.getView(R.id.boon_result)
+        sigmarResult = view.getView(R.id.sigmar_result)
+        failureResult = view.getView(R.id.failure_result)
+        baneResult = view.getView(R.id.bane_result)
+        delayResult = view.getView(R.id.delay_result)
+        exhaustionResult = view.getView(R.id.exhaustion_result)
+        chaosResult = view.getView(R.id.chaos_result)
     }
 
     companion object {

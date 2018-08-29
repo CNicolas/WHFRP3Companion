@@ -1,32 +1,30 @@
 package com.nicolas.whfrp3companion.playersheet.talents
 
 import android.os.Bundle
+import android.support.design.widget.FloatingActionButton
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import butterknife.ButterKnife
-import butterknife.OnClick
-import butterknife.Unbinder
 import com.nicolas.database.PlayerRepository
 import com.nicolas.models.extensions.addTalent
 import com.nicolas.models.extensions.removeTalent
 import com.nicolas.models.extensions.toggleEquipment
 import com.nicolas.models.player.Player
-import com.nicolas.models.player.talent.Talent
+import com.nicolas.models.talent.Talent
 import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.shared.DIALOG_TALENT_SEARCH_TAG
 import com.nicolas.whfrp3companion.shared.PLAYER_NAME_INTENT_ARGUMENT
 import com.nicolas.whfrp3companion.shared.dialogs.TalentSearchDialog
+import com.nicolas.whfrp3companion.shared.enums.PlayerElementEditionMode
+import com.nicolas.whfrp3companion.shared.getView
 import kotlinx.android.synthetic.main.fragment_player_talents.*
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 import org.koin.android.ext.android.inject
 
 class PlayerTalentsFragment : Fragment(), TalentListener {
-    private lateinit var unbinder: Unbinder
-
     private val playerRepository by inject<PlayerRepository>()
 
     private lateinit var player: Player
@@ -36,7 +34,7 @@ class PlayerTalentsFragment : Fragment(), TalentListener {
                               savedInstanceState: Bundle?): View? {
         val resultingView: View = inflater.inflate(R.layout.fragment_player_talents, container, false)
 
-        unbinder = ButterKnife.bind(this, resultingView)
+        setupViewEvents(resultingView)
 
         val playerName = arguments!!.getString(PLAYER_NAME_INTENT_ARGUMENT)
         player = playerRepository.find(playerName)!!
@@ -52,18 +50,8 @@ class PlayerTalentsFragment : Fragment(), TalentListener {
         setPlayerTalentsAdapter()
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        unbinder.unbind()
-    }
-
-    @OnClick(R.id.search)
-    fun openTalentSearchDialog() {
-        val talentSearchDialog = TalentSearchDialog.newInstance(player.name)
-        talentSearchDialog.show(activity?.supportFragmentManager, DIALOG_TALENT_SEARCH_TAG)
-    }
-
     // region TalentListener
+
     override fun onAddTalent(talent: Talent) {
         doAsync {
             player.addTalent(talent)
@@ -91,13 +79,24 @@ class PlayerTalentsFragment : Fragment(), TalentListener {
             player.removeTalent(talent)
             player = playerRepository.update(player)
 
-            val adapter = PlayerTalentsAdapter(activity!!, player.talents, this@PlayerTalentsFragment, TalentEditionMode.EQUIPABLE_OR_REMOVABLE)
+            val adapter = PlayerTalentsAdapter(activity!!, player.talents, this@PlayerTalentsFragment, PlayerElementEditionMode.EQUIPABLE_OR_REMOVABLE)
             uiThread {
                 talentsRecyclerView.adapter = adapter
             }
         }
     }
+
     // endregion
+
+    private fun setupViewEvents(view: View) {
+        view.getView<FloatingActionButton>(R.id.searchTalentFAB)
+                .setOnClickListener { openTalentSearchDialog() }
+    }
+
+    private fun openTalentSearchDialog() {
+        val talentSearchDialog = TalentSearchDialog.newInstance(player.name)
+        talentSearchDialog.show(activity?.supportFragmentManager, DIALOG_TALENT_SEARCH_TAG)
+    }
 
     private fun setPlayerTalentsAdapter() {
         doAsync {
@@ -113,7 +112,7 @@ class PlayerTalentsFragment : Fragment(), TalentListener {
     }
 
     private fun createTalentsAdapter(): PlayerTalentsAdapter {
-        return PlayerTalentsAdapter(activity!!, player.talents, this, TalentEditionMode.EQUIPABLE_OR_REMOVABLE)
+        return PlayerTalentsAdapter(activity!!, player.talents, this, PlayerElementEditionMode.EQUIPABLE_OR_REMOVABLE)
     }
 
     companion object {

@@ -1,8 +1,8 @@
 package com.nicolas.models.extensions
 
-import com.nicolas.models.player.talent.Talent
-import com.nicolas.models.player.talent.TalentCooldown
-import com.nicolas.models.player.talent.TalentType
+import com.nicolas.models.talent.Talent
+import com.nicolas.models.talent.TalentCooldown
+import com.nicolas.models.talent.TalentType
 
 fun List<Talent>.findTalents(text: String? = null,
                              cooldown: TalentCooldown? = null,

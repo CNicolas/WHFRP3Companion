@@ -4,7 +4,7 @@ import com.nicolas.database.BuildConfig
 import com.nicolas.models.extensions.*
 import com.nicolas.models.player.Player
 import com.nicolas.models.player.enums.Characteristic.*
-import com.nicolas.models.player.skill.SkillType
+import com.nicolas.models.skill.SkillType
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -22,7 +22,6 @@ class AnkoPlayerRepositorySkillsTest : AbstractAnkoPlayerRepositoryTest() {
         assertThat(player.skills.size).isEqualTo(18)
 
         val advancedSkills = allSkills.advanced
-        println(advancedSkills)
         assertThat(advancedSkills.map { it.type }.distinct()).isEqualTo(listOf(SkillType.ADVANCED))
         player.addSkill(advancedSkills[0])
 

@@ -3,10 +3,10 @@ package com.nicolas.database.player
 import com.google.gson.GsonBuilder
 import com.nicolas.database.anko.tables.parsers.ItemDeserializer
 import com.nicolas.database.genericType
-import com.nicolas.models.player.item.Armor
-import com.nicolas.models.player.item.Expandable
-import com.nicolas.models.player.item.Item
-import com.nicolas.models.player.item.Weapon
+import com.nicolas.models.item.Armor
+import com.nicolas.models.item.Expandable
+import com.nicolas.models.item.Item
+import com.nicolas.models.item.Weapon
 import org.assertj.core.api.Assertions.assertThat
 import org.testng.annotations.Test
 

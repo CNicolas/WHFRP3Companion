@@ -5,18 +5,18 @@ import android.content.Context
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.SearchView
-import android.support.v7.widget.Toolbar
 import android.view.Menu
 import com.nicolas.database.PlayerRepository
 import com.nicolas.database.loadEffects
+import com.nicolas.models.effect.Effect
 import com.nicolas.models.extensions.addEffect
 import com.nicolas.models.extensions.removeEffect
 import com.nicolas.models.player.Player
-import com.nicolas.models.player.effect.Effect
 import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.shared.PLAYER_NAME_INTENT_ARGUMENT
 import com.nicolas.whfrp3companion.shared.normalized
 import kotlinx.android.synthetic.main.activity_player_effects.*
+import kotlinx.android.synthetic.main.toolbar.*
 import org.jetbrains.anko.act
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
@@ -31,9 +31,8 @@ class PlayerEffectsActivity internal constructor() : AppCompatActivity(), Effect
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_player_effects)
-
-        val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         doAsync {
             player = playerRepository.find(intent.extras.getString(PLAYER_NAME_INTENT_ARGUMENT))!!
@@ -44,6 +43,11 @@ class PlayerEffectsActivity internal constructor() : AppCompatActivity(), Effect
                 updateEffectsList(allEffects)
             }
         }
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        finish()
+        return true
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
