@@ -15,6 +15,8 @@ import com.nicolas.models.extensions.createHand
 import com.nicolas.models.hand.Hand
 import com.nicolas.models.item.Weapon
 import com.nicolas.models.player.Player
+import com.nicolas.models.skill.Skill
+import com.nicolas.models.skill.Specialization
 import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.playersheet.actions.ActionRollResultDialog
 import com.nicolas.whfrp3companion.playersheet.state.StanceChangeListener
@@ -26,7 +28,6 @@ import kotlinx.android.synthetic.main.content_stance_bar.*
 import org.adw.library.widgets.discreteseekbar.DiscreteSeekBar
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.intentFor
-import org.jetbrains.anko.toast
 import org.jetbrains.anko.uiThread
 import org.koin.android.ext.android.inject
 import kotlin.math.abs
@@ -38,6 +39,8 @@ class PlayerAdvancedDiceRollerFragment : Fragment() {
     private lateinit var player: Player
     private lateinit var hand: Hand
 
+    private var skill: Skill? = null
+    private var specialization: Specialization? = null
     private var action: Action? = null
     private var weapon: Weapon? = null
 
@@ -83,8 +86,8 @@ class PlayerAdvancedDiceRollerFragment : Fragment() {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if (requestCode == ACTION_REQUEST_CODE) {
-            if (resultCode == Activity.RESULT_OK) {
+        when (requestCode) {
+            ACTION_REQUEST_CODE -> if (resultCode == Activity.RESULT_OK) {
                 action = data?.getSerializableExtra(ACTION_INTENT_ARGUMENT) as Action?
                 action?.let {
                     val actionHand = player.createHand(it)
@@ -94,7 +97,18 @@ class PlayerAdvancedDiceRollerFragment : Fragment() {
                 }
                 weapon = data?.getSerializableExtra(WEAPON_INTENT_ARGUMENT) as Weapon?
             }
+            SKILL_REQUEST_CODE -> if (resultCode == Activity.RESULT_OK) {
+                skill = data?.getSerializableExtra(SKILL_INTENT_ARGUMENT) as Skill?
+                specialization = data?.getSerializableExtra(SPECIALIZATION_INTENT_ARGUMENT) as Specialization?
+
+                skill?.let { skill ->
+                    specialization?.let {
+                        hand = player.createHand(skill, it)
+                    }
+                }
+            }
         }
+
         super.onActivityResult(requestCode, resultCode, data)
     }
 
@@ -163,7 +177,11 @@ class PlayerAdvancedDiceRollerFragment : Fragment() {
     }
 
     private fun openSkillsSelection() {
-        activity?.toast("Select skill")
+        activity?.let {
+            startActivityForResult(it.intentFor<PlayerAdvancedDiceRollerSkillsActivity>(
+                    PLAYER_NAME_INTENT_ARGUMENT to player.name
+            ), SKILL_REQUEST_CODE)
+        }
     }
 
     private fun openActionsSelection() {

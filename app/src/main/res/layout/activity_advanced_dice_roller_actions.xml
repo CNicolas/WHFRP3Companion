@@ -11,7 +11,7 @@
     <ExpandableListView android:id="@+id/actionsExpandableListView"
                         android:layout_height="match_parent"
                         android:layout_width="match_parent"
-                        android:layout_marginTop="@dimen/medium_padding"
+        android:layout_marginTop="?attr/actionBarSize"
                         android:groupIndicator="@null"
                         tools:listheader="@layout/list_actions_group"
                         tools:listitem="@layout/list_actions_child" />

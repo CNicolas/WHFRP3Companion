@@ -168,4 +168,5 @@
     <string name="trait_killer">Tueur</string>
     <string name="trait_sword_way">Voie de l\'Épée</string>
     <string name="trait_teamwork">Travail d\'Équipe</string>
+    <string name="none">Aucun(e)</string>
 </resources>
