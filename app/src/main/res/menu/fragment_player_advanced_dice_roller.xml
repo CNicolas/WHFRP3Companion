@@ -1,18 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
       xmlns:app="http://schemas.android.com/apk/res-auto">
-    <item android:id="@+id/reset_hand"
-          android:title="@string/reset_hand"
-          android:icon="@drawable/ic_layers_clear_white_24dp"
+    <item android:id="@+id/select_action"
+          android:title="@string/page_actions"
+          android:icon="@drawable/ic_action_white"
+          app:showAsAction="always" />
+    <item android:id="@+id/select_characteristic"
+          android:title="@string/characteristic"
+          android:icon="@drawable/ic_characteristic_white"
           app:showAsAction="ifRoom" />
-
-    <item android:id="@+id/roll_statistics_100"
-          android:title="@string/roll_100_times"
-          app:showAsAction="never" />
-    <item android:id="@+id/roll_statistics_1000"
-          android:title="@string/roll_1000_times"
-          app:showAsAction="never" />
-    <item android:id="@+id/roll_statistics_5000"
-          android:title="@string/roll_5000_times"
-          app:showAsAction="never" />
+    <item android:id="@+id/select_skill"
+          android:title="@string/page_skills"
+          android:icon="@drawable/ic_skills_white"
+          app:showAsAction="ifRoom" />
 </menu>

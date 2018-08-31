@@ -63,6 +63,10 @@ class PlayerAdvancedDiceRollerActionsActivity : AppCompatActivity(), ActionListe
             player.getEquippedWeaponsForCategories(it)
         } ?: player.getEquippedWeapons()
 
+        if (weapons.isEmpty()) {
+            return closeActivityAfterActionSelected(action)
+        }
+
         ActionWeaponDialog.newInstance(weapons) { closeActivityAfterActionSelected(action, it) }
                 .show(supportFragmentManager, DIALOG_ACTION_WEAPONS_TAG)
     }
@@ -73,15 +77,15 @@ class PlayerAdvancedDiceRollerActionsActivity : AppCompatActivity(), ActionListe
         resultingIntent.putExtra(WEAPON_INTENT_ARGUMENT, weapon)
 
         setResult(Activity.RESULT_OK, resultingIntent)
-
-        super.finish()
+        finish()
     }
 
     private fun setPlayerActionsAdapter() {
-        actionsExpandableListView?.setAdapter(createActionsAdapter())
-    }
+        val adapter = ActionExpandableAdapter(this, player.actions, this, player.dominantStance)
+        actions_expandable_list_view.setAdapter(adapter)
 
-    private fun createActionsAdapter(): ActionExpandableAdapter {
-        return ActionExpandableAdapter(this, player.actions, this, player.dominantStance)
+        (0 until player.actions.map { it.type }.distinct().size).forEach { it ->
+            actions_expandable_list_view.expandGroup(it)
+        }
     }
 }

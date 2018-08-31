@@ -7,8 +7,8 @@ const val HAND_INTENT_ARGUMENT = "hand"
 const val HAND_ROLL_COUNT_INTENT_ARGUMENT = "rollCount"
 const val ROLL_RESULT_INTENT_ARGUMENT = "rollResult"
 
-const val SKILL_INTENT_ARGUMENT = "weapon"
-const val SPECIALIZATION_INTENT_ARGUMENT = "weapon"
+const val SKILL_INTENT_ARGUMENT = "skill"
+const val SPECIALIZATION_INTENT_ARGUMENT = "specialization"
 
 const val ITEM_EDIT_INTENT_ARGUMENT = "item"
 const val WEAPON_INTENT_ARGUMENT = "weapon"

@@ -13,6 +13,7 @@
     <string name="roll_100_times">Roll 100 times</string>
     <string name="roll_1000_times">Roll 1000 times</string>
     <string name="roll_5000_times">Roll 5000 times</string>
+    <string name="dices_count">Dices count</string>
 
     <string name="page_home">Home</string>
     <string name="page_dice_roller">Dices roller</string>
@@ -113,6 +114,7 @@
     <string name="cooldown_session">Session</string>
 
     <string name="create_player">Create a player</string>
+    <string name="missing_player_name">Please enter a name</string>
     <string name="delete_player">Delete</string>
     <string name="results">Results</string>
     <string name="select_hand">Select a hand</string>

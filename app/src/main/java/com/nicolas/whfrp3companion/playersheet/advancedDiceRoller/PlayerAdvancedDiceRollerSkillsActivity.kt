@@ -56,8 +56,13 @@ class PlayerAdvancedDiceRollerSkillsActivity : AppCompatActivity() {
     private fun selectSkill(skill: Skill) {
         val title = getString(R.string.page_specializations)
         val specializations: List<Specialization> = skill.specializations.filter { it.isSpecialized }
+
+        if (specializations.isEmpty()) {
+            return closeActivityAfterSkillSelected(skill)
+        }
+
         selector(title, specializations.map { it.name } + getString(R.string.none)) { _, index ->
-            if (index == specializations.size) {
+            if (index >= specializations.size) {
                 closeActivityAfterSkillSelected(skill)
             } else {
                 closeActivityAfterSkillSelected(skill, specializations[index])
@@ -71,7 +76,6 @@ class PlayerAdvancedDiceRollerSkillsActivity : AppCompatActivity() {
         resultingIntent.putExtra(SPECIALIZATION_INTENT_ARGUMENT, specialization)
 
         setResult(Activity.RESULT_OK, resultingIntent)
-
-        super.finish()
+        finish()
     }
 }
