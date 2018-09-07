@@ -7,13 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import com.nicolas.database.PlayerRepository
 import com.nicolas.models.action.Action
-import com.nicolas.models.extensions.createHand
 import com.nicolas.models.player.Player
 import com.nicolas.whfrp3companion.R
-import com.nicolas.whfrp3companion.playersheet.PlayerDiceRollerActivity
+import com.nicolas.whfrp3companion.playersheet.advancedDiceRoller.PlayerAdvancedDiceRollerFragment
 import com.nicolas.whfrp3companion.shared.ACTION_INTENT_ARGUMENT
-import com.nicolas.whfrp3companion.shared.HAND_INTENT_ARGUMENT
 import com.nicolas.whfrp3companion.shared.PLAYER_NAME_INTENT_ARGUMENT
+import com.nicolas.whfrp3companion.shared.STANCE_INTENT_ARGUMENT
+import com.nicolas.whfrp3companion.shared.activities.ActionDetailActivity
 import com.nicolas.whfrp3companion.shared.adapters.ActionExpandableAdapter
 import com.nicolas.whfrp3companion.shared.adapters.ActionListener
 import kotlinx.android.synthetic.main.fragment_player_actions.*
@@ -40,14 +40,19 @@ class PlayerActionsFragment : Fragment(), ActionListener {
         return resultingView
     }
 
-    override fun launchAction(action: Action) {
+    override fun primaryHandler(action: Action) {
         activity?.let {
-            startActivity(it.intentFor<PlayerDiceRollerActivity>(
-                    PLAYER_NAME_INTENT_ARGUMENT to player.name,
-                    HAND_INTENT_ARGUMENT to player.createHand(action),
-                    ACTION_INTENT_ARGUMENT to action
+            it.startActivity(it.intentFor<ActionDetailActivity>(
+                    ACTION_INTENT_ARGUMENT to action,
+                    STANCE_INTENT_ARGUMENT to player.dominantStance
             ))
         }
+    }
+
+    override fun secondaryHandler(action: Action) {
+        activity?.supportFragmentManager?.beginTransaction()
+                ?.replace(R.id.playersheet_content_frame, PlayerAdvancedDiceRollerFragment.newInstance(player.name, action))
+                ?.commit()
     }
 
     private fun setPlayerActionsAdapter() {
@@ -55,14 +60,14 @@ class PlayerActionsFragment : Fragment(), ActionListener {
             player = playerRepository.find(player.name)!!
 
             uiThread {
-                actionsExpandableListView?.setAdapter(createActionsAdapter())
+                actions_expandable_list_view?.setAdapter(createActionsAdapter())
             }
         }
     }
 
     // Keep this as the context
     private fun createActionsAdapter(): ActionExpandableAdapter {
-        return ActionExpandableAdapter(activity!!, player.actions, this, player.dominantStance)
+        return ActionExpandableAdapter(activity!!, player.actions, this, ActionExpandableAdapter.ActionButtonType.ROLL)
     }
 
     companion object {

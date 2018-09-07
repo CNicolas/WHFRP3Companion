@@ -27,7 +27,10 @@ import com.nicolas.whfrp3companion.shared.enums.labelId
 import kotlinx.android.synthetic.main.content_stance_bar.*
 import kotlinx.android.synthetic.main.fragment_player_advanced_dice_roller.*
 import org.adw.library.widgets.discreteseekbar.DiscreteSeekBar
-import org.jetbrains.anko.*
+import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.intentFor
+import org.jetbrains.anko.selector
+import org.jetbrains.anko.uiThread
 import org.koin.android.ext.android.inject
 import kotlin.math.abs
 
@@ -51,23 +54,38 @@ class PlayerAdvancedDiceRollerFragment : Fragment() {
 
         hand = Hand("")
 
-        val playerName = arguments!!.getString(PLAYER_NAME_INTENT_ARGUMENT)
-        playerName?.let {
-            doAsync {
-                player = playerRepository.find(it)!!
+        arguments?.let { args ->
+            val playerName = args.getString(PLAYER_NAME_INTENT_ARGUMENT)
+            playerName?.let {
+                doAsync {
+                    player = playerRepository.find(it)!!
 
-                uiThread {
-                    setupViewsEvents()
-                    setupStanceBar()
-                    setHandAndFillViews()
+                    uiThread {
+                        setupViewsEvents()
+                        setupStanceBar()
+                        setHandAndFillViews()
 
-                    val realStance = player.stance
-                    if (player.stance != stanceBar.max) {
-                        stanceBar.progress = stanceBar.max
-                    } else {
-                        stanceBar.progress = stanceBar.min
+                        val realStance = player.stance
+                        if (player.stance != stanceBar.max) {
+                            stanceBar.progress = stanceBar.max
+                        } else {
+                            stanceBar.progress = stanceBar.min
+                        }
+                        stanceBar.progress = realStance
+
+                        if (args.containsKey(ACTION_INTENT_ARGUMENT)) {
+                            action = args.getSerializable(ACTION_INTENT_ARGUMENT) as Action?
+                            receiveSelectedAction()
+                        } else if (args.containsKey(SKILL_INTENT_ARGUMENT)) {
+                            skill = args.getSerializable(SKILL_INTENT_ARGUMENT) as Skill?
+
+                            if (args.containsKey(SPECIALIZATION_INTENT_ARGUMENT)) {
+                                specialization = args.getSerializable(SPECIALIZATION_INTENT_ARGUMENT) as Specialization?
+                            }
+
+                            receiveSelectedSkill()
+                        }
                     }
-                    stanceBar.progress = realStance
                 }
             }
         }
@@ -93,10 +111,14 @@ class PlayerAdvancedDiceRollerFragment : Fragment() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         when (requestCode) {
             ACTION_REQUEST_CODE -> if (resultCode == Activity.RESULT_OK) {
-                receiveSelectedAction(data)
+                action = data?.getSerializableExtra(ACTION_INTENT_ARGUMENT) as Action?
+                weapon = data?.getSerializableExtra(WEAPON_INTENT_ARGUMENT) as Weapon?
+                receiveSelectedAction()
             }
             SKILL_REQUEST_CODE -> if (resultCode == Activity.RESULT_OK) {
-                receiveSelectedSkill(data)
+                skill = data?.getSerializableExtra(SKILL_INTENT_ARGUMENT) as Skill?
+                specialization = data?.getSerializableExtra(SPECIALIZATION_INTENT_ARGUMENT) as Specialization?
+                receiveSelectedSkill()
             }
         }
 
@@ -209,6 +231,8 @@ class PlayerAdvancedDiceRollerFragment : Fragment() {
             fortune_bar.progress = hand.fortuneDicesCount
             challenge_bar.progress = hand.challengeDicesCount
             misfortune_bar.progress = hand.misfortuneDicesCount
+
+            current_hand_name.text = hand.name
         }
     }
 
@@ -294,38 +318,44 @@ class PlayerAdvancedDiceRollerFragment : Fragment() {
 
     // endregion
 
-    private fun receiveSelectedAction(data: Intent?) {
-        action = data?.getSerializableExtra(ACTION_INTENT_ARGUMENT) as Action?
-        action?.let {
-            val actionHand = player.createHand(it)
-            actionHand?.let {
-                setHandAndFillViews(it)
+    private fun receiveSelectedAction() {
+        action?.let { actionNotNull ->
+            val actionHand = player.createHand(actionNotNull)
+
+            actionHand?.let { hand ->
+                setHandAndFillViews(hand)
+
+                weapon?.let { weaponNotNull ->
+                    current_hand_name.text = "${actionNotNull.name} : ${weaponNotNull.name}"
+                } ?: {
+                    current_hand_name.text = actionNotNull.name
+                }()
+
+                skill = null
+                specialization = null
             }
         }
-        weapon = data?.getSerializableExtra(WEAPON_INTENT_ARGUMENT) as Weapon?
-        skill = null
-        specialization = null
-
-        val handName: String = (action?.name ?: "") + (weapon?.let { " : ${it.name}" } ?: "")
-        current_hand_name.text = handName
     }
 
-    private fun receiveSelectedSkill(data: Intent?) {
-        skill = data?.getSerializableExtra(SKILL_INTENT_ARGUMENT) as Skill?
-        specialization = data?.getSerializableExtra(SPECIALIZATION_INTENT_ARGUMENT) as Specialization?
+    private fun receiveSelectedSkill() {
+        skill?.let { skillNotNull ->
+            specialization?.let { specializationNotNull ->
+                setHandAndFillViews(player.createHand(skillNotNull, specializationNotNull))
 
-        skill?.let { skill ->
-            specialization?.let {
-                setHandAndFillViews(player.createHand(skill, it))
-            } ?: setHandAndFillViews(player.createHand(skill))
+                current_hand_name.text = "${skillNotNull.name} : ${specializationNotNull.name}"
+
+                action = null
+                weapon = null
+
+            } ?: {
+                setHandAndFillViews(player.createHand(skillNotNull))
+
+                current_hand_name.text = skillNotNull.name
+
+                action = null
+                weapon = null
+            }()
         }
-        action = null
-        specialization = null
-
-        activity?.toast(specialization?.name ?: "rien")
-
-        val handName: String = (skill?.name ?: "") + (specialization?.let { " : ${it.name}" } ?: "")
-        current_hand_name.text = handName
     }
 
     private fun changeStance(newStanceValue: Int) {
@@ -357,6 +387,29 @@ class PlayerAdvancedDiceRollerFragment : Fragment() {
         fun newInstance(playerName: String): PlayerAdvancedDiceRollerFragment {
             val args = Bundle()
             args.putString(PLAYER_NAME_INTENT_ARGUMENT, playerName)
+
+            val fragment = PlayerAdvancedDiceRollerFragment()
+            fragment.arguments = args
+
+            return fragment
+        }
+
+        fun newInstance(playerName: String, action: Action): PlayerAdvancedDiceRollerFragment {
+            val args = Bundle()
+            args.putString(PLAYER_NAME_INTENT_ARGUMENT, playerName)
+            args.putSerializable(ACTION_INTENT_ARGUMENT, action)
+
+            val fragment = PlayerAdvancedDiceRollerFragment()
+            fragment.arguments = args
+
+            return fragment
+        }
+
+        fun newInstance(playerName: String, skill: Skill, specialization: Specialization? = null): PlayerAdvancedDiceRollerFragment {
+            val args = Bundle()
+            args.putString(PLAYER_NAME_INTENT_ARGUMENT, playerName)
+            args.putSerializable(SKILL_INTENT_ARGUMENT, skill)
+            args.putSerializable(SPECIALIZATION_INTENT_ARGUMENT, specialization)
 
             val fragment = PlayerAdvancedDiceRollerFragment()
             fragment.arguments = args

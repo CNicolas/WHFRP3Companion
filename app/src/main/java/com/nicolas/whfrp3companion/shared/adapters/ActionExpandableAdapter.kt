@@ -1,27 +1,21 @@
 package com.nicolas.whfrp3companion.shared.adapters
 
 import android.content.Context
-import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import com.nicolas.models.action.Action
 import com.nicolas.models.action.ActionType
-import com.nicolas.models.player.enums.Stance
 import com.nicolas.whfrp3companion.R
-import com.nicolas.whfrp3companion.shared.ACTION_INTENT_ARGUMENT
-import com.nicolas.whfrp3companion.shared.STANCE_INTENT_ARGUMENT
-import com.nicolas.whfrp3companion.shared.activities.ActionDetailActivity
 import com.nicolas.whfrp3companion.shared.bind
 import com.nicolas.whfrp3companion.shared.enums.drawableId
 import com.nicolas.whfrp3companion.shared.enums.labelId
-import org.jetbrains.anko.intentFor
 
 class ActionExpandableAdapter(context: Context,
                               private val actions: List<Action>,
                               private val actionListener: ActionListener? = null,
-                              private val dominantStance: Stance = Stance.CONSERVATIVE) : BaseExpandableListAdapter() {
+                              private val buttonType: ActionButtonType = ActionButtonType.NONE) : BaseExpandableListAdapter() {
 
     private val inflater = LayoutInflater.from(context)
 
@@ -48,7 +42,7 @@ class ActionExpandableAdapter(context: Context,
                               parent: ViewGroup?): View {
         val (resultingView, holder) = getChildViewHolderOfView(convertView, parent)
 
-        holder.setupViews(getChild(groupPosition, childPosition))
+        holder.setupViews(getChild(groupPosition, childPosition), buttonType)
 
         return resultingView
     }
@@ -87,7 +81,7 @@ class ActionExpandableAdapter(context: Context,
             holder = view.tag as ChildViewHolder
         } else {
             view = inflater.inflate(R.layout.list_actions_child, parent, false)
-            holder = ChildViewHolder(view, actionListener, dominantStance)
+            holder = ChildViewHolder(view, actionListener)
             view!!.tag = holder
         }
 
@@ -111,46 +105,54 @@ class ActionExpandableAdapter(context: Context,
         }
     }
 
-    internal class ChildViewHolder(private val view: View,
-                                   private val actionListener: ActionListener?,
-                                   private val dominantStance: Stance) {
-        private val actionChildLinearLayout by view.bind<LinearLayout>(R.id.actionChildLinearLayout)
-        private val actionNameTextView by view.bind<TextView>(R.id.actionNameTextView)
-        private val actionMenuImageButton by view.bind<ImageButton>(R.id.actionMenuImageButton)
+    internal class ChildViewHolder(view: View,
+                                   actionListener: ActionListener?) {
+        private val actionChildLinearLayout by view.bind<LinearLayout>(R.id.action_child_linear_layout)
+        private val actionNameTextView by view.bind<TextView>(R.id.action_name_text_view)
+        private val actionAddButton by view.bind<ImageButton>(R.id.action_add_button)
+        private val actionRollButton by view.bind<ImageButton>(R.id.action_roll_button)
 
         private lateinit var action: Action
 
-        fun setupViews(action: Action) {
+        init {
+            setupViewsEvents(actionListener)
+        }
+
+        fun setupViews(action: Action, buttonType: ActionButtonType) {
             this.action = action
 
             actionNameTextView.text = action.name
 
-            actionListener?.let {
-                val ta = view.context.obtainStyledAttributes(intArrayOf(android.R.attr.selectableItemBackground))
-                actionChildLinearLayout.background = ta.getDrawable(0)
-                ta.recycle()
-            }
-
-            setupViewsEvents(actionListener, action)
-        }
-
-        private fun setupViewsEvents(actionListener: ActionListener?, action: Action) {
-            actionMenuImageButton.setOnClickListener { openActionInDialog() }
-
-            actionListener?.let {
-                actionChildLinearLayout.setOnClickListener { actionListener.launchAction(action) }
-            }
-        }
-
-        private fun openActionInDialog() {
-            val activity = view.context as? AppCompatActivity
-
-            activity?.let {
-                it.startActivity(it.intentFor<ActionDetailActivity>(
-                        ACTION_INTENT_ARGUMENT to action,
-                        STANCE_INTENT_ARGUMENT to dominantStance
-                ))
+            when (buttonType) {
+                ActionButtonType.NONE -> {
+                    actionAddButton.visibility = View.GONE
+                    actionRollButton.visibility = View.GONE
+                }
+                ActionButtonType.ADD -> {
+                    actionAddButton.visibility = View.VISIBLE
+                    actionRollButton.visibility = View.GONE
+                }
+                ActionButtonType.ROLL -> {
+                    actionAddButton.visibility = View.GONE
+                    actionRollButton.visibility = View.VISIBLE
+                }
             }
         }
+
+        private fun setupViewsEvents(actionListener: ActionListener?) {
+            actionChildLinearLayout.setOnClickListener { actionListener?.primaryHandler(action) }
+            actionChildLinearLayout.setOnLongClickListener {
+                actionListener?.longPrimaryHandler(action)
+                true
+            }
+            actionAddButton.setOnClickListener { actionListener?.secondaryHandler(action) }
+            actionRollButton.setOnClickListener { actionListener?.secondaryHandler(action) }
+        }
+    }
+
+    enum class ActionButtonType {
+        NONE,
+        ADD,
+        ROLL
     }
 }
