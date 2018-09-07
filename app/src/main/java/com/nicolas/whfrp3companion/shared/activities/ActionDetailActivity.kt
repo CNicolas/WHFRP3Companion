@@ -59,7 +59,7 @@ class ActionDetailActivity : AppCompatActivity() {
         when (side) {
             Stance.RECKLESS -> fillViewsWithRecklessSide()
             Stance.CONSERVATIVE -> fillViewsWithConservativeSide()
-            else -> fillViewsWithConservativeSide()
+            Stance.NEUTRAL -> fillViewsWithConservativeSide()
         }
 
         navigation.itemIconTintList = null

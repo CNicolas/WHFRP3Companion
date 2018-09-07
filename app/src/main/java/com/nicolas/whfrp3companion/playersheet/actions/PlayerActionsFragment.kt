@@ -60,8 +60,9 @@ class PlayerActionsFragment : Fragment(), ActionListener {
         }
     }
 
+    // Keep this as the context
     private fun createActionsAdapter(): ActionExpandableAdapter {
-        return ActionExpandableAdapter(activity!!, player.actions, this)
+        return ActionExpandableAdapter(activity!!, player.actions, this, player.dominantStance)
     }
 
     companion object {
