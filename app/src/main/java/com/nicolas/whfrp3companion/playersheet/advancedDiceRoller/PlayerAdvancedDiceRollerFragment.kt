@@ -57,7 +57,7 @@ class PlayerAdvancedDiceRollerFragment : Fragment() {
                 player = playerRepository.find(it)!!
 
                 uiThread {
-                    setupViewEvents()
+                    setupViewsEvents()
                     setupStanceBar()
                     setHandAndFillViews()
 
@@ -105,7 +105,7 @@ class PlayerAdvancedDiceRollerFragment : Fragment() {
 
     // region Initialization
 
-    private fun setupViewEvents() {
+    private fun setupViewsEvents() {
         activity?.let { safeActivity ->
             fab_roll_hand.setOnClickListener { rollHand() }
             fab_roll_hand.setOnLongClickListener {

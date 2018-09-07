@@ -34,7 +34,7 @@ class PlayerTalentsFragment : Fragment(), TalentListener {
                               savedInstanceState: Bundle?): View? {
         val resultingView: View = inflater.inflate(R.layout.fragment_player_talents, container, false)
 
-        setupViewEvents(resultingView)
+        setupViewsEvents(resultingView)
 
         val playerName = arguments!!.getString(PLAYER_NAME_INTENT_ARGUMENT)
         player = playerRepository.find(playerName)!!
@@ -88,7 +88,7 @@ class PlayerTalentsFragment : Fragment(), TalentListener {
 
     // endregion
 
-    private fun setupViewEvents(view: View) {
+    private fun setupViewsEvents(view: View) {
         view.getView<FloatingActionButton>(R.id.searchTalentFAB)
                 .setOnClickListener { openTalentSearchDialog() }
     }

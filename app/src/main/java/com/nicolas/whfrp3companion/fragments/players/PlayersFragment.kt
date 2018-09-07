@@ -36,14 +36,14 @@ class PlayersFragment : Fragment() {
         super.onCreateView(inflater, container, savedInstanceState)
         val resultingView: View = inflater.inflate(R.layout.fragment_players, container, false)
 
-        setupViewEvents(resultingView)
+        setupViewsEvents(resultingView)
         updatePlayers()
 
         return resultingView
     }
 
 
-    private fun setupViewEvents(view: View) {
+    private fun setupViewsEvents(view: View) {
         val playersList = view.getView<ListView>(R.id.playersList)
 
         playersList.setOnItemClickListener { _, _, position, _ ->

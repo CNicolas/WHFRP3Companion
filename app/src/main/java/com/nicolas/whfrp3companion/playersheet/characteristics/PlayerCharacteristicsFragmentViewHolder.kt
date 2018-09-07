@@ -86,11 +86,11 @@ internal class PlayerCharacteristicsFragmentViewHolder(private val player: Playe
 
         description.setText(player.description)
 
-        setupViewEvents()
+        setupViewsEvents()
     }
 
 
-    private fun setupViewEvents() {
+    private fun setupViewsEvents() {
         view.getView<ImageButton>(R.id.launch_strength).setOnClickListener { launchStrength() }
         view.getView<ImageButton>(R.id.launch_toughness).setOnClickListener { launchToughness() }
         view.getView<ImageButton>(R.id.launch_agility).setOnClickListener { launchAgility() }
