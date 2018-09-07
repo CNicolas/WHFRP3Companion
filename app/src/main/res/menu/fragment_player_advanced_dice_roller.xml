@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:id="@+id/select_action"
+          android:title="@string/page_actions"
+          android:icon="@drawable/ic_action_white"
+          app:showAsAction="always" />
+    <item android:id="@+id/select_characteristic"
+          android:title="@string/characteristic"
+          android:icon="@drawable/ic_characteristic_white"
+          app:showAsAction="ifRoom" />
+    <item android:id="@+id/select_skill"
+          android:title="@string/page_skills"
+          android:icon="@drawable/ic_skills_white"
+          app:showAsAction="ifRoom" />
+</menu>

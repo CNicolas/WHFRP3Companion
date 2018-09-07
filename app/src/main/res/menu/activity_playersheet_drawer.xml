@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <group android:checkableBehavior="single">
+        <item android:id="@+id/nav_player_advanced_dice_roller"
+              android:icon="@drawable/ic_roll_dices_white"
+              android:title="@string/page_dice_roller" />
+
         <item android:id="@+id/nav_player_characteristics"
               android:icon="@drawable/ic_person_black"
               android:title="@string/page_characteristics" />

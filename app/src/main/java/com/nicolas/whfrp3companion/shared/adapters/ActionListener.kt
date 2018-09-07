@@ -4,5 +4,4 @@ import com.nicolas.models.action.Action
 
 interface ActionListener {
     fun launchAction(action: Action)
-
 }
