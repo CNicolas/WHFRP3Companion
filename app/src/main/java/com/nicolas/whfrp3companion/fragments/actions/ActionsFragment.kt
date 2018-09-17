@@ -57,7 +57,7 @@ class ActionsFragment : Fragment(), ActionListener {
     }
 
     private fun setupViewsEvents(view: View) {
-        view.getView<FloatingActionButton>(R.id.search).setOnClickListener { openSearchDialog() }
+        view.getView<FloatingActionButton>(R.id.fab_search_action).setOnClickListener { openSearchDialog() }
     }
 
     private fun openSearchDialog() {

@@ -14,7 +14,7 @@
                         tools:listheader="@layout/list_actions_group"
                         tools:listitem="@layout/list_actions_child" />
 
-    <android.support.design.widget.FloatingActionButton android:id="@+id/search"
+    <android.support.design.widget.FloatingActionButton android:id="@+id/fab_search_action"
                                                         android:layout_width="wrap_content"
                                                         android:layout_height="wrap_content"
                                                         android:layout_gravity="bottom|end"

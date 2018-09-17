@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.view.View
 import com.nicolas.database.PlayerRepository
 import com.nicolas.models.action.Action
 import com.nicolas.models.extensions.getEquippedWeapons
@@ -73,7 +74,7 @@ class PlayerAdvancedDiceRollerActionsActivity : AppCompatActivity(), ActionListe
                 .show(supportFragmentManager, DIALOG_ACTION_WEAPONS_TAG)
     }
 
-    override fun longPrimaryHandler(action: Action): Boolean {
+    override fun longPrimaryHandler(view: View, action: Action): Boolean {
         startActivity(intentFor<ActionDetailActivity>(
                 ACTION_INTENT_ARGUMENT to action
         ))

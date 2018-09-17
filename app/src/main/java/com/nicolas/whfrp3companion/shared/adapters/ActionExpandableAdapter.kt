@@ -141,10 +141,7 @@ class ActionExpandableAdapter(context: Context,
 
         private fun setupViewsEvents(actionListener: ActionListener?) {
             actionChildLinearLayout.setOnClickListener { actionListener?.primaryHandler(action) }
-            actionChildLinearLayout.setOnLongClickListener {
-                actionListener?.longPrimaryHandler(action)
-                true
-            }
+            actionChildLinearLayout.setOnLongClickListener { actionListener?.longPrimaryHandler(it, action) ?: true }
             actionAddButton.setOnClickListener { actionListener?.secondaryHandler(action) }
             actionRollButton.setOnClickListener { actionListener?.secondaryHandler(action) }
         }
