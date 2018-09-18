@@ -138,8 +138,22 @@ internal val Trait.labelId: Int
     get() = when (this) {
         BASIC -> R.string.trait_basic
         DEFENSE -> R.string.trait_defense
+        CONTINUOUS -> R.string.trait_continuous
         TEAMWORK -> R.string.trait_teamwork
         KILLER -> R.string.trait_killer
-        CONTINUOUS -> R.string.trait_continuous
         SWORD_WAY -> R.string.trait_sword_way
+        RALLY -> R.string.trait_rally
+        RANK_1 -> R.string.trait_rank_1
+        RANK_2 -> R.string.trait_rank_2
+        RANK_3 -> R.string.trait_rank_3
+        RANK_4 -> R.string.trait_rank_4
+        RANK_5 -> R.string.trait_rank_5
+        LIGHT_ORDER -> R.string.trait_light_order
+        CELESTIAL_ORDER -> R.string.trait_celestial_order
+        GOLD_ORDER -> R.string.trait_gold_order
+        JADE_ORDER -> R.string.trait_jade_order
+        AMBER_ORDER -> R.string.trait_amber_order
+        BRIGHT_ORDER -> R.string.trait_bright_order
+        GREY_ORDER -> R.string.trait_grey_order
+        AMETHYST_ORDER -> R.string.trait_amethyst_order
     }

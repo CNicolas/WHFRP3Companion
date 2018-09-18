@@ -10,13 +10,16 @@ data class Action(val name: String,
                   val skill: String? = null,
                   val targetSkill: String? = null,
                   val targetDefense: Boolean? = null,
+                  val skillText: String? = null,
                   val conditions: List<ActionCondition>? = null,
                   val conditionsText: String? = null,
 
                   val conservativeSide: ActionSide,
                   val recklessSide: ActionSide) : Serializable {
+
     val skillsString: String?
         get() = when {
+            skillText != null -> skillText
             skill != null -> when {
                 targetSkill != null -> "$skill contre $targetSkill de la cible"
                 else -> "$skill contre Defense de la cible"

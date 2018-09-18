@@ -170,6 +170,20 @@
     <string name="trait_killer">Killer</string>
     <string name="trait_continuous">Continuous</string>
     <string name="trait_sword_way">Sword Way</string>
+    <string name="trait_rally">Rally</string>
+    <string name="trait_rank_1">Rank 1</string>
+    <string name="trait_rank_2">Rank 2</string>
+    <string name="trait_rank_3">Rank 3</string>
+    <string name="trait_rank_4">Rank 4</string>
+    <string name="trait_rank_5">Rank 5</string>
+    <string name="trait_light_order">Light Order</string>
+    <string name="trait_celestial_order">Celestial Order</string>
+    <string name="trait_gold_order">Gold Order</string>
+    <string name="trait_jade_order">Jade Order</string>
+    <string name="trait_amber_order">Amber Order</string>
+    <string name="trait_bright_order">Bright Order</string>
+    <string name="trait_grey_order">Grey Order</string>
+    <string name="trait_amethyst_order">Amethyst Order</string>
 
     <string name="skill">Skill</string>
     <string name="player_name">Player name</string>

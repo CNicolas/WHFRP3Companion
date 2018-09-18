@@ -10,4 +10,11 @@ data class ActionSide(val stance: Stance,
                       val cooldown: Int? = null,
                       val difficulty: List<DiceType>? = null,
                       val effects: ActionEffects? = null,
-                      val special: ActionSpecial? = null) : Serializable
+                      val special: ActionSpecial? = null) : Serializable {
+
+    val cooldownString: String
+        get() = when (cooldown) {
+            null -> "!"
+            else -> "$cooldown"
+        }
+}

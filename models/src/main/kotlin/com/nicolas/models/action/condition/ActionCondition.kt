@@ -11,10 +11,11 @@ data class ActionCondition(val weapon: ActionConditionWeapon? = null,
                            val range: Range? = null,
                            val target: Target? = null,
                            val preparation: Boolean? = null,
-                           val encumbrance: Boolean? = null) : Serializable {
+                           val encumbrance: Boolean? = null,
+                           val energy: Int? = null) : Serializable {
 
     override fun toString(): String {
-        return listOfNotNull(weapon.toString(), characteristic.toString(), rangeString, encumbranceString)
+        return listOfNotNull(weapon.toString(), characteristic.toString(), rangeString, encumbranceString, energyString)
                 .joinToString(", ")
                 .capitalize()
     }
@@ -57,4 +58,7 @@ data class ActionCondition(val weapon: ActionConditionWeapon? = null,
             false -> "non encombré"
             else -> null
         }
+
+    private val energyString: String?
+        get() = "$energy énergie"
 }
