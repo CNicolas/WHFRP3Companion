@@ -2,7 +2,9 @@ package com.nicolas.whfrp3companion.shared.activities
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.view.View
 import com.nicolas.models.action.Action
+import com.nicolas.models.action.ActionSide
 import com.nicolas.models.action.effect.ActionEffects
 import com.nicolas.models.player.enums.Stance
 import com.nicolas.whfrp3companion.R
@@ -11,6 +13,7 @@ import com.nicolas.whfrp3companion.shared.STANCE_INTENT_ARGUMENT
 import com.nicolas.whfrp3companion.shared.adapters.ActionEffectsAdapter
 import com.nicolas.whfrp3companion.shared.enums.drawableId
 import com.nicolas.whfrp3companion.shared.enums.labelId
+import com.nicolas.whfrp3companion.shared.enums.textIcon
 import com.nicolas.whfrp3companion.shared.viewModifications.parseTemplatedText
 import kotlinx.android.synthetic.main.activity_action_detail.*
 import kotlinx.android.synthetic.main.content_action_side.*
@@ -52,10 +55,14 @@ class ActionDetailActivity : AppCompatActivity() {
     }
 
     private fun setupViews(side: Stance?) {
-        actionTypeImageView.setImageResource(action.type.drawableId)
-        actionTraitsTextView.text = action.traits.joinToString { getString(it.labelId) }
-        actionSkillsTextView.text = action.skillsString
-        actionConditionsTextView.text = action.conditionsString?.let { parseTemplatedText(this, it) }
+        action_type_imageview.setImageResource(action.type.drawableId)
+        action_traits_textview.text = action.traits.joinToString { getString(it.labelId) }
+        action_skills_textview.text = action.skillsString
+        action.conditionsString?.let {
+            action_conditions_textview.text = parseTemplatedText(this, it)
+        } ?: {
+            action_conditions_textview.visibility = View.GONE
+        }()
 
         when (side) {
             Stance.RECKLESS -> fillViewsWithRecklessSide()
@@ -67,16 +74,24 @@ class ActionDetailActivity : AppCompatActivity() {
     }
 
     private fun fillViewsWithConservativeSide() {
-        actionCooldownTextView.text = action.conservativeSide.cooldownString
+        action_difficulty_textview.text = parseTemplatedText(this, action.conservativeSide.difficultyString)
+        action_cooldown_textview.text = action.conservativeSide.cooldownString
         action.conservativeSide.effects?.let { setEffectsAdapter(it) }
     }
 
     private fun fillViewsWithRecklessSide() {
-        actionCooldownTextView.text = action.recklessSide.cooldownString
+        action_difficulty_textview.text = parseTemplatedText(this, action.recklessSide.difficultyString)
+        action_cooldown_textview.text = action.recklessSide.cooldownString
         action.recklessSide.effects?.let { setEffectsAdapter(it) }
     }
 
     private fun setEffectsAdapter(actionEffects: ActionEffects) {
         actionEffectsListView.adapter = ActionEffectsAdapter(this, actionEffects)
     }
+
+    private val ActionSide.difficultyString: String
+        get() = when (difficulty) {
+            null -> ""
+            else -> difficulty?.joinToString(" ") { "{${it.textIcon}}" } ?: ""
+        }
 }

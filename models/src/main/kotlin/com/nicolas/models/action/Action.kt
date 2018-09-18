@@ -31,6 +31,6 @@ data class Action(val name: String,
         get() = when {
             conditionsText != null -> conditionsText
             conditions != null -> conditions.joinToString(". ")
-            else -> ""
+            else -> null
         }
 }

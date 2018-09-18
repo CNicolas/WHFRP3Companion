@@ -38,6 +38,16 @@ internal val Characteristic.labelId: Int
         FELLOWSHIP -> R.string.fellowship
     }
 
+internal val Characteristic.shortLabelId: Int
+    get() = when (this) {
+        STRENGTH -> R.string.strength_short
+        TOUGHNESS -> R.string.toughness_short
+        AGILITY -> R.string.agility_short
+        INTELLIGENCE -> R.string.intelligence_short
+        WILLPOWER -> R.string.willpower_short
+        FELLOWSHIP -> R.string.fellowship_short
+    }
+
 internal val ItemType.labelId: Int
     get() = when (this) {
         ARMOR -> R.string.armor

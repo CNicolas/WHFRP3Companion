@@ -3,7 +3,7 @@
     "name": "Bourrasque protectrice d'Aqshy",
     "type": "SPELL",
     "traits": [ "RANK_1", "BRIGHT_ORDER", "CONTINUOUS" ],
-    "skill": "Art de la magie",
+    "skill": "Art de la Magie",
     "targetDefense": false,
     "conditions": [
       { "energy": 4 }
@@ -63,8 +63,8 @@
     "name": "Cautérisation",
     "type": "SPELL",
     "traits": [ "RANK_1", "BRIGHT_ORDER", "RALLY" ],
-    "skill": "Art de la magie",
-    "skillText": "Art de la magie (Int) contre Gravité de la Blessure Critique de la Cible",
+    "skill": "Art de la Magie",
+    "skillText": "Art de la Magie (Int) contre Gravité de la Blessure Critique de la Cible",
     "conditions": [
       { "energy": 3 },
       {
@@ -132,7 +132,7 @@
     "name": "Epée Ardente de Rhuin",
     "type": "SPELL",
     "traits": [ "RANK_1", "BRIGHT_ORDER", "CONTINUOUS" ],
-    "skill": "Art de la magie",
+    "skill": "Art de la Magie",
     "conditions": [
       { "energy": 2 }
     ],
@@ -181,7 +181,7 @@
     "name": "Explosion de Flammes",
     "type": "SPELL",
     "traits": [ "RANK_1", "BRIGHT_ORDER" ],
-    "skill": "Art de la magie",
+    "skill": "Art de la Magie",
     "conditions": [
       { "energy": 6 },
       {

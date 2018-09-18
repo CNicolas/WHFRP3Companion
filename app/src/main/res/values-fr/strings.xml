@@ -47,7 +47,7 @@
     <string name="rank">Rang</string>
     <string name="strength">Force</string>
     <string name="toughness">Endurance</string>
-    <string name="willpower">Force mentale</string>
+    <string name="willpower">Force Mentale</string>
     <string name="age">Age</string>
     <string name="description">Description</string>
     <string name="dwarf">Nain</string>
@@ -185,4 +185,10 @@
     <string name="none">Aucun(e)</string>
     <string name="missing_player_name">Veuillez entrer un nom</string>
     <string name="dices_count">Nombre de dés</string>
+    <string name="agility_short">Ag</string>
+    <string name="fellowship_short">Soc</string>
+    <string name="intelligence_short">Int</string>
+    <string name="strength_short">F</string>
+    <string name="toughness_short">E</string>
+    <string name="willpower_short">FM</string>
 </resources>

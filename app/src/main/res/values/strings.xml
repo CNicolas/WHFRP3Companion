@@ -46,6 +46,13 @@
     <string name="willpower">Willpower</string>
     <string name="fellowship">Fellowship</string>
 
+    <string name="strength_short">St</string>
+    <string name="toughness_short">To</string>
+    <string name="agility_short">Ag</string>
+    <string name="intelligence_short">Int</string>
+    <string name="willpower_short">WP</string>
+    <string name="fellowship_short">Fel</string>
+
     <string name="human">Human</string>
     <string name="dwarf">Dwarf</string>
     <string name="high_elf">High Elf</string>

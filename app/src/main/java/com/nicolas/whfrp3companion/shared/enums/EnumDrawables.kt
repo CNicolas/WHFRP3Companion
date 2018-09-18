@@ -2,11 +2,15 @@ package com.nicolas.whfrp3companion.shared.enums
 
 import com.nicolas.models.action.ActionType
 import com.nicolas.models.action.ActionType.*
+import com.nicolas.models.dice.DiceType
+import com.nicolas.models.dice.DiceType.*
 import com.nicolas.models.dice.Face
 import com.nicolas.models.dice.Face.*
 import com.nicolas.models.item.enums.WeaponType
 import com.nicolas.models.item.enums.WeaponType.*
 import com.nicolas.whfrp3companion.R
+import com.nicolas.whfrp3companion.shared.viewModifications.TextIcon
+import com.nicolas.whfrp3companion.shared.viewModifications.TextIcon.*
 
 internal val Face.drawableId: Int
     get() = when (this) {
@@ -53,4 +57,15 @@ internal val ActionType.drawableId: Int
         SUPPORT -> R.drawable.ic_flag_black
         SPELL -> R.drawable.ic_spell_black
         SUMMONING -> R.drawable.ic_summoning_black
+    }
+
+internal val DiceType.textIcon: TextIcon
+    get() = when (this) {
+        CHARACTERISTIC -> CHARACTERISTIC_DICE
+        CONSERVATIVE -> CONSERVATIVE_DICE
+        RECKLESS -> RECKLESS_DICE
+        EXPERTISE -> EXPERTISE_DICE
+        FORTUNE -> FORTUNE_DICE
+        CHALLENGE -> CHALLENGE_DICE
+        MISFORTUNE -> MISFORTUNE_DICE
     }

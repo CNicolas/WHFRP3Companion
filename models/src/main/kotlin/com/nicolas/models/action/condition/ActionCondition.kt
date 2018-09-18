@@ -60,5 +60,8 @@ data class ActionCondition(val weapon: ActionConditionWeapon? = null,
         }
 
     private val energyString: String?
-        get() = "$energy énergie"
+        get() = when (energy) {
+            null -> null
+            else -> "$energy énergie"
+        }
 }
