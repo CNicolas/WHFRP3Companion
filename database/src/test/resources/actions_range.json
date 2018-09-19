@@ -1,5 +1,91 @@
 [
   {
+    "name": "Lancer Puissant",
+    "type": "RANGE_ATTACK",
+    "traits": [ ],
+    "skill": "Capacité de Tir",
+    "skillText": "Capacité de Tir (Ag) contre Défense de la Cible",
+    "targetDefense": true,
+    "conditions": [
+      {
+        "weapon": {
+          "categories": [ "THROWING" ],
+          "equipped": true
+        }
+      },
+      { "range": "ENGAGED", "target": "NONE" }
+    ],
+    "conditionsText": "Arme de jet en main, non engagé avec un ennemi.",
+    "conservativeSide": {
+      "stance": "CONSERVATIVE",
+      "cooldown": 1,
+      "difficulty": [ "MISFORTUNE", "MISFORTUNE" ],
+      "special": {
+        "text": "Vous pouvez subir jusqu'à 2 fatigue avant cette action. Réduisez le modificateur de difficulté de {MISFORTUNE_DICE} et ajoutez 1 jeton de recharge en plus sur cette carte par fatigue."
+      },
+      "effects": {
+        "SUCCESS": {
+          "1": [
+            {
+              "damage": 0,
+              "text": "Vous touchez et pouvez ajouter votre Force ou votre Agilité au niveau de dégâts de votre arme pour déterminer les dégâts infligés."
+            }
+          ],
+          "3": [
+            {
+              "damage": 0,
+              "text": "Comme ci-dessus, +2 dégâts par fatigue subie pour réduire la difficulté."
+            }
+          ]
+        },
+        "BOON": {
+          "2": [
+            {
+              "text": "Réduisez la valeur d'enchaissement de la Cible de la quantité de fatigue subie pour réduire la difficulté."
+            }
+          ]
+        },
+        "BANE": {
+          "2": [ { "stress": 1 } ]
+        }
+      }
+    },
+    "recklessSide": {
+      "stance": "RECKLESS",
+      "cooldown": 1,
+      "difficulty": [ "MISFORTUNE", "MISFORTUNE" ],
+      "special": {
+        "text": "Vous pouvez subir jusqu'à 2 fatigue avant cette action. Réduisez le modificateur de difficulté de {MISFORTUNE_DICE} et ajoutez 1 jeton de recharge en plus sur cette carte par fatigue."
+      },
+      "effects": {
+        "SUCCESS": {
+          "1": [
+            {
+              "damage": 0,
+              "text": "Vous infligez les dégâts normaux, +1 dégât par fatigue subie pour réduire la difficulté."
+            }
+          ],
+          "2": [
+            {
+              "damage": 0,
+              "text": "Vous infligez les dégâts normaux, +1 dégât par fatigue subie pour réduire la difficulté."
+            }
+          ]
+        },
+        "BOON": {
+          "2": [
+            {
+              "text": "+1 dégât par fatigue subie pour réduire la difficulté."
+            }
+          ]
+        },
+        "BANE": {
+          "1": [ { "stress": 1 } ]
+        }
+      }
+    }
+  },
+  {
     "name": "Tir",
     "type": "RANGE_ATTACK",
     "traits": [ "BASIC" ],
@@ -45,84 +131,6 @@
         },
         "BANE": {
           "2": [ { "canEngage": "TARGET" } ]
-        }
-      }
-    }
-  },
-  {
-    "name": "Tir d'Élite",
-    "type": "RANGE_ATTACK",
-    "traits": [ ],
-    "skill": "Capacité de Tir",
-    "targetDefense": true,
-    "conditions": [
-      {
-        "weapon": {
-          "categories": [ "RANGE", "FIRE_ARM", "REPEATING" ],
-          "equipped": true
-        }
-      },
-      { "range": "MEDIUM", "target": "TARGET" },
-      { "range": "ENGAGED", "target": "NONE" },
-      { "preparation": true }
-    ],
-    "conservativeSide": {
-      "stance": "CONSERVATIVE",
-      "cooldown": 2,
-      "difficulty": [ "MISFORTUNE" ],
-      "effects": {
-        "SUCCESS": {
-          "1": [ { "damage": 0 } ],
-          "2": [
-            {
-              "damage": 1,
-              "critical": 1
-            }
-          ]
-        },
-        "BOON": {
-          "1": [ { "damage": 1 } ]
-        },
-        "SIGMAR": {
-          "1": [
-            { "text": "Votre attaque inflige des dégâts supplémentaires égaux au niveau de dégâts de votre arme" }
-          ]
-        },
-        "BANE": {
-          "2": [
-            {
-              "stress": 1,
-              "exhaustion": 1
-            }
-          ]
-        }
-      }
-    },
-    "recklessSide": {
-      "stance": "RECKLESS",
-      "cooldown": 3,
-      "difficulty": [ "MISFORTUNE", "MISFORTUNE" ],
-      "effects": {
-        "SUCCESS": {
-          "1": [ { "damage": 1 } ],
-          "3": [
-            {
-              "damage": 2,
-              "critical": 1
-            }
-          ]
-        },
-        "BOON": {
-          "1": [ { "damage": 1 } ],
-          "2": [ { "ignoreSoak": true } ]
-        },
-        "BANE": {
-          "1": [
-            {
-              "stress": 1,
-              "exhaustion": 1
-            }
-          ]
         }
       }
     }
@@ -206,6 +214,84 @@
               "target": "ALLY",
               "exhaustion": 1,
               "text": "Les alliés situés à ce niveau d'engagmeent subissent 1 {EXHAUSTION}."
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "name": "Tir d'Élite",
+    "type": "RANGE_ATTACK",
+    "traits": [ ],
+    "skill": "Capacité de Tir",
+    "targetDefense": true,
+    "conditions": [
+      {
+        "weapon": {
+          "categories": [ "RANGE", "FIRE_ARM", "REPEATING" ],
+          "equipped": true
+        }
+      },
+      { "range": "MEDIUM", "target": "TARGET" },
+      { "range": "ENGAGED", "target": "NONE" },
+      { "preparation": true }
+    ],
+    "conservativeSide": {
+      "stance": "CONSERVATIVE",
+      "cooldown": 2,
+      "difficulty": [ "MISFORTUNE" ],
+      "effects": {
+        "SUCCESS": {
+          "1": [ { "damage": 0 } ],
+          "2": [
+            {
+              "damage": 1,
+              "critical": 1
+            }
+          ]
+        },
+        "BOON": {
+          "1": [ { "damage": 1 } ]
+        },
+        "SIGMAR": {
+          "1": [
+            { "text": "Votre attaque inflige des dégâts supplémentaires égaux au niveau de dégâts de votre arme" }
+          ]
+        },
+        "BANE": {
+          "2": [
+            {
+              "stress": 1,
+              "exhaustion": 1
+            }
+          ]
+        }
+      }
+    },
+    "recklessSide": {
+      "stance": "RECKLESS",
+      "cooldown": 3,
+      "difficulty": [ "MISFORTUNE", "MISFORTUNE" ],
+      "effects": {
+        "SUCCESS": {
+          "1": [ { "damage": 1 } ],
+          "3": [
+            {
+              "damage": 2,
+              "critical": 1
+            }
+          ]
+        },
+        "BOON": {
+          "1": [ { "damage": 1 } ],
+          "2": [ { "ignoreSoak": true } ]
+        },
+        "BANE": {
+          "1": [
+            {
+              "stress": 1,
+              "exhaustion": 1
             }
           ]
         }

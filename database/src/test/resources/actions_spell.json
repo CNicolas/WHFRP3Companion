@@ -1,1 +1,257 @@
-[ ]
+[
+  {
+    "name": "Bourrasque protectrice d'Aqshy",
+    "type": "SPELL",
+    "traits": [ "RANK_1", "BRIGHT_ORDER", "CONTINUOUS" ],
+    "skill": "Art de la Magie",
+    "targetDefense": false,
+    "conditions": [
+      { "energy": 4 }
+    ],
+    "conservativeSide": {
+      "stance": "CONSERVATIVE",
+      "cooldown": 4,
+      "difficulty": [ "CHALLENGE" ],
+      "special": {
+        "text": "Vous êtes enveloppé de flammes orange trmeblotantes qui dévient les coups. Tant que cette carte est en cours de recharge, votre valeur d'encaissement augmente de 2"
+      },
+      "effects": {
+        "SUCCESS": {
+          "1": [ { "text": "Vous lancez le sort." } ],
+          "2": [
+            {
+              "cooldown": 2,
+              "text": "Comme ci-dessus, et ajoutez 2 jetons de recharge sur cette carte"
+            }
+          ]
+        },
+        "BOON": {
+          "1": [ { "energy": 1 } ]
+        },
+        "BANE": {
+          "1": [ { "energy": -1 } ]
+        }
+      }
+    },
+    "recklessSide": {
+      "stance": "RECKLESS",
+      "cooldown": 4,
+      "difficulty": [ "CHALLENGE" ],
+      "special": {
+        "text": "Vous êtes enveloppé de flammes orange trmeblotantes qui dévient les coups. Tant que cette carte est en cours de recharge, votre valeur d'encaissement augmente d'un nombre égal à votre niveau actuel de Témérité"
+      },
+      "effects": {
+        "SUCCESS": {
+          "1": [ { "text": "Vous lancez le sort." } ],
+          "3": [
+            {
+              "cooldown": 2,
+              "text": "Comme ci-dessus, et ajoutez 2 jetons de recharge sur cette carte"
+            }
+          ]
+        },
+        "BOON": {
+          "2": [ { "energy": 1 } ]
+        },
+        "BANE": {
+          "1": [ { "energy": -1 } ]
+        }
+      }
+    }
+  },
+  {
+    "name": "Cautérisation",
+    "type": "SPELL",
+    "traits": [ "RANK_1", "BRIGHT_ORDER", "RALLY" ],
+    "skill": "Art de la Magie",
+    "skillText": "Art de la Magie (Int) contre Gravité de la Blessure Critique de la Cible",
+    "conditions": [
+      { "energy": 3 },
+      {
+        "target": "TARGET",
+        "range": "ENGAGED"
+      }
+    ],
+    "conservativeSide": {
+      "stance": "CONSERVATIVE",
+      "difficulty": [ ],
+      "special": {
+        "text": "Cette carte recharge durant chaque phase de ralliement et à la fin de la rencontre"
+      },
+      "effects": {
+        "SUCCESS": {
+          "1": [
+            {
+              "text": "En faisant chauffer votre main ou votre bâton au rouge, vous cautérisez la blessure critique de la Cible. Cette blessure est traitée comme une blessure normale jusqu'à la fin de l'acte."
+            }
+          ]
+        },
+        "BOON": {
+          "2": [ { "energy": 1 } ]
+        },
+        "SIGMAR": {
+          "1": [ { "text": "La blessure critique est convertie en blessure normale de façon permanente" } ]
+        },
+        "BANE": {
+          "2": [ { "exhaustion": 1 } ]
+        }
+      }
+    },
+    "recklessSide": {
+      "stance": "RECKLESS",
+      "difficulty": [ ],
+      "special": {
+        "text": "Cette carte recharge durant chaque phase de ralliement et à la fin de la rencontre"
+      },
+      "effects": {
+        "SUCCESS": {
+          "1": [
+            {
+              "text": "En faisant chauffer votre main ou votre bâton au rouge, vous cautérisez la blessure critique de la Cible. Cette blessure est traitée comme une blessure normale jusqu'à la fin de l'acte."
+            }
+          ],
+          "3": [
+            {
+              "text": "Comme ci-dessus, et vous pouvez immédiatement tenter de relancer ce sort à un niveau de difficulté +1."
+            }
+          ]
+        },
+        "BOON": {
+          "2": [ { "energy": 1 } ]
+        },
+        "SIGMAR": {
+          "1": [ { "text": "La blessure critique est convertie en blessure normale de façon permanente" } ]
+        },
+        "BANE": {
+          "2": [ { "exhaustion": 1 } ]
+        }
+      }
+    }
+  },
+  {
+    "name": "Epée Ardente de Rhuin",
+    "type": "SPELL",
+    "traits": [ "RANK_1", "BRIGHT_ORDER", "CONTINUOUS" ],
+    "skill": "Art de la Magie",
+    "conditions": [
+      { "energy": 2 }
+    ],
+    "conditionsText": "2 énergie, une main libre.",
+    "conservativeSide": {
+      "stance": "CONSERVATIVE",
+      "cooldown": 5,
+      "difficulty": [ "MISFORTUNE" ],
+      "special": {
+        "text": "Tant que cette carte est en cours de recharge, une épée enflammée se matérialise dans votre main. Considérez-la comme une arme à une main ayant une ND 5, NC 2 et Perforante 1 qui inflige des dégâts de feu. Vous pouvez faire disparaître ou réapparaître l'épée au moyen d'une manoeuvre tant que cette carte est en cours de recharge."
+      },
+      "effects": {
+        "SUCCESS": {
+          "1": [ { "text": "Vous réussissez à invoquer l'épée." } ]
+        },
+        "BOON": {
+          "2": [ { "cooldown": 2 } ]
+        },
+        "BANE": {
+          "2": [ { "exhaustion": 1 } ]
+        }
+      }
+    },
+    "recklessSide": {
+      "stance": "RECKLESS",
+      "cooldown": 5,
+      "difficulty": [ "MISFORTUNE" ],
+      "special": {
+        "text": "Tant que cette carte est en cours de recharge, une épée enflammée se matérialise dans votre main. Considérez-la comme une arme à une main ayant une ND 5, NC 2 et Perforante 1 qui inflige des dégâts de feu. Les attaques que vous portez avec bénéficient de {FORTUNE_DICE}. Vous pouvez faire disparaître ou réapparaître l'épée au moyen d'une manoeuvre tant que cette carte est en cours de recharge."
+      },
+      "effects": {
+        "SUCCESS": {
+          "1": [ { "text": "Vous réussissez à invoquer l'épée." } ],
+          "2": [ { "text": "Comme ci-dessus, mais quand vous maniez l'épée, votre valeur de Force augmente de 1" } ]
+        },
+        "BOON": {
+          "2": [ { "cooldown": 2 } ]
+        },
+        "BANE": {
+          "2": [ { "exhaustion": 1 } ]
+        }
+      }
+    }
+  },
+  {
+    "name": "Explosion de Flammes",
+    "type": "SPELL",
+    "traits": [ "RANK_1", "BRIGHT_ORDER" ],
+    "skill": "Art de la Magie",
+    "conditions": [
+      { "energy": 6 },
+      {
+        "target": "TARGET",
+        "range": "MEDIUM"
+      }
+    ],
+    "conditionsText": "6 énergie, cible jusqu'à portée moyenne. Si vous êtes engagé avec un ennemi, ajoutez {CHALLENGE_DICE} à votre réserve de dés.",
+    "conservativeSide": {
+      "stance": "CONSERVATIVE",
+      "cooldown": 2,
+      "difficulty": [ "CHALLENGE" ],
+      "effects": {
+        "SUCCESS": {
+          "1": [
+            {
+              "damage": 3,
+              "characteristics": [ "INTELLIGENCE" ],
+              "text": "Vous touchez votre cible avec un jet de flammes, lui infligeant 3 + Int dégâts."
+            }
+          ],
+          "3": [
+            {
+              "damage": 5,
+              "characteristics": [ "INTELLIGENCE" ],
+              "text": "Comme ci-dessus, mais vous infligez 5 + Int dégâts à la place"
+            }
+          ]
+        },
+        "BOON": {
+          "1": [ { "damage": 1 } ],
+          "2": [ { "damage": 2 } ]
+        },
+        "BANE": {
+          "2": [ { "exhaustion": 1, "stress": 1 } ]
+        }
+      }
+    },
+    "recklessSide": {
+      "stance": "RECKLESS",
+      "cooldown": 2,
+      "difficulty": [ "CHALLENGE" ],
+      "effects": {
+        "SUCCESS": {
+          "1": [
+            {
+              "damage": 4,
+              "characteristics": [ "INTELLIGENCE" ],
+              "text": "Vous touchez votre cible avec un jet de flammes, lui infligeant 4 + Int dégâts."
+            }
+          ],
+          "3": [
+            {
+              "damage": 6,
+              "characteristics": [ "INTELLIGENCE" ],
+              "text": "Comme ci-dessus, mais vous infligez 6 + Int dégâts à la place"
+            }
+          ]
+        },
+        "BOON": {
+          "1": [ { "damage": 1 } ],
+          "2": [ { "damage": 1, "critical": 1 } ]
+        },
+        "SIGMAR": {
+          "1": [ { "damage": 1, "critical": 1 } ]
+        },
+        "BANE": {
+          "2": [ { "exhaustion": 1, "stress": 1 } ]
+        }
+      }
+    }
+  }
+]

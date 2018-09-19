@@ -22,6 +22,7 @@ data class ActionConditionWeapon(val categories: List<WeaponCategory> = listOf()
                     RANGE -> "arme à distance"
                     FIRE_ARM -> "arme à feu"
                     REPEATING -> "arme à répétition"
+                    THROWING -> "arme de jet"
                 }
             }
 

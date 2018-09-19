@@ -6,7 +6,8 @@ enum class WeaponCategory {
     MELEE,
     RANGE,
     FIRE_ARM,
-    REPEATING
+    REPEATING,
+    THROWING
 }
 
 enum class WeaponType(val category: WeaponCategory) {
@@ -34,7 +35,10 @@ enum class WeaponType(val category: WeaponCategory) {
     RIFLE(FIRE_ARM),
 
     REPEATING_GUN(REPEATING),
-    REPEATING_CROSSBOW(REPEATING);
+    REPEATING_CROSSBOW(REPEATING),
+
+    THROWING_DAGGER(THROWING),
+    THROWING_AXE(THROWING);
 
     companion object {
         operator fun get(ordinal: Int): WeaponType = values()[ordinal]

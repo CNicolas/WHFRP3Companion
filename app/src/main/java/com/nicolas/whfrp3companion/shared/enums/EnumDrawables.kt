@@ -48,6 +48,8 @@ internal val WeaponType.drawableId: Int
         RIFLE -> R.drawable.ic_rifle_black
         REPEATING_GUN -> R.drawable.ic_repeating_hanggun_black
         REPEATING_CROSSBOW -> R.drawable.ic_repeating_crossbow_black
+        THROWING_DAGGER -> R.drawable.ic_dagger_black
+        THROWING_AXE -> R.drawable.ic_axe_black
     }
 
 internal val ActionType.drawableId: Int

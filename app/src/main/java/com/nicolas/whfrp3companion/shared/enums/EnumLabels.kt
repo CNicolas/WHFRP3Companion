@@ -115,6 +115,8 @@ internal val WeaponType.labelId: Int
         RIFLE -> R.string.weapon_rifle
         REPEATING_GUN -> R.string.weapon_repeating_gun
         REPEATING_CROSSBOW -> R.string.weapon_repeating_crossbow
+        THROWING_DAGGER -> R.string.weapon_throwing_dagger
+        THROWING_AXE -> R.string.weapon_throwing_axe
     }
 
 internal val Range.labelId: Int
