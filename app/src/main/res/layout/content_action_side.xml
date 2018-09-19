@@ -8,8 +8,8 @@
                                              android:paddingTop="@dimen/activity_vertical_margin"
                                              tools:context=".shared.activities.ActionDetailActivity">
     <ImageView android:id="@+id/action_type_imageview"
-               android:layout_width="40dp"
-               android:layout_height="40dp"
+               android:layout_width="50dp"
+               android:layout_height="50dp"
                android:contentDescription="@string/action_type"
                android:src="@drawable/ic_sword_black"
                android:layout_marginLeft="@dimen/medium_padding"
@@ -19,7 +19,7 @@
                app:layout_constraintLeft_toLeftOf="parent" />
 
     <TextView android:id="@+id/action_difficulty_textview"
-              android:layout_width="40dp"
+              android:layout_width="70dp"
               android:layout_height="25dp"
               android:gravity="center"
               app:layout_constraintTop_toBottomOf="@+id/action_type_imageview"
@@ -39,8 +39,8 @@
               app:layout_constraintLeft_toRightOf="@+id/action_type_imageview" />
 
     <TextView android:id="@+id/action_cooldown_textview"
-              android:layout_width="40dp"
-              android:layout_height="40dp"
+              android:layout_width="50dp"
+              android:layout_height="50dp"
               android:layout_marginRight="@dimen/medium_padding"
               android:gravity="center"
               android:hint="@string/zero"
@@ -84,9 +84,7 @@
     <ListView android:id="@+id/actionEffectsListView"
               android:layout_width="0dp"
               android:layout_height="wrap_content"
-              android:paddingTop="@dimen/medium_padding"
-              android:paddingLeft="@dimen/list_std_margin"
-              android:paddingRight="@dimen/list_std_margin"
+              android:paddingTop="@dimen/small_padding"
               tools:listitem="@layout/list_element_action_effect"
               app:layout_constraintTop_toBottomOf="@+id/action_conditions_textview"
               app:layout_constraintRight_toRightOf="parent"

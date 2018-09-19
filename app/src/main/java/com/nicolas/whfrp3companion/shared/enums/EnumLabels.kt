@@ -14,6 +14,8 @@ import com.nicolas.models.player.enums.Characteristic
 import com.nicolas.models.player.enums.Characteristic.*
 import com.nicolas.models.player.enums.Race
 import com.nicolas.models.player.enums.Race.*
+import com.nicolas.models.player.enums.Stance
+import com.nicolas.models.player.enums.Stance.*
 import com.nicolas.models.talent.TalentCooldown
 import com.nicolas.models.talent.TalentCooldown.*
 import com.nicolas.models.talent.TalentType
@@ -46,6 +48,13 @@ internal val Characteristic.shortLabelId: Int
         INTELLIGENCE -> R.string.intelligence_short
         WILLPOWER -> R.string.willpower_short
         FELLOWSHIP -> R.string.fellowship_short
+    }
+
+internal val Stance.labelId: Int
+    get() = when (this) {
+        CONSERVATIVE -> R.string.conservative
+        RECKLESS -> R.string.reckless
+        NEUTRAL -> R.string.neutral
     }
 
 internal val ItemType.labelId: Int

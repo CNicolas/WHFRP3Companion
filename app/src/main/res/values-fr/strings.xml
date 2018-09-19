@@ -22,6 +22,7 @@
     <string name="fortune">Fortune</string>
     <string name="misfortune">Infortune</string>
     <string name="reckless">Témérité</string>
+    <string name="neutral">Neutre</string>
     <string name="results">Résultats</string>
     <string name="page_dice_roller_statistics">Statistiques</string>
     <string name="statistics_average_result_hint">0 / lancé</string>
