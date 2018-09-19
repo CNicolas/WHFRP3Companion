@@ -155,9 +155,7 @@
       "stance": "CONSERVATIVE",
       "cooldown": 2,
       "difficulty": [ ],
-      "special": {
-        "text": "Vous ne pouvez pas utiliser de Défense Active quand cette carte est en cours de recharge."
-      },
+      "specialText": "Vous ne pouvez pas utiliser de Défense Active quand cette carte est en cours de recharge.",
       "effects": {
         "SUCCESS": {
           "1": [ { "damage": 1 } ],
@@ -183,9 +181,7 @@
       "stance": "RECKLESS",
       "cooldown": 2,
       "difficulty": [ "MISFORTUNE" ],
-      "special": {
-        "text": "Vous ne pouvez pas utiliser de Défense Active quand cette carte est en cours de recharge."
-      },
+      "specialText": "Vous ne pouvez pas utiliser de Défense Active quand cette carte est en cours de recharge.",
       "effects": {
         "SUCCESS": {
           "1": [ { "damage": 1 } ],

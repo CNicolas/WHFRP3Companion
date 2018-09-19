@@ -12,9 +12,7 @@
       "stance": "CONSERVATIVE",
       "cooldown": 4,
       "difficulty": [ "CHALLENGE" ],
-      "special": {
-        "text": "Vous êtes enveloppé de flammes orange trmeblotantes qui dévient les coups. Tant que cette carte est en cours de recharge, votre valeur d'encaissement augmente de 2"
-      },
+      "specialText": "Vous êtes enveloppé de flammes orange trmeblotantes qui dévient les coups. Tant que cette carte est en cours de recharge, votre valeur d'encaissement augmente de 2",
       "effects": {
         "SUCCESS": {
           "1": [ { "text": "Vous lancez le sort." } ],
@@ -37,9 +35,7 @@
       "stance": "RECKLESS",
       "cooldown": 4,
       "difficulty": [ "CHALLENGE" ],
-      "special": {
-        "text": "Vous êtes enveloppé de flammes orange trmeblotantes qui dévient les coups. Tant que cette carte est en cours de recharge, votre valeur d'encaissement augmente d'un nombre égal à votre niveau actuel de Témérité"
-      },
+      "specialText": "Vous êtes enveloppé de flammes orange trmeblotantes qui dévient les coups. Tant que cette carte est en cours de recharge, votre valeur d'encaissement augmente d'un nombre égal à votre niveau actuel de Témérité",
       "effects": {
         "SUCCESS": {
           "1": [ { "text": "Vous lancez le sort." } ],
@@ -75,9 +71,7 @@
     "conservativeSide": {
       "stance": "CONSERVATIVE",
       "difficulty": [ ],
-      "special": {
-        "text": "Cette carte recharge durant chaque phase de ralliement et à la fin de la rencontre"
-      },
+      "specialText": "Cette carte recharge durant chaque phase de ralliement et à la fin de la rencontre",
       "effects": {
         "SUCCESS": {
           "1": [
@@ -100,9 +94,7 @@
     "recklessSide": {
       "stance": "RECKLESS",
       "difficulty": [ ],
-      "special": {
-        "text": "Cette carte recharge durant chaque phase de ralliement et à la fin de la rencontre"
-      },
+      "specialText": "Cette carte recharge durant chaque phase de ralliement et à la fin de la rencontre",
       "effects": {
         "SUCCESS": {
           "1": [
@@ -141,9 +133,7 @@
       "stance": "CONSERVATIVE",
       "cooldown": 5,
       "difficulty": [ "MISFORTUNE" ],
-      "special": {
-        "text": "Tant que cette carte est en cours de recharge, une épée enflammée se matérialise dans votre main. Considérez-la comme une arme à une main ayant une ND 5, NC 2 et Perforante 1 qui inflige des dégâts de feu. Vous pouvez faire disparaître ou réapparaître l'épée au moyen d'une manoeuvre tant que cette carte est en cours de recharge."
-      },
+      "specialText": "Tant que cette carte est en cours de recharge, une épée enflammée se matérialise dans votre main. Considérez-la comme une arme à une main ayant une ND 5, NC 2 et Perforante 1 qui inflige des dégâts de feu. Vous pouvez faire disparaître ou réapparaître l'épée au moyen d'une manoeuvre tant que cette carte est en cours de recharge.",
       "effects": {
         "SUCCESS": {
           "1": [ { "text": "Vous réussissez à invoquer l'épée." } ]
@@ -160,9 +150,7 @@
       "stance": "RECKLESS",
       "cooldown": 5,
       "difficulty": [ "MISFORTUNE" ],
-      "special": {
-        "text": "Tant que cette carte est en cours de recharge, une épée enflammée se matérialise dans votre main. Considérez-la comme une arme à une main ayant une ND 5, NC 2 et Perforante 1 qui inflige des dégâts de feu. Les attaques que vous portez avec bénéficient de {FORTUNE_DICE}. Vous pouvez faire disparaître ou réapparaître l'épée au moyen d'une manoeuvre tant que cette carte est en cours de recharge."
-      },
+      "specialText": "Tant que cette carte est en cours de recharge, une épée enflammée se matérialise dans votre main. Considérez-la comme une arme à une main ayant une ND 5, NC 2 et Perforante 1 qui inflige des dégâts de feu. Les attaques que vous portez avec bénéficient de {FORTUNE_DICE}. Vous pouvez faire disparaître ou réapparaître l'épée au moyen d'une manoeuvre tant que cette carte est en cours de recharge.",
       "effects": {
         "SUCCESS": {
           "1": [ { "text": "Vous réussissez à invoquer l'épée." } ],
