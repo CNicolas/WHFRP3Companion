@@ -50,6 +50,84 @@
     }
   },
   {
+    "name": "Bond Soudain / Piqué du Faucon",
+    "type": "MELEE_ATTACK",
+    "traits": [ "RITUAL_DANCE" ],
+    "skill": "Capacité de Combat",
+    "targetDefense": true,
+    "conditions": [
+      {
+        "weapon": {
+          "categories": [ "MELEE" ],
+          "equipped": true
+        }
+      },
+      { "range": "SHORT", "target": "TARGET" }
+    ],
+    "conservativeSide": {
+      "name": "Bond Soudain",
+      "stance": "CONSERVATIVE",
+      "conditionsText": "Engagé d'au moins 2 crans dans l'attitude Prudente, arme de corps à corps en main, cible à portée courte.",
+      "cooldown": 3,
+      "difficulty": [ "MISFORTUNE" ],
+      "effects": {
+        "SUCCESS": {
+          "1": [
+            {
+              "damage": 0,
+              "text": "Vous manoeuvrez pour engager la cible en ignorant tout obstacle situé en travers de votre chemin et vous infligez les dégâts normaux."
+            }
+          ]
+        },
+        "BOON": {
+          "1": [ { "text": "Rechargez 1 de vos Défenses Actives dont la face Téméraire est visible." } ]
+        },
+        "SIGMAR": {
+          "1": [ { "text": "Vous pouvez ajuster votre attitude au premier cran de Témérité." } ]
+        },
+        "BANE": {
+          "1": [ { "cooldown": 1 } ]
+        }
+      }
+    },
+    "recklessSide": {
+      "name": "Piqué du Faucon",
+      "stance": "RECKLESS",
+      "conditionsText": "Engagé d'au moins 2 crans dans l'attitude Téméraire, arme de corps à corps en main, cible à portée courte.",
+      "cooldown": 3,
+      "difficulty": [ "MISFORTUNE" ],
+      "effects": {
+        "SUCCESS": {
+          "1": [
+            {
+              "damage": 0,
+              "text": "Vous manoeuvrez pour engager la cible en ignorant tout obstacle situé en travers de votre chemin et vous infligez les dégâts normaux."
+            }
+          ],
+          "2": [
+            {
+              "damage": 2,
+              "text": "Comme ci-dessus, mais vous inglifez +2 dégâts."
+            }
+          ]
+        },
+        "BOON": {
+          "2": [
+            {
+              "text": "Tirez un nombre de blessures critiques égal au nombre de Danses Rituelles que vous rechargez avec la face Prudente visible. Choisissez-en 1 que vous appliquez et défaussez les autres."
+            }
+          ]
+        },
+        "SIGMAR": {
+          "1": [ { "text": "Vous pouvez ajuster votre attitude au premier cran de Témérité." } ]
+        },
+        "BANE": {
+          "1": [ { "cooldown": 1 } ]
+        }
+      }
+    }
+  },
+  {
     "name": "Botte décisive du Maître",
     "type": "MELEE_ATTACK",
     "traits": [ "SWORD_WAY" ],
@@ -136,6 +214,115 @@
     }
   },
   {
+    "name": "Cabriole d'Orion",
+    "type": "MELEE_ATTACK",
+    "traits": [ "RITUAL_DANCE" ],
+    "skill": "Coordination",
+    "skillText": "Coordination (Ag) contre Défense de la Cible",
+    "targetDefense": true,
+    "conditions": [
+      { "range": "ENGAGED", "target": "TARGET" }
+    ],
+    "conditionsText": "Formé en Coordination, au moins 1 Danse Rituelle ou Attaque de Corps à Corps en cours de recharge, engagé avec la cible.",
+    "conservativeSide": {
+      "stance": "CONSERVATIVE",
+      "cooldown": 3,
+      "difficulty": [ "MISFORTUNE" ],
+      "effects": {
+        "SUCCESS": {
+          "1": [ { "damage": 0 } ],
+          "2": [ { "damage": 1, "maneuver": true } ]
+        },
+        "BOON": {
+          "2": [ { "text": "Vous pouvez ajouter ou ôter 1 jeton de recharge de l'une de vos Danses Rituelles." } ]
+        },
+        "SIGMAR": {
+          "1": [ { "text": "Votre attitude passe immédiatement au 2ème cran de Témérité." } ]
+        },
+        "BANE": {
+          "1": [ { "exhaustion": 1 } ]
+        },
+        "CHAOS": {
+          "1": [ { "text": "Une fois cette action résolue, vous reprenez une attitude neutre." } ]
+        }
+      }
+    },
+    "recklessSide": {
+      "stance": "RECKLESS",
+      "cooldown": 3,
+      "difficulty": [ "MISFORTUNE" ],
+      "effects": {
+        "SUCCESS": {
+          "1": [ { "damage": 1 } ],
+          "2": [ { "damage": 2, "critical": 1 } ]
+        },
+        "BOON": {
+          "2": [ { "text": "Vous pouvez ajouter ou ôter 1 jeton de recharge de l'une de vos Danses Rituelles." } ]
+        },
+        "SIGMAR": {
+          "1": [ { "text": "Votre attitude passe immédiatement au 2ème cran de Prudence." } ]
+        },
+        "BANE": {
+          "1": [ { "exhaustion": 1 } ]
+        },
+        "CHAOS": {
+          "1": [ { "text": "Une fois cette action résolue, vous reprenez une attitude neutre." } ]
+        }
+      }
+    }
+  },
+  {
+    "name": "Contre-Coup",
+    "type": "MELEE_ATTACK",
+    "traits": [ "REACTION" ],
+    "skill": "Capacité de Combat",
+    "targetDefense": true,
+    "conditions": [
+      {
+        "weapon": {
+          "categories": [ "MELEE" ],
+          "equipped": true
+        }
+      },
+      { "range": "ENGAGED", "target": "TARGET" }
+    ],
+    "conditionsText": "Arme de corps à corps et bouclier en mains, la cible vient de vous rater avec une Attaque de Corps à Corps contre laquelle vous avez utilisé l'action de Blocage.",
+    "conservativeSide": {
+      "stance": "CONSERVATIVE",
+      "cooldown": 4,
+      "difficulty": [ "MISFORTUNE" ],
+      "effects": {
+        "SUCCESS": {
+          "1": [ { "damage": 0 } ],
+          "3": [ { "damage": 2 } ]
+        },
+        "BOON": {
+          "2": [ { "maneuver": true } ]
+        },
+        "BANE": {
+          "2": [ { "stress": 1, "exhaustion": 1 } ]
+        }
+      }
+    },
+    "recklessSide": {
+      "stance": "RECKLESS",
+      "cooldown": 4,
+      "difficulty": [ "MISFORTUNE" ],
+      "effects": {
+        "SUCCESS": {
+          "1": [ { "damage": 0 } ],
+          "3": [ { "damage": 2 } ]
+        },
+        "BOON": {
+          "2": [ { "maneuver": true } ]
+        },
+        "BANE": {
+          "2": [ { "stress": 1, "exhaustion": 1 } ]
+        }
+      }
+    }
+  },
+  {
     "name": "Coup du Casseur de Trolls",
     "type": "MELEE_ATTACK",
     "traits": [ "KILLER" ],
@@ -214,6 +401,204 @@
         },
         "CHAOS": {
           "1": [ { "wounds": -1 } ]
+        }
+      }
+    }
+  },
+  {
+    "name": "Fureur de la Tempête",
+    "type": "MELEE_ATTACK",
+    "traits": [ "RITUAL_DANCE" ],
+    "skill": "Capacité de Combat",
+    "skillText": "Capacité de Combat (F) contre Défense de la Cible",
+    "targetDefense": true,
+    "conditions": [
+      {
+        "weapon": {
+          "categories": [ "MELEE" ],
+          "equipped": true
+        }
+      },
+      { "range": "ENGAGED", "target": "TARGET" }
+    ],
+    "conservativeSide": {
+      "stance": "CONSERVATIVE",
+      "cooldown": 6,
+      "difficulty": [ "MISFORTUNE", "MISFORTUNE", "MISFORTUNE" ],
+      "specialText": "Avant d'effectuer ce test, vous pouvez ôter jusqu'à 3 jetons de recharge de vos cartes de Danse Rituelle. Réduisez le modificateur de difficulté de {MISFORTUNE_DICE} pour chaque jeton de recharge ainsi ôté.",
+      "effects": {
+        "SUCCESS": {
+          "1": [ { "damage": 0, "critical": 1 } ],
+          "2": [
+            {
+              "damage": 0,
+              "critical": 1,
+              "text": "Vous infligez des dégâts critiques, +1 dégât par jeton de recharge ôté avant d'effectuer ce test."
+            }
+          ]
+        },
+        "BOON": {
+          "1": [ { "text": "+1 dégât pour chaque carte de Dase Rituelle en cours de recharge face Téméraire visible" } ]
+        },
+        "BANE": {
+          "2": [ { "exhaustion": 1 } ]
+        },
+        "CHAOS": {
+          "1": [ { "exhaustion": 1 } ]
+        }
+      }
+    },
+    "recklessSide": {
+      "stance": "RECKLESS",
+      "cooldown": 6,
+      "difficulty": [ "MISFORTUNE", "MISFORTUNE", "MISFORTUNE" ],
+      "effects": {
+        "SUCCESS": {
+          "1": [ { "damage": 2 } ],
+          "2": [
+            {
+              "damage": 2,
+              "critical": 1,
+              "text": "Vous infligez les dégâts +2, +1 critique par jeton de recharge ôté avant d'effectuer ce test."
+            }
+          ]
+        },
+        "BOON": {
+          "2": [
+            { "text": "+2 dégâts pour chaque carte de Danse Rituelle ne cours de recharge face Prudente visible" }
+          ]
+        },
+        "BANE": {
+          "1": [ { "exhaustion": 1 } ]
+        },
+        "CHAOS": {
+          "1": [ { "text": "Subissez 1 fatigue pour chaque jeton de recharge ôté avant d'effectuer ce test." } ]
+        }
+      }
+    }
+  },
+  {
+    "name": "Riposte",
+    "type": "MELEE_ATTACK",
+    "traits": [ "REACTION" ],
+    "skill": "Capacité de Combat",
+    "targetDefense": true,
+    "conditions": [
+      {
+        "weapon": {
+          "categories": [ "MELEE" ],
+          "equipped": true
+        }
+      },
+      { "range": "ENGAGED", "target": "TARGET" }
+    ],
+    "conditionsText": "Arme de corps à corps en main, la cible vient de vous rater avec une Attaque de Corps à Corps contre laquelle vous avez utilisé l'action Parade.",
+    "conservativeSide": {
+      "stance": "CONSERVATIVE",
+      "cooldown": 4,
+      "difficulty": [ "MISFORTUNE" ],
+      "effects": {
+        "SUCCESS": {
+          "1": [ { "damage": 0 } ],
+          "3": [ { "damage": 2 } ]
+        },
+        "BOON": {
+          "2": [ { "maneuver": true } ]
+        },
+        "BANE": {
+          "2": [ { "stress": 1, "exhaustion": 1 } ]
+        }
+      }
+    },
+    "recklessSide": {
+      "stance": "RECKLESS",
+      "cooldown": 4,
+      "difficulty": [ "MISFORTUNE" ],
+      "effects": {
+        "SUCCESS": {
+          "1": [ { "damage": 0 } ],
+          "3": [ { "damage": 2 } ]
+        },
+        "BOON": {
+          "2": [ { "maneuver": true } ]
+        },
+        "BANE": {
+          "2": [ { "stress": 1, "exhaustion": 1 } ]
+        }
+      }
+    }
+  },
+  {
+    "name": "Tourbillon Morel",
+    "type": "MELEE_ATTACK",
+    "traits": [ "RITUAL_DANCE" ],
+    "skill": "Capacité de Combat",
+    "skillText": "Capacité de Combat (F) contre Défense de la Cible",
+    "targetDefense": true,
+    "conditions": [
+      {
+        "weapon": {
+          "categories": [ "MELEE" ],
+          "equipped": true
+        }
+      },
+      { "range": "ENGAGED", "target": "TARGET" }
+    ],
+    "conservativeSide": {
+      "stance": "CONSERVATIVE",
+      "cooldown": 4,
+      "difficulty": [ "MISFORTUNE", "MISFORTUNE" ],
+      "effects": {
+        "SUCCESS": {
+          "1": [ { "damage": 0 } ],
+          "2": [
+            {
+              "damage": 0,
+              "text": "Vous infligez les dégâts normaux, +1 dégât pour chacune de vos cartes d'action en cours de recharge avec la face Téméraire visible."
+            }
+          ]
+        },
+        "BOON": {
+          "2": [
+            {
+              "text": "Pour chacune de vos cartes d'actions en cours de recharge avec la face Téméraire visible, vous pouvez ôter 1 jeton de recharge de cette carte."
+            }
+          ]
+        },
+        "SIGMAR": {
+          "1": [ { "text": "Vous pouvez placer votre attitude au 2ème cran de Témérité." } ]
+        },
+        "BANE": {
+          "1": [ { "text": "Ajustez votre attitude d'un cran vers neutre." } ]
+        }
+      }
+    },
+    "recklessSide": {
+      "stance": "RECKLESS",
+      "cooldown": 4,
+      "difficulty": [ "MISFORTUNE", "MISFORTUNE" ],
+      "effects": {
+        "SUCCESS": {
+          "1": [ { "damage": 0 } ],
+          "2": [
+            {
+              "damage": 0,
+              "text": "Vous infligez les dégâts normaux, +1 dégât pour chacune de vos cartes d'action en cours de recharge avec la face Prudente visible."
+            }
+          ]
+        },
+        "BOON": {
+          "2": [
+            {
+              "text": "Pour chacune de vos cartes d'actions en cours de recharge avec la face Prudente visible, vous pouvez éliminer 1 fatigue."
+            }
+          ]
+        },
+        "SIGMAR": {
+          "1": [ { "text": "Vous pouvez placer votre attitude au 2ème cran de Prudence." } ]
+        },
+        "BANE": {
+          "1": [ { "text": "Ajustez votre attitude d'un cran vers neutre." } ]
         }
       }
     }
