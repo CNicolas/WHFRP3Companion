@@ -5,6 +5,7 @@ enum class Trait {
     DEFENSE,
     CONTINUOUS,
     TEAMWORK,
+    ANCESTOR,
     KILLER,
     SWORD_WAY,
     RALLY,

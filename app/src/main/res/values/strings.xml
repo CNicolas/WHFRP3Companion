@@ -177,6 +177,7 @@
     <string name="trait_basic">Basic</string>
     <string name="trait_defense">Defense</string>
     <string name="trait_teamwork">Teamwork</string>
+    <string name="trait_ancestor">Ancestor</string>
     <string name="trait_killer">Killer</string>
     <string name="trait_continuous">Continuous</string>
     <string name="trait_sword_way">Sword Way</string>

@@ -54,6 +54,7 @@
     "type": "MELEE_ATTACK",
     "traits": [ "RITUAL_DANCE" ],
     "skill": "Capacité de Combat",
+    "skillText": "Capacité de Combat (F) contre Défense de la Cible",
     "targetDefense": true,
     "conditions": [
       {
@@ -132,6 +133,7 @@
     "type": "MELEE_ATTACK",
     "traits": [ "SWORD_WAY" ],
     "skill": "Capacité de Combat",
+    "skillText": "Capacité de Combat (F) contre Défense de la Cible",
     "targetDefense": true,
     "conditions": [
       {
@@ -276,6 +278,7 @@
     "type": "MELEE_ATTACK",
     "traits": [ "REACTION" ],
     "skill": "Capacité de Combat",
+    "skillText": "Capacité de Combat (F) contre Défense de la Cible",
     "targetDefense": true,
     "conditions": [
       {
@@ -406,6 +409,141 @@
     }
   },
   {
+    "name": "Courroux de Morgrim",
+    "type": "MELEE_ATTACK",
+    "traits": [ "ANCESTOR" ],
+    "skill": "Capacité de Combat",
+    "skillText": "Capacité de Combat (F) contre Défense de la Cible",
+    "targetDefense": true,
+    "conditions": [
+      {
+        "weapon": {
+          "categories": [ "MELEE" ],
+          "inHand": true
+        }
+      },
+      { "range": "ENGAGED", "target": "TARGET" },
+      { "wounds": 1 }
+    ],
+    "conditionsText": "Arme de corps à corps en main, engagé avec la cible, vous souffrez d'une ou plusieurs blessures.",
+    "conservativeSide": {
+      "stance": "CONSERVATIVE",
+      "cooldown": 2,
+      "difficulty": [ ],
+      "effects": {
+        "SUCCESS": {
+          "1": [ { "damage": 0 } ],
+          "2": [ { "damage": 2 } ]
+        },
+        "BOON": {
+          "2": [ { "text": "+1 dégât par tranche de 3 blessures dont vous souffrez (arrondir à l'entier supérieur)." } ]
+        },
+        "BANE": {
+          "1": [ { "cooldown": 1 } ]
+        }
+      }
+    },
+    "recklessSide": {
+      "stance": "RECKLESS",
+      "cooldown": 2,
+      "difficulty": [ ],
+      "effects": {
+        "SUCCESS": {
+          "1": [ { "damage": 0 } ],
+          "3": [ { "damage": 2 } ]
+        },
+        "BOON": {
+          "2": [ { "text": "+1 dégât par tranche de 3 blessures dont vous souffrez (arrondir à l'entier supérieur)." } ]
+        },
+        "SIGMAR": {
+          "1": [ { "text": "+1 dégât par tranche de 2 blessures dont vous souffrez (arrondir à l'entier supérieur)." } ]
+        },
+        "BANE": {
+          "1": [ { "cooldown": 2 } ]
+        },
+        "CHAOS": {
+          "1": [ { "text": "Transformez une de vos blessures normales en blessure critique." } ]
+        }
+      }
+    }
+  },
+  {
+    "name": "Enclume de Skalf",
+    "type": "MELEE_ATTACK",
+    "traits": [ "ANCESTOR" ],
+    "skill": "Résistance",
+    "skillText": "Résistance (E) contre Défense de la Cible",
+    "targetDefense": true,
+    "conditions": [
+      {
+        "weapon": {
+          "categories": [ "SHIELD" ],
+          "inHand": true
+        }
+      },
+      { "range": "ENGAGED", "target": "TARGET" }
+    ],
+    "conditionsText": "Bouclier en main, engagé avec la cible. Si vous êtes engagé avec un allié, ajoutez {FORTUNE_DICE} à votre test.",
+    "conservativeSide": {
+      "stance": "CONSERVATIVE",
+      "cooldown": 2,
+      "difficulty": [ "CHALLENGE" ],
+      "effects": {
+        "SUCCESS": {
+          "1": [
+            {
+              "damage": 0,
+              "text": "Vous infligez les dégâts normaux. Tous les alliés engagés avec vous ajoutent {FORTUNE_DICE} à leurs attaques contre la cible quand cette carte est en cours de recharge."
+            }
+          ]
+        },
+        "BOON": {
+          "2": [ { "text": "Vous ou un allié engagé avec vous éliminez 1 fatigue" } ]
+        },
+        "SIGMAR": {
+          "1": [ { "text": "La cible est Vacillante pendant 3 rounds." } ]
+        },
+        "BANE": {
+          "2": [
+            {
+              "canDisengage": "TARGET",
+              "text": "La cible peut se désengager gratuitement une fois cette action résolue."
+            }
+          ]
+        }
+      }
+    },
+    "recklessSide": {
+      "stance": "RECKLESS",
+      "cooldown": 2,
+      "difficulty": [ "CHALLENGE" ],
+      "effects": {
+        "SUCCESS": {
+          "1": [
+            {
+              "damage": 0,
+              "text": "Vous infligez les dégâts normaux. Tous les ennemis engagés avec vous ajoutent {MISFORTUNE_DICE} à leurs attaques quand cette carte est en cours de recharge."
+            }
+          ]
+        },
+        "BOON": {
+          "2": [ { "text": "Vous pouvez éliminer 1 fatigue ou infliger 1 fatigue à un ennemi engagé avec vous." } ]
+        },
+        "SIGMAR": {
+          "1": [ { "text": "La cible est Vacillante pendant 3 rounds." } ]
+        },
+        "BANE": {
+          "2": [
+            {
+              "canDisengage": "TARGET",
+              "text": "La cible peut se désengager gratuitement une fois cette action résolue."
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
     "name": "Fureur de la Tempête",
     "type": "MELEE_ATTACK",
     "traits": [ "RITUAL_DANCE" ],
@@ -473,6 +611,59 @@
         },
         "CHAOS": {
           "1": [ { "text": "Subissez 1 fatigue pour chaque jeton de recharge ôté avant d'effectuer ce test." } ]
+        }
+      }
+    }
+  },
+  {
+    "name": "Justice du Haut Roi Gotrek",
+    "type": "MELEE_ATTACK",
+    "traits": [ "ANCESTOR" ],
+    "skill": "Capacité de Combat",
+    "skillText": "Capacité de Combat (F) contre Défense de la Cible",
+    "targetDefense": true,
+    "conditions": [
+      {
+        "weapon": {
+          "categories": [ "MELEE" ],
+          "inHand": true
+        }
+      },
+      { "range": "ENGAGED", "target": "TARGET" }
+    ],
+    "conservativeSide": {
+      "stance": "CONSERVATIVE",
+      "cooldown": 3,
+      "difficulty": [ "MISFORTUNE", "MISFORTUNE" ],
+      "specialText": "Si votre cible vous a fait du tort, à vous ou votre clan, ou encore s'il s'agit d'une peau verte ou d'un elfe, ajoutez {FORTUNE_DICE} au test.",
+      "effects": {
+        "SUCCESS": {
+          "1": [ { "damage": 0 } ],
+          "2": [ { "damage": 0, "text": "Vous infligez les dégâts normaux, ou -1 dégât et +1 critique, au choix." } ]
+        },
+        "BOON": {
+          "2": [ { "text": "La valeur d'encaissement de la cible est réduite de 3." } ]
+        },
+        "BANE": {
+          "1": [ { "exhaustion": 1 } ]
+        }
+      }
+    },
+    "recklessSide": {
+      "stance": "RECKLESS",
+      "cooldown": 3,
+      "difficulty": [ "MISFORTUNE", "MISFORTUNE" ],
+      "specialText": "Si votre cible vous a fait du tort, à vous ou votre clan, ou encore s'il s'agit d'une peau verte ou d'un elfe, ajoutez {FORTUNE_DICE} au test.",
+      "effects": {
+        "SUCCESS": {
+          "1": [ { "damage": 0 } ],
+          "3": [ { "damage": 0, "critical": 1 } ]
+        },
+        "BOON": {
+          "2": [ { "text": "La valeur d'encaissement de la cible est réduite de 3." } ]
+        },
+        "BANE": {
+          "1": [ { "exhaustion": 1 } ]
         }
       }
     }

@@ -161,6 +161,7 @@ internal val Trait.labelId: Int
         DEFENSE -> R.string.trait_defense
         CONTINUOUS -> R.string.trait_continuous
         TEAMWORK -> R.string.trait_teamwork
+        ANCESTOR -> R.string.trait_ancestor
         KILLER -> R.string.trait_killer
         SWORD_WAY -> R.string.trait_sword_way
         RALLY -> R.string.trait_rally

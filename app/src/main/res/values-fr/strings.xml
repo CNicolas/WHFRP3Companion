@@ -194,4 +194,5 @@
     <string name="willpower_short">FM</string>
     <string name="trait_reaction">Réaction</string>
     <string name="trait_ritual_dance">Danse Rituelle</string>
+    <string name="trait_ancestor">Ancêtre</string>
 </resources>

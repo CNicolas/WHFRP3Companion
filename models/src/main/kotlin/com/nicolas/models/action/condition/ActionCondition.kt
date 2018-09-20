@@ -12,7 +12,8 @@ data class ActionCondition(val weapon: ActionConditionWeapon? = null,
                            val target: Target? = null,
                            val preparation: Boolean? = null,
                            val encumbrance: Boolean? = null,
-                           val energy: Int? = null) : Serializable {
+                           val energy: Int? = null,
+                           val wounds: Int? = null) : Serializable {
 
     override fun toString(): String {
         return listOfNotNull(weapon.toString(), characteristic.toString(), rangeString, encumbranceString, energyString)

@@ -7,7 +7,8 @@ enum class WeaponCategory {
     RANGE,
     FIRE_ARM,
     REPEATING,
-    THROWING
+    THROWING,
+    SHIELD
 }
 
 enum class WeaponType(val category: WeaponCategory) {
