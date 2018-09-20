@@ -37,23 +37,13 @@ class ActionDetailActivity : AppCompatActivity() {
         action = intent.extras.getSerializable(ACTION_INTENT_ARGUMENT) as Action
         val dominantStance = intent.extras.getSerializable(STANCE_INTENT_ARGUMENT) as Stance?
 
-        title = action.name
         setupViews()
-        setupSideViews(dominantStance)
-
-        navigation.setOnNavigationItemSelectedListener {
-            when (it.itemId) {
-                R.id.conservative_side -> {
-                    setupSideViews(CONSERVATIVE)
-                    true
-                }
-                R.id.reckless_side -> {
-                    setupSideViews(RECKLESS)
-                    true
-                }
-                else -> false
-            }
+        when (dominantStance) {
+            RECKLESS -> fillViewsWithRecklessSide()
+            else -> fillViewsWithConservativeSide()
         }
+
+        setupViewsEvents()
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -69,33 +59,56 @@ class ActionDetailActivity : AppCompatActivity() {
             "-"
         }
         action_skills_textview.text = action.skillsString
-        action.conditionsString?.let {
+
+        navigation.itemIconTintList = null
+    }
+
+    private fun fillViewsWithConservativeSide() {
+        title = action.getNameByStance(CONSERVATIVE)
+
+        action_difficulty_textview.text = parseTemplatedText(this, action.conservativeSide.difficultyString)
+        action_cooldown_textview.text = action.conservativeSide.cooldownString
+        action.getConditionsStringByStance(CONSERVATIVE)?.let {
             action_conditions_textview.text = parseTemplatedText(this, it)
         } ?: {
             action_conditions_textview.visibility = View.GONE
         }()
-        navigation.itemIconTintList = null
-    }
 
-    private fun setupSideViews(side: Stance?) {
-        when (side) {
-            RECKLESS -> fillViewsWithRecklessSide()
-            else -> fillViewsWithConservativeSide()
-        }
-    }
-
-    private fun fillViewsWithConservativeSide() {
-        action_difficulty_textview.text = parseTemplatedText(this, action.conservativeSide.difficultyString)
-        action_cooldown_textview.text = action.conservativeSide.cooldownString
         action.conservativeSide.effects?.let { setEffectsAdapter(it) }
+
         setNavigationColors(CONSERVATIVE)
     }
 
     private fun fillViewsWithRecklessSide() {
+        title = action.getNameByStance(RECKLESS)
+
         action_difficulty_textview.text = parseTemplatedText(this, action.recklessSide.difficultyString)
         action_cooldown_textview.text = action.recklessSide.cooldownString
+        action.getConditionsStringByStance(RECKLESS)?.let {
+            action_conditions_textview.text = parseTemplatedText(this, it)
+        } ?: {
+            action_conditions_textview.visibility = View.GONE
+        }()
+
         action.recklessSide.effects?.let { setEffectsAdapter(it) }
+
         setNavigationColors(RECKLESS)
+    }
+
+    private fun setupViewsEvents() {
+        navigation.setOnNavigationItemSelectedListener {
+            when (it.itemId) {
+                R.id.conservative_side -> {
+                    fillViewsWithConservativeSide()
+                    true
+                }
+                R.id.reckless_side -> {
+                    fillViewsWithRecklessSide()
+                    true
+                }
+                else -> false
+            }
+        }
     }
 
     private fun setEffectsAdapter(actionEffects: ActionEffects) {

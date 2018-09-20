@@ -6,6 +6,8 @@ import com.nicolas.models.player.enums.Stance
 import java.io.Serializable
 
 data class ActionSide(val stance: Stance,
+                      val name: String? = null,
+                      val conditionsText: String? = null,
                       val cooldown: Int? = null,
                       val difficulty: List<DiceType>? = null,
                       val effects: ActionEffects? = null,
