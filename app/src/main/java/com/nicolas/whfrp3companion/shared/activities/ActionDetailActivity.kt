@@ -63,7 +63,11 @@ class ActionDetailActivity : AppCompatActivity() {
 
     private fun setupViews() {
         action_type_imageview.setImageResource(action.type.drawableId)
-        action_traits_textview.text = action.traits.joinToString { getString(it.labelId) }
+        action_traits_textview.text = if (action.traits.isNotEmpty()) {
+            action.traits.joinToString { getString(it.labelId) }
+        } else {
+            "-"
+        }
         action_skills_textview.text = action.skillsString
         action.conditionsString?.let {
             action_conditions_textview.text = parseTemplatedText(this, it)

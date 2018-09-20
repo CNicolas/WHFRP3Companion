@@ -192,4 +192,6 @@
     <string name="strength_short">F</string>
     <string name="toughness_short">E</string>
     <string name="willpower_short">FM</string>
+    <string name="trait_reaction">Réaction</string>
+    <string name="trait_ritual_dance">Danse Rituelle</string>
 </resources>

@@ -8,6 +8,8 @@ enum class Trait {
     KILLER,
     SWORD_WAY,
     RALLY,
+    REACTION,
+    RITUAL_DANCE,
     RANK_1,
     RANK_2,
     RANK_3,
