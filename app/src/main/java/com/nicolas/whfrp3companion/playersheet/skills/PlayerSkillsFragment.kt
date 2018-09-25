@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import com.nicolas.database.PlayerRepository
 import com.nicolas.database.loadSkills
 import com.nicolas.models.extensions.addSkill
+import com.nicolas.models.extensions.advanced
 import com.nicolas.models.player.Player
 import com.nicolas.models.skill.Skill
 import com.nicolas.whfrp3companion.R
@@ -49,7 +50,7 @@ class PlayerSkillsFragment : Fragment() {
         add_skill.setOnClickListener {
             activity?.let { safeActivity ->
                 doAsync {
-                    val advancedSkills = loadSkills(safeActivity)
+                    val advancedSkills = loadSkills(safeActivity).advanced
 
                     uiThread {
                         openAddSkillSelector(safeActivity, advancedSkills)
@@ -59,10 +60,10 @@ class PlayerSkillsFragment : Fragment() {
         }
     }
 
-    fun openAddSkillSelector(safeActivity: FragmentActivity, advancedSkills: List<Skill>) {
-        safeActivity.selector("", advancedSkills.map { skill -> skill.name }) { _, index ->
+    private fun openAddSkillSelector(safeActivity: FragmentActivity, skills: List<Skill>) {
+        safeActivity.selector(getString(R.string.skill), skills.map { skill -> skill.name }) { _, index ->
             doAsync {
-                player = playerRepository.update(player.addSkill(advancedSkills[index]))
+                player = playerRepository.update(player.addSkill(skills[index]))
 
                 uiThread {
                     setSkillsListAdapter()

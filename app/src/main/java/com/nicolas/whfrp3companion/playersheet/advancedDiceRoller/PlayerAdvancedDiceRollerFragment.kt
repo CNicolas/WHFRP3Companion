@@ -65,6 +65,7 @@ class PlayerAdvancedDiceRollerFragment : Fragment() {
                         setupStanceBar()
                         setHandAndFillViews()
 
+                        // The if under is trying to refresh the progress to the current stance and color
                         val realStance = player.stance
                         if (player.stance != stanceBar.max) {
                             stanceBar.progress = stanceBar.max

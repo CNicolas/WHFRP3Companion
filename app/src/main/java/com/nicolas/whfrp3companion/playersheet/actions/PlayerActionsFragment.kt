@@ -120,7 +120,7 @@ class PlayerActionsFragment : Fragment(), ActionListener {
                 }
     }
 
-    // Keep this as the context
+    // Keep 'this' as the context
     private fun createActionsAdapter(): ActionExpandableAdapter {
         return ActionExpandableAdapter(activity!!, player.actions, this, ActionExpandableAdapter.ActionButtonType.ROLL)
     }

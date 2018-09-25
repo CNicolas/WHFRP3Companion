@@ -10,7 +10,6 @@
               android:paddingStart="@dimen/medium_padding"
               android:gravity="center_vertical"
               android:textSize="@dimen/medium_text_size"
-              android:textColor="@color/colorSecondaryText"
               android:hint="@string/page_specializations"
               android:layout_weight="9" />
 </LinearLayout>
