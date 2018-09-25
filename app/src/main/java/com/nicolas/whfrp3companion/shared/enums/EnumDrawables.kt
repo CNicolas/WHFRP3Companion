@@ -58,7 +58,7 @@ internal val ActionType.drawableId: Int
         RANGE_ATTACK -> R.drawable.ic_handgun_black
         SUPPORT -> R.drawable.ic_flag_black
         SPELL -> R.drawable.ic_spell_black
-        SUMMONING -> R.drawable.ic_summoning_black
+        BLESSING -> R.drawable.ic_blessing_black
     }
 
 internal val DiceType.textIcon: TextIcon

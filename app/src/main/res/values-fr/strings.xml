@@ -159,7 +159,7 @@
     <string name="melee_attack">Attaque de mêlée</string>
     <string name="range_attack">Attaque à distance</string>
     <string name="spell">Sort</string>
-    <string name="summoning">Invocation</string>
+    <string name="blessing">Bénédiction</string>
     <string name="support">Support</string>
     <string name="action_damage_format">%1$d dégât(s), dont %2$d critique(s)</string>
     <string name="failure">Échec</string>

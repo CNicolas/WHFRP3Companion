@@ -152,7 +152,7 @@ internal val ActionType.labelId: Int
         RANGE_ATTACK -> R.string.range_attack
         SUPPORT -> R.string.support
         SPELL -> R.string.spell
-        SUMMONING -> R.string.summoning
+        BLESSING -> R.string.blessing
     }
 
 internal val Trait.labelId: Int

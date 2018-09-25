@@ -5,7 +5,7 @@ enum class ActionType {
     RANGE_ATTACK,
     SUPPORT,
     SPELL,
-    SUMMONING;
+    BLESSING;
 
     companion object {
         operator fun get(ordinal: Int): ActionType = ActionType.values()[ordinal]
