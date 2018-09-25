@@ -9,7 +9,7 @@ class ActionsFilesLoader {
         return loadMeleeActions() +
                 loadRangeActions() +
                 loadSpellActions() +
-                loadSummoningActions() +
+                loadBlessingActions() +
                 loadSupportActions()
     }
 
@@ -31,8 +31,8 @@ class ActionsFilesLoader {
         return Gson().fromJson(actionsReader, genericType<List<Action>>()) ?: listOf()
     }
 
-    fun loadSummoningActions(): List<Action> {
-        val actionsReader = javaClass.classLoader.getResourceAsStream("actions_summoning.json").reader()
+    fun loadBlessingActions(): List<Action> {
+        val actionsReader = javaClass.classLoader.getResourceAsStream("actions_blessing.json").reader()
 
         return Gson().fromJson(actionsReader, genericType<List<Action>>()) ?: listOf()
     }

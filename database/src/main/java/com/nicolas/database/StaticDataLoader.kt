@@ -29,7 +29,7 @@ fun loadActions(context: Context): List<Action> {
     return loadMeleeActions(context) +
             loadRangeActions(context) +
             loadSpellActions(context) +
-            loadSummoningActions(context) +
+            loadBlessingActions(context) +
             loadSupportActions(context)
 }
 
@@ -51,10 +51,10 @@ fun loadSpellActions(context: Context): List<Action> {
     return Gson().fromJson(spellActionsReader, genericType<List<Action>>()) ?: listOf()
 }
 
-fun loadSummoningActions(context: Context): List<Action> {
-    val summoningActionsReader = context.assets.open("actions_summoning.json").reader()
+fun loadBlessingActions(context: Context): List<Action> {
+    val blessingActionsReader = context.assets.open("actions_blessing.json").reader()
 
-    return Gson().fromJson(summoningActionsReader, genericType<List<Action>>()) ?: listOf()
+    return Gson().fromJson(blessingActionsReader, genericType<List<Action>>()) ?: listOf()
 }
 
 fun loadSupportActions(context: Context): List<Action> {

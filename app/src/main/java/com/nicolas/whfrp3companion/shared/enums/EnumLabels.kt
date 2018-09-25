@@ -14,6 +14,8 @@ import com.nicolas.models.player.enums.Characteristic
 import com.nicolas.models.player.enums.Characteristic.*
 import com.nicolas.models.player.enums.Race
 import com.nicolas.models.player.enums.Race.*
+import com.nicolas.models.player.enums.Stance
+import com.nicolas.models.player.enums.Stance.*
 import com.nicolas.models.talent.TalentCooldown
 import com.nicolas.models.talent.TalentCooldown.*
 import com.nicolas.models.talent.TalentType
@@ -36,6 +38,23 @@ internal val Characteristic.labelId: Int
         INTELLIGENCE -> R.string.intelligence
         WILLPOWER -> R.string.willpower
         FELLOWSHIP -> R.string.fellowship
+    }
+
+internal val Characteristic.shortLabelId: Int
+    get() = when (this) {
+        STRENGTH -> R.string.strength_short
+        TOUGHNESS -> R.string.toughness_short
+        AGILITY -> R.string.agility_short
+        INTELLIGENCE -> R.string.intelligence_short
+        WILLPOWER -> R.string.willpower_short
+        FELLOWSHIP -> R.string.fellowship_short
+    }
+
+internal val Stance.labelId: Int
+    get() = when (this) {
+        CONSERVATIVE -> R.string.conservative
+        RECKLESS -> R.string.reckless
+        NEUTRAL -> R.string.neutral
     }
 
 internal val ItemType.labelId: Int
@@ -96,6 +115,8 @@ internal val WeaponType.labelId: Int
         RIFLE -> R.string.weapon_rifle
         REPEATING_GUN -> R.string.weapon_repeating_gun
         REPEATING_CROSSBOW -> R.string.weapon_repeating_crossbow
+        THROWING_DAGGER -> R.string.weapon_throwing_dagger
+        THROWING_AXE -> R.string.weapon_throwing_axe
     }
 
 internal val Range.labelId: Int
@@ -131,15 +152,35 @@ internal val ActionType.labelId: Int
         RANGE_ATTACK -> R.string.range_attack
         SUPPORT -> R.string.support
         SPELL -> R.string.spell
-        SUMMONING -> R.string.summoning
+        BLESSING -> R.string.blessing
     }
 
 internal val Trait.labelId: Int
     get() = when (this) {
         BASIC -> R.string.trait_basic
         DEFENSE -> R.string.trait_defense
-        TEAMWORK -> R.string.trait_teamwork
-        KILLER -> R.string.trait_killer
         CONTINUOUS -> R.string.trait_continuous
+        TEAMWORK -> R.string.trait_teamwork
+        ANCESTOR -> R.string.trait_ancestor
+        KILLER -> R.string.trait_killer
         SWORD_WAY -> R.string.trait_sword_way
+        RALLY -> R.string.trait_rally
+        REACTION -> R.string.trait_reaction
+        RITUAL_DANCE -> R.string.trait_ritual_dance
+        MINOR -> R.string.trait_minor
+        DIVINE -> R.string.trait_divine
+        RANK_0 -> R.string.trait_rank_0
+        RANK_1 -> R.string.trait_rank_1
+        RANK_2 -> R.string.trait_rank_2
+        RANK_3 -> R.string.trait_rank_3
+        RANK_4 -> R.string.trait_rank_4
+        RANK_5 -> R.string.trait_rank_5
+        LIGHT_ORDER -> R.string.trait_light_order
+        CELESTIAL_ORDER -> R.string.trait_celestial_order
+        GOLD_ORDER -> R.string.trait_gold_order
+        JADE_ORDER -> R.string.trait_jade_order
+        AMBER_ORDER -> R.string.trait_amber_order
+        BRIGHT_ORDER -> R.string.trait_bright_order
+        GREY_ORDER -> R.string.trait_grey_order
+        AMETHYST_ORDER -> R.string.trait_amethyst_order
     }

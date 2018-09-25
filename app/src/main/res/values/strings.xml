@@ -34,6 +34,7 @@
     <string name="characteristic">Characteristic</string>
     <string name="conservative">Conservative</string>
     <string name="reckless">Reckless</string>
+    <string name="neutral">Neutral</string>
     <string name="expertise">Expertise</string>
     <string name="fortune">Fortune</string>
     <string name="challenge">Challenge</string>
@@ -45,6 +46,13 @@
     <string name="intelligence">Intelligence</string>
     <string name="willpower">Willpower</string>
     <string name="fellowship">Fellowship</string>
+
+    <string name="strength_short">St</string>
+    <string name="toughness_short">To</string>
+    <string name="agility_short">Ag</string>
+    <string name="intelligence_short">Int</string>
+    <string name="willpower_short">WP</string>
+    <string name="fellowship_short">Fel</string>
 
     <string name="human">Human</string>
     <string name="dwarf">Dwarf</string>
@@ -95,6 +103,8 @@
     <string name="weapon_rifle">Rifle</string>
     <string name="weapon_repeating_gun">Repeating gun</string>
     <string name="weapon_repeating_crossbow">Repeating crossbow</string>
+    <string name="weapon_throwing_dagger">Dague de Jet</string>
+    <string name="weapon_throwing_axe">Hache de Jet</string>
 
     <string name="range_engaged">Engaged</string>
     <string name="range_short">Short</string>
@@ -162,14 +172,34 @@
     <string name="range_attack">Range attack</string>
     <string name="support">Support</string>
     <string name="spell">Spell</string>
-    <string name="summoning">Summoning</string>
+    <string name="blessing">Blessing</string>
 
     <string name="trait_basic">Basic</string>
     <string name="trait_defense">Defense</string>
     <string name="trait_teamwork">Teamwork</string>
+    <string name="trait_ancestor">Ancestor</string>
     <string name="trait_killer">Killer</string>
     <string name="trait_continuous">Continuous</string>
     <string name="trait_sword_way">Sword Way</string>
+    <string name="trait_rally">Rally</string>
+    <string name="trait_reaction">Reaction</string>
+    <string name="trait_ritual_dance">Ritual Dance</string>
+    <string name="trait_minor">Minor</string>
+    <string name="trait_divine">Divine</string>
+    <string name="trait_rank_0">Rank 0</string>
+    <string name="trait_rank_1">Rank 1</string>
+    <string name="trait_rank_2">Rank 2</string>
+    <string name="trait_rank_3">Rank 3</string>
+    <string name="trait_rank_4">Rank 4</string>
+    <string name="trait_rank_5">Rank 5</string>
+    <string name="trait_light_order">Light Order</string>
+    <string name="trait_celestial_order">Celestial Order</string>
+    <string name="trait_gold_order">Gold Order</string>
+    <string name="trait_jade_order">Jade Order</string>
+    <string name="trait_amber_order">Amber Order</string>
+    <string name="trait_bright_order">Bright Order</string>
+    <string name="trait_grey_order">Grey Order</string>
+    <string name="trait_amethyst_order">Amethyst Order</string>
 
     <string name="skill">Skill</string>
     <string name="player_name">Player name</string>

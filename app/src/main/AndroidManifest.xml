@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.nicolas.whfrp3companion">
+          package="com.nicolas.whfrp3companion">
 
     <application
         android:name=".WHFRP3Companion"
@@ -89,13 +89,20 @@
             android:label="@string/page_talents"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
-        <activity android:name=".shared.activities.ActionDetailActivity" />
+        <activity
+            android:name=".shared.activities.ActionDetailActivity" />
         <activity
             android:name=".playersheet.advancedDiceRoller.PlayerAdvancedDiceRollerSkillsActivity"
             android:parentActivityName=".playersheet.PlayerSheetActivity" />
         <activity
             android:name=".playersheet.advancedDiceRoller.PlayerAdvancedDiceRollerActionsActivity"
             android:parentActivityName=".playersheet.PlayerSheetActivity" />
+
+        <activity
+            android:name=".playersheet.actions.PlayerAddActionsActivity"
+            android:parentActivityName=".playersheet.PlayerSheetActivity"
+            android:windowSoftInputMode="stateHidden|adjustPan">
+        </activity>
     </application>
 
 </manifest>

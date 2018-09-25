@@ -20,6 +20,7 @@
     <color name="spinner_background">#cfd8dc</color>
     <color name="white_transparent">#90ffffff</color>
     <color name="white_not_white">#fcfcfc</color>
+    <color name="parchment">#f1f1d4</color>
 
     <color name="characteristic">#3f51b5</color>
     <color name="conservative">#2f8f3f</color>

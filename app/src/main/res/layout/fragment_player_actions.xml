@@ -7,18 +7,17 @@
                                                  android:layout_height="match_parent"
                                                  android:fitsSystemWindows="true">
 
-    <ExpandableListView android:id="@+id/actionsExpandableListView"
+    <ExpandableListView android:id="@+id/actions_expandable_list_view"
                         android:layout_height="match_parent"
                         android:layout_width="match_parent"
                         android:groupIndicator="@null"
                         tools:listheader="@layout/list_actions_group"
                         tools:listitem="@layout/list_actions_child" />
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/addActionFloatingActionButton"
+    <android.support.design.widget.FloatingActionButton android:id="@+id/fab_add_action"
                                                         android:layout_width="wrap_content"
                                                         android:layout_height="wrap_content"
                                                         android:layout_gravity="bottom|end"
                                                         android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@drawable/ic_add_white" />
+                                                        app:srcCompat="@drawable/ic_add_white" />
 </android.support.design.widget.CoordinatorLayout>

@@ -50,91 +50,6 @@
     }
   },
   {
-    "name": "Backstab",
-    "type": "MELEE_ATTACK",
-    "traits": [ "TEAMWORK" ],
-    "skill": "Furtivité",
-    "targetSkill": "Observation",
-    "conditions": [
-      {
-        "weapon": {
-          "categories": [ "MELEE" ],
-          "oneHanded": true,
-          "equipped": true
-        }
-      },
-      { "range": "ENGAGED", "target": "TARGET" }
-    ],
-    "conservativeSide": {
-      "stance": "CONSERVATIVE",
-      "cooldown": 4,
-      "difficulty": [
-        "MISFORTUNE",
-        "MISFORTUNE",
-        "MISFORTUNE"
-      ],
-      "special": {
-        "difficultyReducer": {
-          "range": "ENGAGED",
-          "target": "TARGET",
-          "player": false,
-          "ally": "COUNT",
-          "dice": "MISFORTUNE"
-        },
-        "text": "Réduisez la difficulté de {MISFORTUNE_DICE} pour chaque allié engagé avec la cible."
-      },
-      "effects": {
-        "SUCCESS": {
-          "1": [ { "damage": 1 } ],
-          "2": [
-            {
-              "damage": 1,
-              "ignoreSoak": true
-            }
-          ]
-        },
-        "BOON": {
-          "2": [ { "damage": 2 } ]
-        },
-        "BANE": {
-          "2": [ { "cooldown": 2 } ]
-        }
-      }
-    },
-    "recklessSide": {
-      "stance": "RECKLESS",
-      "cooldown": 4,
-      "difficulty": [ "MISFORTUNE", "MISFORTUNE", "MISFORTUNE" ],
-      "special": {
-        "difficultyReducer": {
-          "range": "ENGAGED",
-          "target": "TARGET",
-          "player": false,
-          "ally": "COUNT",
-          "dice": "MISFORTUNE"
-        },
-        "text": "Réduisez la difficulté de {MISFORTUNE_DICE} pour chaque allié engagé avec la cible."
-      },
-      "effects": {
-        "SUCCESS": {
-          "1": [ { "damage": 1 } ],
-          "2": [
-            {
-              "damage": 1,
-              "ignoreSoak": true
-            }
-          ]
-        },
-        "BOON": {
-          "2": [ { "damage": 2 } ]
-        },
-        "BANE": {
-          "2": [ { "cooldown": 2 } ]
-        }
-      }
-    }
-  },
-  {
     "name": "Botte décisive du Maître",
     "type": "MELEE_ATTACK",
     "traits": [ "SWORD_WAY" ],
@@ -239,10 +154,34 @@
     "conservativeSide": {
       "stance": "CONSERVATIVE",
       "cooldown": 2,
+      "difficulty": [ ],
+      "specialText": "Vous ne pouvez pas utiliser de Défense Active quand cette carte est en cours de recharge.",
+      "effects": {
+        "SUCCESS": {
+          "1": [ { "damage": 1 } ],
+          "3": [ { "damage": 3 } ]
+        },
+        "BOON": {
+          "1": [
+            {
+              "damage": 1,
+              "ignoreSoak": true
+            }
+          ]
+        },
+        "BANE": {
+          "1": [ { "exhaustion": 1 } ]
+        },
+        "CHAOS": {
+          "1": [ { "wounds": -1 } ]
+        }
+      }
+    },
+    "recklessSide": {
+      "stance": "RECKLESS",
+      "cooldown": 2,
       "difficulty": [ "MISFORTUNE" ],
-      "special": {
-        "text": "Vous ne pouvez pas utiliser de Défense Active quand cette carte est en cours de recharge."
-      },
+      "specialText": "Vous ne pouvez pas utiliser de Défense Active quand cette carte est en cours de recharge.",
       "effects": {
         "SUCCESS": {
           "1": [ { "damage": 1 } ],
@@ -267,34 +206,6 @@
             {
               "critical": 1,
               "text": "Infligez 1 blessure critique, puis un nbombre de blessures normales égal à sa gravité."
-            }
-          ]
-        },
-        "BANE": {
-          "1": [ { "exhaustion": 1 } ]
-        },
-        "CHAOS": {
-          "1": [ { "wounds": -1 } ]
-        }
-      }
-    },
-    "recklessSide": {
-      "stance": "RECKLESS",
-      "cooldown": 2,
-      "difficulty": [ ],
-      "special": {
-        "text": "Vous ne pouvez pas utiliser de Défense Active quand cette carte est en cours de recharge."
-      },
-      "effects": {
-        "SUCCESS": {
-          "1": [ { "damage": 1 } ],
-          "3": [ { "damage": 3 } ]
-        },
-        "BOON": {
-          "1": [
-            {
-              "damage": 1,
-              "ignoreSoak": true
             }
           ]
         },

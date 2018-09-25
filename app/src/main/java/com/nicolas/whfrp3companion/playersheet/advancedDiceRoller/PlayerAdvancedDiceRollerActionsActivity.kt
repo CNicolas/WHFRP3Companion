@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.view.View
 import com.nicolas.database.PlayerRepository
 import com.nicolas.models.action.Action
 import com.nicolas.models.extensions.getEquippedWeapons
@@ -15,11 +16,13 @@ import com.nicolas.whfrp3companion.shared.ACTION_INTENT_ARGUMENT
 import com.nicolas.whfrp3companion.shared.DIALOG_ACTION_WEAPONS_TAG
 import com.nicolas.whfrp3companion.shared.PLAYER_NAME_INTENT_ARGUMENT
 import com.nicolas.whfrp3companion.shared.WEAPON_INTENT_ARGUMENT
+import com.nicolas.whfrp3companion.shared.activities.ActionDetailActivity
 import com.nicolas.whfrp3companion.shared.adapters.ActionExpandableAdapter
 import com.nicolas.whfrp3companion.shared.adapters.ActionListener
 import kotlinx.android.synthetic.main.activity_advanced_dice_roller_actions.*
 import kotlinx.android.synthetic.main.toolbar.*
 import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.uiThread
 import org.koin.android.ext.android.inject
 
@@ -57,7 +60,7 @@ class PlayerAdvancedDiceRollerActionsActivity : AppCompatActivity(), ActionListe
         return true
     }
 
-    override fun launchAction(action: Action) {
+    override fun primaryHandler(action: Action) {
         val weaponCategories = action.conditions?.mapNotNull { it.weapon }?.flatMap { it.categories }
         val weapons = weaponCategories?.let {
             player.getEquippedWeaponsForCategories(it)
@@ -71,6 +74,14 @@ class PlayerAdvancedDiceRollerActionsActivity : AppCompatActivity(), ActionListe
                 .show(supportFragmentManager, DIALOG_ACTION_WEAPONS_TAG)
     }
 
+    override fun longPrimaryHandler(view: View, action: Action): Boolean {
+        startActivity(intentFor<ActionDetailActivity>(
+                ACTION_INTENT_ARGUMENT to action
+        ))
+
+        return true
+    }
+
     private fun closeActivityAfterActionSelected(action: Action, weapon: Weapon? = null) {
         val resultingIntent = Intent()
         resultingIntent.putExtra(ACTION_INTENT_ARGUMENT, action)
@@ -81,7 +92,7 @@ class PlayerAdvancedDiceRollerActionsActivity : AppCompatActivity(), ActionListe
     }
 
     private fun setPlayerActionsAdapter() {
-        val adapter = ActionExpandableAdapter(this, player.actions, this, player.dominantStance)
+        val adapter = ActionExpandableAdapter(this, player.actions, this, ActionExpandableAdapter.ActionButtonType.NONE)
         actions_expandable_list_view.setAdapter(adapter)
 
         (0 until player.actions.map { it.type }.distinct().size).forEach { it ->

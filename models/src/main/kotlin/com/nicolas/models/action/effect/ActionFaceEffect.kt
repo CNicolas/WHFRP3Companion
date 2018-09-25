@@ -6,6 +6,7 @@ import com.nicolas.models.dice.DiceType
 import com.nicolas.models.item.enums.Range
 import com.nicolas.models.item.enums.or
 import com.nicolas.models.or
+import com.nicolas.models.player.enums.Characteristic
 import com.nicolas.models.plus
 import java.io.Serializable
 import java.lang.Math.abs
@@ -13,6 +14,8 @@ import java.lang.Math.abs
 data class ActionFaceEffect(val damage: Int? = null,
                             val critical: Int? = null,
                             val ignoreSoak: Boolean? = null,
+                            val energy: Int? = null,
+                            val favor: Int? = null,
                             val cooldown: Int? = null,
                             val exhaustion: Int? = null,
                             val stress: Int? = null,
@@ -24,12 +27,15 @@ data class ActionFaceEffect(val damage: Int? = null,
                             val actionType: List<ActionType>? = null,
                             val target: Target? = null,
                             val range: Range? = null,
+                            val characteristics: List<Characteristic>? = null,
 
                             val text: String? = null) : Serializable {
 
     override fun toString(): String = text ?: listOfNotNull(damageString,
             criticalString,
             ignoreSoakString,
+            energyString,
+            favorString,
             cooldownString,
             stressString,
             exhaustionString,
@@ -68,6 +74,22 @@ data class ActionFaceEffect(val damage: Int? = null,
     private val ignoreSoakString: String?
         get() = when (ignoreSoak) {
             true -> "ignorez l'encaissement"
+            else -> null
+        }
+
+    private val energyString: String?
+        get() = when {
+            energy == null -> null
+            energy > 0 -> "Regagnez $energy après avoir lancé ce sort"
+            energy < 0 -> "Perdez $energy après avoir lancé ce sort"
+            else -> null
+        }
+
+    private val favorString: String?
+        get() = when {
+            favor == null -> null
+            favor > 0 -> "Regagnez $favor après avoir lancé ce sort"
+            favor < 0 -> "Perdez $favor après avoir lancé ce sort"
             else -> null
         }
 
@@ -144,6 +166,8 @@ data class ActionFaceEffect(val damage: Int? = null,
                     damage = damage + other.damage,
                     critical = critical + other.critical,
                     ignoreSoak = ignoreSoak.or(other.ignoreSoak),
+                    energy = energy + other.energy,
+                    favor = favor + other.favor,
                     cooldown = cooldown + other.cooldown,
                     exhaustion = exhaustion + other.exhaustion,
                     stress = stress + other.stress,
@@ -154,6 +178,7 @@ data class ActionFaceEffect(val damage: Int? = null,
                     addedDices = addedDices + other.addedDices,
                     actionType = actionType + other.actionType,
                     target = target.or(other.target),
-                    range = range.or(other.range)
+                    range = range.or(other.range),
+                    characteristics = characteristics + other.characteristics
             )
 }

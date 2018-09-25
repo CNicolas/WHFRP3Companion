@@ -5,16 +5,16 @@ import org.assertj.core.api.Assertions.assertThat
 import org.junit.Before
 import org.junit.Test
 
-class ActionsSummoningFileTest {
-    private lateinit var summoningActions: List<Action>
+class ActionsBlessingFileTest {
+    private lateinit var blessingActions: List<Action>
 
     @Before
     fun setup() {
-        summoningActions = ActionsFilesLoader().loadSummoningActions()
+        blessingActions = ActionsFilesLoader().loadBlessingActions()
     }
 
     @Test
     fun should_load_actions_file() {
-        assertThat(summoningActions.size).isEqualTo(0)
+        assertThat(blessingActions.size).isEqualTo(0)
     }
 }

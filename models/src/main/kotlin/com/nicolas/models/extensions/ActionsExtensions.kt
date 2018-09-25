@@ -15,6 +15,22 @@ import com.nicolas.models.plus
 import com.nicolas.models.skill.Skill
 import com.nicolas.models.toInt
 
+fun Player.addAction(action: Action): Player {
+    val mutableActions = actions.toMutableList()
+    mutableActions.add(action)
+    actions = mutableActions.toList()
+
+    return this
+}
+
+fun Player.removeAction(action: Action): Player {
+    val mutableActions = actions.toMutableList()
+    mutableActions.remove(action)
+    actions = mutableActions.toList()
+
+    return this
+}
+
 fun Player.createHand(action: Action): Hand? {
     return action.skill?.let { skillName ->
         getSkillByName(skillName)?.let { skill ->

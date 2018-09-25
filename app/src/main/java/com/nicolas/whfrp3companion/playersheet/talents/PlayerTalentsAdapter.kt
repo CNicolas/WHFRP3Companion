@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.Typeface.BOLD_ITALIC
 import android.support.v4.content.ContextCompat
-import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -112,10 +111,9 @@ class PlayerTalentsAdapter(context: Context,
             addTalent(talent)
             this.addTalentButton.visibility = View.GONE
 
-            (view.context as AppCompatActivity).let { activity ->
-                val snackbarText = activity.getString(R.string.talent_added_format).format(talent.name)
-                snackbar(view, snackbarText).show()
-            }
+
+            val snackbarText = view.context.getString(R.string.talent_added_format).format(talent.name)
+            view.snackbar(snackbarText).show()
         }
     }
 }

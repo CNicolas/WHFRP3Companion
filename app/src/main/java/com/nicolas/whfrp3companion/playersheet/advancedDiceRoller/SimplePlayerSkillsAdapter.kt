@@ -11,7 +11,7 @@ import android.widget.TextView
 import com.nicolas.models.skill.Skill
 import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.shared.bind
-import com.nicolas.whfrp3companion.shared.enums.labelId
+import com.nicolas.whfrp3companion.shared.enums.shortLabelId
 
 class SimplePlayerSkillsAdapter(context: Context,
                                 private val skills: List<Skill>,
@@ -65,7 +65,7 @@ class SimplePlayerSkillsAdapter(context: Context,
             this.skill = skill
 
             skillNameTextView.text = skill.name
-            characteristicTextView.text = view.context.getString(skill.characteristic.labelId).substring(0..2)
+            characteristicTextView.text = view.context.getString(skill.characteristic.shortLabelId)
 
             checkLevel(skill.level)
         }
