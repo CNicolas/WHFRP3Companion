@@ -15,6 +15,7 @@ data class ActionFaceEffect(val damage: Int? = null,
                             val critical: Int? = null,
                             val ignoreSoak: Boolean? = null,
                             val energy: Int? = null,
+                            val favor: Int? = null,
                             val cooldown: Int? = null,
                             val exhaustion: Int? = null,
                             val stress: Int? = null,
@@ -34,6 +35,7 @@ data class ActionFaceEffect(val damage: Int? = null,
             criticalString,
             ignoreSoakString,
             energyString,
+            favorString,
             cooldownString,
             stressString,
             exhaustionString,
@@ -80,6 +82,14 @@ data class ActionFaceEffect(val damage: Int? = null,
             energy == null -> null
             energy > 0 -> "Regagnez $energy après avoir lancé ce sort"
             energy < 0 -> "Perdez $energy après avoir lancé ce sort"
+            else -> null
+        }
+
+    private val favorString: String?
+        get() = when {
+            favor == null -> null
+            favor > 0 -> "Regagnez $favor après avoir lancé ce sort"
+            favor < 0 -> "Perdez $favor après avoir lancé ce sort"
             else -> null
         }
 
@@ -157,6 +167,7 @@ data class ActionFaceEffect(val damage: Int? = null,
                     critical = critical + other.critical,
                     ignoreSoak = ignoreSoak.or(other.ignoreSoak),
                     energy = energy + other.energy,
+                    favor = favor + other.favor,
                     cooldown = cooldown + other.cooldown,
                     exhaustion = exhaustion + other.exhaustion,
                     stress = stress + other.stress,

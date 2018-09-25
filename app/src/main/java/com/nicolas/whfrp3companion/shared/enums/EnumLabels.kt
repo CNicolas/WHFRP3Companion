@@ -167,6 +167,9 @@ internal val Trait.labelId: Int
         RALLY -> R.string.trait_rally
         REACTION -> R.string.trait_reaction
         RITUAL_DANCE -> R.string.trait_ritual_dance
+        MINOR -> R.string.trait_minor
+        DIVINE -> R.string.trait_divine
+        RANK_0 -> R.string.trait_rank_0
         RANK_1 -> R.string.trait_rank_1
         RANK_2 -> R.string.trait_rank_2
         RANK_3 -> R.string.trait_rank_3

@@ -184,6 +184,9 @@
     <string name="trait_rally">Rally</string>
     <string name="trait_reaction">Reaction</string>
     <string name="trait_ritual_dance">Ritual Dance</string>
+    <string name="trait_minor">Minor</string>
+    <string name="trait_divine">Divine</string>
+    <string name="trait_rank_0">Rank 0</string>
     <string name="trait_rank_1">Rank 1</string>
     <string name="trait_rank_2">Rank 2</string>
     <string name="trait_rank_3">Rank 3</string>
