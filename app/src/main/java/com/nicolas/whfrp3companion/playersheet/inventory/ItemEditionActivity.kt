@@ -56,11 +56,25 @@ class ItemEditionActivity : AppCompatActivity() {
     }
 
     private fun setupViews() {
-        itemTypeSpinner.adapter = ArrayAdapter(this, R.layout.element_enum_spinner, values().map { getString(it.labelId) })
-        qualitySpinner.adapter = ArrayAdapter(this, R.layout.element_enum_spinner, Quality.values().map { getString(it.labelId) })
-        armorTypeSpinner.adapter = ArrayAdapter(this, R.layout.element_enum_spinner, ArmorType.values().map { getString(it.labelId) })
-        weaponTypeSpinner.adapter = ArrayAdapter(this, R.layout.element_enum_spinner, WeaponType.values().map { getString(it.labelId) })
-        weaponRangeSpinner.adapter = ArrayAdapter(this, R.layout.element_enum_spinner, Range.values().map { getString(it.labelId) })
+        val itemTypeSpinnerValues = ItemType.values()
+                .map { getString(it.labelId) }
+                .sortedWith(compareBy(String.CASE_INSENSITIVE_ORDER) { it })
+        val qualitySpinnerValues = Quality.values()
+                .map { getString(it.labelId) }
+        val armorTypeSpinnerValues = ArmorType.values()
+                .map { getString(it.labelId) }
+                .sortedWith(compareBy(String.CASE_INSENSITIVE_ORDER) { it })
+        val weaponTypeSpinnerValues = WeaponType.values()
+                .map { getString(it.labelId) }
+                .sortedWith(compareBy(String.CASE_INSENSITIVE_ORDER) { it })
+        val rangeSpinnerValues = Range.values()
+                .map { getString(it.labelId) }
+
+        itemTypeSpinner.adapter = ArrayAdapter(this, R.layout.element_enum_spinner, itemTypeSpinnerValues)
+        qualitySpinner.adapter = ArrayAdapter(this, R.layout.element_enum_spinner, qualitySpinnerValues)
+        armorTypeSpinner.adapter = ArrayAdapter(this, R.layout.element_enum_spinner, armorTypeSpinnerValues)
+        weaponTypeSpinner.adapter = ArrayAdapter(this, R.layout.element_enum_spinner, weaponTypeSpinnerValues)
+        weaponRangeSpinner.adapter = ArrayAdapter(this, R.layout.element_enum_spinner, rangeSpinnerValues)
 
         itemTypeSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) = showGenericItemViews()

@@ -50,7 +50,11 @@ class TalentSearchDialog : DialogFragment() {
     }
 
     private fun setupViews() {
-        val talentTypes = listOf(getString(R.string.all)) + TalentType.values().map { getString(it.labelId) }
+        val sortedTalentTypesLabels = TalentType.values()
+                .map { getString(it.labelId) }
+                .sortedWith(compareBy(String.CASE_INSENSITIVE_ORDER) { it })
+        val talentTypes = listOf(getString(R.string.all)) + sortedTalentTypesLabels
+
         val talentCooldowns = listOf(getString(R.string.all)) + TalentCooldown.values().map { getString(it.labelId) }
 
         talentTypeSpinner.adapter = ArrayAdapter(context, R.layout.element_enum_spinner, talentTypes)

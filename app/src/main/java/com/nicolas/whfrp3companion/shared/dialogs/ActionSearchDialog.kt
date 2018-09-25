@@ -45,7 +45,11 @@ class ActionSearchDialog : DialogFragment() {
     }
 
     private fun setupViews() {
-        val actionTypes = listOf(getString(R.string.all)) + ActionType.values().map { getString(it.labelId) }
+        val sortedActionTypesLabels = ActionType.values()
+                .map { getString(it.labelId) }
+                .sortedWith(compareBy(String.CASE_INSENSITIVE_ORDER) { it })
+        val actionTypes = listOf(getString(R.string.all)) + sortedActionTypesLabels
+
         val traits = listOf(getString(R.string.all)) + Trait.values().map { getString(it.labelId) }
 
         actionTypeSpinner.adapter = ArrayAdapter(context, R.layout.element_enum_spinner, actionTypes)
