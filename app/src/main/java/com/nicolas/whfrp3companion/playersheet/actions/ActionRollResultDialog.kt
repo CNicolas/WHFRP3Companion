@@ -65,7 +65,7 @@ class ActionRollResultDialog : RollResultDialog() {
     }
 
     private fun fillViews(action: Action) {
-        val (finalEffect, remainingReport, activatedEffects) = action.getRollResult(player.currentStance, rollResult)
+        val (finalEffect, _, activatedEffects) = action.getRollResult(player.currentStance, rollResult)
 
         actionEffectsListView.adapter = ActionEffectsAdapter(context!!, action.getSideByStance(player.currentStance).effects!!, activatedEffects)
 

@@ -1,421 +1,560 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            xmlns:tools="http://schemas.android.com/tools"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingStart="@dimen/medium_padding"
-            android:paddingEnd="@dimen/medium_padding"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".playersheet.PlayerSheetActivity"
+    tools:ignore="LabelFor, RtlSymmetry">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:focusableInTouchMode="true">
+
+        <!--region Career-->
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/career_wrapper"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/medium_padding"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/rank_wrapper">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/career"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:paddingStart="@dimen/medium_padding"
+                android:gravity="center"
+                android:hint="@string/career"
+                android:imeOptions="actionNext" />
+        </android.support.design.widget.TextInputLayout>
+        <!--endregion-->
+
+        <!--region Rank-->
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/rank_wrapper"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/career_wrapper"
+            app:layout_constraintRight_toLeftOf="@+id/max_wounds_wrapper">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/rank"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:paddingStart="@dimen/medium_padding"
+                android:hint="@string/rank"
+                android:inputType="numberSigned"
+                android:drawableStart="@drawable/ic_rank_black_24dp"
+                android:imeOptions="actionNext" />
+        </android.support.design.widget.TextInputLayout>
+        <!--endregion-->
+
+        <!--region Max wounds-->
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/max_wounds_wrapper"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/career_wrapper"
+            app:layout_constraintLeft_toRightOf="@+id/rank_wrapper"
+            app:layout_constraintRight_toRightOf="parent">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/max_wounds"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:hint="@string/max_wounds"
+                android:inputType="numberSigned"
+                android:imeOptions="actionNext"
+                android:drawableStart="@drawable/ic_wounds_black_24dp" />
+        </android.support.design.widget.TextInputLayout>
+        <!--endregion-->
+
+        <!--region Experience-->
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/experience_wrapper"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rank_wrapper"
+            app:layout_constraintRight_toLeftOf="@+id/experience_separator"
+            app:layout_constraintHorizontal_weight="20">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/experience"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:paddingStart="@dimen/medium_padding"
+                android:hint="@string/experience"
+                android:inputType="numberSigned"
+                android:selectAllOnFocus="true"
+                android:imeOptions="actionNext" />
+        </android.support.design.widget.TextInputLayout>
+
+        <TextView
+            android:id="@+id/experience_separator"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:paddingTop="@dimen/medium_padding"
-            android:orientation="vertical"
-            tools:context=".playersheet.PlayerSheetActivity"
-            tools:ignore="LabelFor">
-    <android.support.constraint.ConstraintLayout android:layout_width="match_parent"
-                                                 android:layout_height="wrap_content"
-                                                 android:focusableInTouchMode="true">
+            android:gravity="center"
+            android:text="@string/slash"
+            app:layout_constraintTop_toTopOf="@+id/experience_wrapper"
+            app:layout_constraintLeft_toRightOf="@+id/experience_wrapper"
+            app:layout_constraintRight_toLeftOf="@+id/max_experience_wrapper"
+            app:layout_constraintBottom_toBottomOf="@+id/experience_wrapper"
+            app:layout_constraintHorizontal_weight="1" />
 
-        <EditText android:id="@+id/career"
-                  android:layout_width="0dp"
-                  android:layout_height="wrap_content"
-                  android:gravity="center"
-                  android:inputType="textCapSentences"
-                  android:selectAllOnFocus="true"
-                  android:hint="@string/career"
-                  app:layout_constraintTop_toTopOf="parent"
-                  app:layout_constraintRight_toLeftOf="@+id/rank"
-                  app:layout_constraintBottom_toTopOf="@+id/max_wounds"
-                  app:layout_constraintLeft_toLeftOf="parent"
-                  app:layout_constraintHorizontal_weight="2" />
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/max_experience_wrapper"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/very_small_padding"
+            app:layout_constraintTop_toTopOf="@+id/experience_wrapper"
+            app:layout_constraintLeft_toRightOf="@+id/experience_separator"
+            app:layout_constraintRight_toLeftOf="@+id/corruption_wrapper"
+            app:layout_constraintBottom_toBottomOf="@+id/experience_wrapper"
+            app:layout_constraintHorizontal_weight="20">
 
-        <EditText android:id="@+id/rank"
-                  android:layout_width="0dp"
-                  android:layout_height="wrap_content"
-                  android:layout_marginEnd="@dimen/giant_padding"
-                  android:gravity="center"
-                  android:inputType="numberSigned"
-                  android:selectAllOnFocus="true"
-                  android:hint="@string/rank"
-                  app:layout_constraintTop_toTopOf="parent"
-                  app:layout_constraintRight_toRightOf="parent"
-                  app:layout_constraintBottom_toTopOf="@+id/max_wounds"
-                  app:layout_constraintLeft_toRightOf="@id/career"
-                  app:layout_constraintHorizontal_weight="1" />
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/max_experience"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:hint="@string/max_experience"
+                android:inputType="numberSigned"
+                android:selectAllOnFocus="true"
+                android:imeOptions="actionNext" />
+        </android.support.design.widget.TextInputLayout>
+        <!--endregion-->
 
-        <!--region Wounds and corruption-->
-        <ImageView android:id="@+id/bandage_image"
-                   android:layout_width="0dp"
-                   android:layout_height="wrap_content"
-                   android:labelFor="@+id/max_wounds"
-                   android:src="@drawable/ic_bandages_black"
-                   android:contentDescription="@string/max_wounds"
-                   app:layout_constraintTop_toBottomOf="@id/career"
-                   app:layout_constraintRight_toLeftOf="@+id/max_wounds"
-                   app:layout_constraintBottom_toTopOf="@+id/strength"
-                   app:layout_constraintLeft_toLeftOf="parent"
-                   app:layout_constraintHorizontal_weight="2" />
-        <EditText android:id="@+id/max_wounds"
-                  android:layout_width="0dp"
-                  android:layout_height="0dp"
-                  android:gravity="center"
-                  android:inputType="numberSigned"
-                  android:selectAllOnFocus="true"
-                  android:hint="@string/zero"
-                  app:layout_constraintTop_toBottomOf="@id/career"
-                  app:layout_constraintRight_toLeftOf="@+id/experience_label"
-                  app:layout_constraintBottom_toTopOf="@+id/strength"
-                  app:layout_constraintLeft_toRightOf="@id/bandage_image"
-                  app:layout_constraintHorizontal_weight="3" />
+        <!--region Corruption-->
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/corruption_wrapper"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@+id/experience_wrapper"
+            app:layout_constraintLeft_toRightOf="@+id/max_experience_wrapper"
+            app:layout_constraintRight_toLeftOf="@+id/corruption_separator"
+            app:layout_constraintBottom_toBottomOf="@+id/experience_wrapper"
+            app:layout_constraintHorizontal_weight="20">
 
-        <TextView android:id="@+id/experience_label"
-                  android:layout_width="0dp"
-                  android:layout_height="wrap_content"
-                  android:gravity="center"
-                  android:textSize="@dimen/giant_text_size"
-                  android:textStyle="bold|italic"
-                  android:textColor="@android:color/black"
-                  android:labelFor="@+id/experience"
-                  android:text="@string/xp"
-                  app:layout_constraintTop_toBottomOf="@id/career"
-                  app:layout_constraintRight_toLeftOf="@+id/experience"
-                  app:layout_constraintBottom_toTopOf="@+id/strength"
-                  app:layout_constraintLeft_toRightOf="@id/max_wounds"
-                  app:layout_constraintHorizontal_weight="3" />
-        <EditText android:id="@+id/experience"
-                  android:layout_width="0dp"
-                  android:layout_height="0dp"
-                  android:gravity="center_vertical|end"
-                  android:hint="@string/zero"
-                  app:layout_constraintTop_toBottomOf="@id/career"
-                  app:layout_constraintRight_toLeftOf="@+id/experience_separator"
-                  app:layout_constraintBottom_toTopOf="@+id/strength"
-                  app:layout_constraintLeft_toRightOf="@id/experience_label"
-                  app:layout_constraintHorizontal_weight="2" />
-        <TextView android:id="@+id/experience_separator"
-                  android:layout_width="0dp"
-                  android:layout_height="0dp"
-                  android:gravity="center"
-                  android:text="@string/slash"
-                  app:layout_constraintTop_toBottomOf="@id/career"
-                  app:layout_constraintRight_toLeftOf="@+id/max_experience"
-                  app:layout_constraintBottom_toTopOf="@+id/strength"
-                  app:layout_constraintLeft_toRightOf="@id/experience"
-                  app:layout_constraintHorizontal_weight="1" />
-        <EditText android:id="@+id/max_experience"
-                  android:layout_width="0dp"
-                  android:layout_height="0dp"
-                  android:gravity="center_vertical"
-                  android:hint="@string/zero"
-                  app:layout_constraintTop_toBottomOf="@id/career"
-                  app:layout_constraintRight_toLeftOf="@+id/corruption_image"
-                  app:layout_constraintBottom_toTopOf="@+id/strength"
-                  app:layout_constraintLeft_toRightOf="@id/experience_separator"
-                  app:layout_constraintHorizontal_weight="2" />
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/corruption"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:hint="@string/corruption"
+                android:inputType="numberSigned"
+                android:selectAllOnFocus="true"
+                android:imeOptions="actionNext"
+                android:drawableStart="@drawable/ic_chaos_black_24dp"
+                android:drawablePadding="@dimen/small_padding" />
+        </android.support.design.widget.TextInputLayout>
 
-        <ImageView android:id="@+id/corruption_image"
-                   android:layout_width="0dp"
-                   android:layout_height="wrap_content"
-                   android:labelFor="@+id/max_corruption"
-                   android:src="@drawable/ic_chaos_black_36"
-                   android:contentDescription="@string/max_corruption"
-                   app:layout_constraintTop_toBottomOf="@id/career"
-                   app:layout_constraintRight_toLeftOf="@+id/max_corruption"
-                   app:layout_constraintBottom_toTopOf="@+id/strength"
-                   app:layout_constraintLeft_toRightOf="@id/max_experience"
-                   app:layout_constraintHorizontal_weight="2" />
-        <EditText android:id="@+id/max_corruption"
-                  android:layout_width="0dp"
-                  android:layout_height="0dp"
-                  android:gravity="center"
-                  android:inputType="numberSigned"
-                  android:selectAllOnFocus="true"
-                  android:hint="@string/zero"
-                  app:layout_constraintTop_toBottomOf="@id/career"
-                  app:layout_constraintRight_toRightOf="parent"
-                  app:layout_constraintBottom_toTopOf="@+id/strength"
-                  app:layout_constraintLeft_toRightOf="@id/corruption_image"
-                  app:layout_constraintHorizontal_weight="2" />
+        <TextView
+            android:id="@+id/corruption_separator"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:paddingTop="@dimen/medium_padding"
+            android:gravity="center"
+            android:text="@string/slash"
+            app:layout_constraintTop_toTopOf="@+id/experience_wrapper"
+            app:layout_constraintLeft_toRightOf="@+id/corruption_wrapper"
+            app:layout_constraintRight_toLeftOf="@+id/max_corruption_wrapper"
+            app:layout_constraintBottom_toBottomOf="@+id/experience_wrapper"
+            app:layout_constraintHorizontal_weight="1" />
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/max_corruption_wrapper"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/very_small_padding"
+            app:layout_constraintTop_toTopOf="@+id/experience_wrapper"
+            app:layout_constraintLeft_toRightOf="@+id/corruption_separator"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/experience_wrapper"
+            app:layout_constraintHorizontal_weight="20">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/max_corruption"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:hint="@string/max_corruption"
+                android:inputType="numberSigned"
+                android:selectAllOnFocus="true"
+                android:imeOptions="actionNext" />
+        </android.support.design.widget.TextInputLayout>
         <!--endregion-->
 
         <!--region STRENGTH-->
-        <TextView android:id="@+id/strength_label"
-                  style="@style/CharacteristicLabel"
-                  android:labelFor="@id/strength"
-                  android:text="@string/strength"
-                  app:layout_constraintTop_toBottomOf="@id/max_wounds"
-                  app:layout_constraintLeft_toLeftOf="parent"
-                  app:layout_constraintRight_toLeftOf="@+id/strength"
-                  app:layout_constraintBottom_toTopOf="@+id/toughness"
-                  app:layout_constraintHorizontal_weight="2" />
-        <EditText android:id="@+id/strength"
-                  style="@style/CharacteristicEditText"
-                  app:layout_constraintTop_toBottomOf="@id/max_wounds"
-                  app:layout_constraintLeft_toRightOf="@id/strength_label"
-                  app:layout_constraintRight_toLeftOf="@+id/strength_fortune"
-                  app:layout_constraintBottom_toTopOf="@+id/toughness"
-                  app:layout_constraintHorizontal_weight="1" />
-        <EditText android:id="@+id/strength_fortune"
-                  style="@style/CharacteristicFortuneEditText"
-                  app:layout_constraintTop_toBottomOf="@id/max_wounds"
-                  app:layout_constraintLeft_toRightOf="@id/strength"
-                  app:layout_constraintRight_toLeftOf="@+id/launch_strength"
-                  app:layout_constraintBottom_toTopOf="@+id/toughness"
-                  app:layout_constraintHorizontal_weight="1" />
-        <ImageButton android:id="@+id/launch_strength"
-                     android:layout_width="0dp"
-                     android:layout_height="0dp"
-                     android:layout_marginStart="@dimen/big_padding"
-                     android:background="?android:attr/selectableItemBackground"
-                     android:tint="@color/colorSecondaryText"
-                     android:src="@drawable/ic_dice_black"
-                     android:contentDescription="@string/page_dice_roller"
-                     app:layout_constraintTop_toBottomOf="@id/max_wounds"
-                     app:layout_constraintLeft_toRightOf="@id/strength_fortune"
-                     app:layout_constraintRight_toRightOf="parent"
-                     app:layout_constraintBottom_toTopOf="@+id/toughness"
-                     app:layout_constraintHorizontal_weight="1" />
+        <TextView
+            android:id="@+id/strength_label"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:paddingEnd="@dimen/medium_padding"
+            android:gravity="center|end"
+            android:textSize="@dimen/medium_text_size"
+            android:labelFor="@+id/strength"
+            android:text="@string/strength"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/strength"
+            app:layout_constraintTop_toBottomOf="@+id/experience_wrapper"
+            app:layout_constraintHorizontal_weight="2" />
+
+        <EditText
+            android:id="@+id/strength"
+            style="@style/CharacteristicEditText"
+            app:layout_constraintLeft_toRightOf="@+id/strength_label"
+            app:layout_constraintRight_toLeftOf="@+id/strength_fortune"
+            app:layout_constraintTop_toTopOf="@+id/strength_label"
+            app:layout_constraintBottom_toBottomOf="@+id/strength_label"
+            app:layout_constraintHorizontal_weight="1" />
+
+        <EditText
+            android:id="@+id/strength_fortune"
+            style="@style/CharacteristicFortuneEditText"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintTop_toTopOf="@+id/strength_label"
+            app:layout_constraintLeft_toRightOf="@+id/strength"
+            app:layout_constraintRight_toLeftOf="@+id/launch_strength"
+            app:layout_constraintBottom_toBottomOf="@+id/strength_label" />
+
+        <ImageButton
+            android:id="@+id/launch_strength"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/big_padding"
+            android:background="?android:attr/selectableItemBackground"
+            android:contentDescription="@string/page_dice_roller"
+            android:src="@drawable/ic_dice_black"
+            android:tint="@color/colorSecondaryText"
+            app:layout_constraintTop_toTopOf="@+id/strength_label"
+            app:layout_constraintLeft_toRightOf="@+id/strength_fortune"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/strength_label"
+            app:layout_constraintHorizontal_weight="1" />
         <!--endregion-->
 
         <!--region TOUGHNESS-->
-        <TextView android:id="@+id/toughness_label"
-                  style="@style/CharacteristicLabel"
-                  android:labelFor="@id/toughness"
-                  android:text="@string/toughness"
-                  app:layout_constraintTop_toBottomOf="@id/strength"
-                  app:layout_constraintLeft_toLeftOf="parent"
-                  app:layout_constraintRight_toLeftOf="@+id/toughness"
-                  app:layout_constraintBottom_toTopOf="@+id/agility"
-                  app:layout_constraintHorizontal_weight="2" />
-        <EditText android:id="@+id/toughness"
-                  style="@style/CharacteristicEditText"
-                  app:layout_constraintLeft_toRightOf="@id/toughness_label"
-                  app:layout_constraintTop_toBottomOf="@id/strength"
-                  app:layout_constraintRight_toLeftOf="@+id/toughness_fortune"
-                  app:layout_constraintBottom_toTopOf="@+id/agility"
-                  app:layout_constraintHorizontal_weight="1" />
-        <EditText android:id="@+id/toughness_fortune"
-                  style="@style/CharacteristicFortuneEditText"
-                  app:layout_constraintLeft_toRightOf="@id/toughness"
-                  app:layout_constraintTop_toBottomOf="@id/strength"
-                  app:layout_constraintRight_toLeftOf="@+id/launch_toughness"
-                  app:layout_constraintBottom_toTopOf="@+id/agility"
-                  app:layout_constraintHorizontal_weight="1" />
-        <ImageButton android:id="@+id/launch_toughness"
-                     android:layout_width="0dp"
-                     android:layout_height="0dp"
-                     android:layout_marginStart="@dimen/big_padding"
-                     android:background="?android:attr/selectableItemBackground"
-                     android:tint="@color/colorSecondaryText"
-                     android:src="@drawable/ic_dice_black"
-                     android:contentDescription="@string/page_dice_roller"
-                     app:layout_constraintTop_toBottomOf="@id/strength"
-                     app:layout_constraintLeft_toRightOf="@id/toughness_fortune"
-                     app:layout_constraintRight_toRightOf="parent"
-                     app:layout_constraintBottom_toTopOf="@+id/agility"
-                     app:layout_constraintHorizontal_weight="1" />
+        <TextView
+            android:id="@+id/toughness_label"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:gravity="center|end"
+            android:labelFor="@+id/toughness"
+            android:paddingEnd="@dimen/medium_padding"
+            android:text="@string/toughness"
+            android:textSize="@dimen/medium_text_size"
+            app:layout_constraintHorizontal_weight="2"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/toughness"
+            app:layout_constraintTop_toBottomOf="@+id/strength_label" />
+
+        <EditText
+            android:id="@+id/toughness"
+            style="@style/CharacteristicEditText"
+            app:layout_constraintTop_toTopOf="@+id/toughness_label"
+            app:layout_constraintLeft_toRightOf="@+id/toughness_label"
+            app:layout_constraintRight_toLeftOf="@+id/toughness_fortune"
+            app:layout_constraintBottom_toBottomOf="@+id/toughness_label"
+            app:layout_constraintHorizontal_weight="1" />
+
+        <EditText
+            android:id="@+id/toughness_fortune"
+            style="@style/CharacteristicFortuneEditText"
+            app:layout_constraintTop_toTopOf="@+id/toughness_label"
+            app:layout_constraintLeft_toRightOf="@+id/toughness"
+            app:layout_constraintRight_toLeftOf="@+id/launch_toughness"
+            app:layout_constraintBottom_toBottomOf="@+id/toughness_label"
+            app:layout_constraintHorizontal_weight="1" />
+
+        <ImageButton
+            android:id="@+id/launch_toughness"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/big_padding"
+            android:background="?android:attr/selectableItemBackground"
+            android:contentDescription="@string/page_dice_roller"
+            android:src="@drawable/ic_dice_black"
+            android:tint="@color/colorSecondaryText"
+            app:layout_constraintTop_toTopOf="@+id/toughness_label"
+            app:layout_constraintLeft_toRightOf="@+id/toughness_fortune"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/toughness_label"
+            app:layout_constraintHorizontal_weight="1" />
         <!--endregion-->
 
         <!--region AGILITY-->
-        <TextView android:id="@+id/agility_label"
-                  style="@style/CharacteristicLabel"
-                  android:labelFor="@id/agility"
-                  android:text="@string/agility"
-                  app:layout_constraintTop_toBottomOf="@id/toughness"
-                  app:layout_constraintLeft_toLeftOf="parent"
-                  app:layout_constraintRight_toLeftOf="@+id/agility"
-                  app:layout_constraintBottom_toTopOf="@+id/intelligence"
-                  app:layout_constraintHorizontal_weight="2" />
-        <EditText android:id="@+id/agility"
-                  style="@style/CharacteristicEditText"
-                  app:layout_constraintLeft_toRightOf="@id/agility_label"
-                  app:layout_constraintTop_toBottomOf="@id/toughness"
-                  app:layout_constraintRight_toLeftOf="@+id/agility_fortune"
-                  app:layout_constraintBottom_toTopOf="@+id/intelligence"
-                  app:layout_constraintHorizontal_weight="1" />
-        <EditText android:id="@+id/agility_fortune"
-                  style="@style/CharacteristicFortuneEditText"
-                  app:layout_constraintLeft_toRightOf="@id/agility"
-                  app:layout_constraintTop_toBottomOf="@id/toughness"
-                  app:layout_constraintRight_toLeftOf="@+id/launch_agility"
-                  app:layout_constraintBottom_toTopOf="@+id/intelligence"
-                  app:layout_constraintHorizontal_weight="1" />
-        <ImageButton android:id="@+id/launch_agility"
-                     android:layout_width="0dp"
-                     android:layout_height="0dp"
-                     android:layout_marginStart="@dimen/big_padding"
-                     android:background="?android:attr/selectableItemBackground"
-                     android:tint="@color/colorSecondaryText"
-                     android:src="@drawable/ic_dice_black"
-                     android:contentDescription="@string/page_dice_roller"
-                     app:layout_constraintTop_toBottomOf="@id/toughness"
-                     app:layout_constraintLeft_toRightOf="@id/agility_fortune"
-                     app:layout_constraintRight_toRightOf="parent"
-                     app:layout_constraintBottom_toTopOf="@+id/intelligence"
-                     app:layout_constraintHorizontal_weight="1" />
+        <TextView
+            android:id="@+id/agility_label"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:paddingEnd="@dimen/medium_padding"
+            android:gravity="center|end"
+            android:textSize="@dimen/medium_text_size"
+            android:labelFor="@+id/agility"
+            android:text="@string/agility"
+            app:layout_constraintTop_toBottomOf="@+id/toughness_label"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/agility"
+            app:layout_constraintHorizontal_weight="2" />
+
+        <EditText
+            android:id="@+id/agility"
+            style="@style/CharacteristicEditText"
+            app:layout_constraintTop_toTopOf="@+id/agility_label"
+            app:layout_constraintLeft_toRightOf="@+id/agility_label"
+            app:layout_constraintRight_toLeftOf="@+id/agility_fortune"
+            app:layout_constraintBottom_toBottomOf="@+id/agility_label"
+            app:layout_constraintHorizontal_weight="1" />
+
+        <EditText
+            android:id="@+id/agility_fortune"
+            style="@style/CharacteristicFortuneEditText"
+            app:layout_constraintTop_toTopOf="@+id/agility_label"
+            app:layout_constraintLeft_toRightOf="@+id/agility"
+            app:layout_constraintRight_toLeftOf="@+id/launch_agility"
+            app:layout_constraintBottom_toBottomOf="@+id/agility_label"
+            app:layout_constraintHorizontal_weight="1" />
+
+        <ImageButton
+            android:id="@+id/launch_agility"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/big_padding"
+            android:background="?android:attr/selectableItemBackground"
+            android:contentDescription="@string/page_dice_roller"
+            android:src="@drawable/ic_dice_black"
+            android:tint="@color/colorSecondaryText"
+            app:layout_constraintTop_toTopOf="@+id/agility_label"
+            app:layout_constraintLeft_toRightOf="@+id/agility_fortune"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/agility_label"
+            app:layout_constraintHorizontal_weight="1" />
         <!--endregion-->
 
         <!--region INTELLIGENCE-->
-        <TextView android:id="@+id/intelligence_label"
-                  style="@style/CharacteristicLabel"
-                  android:labelFor="@id/intelligence"
-                  android:text="@string/intelligence"
-                  app:layout_constraintTop_toBottomOf="@id/agility"
-                  app:layout_constraintLeft_toLeftOf="parent"
-                  app:layout_constraintRight_toLeftOf="@+id/intelligence"
-                  app:layout_constraintBottom_toTopOf="@+id/willpower"
-                  app:layout_constraintHorizontal_weight="2" />
-        <EditText android:id="@+id/intelligence"
-                  style="@style/CharacteristicEditText"
-                  app:layout_constraintLeft_toRightOf="@id/intelligence_label"
-                  app:layout_constraintTop_toBottomOf="@id/agility"
-                  app:layout_constraintRight_toLeftOf="@+id/intelligence_fortune"
-                  app:layout_constraintBottom_toTopOf="@+id/willpower"
-                  app:layout_constraintHorizontal_weight="1" />
-        <EditText android:id="@+id/intelligence_fortune"
-                  style="@style/CharacteristicFortuneEditText"
-                  app:layout_constraintLeft_toRightOf="@id/intelligence"
-                  app:layout_constraintTop_toBottomOf="@id/agility"
-                  app:layout_constraintRight_toLeftOf="@+id/launch_intelligence"
-                  app:layout_constraintBottom_toTopOf="@+id/willpower"
-                  app:layout_constraintHorizontal_weight="1" />
-        <ImageButton android:id="@+id/launch_intelligence"
-                     android:layout_width="0dp"
-                     android:layout_height="0dp"
-                     android:layout_marginStart="@dimen/big_padding"
-                     android:background="?android:attr/selectableItemBackground"
-                     android:tint="@color/colorSecondaryText"
-                     android:src="@drawable/ic_dice_black"
-                     android:contentDescription="@string/page_dice_roller"
-                     app:layout_constraintTop_toBottomOf="@id/agility"
-                     app:layout_constraintLeft_toRightOf="@id/intelligence_fortune"
-                     app:layout_constraintRight_toRightOf="parent"
-                     app:layout_constraintBottom_toTopOf="@+id/willpower"
-                     app:layout_constraintHorizontal_weight="1" />
+        <TextView
+            android:id="@+id/intelligence_label"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:paddingEnd="@dimen/medium_padding"
+            android:gravity="center|end"
+            android:textSize="@dimen/medium_text_size"
+            android:labelFor="@+id/intelligence"
+            android:text="@string/intelligence"
+            app:layout_constraintTop_toBottomOf="@+id/agility_label"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/intelligence"
+            app:layout_constraintHorizontal_weight="2" />
+
+        <EditText
+            android:id="@+id/intelligence"
+            style="@style/CharacteristicEditText"
+            app:layout_constraintTop_toTopOf="@+id/intelligence_label"
+            app:layout_constraintLeft_toRightOf="@+id/intelligence_label"
+            app:layout_constraintRight_toLeftOf="@+id/intelligence_fortune"
+            app:layout_constraintBottom_toBottomOf="@+id/intelligence_label"
+            app:layout_constraintHorizontal_weight="1" />
+
+        <EditText
+            android:id="@+id/intelligence_fortune"
+            style="@style/CharacteristicFortuneEditText"
+            app:layout_constraintTop_toTopOf="@+id/intelligence_label"
+            app:layout_constraintLeft_toRightOf="@+id/intelligence"
+            app:layout_constraintRight_toLeftOf="@+id/launch_intelligence"
+            app:layout_constraintBottom_toBottomOf="@+id/intelligence_label"
+            app:layout_constraintHorizontal_weight="1" />
+
+        <ImageButton
+            android:id="@+id/launch_intelligence"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/big_padding"
+            android:background="?android:attr/selectableItemBackground"
+            android:contentDescription="@string/page_dice_roller"
+            android:src="@drawable/ic_dice_black"
+            android:tint="@color/colorSecondaryText"
+            app:layout_constraintTop_toTopOf="@+id/intelligence_label"
+            app:layout_constraintLeft_toRightOf="@+id/intelligence_fortune"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/intelligence_label"
+            app:layout_constraintHorizontal_weight="1" />
         <!--endregion-->
 
         <!--region WILLPOWER-->
-        <TextView android:id="@+id/willpower_label"
-                  style="@style/CharacteristicLabel"
-                  android:labelFor="@id/willpower"
-                  android:text="@string/willpower"
-                  app:layout_constraintTop_toBottomOf="@id/intelligence"
-                  app:layout_constraintLeft_toLeftOf="parent"
-                  app:layout_constraintRight_toLeftOf="@+id/willpower"
-                  app:layout_constraintBottom_toTopOf="@+id/fellowship"
-                  app:layout_constraintHorizontal_weight="2" />
-        <EditText android:id="@+id/willpower"
-                  style="@style/CharacteristicEditText"
-                  app:layout_constraintLeft_toRightOf="@id/willpower_label"
-                  app:layout_constraintTop_toBottomOf="@id/intelligence"
-                  app:layout_constraintRight_toLeftOf="@+id/willpower_fortune"
-                  app:layout_constraintBottom_toTopOf="@+id/fellowship"
-                  app:layout_constraintHorizontal_weight="1" />
-        <EditText android:id="@+id/willpower_fortune"
-                  style="@style/CharacteristicFortuneEditText"
-                  app:layout_constraintLeft_toRightOf="@id/willpower"
-                  app:layout_constraintTop_toBottomOf="@id/intelligence"
-                  app:layout_constraintRight_toLeftOf="@+id/launch_willpower"
-                  app:layout_constraintBottom_toTopOf="@+id/fellowship"
-                  app:layout_constraintHorizontal_weight="1" />
-        <ImageButton android:id="@+id/launch_willpower"
-                     android:layout_width="0dp"
-                     android:layout_height="0dp"
-                     android:layout_marginStart="@dimen/big_padding"
-                     android:background="?android:attr/selectableItemBackground"
-                     android:tint="@color/colorSecondaryText"
-                     android:src="@drawable/ic_dice_black"
-                     android:contentDescription="@string/page_dice_roller"
-                     app:layout_constraintTop_toBottomOf="@id/intelligence"
-                     app:layout_constraintLeft_toRightOf="@id/willpower_fortune"
-                     app:layout_constraintRight_toRightOf="parent"
-                     app:layout_constraintBottom_toTopOf="@+id/fellowship"
-                     app:layout_constraintHorizontal_weight="1" />
+        <TextView
+            android:id="@+id/willpower_label"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:gravity="center|end"
+            android:labelFor="@+id/willpower"
+            android:paddingEnd="@dimen/medium_padding"
+            android:text="@string/willpower"
+            android:textSize="@dimen/medium_text_size"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintHorizontal_weight="2"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/willpower"
+            app:layout_constraintTop_toBottomOf="@+id/intelligence_label" />
+
+        <EditText
+            android:id="@+id/willpower"
+            style="@style/CharacteristicEditText"
+            app:layout_constraintTop_toTopOf="@+id/willpower_label"
+            app:layout_constraintLeft_toRightOf="@+id/willpower_label"
+            app:layout_constraintRight_toLeftOf="@+id/willpower_fortune"
+            app:layout_constraintBottom_toBottomOf="@+id/willpower_label"
+            app:layout_constraintHorizontal_weight="1" />
+
+        <EditText
+            android:id="@+id/willpower_fortune"
+            style="@style/CharacteristicFortuneEditText"
+            app:layout_constraintTop_toTopOf="@+id/willpower_label"
+            app:layout_constraintLeft_toRightOf="@+id/willpower"
+            app:layout_constraintRight_toLeftOf="@+id/launch_willpower"
+            app:layout_constraintBottom_toBottomOf="@+id/willpower_label"
+            app:layout_constraintHorizontal_weight="1" />
+
+        <ImageButton
+            android:id="@+id/launch_willpower"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/big_padding"
+            android:background="?android:attr/selectableItemBackground"
+            android:contentDescription="@string/page_dice_roller"
+            android:src="@drawable/ic_dice_black"
+            android:tint="@color/colorSecondaryText"
+            app:layout_constraintTop_toTopOf="@+id/willpower_label"
+            app:layout_constraintLeft_toRightOf="@+id/willpower_fortune"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/willpower_label"
+            app:layout_constraintHorizontal_weight="1" />
         <!--endregion-->
 
         <!--region FELLOWSHIP-->
-        <TextView android:id="@+id/fellowship_label"
-                  style="@style/CharacteristicLabel"
-                  android:labelFor="@id/fellowship"
-                  android:text="@string/fellowship"
-                  app:layout_constraintTop_toBottomOf="@id/willpower"
-                  app:layout_constraintLeft_toLeftOf="parent"
-                  app:layout_constraintRight_toLeftOf="@+id/fellowship"
-                  app:layout_constraintBottom_toTopOf="@+id/max_conservative"
-                  app:layout_constraintHorizontal_weight="2" />
-        <EditText android:id="@+id/fellowship"
-                  style="@style/CharacteristicEditText"
-                  app:layout_constraintLeft_toRightOf="@id/fellowship_label"
-                  app:layout_constraintTop_toBottomOf="@id/willpower"
-                  app:layout_constraintRight_toLeftOf="@+id/fellowship_fortune"
-                  app:layout_constraintBottom_toTopOf="@+id/max_conservative"
-                  app:layout_constraintHorizontal_weight="1" />
-        <EditText android:id="@+id/fellowship_fortune"
-                  style="@style/CharacteristicFortuneEditText"
-                  app:layout_constraintLeft_toRightOf="@id/fellowship"
-                  app:layout_constraintTop_toBottomOf="@id/willpower"
-                  app:layout_constraintRight_toLeftOf="@+id/launch_fellowship"
-                  app:layout_constraintBottom_toTopOf="@+id/max_conservative"
-                  app:layout_constraintHorizontal_weight="1" />
-        <ImageButton android:id="@+id/launch_fellowship"
-                     android:layout_width="0dp"
-                     android:layout_height="0dp"
-                     android:layout_marginStart="@dimen/big_padding"
-                     android:background="?android:attr/selectableItemBackground"
-                     android:tint="@color/colorSecondaryText"
-                     android:src="@drawable/ic_dice_black"
-                     android:contentDescription="@string/page_dice_roller"
-                     app:layout_constraintTop_toBottomOf="@id/willpower"
-                     app:layout_constraintLeft_toRightOf="@id/fellowship_fortune"
-                     app:layout_constraintRight_toRightOf="parent"
-                     app:layout_constraintBottom_toTopOf="@+id/max_conservative"
-                     app:layout_constraintHorizontal_weight="1" />
+        <TextView
+            android:id="@+id/fellowship_label"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:paddingEnd="@dimen/medium_padding"
+            android:gravity="center|end"
+            android:textSize="@dimen/medium_text_size"
+            android:labelFor="@+id/fellowship"
+            android:text="@string/fellowship"
+            app:layout_constraintTop_toBottomOf="@+id/willpower_label"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/fellowship"
+            app:layout_constraintHorizontal_weight="2" />
+
+        <EditText
+            android:id="@+id/fellowship"
+            style="@style/CharacteristicEditText"
+            app:layout_constraintTop_toTopOf="@+id/fellowship_label"
+            app:layout_constraintLeft_toRightOf="@+id/fellowship_label"
+            app:layout_constraintRight_toLeftOf="@+id/fellowship_fortune"
+            app:layout_constraintBottom_toBottomOf="@+id/fellowship_label"
+            app:layout_constraintHorizontal_weight="1" />
+
+        <EditText
+            android:id="@+id/fellowship_fortune"
+            style="@style/CharacteristicFortuneEditText"
+            app:layout_constraintTop_toTopOf="@+id/fellowship_label"
+            app:layout_constraintLeft_toRightOf="@+id/fellowship"
+            app:layout_constraintRight_toLeftOf="@+id/launch_fellowship"
+            app:layout_constraintBottom_toBottomOf="@+id/fellowship_label"
+            app:layout_constraintHorizontal_weight="1" />
+
+        <ImageButton
+            android:id="@+id/launch_fellowship"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/big_padding"
+            android:background="?android:attr/selectableItemBackground"
+            android:contentDescription="@string/page_dice_roller"
+            android:src="@drawable/ic_dice_black"
+            android:tint="@color/colorSecondaryText"
+            app:layout_constraintTop_toTopOf="@+id/fellowship_label"
+            app:layout_constraintLeft_toRightOf="@+id/fellowship_fortune"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/fellowship_label"
+            app:layout_constraintHorizontal_weight="1" />
         <!--endregion-->
 
         <!--region Stance-->
-        <EditText android:id="@+id/max_conservative"
-                  android:layout_width="75dp"
-                  android:layout_height="45dp"
-                  android:gravity="center"
-                  android:background="@color/conservative"
-                  android:inputType="numberSigned"
-                  android:selectAllOnFocus="true"
-                  android:textColor="@android:color/white"
-                  android:textStyle="bold"
-                  android:hint="@string/zero"
-                  app:layout_constraintTop_toBottomOf="@id/fellowship"
-                  app:layout_constraintLeft_toLeftOf="parent"
-                  app:layout_constraintRight_toLeftOf="@+id/max_reckless"
-                  app:layout_constraintBottom_toTopOf="@+id/description" />
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/max_conservative_wrapper"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/fellowship"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/max_reckless_wrapper">
 
-        <EditText android:id="@+id/max_reckless"
-                  android:layout_width="75dp"
-                  android:layout_height="45dp"
-                  android:background="@color/reckless"
-                  android:gravity="center"
-                  android:inputType="numberSigned"
-                  android:selectAllOnFocus="true"
-                  android:textColor="@android:color/white"
-                  android:textStyle="bold"
-                  android:hint="@string/zero"
-                  app:layout_constraintTop_toBottomOf="@id/fellowship"
-                  app:layout_constraintLeft_toRightOf="@id/max_conservative"
-                  app:layout_constraintRight_toRightOf="parent"
-                  app:layout_constraintBottom_toTopOf="@+id/description" />
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/max_conservative"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:paddingStart="@dimen/medium_padding"
+                android:gravity="center"
+                android:hint="@string/conservative"
+                android:inputType="numberSigned"
+                android:textColor="@color/conservative"
+                android:textSize="@dimen/big_text_size"
+                android:selectAllOnFocus="true"
+                android:text="@string/zero"
+                android:imeOptions="actionNext" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/max_reckless_wrapper"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/fellowship"
+            app:layout_constraintLeft_toRightOf="@+id/max_conservative_wrapper"
+            app:layout_constraintRight_toRightOf="parent">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/max_reckless"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:paddingStart="@dimen/medium_padding"
+                android:gravity="center"
+                android:hint="@string/reckless"
+                android:textSize="@dimen/big_text_size"
+                android:text="@string/zero"
+                android:textColor="@color/reckless"
+                android:selectAllOnFocus="true"
+                android:inputType="numberSigned"
+                android:imeOptions="actionNext" />
+        </android.support.design.widget.TextInputLayout>
         <!--endregion-->
 
-        <EditText android:id="@+id/description"
-                  android:layout_width="0dp"
-                  android:layout_height="0dp"
-                  android:maxHeight="300dp"
-                  android:gravity="top"
-                  android:scrollbars="vertical"
-                  android:inputType="textMultiLine"
-                  android:selectAllOnFocus="true"
-                  android:maxLines="30"
-                  android:hint="@string/description"
-                  app:layout_constraintTop_toBottomOf="@id/max_conservative"
-                  app:layout_constraintLeft_toLeftOf="parent"
-                  app:layout_constraintRight_toRightOf="parent"
-                  app:layout_constraintBottom_toBottomOf="parent" />
+        <!--region Description-->
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/description_wrapper"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/max_conservative_wrapper"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="50dp"
+                android:paddingStart="@dimen/medium_padding"
+                android:hint="@string/description"
+                android:inputType="textMultiLine"
+                android:maxLength="500"
+                android:scrollbars="vertical"
+                android:imeOptions="actionNext" />
+        </android.support.design.widget.TextInputLayout>
+        <!--endregion-->
 
     </android.support.constraint.ConstraintLayout>
 </ScrollView>

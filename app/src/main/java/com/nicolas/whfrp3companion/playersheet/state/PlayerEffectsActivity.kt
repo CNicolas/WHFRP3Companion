@@ -17,7 +17,6 @@ import com.nicolas.whfrp3companion.shared.PLAYER_NAME_INTENT_ARGUMENT
 import com.nicolas.whfrp3companion.shared.normalized
 import kotlinx.android.synthetic.main.activity_player_effects.*
 import kotlinx.android.synthetic.main.toolbar.*
-import org.jetbrains.anko.act
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 import org.koin.android.ext.android.inject
@@ -34,10 +33,11 @@ class PlayerEffectsActivity internal constructor() : AppCompatActivity(), Effect
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
+        val activity = this
         doAsync {
             player = playerRepository.find(intent.extras.getString(PLAYER_NAME_INTENT_ARGUMENT))!!
 
-            allEffects = loadEffects(act)
+            allEffects = loadEffects(activity)
 
             uiThread {
                 updateEffectsList(allEffects)
@@ -60,7 +60,7 @@ class PlayerEffectsActivity internal constructor() : AppCompatActivity(), Effect
             val info = searchManager.getSearchableInfo(componentName)
             val searchView: SearchView? = searchMenuItem.actionView as SearchView?
 
-            searchView?.let {
+            searchView?.let { _ ->
                 searchView.setSearchableInfo(info)
                 searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
                     override fun onQueryTextSubmit(query: String): Boolean {
