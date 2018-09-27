@@ -103,8 +103,8 @@
     <string name="weapon_rifle">Rifle</string>
     <string name="weapon_repeating_gun">Repeating gun</string>
     <string name="weapon_repeating_crossbow">Repeating crossbow</string>
-    <string name="weapon_throwing_dagger">Dague de Jet</string>
-    <string name="weapon_throwing_axe">Hache de Jet</string>
+    <string name="weapon_throwing_dagger">Throwing Dagger</string>
+    <string name="weapon_throwing_axe">Throwing Axe</string>
 
     <string name="range_engaged">Engaged</string>
     <string name="range_short">Short</string>
@@ -211,7 +211,10 @@
     <string name="description">Description</string>
     <string name="max_wounds">Max wounds</string>
     <string name="wounds">Wounds</string>
+    <string name="corruption">Corruption</string>
     <string name="max_corruption">Max corruption</string>
+    <string name="experience">Experience</string>
+    <string name="max_experience">Max experience</string>
     <string name="saved">Saved</string>
     <string name="xp" translatable="false">XP</string>
     <string name="stress">Stress</string>

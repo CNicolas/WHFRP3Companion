@@ -22,3 +22,7 @@ internal fun View.hide() {
 
 internal fun List<View>.show() = forEach { it.visibility = View.VISIBLE }
 internal fun List<View>.hide() = forEach { it.visibility = View.GONE }
+
+fun EditText.markRequired() {
+    hint = "$hint *"
+}

@@ -59,7 +59,7 @@
     <string name="size">Taille</string>
     <string name="wood_elf">Elfe Sylvain</string>
     <string name="delete_player">Supprimer</string>
-    <string name="max_corruption">Max corruption</string>
+    <string name="max_corruption">Corruption Max</string>
     <string name="max_wounds">Points de blessure</string>
     <string name="race">Race</string>
     <string name="stress">Stress</string>
@@ -198,4 +198,9 @@
     <string name="trait_minor">Mineure</string>
     <string name="trait_rank_0">Rang 0</string>
     <string name="trait_divine">Divin</string>
+    <string name="corruption">Corruption</string>
+    <string name="experience">Expérience</string>
+    <string name="max_experience">Expérience Max</string>
+    <string name="weapon_throwing_dagger">Dague de Jet</string>
+    <string name="weapon_throwing_axe">Hache de Jet</string>
 </resources>
