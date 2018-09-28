@@ -1,8 +1,10 @@
 package com.nicolas.whfrp3companion.playersheet.inventory
 
+import android.content.res.ColorStateList
 import android.os.Bundle
 import android.support.design.widget.FloatingActionButton
 import android.support.v4.app.Fragment
+import android.support.v4.content.ContextCompat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,6 +20,7 @@ import com.nicolas.whfrp3companion.shared.ITEM_EDIT_INTENT_ARGUMENT
 import com.nicolas.whfrp3companion.shared.PLAYER_NAME_INTENT_ARGUMENT
 import com.nicolas.whfrp3companion.shared.getView
 import kotlinx.android.synthetic.main.fragment_player_inventory.*
+import kotlinx.android.synthetic.main.fragment_player_state.*
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.uiThread
@@ -102,8 +105,29 @@ class PlayerInventoryFragment : Fragment(), ItemListener {
                         inventoryExpandableList.expandGroup(groupIndex)
                     }
                 }
+
+                setupEncumbrance()
             }
         }
+    }
+
+    private fun setupEncumbrance() {
+        encumbranceBar.min = 0
+        encumbranceBar.max = player.maxEncumbrance
+        encumbranceBar.progress = player.encumbrance
+        encumbranceBar.isEnabled = false
+
+        val colorId = when {
+            player.encumbrance < player.encumbranceOverload -> R.color.conservative
+            player.encumbrance < player.maxEncumbrance -> R.color.orange
+            else -> R.color.reckless
+        }
+        val color = ContextCompat.getColor(context!!, colorId)
+        val colorStateList = ColorStateList.valueOf(color)
+        encumbranceBar.setScrubberColor(colorStateList)
+
+        encumbranceTextView.text = "${player.encumbrance} / ${player.maxEncumbrance}"
+        encumbranceTextView.setTextColor(colorStateList)
     }
 
     companion object {
