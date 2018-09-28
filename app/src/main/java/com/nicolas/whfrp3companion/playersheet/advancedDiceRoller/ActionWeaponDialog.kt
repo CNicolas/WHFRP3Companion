@@ -16,12 +16,14 @@ import com.nicolas.whfrp3companion.shared.getView
 class ActionWeaponDialog() : DialogFragment() {
     private var chooseWeapon: (weapon: Weapon) -> Unit = {}
 
+    @SuppressLint("ValidFragment")
     constructor(chooseWeapon: (weapon: Weapon) -> Unit) : this() {
         this.chooseWeapon = chooseWeapon
     }
 
     private lateinit var weapons: List<Weapon>
 
+    @Suppress("UNCHECKED_CAST")
     @SuppressLint("InflateParams")
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val builder = AlertDialog.Builder(activity)

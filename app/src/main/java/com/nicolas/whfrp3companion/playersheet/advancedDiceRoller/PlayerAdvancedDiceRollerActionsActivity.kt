@@ -46,7 +46,7 @@ class PlayerAdvancedDiceRollerActionsActivity : AppCompatActivity(), ActionListe
             doAsync {
                 player = playerRepository.find(it)!!
 
-                uiThread {
+                uiThread { _ ->
                     setPlayerActionsAdapter()
                 }
             }

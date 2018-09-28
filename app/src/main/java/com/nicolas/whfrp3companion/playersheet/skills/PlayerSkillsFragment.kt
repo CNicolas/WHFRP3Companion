@@ -52,7 +52,7 @@ class PlayerSkillsFragment : Fragment() {
                 doAsync {
                     val advancedSkills = loadSkills(safeActivity).advanced
 
-                    uiThread {
+                    uiThread { _ ->
                         openAddSkillSelector(safeActivity, advancedSkills)
                     }
                 }

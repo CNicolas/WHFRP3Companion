@@ -66,7 +66,7 @@ class ActionsFragment : Fragment(), ActionListener {
                 doAsync {
                     actions = actions.search(actionSearch)
 
-                    uiThread {
+                    uiThread { _ ->
                         setActionsAdapter()
                     }
                 }

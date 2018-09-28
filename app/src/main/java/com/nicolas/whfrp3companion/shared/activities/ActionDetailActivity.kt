@@ -6,7 +6,6 @@ import android.text.SpannableString
 import android.text.Spanned
 import android.text.style.ForegroundColorSpan
 import android.view.MenuItem
-import android.view.View
 import com.nicolas.models.action.Action
 import com.nicolas.models.action.ActionSide
 import com.nicolas.models.action.effect.ActionEffects

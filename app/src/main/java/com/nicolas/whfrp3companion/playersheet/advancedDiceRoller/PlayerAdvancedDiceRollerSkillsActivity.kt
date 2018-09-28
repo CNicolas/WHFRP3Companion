@@ -35,9 +35,9 @@ class PlayerAdvancedDiceRollerSkillsActivity : AppCompatActivity() {
             playerName = intent.extras.getString(PLAYER_NAME_INTENT_ARGUMENT)
         }
 
-        playerName?.let {
+        playerName?.let { name ->
             doAsync {
-                player = playerRepository.find(it)!!
+                player = playerRepository.find(name)!!
 
                 uiThread { activity ->
                     skillsListView.adapter = SimplePlayerSkillsAdapter(activity, player.skills) { selectSkill(it) }

@@ -105,7 +105,7 @@ class PlayerSkillsExpandableAdapter(context: Context,
         internal var ankoPlayerRepository: AnkoPlayerRepository? = null
 
         lateinit var skill: Skill
-        lateinit var specialization: Specialization
+        private lateinit var specialization: Specialization
 
         init {
             setupViewsEvents(view)

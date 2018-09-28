@@ -103,7 +103,7 @@ class PlayerTalentsFragment : Fragment(), TalentListener {
             player = playerRepository.find(player.name)!!
 
             uiThread {
-                talentsRecyclerView?.let {
+                talentsRecyclerView?.let { _ ->
                     talentsRecyclerView.layoutManager = LinearLayoutManager(activity!!)
                     talentsRecyclerView.adapter = createTalentsAdapter()
                 }

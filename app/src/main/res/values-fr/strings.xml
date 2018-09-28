@@ -4,7 +4,6 @@
     <string name="navigation_drawer_open">Ouvrir le panneau de navigation</string>
     <string name="page_careers">Carrières</string>
     <string name="page_home">Accueil</string>
-    <string name="page_players">Joueurs</string>
     <string name="page_skills">Compétences</string>
     <string name="page_specializations">Spécialisations</string>
     <string name="page_talents">Talents</string>
@@ -55,8 +54,6 @@
     <string name="high_elf">Haut Elfe</string>
     <string name="human">Humain</string>
     <string name="lorem">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor…</string>
-    <string name="saved">Enregistré</string>
-    <string name="size">Taille</string>
     <string name="wood_elf">Elfe Sylvain</string>
     <string name="delete_player">Supprimer</string>
     <string name="max_corruption">Corruption Max</string>
@@ -83,9 +80,7 @@
     <string name="critical_level">Niveau critique</string>
     <string name="damage">Dégâts</string>
     <string name="defense">Défense</string>
-    <string name="quality">Qualité</string>
     <string name="quantity">Quantité</string>
-    <string name="range">Portée</string>
     <string name="soak">Encaissement</string>
     <string name="uses">Utilisations</string>
     <string name="quality_low">Faible</string>
@@ -127,7 +122,6 @@
     <string name="delete_item">Supprimer</string>
     <string name="edit_item">Éditer</string>
     <string name="equip_item">Équiper</string>
-    <string name="unequip_item">Déséquiper</string>
     <string name="no_saved_hand">Aucune main sauvegardée</string>
     <string name="weapon_axe">Hache</string>
     <string name="weapon_two_handed_axe">Hace à deux mains</string>
@@ -150,12 +144,10 @@
     <string name="search_effect">Rechercher un effet</string>
     <string name="search_talent">Rechercher un talent</string>
     <string name="talent_added_format">%1$s ajoutés</string>
-    <string name="modify">Modifier</string>
     <string name="action_name">Nom de l\'action</string>
     <string name="action_type">Type d\'action</string>
     <string name="action_conditions">Conditions</string>
     <string name="action_traits">Traits de l\'action</string>
-    <string name="launch_action">Lancer l\'action</string>
     <string name="melee_attack">Attaque de mêlée</string>
     <string name="range_attack">Attaque à distance</string>
     <string name="spell">Sort</string>

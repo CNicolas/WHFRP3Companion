@@ -21,7 +21,7 @@ class SpecializationsExtensionsTest {
         val oneTimeFilteredSpecializations = allSkills.findSpecializations("ation", Characteristic.TOUGHNESS)
         assertThat(oneTimeFilteredSpecializations.size).isEqualTo(1)
         val skill = oneTimeFilteredSpecializations.findSkillByName("Résistance")
-        assertThat(skill).isNotNull()
+        assertThat(skill).isNotNull
         assertThat(oneTimeFilteredSpecializations[skill]!!.size).isEqualTo(1)
         assertThat(oneTimeFilteredSpecializations[skill]!![0].name).isEqualTo("Récupération Après l'Effort")
     }

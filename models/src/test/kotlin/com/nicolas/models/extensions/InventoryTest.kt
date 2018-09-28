@@ -20,13 +20,13 @@ class InventoryTest {
 
         assertThat(player.items.size).isEqualTo(1)
         assertThat(player.encumbrance).isEqualTo(2)
-        assertThat(player.getWeaponByName("Baton")).isNotNull()
+        assertThat(player.getWeaponByName("Baton")).isNotNull
 
         player.addItem(Expandable(name = "Potion", quantity = 1, uses = 2, encumbrance = 1))
         assertThat(player.items.size).isEqualTo(2)
         assertThat(player.encumbrance).isEqualTo(3)
-        assertThat(player.getWeaponByName("Baton")).isNotNull()
-        assertThat(player.getExpandableByName("Potion")).isNotNull()
+        assertThat(player.getWeaponByName("Baton")).isNotNull
+        assertThat(player.getExpandableByName("Potion")).isNotNull
     }
 
     @Test
@@ -36,7 +36,7 @@ class InventoryTest {
 
         assertThat(player.items.size).isEqualTo(1)
         assertThat(player.encumbrance).isEqualTo(2)
-        assertThat(player.getWeaponByName("Baton")).isNotNull()
+        assertThat(player.getWeaponByName("Baton")).isNotNull
 
         player.removeItem(weapon)
         assertThat(player.items.size).isEqualTo(0)

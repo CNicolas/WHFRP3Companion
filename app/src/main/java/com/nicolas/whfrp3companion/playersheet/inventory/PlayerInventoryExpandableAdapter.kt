@@ -175,7 +175,7 @@ class PlayerInventoryExpandableAdapter(private val context: Context,
             layout.setOnLongClickListener { openItemMenu(it) }
         }
 
-        fun openItemMenu(view: View): Boolean {
+        private fun openItemMenu(view: View): Boolean {
             val itemPopupMenu = PopupMenu(view.context, view, Gravity.END)
             itemPopupMenu.menuInflater.inflate(R.menu.inventory_item, itemPopupMenu.menu)
 
