@@ -19,12 +19,14 @@ import com.nicolas.whfrp3companion.playersheet.advancedDiceRoller.PlayerAdvanced
 import com.nicolas.whfrp3companion.playersheet.characteristics.PlayerCharacteristicsFragment
 import com.nicolas.whfrp3companion.playersheet.inventory.PlayerInventoryFragment
 import com.nicolas.whfrp3companion.playersheet.skills.PlayerSkillsFragment
+import com.nicolas.whfrp3companion.playersheet.state.PlayerEffectsActivity
 import com.nicolas.whfrp3companion.playersheet.state.PlayerStateFragment
 import com.nicolas.whfrp3companion.playersheet.talents.PlayerTalentsFragment
 import com.nicolas.whfrp3companion.shared.PLAYER_NAME_INTENT_ARGUMENT
 import com.nicolas.whfrp3companion.shared.bind
 import com.nicolas.whfrp3companion.shared.enums.labelId
 import kotlinx.android.synthetic.main.toolbar.*
+import org.jetbrains.anko.intentFor
 import org.koin.android.ext.android.inject
 
 class PlayerSheetActivity : AppCompatActivity() {
@@ -75,6 +77,15 @@ class PlayerSheetActivity : AppCompatActivity() {
     }
 
     private fun displaySelectedFragment(menuItemId: Int) {
+        if (menuItemId == R.id.nav_player_effects) {
+            drawer.closeDrawer(GravityCompat.START)
+            closeKeyboard()
+
+            startActivity(intentFor<PlayerEffectsActivity>(
+                    PLAYER_NAME_INTENT_ARGUMENT to player.name
+            ))
+        }
+
         val fragment = when (menuItemId) {
             R.id.nav_player_advanced_dice_roller -> PlayerAdvancedDiceRollerFragment.newInstance(player.name)
             R.id.nav_player_characteristics -> PlayerCharacteristicsFragment.newInstance(player.name)
