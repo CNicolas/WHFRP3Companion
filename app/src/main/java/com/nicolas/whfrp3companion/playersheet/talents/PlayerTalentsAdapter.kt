@@ -18,7 +18,9 @@ import com.nicolas.whfrp3companion.shared.enums.PlayerElementEditionMode.ADDABLE
 import com.nicolas.whfrp3companion.shared.enums.PlayerElementEditionMode.EQUIPABLE_OR_REMOVABLE
 import com.nicolas.whfrp3companion.shared.enums.colorId
 import com.nicolas.whfrp3companion.shared.enums.labelId
+import com.nicolas.whfrp3companion.shared.viewModifications.hide
 import com.nicolas.whfrp3companion.shared.viewModifications.parseTemplatedText
+import com.nicolas.whfrp3companion.shared.viewModifications.show
 import org.jetbrains.anko.design.snackbar
 
 class PlayerTalentsAdapter(context: Context,
@@ -59,14 +61,14 @@ class PlayerTalentsAdapter(context: Context,
 
             when (talentEditionMode) {
                 ADDABLE -> {
-                    addTalentButton.visibility = View.VISIBLE
-                    toggleTalentEquipmentButton.visibility = View.GONE
-                    removeTalentButton.visibility = View.GONE
+                    addTalentButton.show()
+                    toggleTalentEquipmentButton.hide()
+                    removeTalentButton.hide()
                 }
                 EQUIPABLE_OR_REMOVABLE -> {
-                    addTalentButton.visibility = View.GONE
-                    toggleTalentEquipmentButton.visibility = View.VISIBLE
-                    removeTalentButton.visibility = View.VISIBLE
+                    addTalentButton.hide()
+                    toggleTalentEquipmentButton.show()
+                    removeTalentButton.show()
                 }
             }
         }
@@ -94,7 +96,7 @@ class PlayerTalentsAdapter(context: Context,
             talentDescriptionTextView.text = parseTemplatedText(view.context, talent.description)
 
             addedTalents.find { it.name == talent.name }?.let {
-                this.addTalentButton.visibility = View.GONE
+                this.addTalentButton.hide()
             }
         }
 
@@ -109,7 +111,7 @@ class PlayerTalentsAdapter(context: Context,
         private fun onAddTalent() {
             talentListener.onAddTalent(talent)
             addTalent(talent)
-            this.addTalentButton.visibility = View.GONE
+            this.addTalentButton.hide()
 
 
             val snackbarText = view.context.getString(R.string.talent_added_format).format(talent.name)

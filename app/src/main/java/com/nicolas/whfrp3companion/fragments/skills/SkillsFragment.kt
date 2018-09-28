@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.nicolas.database.loadSkills
 import com.nicolas.whfrp3companion.R
+import com.nicolas.whfrp3companion.shared.viewModifications.hide
 import kotlinx.android.synthetic.main.fragment_skills.*
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
@@ -24,7 +25,7 @@ class SkillsFragment : Fragment() {
                 val skillsAdapter = SkillsExpandableAdapter(context!!, skills)
                 skillsList.setAdapter(skillsAdapter)
 
-                add_skill.visibility = View.GONE
+                add_skill.hide()
             }
         }
 

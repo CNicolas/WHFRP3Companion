@@ -11,6 +11,8 @@ import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.shared.bind
 import com.nicolas.whfrp3companion.shared.enums.drawableId
 import com.nicolas.whfrp3companion.shared.enums.labelId
+import com.nicolas.whfrp3companion.shared.viewModifications.hide
+import com.nicolas.whfrp3companion.shared.viewModifications.show
 
 class ActionExpandableAdapter(context: Context,
                               private val actions: List<Action>,
@@ -125,16 +127,16 @@ class ActionExpandableAdapter(context: Context,
 
             when (buttonType) {
                 ActionButtonType.NONE -> {
-                    actionAddButton.visibility = View.GONE
-                    actionRollButton.visibility = View.GONE
+                    actionAddButton.hide()
+                    actionRollButton.hide()
                 }
                 ActionButtonType.ADD -> {
-                    actionAddButton.visibility = View.VISIBLE
-                    actionRollButton.visibility = View.GONE
+                    actionAddButton.show()
+                    actionRollButton.hide()
                 }
                 ActionButtonType.ROLL -> {
-                    actionAddButton.visibility = View.GONE
-                    actionRollButton.visibility = View.VISIBLE
+                    actionAddButton.hide()
+                    actionRollButton.show()
                 }
             }
         }

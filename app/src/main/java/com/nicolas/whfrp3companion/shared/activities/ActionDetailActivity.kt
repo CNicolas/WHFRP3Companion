@@ -20,6 +20,7 @@ import com.nicolas.whfrp3companion.shared.enums.colorId
 import com.nicolas.whfrp3companion.shared.enums.drawableId
 import com.nicolas.whfrp3companion.shared.enums.labelId
 import com.nicolas.whfrp3companion.shared.enums.textIcon
+import com.nicolas.whfrp3companion.shared.viewModifications.hide
 import com.nicolas.whfrp3companion.shared.viewModifications.parseTemplatedText
 import kotlinx.android.synthetic.main.activity_action_detail.*
 import kotlinx.android.synthetic.main.content_action_side.*
@@ -71,7 +72,7 @@ class ActionDetailActivity : AppCompatActivity() {
         action.getConditionsStringByStance(CONSERVATIVE)?.let {
             action_conditions_textview.text = parseTemplatedText(this, it)
         } ?: {
-            action_conditions_textview.visibility = View.GONE
+            action_conditions_textview.hide()
         }()
 
         action.conservativeSide.effects?.let { setEffectsAdapter(it) }
@@ -87,7 +88,7 @@ class ActionDetailActivity : AppCompatActivity() {
         action.getConditionsStringByStance(RECKLESS)?.let {
             action_conditions_textview.text = parseTemplatedText(this, it)
         } ?: {
-            action_conditions_textview.visibility = View.GONE
+            action_conditions_textview.hide()
         }()
 
         action.recklessSide.effects?.let { setEffectsAdapter(it) }

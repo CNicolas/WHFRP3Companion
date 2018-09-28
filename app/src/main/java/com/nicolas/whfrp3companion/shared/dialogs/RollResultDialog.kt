@@ -6,13 +6,13 @@ import android.app.Dialog
 import android.os.Bundle
 import android.support.v4.app.DialogFragment
 import android.view.View
-import android.view.View.GONE
 import android.widget.TextView
 import com.nicolas.diceroller.roll.RollResult
 import com.nicolas.models.dice.Face
 import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.shared.ROLL_RESULT_INTENT_ARGUMENT
 import com.nicolas.whfrp3companion.shared.getView
+import com.nicolas.whfrp3companion.shared.viewModifications.hide
 
 open class RollResultDialog : DialogFragment() {
     private lateinit var successResult: TextView
@@ -47,42 +47,42 @@ open class RollResultDialog : DialogFragment() {
 
     protected fun setResultsContent(rollResult: RollResult) {
         when (rollResult.report[Face.SUCCESS]) {
-            null -> successResult.visibility = GONE
+            null -> successResult.hide()
             else -> successResult.text = rollResult.report[Face.SUCCESS].toString()
         }
 
         when (rollResult.report[Face.BOON]) {
-            null -> boonResult.visibility = GONE
+            null -> boonResult.hide()
             else -> boonResult.text = rollResult.report[Face.BOON].toString()
         }
 
         when (rollResult.report[Face.SIGMAR]) {
-            null -> sigmarResult.visibility = GONE
+            null -> sigmarResult.hide()
             else -> sigmarResult.text = rollResult.report[Face.SIGMAR].toString()
         }
 
         when (rollResult.report[Face.FAILURE]) {
-            null -> failureResult.visibility = GONE
+            null -> failureResult.hide()
             else -> failureResult.text = rollResult.report[Face.FAILURE].toString()
         }
 
         when (rollResult.report[Face.BANE]) {
-            null -> baneResult.visibility = GONE
+            null -> baneResult.hide()
             else -> baneResult.text = rollResult.report[Face.BANE].toString()
         }
 
         when (rollResult.report[Face.DELAY]) {
-            null -> delayResult.visibility = GONE
+            null -> delayResult.hide()
             else -> delayResult.text = rollResult.report[Face.DELAY].toString()
         }
 
         when (rollResult.report[Face.EXHAUSTION]) {
-            null -> exhaustionResult.visibility = GONE
+            null -> exhaustionResult.hide()
             else -> exhaustionResult.text = rollResult.report[Face.EXHAUSTION].toString()
         }
 
         when (rollResult.report[Face.CHAOS]) {
-            null -> chaosResult.visibility = GONE
+            null -> chaosResult.hide()
             else -> chaosResult.text = rollResult.report[Face.CHAOS].toString()
         }
     }

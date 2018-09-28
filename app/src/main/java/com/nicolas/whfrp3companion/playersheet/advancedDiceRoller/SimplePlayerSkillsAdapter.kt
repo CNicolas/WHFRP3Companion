@@ -12,6 +12,7 @@ import com.nicolas.models.skill.Skill
 import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.shared.bind
 import com.nicolas.whfrp3companion.shared.enums.shortLabelId
+import com.nicolas.whfrp3companion.shared.viewModifications.hide
 
 class SimplePlayerSkillsAdapter(context: Context,
                                 private val skills: List<Skill>,
@@ -56,7 +57,7 @@ class SimplePlayerSkillsAdapter(context: Context,
             level1CheckBox.isEnabled = false
             level2CheckBox.isEnabled = false
             level3CheckBox.isEnabled = false
-            launchSkillImageButton.visibility = View.GONE
+            launchSkillImageButton.hide()
 
             view.setOnClickListener { selectSkill(skill) }
         }
