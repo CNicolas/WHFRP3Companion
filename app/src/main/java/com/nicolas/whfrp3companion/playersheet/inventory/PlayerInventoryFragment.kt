@@ -20,7 +20,6 @@ import com.nicolas.whfrp3companion.shared.ITEM_EDIT_INTENT_ARGUMENT
 import com.nicolas.whfrp3companion.shared.PLAYER_NAME_INTENT_ARGUMENT
 import com.nicolas.whfrp3companion.shared.getView
 import kotlinx.android.synthetic.main.fragment_player_inventory.*
-import kotlinx.android.synthetic.main.fragment_player_state.*
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.uiThread
@@ -87,8 +86,8 @@ class PlayerInventoryFragment : Fragment(), ItemListener {
     }
 
     private fun getPlayerItems() {
-        val expandedGroups = inventoryExpandableList?.let {
-            it.adapter?.let {
+        val expandedGroups = inventoryExpandableList?.let { _ ->
+            inventoryExpandableList.adapter?.let { _ ->
                 ItemType.values().map { inventoryExpandableList.isGroupExpanded(it.ordinal) }
             }
         }
@@ -112,10 +111,10 @@ class PlayerInventoryFragment : Fragment(), ItemListener {
     }
 
     private fun setupEncumbrance() {
-        encumbranceBar.min = 0
-        encumbranceBar.max = player.maxEncumbrance
-        encumbranceBar.progress = player.encumbrance
-        encumbranceBar.isEnabled = false
+        encumbrance.min = 0
+        encumbrance.max = player.maxEncumbrance
+        encumbrance.progress = player.encumbrance
+        encumbrance.isEnabled = false
 
         val colorId = when {
             player.encumbrance < player.encumbranceOverload -> R.color.conservative
@@ -124,10 +123,11 @@ class PlayerInventoryFragment : Fragment(), ItemListener {
         }
         val color = ContextCompat.getColor(context!!, colorId)
         val colorStateList = ColorStateList.valueOf(color)
-        encumbranceBar.setScrubberColor(colorStateList)
+        encumbrance.setScrubberColor(colorStateList)
 
-        encumbranceTextView.text = "${player.encumbrance} / ${player.maxEncumbrance}"
-        encumbranceTextView.setTextColor(colorStateList)
+        encumbrance_label.text = getString(R.string.value_on_max_value_format)
+                .format(player.encumbrance, player.maxEncumbrance)
+        encumbrance_label.setTextColor(colorStateList)
     }
 
     companion object {

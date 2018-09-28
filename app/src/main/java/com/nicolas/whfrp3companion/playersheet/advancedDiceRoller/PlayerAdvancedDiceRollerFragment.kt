@@ -330,7 +330,8 @@ class PlayerAdvancedDiceRollerFragment : Fragment() {
                 setHandAndFillViews(hand)
 
                 weapon?.let { weaponNotNull ->
-                    current_hand_name.text = "${actionNotNull.name} : ${weaponNotNull.name}"
+                    current_hand_name.text = getString(R.string.text_double_dots_text_format)
+                            .format(actionNotNull.name, weaponNotNull.name)
                 } ?: {
                     current_hand_name.text = actionNotNull.name
                 }()
@@ -346,7 +347,8 @@ class PlayerAdvancedDiceRollerFragment : Fragment() {
             specialization?.let { specializationNotNull ->
                 setHandAndFillViews(player.createHand(skillNotNull, specializationNotNull))
 
-                current_hand_name.text = "${skillNotNull.name} : ${specializationNotNull.name}"
+                current_hand_name.text = getString(R.string.text_double_dots_text_format)
+                        .format(skillNotNull.name, specializationNotNull.name)
 
                 action = null
                 weapon = null

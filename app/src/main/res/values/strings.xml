@@ -236,6 +236,8 @@
     <string name="hyphen" translatable="false">-</string>
     <string name="plus" translatable="false">+</string>
     <string name="more_less" translatable="false">+ / -</string>
+    <string name="value_on_max_value_format" translatable="false">%1$d / %2$d</string>
+    <string name="text_double_dots_text_format" translatable="false">%1$s : %2$s</string>
 
     <string name="lorem">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor…</string>
 </resources>
