@@ -64,7 +64,7 @@ internal class PlayerDiceRollerActivity : AppCompatActivity() {
             doAsync {
                 player = playerRepository.find(it)!!
 
-                uiThread {
+                uiThread { _ ->
                     setupStance()
                     setupViewsEvents()
                     fillViews()
@@ -193,7 +193,7 @@ internal class PlayerDiceRollerActivity : AppCompatActivity() {
         stanceBar.max = player.maxReckless
 
         val stanceChangeListener = StanceChangeListener(this,
-                { currentStanceTextView.setTextColor(it) },
+                { current_stance.setTextColor(it) },
                 { changeStance(it) })
         stanceBar.setOnProgressChangeListener(stanceChangeListener)
 
@@ -204,7 +204,7 @@ internal class PlayerDiceRollerActivity : AppCompatActivity() {
     }
 
     private fun changeStance(newStanceValue: Int) {
-        currentStanceTextView.text = Math.abs(newStanceValue).toString()
+        current_stance.text = Math.abs(newStanceValue).toString()
         player.stance = newStanceValue
 
         doAsync {

@@ -22,6 +22,7 @@
             android:id="@+id/name_wrapper"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:paddingTop="@dimen/medium_padding"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintRight_toRightOf="parent">
@@ -54,7 +55,6 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:checked="true"
                 android:text="@string/generic_item" />
 
             <RadioButton
@@ -270,6 +270,7 @@
             android:id="@+id/description_wrapper"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/big_padding"
             app:layout_constraintTop_toBottomOf="@+id/uses_wrapper"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent">

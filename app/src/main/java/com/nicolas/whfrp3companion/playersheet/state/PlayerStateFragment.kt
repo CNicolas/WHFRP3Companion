@@ -203,7 +203,7 @@ class PlayerStateFragment : Fragment() {
         stanceBar.max = player.maxReckless
 
         val stanceChangeListener = StanceChangeListener(context!!,
-                { currentStanceTextView.setTextColor(it) },
+                { current_stance.setTextColor(it) },
                 { changeStance(it) })
         stanceBar.setOnProgressChangeListener(stanceChangeListener)
 
@@ -228,7 +228,8 @@ class PlayerStateFragment : Fragment() {
         val colorStateList = ColorStateList.valueOf(color)
         encumbranceBar.setScrubberColor(colorStateList)
 
-        encumbranceTextView.text = "${player.encumbrance} / ${player.maxEncumbrance}"
+        encumbranceTextView.text = getString(R.string.value_on_max_value_format)
+                .format(player.encumbrance, player.maxEncumbrance)
         encumbranceTextView.setTextColor(colorStateList)
     }
 
@@ -239,7 +240,7 @@ class PlayerStateFragment : Fragment() {
     }
 
     private fun changeStance(newStanceValue: Int) {
-        currentStanceTextView.text = Math.abs(newStanceValue).toString()
+        current_stance.text = Math.abs(newStanceValue).toString()
         player.stance = newStanceValue
 
         updatePlayerAsync()

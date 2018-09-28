@@ -49,6 +49,7 @@ class ItemEditionActivity : AppCompatActivity() {
         setupViews()
         setupViewsEvents()
         fillViewsWithItem(item)
+        checkItemType(GENERIC_ITEM)
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -68,7 +69,7 @@ class ItemEditionActivity : AppCompatActivity() {
         weapon_type.adapter = ArrayAdapter(this, R.layout.element_enum_spinner, weaponTypesWithLabels.second)
         range.adapter = ArrayAdapter(this, R.layout.element_enum_spinner, rangeSpinnerValues)
 
-        name.markRequired()
+        name_wrapper.markRequired()
     }
 
     private fun setupViewsEvents() {
@@ -207,9 +208,11 @@ class ItemEditionActivity : AppCompatActivity() {
     }
 
     private fun showGenericItemViews() {
+        armor_type.hide()
         defense_wrapper.hide()
         soak_wrapper.hide()
 
+        weapon_type.hide()
         damage_wrapper.hide()
         critical_level_wrapper.hide()
         range.hide()
@@ -218,9 +221,11 @@ class ItemEditionActivity : AppCompatActivity() {
     }
 
     private fun showArmorViews() {
+        armor_type.show()
         defense_wrapper.show()
         soak_wrapper.show()
 
+        weapon_type.hide()
         damage_wrapper.hide()
         critical_level_wrapper.hide()
         range.hide()
@@ -229,9 +234,11 @@ class ItemEditionActivity : AppCompatActivity() {
     }
 
     private fun showWeaponViews() {
+        armor_type.hide()
         defense_wrapper.hide()
         soak_wrapper.hide()
 
+        weapon_type.show()
         damage_wrapper.show()
         critical_level_wrapper.show()
         range.show()
@@ -240,9 +247,11 @@ class ItemEditionActivity : AppCompatActivity() {
     }
 
     private fun showExpandableViews() {
+        armor_type.hide()
         defense_wrapper.hide()
         soak_wrapper.hide()
 
+        weapon_type.hide()
         damage_wrapper.hide()
         critical_level_wrapper.hide()
         range.hide()

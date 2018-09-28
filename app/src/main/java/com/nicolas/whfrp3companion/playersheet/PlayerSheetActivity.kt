@@ -84,6 +84,8 @@ class PlayerSheetActivity : AppCompatActivity() {
             startActivity(intentFor<PlayerEffectsActivity>(
                     PLAYER_NAME_INTENT_ARGUMENT to player.name
             ))
+
+            return
         }
 
         val fragment = when (menuItemId) {

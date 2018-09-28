@@ -194,7 +194,7 @@ class PlayerAdvancedDiceRollerFragment : Fragment() {
             misfortune_value_button.setOnClickListener { openChangeDiceValueDialog(DiceType.MISFORTUNE) }
 
             val stanceChangeListener = StanceChangeListener(safeActivity,
-                    { currentStanceTextView.setTextColor(it) },
+                    { current_stance.setTextColor(it) },
                     { changeStance(it) })
             stanceBar.setOnProgressChangeListener(stanceChangeListener)
         }
@@ -377,7 +377,7 @@ class PlayerAdvancedDiceRollerFragment : Fragment() {
     }
 
     private fun changeStance(newStanceValue: Int) {
-        currentStanceTextView.text = Math.abs(newStanceValue).toString()
+        current_stance.text = Math.abs(newStanceValue).toString()
         player.stance = newStanceValue
 
         doAsync {
