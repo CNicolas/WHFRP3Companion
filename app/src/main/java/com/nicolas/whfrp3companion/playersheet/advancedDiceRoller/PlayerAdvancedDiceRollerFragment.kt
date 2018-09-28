@@ -60,10 +60,30 @@ class PlayerAdvancedDiceRollerFragment : Fragment() {
                 doAsync {
                     player = playerRepository.find(it)!!
 
-                    uiThread {
+                    uiThread { _ ->
                         setupViewsEvents()
                         setupStanceBar()
                         setHandAndFillViews()
+
+                        when {
+                            args.containsKey(ACTION_INTENT_ARGUMENT) -> {
+                                action = args.getSerializable(ACTION_INTENT_ARGUMENT) as Action?
+                                receiveSelectedAction()
+                            }
+                            args.containsKey(SKILL_INTENT_ARGUMENT) -> {
+                                skill = args.getSerializable(SKILL_INTENT_ARGUMENT) as Skill?
+
+                                if (args.containsKey(SPECIALIZATION_INTENT_ARGUMENT)) {
+                                    specialization = args.getSerializable(SPECIALIZATION_INTENT_ARGUMENT) as Specialization?
+                                }
+
+                                receiveSelectedSkill()
+                            }
+                            args.containsKey(CHARACTERISTIC_INTENT_ARGUMENT) -> {
+                                val characteristic = args.getSerializable(CHARACTERISTIC_INTENT_ARGUMENT) as Characteristic
+                                receiveSelectedCharacteristic(characteristic)
+                            }
+                        }
 
                         // The if under is trying to refresh the progress to the current stance and color
                         val realStance = player.stance
@@ -73,19 +93,6 @@ class PlayerAdvancedDiceRollerFragment : Fragment() {
                             stanceBar.progress = stanceBar.min
                         }
                         stanceBar.progress = realStance
-
-                        if (args.containsKey(ACTION_INTENT_ARGUMENT)) {
-                            action = args.getSerializable(ACTION_INTENT_ARGUMENT) as Action?
-                            receiveSelectedAction()
-                        } else if (args.containsKey(SKILL_INTENT_ARGUMENT)) {
-                            skill = args.getSerializable(SKILL_INTENT_ARGUMENT) as Skill?
-
-                            if (args.containsKey(SPECIALIZATION_INTENT_ARGUMENT)) {
-                                specialization = args.getSerializable(SPECIALIZATION_INTENT_ARGUMENT) as Specialization?
-                            }
-
-                            receiveSelectedSkill()
-                        }
                     }
                 }
             }
@@ -301,11 +308,7 @@ class PlayerAdvancedDiceRollerFragment : Fragment() {
         val characteristicsAsStrings = Characteristic.values().map { getString(it.labelId) }
 
         activity?.selector(title, characteristicsAsStrings) { _, index ->
-            val characteristicHand = player.createHand(Characteristic[index])
-            setHandAndFillViews(characteristicHand)
-
-            val handName: String = (characteristicsAsStrings[index])
-            current_hand_name.text = handName
+            receiveSelectedCharacteristic(Characteristic[index])
         }
     }
 
@@ -357,6 +360,18 @@ class PlayerAdvancedDiceRollerFragment : Fragment() {
                 weapon = null
             }()
         }
+    }
+
+    private fun receiveSelectedCharacteristic(characteristic: Characteristic) {
+        val characteristicHand = player.createHand(characteristic)
+        setHandAndFillViews(characteristicHand)
+
+        current_hand_name.text = getString(characteristic.labelId)
+
+        action = null
+        weapon = null
+        skill = null
+        specialization = null
     }
 
     private fun changeStance(newStanceValue: Int) {
@@ -411,6 +426,17 @@ class PlayerAdvancedDiceRollerFragment : Fragment() {
             args.putString(PLAYER_NAME_INTENT_ARGUMENT, playerName)
             args.putSerializable(SKILL_INTENT_ARGUMENT, skill)
             args.putSerializable(SPECIALIZATION_INTENT_ARGUMENT, specialization)
+
+            val fragment = PlayerAdvancedDiceRollerFragment()
+            fragment.arguments = args
+
+            return fragment
+        }
+
+        fun newInstance(playerName: String, characteristic: Characteristic): PlayerAdvancedDiceRollerFragment {
+            val args = Bundle()
+            args.putString(PLAYER_NAME_INTENT_ARGUMENT, playerName)
+            args.putSerializable(CHARACTERISTIC_INTENT_ARGUMENT, characteristic)
 
             val fragment = PlayerAdvancedDiceRollerFragment()
             fragment.arguments = args
