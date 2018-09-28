@@ -488,7 +488,7 @@
         <!--region Stance-->
         <android.support.design.widget.TextInputLayout
             android:id="@+id/max_conservative_wrapper"
-            android:layout_width="120dp"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@+id/fellowship"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -505,13 +505,12 @@
                 android:textColor="@color/conservative"
                 android:textSize="@dimen/big_text_size"
                 android:selectAllOnFocus="true"
-                android:text="@string/zero"
                 android:imeOptions="actionNext" />
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
             android:id="@+id/max_reckless_wrapper"
-            android:layout_width="120dp"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@+id/fellowship"
             app:layout_constraintLeft_toRightOf="@+id/max_conservative_wrapper"
@@ -525,7 +524,6 @@
                 android:gravity="center"
                 android:hint="@string/reckless"
                 android:textSize="@dimen/big_text_size"
-                android:text="@string/zero"
                 android:textColor="@color/reckless"
                 android:selectAllOnFocus="true"
                 android:inputType="numberSigned"
