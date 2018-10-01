@@ -14,6 +14,7 @@ import com.nicolas.models.action.ActionType
 import com.nicolas.models.action.Trait
 import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.shared.enums.labelId
+import com.nicolas.whfrp3companion.shared.enums.sortedAndLabels
 import com.nicolas.whfrp3companion.shared.getView
 
 class ActionSearchDialog : DialogFragment() {
@@ -21,6 +22,8 @@ class ActionSearchDialog : DialogFragment() {
     private lateinit var actionTraitSpinner: Spinner
     private lateinit var cooldownEditText: EditText
     private lateinit var searchEditText: EditText
+
+    private lateinit var sortedActionTypesWithLabels: Pair<List<ActionType>, List<String>>
 
     private lateinit var handleSearch: (actionSearch: ActionSearch) -> Unit
 
@@ -45,10 +48,8 @@ class ActionSearchDialog : DialogFragment() {
     }
 
     private fun setupViews() {
-        val sortedActionTypesLabels = ActionType.values()
-                .map { getString(it.labelId) }
-                .sortedWith(compareBy(String.CASE_INSENSITIVE_ORDER) { it })
-        val actionTypes = listOf(getString(R.string.all)) + sortedActionTypesLabels
+        sortedActionTypesWithLabels = ActionType.values().sortedAndLabels(context!!)
+        val actionTypes = listOf(getString(R.string.all)) + sortedActionTypesWithLabels.second
 
         val traits = listOf(getString(R.string.all)) + Trait.values().map { getString(it.labelId) }
 
@@ -65,14 +66,17 @@ class ActionSearchDialog : DialogFragment() {
 
     private fun getTalentSearchFromViews(): ActionSearch {
         val text = searchEditText.text.toString().trim()
+
         val actionType = when {
             actionTypeSpinner.selectedItemPosition == 0 -> null
-            else -> ActionType[actionTypeSpinner.selectedItemPosition - 1]
+            else -> sortedActionTypesWithLabels.first[actionTypeSpinner.selectedItemPosition - 1]
         }
+
         val trait = when {
             actionTraitSpinner.selectedItemPosition == 0 -> null
             else -> Trait[actionTraitSpinner.selectedItemPosition - 1]
         }
+
         val cooldown = cooldownEditText.text.toString().toIntOrNull()
 
         return ActionSearch(text = text,

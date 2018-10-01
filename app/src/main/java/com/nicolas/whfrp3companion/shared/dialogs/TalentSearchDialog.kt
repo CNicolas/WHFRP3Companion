@@ -17,6 +17,7 @@ import com.nicolas.whfrp3companion.shared.PLAYER_NAME_INTENT_ARGUMENT
 import com.nicolas.whfrp3companion.shared.TALENTS_SEARCH_INTENT_ARGUMENT
 import com.nicolas.whfrp3companion.shared.activities.TalentsActivity
 import com.nicolas.whfrp3companion.shared.enums.labelId
+import com.nicolas.whfrp3companion.shared.enums.sortedAndLabels
 import com.nicolas.whfrp3companion.shared.getView
 import org.jetbrains.anko.intentFor
 
@@ -50,24 +51,23 @@ class TalentSearchDialog : DialogFragment() {
     }
 
     private fun setupViews() {
-        val sortedTalentTypesLabels = TalentType.values()
-                .map { getString(it.labelId) }
-                .sortedWith(compareBy(String.CASE_INSENSITIVE_ORDER) { it })
-        val talentTypes = listOf(getString(R.string.all)) + sortedTalentTypesLabels
+        val sortedTalentTypesWithLabels = TalentType.values().sortedAndLabels(context!!)
+        val talentTypes = listOf(getString(R.string.all)) + sortedTalentTypesWithLabels.second
 
         val talentCooldowns = listOf(getString(R.string.all)) + TalentCooldown.values().map { getString(it.labelId) }
 
         talentTypeSpinner.adapter = ArrayAdapter(context, R.layout.element_enum_spinner, talentTypes)
         cooldownSpinner.adapter = ArrayAdapter(context, R.layout.element_enum_spinner, talentCooldowns)
 
-        val talentTypePosition = talentSearch?.talentType?.ordinal
-        if (talentTypePosition != null) {
-            talentTypeSpinner.setSelection(talentTypePosition + 1)
+        talentSearch?.talentType?.let {
+            val selectedIndex = sortedTalentTypesWithLabels.first.indexOf(it)
+            talentTypeSpinner.setSelection(selectedIndex + 1)
         }
-        val talentCooldownPosition = talentSearch?.cooldown?.ordinal
-        if (talentCooldownPosition != null) {
-            cooldownSpinner.setSelection(talentCooldownPosition + 1)
+
+        talentSearch?.cooldown?.let {
+            talentTypeSpinner.setSelection(it.ordinal + 1)
         }
+
         searchEditText.setText(talentSearch?.text)
     }
 
