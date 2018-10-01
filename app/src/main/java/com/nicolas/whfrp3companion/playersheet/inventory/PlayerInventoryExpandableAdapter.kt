@@ -8,7 +8,6 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.INVISIBLE
-import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.BaseExpandableListAdapter
 import android.widget.ImageView
@@ -27,6 +26,7 @@ import com.nicolas.whfrp3companion.shared.enums.pluralLabelId
 import com.nicolas.whfrp3companion.shared.getView
 import com.nicolas.whfrp3companion.shared.viewModifications.hide
 import com.nicolas.whfrp3companion.shared.viewModifications.show
+import org.jetbrains.anko.dimen
 
 class PlayerInventoryExpandableAdapter(private val context: Context,
                                        private val player: Player,
@@ -115,7 +115,6 @@ class PlayerInventoryExpandableAdapter(private val context: Context,
     internal class ChildViewHolder(private val itemListener: ItemListener, view: View) {
         private val equippedImageView by view.bind<ImageView>(R.id.equipped)
         private val itemNameTextView by view.bind<TextView>(R.id.item_name)
-        private val quantityTextView by view.bind<TextView>(R.id.quantity)
         private val encumbranceTextView by view.bind<TextView>(R.id.encumbrance)
 
         private val defenseTextView by view.bind<TextView>(R.id.defense)
@@ -140,13 +139,11 @@ class PlayerInventoryExpandableAdapter(private val context: Context,
             setupViewsEvents(view)
         }
 
-        @SuppressLint("SetTextI18n")
         fun setupViews(item: Item) {
             this.item = item
 
             itemNameTextView.text = item.name
-            quantityTextView.text = item.quantity.toString()
-            encumbranceTextView.text = "${item.encumbrance}  (${item.encumbrance * item.quantity})"
+            encumbranceTextView.text = "${item.encumbrance}"
 
             when (item.quality) {
                 LOW -> itemNameTextView.setTextColor(ContextCompat.getColor(itemNameTextView.context, R.color.colorSecondaryText))
@@ -243,12 +240,15 @@ class PlayerInventoryExpandableAdapter(private val context: Context,
             showEquippedImage(weapon.isEquipped)
         }
 
-        private fun showEquippedImage(isEquipped: Boolean) = if (isEquipped) {
-            itemNameTextView.setTypeface(null, BOLD)
-            equippedImageView.visibility = VISIBLE
-        } else {
-            itemNameTextView.typeface = null
-            equippedImageView.visibility = INVISIBLE
+        private fun showEquippedImage(isEquipped: Boolean) = when {
+            isEquipped -> {
+                itemNameTextView.setTypeface(null, BOLD)
+                equippedImageView.show()
+            }
+            else -> {
+                itemNameTextView.typeface = null
+                equippedImageView.visibility = INVISIBLE
+            }
         }
 
         private fun changeEquipmentStatus(isEquipped: Boolean? = null) {

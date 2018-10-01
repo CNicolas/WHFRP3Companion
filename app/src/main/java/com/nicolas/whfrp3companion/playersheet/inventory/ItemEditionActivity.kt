@@ -138,7 +138,13 @@ class ItemEditionActivity : AppCompatActivity() {
                 player.removeItem(it)
             }
 
-            player.addItem(createItemFromViews())
+            val itemToAdd = createItemFromViews()
+            val quantityToAdd = itemToAdd.quantity
+
+            itemToAdd.quantity = 1
+            (0 until quantityToAdd).forEach {
+                player.addItem(itemToAdd)
+            }
             player = playerRepository.update(player)
 
             uiThread {
