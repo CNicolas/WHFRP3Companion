@@ -102,7 +102,7 @@ class PlayerAdvancedDiceRollerFragment : Fragment() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
-        inflater?.inflate(R.menu.fragment_player_advanced_dice_roller, menu)
+        inflater?.inflate(R.menu.player_advanced_dice_roller, menu)
 
         super.onCreateOptionsMenu(menu, inflater)
     }

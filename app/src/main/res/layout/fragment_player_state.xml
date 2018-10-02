@@ -161,7 +161,6 @@
         app:layout_constraintHorizontal_weight="10" />
     <!--endregion-->
 
-
     <!--region Defense, Soak and Toughness-->
     <TextView
         android:id="@+id/defense"

@@ -17,24 +17,24 @@
             android:title="@string/page_state" />
 
         <item
-            android:id="@+id/nav_player_skills"
-            android:icon="@drawable/ic_skills_black"
-            android:title="@string/page_skills" />
-
-        <item
             android:id="@+id/nav_player_inventory"
             android:icon="@drawable/ic_bag_black"
             android:title="@string/page_inventory" />
 
         <item
-            android:id="@+id/nav_player_talents"
-            android:icon="@drawable/ic_talents_black"
-            android:title="@string/page_talents" />
+            android:id="@+id/nav_player_skills"
+            android:icon="@drawable/ic_skills_black"
+            android:title="@string/page_skills" />
 
         <item
             android:id="@+id/nav_player_actions"
             android:icon="@drawable/ic_action_black"
             android:title="@string/page_actions" />
+
+        <item
+            android:title="@string/page_talents"
+            android:id="@+id/nav_player_talents"
+            android:icon="@drawable/ic_talents_black" />
 
         <item
             android:id="@+id/nav_player_effects"
