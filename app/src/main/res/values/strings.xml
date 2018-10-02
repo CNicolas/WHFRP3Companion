@@ -207,9 +207,12 @@
     <string name="max_wounds">Max wounds</string>
     <string name="wounds">Wounds</string>
     <string name="corruption">Corruption</string>
+    <string name="corruption_short">Corrupt.</string>
     <string name="max_corruption">Max corruption</string>
+    <string name="max_corruption_short">Max corrupt.</string>
     <string name="experience">Experience</string>
     <string name="max_experience">Max experience</string>
+    <string name="max_experience_short">Max XP</string>
     <string name="stress">Stress</string>
     <string name="exhaustion">Exhaustion</string>
     <string name="encumbrance">Encumbrance</string>

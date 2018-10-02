@@ -195,4 +195,7 @@
     <string name="max_experience">Expérience Max</string>
     <string name="weapon_throwing_dagger">Dague de Jet</string>
     <string name="weapon_throwing_axe">Hache de Jet</string>
+    <string name="max_experience_short">XP Max</string>
+    <string name="max_corruption_short">Corrupt. Max</string>
+    <string name="corruption_short">Corrupt.</string>
 </resources>

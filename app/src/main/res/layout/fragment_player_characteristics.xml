@@ -52,6 +52,7 @@
                 android:hint="@string/rank"
                 android:inputType="numberSigned"
                 android:drawableStart="@drawable/ic_rank_black_24dp"
+                android:selectAllOnFocus="true"
                 android:imeOptions="actionNext" />
         </android.support.design.widget.TextInputLayout>
         <!--endregion-->
@@ -72,6 +73,7 @@
                 android:hint="@string/max_wounds"
                 android:inputType="numberSigned"
                 android:imeOptions="actionNext"
+                android:selectAllOnFocus="true"
                 android:drawableStart="@drawable/ic_wounds_black_24dp" />
         </android.support.design.widget.TextInputLayout>
         <!--endregion-->
@@ -125,7 +127,7 @@
                 android:id="@+id/max_experience"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:hint="@string/max_experience"
+                android:hint="@string/max_experience_short"
                 android:inputType="numberSigned"
                 android:selectAllOnFocus="true"
                 android:imeOptions="actionNext" />
@@ -147,7 +149,7 @@
                 android:id="@+id/corruption"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:hint="@string/corruption"
+                android:hint="@string/corruption_short"
                 android:inputType="numberSigned"
                 android:selectAllOnFocus="true"
                 android:imeOptions="actionNext"
@@ -183,7 +185,7 @@
                 android:id="@+id/max_corruption"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:hint="@string/max_corruption"
+                android:hint="@string/max_corruption_short"
                 android:inputType="numberSigned"
                 android:selectAllOnFocus="true"
                 android:imeOptions="actionNext" />
@@ -508,7 +510,7 @@
                 android:imeOptions="actionNext" />
         </android.support.design.widget.TextInputLayout>
 
-        <android.support.design.widget.TextInputLayout
+        <android.support.design.widget.TextInputLayoutmax_
             android:id="@+id/max_reckless_wrapper"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
@@ -528,7 +530,7 @@
                 android:selectAllOnFocus="true"
                 android:inputType="numberSigned"
                 android:imeOptions="actionNext" />
-        </android.support.design.widget.TextInputLayout>
+        </android.support.design.widget.TextInputLayoutmax_>
         <!--endregion-->
 
         <!--region Description-->
