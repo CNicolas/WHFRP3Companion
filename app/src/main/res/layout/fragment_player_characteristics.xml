@@ -42,7 +42,8 @@
             android:layout_height="wrap_content"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/career_wrapper"
-            app:layout_constraintRight_toLeftOf="@+id/max_wounds_wrapper">
+            app:layout_constraintRight_toLeftOf="@+id/wounds_wrapper"
+            app:layout_constraintHorizontal_weight="19">
 
             <android.support.design.widget.TextInputEditText
                 android:id="@+id/rank"
@@ -57,14 +58,52 @@
         </android.support.design.widget.TextInputLayout>
         <!--endregion-->
 
-        <!--region Max wounds-->
+        <!--region Wounds-->
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/wounds_wrapper"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@+id/rank_wrapper"
+            app:layout_constraintLeft_toRightOf="@+id/rank_wrapper"
+            app:layout_constraintRight_toLeftOf="@+id/wounds_separator"
+            app:layout_constraintBottom_toBottomOf="@+id/rank_wrapper"
+            app:layout_constraintHorizontal_weight="20">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/wounds"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:hint="@string/wounds"
+                android:inputType="numberSigned"
+                android:selectAllOnFocus="true"
+                android:imeOptions="actionNext"
+                android:drawableStart="@drawable/ic_wounds_black_24dp"
+                android:drawablePadding="@dimen/small_padding" />
+        </android.support.design.widget.TextInputLayout>
+
+        <TextView
+            android:id="@+id/wounds_separator"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:paddingTop="@dimen/medium_padding"
+            android:gravity="center"
+            android:text="@string/slash"
+            app:layout_constraintTop_toTopOf="@+id/wounds_wrapper"
+            app:layout_constraintLeft_toRightOf="@+id/wounds_wrapper"
+            app:layout_constraintRight_toLeftOf="@+id/max_wounds_wrapper"
+            app:layout_constraintBottom_toBottomOf="@+id/wounds_wrapper"
+            app:layout_constraintHorizontal_weight="1" />
+
         <android.support.design.widget.TextInputLayout
             android:id="@+id/max_wounds_wrapper"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/career_wrapper"
-            app:layout_constraintLeft_toRightOf="@+id/rank_wrapper"
-            app:layout_constraintRight_toRightOf="parent">
+            android:paddingStart="@dimen/very_small_padding"
+            app:layout_constraintTop_toTopOf="@+id/wounds_wrapper"
+            app:layout_constraintLeft_toRightOf="@+id/wounds_separator"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/wounds_wrapper"
+            app:layout_constraintHorizontal_weight="20">
 
             <android.support.design.widget.TextInputEditText
                 android:id="@+id/max_wounds"
@@ -72,9 +111,8 @@
                 android:layout_height="50dp"
                 android:hint="@string/max_wounds"
                 android:inputType="numberSigned"
-                android:imeOptions="actionNext"
                 android:selectAllOnFocus="true"
-                android:drawableStart="@drawable/ic_wounds_black_24dp" />
+                android:imeOptions="actionNext" />
         </android.support.design.widget.TextInputLayout>
         <!--endregion-->
 
@@ -510,13 +548,14 @@
                 android:imeOptions="actionNext" />
         </android.support.design.widget.TextInputLayout>
 
-        <android.support.design.widget.TextInputLayoutmax_
+        <android.support.design.widget.TextInputLayout
             android:id="@+id/max_reckless_wrapper"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/fellowship"
+            app:layout_constraintTop_toTopOf="@+id/max_conservative_wrapper"
             app:layout_constraintLeft_toRightOf="@+id/max_conservative_wrapper"
-            app:layout_constraintRight_toRightOf="parent">
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/max_conservative_wrapper">
 
             <android.support.design.widget.TextInputEditText
                 android:id="@+id/max_reckless"
@@ -530,7 +569,7 @@
                 android:selectAllOnFocus="true"
                 android:inputType="numberSigned"
                 android:imeOptions="actionNext" />
-        </android.support.design.widget.TextInputLayoutmax_>
+        </android.support.design.widget.TextInputLayout>
         <!--endregion-->
 
         <!--region Description-->

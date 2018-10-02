@@ -39,7 +39,7 @@ class PlayerCharacteristicsFragment : Fragment() {
 
             uiThread {
                 setupViews(player)
-                setupTextWatchersEvents()
+                setupViewsEvents()
             }
         }
 
@@ -50,10 +50,13 @@ class PlayerCharacteristicsFragment : Fragment() {
 
     private fun setupViews(player: Player) {
         career.setText(player.careerName)
+
         rank.setText(player.rank.toString())
+        wounds.setText(player.wounds.toString())
+        max_wounds.setText(player.maxWounds.toString())
+
         experience.setText(player.experience.toString())
         max_experience.setText(player.maxExperience.toString())
-        max_wounds.setText(player.maxWounds.toString())
         corruption.setText(player.corruption.toString())
         max_corruption.setText(player.maxCorruption.toString())
 
@@ -74,17 +77,31 @@ class PlayerCharacteristicsFragment : Fragment() {
         max_reckless.setText(player.maxReckless.toString())
 
         description.setText(player.description)
+    }
 
-        setupViewsEvents()
+    private fun setupViewsEvents() {
+        setupTextWatchersEvents()
+
+        launch_strength.setOnClickListener { goToDiceRollerFragment(STRENGTH) }
+        launch_toughness.setOnClickListener { goToDiceRollerFragment(TOUGHNESS) }
+        launch_agility.setOnClickListener { goToDiceRollerFragment(AGILITY) }
+        launch_intelligence.setOnClickListener { goToDiceRollerFragment(INTELLIGENCE) }
+        launch_willpower.setOnClickListener { goToDiceRollerFragment(WILLPOWER) }
+        launch_fellowship.setOnClickListener { goToDiceRollerFragment(FELLOWSHIP) }
     }
 
     private fun setupTextWatchersEvents() {
         career.addTextChangedListener(playerSavingTextWatcher)
+
         rank.addTextChangedListener(playerSavingTextWatcher)
+        wounds.addTextChangedListener(playerSavingTextWatcher)
+        max_wounds.addTextChangedListener(playerSavingTextWatcher)
+
         experience.addTextChangedListener(playerSavingTextWatcher)
         max_experience.addTextChangedListener(playerSavingTextWatcher)
-        max_wounds.addTextChangedListener(playerSavingTextWatcher)
+        corruption.addTextChangedListener(playerSavingTextWatcher)
         max_corruption.addTextChangedListener(playerSavingTextWatcher)
+
         strength.addTextChangedListener(playerSavingTextWatcher)
         strength_fortune.addTextChangedListener(playerSavingTextWatcher)
         toughness.addTextChangedListener(playerSavingTextWatcher)
@@ -97,18 +114,11 @@ class PlayerCharacteristicsFragment : Fragment() {
         willpower_fortune.addTextChangedListener(playerSavingTextWatcher)
         fellowship.addTextChangedListener(playerSavingTextWatcher)
         fellowship_fortune.addTextChangedListener(playerSavingTextWatcher)
+
         max_conservative.addTextChangedListener(playerSavingTextWatcher)
         max_reckless.addTextChangedListener(playerSavingTextWatcher)
-        description.addTextChangedListener(playerSavingTextWatcher)
-    }
 
-    private fun setupViewsEvents() {
-        launch_strength.setOnClickListener { goToDiceRollerFragment(STRENGTH) }
-        launch_toughness.setOnClickListener { goToDiceRollerFragment(TOUGHNESS) }
-        launch_agility.setOnClickListener { goToDiceRollerFragment(AGILITY) }
-        launch_intelligence.setOnClickListener { goToDiceRollerFragment(INTELLIGENCE) }
-        launch_willpower.setOnClickListener { goToDiceRollerFragment(WILLPOWER) }
-        launch_fellowship.setOnClickListener { goToDiceRollerFragment(FELLOWSHIP) }
+        description.addTextChangedListener(playerSavingTextWatcher)
     }
 
     // endregion
@@ -139,6 +149,7 @@ class PlayerCharacteristicsFragment : Fragment() {
                             maxExperience = partialPlayer.maxExperience,
                             maxConservative = partialPlayer.maxConservative,
                             maxReckless = partialPlayer.maxReckless,
+                            wounds = partialPlayer.wounds,
                             maxWounds = partialPlayer.maxWounds,
                             corruption = partialPlayer.corruption,
                             maxCorruption = partialPlayer.maxCorruption
@@ -162,6 +173,7 @@ class PlayerCharacteristicsFragment : Fragment() {
             maxExperience = max_experience.intValue,
             maxConservative = max_conservative.intValue,
             maxReckless = max_reckless.intValue,
+            wounds = wounds.intValue,
             maxWounds = max_wounds.intValue,
             corruption = corruption.intValue,
             maxCorruption = max_corruption.intValue
