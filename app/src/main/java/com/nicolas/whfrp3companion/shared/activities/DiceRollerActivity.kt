@@ -2,8 +2,6 @@ package com.nicolas.whfrp3companion.shared.activities
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.Menu
 import android.view.MenuItem
 import com.nicolas.database.HandRepository
@@ -13,6 +11,7 @@ import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.shared.DIALOG_ROLL_RESULT_TAG
 import com.nicolas.whfrp3companion.shared.HAND_INTENT_ARGUMENT
 import com.nicolas.whfrp3companion.shared.HAND_ROLL_COUNT_INTENT_ARGUMENT
+import com.nicolas.whfrp3companion.shared.createTextWatcher
 import com.nicolas.whfrp3companion.shared.dialogs.RollResultDialog
 import kotlinx.android.synthetic.main.activity_dice_roller.*
 import kotlinx.android.synthetic.main.content_dice_roller.*
@@ -76,7 +75,8 @@ class DiceRollerActivity : AppCompatActivity() {
             rollResultsDialog.show(supportFragmentManager, DIALOG_ROLL_RESULT_TAG)
         }
 
-        handNameTextView.addTextChangedListener(handNameTextWatcher)
+        handNameTextView.addTextChangedListener(createTextWatcher { newName -> hand.name = newName.toString() })
+
         characteristicDicePicker.setOnValueChangedListener { _, _, newVal -> hand.characteristicDicesCount = newVal }
         expertiseDicePicker.setOnValueChangedListener { _, _, newVal -> hand.expertiseDicesCount = newVal }
         fortuneDicePicker.setOnValueChangedListener { _, _, newVal -> hand.fortuneDicesCount = newVal }
@@ -134,13 +134,4 @@ class DiceRollerActivity : AppCompatActivity() {
         challengeDicePicker.value = hand.challengeDicesCount
         misfortuneDicePicker.value = hand.misfortuneDicesCount
     }
-
-    private val handNameTextWatcher: TextWatcher
-        get() = object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-            override fun afterTextChanged(s: Editable) {
-                hand.name = s.toString()
-            }
-        }
 }

@@ -2,8 +2,6 @@ package com.nicolas.whfrp3companion.playersheet
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -160,7 +158,7 @@ internal class PlayerDiceRollerActivity : AppCompatActivity() {
             }
         }
 
-        handNameTextView.addTextChangedListener(handNameTextWatcher)
+        handNameTextView.addTextChangedListener(createTextWatcher { newName -> hand.name = newName.toString() })
         characteristicDicePicker.setOnValueChangedListener { _, _, newVal -> hand.characteristicDicesCount = newVal }
         expertiseDicePicker.setOnValueChangedListener { _, _, newVal -> hand.expertiseDicesCount = newVal }
         fortuneDicePicker.setOnValueChangedListener { _, _, newVal -> hand.fortuneDicesCount = newVal }
@@ -216,15 +214,6 @@ internal class PlayerDiceRollerActivity : AppCompatActivity() {
             }
         }
     }
-
-    private val handNameTextWatcher: TextWatcher
-        get() = object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-            override fun afterTextChanged(s: Editable) {
-                hand.name = s.toString()
-            }
-        }
 
     // endregion
 }

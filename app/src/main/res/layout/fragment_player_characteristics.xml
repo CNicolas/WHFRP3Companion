@@ -230,6 +230,7 @@
         </android.support.design.widget.TextInputLayout>
         <!--endregion-->
 
+        <!--region Characteristics-->
         <!--region STRENGTH-->
         <TextView
             android:id="@+id/strength_label"
@@ -523,6 +524,7 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintBottom_toBottomOf="@+id/fellowship_label"
             app:layout_constraintHorizontal_weight="1" />
+        <!--endregion-->
         <!--endregion-->
 
         <!--region Stance-->

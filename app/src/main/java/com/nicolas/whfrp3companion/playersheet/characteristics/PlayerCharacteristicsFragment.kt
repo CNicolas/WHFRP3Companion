@@ -2,8 +2,6 @@ package com.nicolas.whfrp3companion.playersheet.characteristics
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,6 +13,7 @@ import com.nicolas.models.player.enums.Characteristic.*
 import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.playersheet.advancedDiceRoller.PlayerAdvancedDiceRollerFragment
 import com.nicolas.whfrp3companion.shared.PLAYER_NAME_INTENT_ARGUMENT
+import com.nicolas.whfrp3companion.shared.createTextWatcher
 import com.nicolas.whfrp3companion.shared.viewModifications.intValue
 import kotlinx.android.synthetic.main.fragment_player_characteristics.*
 import org.jetbrains.anko.doAsync
@@ -91,34 +90,33 @@ class PlayerCharacteristicsFragment : Fragment() {
     }
 
     private fun setupTextWatchersEvents() {
-        career.addTextChangedListener(playerSavingTextWatcher)
 
-        rank.addTextChangedListener(playerSavingTextWatcher)
-        wounds.addTextChangedListener(playerSavingTextWatcher)
-        max_wounds.addTextChangedListener(playerSavingTextWatcher)
+        rank.addTextChangedListener(createTextWatcher { _ -> save() })
+        wounds.addTextChangedListener(createTextWatcher{ _ -> save() })
+        max_wounds.addTextChangedListener(createTextWatcher{ _ -> save() })
 
-        experience.addTextChangedListener(playerSavingTextWatcher)
-        max_experience.addTextChangedListener(playerSavingTextWatcher)
-        corruption.addTextChangedListener(playerSavingTextWatcher)
-        max_corruption.addTextChangedListener(playerSavingTextWatcher)
+        experience.addTextChangedListener(createTextWatcher{ _ -> save() })
+        max_experience.addTextChangedListener(createTextWatcher{ _ -> save() })
+        corruption.addTextChangedListener(createTextWatcher{ _ -> save() })
+        max_corruption.addTextChangedListener(createTextWatcher{ _ -> save() })
 
-        strength.addTextChangedListener(playerSavingTextWatcher)
-        strength_fortune.addTextChangedListener(playerSavingTextWatcher)
-        toughness.addTextChangedListener(playerSavingTextWatcher)
-        toughness_fortune.addTextChangedListener(playerSavingTextWatcher)
-        agility.addTextChangedListener(playerSavingTextWatcher)
-        agility_fortune.addTextChangedListener(playerSavingTextWatcher)
-        intelligence.addTextChangedListener(playerSavingTextWatcher)
-        intelligence_fortune.addTextChangedListener(playerSavingTextWatcher)
-        willpower.addTextChangedListener(playerSavingTextWatcher)
-        willpower_fortune.addTextChangedListener(playerSavingTextWatcher)
-        fellowship.addTextChangedListener(playerSavingTextWatcher)
-        fellowship_fortune.addTextChangedListener(playerSavingTextWatcher)
+        strength.addTextChangedListener(createTextWatcher{ _ -> save() })
+        strength_fortune.addTextChangedListener(createTextWatcher{ _ -> save() })
+        toughness.addTextChangedListener(createTextWatcher{ _ -> save() })
+        toughness_fortune.addTextChangedListener(createTextWatcher{ _ -> save() })
+        agility.addTextChangedListener(createTextWatcher{ _ -> save() })
+        agility_fortune.addTextChangedListener(createTextWatcher{ _ -> save() })
+        intelligence.addTextChangedListener(createTextWatcher{ _ -> save() })
+        intelligence_fortune.addTextChangedListener(createTextWatcher{ _ -> save() })
+        willpower.addTextChangedListener(createTextWatcher{ _ -> save() })
+        willpower_fortune.addTextChangedListener(createTextWatcher{ _ -> save() })
+        fellowship.addTextChangedListener(createTextWatcher{ _ -> save() })
+        fellowship_fortune.addTextChangedListener(createTextWatcher{ _ -> save() })
 
-        max_conservative.addTextChangedListener(playerSavingTextWatcher)
-        max_reckless.addTextChangedListener(playerSavingTextWatcher)
+        max_conservative.addTextChangedListener(createTextWatcher{ _ -> save() })
+        max_reckless.addTextChangedListener(createTextWatcher{ _ -> save() })
 
-        description.addTextChangedListener(playerSavingTextWatcher)
+        description.addTextChangedListener(createTextWatcher{ _ -> save() })
     }
 
     // endregion
@@ -178,13 +176,6 @@ class PlayerCharacteristicsFragment : Fragment() {
             corruption = corruption.intValue,
             maxCorruption = max_corruption.intValue
     )
-
-    private val playerSavingTextWatcher: TextWatcher
-        get() = object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-            override fun afterTextChanged(s: Editable) = save()
-        }
 
     companion object {
         fun newInstance(playerName: String): PlayerCharacteristicsFragment {
