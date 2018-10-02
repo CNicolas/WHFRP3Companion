@@ -1,14 +1,10 @@
 package com.nicolas.whfrp3companion.playersheet.state
 
-import android.app.AlertDialog
-import android.content.res.ColorStateList
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v4.content.ContextCompat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.NumberPicker
 import com.nicolas.database.PlayerRepository
 import com.nicolas.models.extensions.*
 import com.nicolas.models.player.Player
@@ -18,8 +14,6 @@ import kotlinx.android.synthetic.main.content_stance_bar.*
 import kotlinx.android.synthetic.main.fragment_player_state.*
 import org.adw.library.widgets.discreteseekbar.DiscreteSeekBar
 import org.jetbrains.anko.doAsync
-import org.jetbrains.anko.intentFor
-import org.jetbrains.anko.toast
 import org.jetbrains.anko.uiThread
 import org.koin.android.ext.android.inject
 import kotlin.math.abs
@@ -67,10 +61,6 @@ class PlayerStateFragment : Fragment() {
                 soakTextView.text = "${player.soak}"
 
                 weaponsListView.adapter = WeaponsAdapter(context!!, player.getEquippedWeapons())
-
-                setupEncumbrance()
-
-                setupMoney()
             }
         }
     }
@@ -84,10 +74,6 @@ class PlayerStateFragment : Fragment() {
 
         removeExhaustionButton.setOnClickListener { removeExhaustion() }
         addExhaustionButton.setOnClickListener { addExhaustion() }
-
-        openEffects.setOnClickListener { startEffectsActivity() }
-
-        changeMoney.setOnClickListener { changeMoney() }
     }
 
     private fun removeWound() {
@@ -144,48 +130,6 @@ class PlayerStateFragment : Fragment() {
         updatePlayerAsync()
     }
 
-    private fun startEffectsActivity() {
-        activity?.let {
-            startActivity(it.intentFor<PlayerEffectsActivity>(
-                    PLAYER_NAME_INTENT_ARGUMENT to player.name
-            ))
-        }
-    }
-
-    private fun changeMoney() {
-        val builder = AlertDialog.Builder(activity)
-        val inflater = activity!!.layoutInflater
-        val view = inflater.inflate(R.layout.dialog_money, null, false)
-
-        val goldPicker = view.findViewById(R.id.gold) as NumberPicker
-        val silverPicker = view.findViewById(R.id.silver) as NumberPicker
-        val brassPicker = view.findViewById(R.id.brass) as NumberPicker
-
-        builder.setView(view)
-        builder.setTitle(R.string.change_money)
-
-        builder.setNegativeButton(R.string.remove) { dialog, _ ->
-            try {
-                player.removeMoney(goldPicker.value, silverPicker.value, brassPicker.value)
-                dialog.dismiss()
-            } catch (exception: IllegalArgumentException) {
-                context?.toast(R.string.not_enough_money)
-            }
-        }
-
-        builder.setPositiveButton(R.string.add) { dialog, _ ->
-            player.addMoney(goldPicker.value, silverPicker.value, brassPicker.value)
-            dialog.dismiss()
-        }
-
-        builder.setOnDismissListener {
-            updatePlayerAsync()
-            setupMoney()
-        }
-
-        builder.create().show()
-    }
-
     private fun updateWoundsText() {
         woundsTextView.text = "${player.wounds} / ${player.maxWounds}"
     }
@@ -211,32 +155,6 @@ class PlayerStateFragment : Fragment() {
         stanceBar.numericTransformer = object : DiscreteSeekBar.NumericTransformer() {
             override fun transform(value: Int): Int = abs(value)
         }
-    }
-
-    private fun setupEncumbrance() {
-        encumbranceBar.min = 0
-        encumbranceBar.max = player.maxEncumbrance
-        encumbranceBar.progress = player.encumbrance
-        encumbranceBar.isEnabled = false
-
-        val colorId = when {
-            player.encumbrance < player.encumbranceOverload -> R.color.conservative
-            player.encumbrance < player.maxEncumbrance -> R.color.orange
-            else -> R.color.reckless
-        }
-        val color = ContextCompat.getColor(context!!, colorId)
-        val colorStateList = ColorStateList.valueOf(color)
-        encumbranceBar.setScrubberColor(colorStateList)
-
-        encumbranceTextView.text = getString(R.string.value_on_max_value_format)
-                .format(player.encumbrance, player.maxEncumbrance)
-        encumbranceTextView.setTextColor(colorStateList)
-    }
-
-    private fun setupMoney() {
-        goldTextView.text = "${player.gold}"
-        silverTextView.text = "${player.silver}"
-        brassTextView.text = "${player.brass}"
     }
 
     private fun changeStance(newStanceValue: Int) {
