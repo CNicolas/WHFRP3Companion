@@ -11,6 +11,7 @@
         android:layout_height="match_parent"
         android:layout_width="match_parent"
         android:paddingBottom="@dimen/padding_above_big_fab"
+        android:clipToPadding="false"
         tools:listheader="@layout/list_skills_header"
         tools:listitem="@layout/list_skills_child" />
 

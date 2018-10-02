@@ -43,7 +43,6 @@ class PlayerInventoryFragment : Fragment(), ItemListener {
         playerName = arguments!!.getString(PLAYER_NAME_INTENT_ARGUMENT)
 
         setupViews()
-        setupViewsEvents()
 
         return resultingView
     }
@@ -52,6 +51,7 @@ class PlayerInventoryFragment : Fragment(), ItemListener {
         super.onResume()
 
         setupViews()
+        setupViewsEvents()
     }
 
     // region ItemListener
@@ -75,8 +75,10 @@ class PlayerInventoryFragment : Fragment(), ItemListener {
     // endregion
 
     private fun setupViewsEvents() {
-        add_item.setOnClickListener { startItemEditionActivity() }
-        change_money.setOnClickListener { changeMoney() }
+        activity?.let { _ ->
+            add_item.setOnClickListener { startItemEditionActivity() }
+            change_money.setOnClickListener { changeMoney() }
+        }
     }
 
     private fun startItemEditionActivity(item: Item? = null) {

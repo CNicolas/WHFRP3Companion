@@ -18,7 +18,7 @@
     <dimen name="big_padding">20dp</dimen>
     <dimen name="giant_padding">32dp</dimen>
     <dimen name="giant_padding_2">64dp</dimen>
-    <dimen name="padding_above_big_fab">72dp</dimen>
+    <dimen name="padding_above_big_fab">80dp</dimen>
 
     <dimen name="list_std_margin">16dp</dimen>
     <dimen name="list_std_drawable">24dp</dimen>
