@@ -25,7 +25,8 @@ data class Action(val name: String = "Action",
             skillText != null -> skillText
             skill != null -> when {
                 targetSkill != null -> "$skill contre $targetSkill de la cible"
-                else -> "$skill contre Defense de la cible"
+                targetDefense != null -> "$skill contre Defense de la cible"
+                else -> skill
             }
             else -> null
         }

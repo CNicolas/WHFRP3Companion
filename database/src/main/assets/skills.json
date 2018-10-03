@@ -316,7 +316,7 @@
     ]
   },
   {
-    "characteristic": "INTELLIGENCE",
+    "characteristic": "FELLOWSHIP",
     "type": "ADVANCED",
     "name": "Invocation",
     "specializations": [
@@ -363,7 +363,7 @@
     ]
   },
   {
-    "characteristic": "INTELLIGENCE",
+    "characteristic": "WILLPOWER",
     "type": "ADVANCED",
     "name": "Piété",
     "specializations": [

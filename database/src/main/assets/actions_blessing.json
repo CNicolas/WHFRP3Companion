@@ -3,6 +3,7 @@
     "name": "Bénédiction Mineure",
     "type": "BLESSING",
     "traits": [ "BASIC", "MINOR", "RANK_0", "REACTION" ],
+    "skillsText": "Pas de test requis",
     "conditions": [
       { "favor": 2 },
       { "range": "ENGAGED", "target": "NONE" }
@@ -25,6 +26,7 @@
     "type": "BLESSING",
     "traits": [ "BASIC", "MINOR", "RANK_0" ],
     "skill": "Invocation",
+    "skillText": "Piété (Int)",
     "conditions": [
       { "favor": 2 },
       { "range": "ENGAGED", "target": "TARGET" }
@@ -78,6 +80,7 @@
     "type": "BLESSING",
     "traits": [ "BASIC", "DIVINE", "RALLY" ],
     "skill": "Piété",
+    "skillText": "Piété (Int)",
     "conditionsText": "Vous avez réussi à invoquer une Bénédiction, mais vous avez moins de faveur que nécessaire. Si vous êtes engagés avec un ennemi, ajoutez {MISFORTUNE_DICE} à votre réserve de dés.",
     "conservativeSide": {
       "stance": "CONSERVATIVE",

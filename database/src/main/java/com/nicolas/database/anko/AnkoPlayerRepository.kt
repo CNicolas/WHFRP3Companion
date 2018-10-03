@@ -56,6 +56,10 @@ class AnkoPlayerRepository(context: Context) : PlayerRepository {
     }
 
     private fun Player.createActions() {
-        actions = basicActions.toList()
+        actions = basicActions
+                .filter { action ->
+                    skills.map { it.name }.contains(action.skill)
+                }
+                .toList()
     }
 }
