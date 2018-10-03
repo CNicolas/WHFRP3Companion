@@ -23,7 +23,7 @@ import kotlinx.android.synthetic.main.fragment_actions.*
 import kotlinx.android.synthetic.main.toolbar.*
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.intentFor
-import org.jetbrains.anko.toast
+import org.jetbrains.anko.longToast
 import org.jetbrains.anko.uiThread
 import org.koin.android.ext.android.inject
 
@@ -94,7 +94,7 @@ class PlayerAddActionsActivity : AppCompatActivity(), ActionListener {
 
             uiThread {
                 setActionsAdapter()
-                toast("${action.name} added")
+                longToast(getString(R.string.added_format).format(action.name))
             }
         }
     }
