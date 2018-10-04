@@ -176,7 +176,7 @@
     <string name="trait_grey_order">Ordre Gris</string>
     <string name="trait_amethyst_order">Ordre d\'Améthyste</string>
     <string name="none">Aucun(e)</string>
-    <string name="missing_player_name">Veuillez entrer un nom</string>
+    <string name="missing_name">Veuillez entrer un nom</string>
     <string name="dices_count">Nombre de dés</string>
     <string name="agility_short">Ag</string>
     <string name="fellowship_short">Soc</string>

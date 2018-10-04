@@ -102,7 +102,7 @@ class PlayersFragment : Fragment() {
                 updatePlayers()
                 dialog.dismiss()
             } else {
-                context?.toast(R.string.missing_player_name)
+                context?.toast(R.string.missing_name)
             }
         }
 

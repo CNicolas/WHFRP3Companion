@@ -22,6 +22,7 @@ import com.nicolas.whfrp3companion.shared.viewModifications.show
 import kotlinx.android.synthetic.main.activity_item_edition.*
 import kotlinx.android.synthetic.main.toolbar.*
 import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.toast
 import org.jetbrains.anko.uiThread
 import org.koin.android.ext.android.inject
 
@@ -82,7 +83,15 @@ class ItemEditionActivity : AppCompatActivity() {
             }
         }
 
-        save_item.setOnClickListener { save() }
+        save_item.setOnClickListener {
+            if (name.text.toString().trim().isNotEmpty()) {
+                name_wrapper.isErrorEnabled = false
+                save()
+            } else {
+                name_wrapper.error = getString(R.string.missing_name)
+                toast(R.string.missing_name)
+            }
+        }
     }
 
     private fun fillViewsWithItem(item: Item?) {
