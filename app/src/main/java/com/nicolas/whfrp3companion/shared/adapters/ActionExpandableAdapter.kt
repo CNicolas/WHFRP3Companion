@@ -8,6 +8,7 @@ import android.widget.*
 import com.nicolas.models.action.Action
 import com.nicolas.models.action.ActionType
 import com.nicolas.whfrp3companion.R
+import com.nicolas.whfrp3companion.shared.adapters.ActionExpandableAdapter.ActionButtonType.*
 import com.nicolas.whfrp3companion.shared.bind
 import com.nicolas.whfrp3companion.shared.enums.drawableId
 import com.nicolas.whfrp3companion.shared.enums.labelId
@@ -17,7 +18,7 @@ import com.nicolas.whfrp3companion.shared.viewModifications.show
 class ActionExpandableAdapter(context: Context,
                               private val actions: List<Action>,
                               private val actionListener: ActionListener? = null,
-                              private val buttonType: ActionButtonType = ActionButtonType.NONE) : BaseExpandableListAdapter() {
+                              private val buttonType: ActionButtonType = NONE) : BaseExpandableListAdapter() {
 
     private val inflater = LayoutInflater.from(context)
 
@@ -126,15 +127,15 @@ class ActionExpandableAdapter(context: Context,
             actionNameTextView.text = action.name
 
             when (buttonType) {
-                ActionButtonType.NONE -> {
+                NONE -> {
                     actionAddButton.hide()
                     actionRollButton.hide()
                 }
-                ActionButtonType.ADD -> {
+                ADD -> {
                     actionAddButton.show()
                     actionRollButton.hide()
                 }
-                ActionButtonType.ROLL -> {
+                ROLL -> {
                     actionAddButton.hide()
                     actionRollButton.show()
                 }

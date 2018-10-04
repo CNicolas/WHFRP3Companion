@@ -4,7 +4,6 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.view.View
 import com.nicolas.database.PlayerRepository
 import com.nicolas.models.action.Action
 import com.nicolas.models.extensions.getEquippedWeapons
@@ -61,6 +60,12 @@ class PlayerAdvancedDiceRollerActionsActivity : AppCompatActivity(), ActionListe
     }
 
     override fun primaryHandler(action: Action) {
+        startActivity(intentFor<ActionDetailActivity>(
+                ACTION_INTENT_ARGUMENT to action
+        ))
+    }
+
+    override fun secondaryHandler(action: Action) {
         val weaponCategories = action.conditions?.mapNotNull { it.weapon }?.flatMap { it.categories }
         val weapons = weaponCategories?.let {
             player.getEquippedWeaponsForCategories(it)
@@ -74,14 +79,6 @@ class PlayerAdvancedDiceRollerActionsActivity : AppCompatActivity(), ActionListe
                 .show(supportFragmentManager, DIALOG_ACTION_WEAPONS_TAG)
     }
 
-    override fun longPrimaryHandler(view: View, action: Action): Boolean {
-        startActivity(intentFor<ActionDetailActivity>(
-                ACTION_INTENT_ARGUMENT to action
-        ))
-
-        return true
-    }
-
     private fun closeActivityAfterActionSelected(action: Action, weapon: Weapon? = null) {
         val resultingIntent = Intent()
         resultingIntent.putExtra(ACTION_INTENT_ARGUMENT, action)
@@ -92,7 +89,7 @@ class PlayerAdvancedDiceRollerActionsActivity : AppCompatActivity(), ActionListe
     }
 
     private fun setPlayerActionsAdapter() {
-        val adapter = ActionExpandableAdapter(this, player.actions, this, ActionExpandableAdapter.ActionButtonType.NONE)
+        val adapter = ActionExpandableAdapter(this, player.actions, this, ActionExpandableAdapter.ActionButtonType.ROLL)
         actions_expandable_list_view.setAdapter(adapter)
 
         (0 until player.actions.map { it.type }.distinct().size).forEach { it ->
