@@ -39,7 +39,7 @@ class PlayerSkillsFragment : Fragment() {
                 setupViewsEvents()
 
                 setSkillsListAdapter()
-                skillsList.setGroupIndicator(null)
+                skills_listview.setGroupIndicator(null)
             }
         }
 
@@ -75,7 +75,7 @@ class PlayerSkillsFragment : Fragment() {
     private fun setSkillsListAdapter() {
         activity?.let {
             val skillsAdapter = PlayerSkillsExpandableAdapter(it, player)
-            skillsList.setAdapter(skillsAdapter)
+            skills_listview.setAdapter(skillsAdapter)
         }
     }
 

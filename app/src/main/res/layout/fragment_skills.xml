@@ -7,7 +7,7 @@
     android:layout_height="match_parent">
 
     <ExpandableListView
-        android:id="@+id/skillsList"
+        android:id="@+id/skills_listview"
         android:layout_height="match_parent"
         android:layout_width="match_parent"
         android:paddingBottom="@dimen/padding_above_big_fab"

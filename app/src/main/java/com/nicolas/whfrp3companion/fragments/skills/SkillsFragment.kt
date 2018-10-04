@@ -22,7 +22,8 @@ class SkillsFragment : Fragment() {
 
             uiThread {
                 val skillsAdapter = SkillsExpandableAdapter(context!!, skills)
-                skillsList.setAdapter(skillsAdapter)
+                skills_listview.setAdapter(skillsAdapter)
+                skills_listview.setPadding(0, 0, 0, 0)
 
                 add_skill.hide()
             }
