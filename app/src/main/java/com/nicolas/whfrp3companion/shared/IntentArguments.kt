@@ -21,4 +21,5 @@ const val ACTION_INTENT_ARGUMENT = "action"
 const val ACTION_SEARCH_INTENT_ARGUMENT = "actionSearch"
 
 const val ACTION_REQUEST_CODE = 1
-const val SKILL_REQUEST_CODE = 2
+const val ACTION_SEARCH_REQUEST_CODE = 2
+const val SKILL_REQUEST_CODE = 3

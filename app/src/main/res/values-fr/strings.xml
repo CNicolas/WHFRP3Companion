@@ -199,4 +199,5 @@
     <string name="max_corruption_short">Corrupt. Max</string>
     <string name="corruption_short">Corrupt.</string>
     <string name="added_format">%1$s ajouté(e)</string>
+    <string name="reset">Réinitialiser</string>
 </resources>

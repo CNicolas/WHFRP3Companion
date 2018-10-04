@@ -1,19 +1,23 @@
 package com.nicolas.whfrp3companion.fragments.actions
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.FloatingActionButton
 import android.support.v4.app.Fragment
 import android.view.*
 import com.nicolas.database.loadActions
 import com.nicolas.models.action.Action
+import com.nicolas.models.action.ActionSearch
 import com.nicolas.models.extensions.search
 import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.shared.ACTION_INTENT_ARGUMENT
-import com.nicolas.whfrp3companion.shared.ACTION_TALENT_SEARCH_TAG
+import com.nicolas.whfrp3companion.shared.ACTION_SEARCH_INTENT_ARGUMENT
+import com.nicolas.whfrp3companion.shared.ACTION_SEARCH_REQUEST_CODE
 import com.nicolas.whfrp3companion.shared.activities.ActionDetailActivity
+import com.nicolas.whfrp3companion.shared.activities.ActionSearchActivity
 import com.nicolas.whfrp3companion.shared.adapters.ActionExpandableAdapter
 import com.nicolas.whfrp3companion.shared.adapters.ActionListener
-import com.nicolas.whfrp3companion.shared.dialogs.ActionSearchDialog
 import com.nicolas.whfrp3companion.shared.getView
 import kotlinx.android.synthetic.main.fragment_actions.*
 import org.jetbrains.anko.doAsync
@@ -48,6 +52,25 @@ class ActionsFragment : Fragment(), ActionListener {
         return super.onOptionsItemSelected(item)
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        when (requestCode) {
+            ACTION_SEARCH_REQUEST_CODE -> if (resultCode == Activity.RESULT_OK) {
+                val actionSearch = data?.getSerializableExtra(ACTION_SEARCH_INTENT_ARGUMENT) as ActionSearch?
+                actionSearch?.let {
+                    doAsync {
+                        actions = actions.search(actionSearch)
+
+                        uiThread { _ ->
+                            setActionsAdapter()
+                        }
+                    }
+                }
+            }
+        }
+
+        super.onActivityResult(requestCode, resultCode, data)
+    }
+
     override fun primaryHandler(action: Action) {
         activity?.let {
             it.startActivity(it.intentFor<ActionDetailActivity>(
@@ -57,20 +80,12 @@ class ActionsFragment : Fragment(), ActionListener {
     }
 
     private fun setupViewsEvents(view: View) {
-        view.getView<FloatingActionButton>(R.id.fab_search_action).setOnClickListener { openSearchDialog() }
+        view.getView<FloatingActionButton>(R.id.fab_search_action).setOnClickListener { openSearchActivity() }
     }
 
-    private fun openSearchDialog() {
+    private fun openSearchActivity() {
         activity?.let {
-            ActionSearchDialog.newInstance { actionSearch ->
-                doAsync {
-                    actions = actions.search(actionSearch)
-
-                    uiThread { _ ->
-                        setActionsAdapter()
-                    }
-                }
-            }.show(it.supportFragmentManager, ACTION_TALENT_SEARCH_TAG)
+            it.startActivity(it.intentFor<ActionSearchActivity>())
         }
     }
 

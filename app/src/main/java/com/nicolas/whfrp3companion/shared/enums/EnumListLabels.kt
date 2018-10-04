@@ -2,6 +2,7 @@ package com.nicolas.whfrp3companion.shared.enums
 
 import android.content.Context
 import com.nicolas.models.action.ActionType
+import com.nicolas.models.action.Trait
 import com.nicolas.models.item.enums.ArmorType
 import com.nicolas.models.item.enums.Quality
 import com.nicolas.models.item.enums.Range
@@ -80,6 +81,24 @@ internal fun Array<ActionType>.sortedAndLabels(context: Context): Pair<List<Acti
     }
 
     return sortedActionTypes to sortedLabels
+}
+
+// endregion
+
+// region Trait
+
+internal fun Array<Trait>.labels(context: Context): List<String> = map { context.getString(it.labelId) }
+
+internal fun Array<Trait>.sortedAndLabels(context: Context): Pair<List<Trait>, List<String>> {
+    val sortedLabels = labels(context).sortedWith(compareBy(String.CASE_INSENSITIVE_ORDER) {
+        Normalizer.normalize(it, Normalizer.Form.NFD)
+    })
+
+    val sortedTraits = sortedLabels.mapNotNull { label ->
+        find { label == context.getString(it.labelId) }
+    }
+
+    return sortedTraits to sortedLabels
 }
 
 // endregion

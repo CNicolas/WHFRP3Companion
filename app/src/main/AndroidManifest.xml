@@ -103,6 +103,7 @@
             android:parentActivityName=".playersheet.PlayerSheetActivity"
             android:windowSoftInputMode="stateHidden|adjustPan">
         </activity>
+        <activity android:name=".shared.activities.ActionSearchActivity" />
     </application>
 
 </manifest>

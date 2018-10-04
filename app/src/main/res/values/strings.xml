@@ -226,7 +226,9 @@
     <string name="uses">Uses</string>
 
     <string name="all">All</string>
+    <string name="reset">Reset</string>
     <string name="added_format">%1$s added</string>
+
     <string name="slash" translatable="false">/</string>
     <string name="hyphen" translatable="false">-</string>
     <string name="plus" translatable="false">+</string>

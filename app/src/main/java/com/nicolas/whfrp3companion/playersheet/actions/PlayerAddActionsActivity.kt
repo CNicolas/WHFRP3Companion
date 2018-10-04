@@ -1,5 +1,7 @@
 package com.nicolas.whfrp3companion.playersheet.actions
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
@@ -7,19 +9,18 @@ import android.view.MenuItem
 import com.nicolas.database.PlayerRepository
 import com.nicolas.database.loadActions
 import com.nicolas.models.action.Action
+import com.nicolas.models.action.ActionSearch
 import com.nicolas.models.extensions.addAction
 import com.nicolas.models.extensions.search
 import com.nicolas.models.item.enums.ItemType
 import com.nicolas.models.player.Player
 import com.nicolas.whfrp3companion.R
-import com.nicolas.whfrp3companion.shared.ACTION_INTENT_ARGUMENT
-import com.nicolas.whfrp3companion.shared.ACTION_TALENT_SEARCH_TAG
-import com.nicolas.whfrp3companion.shared.PLAYER_NAME_INTENT_ARGUMENT
+import com.nicolas.whfrp3companion.shared.*
 import com.nicolas.whfrp3companion.shared.activities.ActionDetailActivity
+import com.nicolas.whfrp3companion.shared.activities.ActionSearchActivity
 import com.nicolas.whfrp3companion.shared.adapters.ActionExpandableAdapter
 import com.nicolas.whfrp3companion.shared.adapters.ActionListener
-import com.nicolas.whfrp3companion.shared.dialogs.ActionSearchDialog
-import kotlinx.android.synthetic.main.fragment_actions.*
+import kotlinx.android.synthetic.main.activity_player_add_actions.*
 import kotlinx.android.synthetic.main.toolbar.*
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.intentFor
@@ -58,8 +59,6 @@ class PlayerAddActionsActivity : AppCompatActivity(), ActionListener {
                 }
             }
         }
-
-        setupViewsEvents()
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -75,9 +74,29 @@ class PlayerAddActionsActivity : AppCompatActivity(), ActionListener {
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
+            R.id.search -> openSearchActivity()
             R.id.reset_actions_filters -> resetActions()
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        when (requestCode) {
+            ACTION_SEARCH_REQUEST_CODE -> if (resultCode == Activity.RESULT_OK) {
+                val actionSearch = data?.getSerializableExtra(ACTION_SEARCH_INTENT_ARGUMENT) as ActionSearch?
+                actionSearch?.let {
+                    doAsync {
+                        actions = actions.search(actionSearch)
+
+                        uiThread { _ ->
+                            setActionsAdapter()
+                        }
+                    }
+                }
+            }
+        }
+
+        super.onActivityResult(requestCode, resultCode, data)
     }
 
     override fun primaryHandler(action: Action) {
@@ -99,20 +118,8 @@ class PlayerAddActionsActivity : AppCompatActivity(), ActionListener {
         }
     }
 
-    private fun setupViewsEvents() {
-        fab_search_action.setOnClickListener { openSearchDialog() }
-    }
-
-    private fun openSearchDialog() {
-        ActionSearchDialog.newInstance { actionSearch ->
-            doAsync {
-                actions = actions.search(actionSearch)
-
-                uiThread {
-                    setActionsAdapter()
-                }
-            }
-        }.show(supportFragmentManager, ACTION_TALENT_SEARCH_TAG)
+    private fun openSearchActivity() {
+        startActivity(intentFor<ActionSearchActivity>())
     }
 
     private fun resetActions() {
