@@ -9,10 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.View.INVISIBLE
 import android.view.ViewGroup
-import android.widget.BaseExpandableListAdapter
-import android.widget.ImageView
-import android.widget.PopupMenu
-import android.widget.TextView
+import android.widget.*
 import com.nicolas.models.extensions.getItemsOfType
 import com.nicolas.models.item.*
 import com.nicolas.models.item.enums.ItemType
@@ -26,7 +23,6 @@ import com.nicolas.whfrp3companion.shared.enums.pluralLabelId
 import com.nicolas.whfrp3companion.shared.getView
 import com.nicolas.whfrp3companion.shared.viewModifications.hide
 import com.nicolas.whfrp3companion.shared.viewModifications.show
-import org.jetbrains.anko.dimen
 
 class PlayerInventoryExpandableAdapter(private val context: Context,
                                        private val player: Player,
@@ -117,6 +113,8 @@ class PlayerInventoryExpandableAdapter(private val context: Context,
         private val itemNameTextView by view.bind<TextView>(R.id.item_name)
         private val encumbranceTextView by view.bind<TextView>(R.id.encumbrance)
 
+        private val custimItemLayout by view.bind<LinearLayout>(R.id.custom_item_layout)
+
         private val defenseTextView by view.bind<TextView>(R.id.defense)
         private val soakTextView by view.bind<TextView>(R.id.soak)
 
@@ -194,6 +192,8 @@ class PlayerInventoryExpandableAdapter(private val context: Context,
         }
 
         private fun showArmorViews() {
+            custimItemLayout.show()
+
             val armor = item as Armor
 
             defenseTextView.text = armor.defense.toString()
@@ -207,6 +207,8 @@ class PlayerInventoryExpandableAdapter(private val context: Context,
         }
 
         private fun showExpandableViews() {
+            custimItemLayout.show()
+
             val expandable = item as Expandable
 
             usesTextView.text = expandable.uses.toString()
@@ -219,6 +221,8 @@ class PlayerInventoryExpandableAdapter(private val context: Context,
         }
 
         private fun showGenericItemViews() {
+            custimItemLayout.hide()
+
             armorViews.hide()
             expandableViews.hide()
             weaponViews.hide()
@@ -227,6 +231,8 @@ class PlayerInventoryExpandableAdapter(private val context: Context,
         }
 
         private fun showWeaponViews() {
+            custimItemLayout.show()
+
             val weapon = item as Weapon
 
             damageTextView.text = weapon.damage.toString()

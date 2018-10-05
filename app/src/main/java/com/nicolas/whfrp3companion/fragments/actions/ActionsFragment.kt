@@ -85,7 +85,7 @@ class ActionsFragment : Fragment(), ActionListener {
 
     private fun openSearchActivity() {
         activity?.let {
-            it.startActivity(it.intentFor<ActionSearchActivity>())
+            it.startActivityForResult(it.intentFor<ActionSearchActivity>(), ACTION_SEARCH_REQUEST_CODE)
         }
     }
 

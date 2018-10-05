@@ -93,5 +93,7 @@ class ActionSearchActivity : AppCompatActivity() {
 
                     traits_textview.text = traits.joinToString(", ") { getString(it.labelId) }
                 }
+
+        builder.show()
     }
 }

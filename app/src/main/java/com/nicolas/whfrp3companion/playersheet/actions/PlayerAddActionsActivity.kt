@@ -15,7 +15,10 @@ import com.nicolas.models.extensions.search
 import com.nicolas.models.item.enums.ItemType
 import com.nicolas.models.player.Player
 import com.nicolas.whfrp3companion.R
-import com.nicolas.whfrp3companion.shared.*
+import com.nicolas.whfrp3companion.shared.ACTION_INTENT_ARGUMENT
+import com.nicolas.whfrp3companion.shared.ACTION_SEARCH_INTENT_ARGUMENT
+import com.nicolas.whfrp3companion.shared.ACTION_SEARCH_REQUEST_CODE
+import com.nicolas.whfrp3companion.shared.PLAYER_NAME_INTENT_ARGUMENT
 import com.nicolas.whfrp3companion.shared.activities.ActionDetailActivity
 import com.nicolas.whfrp3companion.shared.activities.ActionSearchActivity
 import com.nicolas.whfrp3companion.shared.adapters.ActionExpandableAdapter
@@ -119,7 +122,7 @@ class PlayerAddActionsActivity : AppCompatActivity(), ActionListener {
     }
 
     private fun openSearchActivity() {
-        startActivity(intentFor<ActionSearchActivity>())
+        startActivityForResult(intentFor<ActionSearchActivity>(), ACTION_SEARCH_REQUEST_CODE)
     }
 
     private fun resetActions() {

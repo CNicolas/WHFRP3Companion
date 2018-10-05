@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.nicolas.whfrp3companion">
+    package="com.nicolas.whfrp3companion">
 
     <application
         android:name=".WHFRP3Companion"
@@ -26,6 +26,13 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="stateHidden|adjustResize">
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.app.searchable"
+                android:value="@xml/searchable" />
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
@@ -71,8 +78,7 @@
             android:label="@string/page_talents"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
-        <activity
-            android:name=".shared.activities.ActionDetailActivity" />
+        <activity android:name=".shared.activities.ActionDetailActivity" />
         <activity
             android:name=".playersheet.advancedDiceRoller.PlayerAdvancedDiceRollerSkillsActivity"
             android:parentActivityName=".playersheet.PlayerSheetActivity" />
@@ -83,8 +89,7 @@
         <activity
             android:name=".playersheet.actions.PlayerAddActionsActivity"
             android:parentActivityName=".playersheet.PlayerSheetActivity"
-            android:windowSoftInputMode="stateHidden|adjustPan">
-        </activity>
+            android:windowSoftInputMode="stateHidden|adjustPan"></activity>
         <activity android:name=".shared.activities.ActionSearchActivity" />
     </application>
 

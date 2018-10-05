@@ -33,7 +33,6 @@ class PlayersFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        super.onCreateView(inflater, container, savedInstanceState)
         val resultingView: View = inflater.inflate(R.layout.fragment_players, container, false)
 
         setupViewsEvents(resultingView)

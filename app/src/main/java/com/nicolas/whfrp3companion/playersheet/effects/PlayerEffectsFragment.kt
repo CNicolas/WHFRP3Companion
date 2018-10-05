@@ -31,8 +31,8 @@ class PlayerEffectsFragment : Fragment(), EffectListener {
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        super.onCreateView(inflater, container, savedInstanceState)
         val resultingView: View = inflater.inflate(R.layout.fragment_player_effects, container, false)
+        setHasOptionsMenu(true)
 
         val playerName = arguments!!.getString(PLAYER_NAME_INTENT_ARGUMENT)
         doAsync {

@@ -10,7 +10,7 @@ fun List<Action>.search(actionSearch: ActionSearch): List<Action> {
         filteredActions = filteredActions.findByActionType(it)
     }
 
-    actionSearch.traits.forEach { filteredActions = filteredActions.findByTrait(it) }
+    filteredActions = actionSearch.traits.flatMap { filteredActions.findByTrait(it) }
 
     actionSearch.cooldown?.let {
         filteredActions = filteredActions.findByCooldown(it)

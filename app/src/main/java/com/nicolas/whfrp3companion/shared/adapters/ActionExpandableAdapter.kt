@@ -50,7 +50,7 @@ class ActionExpandableAdapter(context: Context,
         return resultingView
     }
 
-    override fun getGroup(groupPosition: Int) = actionTypes[groupPosition]
+    override fun getGroup(groupPosition: Int) = if (actionTypes.isNotEmpty()) actionTypes[groupPosition] else null
     override fun getGroupCount() = actionTypes.size
     override fun getGroupId(groupPosition: Int) = groupPosition.toLong()
 
@@ -96,14 +96,16 @@ class ActionExpandableAdapter(context: Context,
         private val actionTypeTextView by view.bind<TextView>(R.id.actionTypeTextView)
         private val expandImageView by view.bind<ImageView>(R.id.expandImageView)
 
-        fun setupViews(actionType: ActionType, isExpanded: Boolean) {
-            actionTypeImageView.setImageResource(actionType.drawableId)
-            actionTypeTextView.setText(actionType.labelId)
+        fun setupViews(actionType: ActionType?, isExpanded: Boolean) {
+            actionType?.let {
+                actionTypeImageView.setImageResource(actionType.drawableId)
+                actionTypeTextView.setText(actionType.labelId)
 
-            if (isExpanded) {
-                expandImageView.setImageResource(R.drawable.ic_keyboard_arrow_down_black_24dp)
-            } else {
-                expandImageView.setImageResource(R.drawable.ic_keyboard_arrow_up_black_24dp)
+                if (isExpanded) {
+                    expandImageView.setImageResource(R.drawable.ic_keyboard_arrow_down_black_24dp)
+                } else {
+                    expandImageView.setImageResource(R.drawable.ic_keyboard_arrow_up_black_24dp)
+                }
             }
         }
     }
@@ -144,7 +146,9 @@ class ActionExpandableAdapter(context: Context,
 
         private fun setupViewsEvents(actionListener: ActionListener?) {
             actionChildLinearLayout.setOnClickListener { actionListener?.primaryHandler(action) }
-            actionChildLinearLayout.setOnLongClickListener { actionListener?.longPrimaryHandler(it, action) ?: true }
+            actionChildLinearLayout.setOnLongClickListener {
+                actionListener?.longPrimaryHandler(it, action) ?: true
+            }
             actionAddButton.setOnClickListener { actionListener?.secondaryHandler(action) }
             actionRollButton.setOnClickListener { actionListener?.secondaryHandler(action) }
         }
