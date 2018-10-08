@@ -10,6 +10,8 @@ import com.nicolas.database.PlayerRepository
 import com.nicolas.database.loadSkills
 import com.nicolas.models.extensions.addSkill
 import com.nicolas.models.extensions.advanced
+import com.nicolas.models.extensions.getSkillByName
+import com.nicolas.models.extensions.getSpecializationByName
 import com.nicolas.models.player.Player
 import com.nicolas.models.skill.Skill
 import com.nicolas.models.skill.Specialization
@@ -48,8 +50,24 @@ class PlayerSkillsFragment : Fragment(), SkillListener {
         return resultingView
     }
 
+    override fun skillLevelHandler(skill: Skill, level: Int) {
+        doAsync {
+            player.getSkillByName(skill.name)?.level = skill.level
+            player = playerRepository.update(player)
+        }
+    }
+
     override fun skillSecondaryHandler(skill: Skill) {
         goToDiceRollerFragment(skill)
+    }
+
+    override fun specializationToggleHandler(skill: Skill, specialization: Specialization) {
+        doAsync {
+            player.getSkillByName(skill.name)
+                    ?.getSpecializationByName(specialization.name)
+                    ?.isSpecialized = specialization.isSpecialized
+            player = playerRepository.update(player)
+        }
     }
 
     override fun specializationSecondaryHandler(skill: Skill, specialization: Specialization) {

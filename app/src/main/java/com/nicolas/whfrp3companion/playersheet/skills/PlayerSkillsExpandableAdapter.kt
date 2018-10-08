@@ -11,8 +11,6 @@ import android.widget.CheckBox
 import android.widget.ImageButton
 import android.widget.TextView
 import com.nicolas.database.anko.AnkoPlayerRepository
-import com.nicolas.models.extensions.getSkillByName
-import com.nicolas.models.extensions.getSpecializationByName
 import com.nicolas.models.player.Player
 import com.nicolas.models.skill.Skill
 import com.nicolas.models.skill.SkillType.ADVANCED
@@ -22,7 +20,6 @@ import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.shared.adapters.AbstractSkillsExpandableAdapter
 import com.nicolas.whfrp3companion.shared.bind
 import com.nicolas.whfrp3companion.shared.enums.labelId
-import org.jetbrains.anko.doAsync
 
 class PlayerSkillsExpandableAdapter(context: Context,
                                     private val player: Player,
@@ -125,9 +122,18 @@ class PlayerSkillsExpandableAdapter(context: Context,
         }
 
         private fun setupViewsEvents(skillListener: SkillListener?) {
-            level1CheckBox.setOnClickListener { setFormationLevel(1) }
-            level2CheckBox.setOnClickListener { setFormationLevel(2) }
-            level3CheckBox.setOnClickListener { setFormationLevel(3) }
+            level1CheckBox.setOnClickListener {
+                setFormationLevel(1)
+                skillListener?.skillLevelHandler(skill, 1)
+            }
+            level2CheckBox.setOnClickListener {
+                setFormationLevel(2)
+                skillListener?.skillLevelHandler(skill, 2)
+            }
+            level3CheckBox.setOnClickListener {
+                setFormationLevel(3)
+                skillListener?.skillLevelHandler(skill, 3)
+            }
 
             launchSkillImageButton.setOnClickListener { skillListener?.skillSecondaryHandler(skill) }
         }
@@ -147,13 +153,6 @@ class PlayerSkillsExpandableAdapter(context: Context,
 
             checkLevel()
             loseFocus()
-
-            doAsync {
-                if (player != null) {
-                    player?.getSkillByName(skill.name)?.level = skill.level
-                    ankoPlayerRepository?.update(player!!)
-                }
-            }
         }
 
         private fun checkLevel() {
@@ -208,22 +207,13 @@ class PlayerSkillsExpandableAdapter(context: Context,
         }
 
         private fun setupViewsEvents(skillListener: SkillListener?) {
-            specializationNameCheckableView.setOnClickListener { toggleSpecialization(it as CheckBox) }
-            launchSpecializationImageButton.setOnClickListener { skillListener?.specializationSecondaryHandler(skill, specialization) }
-        }
+            specializationNameCheckableView.setOnClickListener {
+                specialization.isSpecialized = !specialization.isSpecialized
+                (it as CheckBox).isChecked = specialization.isSpecialized
 
-        private fun toggleSpecialization(checkbox: CheckBox) {
-            specialization.isSpecialized = !specialization.isSpecialized
-            checkbox.isChecked = specialization.isSpecialized
-
-            doAsync {
-                if (player != null) {
-                    player?.getSkillByName(skill.name)
-                            ?.getSpecializationByName(specialization.name)
-                            ?.isSpecialized = specialization.isSpecialized
-                    ankoPlayerRepository?.update(player!!)
-                }
+                skillListener?.specializationToggleHandler(skill, specialization)
             }
+            launchSpecializationImageButton.setOnClickListener { skillListener?.specializationSecondaryHandler(skill, specialization) }
         }
     }
 }
