@@ -96,15 +96,11 @@ class PlayerSheetActivity : AppCompatActivity() {
         closeKeyboard()
     }
 
-    private fun displaySelectedFragment(menuItem: MenuItem) {
-        displaySelectedFragment(menuItem.itemId)
-
-        menuItem.isChecked = true
-    }
-
     private fun setupDrawerContent(navigationView: NavigationView) {
         navigationView.setNavigationItemSelectedListener {
-            displaySelectedFragment(it)
+            displaySelectedFragment(it.itemId)
+            it.isChecked = true
+
             true
         }
     }

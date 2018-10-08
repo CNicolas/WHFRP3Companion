@@ -38,16 +38,6 @@
                 android:value=".MainActivity" />
         </activity>
         <activity
-            android:name=".playersheet.PlayerDiceRollerActivity"
-            android:label="@string/page_dice_roller"
-            android:parentActivityName=".playersheet.PlayerDiceRollerActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".playersheet.PlayerDiceRollerActivity" />
-        </activity>
-        <activity
             android:name=".playersheet.inventory.ItemEditionActivity"
             android:label="@string/page_add_item"
             android:parentActivityName=".playersheet.PlayerSheetActivity"
@@ -59,20 +49,10 @@
                 android:value=".playersheet.PlayerSheetActivity" />
         </activity>
         <activity
-            android:name=".shared.activities.DiceRollerActivity"
-            android:label="@string/page_dice_roller"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme" />
-        <activity
             android:name=".shared.activities.DiceRollerStatisticsActivity"
             android:label="@string/page_dice_roller_statistics"
-            android:parentActivityName=".shared.activities.DiceRollerActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".shared.activities.DiceRollerActivity" />
-        </activity>
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".shared.activities.TalentsActivity"
             android:label="@string/page_talents"
@@ -89,7 +69,7 @@
         <activity
             android:name=".playersheet.actions.PlayerAddActionsActivity"
             android:parentActivityName=".playersheet.PlayerSheetActivity"
-            android:windowSoftInputMode="stateHidden|adjustPan"></activity>
+            android:windowSoftInputMode="stateHidden|adjustPan" />
         <activity android:name=".shared.activities.ActionSearchActivity" />
     </application>
 
