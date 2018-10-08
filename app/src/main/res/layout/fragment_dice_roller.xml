@@ -4,7 +4,8 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true">
+    android:fitsSystemWindows="true"
+    android:focusableInTouchMode="true">
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
@@ -12,39 +13,41 @@
         android:layout_marginStart="@dimen/small_padding"
         android:layout_marginEnd="@dimen/small_padding">
 
-        <TextView
-            android:id="@+id/current_hand_name"
+        <EditText
+            android:id="@+id/hand_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:minHeight="50dp"
             android:gravity="center"
-            android:textSize="@dimen/medium_text_size"
             android:hint="@string/hand_name_hint"
+            android:inputType="textCapSentences"
+            android:maxLines="1"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/load_hand"
+            app:layout_constraintHorizontal_weight="10" />
+
+        <ImageButton
+            android:id="@+id/load_hand"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:src="@drawable/ic_expand_more_black_24dp"
+            android:contentDescription="@string/select_hand"
+            app:layout_constraintTop_toTopOf="@+id/hand_name"
+            app:layout_constraintLeft_toRightOf="@+id/hand_name"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/dice_roller_bars_layout" />
+            app:layout_constraintBottom_toBottomOf="@+id/hand_name"
+            app:layout_constraintHorizontal_weight="2" />
 
         <include
             android:id="@+id/dice_roller_bars_layout"
             layout="@layout/content_dice_roller_bars"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/current_hand_name"
+            android:layout_marginTop="@dimen/medium_padding"
+            app:layout_constraintTop_toBottomOf="@+id/hand_name"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent" />
-
-        <include
-            android:id="@+id/stance_bar_layout"
-            layout="@layout/content_stance_bar"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/big_padding"
-            app:layout_constraintTop_toBottomOf="@+id/dice_roller_bars_layout"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" />
-
     </android.support.constraint.ConstraintLayout>
 
     <android.support.design.widget.FloatingActionButton

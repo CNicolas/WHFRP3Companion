@@ -24,6 +24,7 @@ import com.nicolas.whfrp3companion.shared.*
 import com.nicolas.whfrp3companion.shared.activities.DiceRollerStatisticsActivity
 import com.nicolas.whfrp3companion.shared.dialogs.RollResultDialog
 import com.nicolas.whfrp3companion.shared.enums.labelId
+import kotlinx.android.synthetic.main.content_dice_roller_bars.*
 import kotlinx.android.synthetic.main.content_stance_bar.*
 import kotlinx.android.synthetic.main.fragment_player_advanced_dice_roller.*
 import org.adw.library.widgets.discreteseekbar.DiscreteSeekBar
