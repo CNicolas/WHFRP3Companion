@@ -41,7 +41,7 @@ class ActionsFragment : Fragment(), ActionListener {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
-        inflater?.inflate(R.menu.actions_page, menu)
+        inflater?.inflate(R.menu.menu_actions_page, menu)
         super.onCreateOptionsMenu(menu, inflater)
     }
 

@@ -49,7 +49,7 @@ class PlayerEffectsFragment : Fragment(), EffectListener {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
-        inflater?.inflate(R.menu.activity_effects, menu)
+        inflater?.inflate(R.menu.menu_activity_effects, menu)
 
         menu?.let {
             val searchMenuItem = menu.findItem(R.id.search_effect)

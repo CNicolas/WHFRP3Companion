@@ -172,7 +172,7 @@ class PlayerInventoryExpandableAdapter(private val context: Context,
 
         private fun openItemMenu(view: View): Boolean {
             val itemPopupMenu = PopupMenu(view.context, view, Gravity.END)
-            itemPopupMenu.menuInflater.inflate(R.menu.inventory_item, itemPopupMenu.menu)
+            itemPopupMenu.menuInflater.inflate(R.menu.menu_inventory_item, itemPopupMenu.menu)
 
             itemPopupMenu.setOnMenuItemClickListener {
                 when (it.itemId) {

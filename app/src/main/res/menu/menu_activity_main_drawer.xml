@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item android:id="@+id/nav_home"
+              android:icon="@drawable/ic_home_black_24dp"
+              android:title="@string/page_home" />
+
+        <item android:id="@+id/nav_dice_roller"
+              android:icon="@drawable/ic_dice_white"
+              android:title="@string/page_dice_roller" />
+
+        <item android:id="@+id/nav_skills"
+              android:icon="@drawable/ic_skills_black"
+              android:title="@string/page_skills" />
+
+        <item android:id="@+id/nav_talents"
+              android:icon="@drawable/ic_talents_black"
+              android:title="@string/page_talents" />
+
+        <item android:id="@+id/nav_actions"
+              android:icon="@drawable/ic_action_black"
+              android:title="@string/page_actions" />
+
+        <item android:id="@+id/nav_careers"
+              android:icon="@drawable/ic_work_black"
+              android:title="@string/page_careers"
+              android:enabled="false" />
+
+        <item android:id="@+id/nav_items"
+              android:icon="@drawable/ic_sword_black"
+              android:title="@string/page_items"
+              android:enabled="false" />
+    </group>
+</menu>

@@ -67,7 +67,7 @@ class PlayersFragment : Fragment() {
     private fun onPlayerLongClick(view: View, position: Int): Boolean {
         val player = players[position]
         val playerPopupMenu = PopupMenu(activity!!, view, Gravity.END)
-        playerPopupMenu.menuInflater.inflate(R.menu.list_element_player, playerPopupMenu.menu)
+        playerPopupMenu.menuInflater.inflate(R.menu.menu_list_element_player, playerPopupMenu.menu)
         playerPopupMenu.setOnMenuItemClickListener {
             when (it.itemId) {
                 R.id.delete_player -> {

@@ -71,7 +71,7 @@ class PlayerAddActionsActivity : AppCompatActivity(), ActionListener {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.actions_page, menu)
+        menuInflater.inflate(R.menu.menu_actions_page, menu)
         return super.onCreateOptionsMenu(menu)
     }
 

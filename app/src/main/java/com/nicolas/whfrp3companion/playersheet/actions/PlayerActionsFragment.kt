@@ -64,7 +64,7 @@ class PlayerActionsFragment : Fragment(), ActionListener {
 
     override fun longPrimaryHandler(view: View, action: Action): Boolean {
         val actionPopupMenu = PopupMenu(view.context, view, Gravity.END)
-        actionPopupMenu.menuInflater.inflate(R.menu.action_item, actionPopupMenu.menu)
+        actionPopupMenu.menuInflater.inflate(R.menu.menu_action_item, actionPopupMenu.menu)
 
         actionPopupMenu.setOnMenuItemClickListener {
             when (it.itemId) {

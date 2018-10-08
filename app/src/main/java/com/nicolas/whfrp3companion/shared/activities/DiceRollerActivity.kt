@@ -50,7 +50,7 @@ class DiceRollerActivity : AppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.activity_dice_roller, menu)
+        menuInflater.inflate(R.menu.menu_activity_dice_roller, menu)
         return super.onCreateOptionsMenu(menu)
     }
 
