@@ -1,4 +1,4 @@
-package com.nicolas.whfrp3companion.playersheet.advancedDiceRoller
+package com.nicolas.whfrp3companion.playersheet.diceRoller
 
 import android.app.Activity
 import android.content.Intent
@@ -12,21 +12,21 @@ import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.shared.PLAYER_NAME_INTENT_ARGUMENT
 import com.nicolas.whfrp3companion.shared.SKILL_INTENT_ARGUMENT
 import com.nicolas.whfrp3companion.shared.SPECIALIZATION_INTENT_ARGUMENT
-import kotlinx.android.synthetic.main.activity_advanced_dice_roller_skills.*
+import kotlinx.android.synthetic.main.activity_dice_roller_skills.*
 import kotlinx.android.synthetic.main.toolbar.*
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.selector
 import org.jetbrains.anko.uiThread
 import org.koin.android.ext.android.inject
 
-class PlayerAdvancedDiceRollerSkillsActivity : AppCompatActivity() {
+class PlayerDiceRollerSkillsActivity : AppCompatActivity() {
     private val playerRepository by inject<PlayerRepository>()
 
     private lateinit var player: Player
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_advanced_dice_roller_skills)
+        setContentView(R.layout.activity_dice_roller_skills)
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 

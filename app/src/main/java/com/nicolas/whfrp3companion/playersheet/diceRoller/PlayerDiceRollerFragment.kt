@@ -1,4 +1,4 @@
-package com.nicolas.whfrp3companion.playersheet.advancedDiceRoller
+package com.nicolas.whfrp3companion.playersheet.diceRoller
 
 import android.app.Activity
 import android.content.Intent
@@ -26,7 +26,7 @@ import com.nicolas.whfrp3companion.shared.dialogs.RollResultDialog
 import com.nicolas.whfrp3companion.shared.enums.labelId
 import kotlinx.android.synthetic.main.content_dice_roller_bars.*
 import kotlinx.android.synthetic.main.content_stance_bar.*
-import kotlinx.android.synthetic.main.fragment_player_advanced_dice_roller.*
+import kotlinx.android.synthetic.main.fragment_player_dice_roller.*
 import org.adw.library.widgets.discreteseekbar.DiscreteSeekBar
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.intentFor
@@ -36,7 +36,7 @@ import org.koin.android.ext.android.inject
 import kotlin.math.abs
 
 
-class PlayerAdvancedDiceRollerFragment : Fragment() {
+class PlayerDiceRollerFragment : Fragment() {
     private val playerRepository by inject<PlayerRepository>()
 
     private lateinit var player: Player
@@ -52,7 +52,7 @@ class PlayerAdvancedDiceRollerFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        val resultingView: View = inflater.inflate(R.layout.fragment_player_advanced_dice_roller, container, false)
+        val resultingView: View = inflater.inflate(R.layout.fragment_player_dice_roller, container, false)
         setHasOptionsMenu(true)
 
         arguments?.let { args ->
@@ -84,7 +84,7 @@ class PlayerAdvancedDiceRollerFragment : Fragment() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
-        inflater?.inflate(R.menu.menu_player_advanced_dice_roller, menu)
+        inflater?.inflate(R.menu.menu_player_dice_roller, menu)
 
         super.onCreateOptionsMenu(menu, inflater)
     }
@@ -260,7 +260,7 @@ class PlayerAdvancedDiceRollerFragment : Fragment() {
 
     private fun openActionsSelection() {
         activity?.let {
-            startActivityForResult(it.intentFor<PlayerAdvancedDiceRollerActionsActivity>(
+            startActivityForResult(it.intentFor<PlayerDiceRollerActionsActivity>(
                     PLAYER_NAME_INTENT_ARGUMENT to player.name
             ), ACTION_REQUEST_CODE)
         }
@@ -277,7 +277,7 @@ class PlayerAdvancedDiceRollerFragment : Fragment() {
 
     private fun openSkillsSelection() {
         activity?.let {
-            startActivityForResult(it.intentFor<PlayerAdvancedDiceRollerSkillsActivity>(
+            startActivityForResult(it.intentFor<PlayerDiceRollerSkillsActivity>(
                     PLAYER_NAME_INTENT_ARGUMENT to player.name
             ), SKILL_REQUEST_CODE)
         }
@@ -412,45 +412,45 @@ class PlayerAdvancedDiceRollerFragment : Fragment() {
     // region Instance static creators
 
     companion object {
-        fun newInstance(playerName: String): PlayerAdvancedDiceRollerFragment {
+        fun newInstance(playerName: String): PlayerDiceRollerFragment {
             val args = Bundle()
             args.putString(PLAYER_NAME_INTENT_ARGUMENT, playerName)
 
-            val fragment = PlayerAdvancedDiceRollerFragment()
+            val fragment = PlayerDiceRollerFragment()
             fragment.arguments = args
 
             return fragment
         }
 
-        fun newInstance(playerName: String, action: Action): PlayerAdvancedDiceRollerFragment {
+        fun newInstance(playerName: String, action: Action): PlayerDiceRollerFragment {
             val args = Bundle()
             args.putString(PLAYER_NAME_INTENT_ARGUMENT, playerName)
             args.putSerializable(ACTION_INTENT_ARGUMENT, action)
 
-            val fragment = PlayerAdvancedDiceRollerFragment()
+            val fragment = PlayerDiceRollerFragment()
             fragment.arguments = args
 
             return fragment
         }
 
-        fun newInstance(playerName: String, skill: Skill, specialization: Specialization? = null): PlayerAdvancedDiceRollerFragment {
+        fun newInstance(playerName: String, skill: Skill, specialization: Specialization? = null): PlayerDiceRollerFragment {
             val args = Bundle()
             args.putString(PLAYER_NAME_INTENT_ARGUMENT, playerName)
             args.putSerializable(SKILL_INTENT_ARGUMENT, skill)
             args.putSerializable(SPECIALIZATION_INTENT_ARGUMENT, specialization)
 
-            val fragment = PlayerAdvancedDiceRollerFragment()
+            val fragment = PlayerDiceRollerFragment()
             fragment.arguments = args
 
             return fragment
         }
 
-        fun newInstance(playerName: String, characteristic: Characteristic): PlayerAdvancedDiceRollerFragment {
+        fun newInstance(playerName: String, characteristic: Characteristic): PlayerDiceRollerFragment {
             val args = Bundle()
             args.putString(PLAYER_NAME_INTENT_ARGUMENT, playerName)
             args.putSerializable(CHARACTERISTIC_INTENT_ARGUMENT, characteristic)
 
-            val fragment = PlayerAdvancedDiceRollerFragment()
+            val fragment = PlayerDiceRollerFragment()
             fragment.arguments = args
 
             return fragment

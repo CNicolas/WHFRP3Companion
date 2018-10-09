@@ -8,7 +8,7 @@ import com.nicolas.diceroller.roll.roll
 import com.nicolas.models.dice.DiceType
 import com.nicolas.models.hand.Hand
 import com.nicolas.whfrp3companion.R
-import com.nicolas.whfrp3companion.playersheet.advancedDiceRoller.SimpleProgressChangeListener
+import com.nicolas.whfrp3companion.playersheet.diceRoller.SimpleProgressChangeListener
 import com.nicolas.whfrp3companion.shared.DIALOG_ROLL_RESULT_TAG
 import com.nicolas.whfrp3companion.shared.HAND_INTENT_ARGUMENT
 import com.nicolas.whfrp3companion.shared.HAND_ROLL_COUNT_INTENT_ARGUMENT

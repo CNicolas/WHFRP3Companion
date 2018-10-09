@@ -16,7 +16,7 @@ import com.nicolas.models.player.Player
 import com.nicolas.models.skill.Skill
 import com.nicolas.models.skill.Specialization
 import com.nicolas.whfrp3companion.R
-import com.nicolas.whfrp3companion.playersheet.advancedDiceRoller.PlayerAdvancedDiceRollerFragment
+import com.nicolas.whfrp3companion.playersheet.diceRoller.PlayerDiceRollerFragment
 import com.nicolas.whfrp3companion.shared.PLAYER_NAME_INTENT_ARGUMENT
 import kotlinx.android.synthetic.main.fragment_skills.*
 import org.jetbrains.anko.doAsync
@@ -109,7 +109,7 @@ class PlayerSkillsFragment : Fragment(), SkillListener {
 
     private fun goToDiceRollerFragment(skill: Skill, specialization: Specialization? = null) {
         activity?.supportFragmentManager?.beginTransaction()
-                ?.replace(R.id.playersheet_content_frame, PlayerAdvancedDiceRollerFragment.newInstance(player.name, skill, specialization))
+                ?.replace(R.id.playersheet_content_frame, PlayerDiceRollerFragment.newInstance(player.name, skill, specialization))
                 ?.commit()
     }
 

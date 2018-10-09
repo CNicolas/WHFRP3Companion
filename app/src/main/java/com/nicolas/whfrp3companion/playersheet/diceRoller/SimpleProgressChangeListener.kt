@@ -1,4 +1,4 @@
-package com.nicolas.whfrp3companion.playersheet.advancedDiceRoller
+package com.nicolas.whfrp3companion.playersheet.diceRoller
 
 import org.adw.library.widgets.discreteseekbar.DiscreteSeekBar
 

@@ -15,7 +15,7 @@ import com.nicolas.models.player.Player
 import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.fragments.EmptyFragment
 import com.nicolas.whfrp3companion.playersheet.actions.PlayerActionsFragment
-import com.nicolas.whfrp3companion.playersheet.advancedDiceRoller.PlayerAdvancedDiceRollerFragment
+import com.nicolas.whfrp3companion.playersheet.diceRoller.PlayerDiceRollerFragment
 import com.nicolas.whfrp3companion.playersheet.characteristics.PlayerCharacteristicsFragment
 import com.nicolas.whfrp3companion.playersheet.effects.PlayerEffectsFragment
 import com.nicolas.whfrp3companion.playersheet.inventory.PlayerInventoryFragment
@@ -51,7 +51,7 @@ class PlayerSheetActivity : AppCompatActivity() {
         val navigationView = findViewById<NavigationView>(R.id.nav_view)
         setupDrawerContent(navigationView)
 
-        displaySelectedFragment(R.id.nav_player_advanced_dice_roller)
+        displaySelectedFragment(R.id.nav_player_dice_roller)
     }
 
     override fun onPostCreate(savedInstanceState: Bundle?) {
@@ -77,7 +77,7 @@ class PlayerSheetActivity : AppCompatActivity() {
 
     private fun displaySelectedFragment(menuItemId: Int) {
         val fragment = when (menuItemId) {
-            R.id.nav_player_advanced_dice_roller -> PlayerAdvancedDiceRollerFragment.newInstance(player.name)
+            R.id.nav_player_dice_roller -> PlayerDiceRollerFragment.newInstance(player.name)
             R.id.nav_player_characteristics -> PlayerCharacteristicsFragment.newInstance(player.name)
             R.id.nav_player_state -> PlayerStateFragment.newInstance(player.name)
             R.id.nav_player_skills -> PlayerSkillsFragment.newInstance(player.name)

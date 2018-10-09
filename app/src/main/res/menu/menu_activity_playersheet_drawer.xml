@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_player_advanced_dice_roller"
+            android:id="@+id/nav_player_dice_roller"
             android:icon="@drawable/ic_dice_black"
             android:title="@string/page_dice_roller" />
 

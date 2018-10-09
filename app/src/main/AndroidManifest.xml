@@ -60,10 +60,10 @@
             android:theme="@style/AppTheme" />
         <activity android:name=".shared.activities.ActionDetailActivity" />
         <activity
-            android:name=".playersheet.advancedDiceRoller.PlayerAdvancedDiceRollerSkillsActivity"
+            android:name=".playersheet.diceRoller.PlayerDiceRollerSkillsActivity"
             android:parentActivityName=".playersheet.PlayerSheetActivity" />
         <activity
-            android:name=".playersheet.advancedDiceRoller.PlayerAdvancedDiceRollerActionsActivity"
+            android:name=".playersheet.diceRoller.PlayerDiceRollerActionsActivity"
             android:parentActivityName=".playersheet.PlayerSheetActivity" />
 
         <activity
