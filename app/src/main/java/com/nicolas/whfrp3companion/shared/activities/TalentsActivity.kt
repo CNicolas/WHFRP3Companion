@@ -21,7 +21,10 @@ import com.nicolas.whfrp3companion.shared.adapters.TalentsAdapter
 import com.nicolas.whfrp3companion.shared.dialogs.TalentSearchDialog
 import com.nicolas.whfrp3companion.shared.enums.PlayerElementEditionMode
 import com.nicolas.whfrp3companion.shared.getView
+import com.nicolas.whfrp3companion.shared.viewModifications.hide
+import com.nicolas.whfrp3companion.shared.viewModifications.show
 import kotlinx.android.synthetic.main.activity_talents.*
+import kotlinx.android.synthetic.main.toolbar.*
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 import org.koin.android.ext.android.inject
@@ -37,10 +40,10 @@ class TalentsActivity : AppCompatActivity(), TalentListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_talents)
+        setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        setSupportActionBar(getView(R.id.toolbar))
-
-        talentsRecyclerView.layoutManager = LinearLayoutManager(this)
+        talents_recyclerview.layoutManager = LinearLayoutManager(this)
 
         allTalents = loadTalents(this)
 
@@ -49,6 +52,12 @@ class TalentsActivity : AppCompatActivity(), TalentListener {
 
         setupViews(playerName)
     }
+
+    override fun onSupportNavigateUp(): Boolean {
+        finish()
+        return true
+    }
+
 
     // region TalentListener
 
@@ -77,15 +86,23 @@ class TalentsActivity : AppCompatActivity(), TalentListener {
             }
 
             uiThread { activity ->
-                talentsRecyclerView.adapter = if (player != null) {
-                    createTalentsAdapter(talents)
+                if (talents.isEmpty()) {
+                    no_talents.show()
+                    talents_recyclerview.hide()
                 } else {
-                    TalentsAdapter(activity, talents)
+                    talents_recyclerview.adapter = if (player != null) {
+                        createTalentsAdapter(talents)
+                    } else {
+                        TalentsAdapter(activity, talents)
+                    }
+
+                    no_talents.hide()
+                    talents_recyclerview.show()
                 }
             }
         }
 
-        getView<FloatingActionButton>(R.id.searchTalentFAB)
+        getView<FloatingActionButton>(R.id.search)
                 .setOnClickListener { search() }
     }
 

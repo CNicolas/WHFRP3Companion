@@ -2,19 +2,29 @@ package com.nicolas.whfrp3companion.playersheet.skills
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v4.app.FragmentActivity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.nicolas.database.PlayerRepository
+import com.nicolas.database.loadSkills
+import com.nicolas.models.extensions.addSkill
+import com.nicolas.models.extensions.advanced
+import com.nicolas.models.extensions.getSkillByName
+import com.nicolas.models.extensions.getSpecializationByName
 import com.nicolas.models.player.Player
+import com.nicolas.models.skill.Skill
+import com.nicolas.models.skill.Specialization
 import com.nicolas.whfrp3companion.R
+import com.nicolas.whfrp3companion.playersheet.diceRoller.PlayerDiceRollerFragment
 import com.nicolas.whfrp3companion.shared.PLAYER_NAME_INTENT_ARGUMENT
 import kotlinx.android.synthetic.main.fragment_skills.*
 import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.selector
 import org.jetbrains.anko.uiThread
 import org.koin.android.ext.android.inject
 
-class PlayerSkillsFragment : Fragment() {
+class PlayerSkillsFragment : Fragment(), SkillListener {
     private val playerRepository by inject<PlayerRepository>()
 
     private lateinit var player: Player
@@ -30,13 +40,77 @@ class PlayerSkillsFragment : Fragment() {
             player = playerRepository.find(playerName)!!
 
             uiThread {
-                val skillsAdapter = PlayerSkillsExpandableAdapter(context!!, player)
-                skillsList.setAdapter(skillsAdapter)
-                skillsList.setGroupIndicator(null)
+                setupViewsEvents()
+
+                setSkillsListAdapter()
+                skills_listview.setGroupIndicator(null)
             }
         }
 
         return resultingView
+    }
+
+    override fun skillLevelHandler(skill: Skill, level: Int) {
+        doAsync {
+            player.getSkillByName(skill.name)?.level = skill.level
+            player = playerRepository.update(player)
+        }
+    }
+
+    override fun skillSecondaryHandler(skill: Skill) {
+        goToDiceRollerFragment(skill)
+    }
+
+    override fun specializationToggleHandler(skill: Skill, specialization: Specialization) {
+        doAsync {
+            player.getSkillByName(skill.name)
+                    ?.getSpecializationByName(specialization.name)
+                    ?.isSpecialized = specialization.isSpecialized
+            player = playerRepository.update(player)
+        }
+    }
+
+    override fun specializationSecondaryHandler(skill: Skill, specialization: Specialization) {
+        goToDiceRollerFragment(skill, specialization)
+    }
+
+    private fun setupViewsEvents() {
+        add_skill.setOnClickListener {
+            activity?.let { safeActivity ->
+                doAsync {
+                    val advancedSkills = loadSkills(safeActivity).advanced
+
+                    uiThread { _ ->
+                        openAddSkillSelector(safeActivity, advancedSkills)
+                    }
+                }
+            }
+        }
+    }
+
+    private fun openAddSkillSelector(safeActivity: FragmentActivity, skills: List<Skill>) {
+        safeActivity.selector(getString(R.string.skill), skills.map { skill -> skill.name }) { _, index ->
+            doAsync {
+                player = playerRepository.update(player.addSkill(skills[index]))
+
+                uiThread {
+                    setSkillsListAdapter()
+                }
+            }
+        }
+    }
+
+    private fun setSkillsListAdapter() {
+        activity?.let {
+            val skillsAdapter = PlayerSkillsExpandableAdapter(it, player, this)
+            skills_listview.setAdapter(skillsAdapter)
+        }
+    }
+
+    private fun goToDiceRollerFragment(skill: Skill, specialization: Specialization? = null) {
+        activity?.supportFragmentManager?.beginTransaction()
+                ?.replace(R.id.playersheet_content_frame, PlayerDiceRollerFragment.newInstance(player.name, skill, specialization))
+                ?.commit()
     }
 
     companion object {

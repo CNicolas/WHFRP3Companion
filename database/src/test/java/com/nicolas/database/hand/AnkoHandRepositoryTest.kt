@@ -39,7 +39,7 @@ class AnkoHandRepositoryTest {
         assertThat(hand.name).isEqualTo(handName)
 
         val foundHand = ankoHandRepository.find(handName)
-        assertThat(foundHand).isNotNull()
+        assertThat(foundHand).isNotNull
         assertThat(foundHand!!.name).isEqualTo(handName)
 
         assertThat(hand).isEqualToComparingFieldByField(foundHand)

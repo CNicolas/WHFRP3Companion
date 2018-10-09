@@ -13,14 +13,4 @@ class HandTest {
 
         assertThat(roll.faces.size).isEqualTo(3)
     }
-
-    @Test
-    fun should_roll_rank_3_hand() {
-        val hand = Hand(name = "SampleHand",
-                fortuneDicesCount = 2,
-                characteristicDicesCount = 5,
-                expertiseDicesCount = 2,
-                challengeDicesCount = 1,
-                misfortuneDicesCount = 2)
-    }
 }

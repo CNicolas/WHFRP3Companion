@@ -17,6 +17,7 @@ fun parseTemplatedText(context: Context, text: String): SpannableString {
 }
 
 private fun SpannableString.replaceDicesAndIcons(context: Context, text: String) {
+    @Suppress("RegExpRedundantEscape")
     val regexIcons = Regex("\\{([A-Z_]+)\\}")
 
     regexIcons.findAll(text)

@@ -1,5 +1,6 @@
 package com.nicolas.whfrp3companion.shared.viewModifications
 
+import android.support.design.widget.TextInputLayout
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
@@ -22,3 +23,7 @@ internal fun View.hide() {
 
 internal fun List<View>.show() = forEach { it.visibility = View.VISIBLE }
 internal fun List<View>.hide() = forEach { it.visibility = View.GONE }
+
+fun TextInputLayout.markRequired() {
+    hint = "$hint *"
+}

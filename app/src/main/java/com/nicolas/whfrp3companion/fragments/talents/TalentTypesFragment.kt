@@ -26,7 +26,7 @@ class TalentTypesFragment : Fragment() {
                               savedInstanceState: Bundle?): View? {
         val resultingView: View = inflater.inflate(R.layout.fragment_talent_types, container, false)
 
-        setupViewEvents(resultingView)
+        setupViewsEvents(resultingView)
 
         doAsync {
             val talentTypesAdapter = TalentTypesAdapter(context!!)
@@ -39,11 +39,11 @@ class TalentTypesFragment : Fragment() {
         return resultingView
     }
 
-    private fun setupViewEvents(view: View) {
+    private fun setupViewsEvents(view: View) {
         view.getView<ListView>(R.id.talentTypesListView)
                 .setOnItemClickListener { _, _, position, _ -> onTalentTypeClick(position) }
 
-        view.getView<FloatingActionButton>(R.id.searchTalentFAB)
+        view.getView<FloatingActionButton>(R.id.search)
                 .setOnClickListener { openTalentSearchDialog() }
     }
 

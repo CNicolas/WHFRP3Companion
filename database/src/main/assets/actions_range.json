@@ -1,5 +1,87 @@
 [
   {
+    "name": "Lancer Puissant",
+    "type": "RANGE_ATTACK",
+    "traits": [ ],
+    "skill": "Capacité de Tir",
+    "skillText": "Capacité de Tir (Ag) contre Défense de la Cible",
+    "targetDefense": true,
+    "conditions": [
+      {
+        "weapon": {
+          "categories": [ "THROWING" ],
+          "equipped": true
+        }
+      },
+      { "range": "ENGAGED", "target": "NONE" }
+    ],
+    "conditionsText": "Arme de jet en main, non engagé avec un ennemi.",
+    "conservativeSide": {
+      "stance": "CONSERVATIVE",
+      "cooldown": 1,
+      "difficulty": [ "MISFORTUNE", "MISFORTUNE" ],
+      "specialText": "Vous pouvez subir jusqu'à 2 fatigue avant cette action. Réduisez le modificateur de difficulté de {MISFORTUNE_DICE} et ajoutez 1 jeton de recharge en plus sur cette carte par fatigue.",
+      "effects": {
+        "SUCCESS": {
+          "1": [
+            {
+              "damage": 0,
+              "text": "Vous touchez et pouvez ajouter votre Force ou votre Agilité au niveau de dégâts de votre arme pour déterminer les dégâts infligés."
+            }
+          ],
+          "3": [
+            {
+              "damage": 0,
+              "text": "Comme ci-dessus, +2 dégâts par fatigue subie pour réduire la difficulté."
+            }
+          ]
+        },
+        "BOON": {
+          "2": [
+            {
+              "text": "Réduisez la valeur d'enchaissement de la Cible de la quantité de fatigue subie pour réduire la difficulté."
+            }
+          ]
+        },
+        "BANE": {
+          "2": [ { "stress": 1 } ]
+        }
+      }
+    },
+    "recklessSide": {
+      "stance": "RECKLESS",
+      "cooldown": 1,
+      "difficulty": [ "MISFORTUNE", "MISFORTUNE" ],
+      "specialText": "Vous pouvez subir jusqu'à 2 fatigue avant cette action. Réduisez le modificateur de difficulté de {MISFORTUNE_DICE} et ajoutez 1 jeton de recharge en plus sur cette carte par fatigue.",
+      "effects": {
+        "SUCCESS": {
+          "1": [
+            {
+              "damage": 0,
+              "text": "Vous infligez les dégâts normaux, +1 dégât par fatigue subie pour réduire la difficulté."
+            }
+          ],
+          "2": [
+            {
+              "damage": 0,
+              "text": "Vous infligez les dégâts normaux, +1 dégât par fatigue subie pour réduire la difficulté."
+            }
+          ]
+        },
+        "BOON": {
+          "2": [
+            {
+              "text": "+1 dégât par fatigue subie pour réduire la difficulté."
+            }
+          ]
+        },
+        "BANE": {
+          "1": [ { "stress": 1 } ]
+        }
+      }
+    }
+  },
+  {
     "name": "Tir",
     "type": "RANGE_ATTACK",
     "traits": [ "BASIC" ],
@@ -45,6 +127,89 @@
         },
         "BANE": {
           "2": [ { "canEngage": "TARGET" } ]
+        }
+      }
+    }
+  },
+  {
+    "name": "Tir de Couverture",
+    "type": "RANGE_ATTACK",
+    "traits": [ "CONTINUOUS" ],
+    "skill": "Capacité de Tir",
+    "conditions": [
+      {
+        "weapon": {
+          "categories": [ "RANGE" ],
+          "equipped": true
+        }
+      }
+    ],
+    "conservativeSide": {
+      "stance": "CONSERVATIVE",
+      "cooldown": 4,
+      "difficulty": [ "CHALLENGE", "MISFORTUNE" ],
+      "specialText": "En effectuant un tir nourri, vous obligez l'ennemi à rester à couvert ! Choisissez un élément de terrain ou une zone située à portée moyenne ou moins. Quand cette carte est en cours de recharge, tout ennemi qui tente d'y manoeuvrer subit 1 fatigue. Les ennemis situés dans la zone subissent {MISFORTUNE_DICE} à tous les tests."
+    },
+    "effects": {
+      "SUCCESS": {
+        "1": [ { "text": "Vous maintenez le feu de couverture comme décrit ci-dessus." } ],
+        "3": [
+          {
+            "damage": 0,
+            "text": "Comme ci-dessus, et vous infligez les dégâts normaux à un ennemi situé dans la zone."
+          }
+        ]
+      },
+      "BOON": {
+        "1": [
+          {
+            "maneuver": true,
+            "target": "ALLY",
+            "range": "SHORT"
+          }
+        ]
+      },
+      "BANE": {
+        "1": [
+          {
+            "maneuver": true,
+            "target": "TARGET",
+            "text": "Un ennemi situé dans la zone peut effectuer une manoeuvre gratuite sans subir les malus décrits ci-dessus."
+          }
+        ]
+      }
+    },
+    "recklessSide": {
+      "stance": "RECKLESS",
+      "cooldown": 4,
+      "difficulty": [ "CHALLENGE", "MISFORTUNE" ],
+      "effects": {
+        "SUCCESS": {
+          "1": [
+            {
+              "target": "TARGET",
+              "exhaustion": 1,
+              "text": "Vous abattez une plue de projectiles sur l'engagement de la Cible. Tous les ennemis qui s'y situent subissent 1 {EXHAUSTION}"
+            }
+          ]
+        },
+        "BOON": {
+          "1": [
+            {
+              "maneuver": true,
+              "target": "ALLY",
+              "text": "Un allié situé à portée courte de l'engagement de la Cible peut exécuter une manoeuvre gratuite."
+            }
+          ]
+        },
+        "BANE": {
+          "2": [
+            {
+              "target": "ALLY",
+              "exhaustion": 1,
+              "text": "Les alliés situés à ce niveau d'engagmeent subissent 1 {EXHAUSTION}."
+            }
+          ]
         }
       }
     }
@@ -128,91 +293,6 @@
     }
   },
   {
-    "name": "Tir de Couverture",
-    "type": "RANGE_ATTACK",
-    "traits": [ "CONTINUOUS" ],
-    "skill": "Capacité de Tir",
-    "conditions": [
-      {
-        "weapon": {
-          "categories": [ "RANGE" ],
-          "equipped": true
-        }
-      }
-    ],
-    "conservativeSide": {
-      "stance": "CONSERVATIVE",
-      "cooldown": 4,
-      "difficulty": [ "CHALLENGE", "MISFORTUNE" ],
-      "special": {
-        "text": "En effectuant un tir nourri, vous obligez l'ennemi à rester à couvert ! Choisissez un élément de terrain ou une zone située à portée moyenne ou moins. Quand cette carte est en cours de recharge, tout ennemi qui tente d'y manoeuvrer subit 1 fatigue. Les ennemis situés dans la zone subissent {MISFORTUNE_DICE} à tous les tests."
-      },
-      "effects": {
-        "SUCCESS": {
-          "1": [ { "text": "Vous maintenez le feu de couverture comme décrit ci-dessus." } ],
-          "3": [
-            {
-              "damage": 0,
-              "text": "Comme ci-dessus, et vous infligez les dégâts normaux à un ennemi situé dans la zone."
-            }
-          ]
-        },
-        "BOON": {
-          "1": [
-            {
-              "maneuver": true,
-              "target": "ALLY",
-              "range": "SHORT"
-            }
-          ]
-        },
-        "BANE": {
-          "1": [
-            {
-              "maneuver": true,
-              "target": "TARGET",
-              "text": "Un ennemi situé dans la zone peut effectuer une manoeuvre gratuite sans subir les malus décrits ci-dessus."
-            }
-          ]
-        }
-      }
-    },
-    "recklessSide": {
-      "stance": "RECKLESS",
-      "cooldown": 4,
-      "difficulty": [ "CHALLENGE", "MISFORTUNE" ],
-      "effects": {
-        "SUCCESS": {
-          "1": [
-            {
-              "target": "TARGET",
-              "exhaustion": 1,
-              "text": "Vous abattez une plue de projectiles sur l'engagement de la Cible. Tous les ennemis qui s'y situent subissent 1 {EXHAUSTION}"
-            }
-          ]
-        },
-        "BOON": {
-          "1": [
-            {
-              "maneuver": true,
-              "target": "ALLY",
-              "text": "Un allié situé à portée courte de l'engagement de la Cible peut exécuter une manoeuvre gratuite."
-            }
-          ]
-        },
-        "BANE": {
-          "2": [
-            {
-              "target": "ALLY",
-              "exhaustion": 1,
-              "text": "Les alliés situés à ce niveau d'engagmeent subissent 1 {EXHAUSTION}."
-            }
-          ]
-        }
-      }
-    }
-  },
-  {
     "name": "Tir Extrême",
     "type": "RANGE_ATTACK",
     "traits": [ ],
@@ -231,35 +311,31 @@
       "stance": "CONSERVATIVE",
       "cooldown": 0,
       "difficulty": [ "MISFORTUNE" ],
-      "special": {
-        "text": "Si vous exécutez la manoeuvre préparer avant d'entreprendre cette action, ôtez {MISFORTUNE} de votre réserve de dés.",
-        "text2": "Vous pouvez attaquer une cible située jusqu'à un cran de portée de plus que la portée maximale habituelle de votre arme."
+      "conditionsText": "Arme à distance en main, désengagé de la Cible. Si vous exécutez la manoeuvre préparer avant d'entreprendre cette action, ôtez {MISFORTUNE} de votre réserve de dés.",
+      "specialText": "Vous pouvez attaquer une cible située jusqu'à un cran de portée de plus que la portée maximale habituelle de votre arme."
+    },
+    "effects": {
+      "SUCCESS": {
+        "1": [ { "damage": 0 } ]
       },
-      "effects": {
-        "SUCCESS": {
-          "1": [ { "damage": 0 } ]
-        },
-        "BOON": {
-          "1": [ { "damage": 1 } ],
-          "2": [ { "damage": 2 } ]
-        },
-        "BANE": {
-          "2": [
-            {
-              "text": "Votre cible peut exécuter une manoeuvre gratuite."
-            }
-          ]
-        }
+      "BOON": {
+        "1": [ { "damage": 1 } ],
+        "2": [ { "damage": 2 } ]
+      },
+      "BANE": {
+        "2": [
+          {
+            "text": "Votre cible peut exécuter une manoeuvre gratuite."
+          }
+        ]
       }
     },
     "recklessSide": {
       "stance": "RECKLESS",
       "cooldown": 0,
       "difficulty": [ "CHALLENGE" ],
-      "special": {
-        "text": "Si vous exécutez la manoeuvre préparer avant d'entreprendre cette action, échangez un {CHALLENGE} contre un {MISFORTUNE} dans votre réserve de dés.",
-        "text2": "Vous pouvez attaquer une cible située jusqu'à un cran de portée de plus que la portée maximale habituelle de votre arme."
-      },
+      "conditionsText": "Arme à distance en main, désengagé de la Cible. Si vous exécutez la manoeuvre préparer avant d'entreprendre cette action, échangez un {CHALLENGE} contre un {MISFORTUNE} dans votre réserve de dés.",
+      "specialText": "Vous pouvez attaquer une cible située jusqu'à un cran de portée de plus que la portée maximale habituelle de votre arme.",
       "effects": {
         "SUCCESS": {
           "1": [ { "damage": 0 } ]
@@ -305,9 +381,7 @@
       "stance": "CONSERVATIVE",
       "cooldown": 4,
       "difficulty": [ "MISFORTUNE", "MISFORTUNE" ],
-      "special": {
-        "text": "Vous clouez la cible au sol ou l'épinglez contre un mur. Quand cette carte est en cours de recharge, la cible ne peut pas bouger. Elle peut toutefois dépenser une action pour ôter 1 {DELAY_FACE} de cette carte"
-      },
+      "specialText": "Vous clouez la cible au sol ou l'épinglez contre un mur. Quand cette carte est en cours de recharge, la cible ne peut pas bouger. Elle peut toutefois dépenser une action pour ôter 1 {DELAY_FACE} de cette carte",
       "effects": {
         "SUCCESS": {
           "1": [ { "damage": -2 } ],
@@ -325,9 +399,7 @@
       "stance": "RECKLESS",
       "cooldown": 4,
       "difficulty": [ "MISFORTUNE", "MISFORTUNE" ],
-      "special": {
-        "text": "Vous clouez la cible au sol ou l'épinglez contre un mur. Quand cette carte est en cours de recharge, la cible ne peut pas bouger. Elle peut toutefois dépenser une action pour ôter 1 {DELAY_FACE} de cette carte"
-      },
+      "specialText": "Vous clouez la cible au sol ou l'épinglez contre un mur. Quand cette carte est en cours de recharge, la cible ne peut pas bouger. Elle peut toutefois dépenser une action pour ôter 1 {DELAY_FACE} de cette carte",
       "effects": {
         "SUCCESS": {
           "1": [ { "damage": -2 } ],

@@ -10,9 +10,7 @@ fun List<Action>.search(actionSearch: ActionSearch): List<Action> {
         filteredActions = filteredActions.findByActionType(it)
     }
 
-    actionSearch.trait?.let {
-        filteredActions = filteredActions.findByTrait(it)
-    }
+    filteredActions = actionSearch.traits.flatMap { filteredActions.findByTrait(it) }
 
     actionSearch.cooldown?.let {
         filteredActions = filteredActions.findByCooldown(it)
@@ -52,6 +50,5 @@ fun ActionSide.filterByText(text: String): Boolean {
         return true
     }
 
-    return special?.text?.contains(text, true) ?: false ||
-            special?.text2?.contains(text, true) ?: false
+    return specialText?.contains(text, true) ?: false
 }

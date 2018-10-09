@@ -21,7 +21,6 @@
     <string name="page_skills">Skills</string>
     <string name="page_talents">Talents</string>
     <string name="page_careers">Careers</string>
-    <string name="page_players">Players</string>
     <string name="page_items">Items</string>
     <string name="page_specializations">Specializations</string>
     <string name="page_characteristics">Characteristics</string>
@@ -34,6 +33,7 @@
     <string name="characteristic">Characteristic</string>
     <string name="conservative">Conservative</string>
     <string name="reckless">Reckless</string>
+    <string name="neutral">Neutral</string>
     <string name="expertise">Expertise</string>
     <string name="fortune">Fortune</string>
     <string name="challenge">Challenge</string>
@@ -45,6 +45,13 @@
     <string name="intelligence">Intelligence</string>
     <string name="willpower">Willpower</string>
     <string name="fellowship">Fellowship</string>
+
+    <string name="strength_short">St</string>
+    <string name="toughness_short">To</string>
+    <string name="agility_short">Ag</string>
+    <string name="intelligence_short">Int</string>
+    <string name="willpower_short">WP</string>
+    <string name="fellowship_short">Fel</string>
 
     <string name="human">Human</string>
     <string name="dwarf">Dwarf</string>
@@ -95,6 +102,8 @@
     <string name="weapon_rifle">Rifle</string>
     <string name="weapon_repeating_gun">Repeating gun</string>
     <string name="weapon_repeating_crossbow">Repeating crossbow</string>
+    <string name="weapon_throwing_dagger">Throwing Dagger</string>
+    <string name="weapon_throwing_axe">Throwing Axe</string>
 
     <string name="range_engaged">Engaged</string>
     <string name="range_short">Short</string>
@@ -114,7 +123,7 @@
     <string name="cooldown_session">Session</string>
 
     <string name="create_player">Create a player</string>
-    <string name="missing_player_name">Please enter a name</string>
+    <string name="missing_name">Please enter a name</string>
     <string name="delete_player">Delete</string>
     <string name="results">Results</string>
     <string name="select_hand">Select a hand</string>
@@ -126,11 +135,9 @@
     <string name="edit_item">Edit</string>
     <string name="delete_item">Delete</string>
     <string name="equip_item">Equip</string>
-    <string name="unequip_item">Unequip</string>
 
     <string name="no_saved_hand">No saved hand</string>
     <string name="search">Search</string>
-    <string name="modify">Modify</string>
 
     <string name="rolls_count_format">%d rolls</string>
     <string name="successful_rolls_with_percentage_format">%1$d successful rolls (%2$s%%)</string>
@@ -155,21 +162,40 @@
     <string name="action_type">Action type</string>
     <string name="action_traits">Action traits</string>
     <string name="action_conditions">Action conditions</string>
-    <string name="launch_action">Launch action</string>
     <string name="action_damage_format">%1$d damage, of which %2$d critical</string>
 
     <string name="melee_attack">Melee attack</string>
     <string name="range_attack">Range attack</string>
     <string name="support">Support</string>
     <string name="spell">Spell</string>
-    <string name="summoning">Summoning</string>
+    <string name="blessing">Blessing</string>
 
     <string name="trait_basic">Basic</string>
     <string name="trait_defense">Defense</string>
     <string name="trait_teamwork">Teamwork</string>
+    <string name="trait_ancestor">Ancestor</string>
     <string name="trait_killer">Killer</string>
     <string name="trait_continuous">Continuous</string>
     <string name="trait_sword_way">Sword Way</string>
+    <string name="trait_rally">Rally</string>
+    <string name="trait_reaction">Reaction</string>
+    <string name="trait_ritual_dance">Ritual Dance</string>
+    <string name="trait_minor">Minor</string>
+    <string name="trait_divine">Divine</string>
+    <string name="trait_rank_0">Rank 0</string>
+    <string name="trait_rank_1">Rank 1</string>
+    <string name="trait_rank_2">Rank 2</string>
+    <string name="trait_rank_3">Rank 3</string>
+    <string name="trait_rank_4">Rank 4</string>
+    <string name="trait_rank_5">Rank 5</string>
+    <string name="trait_light_order">Light Order</string>
+    <string name="trait_celestial_order">Celestial Order</string>
+    <string name="trait_gold_order">Gold Order</string>
+    <string name="trait_jade_order">Jade Order</string>
+    <string name="trait_amber_order">Amber Order</string>
+    <string name="trait_bright_order">Bright Order</string>
+    <string name="trait_grey_order">Grey Order</string>
+    <string name="trait_amethyst_order">Amethyst Order</string>
 
     <string name="skill">Skill</string>
     <string name="player_name">Player name</string>
@@ -177,32 +203,37 @@
     <string name="rank">Rank</string>
     <string name="career">Career</string>
     <string name="age">Age</string>
-    <string name="size">Size</string>
     <string name="description">Description</string>
     <string name="max_wounds">Max wounds</string>
     <string name="wounds">Wounds</string>
+    <string name="corruption">Corruption</string>
+    <string name="corruption_short">Corrupt.</string>
     <string name="max_corruption">Max corruption</string>
-    <string name="saved">Saved</string>
-    <string name="xp" translatable="false">XP</string>
+    <string name="max_corruption_short">Max corrupt.</string>
+    <string name="experience">Experience</string>
+    <string name="max_experience">Max experience</string>
+    <string name="max_experience_short">Max XP</string>
     <string name="stress">Stress</string>
     <string name="exhaustion">Exhaustion</string>
     <string name="encumbrance">Encumbrance</string>
 
     <string name="item_name">Item name</string>
     <string name="quantity">Quantity</string>
-    <string name="quality">Quality</string>
     <string name="damage">Damage</string>
     <string name="critical_level">Critical level</string>
-    <string name="range">Range</string>
     <string name="soak">Soak</string>
     <string name="defense">Defense</string>
     <string name="uses">Uses</string>
+
     <string name="all">All</string>
+    <string name="reset">Reset</string>
+    <string name="added_format">%1$s added</string>
 
     <string name="slash" translatable="false">/</string>
     <string name="hyphen" translatable="false">-</string>
     <string name="plus" translatable="false">+</string>
-    <string name="more_less" translatable="false">+ / -</string>
+    <string name="value_on_max_value_format" translatable="false">%1$d / %2$d</string>
+    <string name="text_double_dots_text_format" translatable="false">%1$s : %2$s</string>
 
     <string name="lorem">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor…</string>
 </resources>

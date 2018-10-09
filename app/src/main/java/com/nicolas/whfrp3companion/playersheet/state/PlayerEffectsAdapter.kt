@@ -78,7 +78,7 @@ class PlayerEffectsAdapter(context: Context,
         private fun showEffectDescription() {
             val styledText = parseTemplatedText(view.context, "${effect.name}:\n${effect.description}")
 
-            val snackbar = indefiniteSnackbar(view, "")
+            val snackbar = view.indefiniteSnackbar("")
             snackbar.setAction(android.R.string.ok) { snackbar.dismiss() }
 
             val snackbarTextView = snackbar.view.findViewById(android.support.design.R.id.snackbar_text) as TextView

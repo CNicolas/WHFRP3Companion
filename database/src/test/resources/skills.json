@@ -268,7 +268,7 @@
   {
     "characteristic": "INTELLIGENCE",
     "type": "ADVANCED",
-    "name": "Art de la magie",
+    "name": "Art de la Magie",
     "specializations": [
       { "name": "Histoire de la Magie" },
       { "name": "Collèges de Magie" },
@@ -316,7 +316,7 @@
     ]
   },
   {
-    "characteristic": "INTELLIGENCE",
+    "characteristic": "FELLOWSHIP",
     "type": "ADVANCED",
     "name": "Invocation",
     "specializations": [
@@ -363,7 +363,7 @@
     ]
   },
   {
-    "characteristic": "INTELLIGENCE",
+    "characteristic": "WILLPOWER",
     "type": "ADVANCED",
     "name": "Piété",
     "specializations": [

@@ -15,6 +15,22 @@ import com.nicolas.models.plus
 import com.nicolas.models.skill.Skill
 import com.nicolas.models.toInt
 
+fun Player.addAction(action: Action): Player {
+    val mutableActions = actions.toMutableList()
+    mutableActions.add(action)
+    actions = mutableActions.toList()
+
+    return this
+}
+
+fun Player.removeAction(action: Action): Player {
+    val mutableActions = actions.toMutableList()
+    mutableActions.remove(action)
+    actions = mutableActions.toList()
+
+    return this
+}
+
 fun Player.createHand(action: Action): Hand? {
     return action.skill?.let { skillName ->
         getSkillByName(skillName)?.let { skill ->
@@ -76,7 +92,7 @@ private fun Player.createHandWithDifficulty(action: Action, skill: Skill, diffic
 private fun Hand.applyActionWeaponCategorySpecializations(action: Action, skill: Skill): Hand {
     return action.conditions?.let { conditions ->
         val categories = conditions.mapNotNull { it.weapon }
-                .mapNotNull { it.categories }
+                .map { it.categories }
                 .flatMap { it }
 
         applyWeaponTypeSpecialization(skill, categories)

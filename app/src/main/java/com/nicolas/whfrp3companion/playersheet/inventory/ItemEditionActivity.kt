@@ -2,8 +2,6 @@ package com.nicolas.whfrp3companion.playersheet.inventory
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.view.View
-import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import com.nicolas.database.PlayerRepository
 import com.nicolas.models.extensions.addItem
@@ -15,17 +13,16 @@ import com.nicolas.models.player.Player
 import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.shared.ITEM_EDIT_INTENT_ARGUMENT
 import com.nicolas.whfrp3companion.shared.PLAYER_NAME_INTENT_ARGUMENT
-import com.nicolas.whfrp3companion.shared.enums.labelId
+import com.nicolas.whfrp3companion.shared.enums.labels
+import com.nicolas.whfrp3companion.shared.enums.sortedAndLabels
 import com.nicolas.whfrp3companion.shared.viewModifications.hide
 import com.nicolas.whfrp3companion.shared.viewModifications.intValue
+import com.nicolas.whfrp3companion.shared.viewModifications.markRequired
 import com.nicolas.whfrp3companion.shared.viewModifications.show
 import kotlinx.android.synthetic.main.activity_item_edition.*
-import kotlinx.android.synthetic.main.content_item_edition.*
-import kotlinx.android.synthetic.main.part_armor_edition.*
-import kotlinx.android.synthetic.main.part_expandable_edition.*
-import kotlinx.android.synthetic.main.part_weapon_edition.*
 import kotlinx.android.synthetic.main.toolbar.*
 import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.toast
 import org.jetbrains.anko.uiThread
 import org.koin.android.ext.android.inject
 
@@ -34,6 +31,9 @@ class ItemEditionActivity : AppCompatActivity() {
 
     private lateinit var player: Player
     private var item: Item? = null
+
+    private lateinit var armorTypesWithLabels: Pair<List<ArmorType>, List<String>>
+    private lateinit var weaponTypesWithLabels: Pair<List<WeaponType>, List<String>>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,6 +48,9 @@ class ItemEditionActivity : AppCompatActivity() {
         item = intent.extras.getSerializable(ITEM_EDIT_INTENT_ARGUMENT) as Item?
 
         setupViews()
+        setupViewsEvents()
+        fillViewsWithItem(item)
+        checkItemType(GENERIC_ITEM)
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -55,46 +58,102 @@ class ItemEditionActivity : AppCompatActivity() {
         return true
     }
 
+    // region Views Initialization
     private fun setupViews() {
-        itemTypeSpinner.adapter = ArrayAdapter(this, R.layout.element_enum_spinner, values().map { getString(it.labelId) })
-        qualitySpinner.adapter = ArrayAdapter(this, R.layout.element_enum_spinner, Quality.values().map { getString(it.labelId) })
-        armorTypeSpinner.adapter = ArrayAdapter(this, R.layout.element_enum_spinner, ArmorType.values().map { getString(it.labelId) })
-        weaponTypeSpinner.adapter = ArrayAdapter(this, R.layout.element_enum_spinner, WeaponType.values().map { getString(it.labelId) })
-        weaponRangeSpinner.adapter = ArrayAdapter(this, R.layout.element_enum_spinner, Range.values().map { getString(it.labelId) })
+        val qualitySpinnerValues = Quality.values().labels(this)
+        armorTypesWithLabels = ArmorType.values().sortedAndLabels(this)
+        weaponTypesWithLabels = WeaponType.values().sortedAndLabels(this)
+        val rangeSpinnerValues = Range.values().labels(this)
 
-        itemTypeSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onNothingSelected(parent: AdapterView<*>?) = showGenericItemViews()
+        quality.adapter = ArrayAdapter(this, R.layout.element_enum_spinner, qualitySpinnerValues)
+        armor_type.adapter = ArrayAdapter(this, R.layout.element_enum_spinner, armorTypesWithLabels.second)
+        weapon_type.adapter = ArrayAdapter(this, R.layout.element_enum_spinner, weaponTypesWithLabels.second)
+        range.adapter = ArrayAdapter(this, R.layout.element_enum_spinner, rangeSpinnerValues)
 
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                when (ItemType[position]) {
-                    ARMOR -> showArmorViews()
-                    EXPANDABLE -> showExpandableViews()
-                    GENERIC_ITEM -> showGenericItemViews()
-                    WEAPON -> showWeaponViews()
-                }
+        name_wrapper.markRequired()
+    }
+
+    private fun setupViewsEvents() {
+        item_type.setOnCheckedChangeListener { _, checkedId ->
+            when (checkedId) {
+                R.id.item_type_generic -> showGenericItemViews()
+                R.id.item_type_armor -> showArmorViews()
+                R.id.item_type_weapon -> showWeaponViews()
+                R.id.item_type_expandable -> showExpandableViews()
             }
         }
 
+        save_item.setOnClickListener {
+            if (name.text.toString().trim().isNotEmpty()) {
+                name_wrapper.isErrorEnabled = false
+                save()
+            } else {
+                name_wrapper.error = getString(R.string.missing_name)
+                toast(R.string.missing_name)
+            }
+        }
+    }
+
+    private fun fillViewsWithItem(item: Item?) {
         if (item == null) {
-            itemTypeSpinner.setSelection(GENERIC_ITEM.ordinal)
-            qualitySpinner.setSelection(Quality.NORMAL.ordinal)
-            armorTypeSpinner.setSelection(ArmorType.LEATHER.ordinal)
-            weaponTypeSpinner.setSelection(WeaponType.SWORD.ordinal)
-            weaponRangeSpinner.setSelection(Range.ENGAGED.ordinal)
-        } else {
-            fillViewsWithItem(item!!)
+            item_type.check(R.id.item_type_generic)
+            quantity.setText("1")
+            encumbrance.setText("0")
+            quality.setSelection(Quality.NORMAL.ordinal)
+            armor_type.setSelection(0)
+            weapon_type.setSelection(0)
+            range.setSelection(Range.ENGAGED.ordinal)
+
+            return
         }
 
-        save_item.setOnClickListener { save() }
+        name.setText(item.name)
+        checkItemType(item.type)
+        quantity.setText(item.quantity.toString())
+        encumbrance.setText(item.encumbrance.toString())
+        quality.setSelection(item.quality.ordinal)
+        description.setText(item.description)
+
+        when (item.type) {
+            ARMOR -> {
+                val armor = item as Armor
+
+                armor_type.setSelection(armor.subType.ordinal)
+                defense.setText("${armor.defense}")
+                soak.setText("${armor.soak}")
+            }
+            EXPANDABLE -> {
+                val expandable = item as Expandable
+
+                uses.setText("${expandable.uses}")
+            }
+            WEAPON -> {
+                val weapon = item as Weapon
+
+                weapon_type.setSelection(weapon.subType.ordinal)
+                range.setSelection(weapon.range.ordinal)
+                damage.setText("${weapon.damage}")
+                critical_level.setText("${weapon.criticalLevel}")
+            }
+            GENERIC_ITEM -> {
+            }
+        }
     }
+    // endregion
 
     private fun save() {
         doAsync {
-            if (item != null) {
-                player.removeItem(item!!)
+            item?.let {
+                player.removeItem(it)
             }
 
-            player.addItem(createItemFromViews())
+            val itemToAdd = createItemFromViews()
+            val quantityToAdd = itemToAdd.quantity
+
+            itemToAdd.quantity = 1
+            (0 until quantityToAdd).forEach {
+                player.addItem(itemToAdd)
+            }
             player = playerRepository.update(player)
 
             uiThread {
@@ -103,104 +162,115 @@ class ItemEditionActivity : AppCompatActivity() {
         }
     }
 
-    private fun fillViewsWithItem(item: Item) {
-        itemNameEditText.setText(item.name)
-        itemTypeSpinner.setSelection(item.type.ordinal)
-        quantityEditText.setText(item.quantity.toString())
-        encumbranceEditText.setText(item.encumbrance.toString())
-        qualitySpinner.setSelection(item.quality.ordinal)
-        descriptionEditText.setText(item.description)
-
-        when (item.type) {
-            ARMOR -> {
-                val armor = item as Armor
-
-                armorTypeSpinner.setSelection(armor.subType.ordinal)
-                defenseNumberPicker.value = armor.defense
-                soakNumberPicker.value = armor.soak
-            }
-            EXPANDABLE -> {
-                val expandable = item as Expandable
-
-                usesNumberPicker.value = expandable.uses
-            }
-            WEAPON -> {
-                val weapon = item as Weapon
-
-                weaponTypeSpinner.setSelection(weapon.subType.ordinal)
-                weaponRangeSpinner.setSelection(weapon.range.ordinal)
-                damageNumberPicker.value = weapon.damage
-                criticalLevelNumberPicker.value = weapon.criticalLevel
-            }
-            GENERIC_ITEM -> {
-            }
-        }
-    }
-
     private fun createItemFromViews(): Item {
-        return when (ItemType[itemTypeSpinner.selectedItemPosition]) {
+        return when (getItemType()) {
             ARMOR -> Armor(
-                    name = itemNameEditText.text.toString(),
-                    description = descriptionEditText.text.toString(),
-                    encumbrance = encumbranceEditText.intValue,
-                    quantity = quantityEditText.intValue,
-                    quality = Quality[qualitySpinner.selectedItemPosition],
+                    name = name.text.toString(),
+                    description = description.text.toString(),
+                    encumbrance = encumbrance.intValue,
+                    quantity = quantity.intValue,
+                    quality = Quality[quality.selectedItemPosition],
                     isEquipped = (item as? Equipment)?.isEquipped ?: false,
-                    subType = ArmorType[armorTypeSpinner.selectedItemPosition],
-                    soak = soakNumberPicker.value,
-                    defense = defenseNumberPicker.value
+                    subType = armorTypesWithLabels.first[armor_type.selectedItemPosition],
+                    soak = soak.intValue,
+                    defense = defense.intValue
             )
             EXPANDABLE -> Expandable(
-                    name = itemNameEditText.text.toString(),
-                    description = descriptionEditText.text.toString(),
-                    encumbrance = encumbranceEditText.intValue,
-                    quantity = quantityEditText.intValue,
-                    quality = Quality[qualitySpinner.selectedItemPosition],
-                    uses = usesNumberPicker.value
+                    name = name.text.toString(),
+                    description = description.text.toString(),
+                    encumbrance = encumbrance.intValue,
+                    quantity = quantity.intValue,
+                    quality = Quality[quality.selectedItemPosition],
+                    uses = uses.intValue
             )
             GENERIC_ITEM -> GenericItem(
-                    name = itemNameEditText.text.toString(),
-                    description = descriptionEditText.text.toString(),
-                    encumbrance = encumbranceEditText.intValue,
-                    quantity = quantityEditText.intValue,
-                    quality = Quality[qualitySpinner.selectedItemPosition]
+                    name = name.text.toString(),
+                    description = description.text.toString(),
+                    encumbrance = encumbrance.intValue,
+                    quantity = quantity.intValue,
+                    quality = Quality[quality.selectedItemPosition]
             )
             WEAPON -> Weapon(
-                    name = itemNameEditText.text.toString(),
-                    description = descriptionEditText.text.toString(),
-                    encumbrance = encumbranceEditText.intValue,
-                    quantity = quantityEditText.intValue,
-                    quality = Quality[qualitySpinner.selectedItemPosition],
+                    name = name.text.toString(),
+                    description = description.text.toString(),
+                    encumbrance = encumbrance.intValue,
+                    quantity = quantity.intValue,
+                    quality = Quality[quality.selectedItemPosition],
                     isEquipped = (item as? Equipment)?.isEquipped ?: false,
-                    subType = WeaponType[weaponTypeSpinner.selectedItemPosition],
-                    damage = damageNumberPicker.value,
-                    criticalLevel = criticalLevelNumberPicker.value,
-                    range = Range[weaponRangeSpinner.selectedItemPosition]
+                    subType = weaponTypesWithLabels.first[weapon_type.selectedItemPosition],
+                    damage = damage.intValue,
+                    criticalLevel = critical_level.intValue,
+                    range = Range[range.selectedItemPosition]
             )
         }
     }
 
-    private fun showArmorViews() {
-        armorLayout.show()
-        expandableLayout.hide()
-        weaponLayout.hide()
+    private fun checkItemType(itemType: ItemType) {
+        when (itemType) {
+            GENERIC_ITEM -> item_type.check(R.id.item_type_generic)
+            ARMOR -> item_type.check(R.id.item_type_armor)
+            WEAPON -> item_type.check(R.id.item_type_weapon)
+            EXPANDABLE -> item_type.check(R.id.item_type_expandable)
+        }
     }
 
-    private fun showExpandableViews() {
-        armorLayout.hide()
-        expandableLayout.show()
-        weaponLayout.hide()
+    private fun getItemType(): ItemType = when (item_type.checkedRadioButtonId) {
+        R.id.item_type_generic -> GENERIC_ITEM
+        R.id.item_type_armor -> ARMOR
+        R.id.item_type_weapon -> WEAPON
+        R.id.item_type_expandable -> EXPANDABLE
+        else -> GENERIC_ITEM
     }
 
     private fun showGenericItemViews() {
-        armorLayout.hide()
-        expandableLayout.hide()
-        weaponLayout.hide()
+        armor_type.hide()
+        defense_wrapper.hide()
+        soak_wrapper.hide()
+
+        weapon_type.hide()
+        damage_wrapper.hide()
+        critical_level_wrapper.hide()
+        range.hide()
+
+        uses_wrapper.hide()
+    }
+
+    private fun showArmorViews() {
+        armor_type.show()
+        defense_wrapper.show()
+        soak_wrapper.show()
+
+        weapon_type.hide()
+        damage_wrapper.hide()
+        critical_level_wrapper.hide()
+        range.hide()
+
+        uses_wrapper.hide()
     }
 
     private fun showWeaponViews() {
-        armorLayout.hide()
-        expandableLayout.hide()
-        weaponLayout.show()
+        armor_type.hide()
+        defense_wrapper.hide()
+        soak_wrapper.hide()
+
+        weapon_type.show()
+        damage_wrapper.show()
+        critical_level_wrapper.show()
+        range.show()
+
+        uses_wrapper.hide()
+    }
+
+    private fun showExpandableViews() {
+        armor_type.hide()
+        defense_wrapper.hide()
+        soak_wrapper.hide()
+
+        weapon_type.hide()
+        damage_wrapper.hide()
+        critical_level_wrapper.hide()
+        range.hide()
+
+        uses_wrapper.show()
     }
 }

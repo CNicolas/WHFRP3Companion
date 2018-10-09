@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:id="@+id/actionChildLinearLayout"
+              android:id="@+id/action_child_linear_layout"
               android:orientation="horizontal"
               android:layout_width="match_parent"
               android:layout_height="48dp"
-              android:paddingStart="@dimen/list_child_std_margin">
+              android:paddingStart="@dimen/list_child_std_margin"
+              android:background="?attr/selectableItemBackground">
 
-    <TextView android:id="@+id/actionNameTextView"
+    <TextView android:id="@+id/action_name_text_view"
               android:layout_width="0dp"
               android:layout_height="match_parent"
               android:gravity="center_vertical"
@@ -14,10 +15,17 @@
               android:hint="@string/action_name"
               android:layout_weight="1" />
 
-    <ImageButton android:id="@+id/actionMenuImageButton"
+    <ImageButton android:id="@+id/action_add_button"
                  android:layout_width="48dp"
                  android:layout_height="match_parent"
                  android:background="?attr/selectableItemBackground"
-                 android:src="@drawable/ic_options_black_24dp"
+                 android:src="@drawable/ic_add_black_24dp"
+                 android:contentDescription="@string/add" />
+
+    <ImageButton android:id="@+id/action_roll_button"
+                 android:layout_width="48dp"
+                 android:layout_height="match_parent"
+                 android:background="?attr/selectableItemBackground"
+                 android:src="@drawable/ic_dice_black"
                  android:contentDescription="@string/action_conditions" />
 </LinearLayout>

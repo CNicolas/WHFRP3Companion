@@ -15,7 +15,6 @@
     <TextView android:id="@+id/actionTypeTextView"
               android:layout_width="0dp"
               android:layout_height="match_parent"
-              android:layout_marginEnd="@dimen/list_std_margin"
               android:layout_weight="1"
               android:gravity="center_vertical"
               android:textSize="@dimen/list_std_main_text"

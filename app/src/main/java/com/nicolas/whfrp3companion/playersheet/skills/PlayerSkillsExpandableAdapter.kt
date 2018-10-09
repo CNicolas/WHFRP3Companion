@@ -11,27 +11,19 @@ import android.widget.CheckBox
 import android.widget.ImageButton
 import android.widget.TextView
 import com.nicolas.database.anko.AnkoPlayerRepository
-import com.nicolas.models.extensions.createHand
-import com.nicolas.models.extensions.getSkillByName
-import com.nicolas.models.extensions.getSpecializationByName
 import com.nicolas.models.player.Player
 import com.nicolas.models.skill.Skill
 import com.nicolas.models.skill.SkillType.ADVANCED
 import com.nicolas.models.skill.SkillType.BASIC
 import com.nicolas.models.skill.Specialization
 import com.nicolas.whfrp3companion.R
-import com.nicolas.whfrp3companion.playersheet.PlayerDiceRollerActivity
-import com.nicolas.whfrp3companion.shared.HAND_INTENT_ARGUMENT
-import com.nicolas.whfrp3companion.shared.PLAYER_NAME_INTENT_ARGUMENT
 import com.nicolas.whfrp3companion.shared.adapters.AbstractSkillsExpandableAdapter
 import com.nicolas.whfrp3companion.shared.bind
 import com.nicolas.whfrp3companion.shared.enums.labelId
-import com.nicolas.whfrp3companion.shared.getView
-import org.jetbrains.anko.doAsync
-import org.jetbrains.anko.intentFor
 
 class PlayerSkillsExpandableAdapter(context: Context,
-                                    private val player: Player) : AbstractSkillsExpandableAdapter(player.skills) {
+                                    private val player: Player,
+                                    private val skillListener: SkillListener? = null) : AbstractSkillsExpandableAdapter(player.skills) {
     private val inflater = LayoutInflater.from(context)
 
     private val ankoPlayerRepository: AnkoPlayerRepository = AnkoPlayerRepository(context)
@@ -75,7 +67,7 @@ class PlayerSkillsExpandableAdapter(context: Context,
             holder = view.tag as ChildViewHolder
         } else {
             view = inflater.inflate(R.layout.list_player_skills_child, parent, false)
-            holder = ChildViewHolder(view)
+            holder = ChildViewHolder(view, skillListener)
             view!!.tag = holder
         }
 
@@ -90,71 +82,14 @@ class PlayerSkillsExpandableAdapter(context: Context,
             holder = view.tag as GroupViewHolder
         } else {
             view = inflater.inflate(R.layout.list_player_skills_header, parent, false)
-            holder = GroupViewHolder(view)
+            holder = GroupViewHolder(view, skillListener)
             view!!.tag = holder
         }
 
         return Pair(view, holder)
     }
 
-    internal class ChildViewHolder(view: View) {
-        private val specializationNameCheckableView by view.bind<CheckBox>(R.id.specialization_name_checkable)
-        private val launchSpecializationImageButton by view.bind<ImageButton>(R.id.launch_specialization)
-
-        internal var player: Player? = null
-        internal var ankoPlayerRepository: AnkoPlayerRepository? = null
-
-        lateinit var skill: Skill
-        lateinit var specialization: Specialization
-
-        init {
-            setupViewsEvents(view)
-        }
-
-        fun setupViews(skill: Skill, specialization: Specialization) {
-            this.skill = skill
-            this.specialization = specialization
-
-            specializationNameCheckableView.text = specialization.name
-            specializationNameCheckableView.isChecked = specialization.isSpecialized
-
-            specializationNameCheckableView.isFocusable = false
-            launchSpecializationImageButton.isFocusable = false
-        }
-
-        private fun setupViewsEvents(view: View) {
-            view.getView<CheckBox>(R.id.specialization_name_checkable)
-                    .setOnClickListener { toggleSpecialization(it as CheckBox) }
-
-            launchSpecializationImageButton
-                    .setOnClickListener { startDiceRollerActivityForSpecialization(it) }
-        }
-
-        private fun toggleSpecialization(checkbox: CheckBox) {
-            specialization.isSpecialized = !specialization.isSpecialized
-            checkbox.isChecked = specialization.isSpecialized
-
-            doAsync {
-                if (player != null) {
-                    player?.getSkillByName(skill.name)
-                            ?.getSpecializationByName(specialization.name)
-                            ?.isSpecialized = specialization.isSpecialized
-                    ankoPlayerRepository?.update(player!!)
-                }
-            }
-        }
-
-        private fun startDiceRollerActivityForSpecialization(view: View) {
-            val context = view.context
-            context.startActivity(context.intentFor<PlayerDiceRollerActivity>(
-                    PLAYER_NAME_INTENT_ARGUMENT to player?.name,
-                    HAND_INTENT_ARGUMENT to player?.createHand(skill, specialization, skill.name)
-            ))
-        }
-
-    }
-
-    internal class GroupViewHolder(private val view: View) {
+    internal class GroupViewHolder(private val view: View, skillListener: SkillListener?) {
         private val level1CheckBox by view.bind<CheckBox>(R.id.level_1)
         private val level2CheckBox by view.bind<CheckBox>(R.id.level_2)
         private val level3CheckBox by view.bind<CheckBox>(R.id.level_3)
@@ -168,7 +103,7 @@ class PlayerSkillsExpandableAdapter(context: Context,
         lateinit var skill: Skill
 
         init {
-            setupViewsEvents()
+            setupViewsEvents(skillListener)
         }
 
         fun setupViews(skill: Skill) {
@@ -186,12 +121,21 @@ class PlayerSkillsExpandableAdapter(context: Context,
             loseFocus()
         }
 
-        private fun setupViewsEvents() {
-            level1CheckBox.setOnClickListener { setFormationLevel(1) }
-            level2CheckBox.setOnClickListener { setFormationLevel(2) }
-            level3CheckBox.setOnClickListener { setFormationLevel(3) }
+        private fun setupViewsEvents(skillListener: SkillListener?) {
+            level1CheckBox.setOnClickListener {
+                setFormationLevel(1)
+                skillListener?.skillLevelHandler(skill, 1)
+            }
+            level2CheckBox.setOnClickListener {
+                setFormationLevel(2)
+                skillListener?.skillLevelHandler(skill, 2)
+            }
+            level3CheckBox.setOnClickListener {
+                setFormationLevel(3)
+                skillListener?.skillLevelHandler(skill, 3)
+            }
 
-            launchSkillImageButton.setOnClickListener { startDiceRollerActivityForSkill() }
+            launchSkillImageButton.setOnClickListener { skillListener?.skillSecondaryHandler(skill) }
         }
 
         private fun loseFocus() {
@@ -209,13 +153,6 @@ class PlayerSkillsExpandableAdapter(context: Context,
 
             checkLevel()
             loseFocus()
-
-            doAsync {
-                if (player != null) {
-                    player?.getSkillByName(skill.name)?.level = skill.level
-                    ankoPlayerRepository?.update(player!!)
-                }
-            }
         }
 
         private fun checkLevel() {
@@ -242,13 +179,41 @@ class PlayerSkillsExpandableAdapter(context: Context,
                 }
             }
         }
+    }
 
-        private fun startDiceRollerActivityForSkill() {
-            val context = view.context
-            context.startActivity(context.intentFor<PlayerDiceRollerActivity>(
-                    PLAYER_NAME_INTENT_ARGUMENT to player?.name,
-                    HAND_INTENT_ARGUMENT to player?.createHand(skill, skill.name)
-            ))
+    internal class ChildViewHolder(view: View, skillListener: SkillListener?) {
+        private val specializationNameCheckableView by view.bind<CheckBox>(R.id.specialization_name_checkable)
+        private val launchSpecializationImageButton by view.bind<ImageButton>(R.id.launch_specialization)
+
+        internal var player: Player? = null
+        internal var ankoPlayerRepository: AnkoPlayerRepository? = null
+
+        lateinit var skill: Skill
+        private lateinit var specialization: Specialization
+
+        init {
+            setupViewsEvents(skillListener)
+        }
+
+        fun setupViews(skill: Skill, specialization: Specialization) {
+            this.skill = skill
+            this.specialization = specialization
+
+            specializationNameCheckableView.text = specialization.name
+            specializationNameCheckableView.isChecked = specialization.isSpecialized
+
+            specializationNameCheckableView.isFocusable = false
+            launchSpecializationImageButton.isFocusable = false
+        }
+
+        private fun setupViewsEvents(skillListener: SkillListener?) {
+            specializationNameCheckableView.setOnClickListener {
+                specialization.isSpecialized = !specialization.isSpecialized
+                (it as CheckBox).isChecked = specialization.isSpecialized
+
+                skillListener?.specializationToggleHandler(skill, specialization)
+            }
+            launchSpecializationImageButton.setOnClickListener { skillListener?.specializationSecondaryHandler(skill, specialization) }
         }
     }
 }

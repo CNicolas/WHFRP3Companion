@@ -8,15 +8,17 @@
     android:fitsSystemWindows="true">
 
     <ExpandableListView
-        android:id="@+id/actionsExpandableListView"
+        android:id="@+id/actions_expandable_list_view"
         android:layout_height="match_parent"
         android:layout_width="match_parent"
+        android:paddingBottom="@dimen/padding_above_big_fab"
+        android:clipToPadding="false"
         android:groupIndicator="@null"
         tools:listheader="@layout/list_actions_group"
         tools:listitem="@layout/list_actions_child" />
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/search"
+        android:id="@+id/fab_search_action"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"

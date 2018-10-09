@@ -477,7 +477,7 @@
     "type": "ORDER",
     "cooldown": "PASSIVE",
     "name": "Magie Noire",
-    "description": "Vous pouvez apprendre et employer des Sorts de Magie Noire et des Sorts du Chaos. Lorsque vous focalisez l'énergie ou que vous lancez un sort, vous bénéficiez d'un {EXPERTISE_DICE} à l'occasion de votre test. Si vous générez un ou plusieurs {EXHAUSTION_FACE} ou {DELAY_FACE} à l'occasion de ces tests, ajoutez {CHAOS_FACE} aux résultats.\nÀ l'occasion de vos tests de Focalisation et l'Art de la magie, {MISFORTUNE_DICE} {MISFORTUNE_DICE} Ajoutez {CHAOS_FACE} aux résultats."
+    "description": "Vous pouvez apprendre et employer des Sorts de Magie Noire et des Sorts du Chaos. Lorsque vous focalisez l'énergie ou que vous lancez un sort, vous bénéficiez d'un {EXPERTISE_DICE} à l'occasion de votre test. Si vous générez un ou plusieurs {EXHAUSTION_FACE} ou {DELAY_FACE} à l'occasion de ces tests, ajoutez {CHAOS_FACE} aux résultats.\nÀ l'occasion de vos tests de Focalisation et l'Art de la Magie, {MISFORTUNE_DICE} {MISFORTUNE_DICE} Ajoutez {CHAOS_FACE} aux résultats."
   },
   {
     "type": "ORDER",

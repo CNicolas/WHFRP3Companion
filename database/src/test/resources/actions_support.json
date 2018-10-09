@@ -9,9 +9,7 @@
       "stance": "CONSERVATIVE",
       "cooldown": 0,
       "difficulty": [ ],
-      "special": {
-        "text": "Ajoutez {CHALLENGE_DICE} à la réserve de dés de cette action si vous êtes engagé contre un ennemi."
-      },
+      "specialText": "Ajoutez {CHALLENGE_DICE} à la réserve de dés de cette action si vous êtes engagé contre un ennemi.",
       "effects": {
         "SUCCESS": {
           "1": [
@@ -47,9 +45,7 @@
       "stance": "RECKLESS",
       "cooldown": 0,
       "difficulty": [ ],
-      "special": {
-        "text": "Ajoutez {CHALLENGE_DICE} à la réserve de dés de cette action si vous êtes engagé contre un ennemi."
-      },
+      "specialText": "Ajoutez {CHALLENGE_DICE} à la réserve de dés de cette action si vous êtes engagé contre un ennemi.",
       "effects": {
         "SUCCESS": {
           "1": [

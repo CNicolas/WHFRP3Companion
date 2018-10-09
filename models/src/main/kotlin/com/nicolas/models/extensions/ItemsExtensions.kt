@@ -49,16 +49,6 @@ fun Player.removeItem(item: Item): List<Item> {
     return items
 }
 
-fun Player.removeItemByName(name: String): List<Item> {
-    val item = getItemByName(name)
-
-    return if (item != null) {
-        removeItem(item)
-    } else {
-        items
-    }
-}
-
 fun Player.removeAllItems() {
     items = listOf()
 }

@@ -19,6 +19,8 @@ import com.nicolas.whfrp3companion.shared.PLAYER_NAME_INTENT_ARGUMENT
 import com.nicolas.whfrp3companion.shared.dialogs.TalentSearchDialog
 import com.nicolas.whfrp3companion.shared.enums.PlayerElementEditionMode
 import com.nicolas.whfrp3companion.shared.getView
+import com.nicolas.whfrp3companion.shared.viewModifications.hide
+import com.nicolas.whfrp3companion.shared.viewModifications.show
 import kotlinx.android.synthetic.main.fragment_player_talents.*
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
@@ -34,7 +36,7 @@ class PlayerTalentsFragment : Fragment(), TalentListener {
                               savedInstanceState: Bundle?): View? {
         val resultingView: View = inflater.inflate(R.layout.fragment_player_talents, container, false)
 
-        setupViewEvents(resultingView)
+        setupViewsEvents(resultingView)
 
         val playerName = arguments!!.getString(PLAYER_NAME_INTENT_ARGUMENT)
         player = playerRepository.find(playerName)!!
@@ -58,7 +60,7 @@ class PlayerTalentsFragment : Fragment(), TalentListener {
             player = playerRepository.update(player)
 
             uiThread {
-                talentsRecyclerView.adapter = createTalentsAdapter()
+                talents_recyclerview.adapter = createTalentsAdapter()
             }
         }
     }
@@ -69,7 +71,7 @@ class PlayerTalentsFragment : Fragment(), TalentListener {
             player = playerRepository.update(player)
 
             uiThread {
-                talentsRecyclerView.adapter = createTalentsAdapter()
+                talents_recyclerview.adapter = createTalentsAdapter()
             }
         }
     }
@@ -81,15 +83,15 @@ class PlayerTalentsFragment : Fragment(), TalentListener {
 
             val adapter = PlayerTalentsAdapter(activity!!, player.talents, this@PlayerTalentsFragment, PlayerElementEditionMode.EQUIPABLE_OR_REMOVABLE)
             uiThread {
-                talentsRecyclerView.adapter = adapter
+                talents_recyclerview.adapter = adapter
             }
         }
     }
 
     // endregion
 
-    private fun setupViewEvents(view: View) {
-        view.getView<FloatingActionButton>(R.id.searchTalentFAB)
+    private fun setupViewsEvents(view: View) {
+        view.getView<FloatingActionButton>(R.id.search)
                 .setOnClickListener { openTalentSearchDialog() }
     }
 
@@ -103,9 +105,17 @@ class PlayerTalentsFragment : Fragment(), TalentListener {
             player = playerRepository.find(player.name)!!
 
             uiThread {
-                talentsRecyclerView?.let {
-                    talentsRecyclerView.layoutManager = LinearLayoutManager(activity!!)
-                    talentsRecyclerView.adapter = createTalentsAdapter()
+                if (player.talents.isEmpty()) {
+                    no_talents.show()
+                    talents_recyclerview.hide()
+                } else {
+                    talents_recyclerview?.let { _ ->
+                        talents_recyclerview.layoutManager = LinearLayoutManager(activity!!)
+                        talents_recyclerview.adapter = createTalentsAdapter()
+                    }
+
+                    no_talents.hide()
+                    talents_recyclerview.show()
                 }
             }
         }
