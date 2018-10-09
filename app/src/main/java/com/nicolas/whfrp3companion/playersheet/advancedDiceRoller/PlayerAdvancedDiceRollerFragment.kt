@@ -336,14 +336,14 @@ class PlayerAdvancedDiceRollerFragment : Fragment() {
             val actionHand = player.createHand(actionNotNull)
 
             actionHand?.let { hand ->
-                setHandAndFillViews(hand)
-
                 weapon?.let { weaponNotNull ->
-                    current_hand_name.text = getString(R.string.text_double_dots_text_format)
+                    hand.name = getString(R.string.text_double_dots_text_format)
                             .format(actionNotNull.name, weaponNotNull.name)
                 } ?: {
-                    current_hand_name.text = actionNotNull.name
+                    hand.name = actionNotNull.name
                 }()
+
+                setHandAndFillViews(hand)
 
                 skill = null
                 specialization = null
@@ -353,23 +353,20 @@ class PlayerAdvancedDiceRollerFragment : Fragment() {
 
     private fun receiveSelectedSkill() {
         skill?.let { skillNotNull ->
-            specialization?.let { specializationNotNull ->
-                setHandAndFillViews(player.createHand(skillNotNull, specializationNotNull))
-
-                current_hand_name.text = getString(R.string.text_double_dots_text_format)
+            val hand = specialization?.let { specializationNotNull ->
+                val handName = getString(R.string.text_double_dots_text_format)
                         .format(skillNotNull.name, specializationNotNull.name)
 
-                action = null
-                weapon = null
+                player.createHand(skillNotNull, specializationNotNull, handName)
 
             } ?: {
-                setHandAndFillViews(player.createHand(skillNotNull))
-
-                current_hand_name.text = skillNotNull.name
-
-                action = null
-                weapon = null
+                player.createHand(skillNotNull, skillNotNull.name)
             }()
+
+            setHandAndFillViews(hand)
+
+            action = null
+            weapon = null
         }
     }
 
