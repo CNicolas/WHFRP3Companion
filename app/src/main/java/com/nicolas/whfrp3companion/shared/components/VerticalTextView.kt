@@ -2,10 +2,10 @@ package com.nicolas.whfrp3companion.shared.components
 
 import android.content.Context
 import android.graphics.Canvas
+import android.support.v7.widget.AppCompatTextView
 import android.util.AttributeSet
-import android.widget.TextView
 
-abstract class VerticalTextView(context: Context, attrs: AttributeSet) : TextView(context, attrs) {
+abstract class VerticalTextView(context: Context, attrs: AttributeSet) : AppCompatTextView(context, attrs) {
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         super.onMeasure(heightMeasureSpec, widthMeasureSpec)
         setMeasuredDimension(measuredHeight, measuredWidth)

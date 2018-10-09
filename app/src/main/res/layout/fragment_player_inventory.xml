@@ -1,23 +1,123 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                                                 xmlns:app="http://schemas.android.com/apk/res-auto"
-                                                 xmlns:tools="http://schemas.android.com/tools"
-                                                 android:orientation="vertical"
-                                                 android:layout_width="match_parent"
-                                                 android:layout_height="match_parent">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <ExpandableListView
-        android:id="@+id/inventoryExpandableList"
-                        android:layout_height="match_parent"
-                        android:layout_width="match_parent"
-                        android:layout_marginBottom="@dimen/giant_padding_2"
-                        tools:listheader="@layout/list_player_inventory_header"
-                        tools:listitem="@layout/list_player_inventory_child" />
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <android.support.design.widget.FloatingActionButton android:id="@+id/add_item"
-                                                        android:layout_width="wrap_content"
-                                                        android:layout_height="wrap_content"
-                                                        android:layout_gravity="bottom|end"
-                                                        android:layout_margin="@dimen/fab_margin"
-                                                        app:srcCompat="@drawable/ic_add_white" />
+        <ExpandableListView
+            android:id="@+id/inventory_list"
+            android:layout_height="0dp"
+            android:layout_width="0dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/encumbrance_icon"
+            tools:listheader="@layout/list_player_inventory_header"
+            tools:listitem="@layout/list_player_inventory_child" />
+
+        <!--region Encumbrance-->
+        <ImageView
+            android:id="@+id/encumbrance_icon"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:paddingStart="@dimen/medium_padding"
+            android:layout_marginBottom="@dimen/padding_above_big_fab"
+            android:src="@drawable/ic_weight_black_24dp"
+            android:contentDescription="@string/encumbrance"
+            app:layout_constraintTop_toBottomOf="@+id/inventory_list"
+            app:layout_constraintRight_toLeftOf="@+id/encumbrance"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintHorizontal_weight="2" />
+
+        <org.adw.library.widgets.discreteseekbar.DiscreteSeekBar
+            android:id="@+id/encumbrance"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/black_border"
+            android:focusable="false"
+            app:dsb_allowTrackClickToDrag="false"
+            app:dsb_indicatorPopupEnabled="false"
+            app:dsb_scrubberHeight="10dp"
+            app:dsb_thumbSize="0dp"
+            app:dsb_trackHeight="10dp"
+            app:dsb_trackColor="@color/spinner_background"
+            app:layout_constraintTop_toTopOf="@+id/encumbrance_icon"
+            app:layout_constraintLeft_toRightOf="@+id/encumbrance_icon"
+            app:layout_constraintRight_toLeftOf="@+id/encumbrance_label"
+            app:layout_constraintBottom_toBottomOf="@+id/encumbrance_icon"
+            app:layout_constraintHorizontal_weight="7" />
+
+        <TextView
+            android:id="@+id/encumbrance_label"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:textSize="@dimen/medium_text_size"
+            android:hint="@string/zero"
+            app:layout_constraintTop_toTopOf="@+id/encumbrance_icon"
+            app:layout_constraintLeft_toRightOf="@+id/encumbrance"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/encumbrance_icon"
+            app:layout_constraintHorizontal_weight="3" />
+        <!--endregion-->
+
+        <!--region Money-->
+        <TextView
+            android:id="@+id/gold"
+            style="@style/MoneyChip"
+            android:layout_marginStart="100dp"
+            android:hint="@string/double_zero"
+            android:drawableStart="@drawable/coins_gold"
+            app:layout_constraintTop_toBottomOf="@+id/encumbrance"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/silver"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+        <TextView
+            android:id="@+id/silver"
+            style="@style/MoneyChip"
+            android:hint="@string/double_zero"
+            android:drawableStart="@drawable/coins_silver"
+            app:layout_constraintTop_toTopOf="@+id/gold"
+            app:layout_constraintLeft_toRightOf="@+id/gold"
+            app:layout_constraintRight_toLeftOf="@+id/brass"
+            app:layout_constraintBottom_toBottomOf="@+id/gold" />
+
+        <TextView
+            android:id="@+id/brass"
+            style="@style/MoneyChip"
+            android:layout_marginEnd="100dp"
+            android:hint="@string/double_zero"
+            android:drawableStart="@drawable/coins_brass"
+            app:layout_constraintTop_toTopOf="@+id/gold"
+            app:layout_constraintLeft_toRightOf="@+id/silver"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/gold" />
+        <!--endregion-->
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/change_money"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_gravity="bottom|start"
+        android:layout_margin="@dimen/fab_margin"
+        app:fabSize="mini"
+        app:srcCompat="@drawable/ic_coin_white_24dp" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/add_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin"
+        app:fabSize="normal"
+        app:srcCompat="@drawable/ic_add_white" />
 </android.support.design.widget.CoordinatorLayout>

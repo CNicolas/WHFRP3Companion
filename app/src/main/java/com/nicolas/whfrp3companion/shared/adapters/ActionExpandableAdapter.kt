@@ -8,14 +8,17 @@ import android.widget.*
 import com.nicolas.models.action.Action
 import com.nicolas.models.action.ActionType
 import com.nicolas.whfrp3companion.R
+import com.nicolas.whfrp3companion.shared.adapters.ActionExpandableAdapter.ActionButtonType.*
 import com.nicolas.whfrp3companion.shared.bind
 import com.nicolas.whfrp3companion.shared.enums.drawableId
 import com.nicolas.whfrp3companion.shared.enums.labelId
+import com.nicolas.whfrp3companion.shared.viewModifications.hide
+import com.nicolas.whfrp3companion.shared.viewModifications.show
 
 class ActionExpandableAdapter(context: Context,
                               private val actions: List<Action>,
                               private val actionListener: ActionListener? = null,
-                              private val buttonType: ActionButtonType = ActionButtonType.NONE) : BaseExpandableListAdapter() {
+                              private val buttonType: ActionButtonType = NONE) : BaseExpandableListAdapter() {
 
     private val inflater = LayoutInflater.from(context)
 
@@ -47,7 +50,7 @@ class ActionExpandableAdapter(context: Context,
         return resultingView
     }
 
-    override fun getGroup(groupPosition: Int) = actionTypes[groupPosition]
+    override fun getGroup(groupPosition: Int) = if (actionTypes.isNotEmpty()) actionTypes[groupPosition] else null
     override fun getGroupCount() = actionTypes.size
     override fun getGroupId(groupPosition: Int) = groupPosition.toLong()
 
@@ -93,14 +96,16 @@ class ActionExpandableAdapter(context: Context,
         private val actionTypeTextView by view.bind<TextView>(R.id.actionTypeTextView)
         private val expandImageView by view.bind<ImageView>(R.id.expandImageView)
 
-        fun setupViews(actionType: ActionType, isExpanded: Boolean) {
-            actionTypeImageView.setImageResource(actionType.drawableId)
-            actionTypeTextView.setText(actionType.labelId)
+        fun setupViews(actionType: ActionType?, isExpanded: Boolean) {
+            actionType?.let {
+                actionTypeImageView.setImageResource(actionType.drawableId)
+                actionTypeTextView.setText(actionType.labelId)
 
-            if (isExpanded) {
-                expandImageView.setImageResource(R.drawable.ic_keyboard_arrow_down_black_24dp)
-            } else {
-                expandImageView.setImageResource(R.drawable.ic_keyboard_arrow_up_black_24dp)
+                if (isExpanded) {
+                    expandImageView.setImageResource(R.drawable.ic_keyboard_arrow_down_black_24dp)
+                } else {
+                    expandImageView.setImageResource(R.drawable.ic_keyboard_arrow_up_black_24dp)
+                }
             }
         }
     }
@@ -124,24 +129,26 @@ class ActionExpandableAdapter(context: Context,
             actionNameTextView.text = action.name
 
             when (buttonType) {
-                ActionButtonType.NONE -> {
-                    actionAddButton.visibility = View.GONE
-                    actionRollButton.visibility = View.GONE
+                NONE -> {
+                    actionAddButton.hide()
+                    actionRollButton.hide()
                 }
-                ActionButtonType.ADD -> {
-                    actionAddButton.visibility = View.VISIBLE
-                    actionRollButton.visibility = View.GONE
+                ADD -> {
+                    actionAddButton.show()
+                    actionRollButton.hide()
                 }
-                ActionButtonType.ROLL -> {
-                    actionAddButton.visibility = View.GONE
-                    actionRollButton.visibility = View.VISIBLE
+                ROLL -> {
+                    actionAddButton.hide()
+                    actionRollButton.show()
                 }
             }
         }
 
         private fun setupViewsEvents(actionListener: ActionListener?) {
             actionChildLinearLayout.setOnClickListener { actionListener?.primaryHandler(action) }
-            actionChildLinearLayout.setOnLongClickListener { actionListener?.longPrimaryHandler(it, action) ?: true }
+            actionChildLinearLayout.setOnLongClickListener {
+                actionListener?.longPrimaryHandler(it, action) ?: true
+            }
             actionAddButton.setOnClickListener { actionListener?.secondaryHandler(action) }
             actionRollButton.setOnClickListener { actionListener?.secondaryHandler(action) }
         }

@@ -7,15 +7,14 @@ import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
+import com.nicolas.whfrp3companion.fragments.DiceRollerFragment
 import com.nicolas.whfrp3companion.fragments.EmptyFragment
 import com.nicolas.whfrp3companion.fragments.actions.ActionsFragment
 import com.nicolas.whfrp3companion.fragments.players.PlayersFragment
 import com.nicolas.whfrp3companion.fragments.skills.SkillsFragment
 import com.nicolas.whfrp3companion.fragments.talents.TalentTypesFragment
-import com.nicolas.whfrp3companion.shared.activities.DiceRollerActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.toolbar.*
-import org.jetbrains.anko.intentFor
 
 class MainActivity : AppCompatActivity() {
     private lateinit var toggle: ActionBarDrawerToggle
@@ -59,6 +58,7 @@ class MainActivity : AppCompatActivity() {
     private fun displaySelectedFragment(menuItemId: Int) {
         val fragment = when (menuItemId) {
             R.id.nav_home -> PlayersFragment.newInstance()
+            R.id.nav_dice_roller -> DiceRollerFragment.newInstance()
             R.id.nav_skills -> SkillsFragment.newInstance()
             R.id.nav_talents -> TalentTypesFragment.newInstance()
             R.id.nav_actions -> ActionsFragment.newInstance()
@@ -72,22 +72,13 @@ class MainActivity : AppCompatActivity() {
         mainDrawerLayout.closeDrawer(GravityCompat.START)
     }
 
-    private fun displaySelectedFragment(menuItem: MenuItem) {
-        if (menuItem.itemId == R.id.nav_dice_roller) {
-            startActivity(this.intentFor<DiceRollerActivity>())
-
-            mainDrawerLayout.closeDrawer(GravityCompat.START)
-        } else {
-            displaySelectedFragment(menuItem.itemId)
-
-            menuItem.isChecked = true
-            title = menuItem.title
-        }
-    }
-
     private fun setupDrawerContent(navigationView: NavigationView) {
         navigationView.setNavigationItemSelectedListener {
-            displaySelectedFragment(it)
+            displaySelectedFragment(it.itemId)
+
+            it.isChecked = true
+            title = it.title
+
             true
         }
     }

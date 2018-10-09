@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.nicolas.whfrp3companion">
+    package="com.nicolas.whfrp3companion">
 
     <application
         android:name=".WHFRP3Companion"
@@ -26,19 +26,16 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="stateHidden|adjustResize">
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.app.searchable"
+                android:value="@xml/searchable" />
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
-        </activity>
-        <activity
-            android:name=".playersheet.PlayerDiceRollerActivity"
-            android:label="@string/page_dice_roller"
-            android:parentActivityName=".playersheet.PlayerDiceRollerActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".playersheet.PlayerDiceRollerActivity" />
         </activity>
         <activity
             android:name=".playersheet.inventory.ItemEditionActivity"
@@ -52,57 +49,28 @@
                 android:value=".playersheet.PlayerSheetActivity" />
         </activity>
         <activity
-            android:name=".playersheet.state.PlayerEffectsActivity"
-            android:label="@string/page_effects"
-            android:parentActivityName=".playersheet.PlayerSheetActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme"
-            android:windowSoftInputMode="stateHidden|adjustPan">
-            <intent-filter>
-                <action android:name="android.intent.action.SEARCH" />
-            </intent-filter>
-
-            <meta-data
-                android:name="android.app.searchable"
-                android:value="@xml/searchable" />
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".playersheet.PlayerSheetActivity" />
-        </activity>
-        <activity
-            android:name=".shared.activities.DiceRollerActivity"
-            android:label="@string/page_dice_roller"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme" />
-        <activity
             android:name=".shared.activities.DiceRollerStatisticsActivity"
             android:label="@string/page_dice_roller_statistics"
-            android:parentActivityName=".shared.activities.DiceRollerActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".shared.activities.DiceRollerActivity" />
-        </activity>
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".shared.activities.TalentsActivity"
             android:label="@string/page_talents"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
+        <activity android:name=".shared.activities.ActionDetailActivity" />
         <activity
-            android:name=".shared.activities.ActionDetailActivity" />
-        <activity
-            android:name=".playersheet.advancedDiceRoller.PlayerAdvancedDiceRollerSkillsActivity"
+            android:name=".playersheet.diceRoller.PlayerDiceRollerSkillsActivity"
             android:parentActivityName=".playersheet.PlayerSheetActivity" />
         <activity
-            android:name=".playersheet.advancedDiceRoller.PlayerAdvancedDiceRollerActionsActivity"
+            android:name=".playersheet.diceRoller.PlayerDiceRollerActionsActivity"
             android:parentActivityName=".playersheet.PlayerSheetActivity" />
 
         <activity
             android:name=".playersheet.actions.PlayerAddActionsActivity"
             android:parentActivityName=".playersheet.PlayerSheetActivity"
-            android:windowSoftInputMode="stateHidden|adjustPan">
-        </activity>
+            android:windowSoftInputMode="stateHidden|adjustPan" />
+        <activity android:name=".shared.activities.ActionSearchActivity" />
     </application>
 
 </manifest>

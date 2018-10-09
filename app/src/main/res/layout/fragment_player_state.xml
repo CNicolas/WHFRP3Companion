@@ -1,282 +1,209 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                                             xmlns:app="http://schemas.android.com/apk/res-auto"
-                                             xmlns:tools="http://schemas.android.com/tools"
-                                             android:layout_width="match_parent"
-                                             android:layout_height="wrap_content"
-                                             android:paddingStart="@dimen/medium_padding"
-                                             android:paddingEnd="@dimen/medium_padding"
-                                             android:paddingTop="@dimen/medium_padding"
-                                             tools:context=".playersheet.PlayerSheetActivity"
-                                             tools:ignore="RtlSymmetry">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".playersheet.PlayerSheetActivity"
+    tools:ignore="RtlSymmetry">
+
     <!--region Wounds-->
-    <TextView android:id="@+id/woundsLabel"
-              android:layout_width="0dp"
-              android:layout_height="40dp"
-              android:gravity="center|end"
-              android:paddingEnd="@dimen/medium_padding"
-              android:hint="@string/wounds"
-              app:layout_constraintTop_toTopOf="parent"
-              app:layout_constraintRight_toLeftOf="@+id/removeWoundButton"
-              app:layout_constraintBottom_toTopOf="@+id/exhaustionLabel"
-              app:layout_constraintLeft_toLeftOf="parent" />
-    <Button android:id="@+id/removeWoundButton"
-            android:layout_width="50dp"
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/wounds_wrapper"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/medium_padding"
+        android:layout_marginStart="100dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/wounds_separator"
+        app:layout_constraintHorizontal_weight="20">
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/wounds"
+            android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:text="@string/hyphen"
-            app:layout_constraintTop_toTopOf="@+id/woundsLabel"
-            app:layout_constraintRight_toLeftOf="@+id/woundsTextView"
-            app:layout_constraintBottom_toBottomOf="@+id/woundsLabel"
-            app:layout_constraintLeft_toRightOf="@+id/woundsLabel" />
-    <TextView android:id="@+id/woundsTextView"
-              android:layout_width="75dp"
-              android:layout_height="50dp"
-              android:gravity="center"
-              android:textSize="@dimen/big_text_size"
-              android:textStyle="bold"
-              android:hint="@string/zero"
-              app:layout_constraintTop_toTopOf="@+id/removeWoundButton"
-              app:layout_constraintRight_toLeftOf="@+id/addWoundButton"
-              app:layout_constraintBottom_toBottomOf="@+id/removeWoundButton"
-              app:layout_constraintLeft_toRightOf="@+id/removeWoundButton" />
-    <Button android:id="@+id/addWoundButton"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginEnd="@dimen/giant_padding_2"
-            android:text="@string/plus"
-            app:layout_constraintTop_toTopOf="@+id/woundsTextView"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintBottom_toBottomOf="@+id/woundsTextView"
-            app:layout_constraintLeft_toRightOf="@+id/woundsTextView" />
+            android:hint="@string/wounds"
+            android:inputType="numberSigned"
+            android:selectAllOnFocus="true"
+            android:imeOptions="actionNext"
+            android:drawableStart="@drawable/ic_wounds_black_24dp"
+            android:drawablePadding="@dimen/small_padding" />
+    </android.support.design.widget.TextInputLayout>
+
+    <TextView
+        android:id="@+id/wounds_separator"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:textSize="@dimen/big_text_size"
+        android:text="@string/slash"
+        app:layout_constraintTop_toTopOf="@+id/wounds_wrapper"
+        app:layout_constraintLeft_toRightOf="@+id/wounds_wrapper"
+        app:layout_constraintRight_toLeftOf="@+id/max_wounds"
+        app:layout_constraintBottom_toBottomOf="@+id/wounds_wrapper"
+        app:layout_constraintHorizontal_weight="1" />
+
+    <TextView
+        android:id="@+id/max_wounds"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="100dp"
+        android:paddingStart="@dimen/medium_padding"
+        android:gravity="center_vertical"
+        android:textSize="@dimen/big_text_size"
+        android:hint="@string/double_zero"
+        app:layout_constraintTop_toTopOf="@+id/wounds_wrapper"
+        app:layout_constraintLeft_toRightOf="@+id/wounds_separator"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/wounds_wrapper"
+        app:layout_constraintHorizontal_weight="10" />
     <!--endregion-->
 
     <!--region Exhaustion-->
-    <TextView android:id="@+id/exhaustionLabel"
-              android:layout_width="150dp"
-              android:layout_height="30dp"
-              android:gravity="center|bottom"
-              android:hint="@string/exhaustion"
-              app:layout_constraintTop_toBottomOf="@+id/woundsTextView"
-              app:layout_constraintRight_toLeftOf="@+id/stressLabel"
-              app:layout_constraintBottom_toTopOf="@+id/exhaustionTextView"
-              app:layout_constraintLeft_toLeftOf="parent" />
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/exhaustion_wrapper"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/big_padding"
+        app:layout_constraintTop_toBottomOf="@+id/wounds_wrapper"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/exhaustion_separator"
+        app:layout_constraintHorizontal_weight="20">
 
-    <Button android:id="@+id/removeExhaustionButton"
-            android:layout_width="50dp"
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/exhaustion"
+            android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:text="@string/hyphen"
-            app:layout_constraintTop_toTopOf="@+id/exhaustionTextView"
-            app:layout_constraintRight_toLeftOf="@+id/exhaustionTextView"
-            app:layout_constraintBottom_toBottomOf="@+id/exhaustionTextView"
-            app:layout_constraintLeft_toLeftOf="parent" />
-    <TextView android:id="@+id/exhaustionTextView"
-              android:layout_width="50dp"
-              android:layout_height="50dp"
-              android:gravity="center"
-              android:textSize="@dimen/medium_text_size"
-              android:hint="@string/zero"
-              app:layout_constraintTop_toTopOf="@+id/addExhaustionButton"
-              app:layout_constraintRight_toLeftOf="@+id/addExhaustionButton"
-              app:layout_constraintBottom_toBottomOf="@+id/addExhaustionButton"
-              app:layout_constraintLeft_toRightOf="@+id/removeExhaustionButton" />
-    <Button android:id="@+id/addExhaustionButton"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:text="@string/plus"
-            app:layout_constraintTop_toTopOf="@+id/removeStressButton"
-            app:layout_constraintRight_toLeftOf="@+id/removeStressButton"
-            app:layout_constraintBottom_toBottomOf="@+id/removeStressButton"
-            app:layout_constraintLeft_toRightOf="@+id/exhaustionTextView" />
+            android:hint="@string/exhaustion"
+            android:inputType="numberSigned"
+            android:selectAllOnFocus="true"
+            android:imeOptions="actionNext"
+            android:drawableStart="@drawable/ic_exhaustion_24dp"
+            android:drawablePadding="@dimen/small_padding" />
+    </android.support.design.widget.TextInputLayout>
+
+    <TextView
+        android:id="@+id/exhaustion_separator"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:textSize="@dimen/big_text_size"
+        android:text="@string/slash"
+        app:layout_constraintTop_toTopOf="@+id/exhaustion_wrapper"
+        app:layout_constraintLeft_toRightOf="@+id/exhaustion_wrapper"
+        app:layout_constraintRight_toLeftOf="@+id/max_exhaustion"
+        app:layout_constraintBottom_toBottomOf="@+id/exhaustion_wrapper"
+        app:layout_constraintHorizontal_weight="1" />
+
+    <TextView
+        android:id="@+id/max_exhaustion"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:paddingStart="@dimen/medium_padding"
+        android:gravity="center_vertical"
+        android:textSize="@dimen/big_text_size"
+        android:hint="@string/double_zero"
+        app:layout_constraintTop_toTopOf="@+id/exhaustion_wrapper"
+        app:layout_constraintLeft_toRightOf="@+id/exhaustion_separator"
+        app:layout_constraintRight_toLeftOf="@+id/stress_wrapper"
+        app:layout_constraintBottom_toBottomOf="@+id/exhaustion_wrapper"
+        app:layout_constraintHorizontal_weight="10" />
     <!--endregion-->
 
     <!--region Stress-->
-    <TextView android:id="@+id/stressLabel"
-              android:layout_width="150dp"
-              android:layout_height="30dp"
-              android:gravity="center|bottom"
-              android:hint="@string/stress"
-              app:layout_constraintTop_toBottomOf="@+id/woundsTextView"
-              app:layout_constraintRight_toRightOf="parent"
-              app:layout_constraintBottom_toTopOf="@+id/stressTextView"
-              app:layout_constraintLeft_toRightOf="@+id/exhaustionLabel" />
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/stress_wrapper"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/wounds_wrapper"
+        app:layout_constraintLeft_toRightOf="@+id/max_exhaustion"
+        app:layout_constraintRight_toLeftOf="@+id/stress_separator"
+        app:layout_constraintHorizontal_weight="20">
 
-    <Button android:id="@+id/removeStressButton"
-            android:layout_width="50dp"
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/stress"
+            android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:text="@string/hyphen"
-            app:layout_constraintTop_toTopOf="@+id/stressTextView"
-            app:layout_constraintRight_toLeftOf="@+id/stressTextView"
-            app:layout_constraintBottom_toBottomOf="@+id/stressTextView"
-            app:layout_constraintLeft_toRightOf="@+id/addExhaustionButton" />
-    <TextView android:id="@+id/stressTextView"
-              android:layout_width="50dp"
-              android:layout_height="50dp"
-              android:gravity="center"
-              android:textSize="@dimen/medium_text_size"
-              android:hint="@string/zero"
-              app:layout_constraintTop_toTopOf="@+id/addStressButton"
-              app:layout_constraintRight_toLeftOf="@+id/addStressButton"
-              app:layout_constraintBottom_toBottomOf="@+id/addStressButton"
-              app:layout_constraintLeft_toRightOf="@+id/removeStressButton" />
-    <Button android:id="@+id/addStressButton"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:text="@string/plus"
-            app:layout_constraintTop_toBottomOf="@+id/stressLabel"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/stanceBarLayout"
-            app:layout_constraintLeft_toRightOf="@+id/stressTextView" />
+            android:hint="@string/stress"
+            android:inputType="numberSigned"
+            android:selectAllOnFocus="true"
+            android:imeOptions="actionNext"
+            android:drawableStart="@drawable/ic_stress_24dp"
+            android:drawablePadding="@dimen/small_padding" />
+    </android.support.design.widget.TextInputLayout>
+
+    <TextView
+        android:id="@+id/stress_separator"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:textSize="@dimen/big_text_size"
+        android:text="@string/slash"
+        app:layout_constraintTop_toTopOf="@+id/stress_wrapper"
+        app:layout_constraintLeft_toRightOf="@+id/stress_wrapper"
+        app:layout_constraintRight_toLeftOf="@+id/max_stress"
+        app:layout_constraintBottom_toBottomOf="@+id/stress_wrapper"
+        app:layout_constraintHorizontal_weight="1" />
+
+    <TextView
+        android:id="@+id/max_stress"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:paddingStart="@dimen/medium_padding"
+        android:gravity="center_vertical"
+        android:textSize="@dimen/big_text_size"
+        android:hint="@string/double_zero"
+        app:layout_constraintTop_toTopOf="@+id/stress_wrapper"
+        app:layout_constraintLeft_toRightOf="@+id/stress_separator"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/stress_wrapper"
+        app:layout_constraintHorizontal_weight="10" />
     <!--endregion-->
 
-    <!--region Stance-->
-    <LinearLayout android:id="@+id/stanceBarLayout"
-                  android:layout_width="0dp"
-                  android:layout_height="wrap_content"
-                  app:layout_constraintTop_toBottomOf="@+id/exhaustionTextView"
-                  app:layout_constraintRight_toRightOf="parent"
-                  app:layout_constraintBottom_toTopOf="@+id/defenseTextView"
-                  app:layout_constraintLeft_toLeftOf="parent">
-        <include layout="@layout/content_stance_bar" />
-    </LinearLayout>
+    <!--region Defense, Soak and Toughness-->
+    <TextView
+        android:id="@+id/defense"
+        android:layout_width="0dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="@dimen/giant_padding_2"
+        android:gravity="center"
+        android:textSize="@dimen/big_text_size"
+        android:textStyle="bold"
+        android:hint="@string/zero"
+        android:drawableStart="@drawable/ic_shield_black_36"
+        app:layout_constraintTop_toBottomOf="@+id/exhaustion_wrapper"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/soak" />
+
+    <TextView
+        android:id="@+id/soak"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:textSize="@dimen/big_text_size"
+        android:textStyle="bold"
+        android:hint="@string/zero"
+        android:drawableStart="@drawable/ic_armor_black_36"
+        app:layout_constraintTop_toTopOf="@+id/defense"
+        app:layout_constraintLeft_toRightOf="@+id/defense"
+        app:layout_constraintRight_toLeftOf="@+id/toughness"
+        app:layout_constraintBottom_toBottomOf="@+id/defense" />
+
+    <TextView
+        android:id="@+id/toughness"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="@dimen/giant_padding_2"
+        android:gravity="center"
+        android:textSize="@dimen/big_text_size"
+        android:textStyle="bold"
+        android:hint="@string/zero"
+        android:drawableStart="@drawable/ic_toughness_black_24dp"
+        app:layout_constraintTop_toTopOf="@+id/defense"
+        app:layout_constraintLeft_toRightOf="@+id/soak"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/defense" />
     <!--endregion-->
 
-    <!--region Defense/Soak-->
-    <TextView android:id="@+id/defenseTextView"
-              android:layout_width="0dp"
-              android:layout_height="50dp"
-              android:layout_marginStart="@dimen/giant_padding_2"
-              android:gravity="center"
-              android:drawableStart="@drawable/ic_shield_black_36"
-              android:textSize="@dimen/big_text_size"
-              android:textStyle="bold"
-              android:hint="@string/zero"
-              app:layout_constraintTop_toBottomOf="@+id/stanceBarLayout"
-              app:layout_constraintRight_toLeftOf="@+id/soakTextView"
-              app:layout_constraintBottom_toTopOf="@+id/weaponsListView"
-              app:layout_constraintLeft_toLeftOf="parent" />
-    <TextView android:id="@+id/soakTextView"
-              android:layout_width="0dp"
-              android:layout_height="50dp"
-              android:layout_marginEnd="@dimen/giant_padding_2"
-              android:gravity="center"
-              android:drawableStart="@drawable/ic_armor_black_36"
-              android:textSize="@dimen/big_text_size"
-              android:textStyle="bold"
-              android:hint="@string/zero"
-              app:layout_constraintTop_toTopOf="@+id/defenseTextView"
-              app:layout_constraintRight_toRightOf="parent"
-              app:layout_constraintBottom_toBottomOf="@+id/defenseTextView"
-              app:layout_constraintLeft_toRightOf="@+id/defenseTextView" />
-    <!--endregion-->
-
-    <ListView android:id="@+id/weaponsListView"
-              android:layout_width="0dp"
-              android:layout_height="110dp"
-              android:layout_marginTop="@dimen/medium_padding"
-              android:layout_marginBottom="@dimen/medium_padding"
-              app:layout_constraintTop_toBottomOf="@+id/defenseTextView"
-              app:layout_constraintRight_toRightOf="parent"
-              app:layout_constraintBottom_toTopOf="@+id/openEffects"
-              app:layout_constraintLeft_toLeftOf="parent"
-              tools:listitem="@layout/list_element_weapon" />
-
-    <Button android:id="@+id/openEffects"
-            android:layout_width="0dp"
-            android:layout_height="48dp"
-            android:layout_marginBottom="@dimen/big_padding"
-            android:text="@string/page_effects"
-            app:layout_constraintTop_toBottomOf="@+id/weaponsListView"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/encumbranceBar"
-            app:layout_constraintLeft_toLeftOf="parent" />
-
-    <!--region Encumbrance-->
-    <ImageView android:id="@+id/encumbrance_icon"
-               android:layout_width="0dp"
-               android:layout_height="wrap_content"
-               android:src="@drawable/ic_weight_black_36"
-               android:contentDescription="@string/encumbrance"
-               app:layout_constraintTop_toBottomOf="@+id/openEffects"
-               app:layout_constraintRight_toLeftOf="@+id/encumbranceBar"
-               app:layout_constraintBottom_toTopOf="@+id/goldTextView"
-               app:layout_constraintLeft_toLeftOf="parent"
-               app:layout_constraintHorizontal_weight="1" />
-    <org.adw.library.widgets.discreteseekbar.DiscreteSeekBar android:id="@+id/encumbranceBar"
-                                                             android:layout_width="0dp"
-                                                             android:layout_height="wrap_content"
-                                                             android:background="@drawable/black_border"
-                                                             android:focusable="false"
-                                                             app:dsb_allowTrackClickToDrag="false"
-                                                             app:dsb_indicatorPopupEnabled="false"
-                                                             app:dsb_scrubberHeight="10dp"
-                                                             app:dsb_thumbSize="0dp"
-                                                             app:dsb_trackHeight="10dp"
-                                                             app:dsb_trackColor="@color/spinner_background"
-                                                             app:layout_constraintTop_toTopOf="@+id/encumbrance_icon"
-                                                             app:layout_constraintRight_toLeftOf="@+id/encumbranceTextView"
-                                                             app:layout_constraintBottom_toBottomOf="@+id/encumbrance_icon"
-                                                             app:layout_constraintLeft_toRightOf="@+id/encumbrance_icon"
-                                                             app:layout_constraintHorizontal_weight="7" />
-    <TextView android:id="@+id/encumbranceTextView"
-              android:layout_width="0dp"
-              android:layout_height="40dp"
-              android:gravity="center"
-              android:textSize="@dimen/medium_text_size"
-              android:hint="@string/zero"
-              app:layout_constraintTop_toTopOf="@+id/encumbranceBar"
-              app:layout_constraintRight_toRightOf="parent"
-              app:layout_constraintLeft_toRightOf="@+id/encumbranceBar"
-              app:layout_constraintBottom_toBottomOf="@+id/encumbranceBar"
-              app:layout_constraintHorizontal_weight="2" />
-    <!--endregion-->
-
-    <!--region Money-->
-    <TextView android:id="@+id/goldTextView"
-              android:layout_width="0dp"
-              android:layout_height="40dp"
-              android:gravity="center"
-              android:paddingStart="@dimen/medium_padding"
-              android:drawableStart="@drawable/coins_gold"
-              android:textSize="@dimen/medium_text_size"
-              android:hint="@string/zero"
-              app:layout_constraintTop_toBottomOf="@+id/encumbranceBar"
-              app:layout_constraintRight_toLeftOf="@+id/silverTextView"
-              app:layout_constraintBottom_toBottomOf="parent"
-              app:layout_constraintLeft_toLeftOf="parent" />
-    <TextView android:id="@+id/silverTextView"
-              android:layout_width="0dp"
-              android:layout_height="40dp"
-              android:gravity="center"
-              android:paddingStart="@dimen/medium_padding"
-              android:drawableStart="@drawable/coins_silver"
-              android:textSize="@dimen/medium_text_size"
-              android:hint="@string/zero"
-              app:layout_constraintTop_toTopOf="@+id/goldTextView"
-              app:layout_constraintRight_toLeftOf="@+id/brassTextView"
-              app:layout_constraintBottom_toBottomOf="@+id/goldTextView"
-              app:layout_constraintLeft_toRightOf="@+id/goldTextView" />
-    <TextView android:id="@+id/brassTextView"
-              android:layout_width="0dp"
-              android:layout_height="40dp"
-              android:gravity="center"
-              android:paddingStart="@dimen/medium_padding"
-              android:drawableStart="@drawable/coins_brass"
-              android:textSize="@dimen/medium_text_size"
-              android:hint="@string/zero"
-              app:layout_constraintTop_toTopOf="@+id/silverTextView"
-              app:layout_constraintRight_toLeftOf="@+id/changeMoney"
-              app:layout_constraintBottom_toBottomOf="@+id/silverTextView"
-              app:layout_constraintLeft_toRightOf="@+id/silverTextView" />
-    <ImageButton android:id="@+id/changeMoney"
-                 android:layout_width="60dp"
-                 android:layout_height="50dp"
-                 android:layout_marginStart="@dimen/medium_padding"
-                 android:gravity="center"
-                 android:src="@drawable/ic_coin_black_24dp"
-                 android:contentDescription="@string/change_money"
-                 app:layout_constraintTop_toTopOf="@+id/brassTextView"
-                 app:layout_constraintRight_toRightOf="parent"
-                 app:layout_constraintBottom_toBottomOf="@+id/brassTextView"
-                 app:layout_constraintLeft_toRightOf="@+id/brassTextView" />
-    <!--endregion-->
 </android.support.constraint.ConstraintLayout>

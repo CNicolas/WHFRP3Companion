@@ -33,7 +33,6 @@ class PlayersFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        super.onCreateView(inflater, container, savedInstanceState)
         val resultingView: View = inflater.inflate(R.layout.fragment_players, container, false)
 
         setupViewsEvents(resultingView)
@@ -68,7 +67,7 @@ class PlayersFragment : Fragment() {
     private fun onPlayerLongClick(view: View, position: Int): Boolean {
         val player = players[position]
         val playerPopupMenu = PopupMenu(activity!!, view, Gravity.END)
-        playerPopupMenu.menuInflater.inflate(R.menu.list_element_player, playerPopupMenu.menu)
+        playerPopupMenu.menuInflater.inflate(R.menu.menu_list_element_player, playerPopupMenu.menu)
         playerPopupMenu.setOnMenuItemClickListener {
             when (it.itemId) {
                 R.id.delete_player -> {
@@ -102,7 +101,7 @@ class PlayersFragment : Fragment() {
                 updatePlayers()
                 dialog.dismiss()
             } else {
-                context?.toast(R.string.missing_player_name)
+                context?.toast(R.string.missing_name)
             }
         }
 

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:focusableInTouchMode="true">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/small_padding"
+        android:layout_marginEnd="@dimen/small_padding">
+
+        <EditText
+            android:id="@+id/hand_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:minHeight="50dp"
+            android:gravity="center"
+            android:hint="@string/hand_name_hint"
+            android:inputType="textCapSentences"
+            android:maxLines="1"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/load_hand"
+            app:layout_constraintHorizontal_weight="10" />
+
+        <ImageButton
+            android:id="@+id/load_hand"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:src="@drawable/ic_expand_more_black_24dp"
+            android:contentDescription="@string/select_hand"
+            app:layout_constraintTop_toTopOf="@+id/hand_name"
+            app:layout_constraintLeft_toRightOf="@+id/hand_name"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/hand_name"
+            app:layout_constraintHorizontal_weight="2" />
+
+        <include
+            android:id="@+id/dice_roller_bars_layout"
+            layout="@layout/content_dice_roller_bars"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/medium_padding"
+            app:layout_constraintTop_toBottomOf="@+id/hand_name"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_reset_hand"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|start"
+        android:layout_margin="@dimen/fab_margin"
+        app:fabSize="mini"
+        app:srcCompat="@drawable/ic_clear_white_24dp" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_roll_hand"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin"
+        app:fabSize="normal"
+        app:srcCompat="@drawable/ic_roll_dices_white" />
+</android.support.design.widget.CoordinatorLayout>

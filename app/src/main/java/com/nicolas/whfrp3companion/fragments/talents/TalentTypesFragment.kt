@@ -43,7 +43,7 @@ class TalentTypesFragment : Fragment() {
         view.getView<ListView>(R.id.talentTypesListView)
                 .setOnItemClickListener { _, _, position, _ -> onTalentTypeClick(position) }
 
-        view.getView<FloatingActionButton>(R.id.searchTalentFAB)
+        view.getView<FloatingActionButton>(R.id.search)
                 .setOnClickListener { openTalentSearchDialog() }
     }
 

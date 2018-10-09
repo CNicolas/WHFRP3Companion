@@ -92,7 +92,7 @@ private fun Player.createHandWithDifficulty(action: Action, skill: Skill, diffic
 private fun Hand.applyActionWeaponCategorySpecializations(action: Action, skill: Skill): Hand {
     return action.conditions?.let { conditions ->
         val categories = conditions.mapNotNull { it.weapon }
-                .mapNotNull { it.categories }
+                .map { it.categories }
                 .flatMap { it }
 
         applyWeaponTypeSpecialization(skill, categories)

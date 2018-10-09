@@ -23,6 +23,6 @@
                                                         android:layout_height="wrap_content"
                                                         android:layout_gravity="bottom"
                                                         android:background="?android:attr/windowBackground"
-                                                        app:menu="@menu/action_sides" />
+                                                        app:menu="@menu/menu_action_sides" />
 
 </LinearLayout>

@@ -29,7 +29,7 @@ class AnkoPlayerRepositoryTest : AbstractAnkoPlayerRepositoryTest() {
         assertThat(player.name).isEqualTo(playerName)
 
         val foundPlayer = ankoPlayerRepository.find(playerName)
-        assertThat(foundPlayer).isNotNull()
+        assertThat(foundPlayer).isNotNull
         assertThat(foundPlayer!!.name).isEqualTo(playerName)
 
         assertThat(player).isEqualToComparingFieldByField(foundPlayer)

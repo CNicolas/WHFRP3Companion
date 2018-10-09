@@ -6,12 +6,12 @@ import com.nicolas.models.skill.Skill
 import com.nicolas.models.skill.SkillType
 import com.nicolas.models.skill.Specialization
 
-fun Player.addSkill(skill: Skill): List<Skill> {
+fun Player.addSkill(skill: Skill): Player {
     val mutableSkills = skills.toMutableList()
     mutableSkills.add(skill)
     skills = mutableSkills.toList()
 
-    return skills
+    return this
 }
 
 fun Player.getSkillByName(name: String): Skill? =

@@ -4,5 +4,5 @@ import java.io.Serializable
 
 data class ActionSearch(val text: String,
                         val actionType: ActionType?,
-                        val trait: Trait?,
+                        val traits: List<Trait>,
                         val cooldown: Int?) : Serializable

@@ -1,5 +1,6 @@
 package com.nicolas.database.anko
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import com.nicolas.database.anko.tables.HAND_TABLE_NAME
@@ -11,6 +12,7 @@ import org.jetbrains.anko.db.dropTable
 
 class DatabaseOpenHelper(private val context: Context) : ManagedSQLiteOpenHelper(context, "whfrp3.db", null, 1) {
     companion object {
+        @SuppressLint("StaticFieldLeak")
         private var instance: DatabaseOpenHelper? = null
 
         @Synchronized

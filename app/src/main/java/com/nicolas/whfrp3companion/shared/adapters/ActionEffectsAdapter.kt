@@ -3,7 +3,6 @@ package com.nicolas.whfrp3companion.shared.adapters
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.BaseAdapter
@@ -13,6 +12,7 @@ import com.nicolas.models.action.effect.*
 import com.nicolas.whfrp3companion.R
 import com.nicolas.whfrp3companion.shared.bind
 import com.nicolas.whfrp3companion.shared.enums.drawableId
+import com.nicolas.whfrp3companion.shared.viewModifications.hide
 import com.nicolas.whfrp3companion.shared.viewModifications.parseTemplatedText
 
 class ActionEffectsAdapter(context: Context,
@@ -75,10 +75,10 @@ class ActionEffectsAdapter(context: Context,
         }
 
         private fun setImagesVisibility(faceCount: Int) {
-            face1ImageView.visibility = GONE
-            face2ImageView.visibility = GONE
-            face3ImageView.visibility = GONE
-            face4ImageView.visibility = GONE
+            face1ImageView.hide()
+            face2ImageView.hide()
+            face3ImageView.hide()
+            face4ImageView.hide()
 
             if (faceCount > 0) {
                 face1ImageView.visibility = VISIBLE

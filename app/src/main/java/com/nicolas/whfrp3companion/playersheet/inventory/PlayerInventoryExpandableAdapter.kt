@@ -8,12 +8,8 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.INVISIBLE
-import android.view.View.VISIBLE
 import android.view.ViewGroup
-import android.widget.BaseExpandableListAdapter
-import android.widget.ImageView
-import android.widget.PopupMenu
-import android.widget.TextView
+import android.widget.*
 import com.nicolas.models.extensions.getItemsOfType
 import com.nicolas.models.item.*
 import com.nicolas.models.item.enums.ItemType
@@ -115,8 +111,9 @@ class PlayerInventoryExpandableAdapter(private val context: Context,
     internal class ChildViewHolder(private val itemListener: ItemListener, view: View) {
         private val equippedImageView by view.bind<ImageView>(R.id.equipped)
         private val itemNameTextView by view.bind<TextView>(R.id.item_name)
-        private val quantityTextView by view.bind<TextView>(R.id.quantity)
         private val encumbranceTextView by view.bind<TextView>(R.id.encumbrance)
+
+        private val custimItemLayout by view.bind<LinearLayout>(R.id.custom_item_layout)
 
         private val defenseTextView by view.bind<TextView>(R.id.defense)
         private val soakTextView by view.bind<TextView>(R.id.soak)
@@ -140,13 +137,11 @@ class PlayerInventoryExpandableAdapter(private val context: Context,
             setupViewsEvents(view)
         }
 
-        @SuppressLint("SetTextI18n")
         fun setupViews(item: Item) {
             this.item = item
 
             itemNameTextView.text = item.name
-            quantityTextView.text = item.quantity.toString()
-            encumbranceTextView.text = "${item.encumbrance}  (${item.encumbrance * item.quantity})"
+            encumbranceTextView.text = "${item.encumbrance}"
 
             when (item.quality) {
                 LOW -> itemNameTextView.setTextColor(ContextCompat.getColor(itemNameTextView.context, R.color.colorSecondaryText))
@@ -175,9 +170,9 @@ class PlayerInventoryExpandableAdapter(private val context: Context,
             layout.setOnLongClickListener { openItemMenu(it) }
         }
 
-        fun openItemMenu(view: View): Boolean {
+        private fun openItemMenu(view: View): Boolean {
             val itemPopupMenu = PopupMenu(view.context, view, Gravity.END)
-            itemPopupMenu.menuInflater.inflate(R.menu.inventory_item, itemPopupMenu.menu)
+            itemPopupMenu.menuInflater.inflate(R.menu.menu_inventory_item, itemPopupMenu.menu)
 
             itemPopupMenu.setOnMenuItemClickListener {
                 when (it.itemId) {
@@ -197,6 +192,8 @@ class PlayerInventoryExpandableAdapter(private val context: Context,
         }
 
         private fun showArmorViews() {
+            custimItemLayout.show()
+
             val armor = item as Armor
 
             defenseTextView.text = armor.defense.toString()
@@ -210,6 +207,8 @@ class PlayerInventoryExpandableAdapter(private val context: Context,
         }
 
         private fun showExpandableViews() {
+            custimItemLayout.show()
+
             val expandable = item as Expandable
 
             usesTextView.text = expandable.uses.toString()
@@ -222,6 +221,8 @@ class PlayerInventoryExpandableAdapter(private val context: Context,
         }
 
         private fun showGenericItemViews() {
+            custimItemLayout.hide()
+
             armorViews.hide()
             expandableViews.hide()
             weaponViews.hide()
@@ -230,6 +231,8 @@ class PlayerInventoryExpandableAdapter(private val context: Context,
         }
 
         private fun showWeaponViews() {
+            custimItemLayout.show()
+
             val weapon = item as Weapon
 
             damageTextView.text = weapon.damage.toString()
@@ -243,12 +246,15 @@ class PlayerInventoryExpandableAdapter(private val context: Context,
             showEquippedImage(weapon.isEquipped)
         }
 
-        private fun showEquippedImage(isEquipped: Boolean) = if (isEquipped) {
-            itemNameTextView.setTypeface(null, BOLD)
-            equippedImageView.visibility = VISIBLE
-        } else {
-            itemNameTextView.typeface = null
-            equippedImageView.visibility = INVISIBLE
+        private fun showEquippedImage(isEquipped: Boolean) = when {
+            isEquipped -> {
+                itemNameTextView.setTypeface(null, BOLD)
+                equippedImageView.show()
+            }
+            else -> {
+                itemNameTextView.typeface = null
+                equippedImageView.visibility = INVISIBLE
+            }
         }
 
         private fun changeEquipmentStatus(isEquipped: Boolean? = null) {

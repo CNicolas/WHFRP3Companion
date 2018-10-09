@@ -2,7 +2,7 @@
 
 buildscript {
     ext {
-        kotlin_version = '1.2.61'
+        kotlin_version = '1.2.71'
         android_support_version = '27.1.1'
         anko_version = '0.10.6'
         robolectric_version = '3.8'

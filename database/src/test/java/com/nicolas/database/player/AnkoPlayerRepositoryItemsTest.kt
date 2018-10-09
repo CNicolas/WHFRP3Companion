@@ -58,7 +58,7 @@ class AnkoPlayerRepositoryItemsTest : AbstractAnkoPlayerRepositoryTest() {
         assertThat(updatedPlayer.encumbrance).isEqualTo(6)
 
         val sameWeapon = updatedPlayer2.getWeaponByName("Sword")
-        assertThat(sameWeapon).isNotNull()
+        assertThat(sameWeapon).isNotNull
         assertThat(sameWeapon!!.name).isEqualTo("Sword")
         assertThat(sameWeapon.damage).isEqualTo(4)
         assertThat(sameWeapon.isEquipped).isTrue()

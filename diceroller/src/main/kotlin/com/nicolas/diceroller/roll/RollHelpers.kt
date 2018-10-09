@@ -20,7 +20,7 @@ fun rollHand(Hand: Hand): RollResult {
 fun rollHandForStatistics(Hand: Hand, count: Int): RollStatistics {
     val rollResults = mutableListOf<RollResult>()
 
-    (0 until count).forEach { rollResults.add(rollHand(Hand)) }
+    (0 until count).forEach { _ -> rollResults.add(rollHand(Hand)) }
 
     return RollStatistics(rollResults)
 }
@@ -40,13 +40,13 @@ private fun Hand.rollForFaces(): List<Face> {
 private fun createPool(Hand: Hand): List<Dice> {
     val pool = mutableListOf<Dice>()
 
-    (0 until Hand.characteristicDicesCount).forEach { pool.add(CharacteristicDice()) }
-    (0 until Hand.expertiseDicesCount).forEach { pool.add(ExpertiseDice()) }
-    (0 until Hand.fortuneDicesCount).forEach { pool.add(FortuneDice()) }
-    (0 until Hand.conservativeDicesCount).forEach { pool.add(ConservativeDice()) }
-    (0 until Hand.recklessDicesCount).forEach { pool.add(RecklessDice()) }
-    (0 until Hand.challengeDicesCount).forEach { pool.add(ChallengeDice()) }
-    (0 until Hand.misfortuneDicesCount).forEach { pool.add(MisfortuneDice()) }
+    (0 until Hand.characteristicDicesCount).forEach { _ -> pool.add(CharacteristicDice()) }
+    (0 until Hand.expertiseDicesCount).forEach { _ -> pool.add(ExpertiseDice()) }
+    (0 until Hand.fortuneDicesCount).forEach { _ -> pool.add(FortuneDice()) }
+    (0 until Hand.conservativeDicesCount).forEach { _ -> pool.add(ConservativeDice()) }
+    (0 until Hand.recklessDicesCount).forEach { _ -> pool.add(RecklessDice()) }
+    (0 until Hand.challengeDicesCount).forEach { _ -> pool.add(ChallengeDice()) }
+    (0 until Hand.misfortuneDicesCount).forEach { _ -> pool.add(MisfortuneDice()) }
 
     return pool.toList()
 }

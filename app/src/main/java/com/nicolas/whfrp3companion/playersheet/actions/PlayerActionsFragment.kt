@@ -14,7 +14,7 @@ import com.nicolas.models.action.ActionType
 import com.nicolas.models.extensions.removeAction
 import com.nicolas.models.player.Player
 import com.nicolas.whfrp3companion.R
-import com.nicolas.whfrp3companion.playersheet.advancedDiceRoller.PlayerAdvancedDiceRollerFragment
+import com.nicolas.whfrp3companion.playersheet.diceRoller.PlayerDiceRollerFragment
 import com.nicolas.whfrp3companion.shared.ACTION_INTENT_ARGUMENT
 import com.nicolas.whfrp3companion.shared.PLAYER_NAME_INTENT_ARGUMENT
 import com.nicolas.whfrp3companion.shared.STANCE_INTENT_ARGUMENT
@@ -64,7 +64,7 @@ class PlayerActionsFragment : Fragment(), ActionListener {
 
     override fun longPrimaryHandler(view: View, action: Action): Boolean {
         val actionPopupMenu = PopupMenu(view.context, view, Gravity.END)
-        actionPopupMenu.menuInflater.inflate(R.menu.action_item, actionPopupMenu.menu)
+        actionPopupMenu.menuInflater.inflate(R.menu.menu_action_item, actionPopupMenu.menu)
 
         actionPopupMenu.setOnMenuItemClickListener {
             when (it.itemId) {
@@ -84,7 +84,7 @@ class PlayerActionsFragment : Fragment(), ActionListener {
 
     override fun secondaryHandler(action: Action) {
         activity?.supportFragmentManager?.beginTransaction()
-                ?.replace(R.id.playersheet_content_frame, PlayerAdvancedDiceRollerFragment.newInstance(player.name, action))
+                ?.replace(R.id.playersheet_content_frame, PlayerDiceRollerFragment.newInstance(player.name, action))
                 ?.commit()
     }
 
@@ -120,7 +120,7 @@ class PlayerActionsFragment : Fragment(), ActionListener {
                 }
     }
 
-    // Keep this as the context
+    // Keep 'this' as the context
     private fun createActionsAdapter(): ActionExpandableAdapter {
         return ActionExpandableAdapter(activity!!, player.actions, this, ActionExpandableAdapter.ActionButtonType.ROLL)
     }

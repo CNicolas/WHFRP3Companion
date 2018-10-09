@@ -1,1 +1,186 @@
-[ ]
+[
+  {
+    "name": "Bénédiction Mineure",
+    "type": "BLESSING",
+    "traits": [ "BASIC", "MINOR", "RANK_0", "REACTION" ],
+    "skillsText": "Pas de test requis",
+    "conditions": [
+      { "favor": 2 },
+      { "range": "ENGAGED", "target": "NONE" }
+    ],
+    "conservativeSide": {
+      "stance": "CONSERVATIVE",
+      "cooldown": 2,
+      "effectText": "Vous chuchotez une prière pour un allié, souhaitant qu'elle lui porte chance dans l'action qu'il entreprend.",
+      "specialText": "Après qu'un allié à courte portée ait déclaré une action, vous pouvez dépenser 2 faveur et placer 2 jetons de recharge sur cette carte pour ajouter {FORTUNE_DICE} à sa réserve de dés."
+    },
+    "recklessSide": {
+      "stance": "RECKLESS",
+      "cooldown": 2,
+      "effectText": "Vous chuchotez une prière pour un allié, souhaitant qu'elle lui porte chance dans l'action qu'il entreprend.",
+      "specialText": "Après qu'un allié à courte portée ait déclaré une action, vous pouvez dépenser 2 faveur et placer 2 jetons de recharge sur cette carte pour ajouter {FORTUNE_DICE} à sa réserve de dés."
+    }
+  },
+  {
+    "name": "Bénédiction de Santé",
+    "type": "BLESSING",
+    "traits": [ "BASIC", "MINOR", "RANK_0" ],
+    "skill": "Invocation",
+    "skillText": "Piété (Int)",
+    "conditions": [
+      { "favor": 2 },
+      { "range": "ENGAGED", "target": "TARGET" }
+    ],
+    "conditionsText": "2 faveur, engagé avec la cible (vous pouvez vous cibler).",
+    "conservativeSide": {
+      "stance": "CONSERVATIVE",
+      "cooldown": 2,
+      "difficulty": [ "MISFORTUNE" ],
+      "effects": {
+        "SUCCESS": {
+          "1": [ { "text": "Vous invoquez une prière apaisante. La cible élimine 2 stress ou 2 fatigue." } ],
+          "3": [ { "text": "Identique, mais 3 stress et 3 fatigue." } ]
+        },
+        "BOON": {
+          "2": [ { "text": "La cible peut éliminer à la fois de la fatigue et du stress plutôt que l'un ou l'autre." } ]
+        },
+        "BANE": {
+          "2": [
+            {
+              "text": "Si la cible éliminait du stress, vous subissez 1 fatigue. Si la cible éliminait de la fatigue, vous subissez 1 stress."
+            }
+          ]
+        }
+      }
+    },
+    "recklessSide": {
+      "stance": "RECKLESS",
+      "cooldown": 2,
+      "difficulty": [ "MISFORTUNE" ],
+      "effects": {
+        "SUCCESS": {
+          "1": [ { "text": "Vous invoquez une prière apaisante. La cible élimine 2 stress ou 2 fatigue." } ],
+          "3": [ { "text": "Identique, mais 3 stress et 3 fatigue." } ]
+        },
+        "BOON": {
+          "2": [ { "text": "La cible peut éliminer à la fois de la fatigue et du stress plutôt que l'un ou l'autre." } ]
+        },
+        "BANE": {
+          "2": [
+            {
+              "text": "Si la cible éliminait du stress, vous subissez 1 fatigue. Si la cible éliminait de la fatigue, vous subissez 1 stress."
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "name": "Implorer",
+    "type": "BLESSING",
+    "traits": [ "BASIC", "DIVINE", "RALLY" ],
+    "skill": "Piété",
+    "skillText": "Piété (Int)",
+    "conditionsText": "Vous avez réussi à invoquer une Bénédiction, mais vous avez moins de faveur que nécessaire. Si vous êtes engagés avec un ennemi, ajoutez {MISFORTUNE_DICE} à votre réserve de dés.",
+    "conservativeSide": {
+      "stance": "CONSERVATIVE",
+      "cooldown": 0,
+      "difficulty": [ "CHALLENGE" ],
+      "effects": {
+        "SUCCESS": {
+          "1": [ { "favor": 2, "text": "Vous priez votre dieu. Gagnez 2 faveur." } ],
+          "2": [ { "favor": 3, "text": "Identique, mais gagnez 3 faveur." } ],
+          "3": [ { "favor": 4, "text": "Identique, mais gagnez 4 faveur." } ]
+        },
+        "BOON": {
+          "2": [ { "favor": 1, "text": "Gagnez 1 faveur." } ]
+        },
+        "BANE": {
+          "2": [
+            {
+              "stress": 1,
+              "text": "Subissez 1 stress. Si après avoir terminé cette action, vous avez plus de faveur que le double de votre Force Mentale, subissez 1 stress additionnel."
+            }
+          ]
+        }
+      }
+    },
+    "recklessSide": {
+      "stance": "RECKLESS",
+      "cooldown": 0,
+      "difficulty": [ "CHALLENGE" ],
+      "effects": {
+        "SUCCESS": {
+          "1": [ { "favor": 2, "text": "Vous priez votre dieu. Gagnez 2 faveur." } ],
+          "2": [ { "favor": 4, "text": "Identique, mais gagnez 4 faveur." } ],
+          "3": [ { "favor": 6, "text": "Identique, mais gagnez 6 faveur." } ]
+        },
+        "BOON": {
+          "1": [ { "favor": 1, "text": "Gagnez 1 faveur." } ]
+        },
+        "BANE": {
+          "2": [
+            {
+              "stress": 1,
+              "text": "Subissez 1 stress. Si après avoir terminé cette action, vous avez plus de faveur que le double de votre Force Mentale, subissez 1 stress additionnel."
+            }
+          ]
+        },
+        "CHAOS": {
+          "1": [
+            {
+              "text": "Si après avoir terminé cette action, vous avez plus de faveur que le double de votre Force Mentale, vous subissez l'ire des dieux ! Vous êtes Vacillant pendant 2 rounds."
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "name": "Protection Mineure",
+    "type": "BLESSING",
+    "traits": [ "BASIC", "MINOR", "CONTINUOUS", "RANK_0" ],
+    "skill": "Invocation",
+    "conditions": [
+      { "favor": 3 },
+      { "range": "SHORT", "target": "TARGET" }
+    ],
+    "conditionsText": "3 faveur, cible à courte portée (vous pouvez vous cibler). Ajoutez {CHALLENGE_DICE] à votre réserve de dés si vous êtes engagé avec un ennemi.",
+    "conservativeSide": {
+      "stance": "CONSERVATIVE",
+      "cooldown": 3,
+      "difficulty": [ "MISFORTUNE" ],
+      "effectText": "Votre cible est protégée par une aura lumineuse. Lorsque cette carte se recharge, la valeur d'encaissement de la cible est augmentée de 1.",
+      "effects": {
+        "SUCCESS": {
+          "1": [ { "soak": 1, "text": "La Bénédiction est invoquée." } ],
+          "2": [ { "soak": 1, "cooldown": 1, "text": "La Bénédiction est invoquée et ajoutez-y 1 jeton de recharge." } ]
+        },
+        "BOON": {
+          "2": [ { "text": "La cible peut éliminer 1 blessure." } ]
+        },
+        "BANE": {
+          "1": [ { "exhaustion": 1 } ]
+        }
+      }
+    },
+    "recklessSide": {
+      "stance": "RECKLESS",
+      "cooldown": 3,
+      "difficulty": [ "MISFORTUNE" ],
+      "effectText": "Votre cible est protégée par une aura lumineuse. Lorsque cette carte se recharge, la valeur d'encaissement de la cible est augmentée de 1.",
+      "effects": {
+        "SUCCESS": {
+          "1": [ { "soak": 1, "text": "La Bénédiction est invoquée." } ],
+          "2": [ { "soak": 1, "cooldown": 1, "text": "La Bénédiction est invoquée et ajoutez-y 1 jeton de recharge." } ]
+        },
+        "BOON": {
+          "2": [ { "text": "La cible peut éliminer 1 blessure." } ]
+        },
+        "BANE": {
+          "1": [ { "exhaustion": 1 } ]
+        }
+      }
+    }
+  }
+]
