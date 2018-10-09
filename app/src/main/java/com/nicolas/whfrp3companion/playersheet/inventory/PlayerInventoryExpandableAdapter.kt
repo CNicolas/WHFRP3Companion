@@ -113,7 +113,7 @@ class PlayerInventoryExpandableAdapter(private val context: Context,
         private val itemNameTextView by view.bind<TextView>(R.id.item_name)
         private val encumbranceTextView by view.bind<TextView>(R.id.encumbrance)
 
-        private val custimItemLayout by view.bind<LinearLayout>(R.id.custom_item_layout)
+        private val customItemLayout by view.bind<LinearLayout>(R.id.custom_item_layout)
 
         private val defenseTextView by view.bind<TextView>(R.id.defense)
         private val soakTextView by view.bind<TextView>(R.id.soak)
@@ -192,7 +192,7 @@ class PlayerInventoryExpandableAdapter(private val context: Context,
         }
 
         private fun showArmorViews() {
-            custimItemLayout.show()
+            customItemLayout.show()
 
             val armor = item as Armor
 
@@ -207,7 +207,7 @@ class PlayerInventoryExpandableAdapter(private val context: Context,
         }
 
         private fun showExpandableViews() {
-            custimItemLayout.show()
+            customItemLayout.show()
 
             val expandable = item as Expandable
 
@@ -221,7 +221,7 @@ class PlayerInventoryExpandableAdapter(private val context: Context,
         }
 
         private fun showGenericItemViews() {
-            custimItemLayout.hide()
+            customItemLayout.hide()
 
             armorViews.hide()
             expandableViews.hide()
@@ -231,7 +231,7 @@ class PlayerInventoryExpandableAdapter(private val context: Context,
         }
 
         private fun showWeaponViews() {
-            custimItemLayout.show()
+            customItemLayout.show()
 
             val weapon = item as Weapon
 

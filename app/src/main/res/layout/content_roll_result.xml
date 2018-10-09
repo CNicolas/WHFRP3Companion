@@ -1,38 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="horizontal">
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
 
-    <TextView android:id="@+id/success_result"
-              style="@style/ResultDialogImagedTextView"
-              android:drawableTop="@drawable/ic_success_black_36" />
+    <TextView
+        android:id="@+id/success_result"
+        android:layout_width="48dp"
+        android:layout_height="wrap_content"
+        style="@style/ActionRollResultDialogFaceTextView"
+        android:drawableTop="@drawable/ic_success_black_36"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/boon_result" />
 
-    <TextView android:id="@+id/boon_result"
-              style="@style/ResultDialogImagedTextView"
-              android:drawableTop="@drawable/ic_boon_black_36" />
+    <TextView
+        android:id="@+id/boon_result"
+        android:layout_width="48dp"
+        android:layout_height="wrap_content"
+        style="@style/ActionRollResultDialogFaceTextView"
+        android:drawableTop="@drawable/ic_boon_black_36"
+        app:layout_constraintLeft_toRightOf="@+id/success_result"
+        app:layout_constraintTop_toTopOf="@+id/success_result"
+        app:layout_constraintRight_toLeftOf="@+id/sigmar_result"
+        app:layout_constraintBottom_toBottomOf="@+id/success_result" />
 
-    <TextView android:id="@+id/sigmar_result"
-              style="@style/ResultDialogImagedTextView"
-              android:drawableTop="@drawable/ic_sigmar_black_36" />
+    <TextView
+        android:id="@+id/sigmar_result"
+        android:layout_width="48dp"
+        android:layout_height="wrap_content"
+        style="@style/ActionRollResultDialogFaceTextView"
+        android:drawableTop="@drawable/ic_sigmar_black_36"
+        app:layout_constraintLeft_toRightOf="@+id/boon_result"
+        app:layout_constraintTop_toTopOf="@+id/success_result"
+        app:layout_constraintRight_toLeftOf="@+id/failure_result"
+        app:layout_constraintBottom_toBottomOf="@+id/success_result" />
 
-    <TextView android:id="@+id/failure_result"
-              style="@style/ResultDialogImagedTextView"
-              android:drawableTop="@drawable/ic_failure_black_36" />
+    <TextView
+        android:id="@+id/failure_result"
+        android:layout_width="48dp"
+        android:layout_height="wrap_content"
+        style="@style/ActionRollResultDialogFaceTextView"
+        android:drawableTop="@drawable/ic_failure_black_36"
+        app:layout_constraintLeft_toRightOf="@+id/sigmar_result"
+        app:layout_constraintTop_toTopOf="@+id/success_result"
+        app:layout_constraintRight_toLeftOf="@+id/bane_result"
+        app:layout_constraintBottom_toBottomOf="@+id/success_result" />
 
-    <TextView android:id="@+id/bane_result"
-              style="@style/ResultDialogImagedTextView"
-              android:drawableTop="@drawable/ic_bane_black_36" />
+    <TextView
+        android:id="@+id/bane_result"
+        android:layout_width="48dp"
+        android:layout_height="wrap_content"
+        style="@style/ActionRollResultDialogFaceTextView"
+        android:drawableTop="@drawable/ic_bane_black_36"
+        app:layout_constraintLeft_toRightOf="@+id/failure_result"
+        app:layout_constraintTop_toTopOf="@+id/success_result"
+        app:layout_constraintRight_toLeftOf="@+id/delay_result"
+        app:layout_constraintBottom_toBottomOf="@+id/success_result" />
 
-    <TextView android:id="@+id/delay_result"
-              style="@style/ResultDialogImagedTextView"
-              android:drawableTop="@drawable/ic_delay_black_36" />
+    <TextView
+        android:id="@+id/delay_result"
+        android:layout_width="48dp"
+        android:layout_height="wrap_content"
+        style="@style/ActionRollResultDialogFaceTextView"
+        android:drawableTop="@drawable/ic_delay_black_36"
+        app:layout_constraintLeft_toRightOf="@+id/bane_result"
+        app:layout_constraintTop_toTopOf="@+id/success_result"
+        app:layout_constraintRight_toLeftOf="@+id/exhaustion_result"
+        app:layout_constraintBottom_toBottomOf="@+id/success_result" />
 
-    <TextView android:id="@+id/exhaustion_result"
-              style="@style/ResultDialogImagedTextView"
-              android:drawableTop="@drawable/ic_exhaustion_black_36" />
+    <TextView
+        android:id="@+id/exhaustion_result"
+        android:layout_width="48dp"
+        android:layout_height="wrap_content"
+        style="@style/ActionRollResultDialogFaceTextView"
+        android:drawableTop="@drawable/ic_exhaustion_black_36"
+        app:layout_constraintLeft_toRightOf="@+id/delay_result"
+        app:layout_constraintTop_toTopOf="@+id/success_result"
+        app:layout_constraintRight_toLeftOf="@+id/chaos_result"
+        app:layout_constraintBottom_toBottomOf="@+id/success_result" />
 
-    <TextView android:id="@+id/chaos_result"
-              style="@style/ResultDialogImagedTextView"
-              android:drawableTop="@drawable/ic_chaos_black_36" />
-</LinearLayout>
+    <TextView
+        android:id="@+id/chaos_result"
+        android:layout_width="48dp"
+        android:layout_height="wrap_content"
+        style="@style/ActionRollResultDialogFaceTextView"
+        android:drawableTop="@drawable/ic_chaos_black_36"
+        app:layout_constraintLeft_toRightOf="@+id/exhaustion_result"
+        app:layout_constraintTop_toTopOf="@+id/success_result"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/success_result" />
+</android.support.constraint.ConstraintLayout>
